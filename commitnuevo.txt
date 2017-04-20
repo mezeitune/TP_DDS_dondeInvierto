@@ -1,6 +1,0 @@
-<<<<<<< HEAD
-hola bone
-hola shepo
-=======
-hola bone
->>>>>>> 4e18187571186080e7c9722a848885eea67da741
