@@ -13,25 +13,17 @@ public class Main extends Application{
 
 	
 	public static void main(String[] args){
-<<<<<<< HEAD
-		  
-		List<Empresa> empresasPrueba = new Adapter("empresas.json").getEmpresasDelArchivo();
-		Main.consultarCuentas(empresasPrueba);
-	
-	}
-=======
+
 	
 			new Main().start();
 	}
 		@Override
 	protected Window<?> createMainWindow() {
 			return new DatosEmpresasWindow(this);
-		}	
+	}	
 		
 }		
 	
-
->>>>>>> 2954f52886f72e7ed04fb2195af9f45b4e14e855
 
 /*List<Empresa> empresasPrueba = new Adapter().getEmpresasDelArchivo();
 	Main.consultarCuentas(empresasPrueba);*/

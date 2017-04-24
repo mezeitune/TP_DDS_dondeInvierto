@@ -44,7 +44,7 @@ public class DatosEmpresasViewModel{
 
 	public void setearEmpresaSeleccionada() {
 		
-		List<Empresa> empresasPrueba = new Adapter().getEmpresasDelArchivo();
+		List<Empresa> empresasPrueba = new Adapter("empresas.json").getEmpresasDelArchivo();
 		this.empresas=empresasPrueba;
 	}
 }
