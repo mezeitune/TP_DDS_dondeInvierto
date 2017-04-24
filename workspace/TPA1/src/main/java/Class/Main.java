@@ -2,19 +2,20 @@ package Class;
 import usuario.*;
 
 import java.io.FileReader;
-import java.io.InputStream;
-import java.util.Scanner;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+//import org.uqbar.arena.widgets.List;
 import org.uqbar.commons.utils.Observable;
 
 import com.google.gson.Gson;
-import com.ibm.icu.util.BytesTrie.Iterator;
 
-import sun.misc.IOUtils;
+import java.lang.reflect.Type;
+import com.google.gson.reflect.TypeToken;
+
+
 
 
 @Observable
@@ -22,31 +23,30 @@ public class Main {
 
 	
 	public static void main(String[] args){
-
-		   JSONParser parser = new JSONParser();
-		   
-	        try {
-	 
-	            Object obj = parser.parse(new FileReader(
-	                    "empresas.json"));
-	 
-	            JSONObject jsonObject = (JSONObject) obj;
-	            String jsonObjectt=jsonObject.toString();
-
-	            
-	            ObjetoPrueba json= new Gson().fromJson(jsonObjectt,ObjetoPrueba.class);
-	            
-	            System.out.println(json.Author);
-	            
-	 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-		
+		  
+	List<Empresa> empresasPrueba = new Adapter().getEmpresasDelArchivo();
+	Main.consultarCuentas(empresasPrueba);
+	
+	  }
+	
+	public static void consultarCuentas(List<Empresa> empresas){
+		int i,j;
+		for(i=0; i< empresas.size();i++){
+			System.out.println(empresas.get(i).getNombre());
+			for(j=0; j < empresas.get(i).getCuentas().size(); j++){
+				System.out.println(empresas.get(i).getCuentas().get(j).getNombre());
+				System.out.println(empresas.get(i).getCuentas().get(j).getPeriodo());
+				System.out.println(empresas.get(i).getCuentas().get(j).getValor());
+			}
+		}
 	}
 	
+	}
+
 	
 	
-}
+	
+	
+	
 
 //"C:\\arch.txt"

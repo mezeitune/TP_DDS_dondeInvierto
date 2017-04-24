@@ -7,20 +7,20 @@ import org.uqbar.commons.utils.Observable;
 public class Empresa {
 
 	String nombre;
-	static List<Cuenta> cuentas = new ArrayList<Cuenta>();
+	List<Cuenta> cuentas = new ArrayList<Cuenta>();
 	
 	public String getNombre() {
 		return nombre;
 	}
-	public static List<Cuenta> getCuentas() {
+	public  List<Cuenta> getCuentas() {
 		return cuentas;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void setValores(List<Cuenta> cuentas) {
-		Empresa.cuentas = (ArrayList<Cuenta>) cuentas;
+	public void setCuentas(List<Cuenta> cuentas) {
+		this.cuentas= (ArrayList<Cuenta>) cuentas;
 	}
 
 	   

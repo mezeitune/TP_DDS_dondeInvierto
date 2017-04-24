@@ -1,16 +1,33 @@
 package usuario;
-import java.io.*;
-import java.util.*;
 
 import org.uqbar.commons.utils.Observable;
 @Observable
 public class Cuenta {
 
-	List<Empresa> empresas = new ArrayList<Empresa>();
+	String nombre;
+	int periodo;
+	int valor;
+	
+	public String getNombre (){
+		return this.nombre;
+	}
+	
+	public int getPeriodo (){
+		return this.periodo;
+	}
+	
+	public int getValor (){
+		return this.valor;
+	}
 	
 	
 	
 	
+	//List<Empresa> empresas = new ArrayList<Empresa>();
+	
+	
+	
+	/*
 	public String leerInformacionCuenta  (String path){
 		String texto = "";
 		
@@ -28,12 +45,13 @@ public class Cuenta {
 			return texto;
 	}
 
-	
-	
+	*/
+	/*
 	public List<Empresa> getEmpresas() {
 		return empresas;
 	}	
 	public void setValores(List<Empresa> empresas) {
 		this.empresas = empresas;
 	}
+	*/
 }

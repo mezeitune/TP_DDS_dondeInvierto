@@ -1,9 +1,30 @@
+[{
+	"nombre" : "Facebook",
+  	"cuentas": [{
+  		"nombre" : "EBITDA",
+  		"periodo" : "2016",
+  		"valor" : 1
+  	},
+  	{
+  		"nombre" : "FDS",
+  		"periodo" : "2016",
+  		"valor" : 2
+  	}]
+},
 {
-    "Name": "crunchify.com",
-    "Author": "App Shah",
-    "Company List": [
-        "Compnay: eBay",
-        "Compnay: Paypal",
-        "Compnay: Google"
-    ]
+	"nombre" : "Twitter",
+  	"cuentas": [{
+  		"nombre" : "EBITDA",
+  		"periodo" : "2016",
+  		"valor" : 1
+  	}]
+},
+{
+	"nombre" : "Coca Cola",
+  	"cuentas": [{
+  		"nombre" : "EBITDA",
+  		"periodo" : "2016",
+  		"valor" : 2
+	}]
 }
+]
