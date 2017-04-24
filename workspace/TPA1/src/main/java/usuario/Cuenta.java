@@ -10,7 +10,7 @@ public class Cuenta {
 	
 	
 	
-	
+	/*//No se tendria que usar esto ahora con la implementacion del lector de json
 	public String leerInformacionCuenta  (String path){
 		String texto = "";
 		
@@ -27,7 +27,7 @@ public class Cuenta {
 			
 			return texto;
 	}
-
+*/
 	
 	
 	public List<Empresa> getEmpresas() {

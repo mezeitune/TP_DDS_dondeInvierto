@@ -4,6 +4,8 @@ public class ObjetoPrueba {
 
 	String Name;
 	String Author;
+	
+	
 	public String getName() {
 		return Name;
 	}
