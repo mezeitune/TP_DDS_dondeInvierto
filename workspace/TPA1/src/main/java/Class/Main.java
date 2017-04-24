@@ -1,31 +1,47 @@
 package Class;
 import usuario.*;
+
+import java.io.FileReader;
+import java.io.InputStream;
 import java.util.Scanner;
+
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.uqbar.commons.utils.Observable;
+
+import com.google.gson.Gson;
+import com.ibm.icu.util.BytesTrie.Iterator;
+
+import sun.misc.IOUtils;
 
 
 @Observable
 public class Main {
 
 	
-	public static void main(String[] args) {
-		//Segun lo que entendi habria que leer el txt y que se vaya insertando todo en las clases de Empresa y las demas
-		//Pero la clase que lee el txt no deberia ser Cuenta , habria que crear un modulo aparte para que sea mas facil de testear
-		
-		String path = "";
-		Scanner pathScanner = new Scanner (System.in);
-		Cuenta archivo = new Cuenta();
-		
-		System.out.println("Ingrese la ruta del archivo");
-        
-        path = pathScanner.nextLine ();
-        
-		String datosCuenta = archivo.leerInformacionCuenta(path);
-		
-		
-		System.out.println(datosCuenta); //en windows va siempre la \\ en vez de \
-		pathScanner.close();
-		
+	public static void main(String[] args){
+
+		   JSONParser parser = new JSONParser();
+		   
+	        try {
+	 
+	            Object obj = parser.parse(new FileReader(
+	                    "empresas.json"));
+	 
+	            JSONObject jsonObject = (JSONObject) obj;
+	            String jsonObjectt=jsonObject.toString();
+
+	            
+	            ObjetoPrueba json= new Gson().fromJson(jsonObjectt,ObjetoPrueba.class);
+	            
+	            System.out.println(json.Author);
+	            
+	 
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 		
 	}
 	
