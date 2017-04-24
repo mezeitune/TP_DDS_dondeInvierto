@@ -19,6 +19,19 @@ public class Cuenta {
 	public int getValor (){
 		return this.valor;
 	}
+	
+	
+	public void setNombre(String unNombre){
+		this.nombre = unNombre;
+	}
+	
+	public void setPeriodo(int unPeriodo){
+		this.periodo = unPeriodo;
+	}
+	
+	public void setValor(int unValor){
+		this.valor = unValor;
+	}
 }
 
 	
