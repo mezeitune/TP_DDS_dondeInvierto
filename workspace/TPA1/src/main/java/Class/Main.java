@@ -9,10 +9,10 @@ public class Main {
 	
 	public static void main(String[] args){
 		  
-	List<Empresa> empresasPrueba = new Adapter().getEmpresasDelArchivo();
-	Main.consultarCuentas(empresasPrueba);
+		List<Empresa> empresasPrueba = new Adapter("empresas.json").getEmpresasDelArchivo();
+		Main.consultarCuentas(empresasPrueba);
 	
-	  }
+	}
 
 	public static void consultarCuentas(List<Empresa> empresas){
 		int i,j;
