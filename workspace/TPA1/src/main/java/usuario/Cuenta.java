@@ -19,15 +19,15 @@ public class Cuenta {
 	public int getValor (){
 		return this.valor;
 	}
-	
-	
-	
+}
+
 	
 	//List<Empresa> empresas = new ArrayList<Empresa>();
 	
 	
 	
 	/*
+	/No se tendria que usar esto ahora con la implementacion del lector de json
 	public String leerInformacionCuenta  (String path){
 		String texto = "";
 		
@@ -46,12 +46,5 @@ public class Cuenta {
 	}
 
 	*/
-	/*
-	public List<Empresa> getEmpresas() {
-		return empresas;
-	}	
-	public void setValores(List<Empresa> empresas) {
-		this.empresas = empresas;
-	}
-	*/
-}
+
+
