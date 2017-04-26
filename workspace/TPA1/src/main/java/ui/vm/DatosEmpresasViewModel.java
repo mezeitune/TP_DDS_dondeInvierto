@@ -41,11 +41,7 @@ public class DatosEmpresasViewModel{
 		return this.cuenta;
 	}
 	
-	public List<Cuenta> getCuentas(){
-		return cuentas;
-		
-	}
-	
+
 	public void setEmpresa(Empresa empresaSeleccionada){
 		this.empresa = empresaSeleccionada;
 	}
@@ -57,5 +53,14 @@ public class DatosEmpresasViewModel{
 	public List<Empresa> getEmpresas(){
 		return this.empresas;
 	}
+	
+	public void setCuentas(){
+		this.cuentas=this.empresa.getCuentas();
+	}
+	
+	public List<Cuenta> getCuentas(){
+		return cuentas;
+	}
+	
 	
 }
