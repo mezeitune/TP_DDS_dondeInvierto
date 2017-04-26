@@ -4,9 +4,9 @@ import org.uqbar.commons.utils.Observable;
 @Observable
 public class Cuenta {
 
-	String nombre;
-	int periodo;
-	int valor;
+	private String nombre;
+	private int periodo;
+	private int valor;
 	
 	public String getNombre (){
 		return this.nombre;

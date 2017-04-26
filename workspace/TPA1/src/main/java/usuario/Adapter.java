@@ -32,7 +32,6 @@ public class Adapter {
 		            String empresaString=jsonArray.toString();
 	
 		           empresas = new Gson().fromJson(empresaString,listType);
-		           
 		      
 		 
 		        } catch (Exception e) {

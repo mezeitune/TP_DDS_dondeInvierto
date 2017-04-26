@@ -15,7 +15,7 @@ import usuario.*;
 @Observable
 public class DatosEmpresasViewModel{
 	
-	private Empresa unaEmpresa;
+	private Empresa empresa;
 	private String nombre;
 	private List<Cuenta> cuentas;
 	private List<Empresa> empresas;
@@ -23,28 +23,39 @@ public class DatosEmpresasViewModel{
 
 
 	public DatosEmpresasViewModel() {
-		this.setearEmpresaSeleccionada();
+		this.setEmpresas();
+	}
+	
+	public void setEmpresas() {
+		this.empresas = new Adapter("empresas.json").getEmpresasDelArchivo();
 	}
 	
 	public String getNombre(){
-		return unaEmpresa.getNombre();
+		return empresa.getNombre();
 	}
 	
 	public void setCuenta(Cuenta cuenta){
 		this.cuenta=cuenta;
 	}
-	
-	
-	public Empresa getEmpresaSeleccionada(){
-		return this.unaEmpresa;
+	public Cuenta getCuenta(){
+		return this.cuenta;
 	}
+	
+	public List<Cuenta> getCuentas(){
+		return cuentas;
+		
+	}
+	
+	public void setEmpresa(Empresa empresaSeleccionada){
+		this.empresa = empresaSeleccionada;
+	}
+	
+	public Empresa getEmpresa(){
+		return this.empresa;
+	}
+	
 	public List<Empresa> getEmpresas(){
 		return this.empresas;
 	}
-
-	public void setearEmpresaSeleccionada() {
-		
-		List<Empresa> empresasPrueba = new Adapter("empresas.json").getEmpresasDelArchivo();
-		this.empresas=empresasPrueba;
-	}
+	
 }
