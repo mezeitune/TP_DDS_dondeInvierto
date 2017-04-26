@@ -27,7 +27,7 @@ public class DatosEmpresasViewModel{
 	}
 	
 	public void setEmpresas() {
-		this.empresas = new Adapter("empresas.json").getEmpresasDelArchivo();
+		this.empresas = new ParserJsonAEmpresaAdapter("empresas.json").getEmpresasDelArchivo();
 	}
 	
 	public String getNombre(){
