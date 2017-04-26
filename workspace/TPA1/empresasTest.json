@@ -1,0 +1,37 @@
+[{
+	"nombre" : "Facebook",
+  	"cuentas": [{
+  		"nombre" : "EBITDA",
+  		"periodo" : "2016",
+  		"valor" : 14870
+  	},
+	{
+  		"nombre" : "EBITDA",
+  		"periodo" : "2015",
+  		"valor" : 8162
+  	},
+	{
+		"nombre" : "Free Cash Flow",
+		"periodo" : "2016",
+		"valor" : 11617	
+	},
+	{
+		"nombre" : "Revenue",
+		"periodo" : "2016",
+		"valor" : 27638
+	}]
+},
+{
+	"nombre" : "Apple",
+  	"cuentas": [{
+  		"nombre" : "Free Cash Flow",
+  		"periodo" : "2016",
+  		"valor" : 52276
+  	},
+	{
+  		"nombre" : "Revenue",
+  		"periodo" : "2016",
+  		"valor" : 65824
+		}]
+}
+]

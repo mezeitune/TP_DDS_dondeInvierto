@@ -22,23 +22,18 @@ public class Adapter {
 			
 			List <Empresa> empresas = new ArrayList <Empresa> ();
 			JSONParser parser = new JSONParser();
-			Type listType = new TypeToken <List<Empresa>>() {}.getType(); // Esto es para poder castear bien en el Gson.
+			Type listType = new TypeToken <List<Empresa>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 			   
 		        try {
-		 
 		            Object obj = parser.parse(new FileReader(archivoParaJson));
-		 
 		            JSONArray jsonArray = (JSONArray) obj;
-		            String empresaString=jsonArray.toString();
-	
+		            String empresaString=jsonArray.toString(); // fromJson(2) pide como primer parametro un String.
 		           empresas = new Gson().fromJson(empresaString,listType);
 		      
-		 
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		        }
 		        
 		        return empresas;
-			
 	}
 }

@@ -13,8 +13,6 @@ public class JsonTest {
  		adapter = new Adapter("test.json");//archivo de tests
  	}
 	
-	
-
     @Test
     public void testDeInicializacionDeNombredelArchivoTestJson() {
     	
