@@ -15,33 +15,30 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class ParserJsonAEmpresaAdapter {
-	private String archivoParaJson;
+	//private String archivoParaJson;
 	private List <Empresa> empresasObtenidasDelArchivo = new ArrayList <Empresa> ();
 	private JSONParser parserJsonAObjetos = new JSONParser();
 	private Object objetoAOtrosObjetos;
 	
-	public ParserJsonAEmpresaAdapter(String archivo){
-		archivoParaJson=archivo;
-		setObjecArchivo();
-	}
 	
 	public List<Empresa> getEmpresasDelArchivo() {
 			
 		Type listType = new TypeToken <List<Empresa>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		
-		empresasObtenidasDelArchivo = new Gson().fromJson(stringEmpresasParaGson(),listType);
+		this.empresasObtenidasDelArchivo = new Gson().fromJson(stringEmpresasParaGson(),listType);
 	
-	    return empresasObtenidasDelArchivo;
+	    return this.empresasObtenidasDelArchivo;
 	}
 	
 	
-	public void setObjecArchivo() {
+	public void definirObjetosDelArchivo(String archivoParaJson) throws IOException {
 		
 		try {
-			objetoAOtrosObjetos = parserJsonAObjetos.parse(new FileReader(archivoParaJson));
+			this.objetoAOtrosObjetos = parserJsonAObjetos.parse(new FileReader(archivoParaJson));
+			
 		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			throw new IOException();
 		}
 		
 	}
@@ -50,6 +47,8 @@ public class ParserJsonAEmpresaAdapter {
 		JSONArray jsonArray=ParserJsonString.pasarDeObjetosAJSON(objetoAOtrosObjetos);
 		return ParserJsonString.pasarDeJSONArrayAString(jsonArray);
 	}
+
+
 	
 
 	

@@ -1,5 +1,7 @@
 package Class;
 import usuario.*;
+
+import java.io.IOException;
 import java.util.List;
 
 import org.uqbar.arena.Application;
@@ -19,7 +21,13 @@ public class Main extends Application{
 	}
 		@Override
 	protected Window<?> createMainWindow() {
-			return new DatosEmpresasWindow(this);
+			try {
+				return new DatosEmpresasWindow(this);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
 	}	
 		
 }		

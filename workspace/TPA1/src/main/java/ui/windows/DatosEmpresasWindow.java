@@ -5,6 +5,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.WindowOwner;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -20,7 +21,7 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 	
 	
 	
-	public DatosEmpresasWindow(WindowOwner parent) {
+	public DatosEmpresasWindow(WindowOwner parent) throws IOException {
 		super(parent, new DatosEmpresasViewModel());
 	}
 	
