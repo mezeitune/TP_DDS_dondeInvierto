@@ -8,6 +8,7 @@ import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.Observable;
 
+import exceptions.JSONMalFormadoException;
 import ui.windows.CargaArchivoEmpresaWindow;
 import ui.windows.DatosEmpresasWindow;
 
@@ -25,9 +26,9 @@ public class Main extends Application{
 
 			try {
 				return new CargaArchivoEmpresaWindow(this);
-			} catch (IOException e) {
+			} catch (JSONMalFormadoException ex) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ex.printStackTrace();
 			}
 			return null;
 

@@ -13,9 +13,8 @@ public class ArchivoRepository {
 		 ArchivoRepository.archivo=archivo;
 	}
 	
-	public static String getArchivo() throws IOException{
-		ParserJsonAEmpresaAdapter P = new ParserJsonAEmpresaAdapter();
-		P.definirObjetosDelArchivo(archivo);
+	public static String getArchivo(){
+		ParserJsonAEmpresaAdapter P = new ParserJsonAEmpresaAdapter(archivo);
 		return archivo;
 	}
 	

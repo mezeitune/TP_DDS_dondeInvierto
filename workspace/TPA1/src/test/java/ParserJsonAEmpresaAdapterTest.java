@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import exceptions.JSONMalFormadoException;
 import parser.ParserJsonAEmpresaAdapter;
 import usuario.Empresa;
 
@@ -15,16 +16,15 @@ public class ParserJsonAEmpresaAdapterTest {
 	
  	@Before
  	public void init() throws IOException {
- 		parserJsonAEmpresaAdapter = new ParserJsonAEmpresaAdapter();//archivo de tests
- 		parserJsonAEmpresaAdapter.definirObjetosDelArchivo("empresasTest.json");
+ 		parserJsonAEmpresaAdapter = new ParserJsonAEmpresaAdapter("empresasTest.json");
  	}
 	
 
- 	@Test(expected = Exception.class)
+ 	@Test(expected = JSONMalFormadoException.class)
  	public void pasarArchivoInexistenteYQueExplote() throws IOException {
  		
- 		ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapterTest = new ParserJsonAEmpresaAdapter();
- 		parserJsonAEmpresaAdapterTest.definirObjetosDelArchivo("inexistente.json");
+ 		ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapterTest = new ParserJsonAEmpresaAdapter("inexistente.json");
+ 		parserJsonAEmpresaAdapterTest.getEmpresasDelArchivo();
  		
  	    
  	}
@@ -33,8 +33,8 @@ public class ParserJsonAEmpresaAdapterTest {
  	@Test
  	public void pasarArchivoExistente() throws IOException {
  		
- 		ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapterTest = new ParserJsonAEmpresaAdapter();
- 		parserJsonAEmpresaAdapterTest.definirObjetosDelArchivo("empresas.json");
+ 		ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapterTest = new ParserJsonAEmpresaAdapter("empresas.json");
+ 		parserJsonAEmpresaAdapterTest.getEmpresasDelArchivo();
  	    
  	}
  	

@@ -18,8 +18,10 @@ import static org.mockito.Mockito.*;      // ...with the caveat noted below.
 public class EmpresaTest {
 
 	
+	//Mock con el filter por periodo (un test)
 	
-	@Test
+	
+	/*@Test
 	public void ListaAsignadaCorrectamenteConParser(){
 		ParserJsonAEmpresaAdapter parserMock=Mockito.mock(ParserJsonAEmpresaAdapter.class);
 		List<Empresa> someList = new ArrayList<Empresa>();
@@ -29,7 +31,7 @@ public class EmpresaTest {
 		Assert.assertEquals(someList, parserMock.getEmpresasDelArchivo());
 		
 		
-	}
+	}*/
 	
 	
 }

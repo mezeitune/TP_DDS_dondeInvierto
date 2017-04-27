@@ -17,7 +17,7 @@ import ui.vm.*;
 
 public class CargaArchivoEmpresaWindow extends SimpleWindow<CargaArchivoEmpresaViewModel>{
 
-	public CargaArchivoEmpresaWindow(WindowOwner parent) throws IOException{
+	public CargaArchivoEmpresaWindow(WindowOwner parent){
 		super(parent, new CargaArchivoEmpresaViewModel());
 	}
 	@Override

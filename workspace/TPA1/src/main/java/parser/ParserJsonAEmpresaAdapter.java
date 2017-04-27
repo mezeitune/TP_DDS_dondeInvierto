@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import Class.Main;
+import exceptions.JSONMalFormadoException;
 import usuario.Empresa;
 
 public class ParserJsonAEmpresaAdapter {
@@ -23,6 +24,10 @@ public class ParserJsonAEmpresaAdapter {
 	private JSONParser parserJsonAObjetos = new JSONParser();
 	private Object objetoAOtrosObjetos;
 	private static String archivo;
+	
+	public ParserJsonAEmpresaAdapter(String archivo){
+		this.archivo=archivo;
+	}
 	
 	public List<Empresa> getEmpresasDelArchivo() {
 			
@@ -34,46 +39,36 @@ public class ParserJsonAEmpresaAdapter {
 	}
 	
 	
-	public void definirObjetosDelArchivo(String archivoParaJson) throws IOException {
+	public Object definirObjetosDelArchivo() {
 		
 		try {
-			this.objetoAOtrosObjetos = parserJsonAObjetos.parse(new FileReader(archivoParaJson));
-			this.setArchivo(archivoParaJson);
+			return parserJsonAObjetos.parse(new FileReader(this.archivo));
 			
-		} catch (IOException | ParseException e) {
+			
+		} catch (JSONMalFormadoException ex) {
 
-			throw new IOException();
+			throw new JSONMalFormadoException();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			throw new JSONMalFormadoException();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new JSONMalFormadoException();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			throw new JSONMalFormadoException();
 		}
 		
 	}
-	
-	public void setArchivo(String archivoParaJson){
-		this.archivo= archivoParaJson;
-	}
-	
-	public static String getArchivo(){
-		return archivo;
-	}
-	
+
 	public String stringEmpresasParaGson(){
-		JSONArray jsonArray=ParserJsonString.pasarDeObjetosAJSON(objetoAOtrosObjetos);
+		JSONArray jsonArray=ParserJsonString.pasarDeObjetosAJSON(this.definirObjetosDelArchivo());
 		return ParserJsonString.pasarDeJSONArrayAString(jsonArray);
 	}
 
 	
-	public static void main(String[] args){
-
-		ParserJsonAEmpresaAdapter p=new ParserJsonAEmpresaAdapter();
-		try {
-			p.definirObjetosDelArchivo("empresas.json");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println(p.getEmpresasDelArchivo());
-		
-	}
+	
 
 	
 

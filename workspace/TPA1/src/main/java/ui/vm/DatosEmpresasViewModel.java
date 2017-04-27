@@ -24,14 +24,13 @@ public class DatosEmpresasViewModel{
 	private Cuenta cuenta;
 
 
-	public DatosEmpresasViewModel() throws IOException {
+	public DatosEmpresasViewModel() {
 		this.setEmpresas();
 	}
 	
 
-	public void setEmpresas() throws IOException {
-		ParserJsonAEmpresaAdapter parser = new ParserJsonAEmpresaAdapter();
-		parser.definirObjetosDelArchivo(ArchivoRepository.getArchivo());
+	public void setEmpresas() {
+		ParserJsonAEmpresaAdapter parser = new ParserJsonAEmpresaAdapter(ArchivoRepository.getArchivo());
 		this.empresas=parser.getEmpresasDelArchivo();
 	}
 	
