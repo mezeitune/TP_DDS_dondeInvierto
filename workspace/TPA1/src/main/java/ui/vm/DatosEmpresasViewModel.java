@@ -6,7 +6,7 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 import com.sun.jersey.api.client.Client;
 
-
+import repository.ArchivoRepository;
 import com.google.gson.Gson;
 import usuario.*;
 
@@ -27,7 +27,7 @@ public class DatosEmpresasViewModel{
 	}
 	
 	public void setEmpresas() {
-		this.empresas = new ParserJsonAEmpresaAdapter("empresas.json").getEmpresasDelArchivo();
+		this.empresas = new ParserJsonAEmpresaAdapter(ArchivoRepository.getArchivo()).getEmpresasDelArchivo();
 	}
 	
 	public String getNombre(){

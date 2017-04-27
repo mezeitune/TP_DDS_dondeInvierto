@@ -25,6 +25,9 @@ public class ParserJsonAEmpresaAdapter {
 		setObjecArchivo();
 	}
 	
+	public String getArchivo(){
+		return archivoParaJson;
+	}
 	public List<Empresa> getEmpresasDelArchivo() {
 			
 		Type listType = new TypeToken <List<Empresa>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.

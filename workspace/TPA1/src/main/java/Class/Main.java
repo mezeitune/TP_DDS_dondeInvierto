@@ -6,6 +6,7 @@ import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.Observable;
 
+import ui.windows.CargaArchivoEmpresaWindow;
 import ui.windows.DatosEmpresasWindow;
 
 @Observable
@@ -19,7 +20,7 @@ public class Main extends Application{
 	}
 		@Override
 	protected Window<?> createMainWindow() {
-			return new DatosEmpresasWindow(this);
+			return new CargaArchivoEmpresaWindow(this);
 	}	
 		
 }		
