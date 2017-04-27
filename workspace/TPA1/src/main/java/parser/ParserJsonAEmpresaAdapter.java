@@ -1,4 +1,4 @@
-package usuario;
+package parser;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,6 +13,9 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import Class.Main;
+import usuario.Empresa;
 
 public class ParserJsonAEmpresaAdapter {
 	//private String archivoParaJson;
@@ -57,6 +60,20 @@ public class ParserJsonAEmpresaAdapter {
 		return ParserJsonString.pasarDeJSONArrayAString(jsonArray);
 	}
 
+	
+	public static void main(String[] args){
+
+		ParserJsonAEmpresaAdapter p=new ParserJsonAEmpresaAdapter();
+		try {
+			p.definirObjetosDelArchivo("empresas.json");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(p.getEmpresasDelArchivo());
+		
+	}
 
 	
 

@@ -1,4 +1,4 @@
-package usuario;
+package parser;
 
 import org.json.simple.JSONArray;
 

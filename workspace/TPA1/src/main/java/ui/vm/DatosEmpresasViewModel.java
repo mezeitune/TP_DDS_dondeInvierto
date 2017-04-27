@@ -7,6 +7,7 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 import com.sun.jersey.api.client.Client;
 
+import parser.ParserJsonAEmpresaAdapter;
 import repository.ArchivoRepository;
 import com.google.gson.Gson;
 import usuario.*;

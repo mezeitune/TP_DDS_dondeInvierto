@@ -1,6 +1,7 @@
 package repository;
 import java.io.IOException;
 
+import parser.ParserJsonAEmpresaAdapter;
 import usuario.*;
 
 public class ArchivoRepository {

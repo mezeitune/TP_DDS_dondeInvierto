@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import usuario.ParserJsonAEmpresaAdapter;
+import parser.ParserJsonAEmpresaAdapter;
 import usuario.Empresa;
 
 public class ParserJsonAEmpresaAdapterTest {
