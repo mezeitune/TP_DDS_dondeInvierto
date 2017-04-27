@@ -1,0 +1,33 @@
+Primera entrega: 27/04/17
+
+Tiempo limite: Dos semanas a partir de la primera entrega.
+		Avisar a Zaffaroni cuando el codigo este listo para la corrección.
+
+CORRECCIONES
+
+En cuanto a diseno:
+
+-Evaluar la posibilidad de usar archivos con extension .csv , por ser compatible con excel.
+-Poder aplicar un browser para elegir el archivo a abrir, es decir, implementar un buscador de archivos. (FileBrowser en Arena creeo).
+-Agregar a la ventana, la posibilidad de setear un periodo (Un combo o algo por el estilo). Se quiere consultar las cuentas de una empresa en un periodo.
+
+En cuanto codigo:
+-Volar el repositorio. Ya que el archivo no se va a obtener de manera global, si no por constructor en el viewModel.
+-Agregar la funcionalidad para poder filtrar las empresas por el periodo en el que se quiere mostrar las cuentas de dicha empresa.
+-En clase Datos...Window.java Fijarse de aplicar un setAdapterWith () en vez de setAdapter(). Esta parte no la entendi muy bien. Creo que setAdapter es un metodo mas copado, pero que no hacia falta para lo que nosotros queriamos, que es mostrar el nombre de la empresa.
+-No guardar estados inescesarios. 
+-Solucionar el problema que hay en DAtosEmpresaViewModel, en donde hay dos lineas que se usan para obtener las empresas. Estan ATADAS.
+- El periodo esta definido como un INT. Cambiarlo a un STRING.
+- Evitar el paso en donde se usa un Object obj. Ver Tipos Genericos de Java.  (No me acuerdo especificamente el problema aca. Si se que no habria que usarlo,y que habria que parsear directamente al objeto).
+
+
+En cuanto a validaciones:
+-Hay que validar cuando el archivo es inexistente.
+-Hay que validar la extension del archivo (Esa la invente yo). Simplemente es validar el string que se recibe, que despues del punto sea lo esperado.
+-Validar que el contenido del archivo sea el correcto. Que un archivo no este mal armado.
+-Controlar lo del .gitIgnore.
+
+En cuanto a tests:
+-Mockear el archivo, es decir, que el input del test no sea el archivo en si, si no una lista de empresas generada por nosotros que ya este en memoria. No hay que hacer una consulta del archivo, ya que me liga.
+
+
