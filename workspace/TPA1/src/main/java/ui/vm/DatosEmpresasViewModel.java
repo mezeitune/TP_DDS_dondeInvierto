@@ -1,6 +1,7 @@
 package ui.vm;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
@@ -22,12 +23,15 @@ public class DatosEmpresasViewModel{
 	private Cuenta cuenta;
 
 
-	public DatosEmpresasViewModel() {
+	public DatosEmpresasViewModel() throws IOException {
 		this.setEmpresas();
 	}
 	
-	public void setEmpresas() {
-		this.empresas = new ParserJsonAEmpresaAdapter(ArchivoRepository.getArchivo()).getEmpresasDelArchivo();
+
+	public void setEmpresas() throws IOException {
+		ParserJsonAEmpresaAdapter parser = new ParserJsonAEmpresaAdapter();
+		parser.definirObjetosDelArchivo(ArchivoRepository.getArchivo());
+		this.empresas=parser.getEmpresasDelArchivo();
 	}
 	
 	public String getNombre(){

@@ -1,4 +1,6 @@
 package repository;
+import java.io.IOException;
+
 import usuario.*;
 
 public class ArchivoRepository {
@@ -10,9 +12,10 @@ public class ArchivoRepository {
 		 ArchivoRepository.archivo=archivo;
 	}
 	
-	public static String getArchivo(){
-		ParserJsonAEmpresaAdapter P = new ParserJsonAEmpresaAdapter(archivo);
-		return P.getArchivo();
+	public static String getArchivo() throws IOException{
+		ParserJsonAEmpresaAdapter P = new ParserJsonAEmpresaAdapter();
+		P.definirObjetosDelArchivo(archivo);
+		return archivo;
 	}
 	
 }

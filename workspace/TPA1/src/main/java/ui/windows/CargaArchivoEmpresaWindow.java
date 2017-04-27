@@ -1,5 +1,7 @@
 package ui.windows;
 
+import java.io.IOException;
+
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -15,7 +17,7 @@ import ui.vm.*;
 
 public class CargaArchivoEmpresaWindow extends SimpleWindow<CargaArchivoEmpresaViewModel>{
 
-	public CargaArchivoEmpresaWindow(WindowOwner parent) {
+	public CargaArchivoEmpresaWindow(WindowOwner parent) throws IOException{
 		super(parent, new CargaArchivoEmpresaViewModel());
 	}
 	@Override
@@ -34,11 +36,18 @@ public class CargaArchivoEmpresaWindow extends SimpleWindow<CargaArchivoEmpresaV
 	protected void addActions(Panel actionsPanel) {
 		new Button(actionsPanel)
 		.setCaption("Ver Datos")
-		.onClick(this::DatosEmpresasWindow);
+		.onClick(() -> {
+			try {
+				DatosEmpresasWindow();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 		
 	}
 	
-	public void DatosEmpresasWindow() {
+	public void DatosEmpresasWindow() throws IOException {
 		Dialog<?> dialog = new DatosEmpresasWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
