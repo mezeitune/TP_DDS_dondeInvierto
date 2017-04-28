@@ -5,14 +5,14 @@ import org.uqbar.commons.utils.Observable;
 public class Cuenta {
 
 	private String nombre;
-	private int periodo;
+	private String periodo;
 	private int valor;
 	
 	public String getNombre (){
 		return this.nombre;
 	}
 	
-	public int getPeriodo (){
+	public String getPeriodo (){
 		return this.periodo;
 	}
 	
@@ -25,7 +25,7 @@ public class Cuenta {
 		this.nombre = unNombre;
 	}
 	
-	public void setPeriodo(int unPeriodo){
+	public void setPeriodo(String unPeriodo){
 		this.periodo = unPeriodo;
 	}
 	

@@ -19,11 +19,12 @@ public class DatosEmpresasViewModel{
 	
 	private Empresa empresa;
 	private String nombre;
-	private List<Cuenta> cuentas;
+	private static List<Cuenta> cuentas;
 	private List<Empresa> empresas;
 	private Cuenta cuenta;
-
-
+	private String periodo;
+	
+	
 	public DatosEmpresasViewModel() {
 		this.setEmpresas();
 	}
@@ -38,6 +39,14 @@ public class DatosEmpresasViewModel{
 		return empresa.getNombre();
 	}
 	
+	public String getPeriodo(){
+		return cuenta.getPeriodo();
+	}
+	
+	public void setPeriodo(String periodo){
+		this.periodo= this.cuenta.getPeriodo();
+	}
+	
 	public void setCuenta(Cuenta cuenta){
 		this.cuenta=cuenta;
 	}
@@ -50,6 +59,7 @@ public class DatosEmpresasViewModel{
 		this.empresa = empresaSeleccionada;
 	}
 	
+	
 	public Empresa getEmpresa(){
 		return this.empresa;
 	}
@@ -58,11 +68,12 @@ public class DatosEmpresasViewModel{
 		return this.empresas;
 	}
 	
+	
 	public void setCuentas(){
 		this.cuentas=this.empresa.getCuentas();
 	}
 	
-	public List<Cuenta> getCuentas(){
+	public static List<Cuenta> getCuentas(){
 		return cuentas;
 	}
 	

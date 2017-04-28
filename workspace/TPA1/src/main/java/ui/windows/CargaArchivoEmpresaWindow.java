@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.FileSelector;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
@@ -24,16 +25,29 @@ public class CargaArchivoEmpresaWindow extends SimpleWindow<CargaArchivoEmpresaV
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Consultor de cuentas");
 		Panel form = new Panel(mainPanel);
-		form.setLayout(new ColumnLayout(2));
 		
-		new Label(form).setText("Ingrese el nombre del archivo (nombreArchivo.json)");
+		form.setLayout(new ColumnLayout(1));
 		
-		new TextBox(form).setWidth(100).bindValueToProperty("archivo");
+		new Label(form).setWidth(500);
 		
+		new Label(form).setText("Ruta seleccionada ");
+		new Label(form).bindValueToProperty("archivo");
 		
 	}
+		
+	
+	
+	
+	
 	
 	protected void addActions(Panel actionsPanel) {
+		
+		new FileSelector(actionsPanel)
+	    .setCaption("Seleccionar Archivo .json")
+	    .bindValueToProperty("archivo");
+		
+		
+		
 		new Button(actionsPanel)
 		.setCaption("Ver Datos")
 		.onClick(() -> {
@@ -46,6 +60,8 @@ public class CargaArchivoEmpresaWindow extends SimpleWindow<CargaArchivoEmpresaV
 		});
 		
 	}
+	
+	
 	
 	public void DatosEmpresasWindow() throws IOException {
 		Dialog<?> dialog = new DatosEmpresasWindow(this);

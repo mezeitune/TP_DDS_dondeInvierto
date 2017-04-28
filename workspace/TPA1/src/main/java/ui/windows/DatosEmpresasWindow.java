@@ -10,6 +10,7 @@ import java.io.IOException;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Label;
+import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
@@ -33,13 +34,24 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		form.setLayout(new ColumnLayout(1));
 		
 		
-		new Label(form).setText("Seleccione una empresa para ver sus cuentas").setBackground(Color.ORANGE);
+		new Label(form).setText("Seleccione una empresa ").setBackground(Color.ORANGE);
 		Selector<Empresa> selectorEmpresa = new Selector<Empresa>(form).allowNull(true);
+		selectorEmpresa.setWidth(100);
 		selectorEmpresa.bindItemsToProperty("empresas").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		selectorEmpresa.bindValueToProperty("empresa");
 		
 		new Label(form).setText("Empresa Seleccionada").setBackground(Color.ORANGE);
 		new Label(form).bindValueToProperty("empresa.nombre");
+		
+		new Label(form).setText("Seleccione un Período ").setBackground(Color.ORANGE);
+		Selector<Cuenta> selectorPeriodo = new Selector<Cuenta>(form).allowNull(true);
+		selectorPeriodo.setWidth(100);
+		selectorPeriodo.bindItemsToProperty("empresa.cuentas").setAdapter(new PropertyAdapter(Cuenta.class, "periodo"));
+		selectorPeriodo.bindValueToProperty("cuenta");
+		
+		new Label(form).setText("Periodo Seleccionado").setBackground(Color.ORANGE);
+		new Label(form).bindValueToProperty("cuenta.periodo");
+		
 		new Label(form).setText("Cuentas").setBackground(Color.ORANGE);
 
 		
@@ -47,12 +59,10 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		
 		
 		table.bindItemsToProperty("empresa.cuentas");
-		table.bindValueToProperty("cuenta");
+		
 		
 		new Column<Cuenta>(table).setTitle("Nombre").bindContentsToProperty("nombre");
 		new Column<Cuenta>(table).setTitle("Valor").bindContentsToProperty("valor");
-		new Column<Cuenta>(table).setTitle("Periodo").bindContentsToProperty("periodo");
-	
 		
 	}
 	

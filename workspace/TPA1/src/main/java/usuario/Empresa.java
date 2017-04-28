@@ -8,6 +8,7 @@ public class Empresa {
 
 	String nombre;
 	private List<Cuenta> cuentas = new LinkedList<>(); 
+
 	
 	public String getNombre() {
 		return nombre;
@@ -22,6 +23,6 @@ public class Empresa {
 	public void setCuentas(List<Cuenta> cuentas) {
 		this.cuentas=cuentas;
 	}
-	   
+	
 	
 }
