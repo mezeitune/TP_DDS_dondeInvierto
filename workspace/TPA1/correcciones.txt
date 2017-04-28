@@ -8,7 +8,6 @@ CORRECCIONES
 En cuanto a diseno:
 
 -Evaluar la posibilidad de usar archivos con extension .csv , por ser compatible con excel.
--Poder aplicar un browser para elegir el archivo a abrir, es decir, implementar un buscador de archivos. (FileBrowser en Arena creeo).
 -Agregar a la ventana, la posibilidad de setear un periodo (Un combo o algo por el estilo). Se quiere consultar las cuentas de una empresa en un periodo.
 
 En cuanto codigo:
