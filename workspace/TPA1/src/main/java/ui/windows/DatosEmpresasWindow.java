@@ -43,14 +43,14 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		new Label(form).setText("Empresa Seleccionada").setBackground(Color.ORANGE);
 		new Label(form).bindValueToProperty("empresa.nombre");
 		
-		new Label(form).setText("Seleccione un Período ").setBackground(Color.ORANGE);
-		Selector<Cuenta> selectorPeriodo = new Selector<Cuenta>(form).allowNull(true);
+		new Label(form).setText("Seleccione un Perï¿½odo ").setBackground(Color.ORANGE);
+		Selector<String> selectorPeriodo = new Selector<String>(form).allowNull(true);
 		selectorPeriodo.setWidth(100);
 		selectorPeriodo.bindItemsToProperty("empresa.cuentas").setAdapter(new PropertyAdapter(Cuenta.class, "periodo"));
-		selectorPeriodo.bindValueToProperty("cuenta");
+		selectorPeriodo.bindValueToProperty("periodoo");
 		
 		new Label(form).setText("Periodo Seleccionado").setBackground(Color.ORANGE);
-		new Label(form).bindValueToProperty("cuenta.periodo");
+		new Label(form).bindValueToProperty("periodoo");
 		
 		new Label(form).setText("Cuentas").setBackground(Color.ORANGE);
 
@@ -59,6 +59,7 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		
 		
 		table.bindItemsToProperty("empresa.cuentas");
+		
 		
 		
 		new Column<Cuenta>(table).setTitle("Nombre").bindContentsToProperty("nombre");

@@ -23,6 +23,7 @@ public class DatosEmpresasViewModel{
 	private List<Empresa> empresas;
 	private Cuenta cuenta;
 	private String periodo;
+	private String periodoo;
 	
 	
 	public DatosEmpresasViewModel() {
@@ -70,9 +71,19 @@ public class DatosEmpresasViewModel{
 	
 	
 	public void setCuentas(){
-		this.cuentas=this.empresa.getCuentas();
+		this.cuentas=this.empresa.getCuentasPorPeriodo(this.getPeriodoo());
 	}
 	
+	public String getPeriodoo() {
+		return periodoo;
+	}
+
+
+	public void setPeriodoo(String periodooo) {
+		this.periodoo = periodooo;
+	}
+
+
 	public static List<Cuenta> getCuentas(){
 		return cuentas;
 	}
