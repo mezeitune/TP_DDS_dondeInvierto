@@ -22,7 +22,7 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 	
 	
 	
-	public DatosEmpresasWindow(WindowOwner parent) {
+	public DatosEmpresasWindow(WindowOwner parent) throws IOException {
 		super(parent, new DatosEmpresasViewModel());
 	}
 	

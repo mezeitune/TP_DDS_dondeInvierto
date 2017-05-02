@@ -35,11 +35,6 @@ public class CargaArchivoEmpresaWindow extends SimpleWindow<CargaArchivoEmpresaV
 		
 	}
 		
-	
-	
-	
-	
-	
 	protected void addActions(Panel actionsPanel) {
 		
 		new FileSelector(actionsPanel)

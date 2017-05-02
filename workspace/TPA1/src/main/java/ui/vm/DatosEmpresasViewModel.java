@@ -7,6 +7,7 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 import com.sun.jersey.api.client.Client;
 
+import parser.CSVToEmpresas;
 import parser.ParserJsonAEmpresaAdapter;
 import repository.ArchivoRepository;
 import com.google.gson.Gson;
@@ -26,14 +27,14 @@ public class DatosEmpresasViewModel{
 	private String periodoo;
 	
 	
-	public DatosEmpresasViewModel() {
+	public DatosEmpresasViewModel() throws IOException {
 		this.setEmpresas();
 	}
 	
 
-	public void setEmpresas() {
-		ParserJsonAEmpresaAdapter parser = new ParserJsonAEmpresaAdapter(ArchivoRepository.getArchivo());
-		this.empresas=parser.getEmpresasDelArchivo();
+	public void setEmpresas() throws IOException {
+		CSVToEmpresas parser = new CSVToEmpresas(ArchivoRepository.getArchivo());
+		this.empresas=parser.csvFileToEmpresas();
 	}
 	
 	public String getNombre(){

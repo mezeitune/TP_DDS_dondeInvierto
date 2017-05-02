@@ -1,6 +1,7 @@
 package repository;
 import java.io.IOException;
 
+import parser.CSVToEmpresas;
 import parser.ParserJsonAEmpresaAdapter;
 import usuario.*;
 
@@ -14,7 +15,7 @@ public class ArchivoRepository {
 	}
 	
 	public static String getArchivo(){
-		ParserJsonAEmpresaAdapter P = new ParserJsonAEmpresaAdapter(archivo);
+		CSVToEmpresas P = new CSVToEmpresas(archivo);
 		return archivo;
 	}
 	
