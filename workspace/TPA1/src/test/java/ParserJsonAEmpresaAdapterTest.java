@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.JSONMalFormadoException;
+import exceptions.CSVMalFormadoException;
 import parser.ParserJsonAEmpresaAdapter;
 import usuario.Empresa;
 
@@ -20,7 +20,7 @@ public class ParserJsonAEmpresaAdapterTest {
  	}
 	
 
- 	@Test(expected = JSONMalFormadoException.class)
+ 	@Test(expected = CSVMalFormadoException.class)
  	public void pasarArchivoInexistenteYQueExplote() throws IOException {
  		
  		ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapterTest = new ParserJsonAEmpresaAdapter("inexistente.json");

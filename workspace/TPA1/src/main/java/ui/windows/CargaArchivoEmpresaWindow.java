@@ -38,7 +38,7 @@ public class CargaArchivoEmpresaWindow extends SimpleWindow<CargaArchivoEmpresaV
 	protected void addActions(Panel actionsPanel) {
 		
 		new FileSelector(actionsPanel)
-	    .setCaption("Seleccionar Archivo .json")
+	    .setCaption("Seleccionar Archivo a Cargar")
 	    .bindValueToProperty("archivo");
 		
 		

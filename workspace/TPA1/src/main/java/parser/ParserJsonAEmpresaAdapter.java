@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import Class.Main;
-import exceptions.JSONMalFormadoException;
+import exceptions.CSVMalFormadoException;
 import usuario.Empresa;
 
 public class ParserJsonAEmpresaAdapter {
@@ -45,19 +45,19 @@ public class ParserJsonAEmpresaAdapter {
 			return parserJsonAObjetos.parse(new FileReader(this.archivo));
 			
 			
-		} catch (JSONMalFormadoException ex) {
+		} catch (CSVMalFormadoException ex) {
 
-			throw new JSONMalFormadoException();
+			throw new CSVMalFormadoException();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			throw new JSONMalFormadoException();
+			throw new CSVMalFormadoException();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			throw new JSONMalFormadoException();
+			throw new CSVMalFormadoException();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			throw new JSONMalFormadoException();
+			throw new CSVMalFormadoException();
 		}
 		
 	}

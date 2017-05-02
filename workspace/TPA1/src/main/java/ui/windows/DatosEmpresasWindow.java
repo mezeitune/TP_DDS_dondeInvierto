@@ -3,14 +3,15 @@ package ui.windows;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.WindowOwner;
+import org.uqbar.lacar.ui.model.Action;
 
 import java.awt.Color;
 import java.io.IOException;
 
+import org.uqbar.arena.bindings.ObservableProperty;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Label;
-import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
@@ -40,17 +41,18 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		selectorEmpresa.bindItemsToProperty("empresas").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		selectorEmpresa.bindValueToProperty("empresa");
 		
-		new Label(form).setText("Empresa Seleccionada").setBackground(Color.ORANGE);
-		new Label(form).bindValueToProperty("empresa.nombre");
+		/*new Label(form).setText("Empresa Seleccionada").setBackground(Color.ORANGE);
+		new Label(form).bindValueToProperty("empresa.nombre"); Funciona pero queda feo*/
 		
-		new Label(form).setText("Seleccione un Per�odo ").setBackground(Color.ORANGE);
-		Selector<String> selectorPeriodo = new Selector<String>(form).allowNull(true);
+		new Label(form).setText("Seleccione un Periodo ").setBackground(Color.ORANGE);
+		Selector<String> selectorPeriodo = new Selector<String>(form).allowNull(true);//No filtra, solo "Selecciona" la primer cuenta con la fecha elegida
+		
 		selectorPeriodo.setWidth(100);
 		selectorPeriodo.bindItemsToProperty("empresa.cuentas").setAdapter(new PropertyAdapter(Cuenta.class, "periodo"));
-		selectorPeriodo.bindValueToProperty("periodoo");
-		
-		new Label(form).setText("Periodo Seleccionado").setBackground(Color.ORANGE);
-		new Label(form).bindValueToProperty("periodoo");
+		selectorPeriodo.bindValueToProperty("cuenta");
+
+		/*new Label(form).setText("Periodo Seleccionado").setBackground(Color.ORANGE);
+		new Label(form).bindValueToProperty("cuenta.periodo");Funciona pero queda feo*/
 		
 		new Label(form).setText("Cuentas").setBackground(Color.ORANGE);
 
@@ -59,15 +61,13 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		
 		
 		table.bindItemsToProperty("empresa.cuentas");
-		
-		
-		
+		table.bindValueToProperty("cuenta");
+
 		new Column<Cuenta>(table).setTitle("Nombre").bindContentsToProperty("nombre");
 		new Column<Cuenta>(table).setTitle("Valor").bindContentsToProperty("valor");
+		new Column<Cuenta>(table).setTitle("Periodo").bindContentsToProperty("periodo");
 		
 	}
-	
-	
 	
 	protected void addActions(Panel actionsPanel) {
 		// TODO Auto-generated method stub

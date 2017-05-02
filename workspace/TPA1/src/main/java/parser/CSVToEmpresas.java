@@ -27,7 +27,7 @@ public class CSVToEmpresas {
 		HeaderColumnNameMappingStrategy<CSVObject> strategy = new HeaderColumnNameMappingStrategy<>();
 		strategy.setType(CSVObject.class);
 		CsvToBean<CSVObject> csvToCSVObject = new CsvToBean<>();
-		CSVReader reader = new CSVReader(new FileReader("/home/manuel/empresas.csv"));
+		CSVReader reader = new CSVReader(new FileReader(archivo));
 		List <CSVObject> CSVObjectList = csvToCSVObject.parse(strategy,reader);
 		return CSVObjectList;
 	}
