@@ -1,5 +1,6 @@
 package usuario;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.uqbar.commons.utils.Observable;
@@ -22,7 +23,11 @@ public class Empresa {
 	}
 
 	public  List<Cuenta> getCuentasPorPeriodo(String periodo) {
-		return (List<Cuenta>) cuentas.stream().filter(line -> line.getPeriodo().equals(periodo)).collect(Collectors.toList()) ;
+		
+		
+		List <Cuenta> listado=(List<Cuenta>) cuentas.stream().filter(line -> line.getPeriodo().equals(periodo)).collect(Collectors.toList()) ;
+
+		return listado;
 	}
 
 	

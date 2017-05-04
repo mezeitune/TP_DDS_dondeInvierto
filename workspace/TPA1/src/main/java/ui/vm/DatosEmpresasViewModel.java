@@ -3,7 +3,9 @@ package ui.vm;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 import com.sun.jersey.api.client.Client;
 
@@ -14,20 +16,28 @@ import com.google.gson.Gson;
 import usuario.*;
 
 
-@SuppressWarnings("unused")
 @Observable
 public class DatosEmpresasViewModel{
 	
 	private Empresa empresa;
 	private String nombre;
-	private List<Cuenta> cuentas;
 	private List<Empresa> empresas;
-	private Cuenta cuenta;
 	private String periodo;	
+	private List<String> periodos;
+	
+	public void setPeriodos(List<String> periodos){
+		this.periodos=periodos;
+	}
+	
+	public List<String> getPeriodos(){
+		return this.periodos;
+	}
 
 	
 	public DatosEmpresasViewModel() throws IOException {
 		this.setEmpresas();
+		empresa= empresas.get(0);
+		periodos=empresa.getCuentas().stream().map(unaCuenta->unaCuenta.getPeriodo()).collect(Collectors.toList());
 	}
 	
 
@@ -41,25 +51,22 @@ public class DatosEmpresasViewModel{
 	}
 	
 	public String getPeriodo(){
-		return cuenta.getPeriodo();
+		return periodo;
 	}
 	
 	public void setPeriodo(String periodo){
-		this.periodo= this.cuenta.getPeriodo();
+		
+		
+		this.periodo= periodo;//this.cuenta.getPeriodo();
+		
+		ObservableUtils.firePropertyChanged(this, "cuentasFiltradas");
 	}
+	
 
-	
-	
-	public void setCuenta(Cuenta cuenta){
-		this.cuenta=cuenta;
-	}
-	public Cuenta getCuenta(){
-		return this.cuenta;
-	}
-	
 
 	public void setEmpresa(Empresa empresaSeleccionada){
 		this.empresa = empresaSeleccionada;
+		this.setPeriodo(null);;
 	}
 	
 	
@@ -72,12 +79,9 @@ public class DatosEmpresasViewModel{
 	}
 	
 	
-	public void setCuentas(){
-		this.cuentas=this.empresa.getCuentasPorPeriodo(this.getPeriodo());
-	}
 	
-	public List<Cuenta> getCuentas(){
-		return cuentas;
+	public List<Cuenta> getCuentasFiltradas(){
+		return this.empresa.getCuentasPorPeriodo(this.getPeriodo());
 	}
 	
 	

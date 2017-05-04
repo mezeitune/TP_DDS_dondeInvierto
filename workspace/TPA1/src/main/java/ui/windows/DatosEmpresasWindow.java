@@ -48,8 +48,9 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		Selector<String> selectorPeriodo = new Selector<String>(form).allowNull(true);//No filtra, solo "Selecciona" la primer cuenta con la fecha elegida
 		
 		selectorPeriodo.setWidth(100);
-		selectorPeriodo.bindItemsToProperty("empresa.cuentas").setAdapter(new PropertyAdapter(Cuenta.class, "periodo"));
-		selectorPeriodo.bindValueToProperty("cuenta");
+		selectorPeriodo.bindItemsToProperty("periodos");
+		selectorPeriodo.bindValueToProperty("periodo");
+		
 
 		/*new Label(form).setText("Periodo Seleccionado").setBackground(Color.ORANGE);
 		new Label(form).bindValueToProperty("cuenta.periodo");Funciona pero queda feo*/
@@ -60,8 +61,7 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		Table<Cuenta> table = new Table<Cuenta>(mainPanel, Cuenta.class);
 		
 		
-		table.bindItemsToProperty("empresa.cuentas");
-		table.bindValueToProperty("cuenta");
+		table.bindItemsToProperty("cuentasFiltradas");
 
 		new Column<Cuenta>(table).setTitle("Nombre").bindContentsToProperty("nombre");
 		new Column<Cuenta>(table).setTitle("Valor").bindContentsToProperty("valor");
