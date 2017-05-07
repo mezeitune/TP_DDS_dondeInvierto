@@ -31,7 +31,7 @@ public class CargaArchivoEmpresaWindow extends SimpleWindow<CargaArchivoEmpresaV
 		new Label(form).setWidth(500);
 		
 		new Label(form).setText("Ruta seleccionada ");
-		new Label(form).bindValueToProperty("archivo");
+		new TextBox(form).setWidth(500).bindValueToProperty("archivo");
 		
 	}
 		

@@ -10,6 +10,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
+import exceptions.CSVMalFormadoException;
+
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -35,7 +37,9 @@ public class CSVToEmpresas {
 	
 	public  List<Empresa> csvFileToEmpresas() throws IOException{
 		List <Empresa> empresas = new ArrayList <Empresa> ();
-		List<CSVObject> CSVObjectList =this.csvFileToCSVObject();
+		
+		
+		List<CSVObject> CSVObjectList = this.csvFileToCSVObject();
 		String empresa;
 		int i=0;
 		
@@ -43,14 +47,18 @@ public class CSVToEmpresas {
 		List<String> nombreEmpresas = new ArrayList<>(setNombreEmpresas);
 		
 		while(i < setNombreEmpresas.size()){
-		Empresa nuevaEmpresa=new Empresa();
-		empresa=nombreEmpresas.get(i);
-		List <CSVObject> empresasByName = this.filtrarPorNombre(empresa,CSVObjectList);
-		List <Cuenta> cuentasByEmpresa = this.filtrarPorCuentas(empresasByName);
-		nuevaEmpresa.setNombre(empresa);
-		nuevaEmpresa.setCuentas(cuentasByEmpresa);
-		empresas.add(nuevaEmpresa);
-		i++;
+			Empresa nuevaEmpresa=new Empresa();
+			
+			empresa=nombreEmpresas.get(i);
+			
+			List <CSVObject> empresasByName = this.filtrarPorNombre(empresa,CSVObjectList);
+			List <Cuenta> cuentasByEmpresa = this.filtrarPorCuentas(empresasByName);
+			
+			nuevaEmpresa.setNombre(empresa);
+			nuevaEmpresa.setCuentas(cuentasByEmpresa);
+			
+			empresas.add(nuevaEmpresa);
+			i++;
 		}
 		return empresas;
 	}
@@ -64,11 +72,18 @@ public class CSVToEmpresas {
 	}
 	
 	public List <CSVObject> filtrarPorNombre(String empresa, List<CSVObject> list){
-		return list.stream().filter(line -> line.getEmpresa().equals(empresa)).collect(Collectors.toList());
+		try{
+			list.stream().filter(line -> line.getEmpresa().equals(empresa)).collect(Collectors.toList());
+		} catch (NullPointerException e){
+			e.getStackTrace();
+		}
+		return list;
 	}
 	
 	public List <Cuenta> filtrarPorCuentas(List <CSVObject> empresasByName){
+
 		return empresasByName.stream().map(line ->this.convertirACuenta(line)).collect(Collectors.toList());
+
 	}
 	
 	

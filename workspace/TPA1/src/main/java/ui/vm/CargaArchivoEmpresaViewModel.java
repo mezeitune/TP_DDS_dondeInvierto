@@ -1,4 +1,7 @@
 package ui.vm;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.uqbar.commons.utils.Observable;
 
 
@@ -13,7 +16,8 @@ public class CargaArchivoEmpresaViewModel {
 		return archivo;
 	}
 
-	public void setArchivo(String archivo) {
+	public void setArchivo(String archivo){
+		
 		this.archivo = archivo;
 		ArchivoRepository.setArchivo(archivo);
 		

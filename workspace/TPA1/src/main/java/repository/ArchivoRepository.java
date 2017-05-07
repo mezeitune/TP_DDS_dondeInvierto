@@ -1,9 +1,6 @@
 package repository;
-import java.io.IOException;
 
-import parser.CSVToEmpresas;
-import parser.ParserJsonAEmpresaAdapter;
-import usuario.*;
+import java.io.FileNotFoundException;
 
 public class ArchivoRepository {
 	
@@ -15,7 +12,6 @@ public class ArchivoRepository {
 	}
 	
 	public static String getArchivo(){
-		CSVToEmpresas P = new CSVToEmpresas(archivo);
 		return archivo;
 	}
 	

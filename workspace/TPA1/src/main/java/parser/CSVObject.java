@@ -7,7 +7,7 @@ import com.opencsv.bean.CsvBind;
 public class CSVObject {
 
 		@CsvBind
-		private String empresa;
+		private  String empresa;
 		@CsvBind
 		private String cuenta;
 		@CsvBind
