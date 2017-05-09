@@ -8,6 +8,9 @@ import org.junit.Test;
 
 import com.opencsv.CSVParser;
 
+import exceptions.ArchivoInexistenteException;
+import exceptions.PathIncorrectoException;
+import exceptions.TipoDeArchivoIncorrectoException;
 import parser.CSVToEmpresas;
 
 
@@ -33,10 +36,24 @@ public class TestCSV {
 		
 	}
 	
-	@Test(expected = FileNotFoundException.class)
+	@Test(expected = PathIncorrectoException.class)
+	public void pasarPathIncorrectoYQueExplote() throws IOException {
+		
+		CSVparser = new CSVToEmpresas("Inexistente.csv");
+		CSVparser.csvFileToEmpresas();
+	}
+	
+	@Test(expected = ArchivoInexistenteException.class)
 	public void pasarArchivoInexistenteYQueExplote() throws IOException {
 		
-		CSVparser = new CSVToEmpresas("inexistente.csv");
+		CSVparser = new CSVToEmpresas(null);
+		CSVparser.csvFileToEmpresas();
+	}
+	
+	@Test(expected = TipoDeArchivoIncorrectoException.class)
+	public void pasarArchivoConExtensionIncorrectaYQueExplote() throws IOException {
+		
+		CSVparser = new CSVToEmpresas("empresas.json");
 		CSVparser.csvFileToEmpresas();
 	}
 	

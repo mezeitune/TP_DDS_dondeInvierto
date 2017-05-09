@@ -10,10 +10,18 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
+import exceptions.ArchivoInexistenteException;
 import exceptions.CSVMalFormadoException;
+import exceptions.PathIncorrectoException;
+import exceptions.TipoDeArchivoIncorrectoException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.apache.commons.io.FilenameUtils;
 
 import usuario.Cuenta;
 import usuario.Empresa;
@@ -21,7 +29,15 @@ import usuario.Empresa;
 public class CSVToEmpresas {
 
 	private  String archivo;
+	private  String extension;
 	public CSVToEmpresas(String archivo){
+		if(archivo==null)
+			throw new ArchivoInexistenteException();
+		Path path = Paths.get(archivo);
+		if (Files.notExists(path))
+			throw new PathIncorrectoException();
+		if(!((extension=FilenameUtils.getExtension(archivo)).equals("csv")))
+			throw new TipoDeArchivoIncorrectoException();
 		this.archivo=archivo;
 	}
 	
