@@ -58,15 +58,13 @@ public class DatosEmpresasViewModel{
 	
 	public void setPeriodo(String periodo){
 		
-		this.periodo= periodo;//this.cuenta.getPeriodo();
+		this.periodo= periodo;
 		ObservableUtils.firePropertyChanged(this, "cuentasFiltradas");
 	}
 	
 
-
 	public void setEmpresa(Empresa empresaSeleccionada){
 		this.empresa = empresaSeleccionada;
-		System.out.print(this.empresa.getNombre());
 		this.setPeriodo(null);
 		ObservableUtils.firePropertyChanged(this, "periodos");
 	}
@@ -83,6 +81,7 @@ public class DatosEmpresasViewModel{
 	
 	
 	public List<Cuenta> getCuentasFiltradas(){
+		if (periodo == null) return empresa.getCuentas();
 		return this.empresa.getCuentasPorPeriodo(this.getPeriodo());
 	}
 	

@@ -41,19 +41,12 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		selectorEmpresa.bindItemsToProperty("empresas").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		selectorEmpresa.bindValueToProperty("empresa");
 		
-		/*new Label(form).setText("Empresa Seleccionada").setBackground(Color.ORANGE);
-		new Label(form).bindValueToProperty("empresa.nombre"); Funciona pero queda feo*/
-		
+
 		new Label(form).setText("Seleccione un Periodo ").setBackground(Color.ORANGE);
-		Selector<String> selectorPeriodo = new Selector<String>(form).allowNull(true);//No filtra, solo "Selecciona" la primer cuenta con la fecha elegida
-		
+		Selector<String> selectorPeriodo = new Selector<String>(form).allowNull(true);
 		selectorPeriodo.setWidth(100);
 		selectorPeriodo.bindItemsToProperty("periodos");
 		selectorPeriodo.bindValueToProperty("periodo");
-		
-
-		/*new Label(form).setText("Periodo Seleccionado").setBackground(Color.ORANGE);
-		new Label(form).bindValueToProperty("cuenta.periodo");Funciona pero queda feo*/
 		
 		new Label(form).setText("Cuentas").setBackground(Color.ORANGE);
 
