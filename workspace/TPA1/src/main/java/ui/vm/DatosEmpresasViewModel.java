@@ -31,15 +31,15 @@ public class DatosEmpresasViewModel{
 	}
 	
 	public List<String> getPeriodos(){
-		return this.periodos;
+		return empresa.getPeriodosSinRepetidos();
 	}
 
 	
 	public DatosEmpresasViewModel() throws IOException {
 		this.setEmpresas();
-		empresa= empresas.get(0);
-		//periodos=empresa.getCuentas().stream().map(unaCuenta->unaCuenta.getPeriodo()).collect(Collectors.toList());
-		periodos=empresa.getPeriodosSinRepetidos();
+		
+		this.empresa= empresas.get(0);
+		this.periodos=this.empresa.getPeriodosSinRepetidos();
 	}
 	
 
@@ -58,9 +58,7 @@ public class DatosEmpresasViewModel{
 	
 	public void setPeriodo(String periodo){
 		
-		
 		this.periodo= periodo;//this.cuenta.getPeriodo();
-		
 		ObservableUtils.firePropertyChanged(this, "cuentasFiltradas");
 	}
 	
@@ -68,7 +66,9 @@ public class DatosEmpresasViewModel{
 
 	public void setEmpresa(Empresa empresaSeleccionada){
 		this.empresa = empresaSeleccionada;
-		this.setPeriodo(null);;
+		System.out.print(this.empresa.getNombre());
+		this.setPeriodo(null);
+		ObservableUtils.firePropertyChanged(this, "periodos");
 	}
 	
 	

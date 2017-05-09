@@ -35,9 +35,8 @@ public class CSVToEmpresas {
 	}
 	
 	
-	public  List<Empresa> csvFileToEmpresas() throws IOException{
+	public List<Empresa> csvFileToEmpresas() throws IOException{
 		List <Empresa> empresas = new ArrayList <Empresa> ();
-		
 		
 		List<CSVObject> CSVObjectList = this.csvFileToCSVObject();
 		String empresa;
@@ -52,6 +51,7 @@ public class CSVToEmpresas {
 			empresa=nombreEmpresas.get(i);
 			
 			List <CSVObject> empresasByName = this.filtrarPorNombre(empresa,CSVObjectList);
+			
 			List <Cuenta> cuentasByEmpresa = this.filtrarPorCuentas(empresasByName);
 			
 			nuevaEmpresa.setNombre(empresa);
@@ -63,7 +63,7 @@ public class CSVToEmpresas {
 		return empresas;
 	}
 	
-	public  Cuenta convertirACuenta(CSVObject line){
+	public Cuenta convertirACuenta(CSVObject line){
 		Cuenta nuevaCuenta = new Cuenta();
 		nuevaCuenta.setNombre(line.getCuenta());
 		nuevaCuenta.setPeriodo(line.getPeriodo());
@@ -72,12 +72,14 @@ public class CSVToEmpresas {
 	}
 	
 	public List <CSVObject> filtrarPorNombre(String empresa, List<CSVObject> list){
+		List <CSVObject> listaFiltrada = new ArrayList<CSVObject> ();
+		
 		try{
-			list.stream().filter(line -> line.getEmpresa().equals(empresa)).collect(Collectors.toList());
+			listaFiltrada = list.stream().filter(line -> line.getEmpresa().equals(empresa)).collect(Collectors.toList());
 		} catch (NullPointerException e){
 			e.getStackTrace();
 		}
-		return list;
+		return listaFiltrada;
 	}
 	
 	public List <Cuenta> filtrarPorCuentas(List <CSVObject> empresasByName){
@@ -87,9 +89,8 @@ public class CSVToEmpresas {
 	}
 	
 	
-	
-	/*Esto es para testear rapidamente
-	public static void main(String[] args) throws IOException{
+	/*
+	public static  void main(String[] args) throws IOException{
 		int i,j;
 		
 		List<Empresa> empresas =CSVToEmpresas.csvFileToEmpresas();
@@ -103,6 +104,5 @@ public class CSVToEmpresas {
 			}
 		}
 }
-*/
-	
+	*/
 }
