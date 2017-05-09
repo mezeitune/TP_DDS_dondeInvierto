@@ -33,7 +33,6 @@ public class DatosEmpresasViewModel{
 	public List<String> getPeriodos(){
 		return empresa.getPeriodosSinRepetidos();
 	}
-
 	
 	public DatosEmpresasViewModel() throws IOException {
 		this.setEmpresas();
@@ -41,7 +40,6 @@ public class DatosEmpresasViewModel{
 		this.empresa= empresas.get(0);
 		this.periodos=this.empresa.getPeriodosSinRepetidos();
 	}
-	
 
 	public void setEmpresas() throws IOException {
 		CSVToEmpresas parser = new CSVToEmpresas(ArchivoRepository.getArchivo());
@@ -62,13 +60,11 @@ public class DatosEmpresasViewModel{
 		ObservableUtils.firePropertyChanged(this, "cuentasFiltradas");
 	}
 	
-
 	public void setEmpresa(Empresa empresaSeleccionada){
 		this.empresa = empresaSeleccionada;
 		this.setPeriodo(null);
 		ObservableUtils.firePropertyChanged(this, "periodos");
 	}
-	
 	
 	public Empresa getEmpresa(){
 		return this.empresa;
@@ -77,8 +73,6 @@ public class DatosEmpresasViewModel{
 	public List<Empresa> getEmpresas(){
 		return this.empresas;
 	}
-	
-	
 	
 	public List<Cuenta> getCuentasFiltradas(){
 		if (periodo == null) return empresa.getCuentas();

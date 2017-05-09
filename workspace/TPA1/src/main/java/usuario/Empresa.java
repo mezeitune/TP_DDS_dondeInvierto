@@ -16,6 +16,11 @@ public class Empresa {
 
 	String nombre;
 	private List<Cuenta> cuentas = new LinkedList<>(); 
+	
+	public  Empresa(String nombreEmpresa,List<Cuenta> cuentas){
+		this.nombre = nombreEmpresa;
+		this.cuentas = cuentas;
+	}
 
 	
 	public String getNombre() {

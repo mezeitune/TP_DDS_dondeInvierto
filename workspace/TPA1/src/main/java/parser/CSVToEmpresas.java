@@ -36,46 +36,34 @@ public class CSVToEmpresas {
 	
 	
 	public List<Empresa> csvFileToEmpresas() throws IOException{
-		List <Empresa> empresas = new ArrayList <Empresa> ();
-		
-		List<CSVObject> CSVObjectList = this.csvFileToCSVObject();
-		String empresa;
 		int i=0;
+		String nombreNuevaEmpresa;
+		List <Empresa> empresas = new ArrayList <Empresa> ();
+		List<CSVObject> CSVObjectList = this.csvFileToCSVObject();
 		
 		Set<String> setNombreEmpresas = new HashSet<>(CSVObjectList.stream().map(line -> line.getEmpresa()).collect(Collectors.toList()));
-		List<String> nombreEmpresas = new ArrayList<>(setNombreEmpresas);
+		List<String> nombreEmpresasSinRepetidos = new ArrayList<>(setNombreEmpresas);
 		
-		while(i < setNombreEmpresas.size()){
-			Empresa nuevaEmpresa=new Empresa();
+		while(i < nombreEmpresasSinRepetidos.size()){
 			
-			empresa=nombreEmpresas.get(i);
+			nombreNuevaEmpresa=nombreEmpresasSinRepetidos.get(i);
 			
-			List <CSVObject> empresasByName = this.filtrarPorNombre(empresa,CSVObjectList);
+			List <CSVObject> empresasByName = this.filtrarPorNombre(nombreNuevaEmpresa,CSVObjectList);
 			
 			List <Cuenta> cuentasByEmpresa = this.filtrarPorCuentas(empresasByName);
 			
-			nuevaEmpresa.setNombre(empresa);
-			nuevaEmpresa.setCuentas(cuentasByEmpresa);
-			
-			empresas.add(nuevaEmpresa);
+			empresas.add(new Empresa(nombreNuevaEmpresa,cuentasByEmpresa));
 			i++;
 		}
 		return empresas;
 	}
 	
-	public Cuenta convertirACuenta(CSVObject line){
-		Cuenta nuevaCuenta = new Cuenta();
-		nuevaCuenta.setNombre(line.getCuenta());
-		nuevaCuenta.setPeriodo(line.getPeriodo());
-		nuevaCuenta.setValor(line.getValor());
-		return nuevaCuenta;
-	}
 	
-	public List <CSVObject> filtrarPorNombre(String empresa, List<CSVObject> list){
+	public List <CSVObject> filtrarPorNombre(String empresa, List<CSVObject> listCSVObjects){
 		List <CSVObject> listaFiltrada = new ArrayList<CSVObject> ();
 		
 		try{
-			listaFiltrada = list.stream().filter(line -> line.getEmpresa().equals(empresa)).collect(Collectors.toList());
+			listaFiltrada = listCSVObjects.stream().filter(line -> line.getEmpresa().equals(empresa)).collect(Collectors.toList());
 		} catch (NullPointerException e){
 			e.getStackTrace();
 		}
@@ -85,24 +73,10 @@ public class CSVToEmpresas {
 	public List <Cuenta> filtrarPorCuentas(List <CSVObject> empresasByName){
 
 		return empresasByName.stream().map(line ->this.convertirACuenta(line)).collect(Collectors.toList());
-
 	}
 	
-	
-	/*
-	public static  void main(String[] args) throws IOException{
-		int i,j;
-		
-		List<Empresa> empresas =CSVToEmpresas.csvFileToEmpresas();
-		System.out.println("------------------");
-		for(i=0; i< empresas.size();i++){
-			System.out.println(empresas.get(i).getNombre());
-			for(j=0; j < empresas.get(i).getCuentas().size(); j++){
-				System.out.println(empresas.get(i).getCuentas().get(j).getNombre());
-				System.out.println(empresas.get(i).getCuentas().get(j).getPeriodo());
-				System.out.println(empresas.get(i).getCuentas().get(j).getValor());
-			}
-		}
-}
-	*/
+	public Cuenta convertirACuenta(CSVObject line){
+		return new Cuenta(line.getCuenta(),line.getPeriodo(),line.getValor());
+	}
+
 }

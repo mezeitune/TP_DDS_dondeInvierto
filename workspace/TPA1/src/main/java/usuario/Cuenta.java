@@ -8,6 +8,12 @@ public class Cuenta {
 	private String periodo;
 	private int valor;
 	
+	public Cuenta(String nombre, String periodo, int valor){
+		this.nombre=nombre;
+		this.periodo=periodo;
+		this.valor=valor;
+	}
+	
 	public String getNombre (){
 		return this.nombre;
 	}
