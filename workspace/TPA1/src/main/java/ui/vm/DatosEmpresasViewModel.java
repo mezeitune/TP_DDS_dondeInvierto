@@ -25,6 +25,7 @@ public class DatosEmpresasViewModel{
 	private String periodo;	
 	private List<String> periodos;
 	
+	
 	public void setPeriodos(List<String> periodos){
 		this.periodos=periodos;
 	}
@@ -37,7 +38,8 @@ public class DatosEmpresasViewModel{
 	public DatosEmpresasViewModel() throws IOException {
 		this.setEmpresas();
 		empresa= empresas.get(0);
-		periodos=empresa.getCuentas().stream().map(unaCuenta->unaCuenta.getPeriodo()).collect(Collectors.toList());
+		//periodos=empresa.getCuentas().stream().map(unaCuenta->unaCuenta.getPeriodo()).collect(Collectors.toList());
+		periodos=empresa.getPeriodosSinRepetidos();
 	}
 	
 

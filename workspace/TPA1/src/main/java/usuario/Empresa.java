@@ -1,6 +1,9 @@
 package usuario;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.uqbar.commons.utils.Observable;
@@ -38,6 +41,13 @@ public class Empresa {
 		this.cuentas=cuentas;
 	}
 	
+	public List<String> getPeriodosSinRepetidos(){
+		Set <String> unSetPeriodos = new HashSet <String> (cuentas.stream().map(cuenta -> cuenta.getPeriodo()).collect(Collectors.toList()));
+		List <String> periodosSinRepetidos = new ArrayList <String> (unSetPeriodos);
+		return periodosSinRepetidos;
+	}
+	
+	/*
 	public static void main(String[] args) {
 		List<Cuenta> cuentas;
 		List<Empresa> empresas;
@@ -54,6 +64,6 @@ public class Empresa {
             System.out.println(cuentas.get(i).getNombre());
         }
 	}
-	
+	*/
 	
 }
