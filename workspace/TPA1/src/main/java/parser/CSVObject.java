@@ -6,6 +6,7 @@ import com.opencsv.bean.CsvBind;
 @SuppressWarnings("deprecation")
 public class CSVObject {
 
+	
 		@CsvBind
 		private  String empresa;
 		@CsvBind
@@ -14,6 +15,17 @@ public class CSVObject {
 		private String periodo;
 		@CsvBind
 		private int valor;
+		
+		
+		/*No puedo crear un constructor para esta clase porque no me lo permite el reader de CSV*/ 
+		public CSVObject init(String empresa, String cuenta, String periodo, int valor){
+			this.empresa=empresa;
+			this.cuenta=cuenta;
+			this.periodo=periodo;
+			this.valor=valor;
+			return this;
+		}
+		
 		
 		public String getEmpresa(){
 			return empresa;

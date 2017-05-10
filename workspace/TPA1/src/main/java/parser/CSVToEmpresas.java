@@ -41,30 +41,35 @@ public class CSVToEmpresas {
 		this.archivo=archivo;
 	}
 	
-	public  List<CSVObject> csvFileToCSVObject() throws IOException{
+	public  List<CSVObject> CSVFileToCSVObjectList() throws IOException{
 		HeaderColumnNameMappingStrategy<CSVObject> strategy = new HeaderColumnNameMappingStrategy<>();
 		strategy.setType(CSVObject.class);
-		CsvToBean<CSVObject> csvToCSVObject = new CsvToBean<>();
+		CsvToBean<CSVObject> lineToCSVObject = new CsvToBean<>();
 		CSVReader reader = new CSVReader(new FileReader(archivo));
-		List <CSVObject> CSVObjectList = csvToCSVObject.parse(strategy,reader);
+		List <CSVObject> CSVObjectList = lineToCSVObject.parse(strategy,reader);
 		return CSVObjectList;
 	}
 	
 	
 	public List<Empresa> csvFileToEmpresas() throws IOException{
+		List<CSVObject> CSVObjectList = this.CSVFileToCSVObjectList();
+		
+		return this.CSVObjectListToEmpresasList(CSVObjectList);
+	}
+	
+	public List <Empresa> CSVObjectListToEmpresasList(List <CSVObject> csvObjectList){
 		int i=0;
 		String nombreNuevaEmpresa;
 		List <Empresa> empresas = new ArrayList <Empresa> ();
-		List<CSVObject> CSVObjectList = this.csvFileToCSVObject();
 		
-		Set<String> setNombreEmpresas = new HashSet<>(CSVObjectList.stream().map(line -> line.getEmpresa()).collect(Collectors.toList()));
+		Set<String> setNombreEmpresas = new HashSet<>(csvObjectList.stream().map(line -> line.getEmpresa()).collect(Collectors.toList()));
 		List<String> nombreEmpresasSinRepetidos = new ArrayList<>(setNombreEmpresas);
 		
 		while(i < nombreEmpresasSinRepetidos.size()){
 			
 			nombreNuevaEmpresa=nombreEmpresasSinRepetidos.get(i);
 			
-			List <CSVObject> empresasByName = this.filtrarPorNombre(nombreNuevaEmpresa,CSVObjectList);
+			List <CSVObject> empresasByName = this.filtrarPorNombre(nombreNuevaEmpresa,csvObjectList);
 			
 			List <Cuenta> cuentasByEmpresa = this.filtrarPorCuentas(empresasByName);
 			
