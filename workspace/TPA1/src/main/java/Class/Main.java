@@ -1,16 +1,10 @@
 package Class;
-import usuario.*;
-
-import java.io.IOException;
-import java.util.List;
-
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.CSVInexistenteException;
-import ui.windows.CargaArchivoEmpresaWindow;
-import ui.windows.DatosEmpresasWindow;
+import ui.windows.MenuWindow;
 
 @Observable
 public class Main extends Application{
@@ -25,9 +19,8 @@ public class Main extends Application{
 	protected Window<?> createMainWindow() {
 
 			try {
-				return new CargaArchivoEmpresaWindow(this);
+				return new MenuWindow(this);
 			} catch (CSVInexistenteException ex) {
-				// TODO Auto-generated catch block
 				ex.printStackTrace();
 			}
 			return null;

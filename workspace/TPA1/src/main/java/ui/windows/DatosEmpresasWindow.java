@@ -3,14 +3,12 @@ package ui.windows;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.WindowOwner;
-import org.uqbar.lacar.ui.model.Action;
-
 import java.awt.Color;
 import java.io.IOException;
 
-import org.uqbar.arena.bindings.ObservableProperty;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
+import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.tables.Column;
@@ -32,7 +30,7 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		
 		
 		Panel form = new Panel(mainPanel);
-		form.setLayout(new ColumnLayout(1));
+		form.setLayout(new ColumnLayout(2));
 		
 		
 		new Label(form).setText("Seleccione una empresa ").setBackground(Color.ORANGE);
@@ -62,10 +60,21 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		
 	}
 	
-	protected void addActions(Panel actionsPanel) {
-		// TODO Auto-generated method stub
-		
+	protected void addActions(Panel actionsPanel){
+		new Button(actionsPanel).setCaption("Volver al menú")
+								.onClick(() -> {
+												try{
+													this.getDelegate().close();
+													MenuWindow();
+												}catch (IOException e) {
+													e.printStackTrace();
+												}
+								});
 	}
 	
-
+	public void MenuWindow() throws IOException {
+		Dialog<?> dialog = new MenuWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
 }		
