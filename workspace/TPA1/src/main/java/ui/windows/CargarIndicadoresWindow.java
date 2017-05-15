@@ -28,9 +28,13 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new VerticalLayout());
 		
-		new Label(form).setText("Escribir en el siguiente recuadro un nuevo Indicador").setBackground(Color.orange);
+		new Label(form).setText("Escribir en el siguiente recuadro el nombre del Indicador").setBackground(Color.orange);
 		
-		new TextBox(form)/*.bindValueToProperty("nuevoIndicador")*/;
+		new TextBox(form).bindValueToProperty("nombreIndicador");
+		
+		new Label(form).setText("Escribir en el siguiente recuadro la formula del Indicador").setBackground(Color.orange);
+		
+		new TextBox(form).bindValueToProperty("formulaIndicador");
 		
 		
 	}
@@ -66,9 +70,11 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		dialog.onAccept(() -> {});
 	}
 	public void PreguntaDeCargaWindow() throws IOException {
-		Dialog<?> dialog = new PreguntaDeCargaWindow(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
+		//Dialog<?> dialog = new PreguntaDeCargaWindow(this);
+		//dialog.open();
+		//dialog.onAccept(() -> {});
+		
+		CargarIndicadoresViewModel.generarIndicador();
 	}
 	
 }
