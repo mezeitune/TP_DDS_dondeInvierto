@@ -17,10 +17,12 @@ import com.google.gson.reflect.TypeToken;
 import Class.Main;
 import exceptions.CSVInexistenteException;
 import usuario.Empresa;
+import usuario.Indicador;
 
 public class ParserJsonAEmpresaAdapter {
 	//private String archivoParaJson;
 	private List <Empresa> empresasObtenidasDelArchivo = new ArrayList <Empresa> ();
+	private List <Indicador> indicadoresObtenidasDelArchivo = new ArrayList <Indicador> ();
 	private JSONParser parserJsonAObjetos = new JSONParser();
 	private Object objetoAOtrosObjetos;
 	private static String archivo;
@@ -33,10 +35,20 @@ public class ParserJsonAEmpresaAdapter {
 			
 		Type listType = new TypeToken <List<Empresa>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		
-		this.empresasObtenidasDelArchivo = new Gson().fromJson(stringEmpresasParaGson(),listType);
+		this.empresasObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
 	
 	    return this.empresasObtenidasDelArchivo;
 	}
+	
+	public List<Indicador> getIndicadoresDelArchivo() {
+		
+		Type listType = new TypeToken <List<Indicador>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
+		
+		this.indicadoresObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
+	
+	    return this.indicadoresObtenidasDelArchivo;
+	}
+	
 	
 	
 	public Object definirObjetosDelArchivo() {
@@ -62,7 +74,7 @@ public class ParserJsonAEmpresaAdapter {
 		
 	}
 
-	public String stringEmpresasParaGson(){
+	public String stringParaGson(){
 		JSONArray jsonArray=ParserJsonString.pasarDeObjetosAJSON(this.definirObjetosDelArchivo());
 		return ParserJsonString.pasarDeJSONArrayAString(jsonArray);
 	}

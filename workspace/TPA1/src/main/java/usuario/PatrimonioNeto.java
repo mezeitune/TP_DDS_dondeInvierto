@@ -33,7 +33,7 @@ public class PatrimonioNeto extends Indicador{
 	
 	
 	@Override
-	public int calcular() {//metodo que tiene que estar por ser Indicador usado de manera polimorfica
+	public float calcular() {//metodo que tiene que estar por ser Indicador usado de manera polimorfica
 		return activo - pasivo;
 		
 	}

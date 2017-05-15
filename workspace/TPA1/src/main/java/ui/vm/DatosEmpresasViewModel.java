@@ -11,7 +11,7 @@ import com.sun.jersey.api.client.Client;
 
 import parser.CSVToEmpresas;
 import parser.ParserJsonAEmpresaAdapter;
-import repository.ArchivoRepository;
+import repository.ArchivoEIndicadoresUsuarioRepository;
 import com.google.gson.Gson;
 import usuario.*;
 
@@ -42,7 +42,7 @@ public class DatosEmpresasViewModel{
 	}
 
 	public void setEmpresas() throws IOException {
-		CSVToEmpresas parser = new CSVToEmpresas(ArchivoRepository.getArchivo());
+		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
 		this.empresas=parser.csvFileToEmpresas();
 		System.out.println(this.empresas.size());
 	}

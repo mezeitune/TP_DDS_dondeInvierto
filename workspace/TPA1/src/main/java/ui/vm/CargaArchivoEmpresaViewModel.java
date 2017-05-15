@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.uqbar.commons.utils.Observable;
 
 
-import repository.ArchivoRepository;
+import repository.ArchivoEIndicadoresUsuarioRepository;
 @Observable
 public class CargaArchivoEmpresaViewModel {
 	
@@ -19,7 +19,7 @@ public class CargaArchivoEmpresaViewModel {
 	public void setArchivo(String archivo){
 		
 		this.archivo = archivo;
-		ArchivoRepository.setArchivo(archivo);
+		ArchivoEIndicadoresUsuarioRepository.setArchivo(archivo);
 		
 	}
 	

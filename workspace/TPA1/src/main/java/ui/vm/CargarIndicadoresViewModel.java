@@ -10,7 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 
-import repository.ArchivoRepository;
+import parser.ParserJsonString;
+import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
 
 public class CargarIndicadoresViewModel {
@@ -36,44 +37,18 @@ public class CargarIndicadoresViewModel {
 	
 	
 	public static void generarIndicador(){
-		ObjectMapper mapper = new ObjectMapper();
+		
 		Indicador obj = new Indicador();
 		obj.setNombre(nombreIndicador);
 		obj.setFormula(formulaIndicador);
 		
-		//Object to JSON in file
-		try {
-			
-			RandomAccessFile randomAccessFile = new RandomAccessFile("indicadores.json", "rw");
-			
-			long pos = randomAccessFile.length();
-			while (randomAccessFile.length() > 0) {
-			    pos--;
-			    randomAccessFile.seek(pos);
-			    if (randomAccessFile.readByte() == ']') {
-			        randomAccessFile.seek(pos);
-			        break;
-			    }
-			}
 		
-			
-			Gson gson= new Gson();
-			String jsonElement = gson.toJson(obj);
-			randomAccessFile.writeBytes("," + jsonElement + "]");
-			
-			randomAccessFile.close();
+		Gson gson= new Gson();
+		String jsonElement = gson.toJson(obj);
+		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnFile("indicadores",jsonElement );
 			
 			
-			
-			//ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-			//writer.writeValue(new File("indicadores.json"), obj);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		//Object to JSON in String
-		//String jsonInString = mapper.writeValueAsString(obj);
+		
 	}
 
 	

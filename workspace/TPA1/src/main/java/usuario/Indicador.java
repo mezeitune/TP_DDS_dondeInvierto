@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import parser.ParserFormulaToIndicador;
+
 public class Indicador {
 
 	private String nombre;
@@ -28,8 +30,7 @@ public class Indicador {
 		this.formula = formula;
 	}
 
-	public int calcular() {
-		// TODO Auto-generated method stub
-		return 0;
+	public float calcular() {
+		return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());
 	}
 }

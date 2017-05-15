@@ -1,10 +1,15 @@
 package Class;
+import java.util.List;
+
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.CSVInexistenteException;
+import parser.ParserFormulaToIndicador;
+import repository.ArchivoEIndicadoresUsuarioRepository;
 import ui.windows.MenuWindow;
+import usuario.Indicador;
 
 @Observable
 public class Main extends Application{
@@ -12,7 +17,9 @@ public class Main extends Application{
 	
 	public static void main(String[] args){
 
+			new ParserFormulaToIndicador();//cargo todos los indicadores definidos por el usuario cuando empieza el sistema
 	
+			//consultarCuentas(); // para verificar que los indicadores se cargaron correctamente en el repositorio
 			new Main().start();
 	}
 		@Override
@@ -27,6 +34,16 @@ public class Main extends Application{
 
 	}	
 		
+		
+
+		/*public static void consultarCuentas(){
+			int i,j;
+			for(i=0; i< ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario().size();i++){
+				System.out.println(ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario().get(i).getNombre());
+				
+			}	  	
+		}*/
+		
 }		
 	
 
@@ -35,16 +52,5 @@ public class Main extends Application{
 	
 	
 
-	/*public static void consultarCuentas(List<Empresa> empresas){
-		int i,j;
-		for(i=0; i< empresas.size();i++){
-			System.out.println(empresas.get(i).getNombre());
-			for(j=0; j < empresas.get(i).getCuentas().size(); j++){
-				System.out.println(empresas.get(i).getCuentas().get(j).getNombre());
-				System.out.println(empresas.get(i).getCuentas().get(j).getPeriodo());
-				System.out.println(empresas.get(i).getCuentas().get(j).getValor());
-			}
-		}	  	
-	}*/
 
 
