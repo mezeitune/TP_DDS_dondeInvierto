@@ -16,13 +16,13 @@ import ui.vm.MenuViewModel;
 @SuppressWarnings("serial")
 public class MenuWindow extends Dialog<MenuViewModel> {
 
-	public MenuWindow(WindowOwner parent) {
-		super(parent, new MenuViewModel());
+	public MenuWindow(WindowOwner cargaExitosaWindow) {
+		super(cargaExitosaWindow, new MenuViewModel());
 	}
 
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
-		
+		this.setTitle("Sistema de carga y consulta");
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new ColumnLayout(2));
 		

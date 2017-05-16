@@ -9,40 +9,31 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import ui.vm.PreguntaDeCargaViewModel;
+import ui.vm.CargaExitosaViewModel;
 
-//por ahora no se usa porque al cargarlo, aunque pregunte o no lo carga igual, me parece mejor que directamente informa la carga exitosa del indicador
+
+
+
 @SuppressWarnings("serial")
-public class PreguntaDeCargaWindow extends Dialog<PreguntaDeCargaViewModel> {
-
-	public PreguntaDeCargaWindow(WindowOwner owner) {
-		super(owner, new PreguntaDeCargaViewModel());
+public class CargaExitosaWindow extends Dialog<CargaExitosaViewModel>{
+	
+	public CargaExitosaWindow (WindowOwner owner) {
+		super(owner, new CargaExitosaViewModel());
 	}
-
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new ColumnLayout(2));
 		
-		new Label(mainPanel).setText("¿Desea agregar un nuevo Indicador?");
+		new Label(mainPanel).setText("Indicador Cargado Con Exito");
 				
 	}
 	
 	protected void addActions(Panel actionsPanel){
-		
-		new Button(actionsPanel).setCaption("Si")
-								.onClick(() -> {
-												try{
-													this.getDelegate().close();
-													CargaExitosaWindow();
-												}catch (IOException e) {
-													e.printStackTrace();
-												}
-								})
-								.setWidth(130);
 	
-		new Button(actionsPanel).setCaption("No, volver al Menu Principal")
+	
+		new Button(actionsPanel).setCaption("Volver al Menu Principal")
 									.onClick(() -> {
 													try{
 														this.getDelegate().close();
@@ -50,8 +41,9 @@ public class PreguntaDeCargaWindow extends Dialog<PreguntaDeCargaViewModel> {
 													}catch (IOException e) {
 														e.printStackTrace();
 													}
-									});
-		new Button(actionsPanel).setCaption("No, volver a Cargar Indicadores")
+									})
+									.setWidth(160);
+		new Button(actionsPanel).setCaption("Volver a cargar otro Indicador")
 		.onClick(() -> {
 						try{
 							this.getDelegate().close();
@@ -59,7 +51,8 @@ public class PreguntaDeCargaWindow extends Dialog<PreguntaDeCargaViewModel> {
 						}catch (IOException e) {
 							e.printStackTrace();
 						}
-		});
+		})
+		.setWidth(160);
 	}
 	
 	
@@ -73,10 +66,5 @@ public class PreguntaDeCargaWindow extends Dialog<PreguntaDeCargaViewModel> {
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void CargaExitosaWindow() throws IOException {
-		Dialog<?> dialog = new CargaExitosaWindow(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
-	}
-	
+
 }

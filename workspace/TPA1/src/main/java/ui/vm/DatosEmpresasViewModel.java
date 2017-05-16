@@ -44,7 +44,7 @@ public class DatosEmpresasViewModel{
 	public void setEmpresas() throws IOException {
 		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
 		this.empresas=parser.csvFileToEmpresas();
-		System.out.println(this.empresas.size());
+		
 	}
 	
 	public String getNombre(){

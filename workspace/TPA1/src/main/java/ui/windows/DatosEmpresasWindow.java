@@ -61,7 +61,7 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 	}
 	
 	protected void addActions(Panel actionsPanel){
-		new Button(actionsPanel).setCaption("Volver al menú")
+		new Button(actionsPanel).setCaption("Volver al Menu Principal")
 								.onClick(() -> {
 												try{
 													this.getDelegate().close();
@@ -70,10 +70,24 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 													e.printStackTrace();
 												}
 								});
-	}
+		new Button(actionsPanel).setCaption("Seleccionar otro archivo")
+								.onClick(() -> {
+												try {
+													this.getDelegate().close();
+													CargaArchivoEmpresaWindow();
+												} catch (IOException e) {
+													e.printStackTrace();
+												}
+								});
+							}
 	
 	public void MenuWindow() throws IOException {
 		Dialog<?> dialog = new MenuWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
+	public void CargaArchivoEmpresaWindow() throws IOException {
+		Dialog<?> dialog = new CargaArchivoEmpresaWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}

@@ -18,7 +18,7 @@ public class Main extends Application{
 	public static void main(String[] args){
 
 			new ParserFormulaToIndicador();//cargo todos los indicadores definidos por el usuario cuando empieza el sistema
-	
+		
 			//consultarCuentas(); // para verificar que los indicadores se cargaron correctamente en el repositorio
 			new Main().start();
 	}

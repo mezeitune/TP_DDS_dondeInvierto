@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.uqbar.commons.utils.Observable;
+
 import parser.ParserFormulaToIndicador;
 
+@Observable
 public class Indicador {
 
 	private String nombre;

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Collection;
 
+import org.uqbar.commons.utils.Observable;
+
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -13,7 +15,7 @@ import com.google.gson.Gson;
 import parser.ParserJsonString;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
-
+@Observable
 public class CargarIndicadoresViewModel {
 
 	

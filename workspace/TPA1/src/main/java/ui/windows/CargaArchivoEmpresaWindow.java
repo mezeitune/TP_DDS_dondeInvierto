@@ -38,12 +38,12 @@ public class CargaArchivoEmpresaWindow extends Dialog<CargaArchivoEmpresaViewMod
 		
 	protected void addActions(Panel actionsPanel) {
 		
-		new FileSelector(actionsPanel).setCaption("Seleccionar Archivo a Cargar")
+		new FileSelector(actionsPanel).setCaption("Seleccione el Archivo a Cargar")
 	    							  .bindValueToProperty("archivo");
 		
 		
 		
-		new Button(actionsPanel).setCaption("Ver Datos")
+		new Button(actionsPanel).setCaption("Ver Cuentas")
 								.onClick(() -> {
 												try {
 													this.getDelegate().close();
@@ -52,7 +52,7 @@ public class CargaArchivoEmpresaWindow extends Dialog<CargaArchivoEmpresaViewMod
 													e.printStackTrace();
 												}
 								});
-		new Button(actionsPanel).setCaption("Cancelar")
+		new Button(actionsPanel).setCaption("Volver al Menu Principal")
 								.onClick(() -> {
 												try {
 													this.getDelegate().close();

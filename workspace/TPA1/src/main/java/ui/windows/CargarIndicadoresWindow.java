@@ -28,11 +28,11 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new VerticalLayout());
 		
-		new Label(form).setText("Escribir en el siguiente recuadro el nombre del Indicador").setBackground(Color.orange);
+		new Label(form).setText("Escriba el nombre del Indicador").setBackground(Color.orange);
 		
 		new TextBox(form).bindValueToProperty("nombreIndicador");
 		
-		new Label(form).setText("Escribir en el siguiente recuadro la formula del Indicador").setBackground(Color.orange);
+		new Label(form).setText("Escriba la formula del Indicador").setBackground(Color.orange);
 		
 		new TextBox(form).bindValueToProperty("formulaIndicador");
 		
@@ -46,13 +46,13 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 								.onClick(() -> {
 												try{
 													this.getDelegate().close();
-													PreguntaDeCargaWindow();
+													CargaExitosaWindow();
 												}catch (IOException e) {
 													e.printStackTrace();
 												}
 								});
 	
-		new Button(actionsPanel).setCaption("Cancelar")
+		new Button(actionsPanel).setCaption("Volver a Menu Principal")
 									.onClick(() -> {
 													try{
 														this.getDelegate().close();
@@ -69,10 +69,10 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void PreguntaDeCargaWindow() throws IOException {
-		//Dialog<?> dialog = new PreguntaDeCargaWindow(this);
-		//dialog.open();
-		//dialog.onAccept(() -> {});
+	public void CargaExitosaWindow() throws IOException {
+		Dialog<?> dialog = new CargaExitosaWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
 		
 		CargarIndicadoresViewModel.generarIndicador();
 	}
