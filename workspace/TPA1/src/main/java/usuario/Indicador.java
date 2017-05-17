@@ -16,6 +16,11 @@ public class Indicador {
 
 	private String nombre;
 	private String formula;
+	
+	public Indicador(String nombre, String formula){
+		this.nombre=nombre;
+		this.formula=formula;
+	}
 
 	public String getNombre() {
 		return nombre;

@@ -40,9 +40,7 @@ public class CargarIndicadoresViewModel {
 	
 	public static void generarIndicador(){
 		
-		Indicador obj = new Indicador();
-		obj.setNombre(nombreIndicador);
-		obj.setFormula(formulaIndicador);
+		Indicador obj = new Indicador(nombreIndicador,formulaIndicador);
 		
 		
 		Gson gson= new Gson();

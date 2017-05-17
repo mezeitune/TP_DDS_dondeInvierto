@@ -1,10 +1,6 @@
 [
-{
-  "nombre" : "jejejeje",
-  "formula" : "jijiji"
-},
-{
-  "nombre" : "jejejeje",
-  "formula" : "jijiji"
-}
-,{"nombre":"goooool","formula":"gaa"},{"nombre":"nuevo","formula":"lala"},{"nombre":"utn","formula":"frba"},{"nombre":"bone","formula":"bone"},{},{},{},{"nombre":"bone","formula":"DS"},{}]
+{"nombre":"Indicador0","formula":"1+1"},
+{"nombre":"Indicador1","formula":"3-1"},
+{"nombre":"Indicador2","formula":"2*1"},
+{"nombre":"Indicador3","formula":"4/2"},
+{"nombre":"Indicador4","formula":"4+2-2"}]

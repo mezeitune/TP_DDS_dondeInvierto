@@ -12,6 +12,10 @@ import com.google.gson.JsonIOException;
 @Observable
 public class PatrimonioNeto extends Indicador{
 
+	public PatrimonioNeto(String nombre, String formula) {
+		super(nombre, formula);
+	}
+
 	private int activo;
 	private int pasivo;
 	
