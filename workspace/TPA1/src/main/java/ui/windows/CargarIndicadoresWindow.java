@@ -3,15 +3,21 @@ package ui.windows;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
+import org.uqbar.arena.widgets.tables.Column;
+import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+import parser.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
+import usuario.Cuenta;
+import usuario.Indicador;
 
 @SuppressWarnings("serial")
 public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> {
@@ -26,15 +32,26 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		this.setTitle("Carga de indicadores");
 		
 		Panel form = new Panel(mainPanel);
-		form.setLayout(new VerticalLayout());
+		form.setLayout(new ColumnLayout(2));
 		
 		new Label(form).setText("Escriba el nombre del Indicador").setBackground(Color.orange);
 		
-		new TextBox(form).bindValueToProperty("nombreIndicador");
+		new TextBox(form).setWidth(200).bindValueToProperty("nombreIndicador");
 		
 		new Label(form).setText("Escriba la formula del Indicador").setBackground(Color.orange);
 		
-		new TextBox(form).bindValueToProperty("formulaIndicador");
+		new TextBox(form).setWidth(200).bindValueToProperty("formulaIndicador");
+		
+		new Label(form).setText("Indicadores Disponibles").setBackground(Color.green);
+		
+		Table<Indicador> table = new Table<Indicador>(mainPanel, Indicador.class);
+		
+		table.bindItemsToProperty("indicadores"); 
+		
+		new Column<Indicador>(table).setTitle("Nombre").bindContentsToProperty("nombre");
+		new Column<Indicador>(table).setTitle("Formula").bindContentsToProperty("formula");
+		
+		
 		
 		
 	}
@@ -46,13 +63,15 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 								.onClick(() -> {
 												try{
 													this.getDelegate().close();
+													CargarIndicadoresViewModel.generarIndicador();//Actualiza archivo sin cerrar programa
+													new ParserFormulaToIndicador();//Muestra Indicadores en tabla
 													CargaExitosaWindow();
 												}catch (IOException e) {
 													e.printStackTrace();
 												}
 								});
 	
-		new Button(actionsPanel).setCaption("Volver a Menu Principal")
+		new Button(actionsPanel).setCaption("Cancelar")
 									.onClick(() -> {
 													try{
 														this.getDelegate().close();
@@ -74,7 +93,6 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		dialog.open();
 		dialog.onAccept(() -> {});
 		
-		CargarIndicadoresViewModel.generarIndicador();
 	}
 	
 }

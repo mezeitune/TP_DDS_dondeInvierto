@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Collection;
+import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -12,13 +13,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 
+import parser.ParserFormulaToIndicador;
 import parser.ParserJsonString;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
 @Observable
 public class CargarIndicadoresViewModel {
 
-	
+	private List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();;
 	
 	private static String nombreIndicador;
 	private static String formulaIndicador;
@@ -33,6 +35,7 @@ public class CargarIndicadoresViewModel {
 		return formulaIndicador;
 	}
 	public void setFormulaIndicador(String formulaIndicador) {
+
 		this.formulaIndicador = formulaIndicador;
 	}
 
@@ -45,12 +48,18 @@ public class CargarIndicadoresViewModel {
 		
 		Gson gson= new Gson();
 		String jsonElement = gson.toJson(obj);
-		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnFile("indicadores",jsonElement );
-			
-			
+		
+		new ParserFormulaToIndicador();
+		ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
+
+		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnFile("indicadores",jsonElement );	
 		
 	}
-
+	
+	public List<Indicador> getIndicadores(){
+		return indicadores;
+		
+	}
 	
 	
 	

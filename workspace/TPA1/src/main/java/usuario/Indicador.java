@@ -1,5 +1,6 @@
 package usuario;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -38,7 +39,9 @@ public class Indicador {
 		this.formula = formula;
 	}
 
-	public float calcular() {
+	public int calcular() {
+		
 		return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());
+	
 	}
 }

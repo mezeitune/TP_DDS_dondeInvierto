@@ -28,5 +28,6 @@ public class ArchivoEIndicadoresUsuarioRepository {
 	public static String getArchivo(){
 		return archivo;
 	}
+
 	
 }

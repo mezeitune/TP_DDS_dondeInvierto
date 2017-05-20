@@ -1,10 +1,21 @@
 package parser;
 
+import java.io.IOException;
 import java.util.stream.IntStream;
+
+import javax.print.DocFlavor.CHAR_ARRAY;
+
+import org.mockito.internal.matchers.Equals;
+
+import java.util.List;
+
 import repository.ArchivoEIndicadoresUsuarioRepository;
+import usuario.Indicador;
 
 public class ParserFormulaToIndicador {
 
+	private static List<Indicador> indicadores;
+	
 	
 	public ParserFormulaToIndicador(){
 		ParserJsonAEmpresaAdapter parserEmpIndicador = new ParserJsonAEmpresaAdapter("indicadores.json");
@@ -12,20 +23,17 @@ public class ParserFormulaToIndicador {
 		
 	}
 	
-	public static float getCalculoIndicador(String formula){
+	public static int getCalculoIndicador(String formula){
+		
 		if(formula.matches("(.*)[+](.*)")){
 			return getSuma(formula);
-	
-		}else 
-		if(formula.matches("(.*)[-](.*)")){
+		}else if(formula.matches("(.*)[-](.*)")){
 			return getResta(formula);
 	
-		}else
-		if(formula.matches("(.*)[*](.*)")){
+		}else if(formula.matches("(.*)[*](.*)")){
 			return getMultiplicacion(formula);
 	
-		}else
-		if(formula.matches("(.*)[/](.*)")){
+		}else if(formula.matches("(.*)[/](.*)")){
 			return getDivision(formula);
 	
 		}
@@ -34,24 +42,26 @@ public class ParserFormulaToIndicador {
 		
 	}
 	
-	private static float getDivision(String formula) {
+	
+	
+	private static int getDivision(String formula) {
 		String operador = "[/]";
 		String[] operandos = formula.split(operador);
 	
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
-		float div= numerosAOperar[0];
+		int div = numerosAOperar[0];
 		for(int i=1; i< numerosAOperar.length; i++){
 			div = div / numerosAOperar[i];
 		}
 		return div;
 	}
 
-	private static float getMultiplicacion(String formula) {
+	private static int getMultiplicacion(String formula) {
 		String operador = "[*]";
 		String[] operandos = formula.split(operador);
 	
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
-		float mult= numerosAOperar[0];
+		int mult= numerosAOperar[0];
 		for(int i=1; i< numerosAOperar.length; i++){
 			mult = mult * numerosAOperar[i];
 		}
@@ -59,12 +69,12 @@ public class ParserFormulaToIndicador {
 		return mult;
 	}
 
-	private static float getResta(String formula) {
+	private static int getResta(String formula) {
 		String operador = "[-]";
 		String[] operandos = formula.split(operador);
 		
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
-		float resta = numerosAOperar[0];
+		int resta = numerosAOperar[0];
 		for(int i=1; i< numerosAOperar.length; i++){
 			resta = resta - numerosAOperar[i];
 		}
@@ -72,9 +82,12 @@ public class ParserFormulaToIndicador {
 		return resta;
 	}
 
-	public static float getSuma(String formula){
+	public static int getSuma(String formula){
+		
 		String operador = "[+]";
 		String[] operandos = formula.split(operador);
+
+		operandos = ParserFormulaToIndicador.mapIndicadoresAFormatoValido(operandos);
 	
 		int sum = IntStream.of(parsearOperandosAInt(operandos)).sum();
 		
@@ -92,4 +105,19 @@ public class ParserFormulaToIndicador {
 		}
 		return numeros;
 	}
+	
+	public static String[] mapIndicadoresAFormatoValido(String[] operandos){
+		
+		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
+		
+		for (int i = 0; i < operandos.length; i++) {
+			for (int k = 0; k < indicadores.size(); k++) {
+				if(indicadores.get(k).getNombre().equals(operandos[i])){
+					operandos[i] = String.valueOf(indicadores.get(k).calcular());
+				}
+			}
+		}
+		return operandos;
+	}
+	
 }

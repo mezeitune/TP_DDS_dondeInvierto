@@ -10,6 +10,8 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+import parser.ParserFormulaToIndicador;
+import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.MenuViewModel;
 
 
@@ -47,6 +49,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 									.onClick(() -> {
 													try{
 														this.getDelegate().close();
+														new ParserFormulaToIndicador();
 														CargarIndicadoresWindow();
 													}catch (IOException e) {
 														e.printStackTrace();
