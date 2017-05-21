@@ -23,13 +23,6 @@ public class Indicador {
 		this.formula=formula;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 	public String getFormula() {
 		return formula;
@@ -43,5 +36,13 @@ public class Indicador {
 		
 		return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());
 	
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombreIndicador) {
+		this.nombre = nombreIndicador;
 	}
 }

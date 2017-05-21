@@ -7,7 +7,7 @@ import org.uqbar.commons.utils.Observable;
 
 import repository.ArchivoEIndicadoresUsuarioRepository;
 @Observable
-public class CargaArchivoEmpresaViewModel {
+public class SeleccionarArchivoViewModel {
 	
 	private String archivo ;
 

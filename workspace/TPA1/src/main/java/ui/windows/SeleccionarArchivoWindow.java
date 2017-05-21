@@ -11,20 +11,21 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+import parser.ParserFormulaToIndicador;
 import ui.vm.*;
 
 
 
 @SuppressWarnings("serial")
-public class CargaArchivoEmpresaWindow extends Dialog<CargaArchivoEmpresaViewModel>{
+public class SeleccionarArchivoWindow extends Dialog<SeleccionarArchivoViewModel>{
 
-	public CargaArchivoEmpresaWindow(WindowOwner parent){
-		super(parent, new CargaArchivoEmpresaViewModel());
+	public SeleccionarArchivoWindow(WindowOwner parent){
+		super(parent, new SeleccionarArchivoViewModel());
 	}
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		
-		this.setTitle("Consultor de cuentas");
+		this.setTitle("Seleccionar Archivo");
 		Panel form = new Panel(mainPanel);
 		
 		form.setLayout(new ColumnLayout(1));
@@ -40,39 +41,35 @@ public class CargaArchivoEmpresaWindow extends Dialog<CargaArchivoEmpresaViewMod
 		
 		new FileSelector(actionsPanel).setCaption("Seleccione el Archivo a Cargar")
 	    							  .bindValueToProperty("archivo");
-		
-		
-		
-		new Button(actionsPanel).setCaption("Ver Cuentas")
-								.onClick(() -> {
-												try {
-													this.getDelegate().close();
-													DatosEmpresasWindow();
-												} catch (IOException e) {
-													e.printStackTrace();
-												}
-								});
-		new Button(actionsPanel).setCaption("Volver al Menu Principal")
-								.onClick(() -> {
-												try {
-													this.getDelegate().close();
-													MenuWindow();
-												} catch (IOException e) {
-													e.printStackTrace();
-												}
-								});
+
+		new Button(actionsPanel).setCaption("Aceptar")
+		.onClick(() -> {
+						try{
+							this.getDelegate().close();
+							CargaExitosaWindow();
+						}catch (IOException e) {
+							e.printStackTrace();
+						}
+		});
+		new Button(actionsPanel).setCaption("Cancelar")
+		.onClick(() -> {
+						try{
+							this.getDelegate().close();
+							MenuWindow();
+						}catch (IOException e) {
+							e.printStackTrace();
+						}
+		});
 		
 	}
 	
-	
-	
-	public void DatosEmpresasWindow() throws IOException {
-		Dialog<?> dialog = new DatosEmpresasWindow(this);
+	public void MenuWindow() throws IOException {
+		Dialog<?> dialog = new MenuWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void MenuWindow() throws IOException {
-		Dialog<?> dialog = new MenuWindow(this);
+	public void CargaExitosaWindow() throws IOException {
+		Dialog<?> dialog = new CargaExitosaWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}

@@ -26,7 +26,7 @@ public class CargaExitosaWindow extends Dialog<CargaExitosaViewModel>{
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new ColumnLayout(2));
 		
-		new Label(mainPanel).setText("Indicador Cargado Con Exito");
+		new Label(mainPanel).setText("Se ha Cargado Con Exito");
 				
 	}
 	
@@ -43,7 +43,7 @@ public class CargaExitosaWindow extends Dialog<CargaExitosaViewModel>{
 													}
 									})
 									.setWidth(160);
-		new Button(actionsPanel).setCaption("Volver a cargar otro Indicador")
+		new Button(actionsPanel).setCaption("Volver a cargar")
 		.onClick(() -> {
 						try{
 							this.getDelegate().close();

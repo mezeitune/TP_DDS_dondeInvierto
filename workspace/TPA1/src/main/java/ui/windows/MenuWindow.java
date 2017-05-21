@@ -30,16 +30,16 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 		
 		
 		new Label(mainPanel).setText("MENÚ PRINCIPAL").setBackground(Color.ORANGE).setHeight(40);
-	
+		new Label(mainPanel).setText("Seleccione el archivo .CSV para consultar indicadores y cuentas").setBackground(Color.GREEN);
 		
 	}
 	protected void addActions(Panel actionsPanel){
 		
-		new Button(actionsPanel).setCaption("Cargar Cuentas")
+		new Button(actionsPanel).setCaption("Consultar Cuentas")
 								.onClick(() -> {
 												try{
 													this.getDelegate().close();
-													CargaArchivoEmpresaWindow();
+													DatosEmpresasWindow();
 												}catch (IOException e) {
 													e.printStackTrace();
 												}
@@ -55,11 +55,31 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 														e.printStackTrace();
 													}
 									});
+		new Button(actionsPanel).setCaption("Consultar Indicadores")
+		.onClick(() -> {
+						try{
+							this.getDelegate().close();
+							new ParserFormulaToIndicador();
+							DatosIndicadoresWindow();
+						}catch (IOException e) {
+							e.printStackTrace();
+						}
+		});
+		new Button(actionsPanel).setCaption("Seleccionar Archivo")
+		.onClick(() -> {
+						try{
+							this.getDelegate().close();
+							SeleccionarArchivoWindow();
+						}catch (IOException e) {
+							e.printStackTrace();
+						}
+		});
+
 	}
 	
 	
-	public void CargaArchivoEmpresaWindow() throws IOException {
-		Dialog<?> dialog = new CargaArchivoEmpresaWindow(this);
+	public void DatosEmpresasWindow() throws IOException {
+		Dialog<?> dialog = new DatosEmpresasWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
@@ -68,6 +88,15 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	
+	public void DatosIndicadoresWindow() throws IOException {
+		Dialog<?> dialog = new DatosIndicadoresWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
+	public void SeleccionarArchivoWindow() throws IOException {
+		Dialog<?> dialog = new SeleccionarArchivoWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
 
 }

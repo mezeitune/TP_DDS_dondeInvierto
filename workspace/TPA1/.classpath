@@ -39,10 +39,10 @@
   <classpathentry kind="var" path="M2_REPO/org/eclipse/org.eclipse.osgi/3.4.3.R34x_v20081215-1030/org.eclipse.osgi-3.4.3.R34x_v20081215-1030.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/org.eclipse.swt/3.4.2.v3452b/org.eclipse.swt-3.4.2.v3452b.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/ui/org.eclipse.ui.workbench/3.4.2.M20090127-1700/org.eclipse.ui.workbench-3.4.2.M20090127-1700.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/swt/win32/org.eclipse.swt.win32.win32.x86_64/3.4.1.v3449c/org.eclipse.swt.win32.win32.x86_64-3.4.1.v3449c.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-core/1.10.19/mockito-core-1.10.19.jar" sourcepath="M2_REPO/org/mockito/mockito-core/1.10.19/mockito-core-1.10.19-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/objenesis/objenesis/2.1/objenesis-2.1.jar" sourcepath="M2_REPO/org/objenesis/objenesis/2.1/objenesis-2.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/swt/win32/org.eclipse.swt.win32.win32.x86/3.4.1.v3452b/org.eclipse.swt.win32.win32.x86-3.4.1.v3452b.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-core/1.10.19/mockito-core-1.10.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/objenesis/objenesis/2.1/objenesis-2.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.11/junit-4.11.jar" sourcepath="M2_REPO/junit/junit/4.11/junit-4.11-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-client/1.8/jersey-client-1.8.jar" sourcepath="M2_REPO/com/sun/jersey/jersey-client/1.8/jersey-client-1.8-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-core/1.8/jersey-core-1.8.jar" sourcepath="M2_REPO/com/sun/jersey/jersey-core/1.8/jersey-core-1.8-sources.jar"/>
@@ -54,12 +54,12 @@
   <classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-mapper-asl/1.7.1/jackson-mapper-asl-1.7.1.jar" sourcepath="M2_REPO/org/codehaus/jackson/jackson-mapper-asl/1.7.1/jackson-mapper-asl-1.7.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-jaxrs/1.7.1/jackson-jaxrs-1.7.1.jar" sourcepath="M2_REPO/org/codehaus/jackson/jackson-jaxrs/1.7.1/jackson-jaxrs-1.7.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-xc/1.7.1/jackson-xc-1.7.1.jar" sourcepath="M2_REPO/org/codehaus/jackson/jackson-xc/1.7.1/jackson-xc-1.7.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar" sourcepath="M2_REPO/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.4.4/jackson-databind-2.4.4.jar" sourcepath="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.4.4/jackson-databind-2.4.4-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.4.0/jackson-annotations-2.4.0.jar" sourcepath="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.4.0/jackson-annotations-2.4.0-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.4.4/jackson-core-2.4.4.jar" sourcepath="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.4.4/jackson-core-2.4.4-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.4.4/jackson-databind-2.4.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.4.0/jackson-annotations-2.4.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.4.4/jackson-core-2.4.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/univocity/univocity-parsers/2.4.1/univocity-parsers-2.4.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar" sourcepath="M2_REPO/com/google/code/gson/gson/2.8.0/gson-2.8.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/opencsv/opencsv/3.9/opencsv-3.9.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-io/commons-io/1.3.2/commons-io-1.3.2.jar"/>

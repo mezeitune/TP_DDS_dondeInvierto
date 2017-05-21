@@ -87,7 +87,7 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		dialog.onAccept(() -> {});
 	}
 	public void CargaArchivoEmpresaWindow() throws IOException {
-		Dialog<?> dialog = new CargaArchivoEmpresaWindow(this);
+		Dialog<?> dialog = new SeleccionarArchivoWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}

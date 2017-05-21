@@ -40,19 +40,7 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		
 		new Label(form).setText("Escriba la formula del Indicador").setBackground(Color.orange);
 		
-		new TextBox(form).setWidth(200).bindValueToProperty("formulaIndicador");
-		
-		new Label(form).setText("Indicadores Disponibles").setBackground(Color.green);
-		
-		Table<Indicador> table = new Table<Indicador>(mainPanel, Indicador.class);
-		
-		table.bindItemsToProperty("indicadores"); 
-		
-		new Column<Indicador>(table).setTitle("Nombre").bindContentsToProperty("nombre");
-		new Column<Indicador>(table).setTitle("Formula").bindContentsToProperty("formula");
-		
-		
-		
+		new TextBox(form).setWidth(200).bindValueToProperty("formulaIndicador");		
 		
 	}
 	
