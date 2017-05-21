@@ -16,25 +16,15 @@ import parser.ParserFormulaToIndicador;
 public class Indicador {
 
 	private String nombre;
-	private String formula;
-	
-	public Indicador(String nombre, String formula){
+	public Indicador(String nombre){
 		this.nombre=nombre;
-		this.formula=formula;
 	}
 
 
-	public String getFormula() {
-		return formula;
-	}
-
-	public void setFormula(String formula) {
-		this.formula = formula;
-	}
 
 	public int calcular() {
 		
-		return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());
+		return 0;
 	
 	}
 

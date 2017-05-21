@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import parser.ParserFormulaToIndicador;
 import parser.ParserJsonString;
 import repository.ArchivoEIndicadoresUsuarioRepository;
+import ui.windows.Custom;
 import usuario.Indicador;
 @Observable
 public class CargarIndicadoresViewModel {
@@ -43,7 +44,7 @@ public class CargarIndicadoresViewModel {
 	
 	public static void generarIndicador(){
 		
-		Indicador obj = new Indicador(nombreIndicador,formulaIndicador);
+		Custom obj = new Custom(nombreIndicador,formulaIndicador);
 		
 		
 		Gson gson= new Gson();
