@@ -21,6 +21,7 @@ import ui.vm.DatosIndicadoresViewModel;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
+import usuario.IndicadorCustom;
 
 public class DatosIndicadoresWindow extends Dialog<DatosIndicadoresViewModel>{
 	public DatosIndicadoresWindow(WindowOwner parent) throws IOException {
@@ -73,11 +74,11 @@ public class DatosIndicadoresWindow extends Dialog<DatosIndicadoresViewModel>{
 		
 		new Label(Panel2).setText("Indicadores Disponibles").setBackground(Color.ORANGE);
 		
-		Table<Indicador> tableIndicadores = new Table<Indicador>(Panel2, Indicador.class);
+		Table<IndicadorCustom> tableIndicadores = new Table<IndicadorCustom>(Panel2, IndicadorCustom.class);
 		tableIndicadores.bindItemsToProperty("indicadores"); 
 		
-		new Column<Indicador>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
-		new Column<Indicador>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
+		new Column<IndicadorCustom>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
+		new Column<IndicadorCustom>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
 		
 		
 		//aca guardamos el indicador a utilizar, uno evaluador si lo hubiera y cuando apretamos evaluar que calcule y muestre el resultado

@@ -5,19 +5,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 import usuario.Cuenta;
+import usuario.IndicadorCustom;
 import usuario.Indicador;
 
 public class ArchivoEIndicadoresUsuarioRepository {
 	
 	private static String archivo;
-	private static List<Indicador> indicadoresDefinidosPorElUsuario = new LinkedList<>(); 
+	private static List<IndicadorCustom> indicadoresDefinidosPorElUsuario = new LinkedList<>(); 
 	
 
-	public static List<Indicador> getIndicadoresDefinidosPorElUsuario() {
+	public static List<IndicadorCustom> getIndicadoresDefinidosPorElUsuario() {
 		return indicadoresDefinidosPorElUsuario;
 	}
 
-	public static void setIndicadoresDefinidosPorElUsuario(List<Indicador> indicadoresDefinidosPorElUsuario) {
+	public static void setIndicadoresDefinidosPorElUsuario(List<IndicadorCustom> indicadoresDefinidosPorElUsuario) {
 		ArchivoEIndicadoresUsuarioRepository.indicadoresDefinidosPorElUsuario = indicadoresDefinidosPorElUsuario;
 	}
 

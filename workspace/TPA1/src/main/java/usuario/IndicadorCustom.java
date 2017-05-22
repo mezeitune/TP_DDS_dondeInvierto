@@ -1,13 +1,14 @@
-package ui.windows;
+package usuario;
+
+import org.uqbar.commons.utils.Observable;
 
 import parser.ParserFormulaToIndicador;
-import usuario.Indicador;
+@Observable
+public class IndicadorCustom extends Indicador {
 
-public class Custom extends Indicador {
-
-	String formula;
+	private String formula;
 	
-	public Custom(String nombre,String formula) {
+	public IndicadorCustom(String nombre,String formula) {
 		super(nombre);
 		this.formula=formula;
 	}

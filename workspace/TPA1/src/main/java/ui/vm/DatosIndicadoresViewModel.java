@@ -26,7 +26,7 @@ public class DatosIndicadoresViewModel{
 	private List<String> periodos;
 	
 	
-	private List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
+	private List<IndicadorCustom> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
 	private String nombreIndicador;
 	private String formulaIndicador;
 	
@@ -98,7 +98,7 @@ public class DatosIndicadoresViewModel{
 
 		this.formulaIndicador = formulaIndicador;
 	}
-	public List<Indicador> getIndicadores(){
+	public List<IndicadorCustom> getIndicadores(){
 		return indicadores;
 		
 	}

@@ -3,4 +3,4 @@
 {"nombre":"Indicador1","formula":"3-1"},
 {"nombre":"Indicador2","formula":"2*1"},
 {"nombre":"Indicador3","formula":"4/2"},
-{"nombre":"Indicador4","formula":"4+2-2"},{"nombre":"Prueba2","formula":"10+Indicador0"},{"nombre":"Prueba3","formula":"Prueba2+10"},{"nombre":"La concha de tu madre all boys","formula":"1+23"},{"nombre":"bone ","formula":"1-1"},{"nombre":"bone2","formula":"Indicador0+1"},{"nombre":"bone","formula":"233"},{"formula":"hola y chau","nombre":"nuevo2017"}]
+{"nombre":"Prueba2","formula":"10+Indicador0"}]

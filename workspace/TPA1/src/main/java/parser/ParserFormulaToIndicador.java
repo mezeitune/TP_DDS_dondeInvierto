@@ -11,10 +11,11 @@ import java.util.List;
 
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
+import usuario.IndicadorCustom;
 
 public class ParserFormulaToIndicador {
 
-	private static List<Indicador> indicadores;
+	private static List<IndicadorCustom> indicadores;
 	
 	
 	public ParserFormulaToIndicador(){
