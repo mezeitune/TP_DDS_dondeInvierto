@@ -1,5 +1,6 @@
 package usuario;
 
+import org.omg.CORBA.UserException;
 import org.uqbar.commons.utils.Observable;
 
 import parser.ParserFormulaToIndicador;
@@ -24,7 +25,7 @@ public class IndicadorCustom extends Indicador {
 		this.formula = formula;
 	}
 
-	public int calcular() {
+	public int calcular() throws UserException {
 		
 		return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());
 	

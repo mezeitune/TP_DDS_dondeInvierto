@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 import javax.print.DocFlavor.CHAR_ARRAY;
 
 import org.mockito.internal.matchers.Equals;
+import org.omg.CORBA.UserException;
 
 import java.util.List;
 
@@ -18,15 +19,16 @@ public class ParserFormulaToIndicador {
 	private static List<IndicadorCustom> indicadores;
 	
 	
-	public ParserFormulaToIndicador(){
+	public ParserFormulaToIndicador() throws UserException{
 		ParserJsonAEmpresaAdapter parserEmpIndicador = new ParserJsonAEmpresaAdapter("indicadores.json");
 		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
 		
 	}
 	
-	public static int getCalculoIndicador(String formula){
+	public static int getCalculoIndicador(String formula) throws UserException{
 		
 		if(formula.matches("(.*)[+](.*)")){
+			System.out.println(formula);
 			return getSuma(formula);
 		}else if(formula.matches("(.*)[-](.*)")){
 			return getResta(formula);
@@ -45,10 +47,12 @@ public class ParserFormulaToIndicador {
 	
 	
 	
-	private static int getDivision(String formula) {
+	private static int getDivision(String formula) throws UserException {
 		String operador = "[/]";
 		String[] operandos = formula.split(operador);
 	
+		operandos = ParserFormulaToIndicador.mapIndicadoresAFormulasAlgebraicas(operandos);
+		
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
 		int div = numerosAOperar[0];
 		for(int i=1; i< numerosAOperar.length; i++){
@@ -57,10 +61,12 @@ public class ParserFormulaToIndicador {
 		return div;
 	}
 
-	private static int getMultiplicacion(String formula) {
+	private static int getMultiplicacion(String formula) throws UserException {
 		String operador = "[*]";
 		String[] operandos = formula.split(operador);
 	
+		operandos = ParserFormulaToIndicador.mapIndicadoresAFormulasAlgebraicas(operandos);
+		
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
 		int mult= numerosAOperar[0];
 		for(int i=1; i< numerosAOperar.length; i++){
@@ -70,9 +76,11 @@ public class ParserFormulaToIndicador {
 		return mult;
 	}
 
-	private static int getResta(String formula) {
+	private static int getResta(String formula) throws UserException {
 		String operador = "[-]";
 		String[] operandos = formula.split(operador);
+		
+		operandos = ParserFormulaToIndicador.mapIndicadoresAFormulasAlgebraicas(operandos);
 		
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
 		int resta = numerosAOperar[0];
@@ -83,13 +91,13 @@ public class ParserFormulaToIndicador {
 		return resta;
 	}
 
-	public static int getSuma(String formula){
+	public static int getSuma(String formula) throws UserException{
 		
 		String operador = "[+]";
 		String[] operandos = formula.split(operador);
-
-		operandos = ParserFormulaToIndicador.mapIndicadoresAFormatoValido(operandos);
-	
+		
+		operandos = ParserFormulaToIndicador.mapIndicadoresAFormulasAlgebraicas(operandos);
+		
 		int sum = IntStream.of(parsearOperandosAInt(operandos)).sum();
 		
 		return sum;
@@ -97,20 +105,16 @@ public class ParserFormulaToIndicador {
 	
 	public static int[] parsearOperandosAInt(String[] operandosString){
 		int[] numeros = new int[operandosString.length];
-		for(int i = 0;i < operandosString.length;i++)
-		{
-		   // Note that this is assuming valid input
-		   // If you want to check then add a try/catch 
-		   // and another index for the numbers if to continue adding the others
+		
+		for(int i = 0;i < operandosString.length;i++){
 		   numeros[i] = Integer.parseInt(operandosString[i]);
 		}
 		return numeros;
 	}
 	
-	public static String[] mapIndicadoresAFormatoValido(String[] operandos){
+	public static String[] mapIndicadoresAFormulasAlgebraicas(String[] operandos) throws UserException{
 		
 		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
-		
 		for (int i = 0; i < operandos.length; i++) {
 			for (int k = 0; k < indicadores.size(); k++) {
 				if(indicadores.get(k).getNombre().equals(operandos[i])){

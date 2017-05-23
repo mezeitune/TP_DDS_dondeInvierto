@@ -3,6 +3,7 @@ package ui.windows;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.omg.CORBA.UserException;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -30,66 +31,58 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 		
 		
 		new Label(mainPanel).setText("MENÚ PRINCIPAL").setBackground(Color.ORANGE).setHeight(40);
-		new Label(mainPanel).setText("Seleccione el archivo .CSV para consultar indicadores y cuentas").setBackground(Color.GREEN);
+		new Label(mainPanel).setText("Debe cargar un archivo .CSV previamente para poder consultar Empresas").setBackground(Color.GREEN);
 		
 	}
 	protected void addActions(Panel actionsPanel){
-		
-		new Button(actionsPanel).setCaption("Consultar Cuentas")
+
+		new Button(actionsPanel).setCaption("Consultas Empresas")
 								.onClick(() -> {
 												try{
 													this.getDelegate().close();
-													DatosEmpresasWindow();
+													try {
+														new ParserFormulaToIndicador();
+													} catch (UserException e) {
+														e.printStackTrace();
+													}
+													DatosIndicadoresWindow();
+												}catch (IOException e) {
+													e.printStackTrace();
+												}
+									});
+		new Button(actionsPanel).setCaption("Seleccionar Archivo")
+								.onClick(() -> {
+												try{
+													this.getDelegate().close();
+													SeleccionarArchivoWindow();
 												}catch (IOException e) {
 													e.printStackTrace();
 												}
 								});
-	
-		new Button(actionsPanel).setCaption("Cargar Indicadores")
-									.onClick(() -> {
-													try{
-														this.getDelegate().close();
-														new ParserFormulaToIndicador();
-														CargarIndicadoresWindow();
-													}catch (IOException e) {
-														e.printStackTrace();
-													}
-									});
-		new Button(actionsPanel).setCaption("Consultar Indicadores")
-		.onClick(() -> {
-						try{
-							this.getDelegate().close();
-							new ParserFormulaToIndicador();
-							DatosIndicadoresWindow();
-						}catch (IOException e) {
-							e.printStackTrace();
-						}
-		});
-		new Button(actionsPanel).setCaption("Seleccionar Archivo")
-		.onClick(() -> {
-						try{
-							this.getDelegate().close();
-							SeleccionarArchivoWindow();
-						}catch (IOException e) {
-							e.printStackTrace();
-						}
-		});
+		new Button(actionsPanel).setCaption("Carga y consulta indicadores")
+								.onClick(() -> {
+												try {
+													new ParserFormulaToIndicador();
+												} catch (UserException e1) {
+													e1.printStackTrace();
+												}
+												try{
+													this.getDelegate().close();
+													CargarIndicadoresWindow();
+												}catch (IOException e) {
+													e.printStackTrace();
+												}
+								}).setWidth(200);
+		
+	}
 
-	}
-	
-	
-	public void DatosEmpresasWindow() throws IOException {
-		Dialog<?> dialog = new DatosEmpresasWindow(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
-	}
 	public void CargarIndicadoresWindow() throws IOException {
 		Dialog<?> dialog = new CargarIndicadoresWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
 	public void DatosIndicadoresWindow() throws IOException {
-		Dialog<?> dialog = new DatosIndicadoresWindow(this);
+		Dialog<?> dialog = new DatosWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}

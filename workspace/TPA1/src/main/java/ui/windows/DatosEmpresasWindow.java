@@ -1,4 +1,4 @@
-package ui.windows;
+/*package ui.windows; LA DEJO COMENTADA, NO ME PARECE QUE HAGA FALTA TENERLA CON LO QUE ARMO NACHO
 
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.widgets.Panel;
@@ -91,4 +91,4 @@ public class DatosEmpresasWindow extends Dialog<DatosEmpresasViewModel> {
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-}		
+}	*/	

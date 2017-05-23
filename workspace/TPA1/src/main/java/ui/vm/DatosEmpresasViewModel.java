@@ -1,4 +1,4 @@
-package ui.vm;
+/*package ui.vm;
 
 
 import java.io.IOException;
@@ -81,4 +81,4 @@ public class DatosEmpresasViewModel{
 	}
 	
 	
-}
+}*/

@@ -4,12 +4,10 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.uqbar.arena.bindings.PropertyAdapter;
-import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
-import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.tables.Column;
@@ -20,11 +18,10 @@ import org.uqbar.arena.windows.WindowOwner;
 import ui.vm.DatosIndicadoresViewModel;
 import usuario.Cuenta;
 import usuario.Empresa;
-import usuario.Indicador;
 import usuario.IndicadorCustom;
 
-public class DatosIndicadoresWindow extends Dialog<DatosIndicadoresViewModel>{
-	public DatosIndicadoresWindow(WindowOwner parent) throws IOException {
+public class DatosWindow extends Dialog<DatosIndicadoresViewModel>{
+	public DatosWindow(WindowOwner parent) throws IOException {
 		super(parent, new DatosIndicadoresViewModel());
 	}
 	
@@ -106,17 +103,7 @@ public class DatosIndicadoresWindow extends Dialog<DatosIndicadoresViewModel>{
 					//	}
 		/*}*/);
 		
-		
-		new Button(Panel2).setCaption("Volver al Menu Principal")
-								.onClick(() -> {
-												try{
-													this.getDelegate().close();
-													MenuWindow();
-												}catch (IOException e) {
-													e.printStackTrace();
-												}
-								});
-		new Button(Panel2).setCaption("Agregar un nuevo Indicador")
+		/*new Button(Panel2).setCaption("Agregar un nuevo Indicador")
 								.onClick(() -> {
 												try {
 													this.getDelegate().close();
@@ -124,7 +111,17 @@ public class DatosIndicadoresWindow extends Dialog<DatosIndicadoresViewModel>{
 												} catch (IOException e) {
 													e.printStackTrace();
 												}
-								});
+								});*/
+		
+		new Button(Panel2).setCaption("Volver al Menu Principal")
+		.onClick(() -> {
+			try{
+				this.getDelegate().close();
+				MenuWindow();
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 	

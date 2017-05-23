@@ -3,4 +3,8 @@
 {"nombre":"Indicador1","formula":"3-1"},
 {"nombre":"Indicador2","formula":"2*1"},
 {"nombre":"Indicador3","formula":"4/2"},
-{"nombre":"Prueba2","formula":"10+Indicador0"}]
+{"formula":"Indicador0+Indicador2+Indicador3","nombre":"PruebaSuma"},
+{"formula":"PruebaSuma-Indicador0","nombre":"PruebaResta"},
+{"formula":"Indicador2*Indicador3","nombre":"PruebaMultiplicacion"},
+{"formula":"Indicador2/Indicador3","nombre":"PruebaDivision"}
+]

@@ -26,7 +26,7 @@ public class CargaExitosaWindow extends Dialog<CargaExitosaViewModel>{
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new ColumnLayout(2));
 		
-		new Label(mainPanel).setText("Se ha Cargado Con Exito");
+		new Label(mainPanel).setText("Se cargo exitosamente el archivo");
 				
 	}
 	
@@ -42,27 +42,13 @@ public class CargaExitosaWindow extends Dialog<CargaExitosaViewModel>{
 														e.printStackTrace();
 													}
 									})
-									.setWidth(160);
-		new Button(actionsPanel).setCaption("Volver a cargar")
-		.onClick(() -> {
-						try{
-							this.getDelegate().close();
-							CargarIndicadoresWindow();
-						}catch (IOException e) {
-							e.printStackTrace();
-						}
-		})
-		.setWidth(160);
+									.setWidth(200);
+
 	}
 	
 	
 	public void MenuWindow() throws IOException {
 		Dialog<?> dialog = new MenuWindow(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
-	}
-	public void CargarIndicadoresWindow() throws IOException {
-		Dialog<?> dialog = new CargarIndicadoresWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}

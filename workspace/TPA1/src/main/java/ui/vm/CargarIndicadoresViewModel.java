@@ -6,6 +6,7 @@ import java.io.RandomAccessFile;
 import java.util.Collection;
 import java.util.List;
 
+import org.omg.CORBA.UserException;
 import org.uqbar.commons.utils.Observable;
 
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
@@ -42,7 +43,7 @@ public class CargarIndicadoresViewModel {
 
 	
 	
-	public static void generarIndicador(){
+	public static void generarIndicador() throws UserException{
 		
 		IndicadorCustom obj = new IndicadorCustom(nombreIndicador,formulaIndicador);
 		

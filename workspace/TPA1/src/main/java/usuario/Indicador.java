@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.omg.CORBA.UserException;
 import org.uqbar.commons.utils.Observable;
 
 import parser.ParserFormulaToIndicador;
@@ -16,13 +17,15 @@ import parser.ParserFormulaToIndicador;
 public class Indicador {
 
 	private String nombre;
+
 	public Indicador(String nombre){
 		this.nombre=nombre;
+
 	}
 
 
 
-	public int calcular() {
+	public int calcular() throws UserException {
 		
 		return 0;
 	
