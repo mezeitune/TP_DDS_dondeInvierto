@@ -11,6 +11,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+import exceptions.ArchivoInexistenteException;
 import parser.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.MenuViewModel;
@@ -45,7 +46,11 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 													} catch (UserException e) {
 														e.printStackTrace();
 													}
+													try{
 													DatosIndicadoresWindow();
+													} catch(ArchivoInexistenteException e){
+														SeleccionarArchivoWindow();
+													}
 												}catch (IOException e) {
 													e.printStackTrace();
 												}
