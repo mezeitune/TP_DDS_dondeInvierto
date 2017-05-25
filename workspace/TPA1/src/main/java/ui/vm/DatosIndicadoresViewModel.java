@@ -2,6 +2,7 @@ package ui.vm;
 
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import org.uqbar.commons.utils.Observable;
 import com.sun.jersey.api.client.Client;
 
 import parser.CSVToEmpresas;
+import parser.ParserFormulaToIndicador;
 import parser.ParserJsonAEmpresaAdapter;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import com.google.gson.Gson;
@@ -29,6 +31,16 @@ public class DatosIndicadoresViewModel{
 	private List<IndicadorCustom> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
 	private String nombreIndicador;
 	private String formulaIndicador;
+	private IndicadorCustom indicadorSeleccionado;
+	
+	public void setIndicadorSeleccionado(IndicadorCustom indicadorSeleccionado){
+		this.indicadorSeleccionado=indicadorSeleccionado;
+	}
+	
+	public IndicadorCustom getIndicadorSeleccionado(){
+		return this.indicadorSeleccionado;
+	}
+	
 	
 	public void setPeriodos(List<String> periodos){
 		this.periodos=periodos;
@@ -62,12 +74,14 @@ public class DatosIndicadoresViewModel{
 	public void setPeriodo(String periodo){
 		
 		this.periodo= periodo;
+		ParserFormulaToIndicador.setPeriodo(periodo);
 		ObservableUtils.firePropertyChanged(this, "cuentasFiltradas");
 	}
 	
 	public void setEmpresa(Empresa empresaSeleccionada){
 		this.empresa = empresaSeleccionada;
 		this.setPeriodo(null);
+		ParserFormulaToIndicador.setEmpresa(empresaSeleccionada);
 		ObservableUtils.firePropertyChanged(this, "periodos");
 	}
 	
@@ -99,8 +113,8 @@ public class DatosIndicadoresViewModel{
 		this.formulaIndicador = formulaIndicador;
 	}
 	public List<IndicadorCustom> getIndicadores(){
+		Collections.sort(indicadores);
 		return indicadores;
-		
 	}
 	
 }

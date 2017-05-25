@@ -45,7 +45,7 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		
 		new TextBox(form).setWidth(300).bindValueToProperty("formulaIndicador");		
 		
-		new Label(form).setText("Puede agregar indicadores pre-existentes en su fórmula").setBackground(Color.green);
+		new Label(form).setText("Puede agregar indicadores pre-existentes en su formula").setBackground(Color.green);
 		
 		new Label(mainPanel).setText("Indicadores Disponibles").setBackground(Color.ORANGE);
 		

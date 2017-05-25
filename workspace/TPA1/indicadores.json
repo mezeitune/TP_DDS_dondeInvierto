@@ -7,4 +7,4 @@
 {"formula":"PruebaSuma-Indicador0","nombre":"PruebaResta"},
 {"formula":"Indicador2*Indicador3","nombre":"PruebaMultiplicacion"},
 {"formula":"Indicador2/Indicador3","nombre":"PruebaDivision"}
-]
+,{"formula":"Indicador0+Indicador1+4","nombre":"Indicador4"},{"formula":"2*5","nombre":"Zeta"},{"formula":"4+5+Indicador1","nombre":"Manuelo"},{"formula":"1+2+Inidicador1","nombre":"Manuelo2"},{"formula":"Indicador0+3+C1APP","nombre":"IndicadorParaApple"}]

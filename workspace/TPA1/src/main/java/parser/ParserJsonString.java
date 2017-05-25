@@ -26,7 +26,7 @@ public class ParserJsonString {
 	}
 	
 	
-	public static void anidadoDeJsonAUnJsonArrayEnUnFile(String nombreArchivo, String jsonElement ){
+	public static void anidadoDeJsonAUnJsonArrayEnUnArchivo(String nombreArchivo, String jsonElement ){
 		
 		
 		try {

@@ -31,13 +31,13 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 		form.setLayout(new ColumnLayout(2));
 		
 		
-		new Label(mainPanel).setText("MENÚ PRINCIPAL").setBackground(Color.ORANGE).setHeight(40);
+		new Label(mainPanel).setText("MENU PRINCIPAL").setBackground(Color.ORANGE).setHeight(40);
 		new Label(mainPanel).setText("Debe cargar un archivo .CSV previamente para poder consultar Empresas").setBackground(Color.GREEN);
 		
 	}
 	protected void addActions(Panel actionsPanel){
 
-		new Button(actionsPanel).setCaption("Consultas Empresas")
+		new Button(actionsPanel).setCaption("Consultar Empresas")
 								.onClick(() -> {
 												try{
 													this.getDelegate().close();
@@ -55,7 +55,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 													e.printStackTrace();
 												}
 									});
-		new Button(actionsPanel).setCaption("Seleccionar Archivo")
+		new Button(actionsPanel).setCaption("Seleccionar archivo de cuentas")
 								.onClick(() -> {
 												try{
 													this.getDelegate().close();
@@ -64,7 +64,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 													e.printStackTrace();
 												}
 								});
-		new Button(actionsPanel).setCaption("Carga y consulta indicadores")
+		new Button(actionsPanel).setCaption("Cargar y consultar indicadores")
 								.onClick(() -> {
 												try {
 													new ParserFormulaToIndicador();

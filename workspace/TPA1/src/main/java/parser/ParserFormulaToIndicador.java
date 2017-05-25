@@ -11,18 +11,30 @@ import org.omg.CORBA.UserException;
 import java.util.List;
 
 import repository.ArchivoEIndicadoresUsuarioRepository;
+import usuario.Cuenta;
+import usuario.Empresa;
 import usuario.Indicador;
 import usuario.IndicadorCustom;
 
 public class ParserFormulaToIndicador {
 
 	private static List<IndicadorCustom> indicadores;
-	
+	private static List<Cuenta> cuentasPorPeriodo;
+	private static Empresa empresa;
+	private static String periodo;
 	
 	public ParserFormulaToIndicador() throws UserException{
 		ParserJsonAEmpresaAdapter parserEmpIndicador = new ParserJsonAEmpresaAdapter("indicadores.json");
 		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
 		
+	}
+	
+	public static void setEmpresa(Empresa unaEmpresa){
+		empresa= unaEmpresa;
+	}
+	
+	public static void setPeriodo(String unPeriodo){
+		periodo=unPeriodo;
 	}
 	
 	public static int getCalculoIndicador(String formula) throws UserException{
@@ -38,20 +50,17 @@ public class ParserFormulaToIndicador {
 	
 		}else if(formula.matches("(.*)[/](.*)")){
 			return getDivision(formula);
-	
 		}
 		return 0;
-		
-		
 	}
 	
 	
 	
 	private static int getDivision(String formula) throws UserException {
 		String operador = "[/]";
-		String[] operandos = formula.split(operador);
-	
-		operandos = ParserFormulaToIndicador.mapIndicadoresAFormulasAlgebraicas(operandos);
+		
+		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
+
 		
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
 		int div = numerosAOperar[0];
@@ -63,9 +72,9 @@ public class ParserFormulaToIndicador {
 
 	private static int getMultiplicacion(String formula) throws UserException {
 		String operador = "[*]";
-		String[] operandos = formula.split(operador);
-	
-		operandos = ParserFormulaToIndicador.mapIndicadoresAFormulasAlgebraicas(operandos);
+		
+		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
+
 		
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
 		int mult= numerosAOperar[0];
@@ -78,10 +87,9 @@ public class ParserFormulaToIndicador {
 
 	private static int getResta(String formula) throws UserException {
 		String operador = "[-]";
-		String[] operandos = formula.split(operador);
 		
-		operandos = ParserFormulaToIndicador.mapIndicadoresAFormulasAlgebraicas(operandos);
-		
+		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
+
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
 		int resta = numerosAOperar[0];
 		for(int i=1; i< numerosAOperar.length; i++){
@@ -91,38 +99,53 @@ public class ParserFormulaToIndicador {
 		return resta;
 	}
 
+	
+	
 	public static int getSuma(String formula) throws UserException{
 		
 		String operador = "[+]";
-		String[] operandos = formula.split(operador);
 		
-		operandos = ParserFormulaToIndicador.mapIndicadoresAFormulasAlgebraicas(operandos);
+		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
 		
 		int sum = IntStream.of(parsearOperandosAInt(operandos)).sum();
 		
 		return sum;
 	}
 	
-	public static int[] parsearOperandosAInt(String[] operandosString){
-		int[] numeros = new int[operandosString.length];
+	public static int[] parsearOperandosAInt(String[] operandos){
+		int[] numeros = new int[operandos.length];
 		
-		for(int i = 0;i < operandosString.length;i++){
-		   numeros[i] = Integer.parseInt(operandosString[i]);
+		for(int i = 0;i < operandos.length;i++){
+		   numeros[i] = Integer.parseInt(operandos[i]);
 		}
 		return numeros;
 	}
 	
-	public static String[] mapIndicadoresAFormulasAlgebraicas(String[] operandos) throws UserException{
-		
+	/*TODO: Testear que reconoce bien el valor de una cuenta y de un indicador*/
+	public static String[] elementosToOperandos(String[] operandos) throws UserException{
+		int i,j;
 		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
-		for (int i = 0; i < operandos.length; i++) {
-			for (int k = 0; k < indicadores.size(); k++) {
-				if(indicadores.get(k).getNombre().equals(operandos[i])){
-					operandos[i] = String.valueOf(indicadores.get(k).calcular());
+		cuentasPorPeriodo=empresa.getCuentasPorPeriodo(periodo);
+		
+		for (i = 0; i < operandos.length; i++) {
+			
+			/* Si matchea con un indicador*/
+			for (j = 0; j < indicadores.size(); j++) {
+				if(indicadores.get(j).getNombre().equals(operandos[i])){
+					operandos[i] = String.valueOf(indicadores.get(j).calcular());
 				}
 			}
+			/*Si matchea con una cuenta*/
+			for (j= 0; j<cuentasPorPeriodo.size();j++){
+				if(cuentasPorPeriodo.get(j).getNombre().equals(operandos[i])){
+					operandos[i]= String.valueOf(cuentasPorPeriodo.get(j).getValor());
+				}
+			}
+			/*Si no matchea ni cuenta ni indicador, entonces es un operador basico y no hay modificaciones en el buffer*/
 		}
 		return operandos;
 	}
 	
 }
+
+	

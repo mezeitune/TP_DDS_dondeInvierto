@@ -5,7 +5,7 @@ import org.uqbar.commons.utils.Observable;
 
 import parser.ParserFormulaToIndicador;
 @Observable
-public class IndicadorCustom extends Indicador {
+public class IndicadorCustom extends Indicador implements Comparable<IndicadorCustom>  {
 
 	private String formula;
 	
@@ -14,8 +14,6 @@ public class IndicadorCustom extends Indicador {
 		this.formula=formula;
 	}
 
-	
-	
 
 	public String getFormula() {
 		return formula;
@@ -30,5 +28,10 @@ public class IndicadorCustom extends Indicador {
 		return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());
 	
 	}
+	
+	public int compareTo(IndicadorCustom unIndicador) {
+        return this.getNombre().compareTo(unIndicador.getNombre());
+    }
+	
 	
 }

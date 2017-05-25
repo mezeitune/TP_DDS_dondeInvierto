@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.omg.CORBA.UserException;
@@ -45,22 +46,19 @@ public class CargarIndicadoresViewModel {
 	
 	public static void generarIndicador() throws UserException{
 		
-		IndicadorCustom obj = new IndicadorCustom(nombreIndicador,formulaIndicador);
+		IndicadorCustom nuevoIndicador = new IndicadorCustom(nombreIndicador,formulaIndicador);
+		String jsonElement = new Gson().toJson(nuevoIndicador); 
 		
-		
-		Gson gson= new Gson();
-		String jsonElement = gson.toJson(obj);
-		
-		new ParserFormulaToIndicador();
-		ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
+		//new ParserFormulaToIndicador();
+		//ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
 
-		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnFile("indicadores",jsonElement );	
+		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );	
 		
 	}
 	
 	public List<IndicadorCustom> getIndicadores(){
-		return indicadores;
-		
+		Collections.sort(this.indicadores);
+		return this.indicadores;
 	}
 	
 	

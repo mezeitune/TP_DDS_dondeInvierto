@@ -14,7 +14,7 @@ import org.uqbar.commons.utils.Observable;
 import parser.ParserFormulaToIndicador;
 
 @Observable
-public class Indicador {
+public class Indicador  {
 
 	private String nombre;
 
@@ -22,8 +22,6 @@ public class Indicador {
 		this.nombre=nombre;
 
 	}
-
-
 
 	public int calcular() throws UserException {
 		
@@ -38,4 +36,5 @@ public class Indicador {
 	public void setNombre(String nombreIndicador) {
 		this.nombre = nombreIndicador;
 	}
+	
 }

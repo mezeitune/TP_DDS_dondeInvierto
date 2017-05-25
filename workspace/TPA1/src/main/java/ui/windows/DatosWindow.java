@@ -91,7 +91,7 @@ public class DatosWindow extends Dialog<DatosIndicadoresViewModel>{
 		Selector<Cuenta> selectorIndicadorAEvaluar = new Selector<Cuenta>(Panel2).allowNull(true);
 		selectorIndicadorAEvaluar.bindItemsToProperty("indicadores").setAdapter(new PropertyAdapter(Cuenta.class, "nombre"));
 		selectorIndicadorAEvaluar.setWidth(100);
-		selectorIndicadorAEvaluar.bindValueToProperty("nombre");
+		selectorIndicadorAEvaluar.bindValueToProperty("indicadorSeleccionado");
 		
 		new Button(Panel2).setCaption("Evaluar")
 		.onClick(null// -> {
