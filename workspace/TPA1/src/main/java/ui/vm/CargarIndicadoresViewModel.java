@@ -41,16 +41,15 @@ public class CargarIndicadoresViewModel {
 
 		this.formulaIndicador = formulaIndicador;
 	}
-
-	
 	
 	public static void generarIndicador() throws UserException{
 		
 		IndicadorCustom nuevoIndicador = new IndicadorCustom(nombreIndicador,formulaIndicador);
 		String jsonElement = new Gson().toJson(nuevoIndicador); 
 		
-		//new ParserFormulaToIndicador();
-		//ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
+		/*Estas dos lineas validarian al indicador ingresado supuestamente. Diria de llevarlo a otro metodo que catchee esta excepcion*/
+		new ParserFormulaToIndicador();
+		ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
 
 		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );	
 		

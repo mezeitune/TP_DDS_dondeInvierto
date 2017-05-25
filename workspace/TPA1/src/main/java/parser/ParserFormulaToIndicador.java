@@ -22,6 +22,7 @@ public class ParserFormulaToIndicador {
 	private static List<Cuenta> cuentasPorPeriodo;
 	private static Empresa empresa;
 	private static String periodo;
+
 	
 	public ParserFormulaToIndicador() throws UserException{
 		ParserJsonAEmpresaAdapter parserEmpIndicador = new ParserJsonAEmpresaAdapter("indicadores.json");
@@ -31,10 +32,12 @@ public class ParserFormulaToIndicador {
 	
 	public static void setEmpresa(Empresa unaEmpresa){
 		empresa= unaEmpresa;
+		System.out.println(unaEmpresa.getNombre());
 	}
 	
 	public static void setPeriodo(String unPeriodo){
 		periodo=unPeriodo;
+		System.out.println(unPeriodo);
 	}
 	
 	public static int getCalculoIndicador(String formula) throws UserException{

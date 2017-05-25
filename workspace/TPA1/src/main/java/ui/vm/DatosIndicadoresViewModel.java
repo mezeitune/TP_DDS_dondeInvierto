@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.omg.CORBA.UserException;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 import com.sun.jersey.api.client.Client;
@@ -33,7 +34,15 @@ public class DatosIndicadoresViewModel{
 	private String formulaIndicador;
 	private IndicadorCustom indicadorSeleccionado;
 	
-	public void setIndicadorSeleccionado(IndicadorCustom indicadorSeleccionado){
+	
+	public DatosIndicadoresViewModel() throws IOException {
+		this.setEmpresas();
+		
+		this.empresa= empresas.get(0);
+		this.periodos=this.empresa.getPeriodosSinRepetidos();
+	}
+	
+	public void setIndicadorSeleccionado(IndicadorCustom indicadorSeleccionado) throws UserException{
 		this.indicadorSeleccionado=indicadorSeleccionado;
 	}
 	
@@ -50,13 +59,6 @@ public class DatosIndicadoresViewModel{
 		return empresa.getPeriodosSinRepetidos();
 	}
 	
-	public DatosIndicadoresViewModel() throws IOException {
-		this.setEmpresas();
-		
-		this.empresa= empresas.get(0);
-		this.periodos=this.empresa.getPeriodosSinRepetidos();
-	}
-
 	public void setEmpresas() throws IOException {
 		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
 		this.empresas=parser.csvFileToEmpresas();
@@ -72,16 +74,15 @@ public class DatosIndicadoresViewModel{
 	}
 	
 	public void setPeriodo(String periodo){
-		
 		this.periodo= periodo;
-		ParserFormulaToIndicador.setPeriodo(periodo);
+		ParserFormulaToIndicador.setPeriodo(periodo); /*Le setea al parser el periodo. Lo necesita para reconocer cuentas*/
 		ObservableUtils.firePropertyChanged(this, "cuentasFiltradas");
 	}
 	
 	public void setEmpresa(Empresa empresaSeleccionada){
 		this.empresa = empresaSeleccionada;
 		this.setPeriodo(null);
-		ParserFormulaToIndicador.setEmpresa(empresaSeleccionada);
+		ParserFormulaToIndicador.setEmpresa(empresaSeleccionada); /*Le setea al parser la empresa seleccionada. Lo necesita para reconocer cuentas*/
 		ObservableUtils.firePropertyChanged(this, "periodos");
 	}
 	
