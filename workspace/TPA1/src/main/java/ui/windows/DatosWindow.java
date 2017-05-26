@@ -10,19 +10,20 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
+import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import ui.vm.DatosIndicadoresViewModel;
+import ui.vm.DatosViewModel;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.IndicadorCustom;
 
-public class DatosWindow extends Dialog<DatosIndicadoresViewModel>{
+public class DatosWindow extends Dialog<DatosViewModel>{
 	public DatosWindow(WindowOwner parent) throws IOException {
-		super(parent, new DatosIndicadoresViewModel());
+		super(parent, new DatosViewModel());
 	}
 	
 	protected void createFormPanel(Panel mainPanel) {
@@ -55,13 +56,7 @@ public class DatosWindow extends Dialog<DatosIndicadoresViewModel>{
 		new Column<Cuenta>(tableCuentas).setTitle("Valor").bindContentsToProperty("valor");
 		new Column<Cuenta>(tableCuentas).setTitle("Periodo").bindContentsToProperty("periodo");
 		
-		new Label(Panel).setText("Seleccione una Cuenta ").setBackground(Color.ORANGE);
-		Selector<Cuenta> selectorCuenta = new Selector<Cuenta>(Panel).allowNull(true);
-		selectorCuenta.bindItemsToProperty("cuentasFiltradas").setAdapter(new PropertyAdapter(Cuenta.class, "nombre"));
-		selectorCuenta.setWidth(100);
-		selectorCuenta.bindValueToProperty("nombre");
-			
-	}
+}
 
 	
 	
@@ -77,41 +72,13 @@ public class DatosWindow extends Dialog<DatosIndicadoresViewModel>{
 		new Column<IndicadorCustom>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
 		new Column<IndicadorCustom>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
 		
-		
-		//aca guardamos el indicador a utilizar, uno evaluador si lo hubiera y cuando apretamos evaluar que calcule y muestre el resultado
-		
-		
-		new Label(Panel2).setText("Seleccione el indicador a utilizar ").setBackground(Color.ORANGE);
-		Selector<Cuenta> selectorIndicadorAUsar = new Selector<Cuenta>(Panel2).allowNull(true);
-		selectorIndicadorAUsar.bindItemsToProperty("indicadores").setAdapter(new PropertyAdapter(Cuenta.class, "nombre"));
-		selectorIndicadorAUsar.setWidth(100);
-		selectorIndicadorAUsar.bindValueToProperty("nombre");
-		
 		new Label(Panel2).setText("Seleccione el indicador a evaluar ").setBackground(Color.ORANGE);
 		Selector<Cuenta> selectorIndicadorAEvaluar = new Selector<Cuenta>(Panel2).allowNull(true);
 		selectorIndicadorAEvaluar.bindItemsToProperty("indicadores").setAdapter(new PropertyAdapter(Cuenta.class, "nombre"));
 		selectorIndicadorAEvaluar.setWidth(100);
 		selectorIndicadorAEvaluar.bindValueToProperty("indicadorSeleccionado");
-		
-		new Button(Panel2).setCaption("Evaluar")
-		.onClick(null// -> {
-					//	try{
-						//	this.getDelegate().close();
-							//MenuWindow(); resultadoEvaluarWindow ?????
-						//}catch (IOException e) {
-							//e.printStackTrace();
-					//	}
-		/*}*/);
-		
-		/*new Button(Panel2).setCaption("Agregar un nuevo Indicador")
-								.onClick(() -> {
-												try {
-													this.getDelegate().close();
-													CargaIndicadoresWindow();
-												} catch (IOException e) {
-													e.printStackTrace();
-												}
-								});*/
+		new Label(Panel2).setText("El resultado es").setBackground(Color.GREEN);
+		new Label(Panel2).setBackground(Color.GREEN).bindValueToProperty("indicadorSeleccionado.calcular");
 		
 		new Button(Panel2).setCaption("Volver al Menu Principal")
 		.onClick(() -> {

@@ -20,7 +20,7 @@ import usuario.*;
 
 
 @Observable
-public class DatosIndicadoresViewModel{
+public class DatosViewModel{
 	
 	private Empresa empresa;
 	private String nombre;
@@ -35,11 +35,20 @@ public class DatosIndicadoresViewModel{
 	private IndicadorCustom indicadorSeleccionado;
 	
 	
-	public DatosIndicadoresViewModel() throws IOException {
-		this.setEmpresas();
+	public DatosViewModel() {
+		try {
+			this.setEmpresas();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.empresa= empresas.get(0);
+		ParserFormulaToIndicador.setEmpresa(empresa);
 		this.periodos=this.empresa.getPeriodosSinRepetidos();
+		this.periodo=empresas.get(0).getPeriodosSinRepetidos().get(0);
+		ParserFormulaToIndicador.setPeriodo(periodo);
+		this.indicadorSeleccionado=indicadores.get(0);
 	}
 	
 	public void setIndicadorSeleccionado(IndicadorCustom indicadorSeleccionado) throws UserException{
@@ -73,13 +82,21 @@ public class DatosIndicadoresViewModel{
 		return periodo;
 	}
 	
-	public void setPeriodo(String periodo){
-		this.periodo= periodo;
+	public void setPeriodo(String periodoSeleccionado){
+		if(periodoSeleccionado==null){
+			
+		}
+		this.periodo= periodoSeleccionado;
 		ParserFormulaToIndicador.setPeriodo(periodo); /*Le setea al parser el periodo. Lo necesita para reconocer cuentas*/
 		ObservableUtils.firePropertyChanged(this, "cuentasFiltradas");
 	}
 	
 	public void setEmpresa(Empresa empresaSeleccionada){
+		if (empresa==null){
+			this.empresa=empresas.get(0);
+			ParserFormulaToIndicador.setEmpresa(empresa);
+		}
+		
 		this.empresa = empresaSeleccionada;
 		this.setPeriodo(null);
 		ParserFormulaToIndicador.setEmpresa(empresaSeleccionada); /*Le setea al parser la empresa seleccionada. Lo necesita para reconocer cuentas*/

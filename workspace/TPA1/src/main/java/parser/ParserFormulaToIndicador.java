@@ -20,30 +20,32 @@ public class ParserFormulaToIndicador {
 
 	private static List<IndicadorCustom> indicadores;
 	private static List<Cuenta> cuentasPorPeriodo;
-	private static Empresa empresa;
+	private static Empresa empresa ;
 	private static String periodo;
-
+	private static List<Empresa> empresas;
 	
-	public ParserFormulaToIndicador() throws UserException{
+	public ParserFormulaToIndicador(){
 		ParserJsonAEmpresaAdapter parserEmpIndicador = new ParserJsonAEmpresaAdapter("indicadores.json");
 		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
 		
 	}
 	
 	public static void setEmpresa(Empresa unaEmpresa){
+		
 		empresa= unaEmpresa;
-		System.out.println(unaEmpresa.getNombre());
+		
 	}
 	
 	public static void setPeriodo(String unPeriodo){
+		
 		periodo=unPeriodo;
-		System.out.println(unPeriodo);
+	
 	}
 	
 	public static int getCalculoIndicador(String formula) throws UserException{
 		
 		if(formula.matches("(.*)[+](.*)")){
-			System.out.println(formula);
+			
 			return getSuma(formula);
 		}else if(formula.matches("(.*)[-](.*)")){
 			return getResta(formula);
@@ -125,7 +127,7 @@ public class ParserFormulaToIndicador {
 	}
 	
 	/*TODO: Testear que reconoce bien el valor de una cuenta y de un indicador*/
-	public static String[] elementosToOperandos(String[] operandos) throws UserException{
+	public static String[] elementosToOperandos(String[] operandos){
 		int i,j;
 		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
 		cuentasPorPeriodo=empresa.getCuentasPorPeriodo(periodo);

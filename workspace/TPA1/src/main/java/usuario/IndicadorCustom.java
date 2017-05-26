@@ -23,9 +23,15 @@ public class IndicadorCustom extends Indicador implements Comparable<IndicadorCu
 		this.formula = formula;
 	}
 
-	public int calcular() throws UserException {
+	public int calcular() {
 		
-		return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());
+		try {
+			return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());
+		} catch (UserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	
 	}
 	

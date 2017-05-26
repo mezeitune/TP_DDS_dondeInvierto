@@ -41,11 +41,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 								.onClick(() -> {
 												try{
 													this.getDelegate().close();
-													try {
-														new ParserFormulaToIndicador();
-													} catch (UserException e) {
-														e.printStackTrace();
-													}
+													new ParserFormulaToIndicador();
 													try{
 													DatosIndicadoresWindow();
 													} catch(ArchivoInexistenteException e){
@@ -66,11 +62,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 								});
 		new Button(actionsPanel).setCaption("Cargar y consultar indicadores")
 								.onClick(() -> {
-												try {
-													new ParserFormulaToIndicador();
-												} catch (UserException e1) {
-													e1.printStackTrace();
-												}
+												new ParserFormulaToIndicador();
 												try{
 													this.getDelegate().close();
 													CargarIndicadoresWindow();
