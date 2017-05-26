@@ -44,6 +44,8 @@ public class ParserFormulaToIndicador {
 	
 	public static int getCalculoIndicador(String formula) throws UserException{
 		
+		IndicadorCustom indicador;
+		
 		if(formula.matches("(.*)[+](.*)")){
 			
 			return getSuma(formula);
@@ -55,12 +57,30 @@ public class ParserFormulaToIndicador {
 	
 		}else if(formula.matches("(.*)[/](.*)")){
 			return getDivision(formula);
+			/*Esta para que la ventana de evaluacion indicadoresTexto pueda cargar un unico indicador*/	
+		}else if(!ParserFormulaToIndicador.indicador(formula).equals(0)){
+			
+			indicador = ParserFormulaToIndicador.indicador(formula);
+			return indicador.calcular();
+			
 		}
 		return 0;
 	}
 	
 	
 	
+	private static IndicadorCustom indicador(String formula) {
+		int j;
+		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
+		for (j = 0; j < indicadores.size(); j++) {
+			if(indicadores.get(j).getNombre().equals(formula)){
+				return indicadores.get(j);
+			}
+		}
+		
+		return null;
+	}
+
 	private static int getDivision(String formula) throws UserException {
 		String operador = "[/]";
 		

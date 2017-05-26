@@ -27,11 +27,14 @@ public class DatosViewModel{
 	private List<Empresa> empresas;
 	private String periodo;	
 	private List<String> periodos;
-	
+	private int calculo;
 	
 	private List<IndicadorCustom> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
 	private String nombreIndicador;
 	private String formulaIndicador;
+	
+	private IndicadorCustom indicadorAEvaluar = new IndicadorCustom("Actual", "0");
+	//private String formulaAEvaluar;
 	private IndicadorCustom indicadorSeleccionado;
 	
 	
@@ -39,7 +42,6 @@ public class DatosViewModel{
 		try {
 			this.setEmpresas();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -49,6 +51,29 @@ public class DatosViewModel{
 		this.periodo=empresas.get(0).getPeriodosSinRepetidos().get(0);
 		ParserFormulaToIndicador.setPeriodo(periodo);
 		this.indicadorSeleccionado=indicadores.get(0);
+	}
+	
+	
+	
+	public void setIndicadorAEvaluar(String formula)throws NullPointerException{
+		this.indicadorAEvaluar.setFormula(formula);
+	
+		this.setCalculo();
+		
+	}
+	
+	public String getIndicadorAEvaluar(){
+		return this.indicadorAEvaluar.getFormula();
+	}
+	
+	
+	
+	public int getCalculo(){
+		return calculo;
+	}
+	public void setCalculo() throws NullPointerException{
+		this.calculo =this.indicadorAEvaluar.calcular();
+					
 	}
 	
 	public void setIndicadorSeleccionado(IndicadorCustom indicadorSeleccionado) throws UserException{

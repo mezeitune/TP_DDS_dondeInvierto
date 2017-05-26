@@ -18,14 +18,6 @@ public class Main extends Application{
 	
 	public static void main(String[] args){
 			
-			/*try {
-				new ParserFormulaToIndicador();
-			} catch (UserException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			
-			//consultarCuentas(); // para verificar que los indicadores se cargaron correctamente en el repositorio*/
 			new Main().start();
 	}
 		@Override
@@ -40,8 +32,9 @@ public class Main extends Application{
 
 	}	
 		
+}
 		
-
+/*
 		public static void consultarCuentas(){
 			int i,j;
 			for(i=0; i< ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario().size();i++){
@@ -52,10 +45,9 @@ public class Main extends Application{
 		
 		
 }		
-}
 	
 
-/*List<Empresa> empresasPrueba = new Adapter().getEmpresasDelArchivo();
+List<Empresa> empresasPrueba = new Adapter().getEmpresasDelArchivo();
 	Main.consultarCuentas(empresasPrueba);*/
 	
 	

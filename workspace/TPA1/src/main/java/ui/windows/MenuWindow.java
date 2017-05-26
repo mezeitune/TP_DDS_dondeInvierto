@@ -43,7 +43,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 													this.getDelegate().close();
 													new ParserFormulaToIndicador();
 													try{
-													DatosIndicadoresWindow();
+														DatosIndicadoresWindow();
 													} catch(ArchivoInexistenteException e){
 														SeleccionarArchivoWindow();
 													}
