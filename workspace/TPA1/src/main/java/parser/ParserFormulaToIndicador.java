@@ -42,27 +42,32 @@ public class ParserFormulaToIndicador {
 	
 	}
 	
-	public static int getCalculoIndicador(String formula) throws UserException{
+	public static int getCalculoIndicador(String formula){
 		
-		IndicadorCustom indicador;
+		try{
+			IndicadorCustom indicador;
 		
-		if(formula.matches("(.*)[+](.*)")){
-			
-			return getSuma(formula);
-		}else if(formula.matches("(.*)[-](.*)")){
-			return getResta(formula);
+			if(formula.matches("(.*)[+](.*)")){
+				return getSuma(formula);
+			}else if(formula.matches("(.*)[-](.*)")){
+				return getResta(formula);
+				
+			}else if(formula.matches("(.*)[*](.*)")){
+				return getMultiplicacion(formula);
 	
-		}else if(formula.matches("(.*)[*](.*)")){
-			return getMultiplicacion(formula);
-	
-		}else if(formula.matches("(.*)[/](.*)")){
-			return getDivision(formula);
-			/*Esta para que la ventana de evaluacion indicadoresTexto pueda cargar un unico indicador*/	
-		}else if(!ParserFormulaToIndicador.indicador(formula).equals(0)){
+			}else if(formula.matches("(.*)[/](.*)")){
+				return getDivision(formula);
+				/*Esta para que la ventana de evaluacion indicadoresTexto pueda cargar un unico indicador*/	
+			}else if(!ParserFormulaToIndicador.indicador(formula).equals(0)){
 			
-			indicador = ParserFormulaToIndicador.indicador(formula);
-			return indicador.calcular();
+				indicador = ParserFormulaToIndicador.indicador(formula);
+				return indicador.calcular();
 			
+			}
+		}catch(NullPointerException e){
+			/**Queda medio raro sin nada pero sino tira excepciones por consola y no se me ocurrio otra forma cuando no reconoce la formula*/
+		}catch(NumberFormatException e){
+			/**Queda medio raro sin nada pero sino tira excepciones por consola y no se me ocurrio otra forma cuando no reconoce la formula*/	
 		}
 		return 0;
 	}
@@ -81,7 +86,7 @@ public class ParserFormulaToIndicador {
 		return null;
 	}
 
-	private static int getDivision(String formula) throws UserException {
+	private static int getDivision(String formula){
 		String operador = "[/]";
 		
 		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
@@ -95,7 +100,7 @@ public class ParserFormulaToIndicador {
 		return div;
 	}
 
-	private static int getMultiplicacion(String formula) throws UserException {
+	private static int getMultiplicacion(String formula){
 		String operador = "[*]";
 		
 		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
@@ -110,7 +115,7 @@ public class ParserFormulaToIndicador {
 		return mult;
 	}
 
-	private static int getResta(String formula) throws UserException {
+	private static int getResta(String formula){
 		String operador = "[-]";
 		
 		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
@@ -126,11 +131,12 @@ public class ParserFormulaToIndicador {
 
 	
 	
-	public static int getSuma(String formula) throws UserException{
+	public static int getSuma(String formula){
 		
 		String operador = "[+]";
-		
+
 		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
+		
 		
 		int sum = IntStream.of(parsearOperandosAInt(operandos)).sum();
 		
@@ -149,11 +155,13 @@ public class ParserFormulaToIndicador {
 	/*TODO: Testear que reconoce bien el valor de una cuenta y de un indicador*/
 	public static String[] elementosToOperandos(String[] operandos){
 		int i,j;
+		for (int j2 = 0; j2 < operandos.length; j2++) {
+		}
 		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
-		cuentasPorPeriodo=empresa.getCuentasPorPeriodo(periodo);
+		
+		
 		
 		for (i = 0; i < operandos.length; i++) {
-			
 			/* Si matchea con un indicador*/
 			for (j = 0; j < indicadores.size(); j++) {
 				if(indicadores.get(j).getNombre().equals(operandos[i])){
@@ -161,11 +169,15 @@ public class ParserFormulaToIndicador {
 				}
 			}
 			/*Si matchea con una cuenta*/
-			for (j= 0; j<cuentasPorPeriodo.size();j++){
-				if(cuentasPorPeriodo.get(j).getNombre().equals(operandos[i])){
-					operandos[i]= String.valueOf(cuentasPorPeriodo.get(j).getValor());
+			try{
+				cuentasPorPeriodo=empresa.getCuentasPorPeriodo(periodo);
+				for (j= 0; j<cuentasPorPeriodo.size();j++){
+					if(cuentasPorPeriodo.get(j).getNombre().equals(operandos[i])){
+						operandos[i]= String.valueOf(cuentasPorPeriodo.get(j).getValor());
+					}
 				}
-			}
+			}catch(NullPointerException e){/**Queda medio raro sin nada pero sino rompe cuando no hay un archivo cargado*/	}
+			
 			/*Si no matchea ni cuenta ni indicador, entonces es un operador basico y no hay modificaciones en el buffer*/
 		}
 		return operandos;

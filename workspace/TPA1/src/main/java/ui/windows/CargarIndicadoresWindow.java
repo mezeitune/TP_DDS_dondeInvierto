@@ -67,6 +67,8 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		
 		new Button(actionsPanel).setCaption("Cargar Indicador")
 								.onClick(() -> {
+												CargarIndicadoresViewModel.generarIndicador();//Actualiza archivo sin cerrar programa
+												new ParserFormulaToIndicador();//Muestra Indicadores en tabla											
 												try{
 													this.getDelegate().close();
 													PreguntaNuevoIndicadorWindow();

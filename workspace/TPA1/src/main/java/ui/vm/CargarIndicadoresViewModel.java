@@ -42,7 +42,7 @@ public class CargarIndicadoresViewModel {
 		this.formulaIndicador = formulaIndicador;
 	}
 	
-	public static void generarIndicador() throws UserException{
+	public static void generarIndicador(){
 		
 		IndicadorCustom nuevoIndicador = new IndicadorCustom(nombreIndicador,formulaIndicador);
 		String jsonElement = new Gson().toJson(nuevoIndicador); 

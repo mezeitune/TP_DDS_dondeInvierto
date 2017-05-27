@@ -55,7 +55,7 @@ public class DatosViewModel{
 	
 	
 	
-	public void setIndicadorAEvaluar(String formula)throws NullPointerException{
+	public void setIndicadorAEvaluar(String formula){
 		this.indicadorAEvaluar.setFormula(formula);
 	
 		this.setCalculo();
@@ -71,8 +71,8 @@ public class DatosViewModel{
 	public int getCalculo(){
 		return calculo;
 	}
-	public void setCalculo() throws NullPointerException{
-		this.calculo =this.indicadorAEvaluar.calcular();
+	public void setCalculo(){
+		this.calculo = this.indicadorAEvaluar.calcular();
 					
 	}
 	

@@ -32,12 +32,7 @@ public class PreguntaNuevoIndicadorWindow extends Dialog<PreguntaNuevoIndicadorV
 	protected void addActions(Panel actionsPanel){
 		new Button(actionsPanel).setCaption("Si")
 								.onClick(() -> {
-												try{
-													CargarIndicadoresViewModel.generarIndicador();//Actualiza archivo sin cerrar programa
-													new ParserFormulaToIndicador();//Muestra Indicadores en tabla											
-												}catch(UserException e){
-													e.printStackTrace();
-												}
+												
 												try{
 													this.getDelegate().close();
 													CargarIndicadoresWindow();
@@ -49,12 +44,7 @@ public class PreguntaNuevoIndicadorWindow extends Dialog<PreguntaNuevoIndicadorV
 		
 		new Button(actionsPanel).setCaption("No")
 								.onClick(() -> {
-												try{
-													CargarIndicadoresViewModel.generarIndicador();//Actualiza archivo sin cerrar programa
-													new ParserFormulaToIndicador();//Muestra Indicadores en tabla											
-												}catch(UserException e){
-													e.printStackTrace();
-												}
+									
 												try{
 													this.getDelegate().close();
 													MenuWindow();
