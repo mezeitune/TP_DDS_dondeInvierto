@@ -29,13 +29,13 @@ public class DatosViewModel{
 	private List<String> periodos;
 	private int calculo;
 	
-	private List<IndicadorCustom> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
+	private List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
 	private String nombreIndicador;
 	private String formulaIndicador;
 	
-	private IndicadorCustom indicadorAEvaluar = new IndicadorCustom("Actual", "0");
+	private Indicador indicadorAEvaluar = new IndicadorCustom("Actual", "0");
 	//private String formulaAEvaluar;
-	private IndicadorCustom indicadorSeleccionado;
+	private Indicador indicadorSeleccionado;
 	
 	
 	public DatosViewModel() {
@@ -55,7 +55,7 @@ public class DatosViewModel{
 	
 	
 	
-	public void setIndicadorAEvaluar(String formula){
+	public void setIndicadorAEvaluar(String formula) throws UserException{
 		this.indicadorAEvaluar.setFormula(formula);
 	
 		this.setCalculo();
@@ -71,16 +71,16 @@ public class DatosViewModel{
 	public int getCalculo(){
 		return calculo;
 	}
-	public void setCalculo(){
+	public void setCalculo() throws UserException{
 		this.calculo = this.indicadorAEvaluar.calcular();
 					
 	}
 	
-	public void setIndicadorSeleccionado(IndicadorCustom indicadorSeleccionado) throws UserException{
+	public void setIndicadorSeleccionado(Indicador indicadorSeleccionado) throws UserException{
 		this.indicadorSeleccionado=indicadorSeleccionado;
 	}
 	
-	public IndicadorCustom getIndicadorSeleccionado(){
+	public Indicador getIndicadorSeleccionado(){
 		return this.indicadorSeleccionado;
 	}
 	
@@ -155,7 +155,7 @@ public class DatosViewModel{
 
 		this.formulaIndicador = formulaIndicador;
 	}
-	public List<IndicadorCustom> getIndicadores(){
+	public List<Indicador> getIndicadores(){
 		Collections.sort(indicadores);
 		return indicadores;
 	}

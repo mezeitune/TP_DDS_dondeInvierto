@@ -20,7 +20,7 @@ import org.uqbar.arena.windows.WindowOwner;
 import ui.vm.DatosViewModel;
 import usuario.Cuenta;
 import usuario.Empresa;
-import usuario.IndicadorCustom;
+import usuario.Indicador;
 
 public class DatosWindow extends Dialog<DatosViewModel>{
 	public DatosWindow(WindowOwner parent) throws IOException {
@@ -62,7 +62,7 @@ public class DatosWindow extends Dialog<DatosViewModel>{
 		/*****************************************************textbox*************************/
 		new Label(Panel).setHeight(20);
 		new Label(Panel).setText("En el cuadro de la derecha puede escribir una formula a evaluar").setBackground(Color.ORANGE);
-		new Label(Panel).setText("Es posible la utilización de indicadores y cuentas").setBackground(Color.ORANGE);
+		new Label(Panel).setText("Es posible la utilizaciï¿½n de indicadores y cuentas").setBackground(Color.ORANGE);
 		/*****************************************************textbox*************************/
 		
 		
@@ -85,11 +85,11 @@ public class DatosWindow extends Dialog<DatosViewModel>{
 		
 		new Label(Panel2).setText("Indicadores Disponibles").setBackground(Color.ORANGE);
 		
-		Table<IndicadorCustom> tableIndicadores = new Table<IndicadorCustom>(Panel2, IndicadorCustom.class);
+		Table<Indicador> tableIndicadores = new Table<Indicador>(Panel2, Indicador.class);
 		tableIndicadores.bindItemsToProperty("indicadores"); 
 		
-		new Column<IndicadorCustom>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
-		new Column<IndicadorCustom>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
+		new Column<Indicador>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
+		new Column<Indicador>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
 		
 		
 		Selector<Cuenta> selectorIndicadorAEvaluar = new Selector<Cuenta>(Panel2).allowNull(true);

@@ -20,7 +20,7 @@ import parser.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
 import usuario.Cuenta;
 import usuario.Indicador;
-import usuario.IndicadorCustom;
+import usuario.Indicador;
 
 @SuppressWarnings("serial")
 public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> {
@@ -49,7 +49,7 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		
 		new Label(mainPanel).setText("Indicadores Disponibles").setBackground(Color.ORANGE);
 		
-		Table<IndicadorCustom> tableIndicadores = new Table<IndicadorCustom>(mainPanel, IndicadorCustom.class);
+		Table<Indicador> tableIndicadores = new Table<Indicador>(mainPanel, Indicador.class);
 		
 		tableIndicadores.setNumberVisibleRows(6).setWidth(200);
 		
@@ -57,8 +57,8 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		
 		
 		
-		new Column<IndicadorCustom>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
-		new Column<IndicadorCustom>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
+		new Column<Indicador>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
+		new Column<Indicador>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
 		
 	}
 	

@@ -14,19 +14,27 @@ import org.uqbar.commons.utils.Observable;
 import parser.ParserFormulaToIndicador;
 
 @Observable
-public class Indicador  {
+public class  Indicador  implements Comparable<Indicador> {
 
 	private String nombre;
-
-	public Indicador(String nombre){
+	private String formula;
+	private int resultado;
+	
+	
+	public Indicador(String nombre,String formula){
 		this.nombre=nombre;
+		this.formula=formula;
 
 	}
 
-	public int calcular() throws UserException {
-		
-		return 0;
+
 	
+	public String getFormula() {
+		return formula;
+	}
+
+	public void setFormula(String formula) {
+		this.formula = formula;
 	}
 
 	public String getNombre() {
@@ -36,5 +44,27 @@ public class Indicador  {
 	public void setNombre(String nombreIndicador) {
 		this.nombre = nombreIndicador;
 	}
+	
+
+	@Override
+	public int compareTo(Indicador unIndicador) {
+        return this.getNombre().compareTo(unIndicador.getNombre());
+    }
+
+
+	public int getResultado(){
+		return this.resultado;
+	}
+	public void setResultado() throws UserException{
+		this.resultado = this.calcular();
+	}
+
+
+
+	public int calcular() {
+		return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());
+	}
+
+	
 	
 }

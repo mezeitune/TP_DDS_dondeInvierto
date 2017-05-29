@@ -18,12 +18,13 @@ import com.google.gson.Gson;
 import parser.ParserFormulaToIndicador;
 import parser.ParserJsonString;
 import repository.ArchivoEIndicadoresUsuarioRepository;
+import usuario.Indicador;
 import usuario.IndicadorCustom;
 import usuario.Indicador;
 @Observable
 public class CargarIndicadoresViewModel {
 
-	private List<IndicadorCustom> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();;
+	private List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();;
 	
 	private static String nombreIndicador;
 	private static String formulaIndicador;
@@ -44,7 +45,7 @@ public class CargarIndicadoresViewModel {
 	
 	public static void generarIndicador(){
 		
-		IndicadorCustom nuevoIndicador = new IndicadorCustom(nombreIndicador,formulaIndicador);
+		Indicador nuevoIndicador = new IndicadorCustom(nombreIndicador,formulaIndicador);
 		String jsonElement = new Gson().toJson(nuevoIndicador); 
 		
 		/*Estas dos lineas validarian al indicador ingresado supuestamente. Diria de llevarlo a otro metodo que catchee esta excepcion*/
@@ -55,7 +56,7 @@ public class CargarIndicadoresViewModel {
 		
 	}
 	
-	public List<IndicadorCustom> getIndicadores(){
+	public List<Indicador> getIndicadores(){
 		Collections.sort(this.indicadores);
 		return this.indicadores;
 	}

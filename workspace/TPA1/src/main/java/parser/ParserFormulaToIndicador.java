@@ -8,17 +8,20 @@ import javax.print.DocFlavor.CHAR_ARRAY;
 import org.mockito.internal.matchers.Equals;
 import org.omg.CORBA.UserException;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
-import usuario.IndicadorCustom;
+import usuario.Indicador;
+import usuario.PatrimonioNeto;
 
 public class ParserFormulaToIndicador {
 
-	private static List<IndicadorCustom> indicadores;
+	private static List<Indicador> indicadores;
 	private static List<Cuenta> cuentasPorPeriodo;
 	private static Empresa empresa ;
 	private static String periodo;
@@ -27,6 +30,10 @@ public class ParserFormulaToIndicador {
 	public ParserFormulaToIndicador(){
 		ParserJsonAEmpresaAdapter parserEmpIndicador = new ParserJsonAEmpresaAdapter("indicadores.json");
 		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
+		ArchivoEIndicadoresUsuarioRepository.cargarIndicadoresPredefinidos();
+		
+
+	    
 		
 	}
 	
@@ -45,7 +52,7 @@ public class ParserFormulaToIndicador {
 	public static int getCalculoIndicador(String formula){
 		
 		try{
-			IndicadorCustom indicador;
+			Indicador indicador;
 		
 			if(formula.matches("(.*)[+](.*)")){
 				return getSuma(formula);
@@ -74,7 +81,7 @@ public class ParserFormulaToIndicador {
 	
 	
 	
-	private static IndicadorCustom indicador(String formula) {
+	private static Indicador indicador(String formula) {
 		int j;
 		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
 		for (j = 0; j < indicadores.size(); j++) {
@@ -153,7 +160,7 @@ public class ParserFormulaToIndicador {
 	}
 	
 	/*TODO: Testear que reconoce bien el valor de una cuenta y de un indicador*/
-	public static String[] elementosToOperandos(String[] operandos){
+	public static String[] elementosToOperandos(String[] operandos) {
 		int i,j;
 		for (int j2 = 0; j2 < operandos.length; j2++) {
 		}
@@ -162,10 +169,11 @@ public class ParserFormulaToIndicador {
 		
 		
 		for (i = 0; i < operandos.length; i++) {
-			/* Si matchea con un indicador*/
 			for (j = 0; j < indicadores.size(); j++) {
 				if(indicadores.get(j).getNombre().equals(operandos[i])){
-					operandos[i] = String.valueOf(indicadores.get(j).calcular());
+
+						operandos[i] = String.valueOf(indicadores.get(j).calcular());
+
 				}
 			}
 			/*Si matchea con una cuenta*/

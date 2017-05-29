@@ -17,12 +17,12 @@ import com.google.gson.reflect.TypeToken;
 import Class.Main;
 import exceptions.CSVInexistenteException;
 import usuario.Empresa;
-import usuario.IndicadorCustom;
+import usuario.Indicador;
 
 public class ParserJsonAEmpresaAdapter {
 	//private String archivoParaJson;
 	private List <Empresa> empresasObtenidasDelArchivo = new ArrayList <Empresa> ();
-	private List <IndicadorCustom> indicadoresObtenidasDelArchivo = new ArrayList <IndicadorCustom> ();
+	private List <Indicador> indicadoresObtenidasDelArchivo = new ArrayList <Indicador> ();
 	private JSONParser parserJsonAObjetos = new JSONParser();
 	private Object objetoAOtrosObjetos;
 	private static String archivo;
@@ -40,9 +40,9 @@ public class ParserJsonAEmpresaAdapter {
 	    return this.empresasObtenidasDelArchivo;
 	}
 	
-	public List<IndicadorCustom> getIndicadoresDelArchivo() {
+	public List<Indicador> getIndicadoresDelArchivo() {
 		
-		Type listType = new TypeToken <List<IndicadorCustom>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
+		Type listType = new TypeToken <List<Indicador>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		
 		this.indicadoresObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
 	
