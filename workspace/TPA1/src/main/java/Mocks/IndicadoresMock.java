@@ -9,7 +9,7 @@ import parser.ParserFormulaToIndicador;
 import usuario.Indicador;
 import usuario.IndicadorCustom;;
 
-public class IndicadoresMock {
+/*public class IndicadoresMock {
 	Indicador nuevoIndicador = new IndicadorCustom("Indicador0","2+2+2+2+2");
 	String nuevoIndicadorJSON = new Gson().toJson(nuevoIndicador); 
 	
@@ -24,3 +24,4 @@ public class IndicadoresMock {
 		return this.nuevoIndicadorJSON;
 	}
 }
+*/
