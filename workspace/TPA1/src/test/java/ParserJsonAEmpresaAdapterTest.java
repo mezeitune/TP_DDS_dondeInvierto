@@ -12,26 +12,23 @@ import usuario.Empresa;
 
 public class ParserJsonAEmpresaAdapterTest {
 	
-	ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapter;//Adapter creado en el paquete usuario para que me devuelva la lista de empresas del archivo json
+	ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapter;
 	
  	@Before
  	public void init() throws IOException {
  		parserJsonAEmpresaAdapter = new ParserJsonAEmpresaAdapter("empresasTest.json");
  	}
 	
-
  	@Test(expected = CSVInexistenteException.class)
  	public void pasarArchivoInexistenteYQueExplote() throws IOException {
  		
  		ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapterTest = new ParserJsonAEmpresaAdapter("inexistente.json");
  		parserJsonAEmpresaAdapterTest.getEmpresasDelArchivo();
- 		
- 	    
  	}
  	
  	
  	@Test
- 	public void pasarArchivoExistente() throws IOException {
+ 	public void pasarArchivoExistenteYQueFuncioneCorrectamente() throws IOException {
  		
  		ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapterTest = new ParserJsonAEmpresaAdapter("empresas.json");
  		parserJsonAEmpresaAdapterTest.getEmpresasDelArchivo();
@@ -39,7 +36,7 @@ public class ParserJsonAEmpresaAdapterTest {
  	}
  	
  	@Test
- 	public void recibeCorrectamenteCantidadDeEmpresas(){
+ 	public void recibeCorrectamente2Empresas(){
  		List <Empresa> empresasCargadas = parserJsonAEmpresaAdapter.getEmpresasDelArchivo();
  		assertEquals(2,empresasCargadas.size());
  		
@@ -47,7 +44,7 @@ public class ParserJsonAEmpresaAdapterTest {
  	
  	
  	@Test
- 	public void almacenaCorrectamenteCuentasEnUnaEmpresa(){
+ 	public void almacenaCorrectamente4CuentasEnUnaEmpresa(){
  		
  		Empresa facebook =  parserJsonAEmpresaAdapter.getEmpresasDelArchivo().get(0);
 
