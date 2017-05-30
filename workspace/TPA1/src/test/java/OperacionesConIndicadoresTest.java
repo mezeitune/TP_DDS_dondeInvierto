@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.omg.CORBA.UserException;
 
 import usuario.Indicador;
-public class ParserIndicadoresTest {
+public class OperacionesConIndicadoresTest {
 	
 	private List<Indicador> indicadores;
 	@Before

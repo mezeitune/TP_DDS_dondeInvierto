@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import Mocks.ListaLineasCsvFileMock;
+import parser.CSVObject;
 import parser.CSVToEmpresas;
 import parser.ParserJsonAEmpresaAdapter;
 import usuario.Cuenta;
@@ -20,7 +21,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;      // ...with the caveat noted below.
 
 
-public class EmpresaTest {
+public class ParserCSVEmpresaTest {
 
 	CSVToEmpresas parser;
 	@Before
@@ -42,24 +43,35 @@ public class EmpresaTest {
 	 	
 	}
 	
-	
-	
-	
-	
-	//Mock con el filter por periodo (un test)
-	
-	
-	/*@Test
+	@Test
 	public void ListaAsignadaCorrectamenteConParser(){
 		ParserJsonAEmpresaAdapter parserMock=Mockito.mock(ParserJsonAEmpresaAdapter.class);
 		List<Empresa> someList = new ArrayList<Empresa>();
 
 	    Mockito.doReturn(someList).when(parserMock).getEmpresasDelArchivo();
 
-		Assert.assertEquals(someList, parserMock.getEmpresasDelArchivo());
-		
-		
-	}*/
+		Assert.assertEquals(someList, parserMock.getEmpresasDelArchivo());	
+	}
+	
+	@Test
+ 	public void recibeCorrectamenteCantidadDeEmpresas() throws IOException {
+ 	   List <Empresa> listaEmpresas = new ArrayList<Empresa>();
+ 	   listaEmpresas= parser.CSVObjectListToEmpresasList(new ListaLineasCsvFileMock().mockearListaLineas());
+ 	   assertEquals(2,listaEmpresas.size());
+ 	}
+	
+	@Test
+	public void filtraBienPorCuentasYNombre(){
+		List <Empresa> listaEmpresasConFacebookYApple = new ArrayList<Empresa>();
+	 	listaEmpresasConFacebookYApple= parser.CSVObjectListToEmpresasList(new ListaLineasCsvFileMock().mockearListaLineas());
+	 	List<Cuenta> cuentasDeFacebook = listaEmpresasConFacebookYApple.get(0).getCuentas();
+	 	List<Cuenta> cuentasDeApple = listaEmpresasConFacebookYApple.get(1).getCuentas();
+	 	assertEquals(4,cuentasDeFacebook.size());
+	 	assertEquals(5,cuentasDeApple.size());
+	}
+	
+	
+	
 	
 	
 }

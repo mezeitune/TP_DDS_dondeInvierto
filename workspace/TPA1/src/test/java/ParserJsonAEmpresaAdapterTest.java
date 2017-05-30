@@ -19,29 +19,6 @@ public class ParserJsonAEmpresaAdapterTest {
  		parserJsonAEmpresaAdapter = new ParserJsonAEmpresaAdapter("empresasTest.json");
  	}
 	
- 	@Test(expected = CSVInexistenteException.class)
- 	public void pasarArchivoInexistenteYQueExplote() throws IOException {
- 		
- 		ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapterTest = new ParserJsonAEmpresaAdapter("inexistente.json");
- 		parserJsonAEmpresaAdapterTest.getEmpresasDelArchivo();
- 	}
- 	
- 	
- 	@Test
- 	public void pasarArchivoExistenteYQueFuncioneCorrectamente() throws IOException {
- 		
- 		ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapterTest = new ParserJsonAEmpresaAdapter("empresas.json");
- 		parserJsonAEmpresaAdapterTest.getEmpresasDelArchivo();
- 	    
- 	}
- 	
- 	@Test
- 	public void recibeCorrectamente2Empresas(){
- 		List <Empresa> empresasCargadas = parserJsonAEmpresaAdapter.getEmpresasDelArchivo();
- 		assertEquals(2,empresasCargadas.size());
- 		
- 	}
- 	
  	
  	@Test
  	public void almacenaCorrectamente4CuentasEnUnaEmpresa(){
@@ -50,6 +27,8 @@ public class ParserJsonAEmpresaAdapterTest {
 
  		assertEquals(4, facebook.getCuentas().size());
  	}
+ 	
+ 	
  	
  
  	
