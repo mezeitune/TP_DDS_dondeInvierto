@@ -33,24 +33,3 @@ public class Main extends Application{
 	}	
 		
 }
-		
-/*
-		public static void consultarCuentas(){
-			int i,j;
-			for(i=0; i< ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario().size();i++){
-				System.out.println(ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario().get(i).getNombre());
-				System.out.println(ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario().get(i).calcular());
-				
-			}	  	
-		
-		
-}		
-	
-
-List<Empresa> empresasPrueba = new Adapter().getEmpresasDelArchivo();
-	Main.consultarCuentas(empresasPrueba);*/
-	
-	
-
-
-

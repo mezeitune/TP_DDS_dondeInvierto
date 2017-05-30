@@ -1,14 +1,6 @@
 package parser;
 
-import java.io.IOException;
 import java.util.stream.IntStream;
-
-import javax.print.DocFlavor.CHAR_ARRAY;
-
-import org.mockito.internal.matchers.Equals;
-import org.omg.CORBA.UserException;
-
-import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -16,8 +8,6 @@ import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
-import usuario.Indicador;
-import usuario.PatrimonioNeto;
 
 public class ParserFormulaToIndicador {
 
@@ -25,16 +15,11 @@ public class ParserFormulaToIndicador {
 	private static List<Cuenta> cuentasPorPeriodo;
 	private static Empresa empresa ;
 	private static String periodo;
-	private static List<Empresa> empresas;
 	
 	public ParserFormulaToIndicador(){
 		ParserJsonAEmpresaAdapter parserEmpIndicador = new ParserJsonAEmpresaAdapter("indicadores.json");
 		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
 		ArchivoEIndicadoresUsuarioRepository.cargarIndicadoresPredefinidos();
-		
-
-	    
-		
 	}
 	
 	public static void setEmpresa(Empresa unaEmpresa){
@@ -71,15 +56,11 @@ public class ParserFormulaToIndicador {
 				return indicador.calcular();
 			
 			}
-		}catch(NullPointerException e){
-			/**Queda medio raro sin nada pero sino tira excepciones por consola y no se me ocurrio otra forma cuando no reconoce la formula*/
-		}catch(NumberFormatException e){
-			/**Queda medio raro sin nada pero sino tira excepciones por consola y no se me ocurrio otra forma cuando no reconoce la formula*/	
-		}
+		}catch(NullPointerException e){} catch(NumberFormatException e){}
+		
 		return 0;
 	}
-	
-	
+
 	
 	private static Indicador indicador(String formula) {
 		int j;
@@ -98,6 +79,7 @@ public class ParserFormulaToIndicador {
 		
 		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
 
+		ParserFormulaToIndicador.matcheaOtroOperador(operandos);
 		
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
 		int div = numerosAOperar[0];
@@ -112,6 +94,7 @@ public class ParserFormulaToIndicador {
 		
 		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
 
+		ParserFormulaToIndicador.matcheaOtroOperador(operandos);
 		
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
 		int mult= numerosAOperar[0];
@@ -127,6 +110,9 @@ public class ParserFormulaToIndicador {
 		
 		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
 
+		ParserFormulaToIndicador.matcheaOtroOperador(operandos);
+		
+		
 		int[] numerosAOperar= parsearOperandosAInt(operandos);
 		int resta = numerosAOperar[0];
 		for(int i=1; i< numerosAOperar.length; i++){
@@ -141,9 +127,10 @@ public class ParserFormulaToIndicador {
 	public static int getSuma(String formula){
 		
 		String operador = "[+]";
-
+				
 		String [] operandos = ParserFormulaToIndicador.elementosToOperandos(formula.split(operador));
 		
+		ParserFormulaToIndicador.matcheaOtroOperador(operandos);
 		
 		int sum = IntStream.of(parsearOperandosAInt(operandos)).sum();
 		
@@ -159,7 +146,21 @@ public class ParserFormulaToIndicador {
 		return numeros;
 	}
 	
-	/*TODO: Testear que reconoce bien el valor de una cuenta y de un indicador*/
+	
+	private static void matcheaOtroOperador(String[] operandos){
+		
+
+		for (int i = 0; i < operandos.length; i++) {
+			if(operandos[i].matches("(.*)[+](.*)") || operandos[i].matches("(.*)[*](.*)") || 
+				operandos[i].matches("(.*)[/](.*)") || operandos[i].matches("(.*)[-](.*)")){
+
+				operandos[i] = Integer.toString(ParserFormulaToIndicador.getCalculoIndicador(operandos[i]));
+			}
+		}
+	}
+	
+	
+	
 	public static String[] elementosToOperandos(String[] operandos) {
 		int i,j;
 		for (int j2 = 0; j2 < operandos.length; j2++) {
@@ -184,7 +185,7 @@ public class ParserFormulaToIndicador {
 						operandos[i]= String.valueOf(cuentasPorPeriodo.get(j).getValor());
 					}
 				}
-			}catch(NullPointerException e){/**Queda medio raro sin nada pero sino rompe cuando no hay un archivo cargado*/	}
+			}catch(NullPointerException e){}
 			
 			/*Si no matchea ni cuenta ni indicador, entonces es un operador basico y no hay modificaciones en el buffer*/
 		}

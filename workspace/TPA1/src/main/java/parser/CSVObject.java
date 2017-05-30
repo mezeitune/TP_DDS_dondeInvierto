@@ -17,7 +17,6 @@ public class CSVObject {
 		private int valor;
 		
 		
-		/*No puedo crear un constructor para esta clase porque no me lo permite el reader de CSV*/ 
 		public CSVObject init(String empresa, String cuenta, String periodo, int valor){
 			this.empresa=empresa;
 			this.cuenta=cuenta;

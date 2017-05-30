@@ -1,15 +1,6 @@
 package usuario;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
-import org.omg.CORBA.UserException;
 import org.uqbar.commons.utils.Observable;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-
-import parser.ParserFormulaToIndicador;
 
 //indicador predefinido que extiende de indicador para que todos tengan el metodo calcular en su dominio
 @Observable

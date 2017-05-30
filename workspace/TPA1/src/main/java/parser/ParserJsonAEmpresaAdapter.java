@@ -14,13 +14,12 @@ import org.json.simple.parser.ParseException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import Class.Main;
 import exceptions.CSVInexistenteException;
 import usuario.Empresa;
 import usuario.Indicador;
 
 public class ParserJsonAEmpresaAdapter {
-	//private String archivoParaJson;
+
 	private List <Empresa> empresasObtenidasDelArchivo = new ArrayList <Empresa> ();
 	private List <Indicador> indicadoresObtenidasDelArchivo = new ArrayList <Indicador> ();
 	private JSONParser parserJsonAObjetos = new JSONParser();
@@ -61,14 +60,11 @@ public class ParserJsonAEmpresaAdapter {
 
 			throw new CSVInexistenteException();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			throw new CSVInexistenteException();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			throw new CSVInexistenteException();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			throw new CSVInexistenteException();
 		}
 		

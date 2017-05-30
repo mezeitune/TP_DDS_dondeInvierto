@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 import org.uqbar.commons.utils.Observable;
 
-import parser.ParserJsonAEmpresaAdapter;
-
 
 @Observable
 public class Empresa {
@@ -51,24 +49,5 @@ public class Empresa {
 		List <String> periodosSinRepetidos = new ArrayList <String> (unSetPeriodos);
 		return periodosSinRepetidos;
 	}
-	
-	/*
-	public static void main(String[] args) {
-		List<Cuenta> cuentas;
-		List<Empresa> empresas;
-		
-		ParserJsonAEmpresaAdapter parser=new ParserJsonAEmpresaAdapter("empresas.json");
-		empresas=parser.getEmpresasDelArchivo();
-		
-		cuentas=empresas.get(0).getCuentasPorPeriodo("2016");
-		
-    
 
-        // Or like this...
-        for(int i = 0; i < cuentas.size(); i++) {
-            System.out.println(cuentas.get(i).getNombre());
-        }
-	}
-	*/
-	
 }

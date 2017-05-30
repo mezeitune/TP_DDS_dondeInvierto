@@ -1,14 +1,10 @@
 package repository;
 
-import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 
-import usuario.Cuenta;
 import usuario.Indicador;
-import usuario.IndicadorCustom;
 import usuario.PatrimonioNeto;
-import usuario.Indicador;
 
 public class ArchivoEIndicadoresUsuarioRepository {
 	
