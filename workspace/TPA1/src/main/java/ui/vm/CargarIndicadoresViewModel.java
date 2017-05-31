@@ -28,6 +28,9 @@ public class CargarIndicadoresViewModel {
 	
 	private static String nombreIndicador;
 	private static String formulaIndicador;
+
+
+	private static int codigoDeError;
 	
 	public String getNombreIndicador() {
 		return nombreIndicador;
@@ -43,22 +46,46 @@ public class CargarIndicadoresViewModel {
 		this.formulaIndicador = formulaIndicador;
 	}
 	
+	public static int getCodigoDeError() {
+		return codigoDeError;
+	}
+	
+	public static void setCodigoDeError(int codigoDeError) {
+		CargarIndicadoresViewModel.codigoDeError = codigoDeError;
+	}
+	
 	public static void generarIndicador(){
 		
 		Indicador nuevoIndicador = new IndicadorCustom(nombreIndicador,formulaIndicador);
 		String jsonElement = new Gson().toJson(nuevoIndicador); 
 		
-		/*Estas dos lineas validarian al indicador ingresado supuestamente. Diria de llevarlo a otro metodo que catchee esta excepcion*/
-		new ParserFormulaToIndicador();
-		ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
+		
+		catcheoYAnidadoAJSON(formulaIndicador,jsonElement);
 
-		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );	
 		
 	}
 	
 	public List<Indicador> getIndicadores(){
 		Collections.sort(this.indicadores);
 		return this.indicadores;
+	}
+	
+	public static void catcheoYAnidadoAJSON(String formulaIndicador, String jsonElement){
+		if(formulaIndicador != null && !formulaIndicador.trim().isEmpty()){
+
+			try{
+				new ParserFormulaToIndicador();
+				ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
+	
+				ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );	
+				setCodigoDeError(0);//devolviendo al estado original , ya que es correcto
+			}catch(Exception e){
+				setCodigoDeError(2);//codigo de error 2 , significa que se genero indicadores erroneos
+			}
+		
+		}else{
+			setCodigoDeError(1);//Codigo de error 1 , significa que se genero un indicador vacio
+		}
 	}
 	
 	

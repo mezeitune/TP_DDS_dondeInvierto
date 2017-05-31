@@ -70,8 +70,18 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 												CargarIndicadoresViewModel.generarIndicador();//Actualiza archivo sin cerrar programa
 												new ParserFormulaToIndicador();//Muestra Indicadores en tabla											
 												try{
-													this.getDelegate().close();
-													PreguntaNuevoIndicadorWindow();
+													
+													if(CargarIndicadoresViewModel.getCodigoDeError() == 1){
+														this.getDelegate().close();
+														IndicadorVacioWindow();
+													}else if(CargarIndicadoresViewModel.getCodigoDeError() == 2){
+														this.getDelegate().close();
+														PreguntaNuevoIndicadorWindow();
+													}else{
+														this.getDelegate().close();
+														PreguntaNuevoIndicadorWindow();
+													}
+
 												}catch (IOException e) {
 													e.printStackTrace();
 												}
@@ -96,6 +106,13 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 	}
 	public void PreguntaNuevoIndicadorWindow() throws IOException {
 		Dialog<?> dialog = new PreguntaNuevoIndicadorWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+		
+	}
+	
+	public void IndicadorVacioWindow() throws IOException {
+		Dialog<?> dialog = new IndicadorVacioWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 		
