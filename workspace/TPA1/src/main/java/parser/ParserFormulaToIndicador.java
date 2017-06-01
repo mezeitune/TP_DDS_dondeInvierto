@@ -1,7 +1,14 @@
 package parser;
 
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import repository.ArchivoEIndicadoresUsuarioRepository;
@@ -190,6 +197,59 @@ public class ParserFormulaToIndicador {
 			/*Si no matchea ni cuenta ni indicador, entonces es un operador basico y no hay modificaciones en el buffer*/
 		}
 		return operandos;
+	}
+	
+	public static boolean validarAntesDePrecargar(String formula){
+		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
+		List<Empresa> empresas;
+		List<Cuenta> cuentas = new LinkedList<>(); ;
+		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+		try {
+			empresas=parser.csvFileToEmpresas();
+			for(int i=0;i<empresas.size();i++){
+				cuentas.addAll(empresas.get(i).getCuentas());
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String[] result = formula.split("[-+*/]");
+		String[] ver = new String[result.length];
+		
+		for(int j=0;j<ver.length;j++){
+			ver[j]="no";
+		}
+		
+		for (int i = 0; i < result.length; i++) {
+			
+			if( StringUtils.isNumeric(result[i])){
+				ver[i]="si";
+			}else{
+				for(Indicador s : indicadores){
+					  if(s.getNombre().equals(result[i])){
+						  ver[i]="si";
+					  }
+				}
+				
+				for(Cuenta s : cuentas){
+					  if(s.getNombre().equals(result[i])){
+						  ver[i]="si";
+					  }
+				}
+			}
+		}
+		
+		for(int k=0;k<ver.length;k++){
+			if(ver[k].equals("no")){
+				return false;
+			}
+		}
+
+		
+		return true;
+		
 	}
 	
 }

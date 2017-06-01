@@ -76,7 +76,7 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 														IndicadorVacioWindow();
 													}else if(CargarIndicadoresViewModel.getCodigoDeError() == 2){
 														this.getDelegate().close();
-														PreguntaNuevoIndicadorWindow();
+														IndicadorErroneoWindow();
 													}else{
 														this.getDelegate().close();
 														PreguntaNuevoIndicadorWindow();
@@ -113,6 +113,13 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 	
 	public void IndicadorVacioWindow() throws IOException {
 		Dialog<?> dialog = new IndicadorVacioWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+		
+	}
+	
+	public void IndicadorErroneoWindow() throws IOException {
+		Dialog<?> dialog = new IndicadorErroneoWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 		

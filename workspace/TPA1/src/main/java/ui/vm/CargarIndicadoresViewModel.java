@@ -62,6 +62,7 @@ public class CargarIndicadoresViewModel {
 		
 		catcheoYAnidadoAJSON(formulaIndicador,jsonElement);
 
+
 		
 	}
 	
@@ -73,13 +74,14 @@ public class CargarIndicadoresViewModel {
 	public static void catcheoYAnidadoAJSON(String formulaIndicador, String jsonElement){
 		if(formulaIndicador != null && !formulaIndicador.trim().isEmpty()){
 
-			try{
+			if(ParserFormulaToIndicador.validarAntesDePrecargar(formulaIndicador)){
 				new ParserFormulaToIndicador();
 				ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
 	
 				ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );	
 				setCodigoDeError(0);//devolviendo al estado original , ya que es correcto
-			}catch(Exception e){
+			}else{
+				
 				setCodigoDeError(2);//codigo de error 2 , significa que se genero indicadores erroneos
 			}
 		
