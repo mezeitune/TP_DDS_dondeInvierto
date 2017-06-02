@@ -16,4 +16,4 @@
 {"formula":"A+B","resultado":0,"nombre":"abcd"},
 {"nombre":"PruebaCombinatoria","formula":"12+A*B","resultado":0},
 {"nombre":"PruebaCombinadaNueva","formula":"A+B*C/D","resultado":0},
-,{"nombre":"test2","formula":"test","resultado":0},{"nombre":"testeando","formula":"1","resultado":0},{"nombre":"testeando2","formula":"1+Indicador0","resultado":0},{"nombre":"testeando3","formula":"1+Indicador0*Free CashFlow","resultado":0}]
+,{"nombre":"test2","formula":"test","resultado":0},{"nombre":"testeando","formula":"1","resultado":0},{"nombre":"testeando2","formula":"1+Indicador0","resultado":0},{"nombre":"testeando3","formula":"1+Indicador0*Free CashFlow","resultado":0},{"nombre":"dsdsdd","formula":"Indicador2","resultado":0},{"nombre":"Indicador","formula":"Indicador0","resultado":0},{"nombre":"Indicador0","formula":"Indicador0+1+2+3","resultado":0}]

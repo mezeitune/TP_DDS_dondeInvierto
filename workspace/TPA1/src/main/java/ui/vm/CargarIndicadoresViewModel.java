@@ -29,7 +29,10 @@ public class CargarIndicadoresViewModel {
 	private static String nombreIndicador;
 	private static String formulaIndicador;
 
-
+	public CargarIndicadoresViewModel(){
+		nombreIndicador=null;
+		formulaIndicador=null;
+	}
 	private static int codigoDeError;
 	
 	public String getNombreIndicador() {
