@@ -2,6 +2,8 @@ import static org.junit.Assert.*;
 
 import Mocks.ListaEmpresasMock;
 import Mocks.ListaIndicadoresMock;
+import parserFormulaInidicador.ParserFormulaToIndicador;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.omg.CORBA.UserException;
 
+import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
 public class ParserIndicadoresTest {
@@ -18,8 +21,10 @@ public class ParserIndicadoresTest {
 	@Before
  	public void init() throws IOException {
 		ListaIndicadoresMock mockListaIndicadores = new ListaIndicadoresMock ();
+		List<Cuenta> mockListaCuentas = new ListaEmpresasMock().mockearListaCuentas();
 		mockListaIndicadores.setIndicadoresMockeados();
 		indicadores = mockListaIndicadores.getIndicadoresMockeados();
+		ParserFormulaToIndicador.init(indicadores,mockListaCuentas);
  	}
 
 	@Test
@@ -44,13 +49,19 @@ public class ParserIndicadoresTest {
 		assertEquals(2.0,indicadorConFormulaDivisiones.calcular(),0);
 	}
 	@Test
-	public void FormulaConDistintasOperacionesFuncionaCorrectamente() throws UserException{
+	public void FormulaConIndicadoresYNumeros() throws UserException{
+		Indicador indicadorConIndicadoresYCuentas = indicadores.get(4);
+		assertEquals(0.0,indicadorConIndicadoresYCuentas.calcular(),0);
+	}
+	@Test
+	public void FormulaDeNumerosConDistintasOperacionesFuncionaCorrectamente() throws UserException{
 		Indicador indicadorConDistintasOperaciones = indicadores.get(5);
 		assertEquals(10.0,indicadorConDistintasOperaciones.calcular(),0);
 	}
 	@Test
-	public void FormulaConIndicadoresYCuentasFuncionaCorrectamente() throws UserException{
-		Indicador indicadorConIndicadoresYCuentas = indicadores.get(4);
-		assertEquals(0.0,indicadorConIndicadoresYCuentas.calcular(),0);
+	public void FormulaDCombinadaDeOperadoresConIndicadoresCuentasYNumeros() throws UserException{
+		Indicador indicadorConDistintasOperaciones = indicadores.get(6);
+		assertEquals(10.0,indicadorConDistintasOperaciones.calcular(),0);
 	}
+	
 }	

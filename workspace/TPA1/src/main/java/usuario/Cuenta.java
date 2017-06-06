@@ -1,8 +1,10 @@
 package usuario;
 
 import org.uqbar.commons.utils.Observable;
+
+import parserFormulaInidicador.Operacion;
 @Observable
-public class Cuenta {
+public class Cuenta extends Operacion {
 
 	private String nombre;
 	private String periodo;
@@ -37,6 +39,10 @@ public class Cuenta {
 	
 	public void setValor(int unValor){
 		this.valor = unValor;
+	}
+	
+	public int calcular(){
+		return valor;
 	}
 }
 

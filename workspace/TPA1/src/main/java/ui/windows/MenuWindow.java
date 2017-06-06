@@ -12,7 +12,7 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import exceptions.ArchivoInexistenteException;
-import parser.ParserFormulaToIndicador;
+import parserFormulaInidicador.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.MenuViewModel;
 
@@ -62,7 +62,12 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 								});
 		new Button(actionsPanel).setCaption("Cargar y consultar indicadores")
 								.onClick(() -> {
-												new ParserFormulaToIndicador();
+												try {
+													new ParserFormulaToIndicador();
+												} catch (IOException e1) {
+													// TODO Auto-generated catch block
+													e1.printStackTrace();
+												}
 												try{
 													this.getDelegate().close();
 													CargarIndicadoresWindow();

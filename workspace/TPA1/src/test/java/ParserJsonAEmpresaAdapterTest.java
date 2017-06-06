@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import exceptions.CSVInexistenteException;
-import parser.ParserJsonAEmpresaAdapter;
+import parser.parserArchivos.ParserJsonAEmpresaAdapter;
 import usuario.Empresa;
 
 public class ParserJsonAEmpresaAdapterTest {

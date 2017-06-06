@@ -1,4 +1,4 @@
-package parser;
+package parser.parserArchivos;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import exceptions.CSVInexistenteException;
+import parser.ParserJsonString;
 import usuario.Empresa;
 import usuario.Indicador;
 

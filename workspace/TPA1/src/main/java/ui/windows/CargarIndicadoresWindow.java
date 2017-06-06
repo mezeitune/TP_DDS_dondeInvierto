@@ -15,8 +15,7 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-
-import parser.ParserFormulaToIndicador;
+import parserFormulaInidicador.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
 import usuario.Cuenta;
 import usuario.Indicador;
@@ -67,8 +66,18 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		
 		new Button(actionsPanel).setCaption("Cargar Indicador")
 								.onClick(() -> {
-												CargarIndicadoresViewModel.generarIndicador();//Actualiza archivo sin cerrar programa
-												new ParserFormulaToIndicador();//Muestra Indicadores en tabla											
+												try {
+													CargarIndicadoresViewModel.generarIndicador();
+												} catch (IOException e2) {
+													// TODO Auto-generated catch block
+													e2.printStackTrace();
+												}//Actualiza archivo sin cerrar programa
+												try {
+													new ParserFormulaToIndicador();
+												} catch (IOException e1) {
+													// TODO Auto-generated catch block
+													e1.printStackTrace();
+												}//Muestra Indicadores en tabla											
 												try{
 													
 													if(CargarIndicadoresViewModel.getCodigoDeError() == 1){

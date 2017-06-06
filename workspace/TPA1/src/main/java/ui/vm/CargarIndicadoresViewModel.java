@@ -15,8 +15,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 
-import parser.ParserFormulaToIndicador;
 import parser.ParserJsonString;
+import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
 import usuario.IndicadorCustom;
@@ -57,7 +57,7 @@ public class CargarIndicadoresViewModel {
 		CargarIndicadoresViewModel.codigoDeError = codigoDeError;
 	}
 	
-	public static void generarIndicador(){
+	public static void generarIndicador() throws IOException{
 		
 		Indicador nuevoIndicador = new IndicadorCustom(nombreIndicador,formulaIndicador);
 		String jsonElement = new Gson().toJson(nuevoIndicador); 
@@ -74,7 +74,7 @@ public class CargarIndicadoresViewModel {
 		return this.indicadores;
 	}
 	
-	public static void catcheoYAnidadoAJSON(String formulaIndicador, String jsonElement){
+	public static void catcheoYAnidadoAJSON(String formulaIndicador, String jsonElement) throws IOException{
 		if(formulaIndicador != null && !formulaIndicador.trim().isEmpty()){
 
 			if(ParserFormulaToIndicador.validarAntesDePrecargar(formulaIndicador)){

@@ -3,10 +3,11 @@ package usuario;
 import org.omg.CORBA.UserException;
 import org.uqbar.commons.utils.Observable;
 
-import parser.ParserFormulaToIndicador;
+import parserFormulaInidicador.Operacion;
+import parserFormulaInidicador.ParserFormulaToIndicador;
 
 @Observable
-public class  Indicador  implements Comparable<Indicador> {
+public class  Indicador extends Operacion implements Comparable<Indicador> {
 
 	private String nombre;
 	private String formula;
@@ -18,8 +19,6 @@ public class  Indicador  implements Comparable<Indicador> {
 		this.formula=formula;
 
 	}
-
-
 	
 	public String getFormula() {
 		return formula;
@@ -50,8 +49,6 @@ public class  Indicador  implements Comparable<Indicador> {
 	public void setResultado() throws UserException{
 		this.resultado = this.calcular();
 	}
-
-
 
 	public int calcular() {
 		return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());

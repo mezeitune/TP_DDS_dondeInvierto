@@ -10,7 +10,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import parser.ParserFormulaToIndicador;
+import parserFormulaInidicador.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.PreguntaNuevoIndicadorViewModel;
 
@@ -25,7 +25,7 @@ public class PreguntaNuevoIndicadorWindow extends Dialog<PreguntaNuevoIndicadorV
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new ColumnLayout(2));
 		
-		new Label(mainPanel).setText("¿Desea cargar un nuevo indicador?");
+		new Label(mainPanel).setText("ï¿½Desea cargar un nuevo indicador?");
 		
 				
 	}

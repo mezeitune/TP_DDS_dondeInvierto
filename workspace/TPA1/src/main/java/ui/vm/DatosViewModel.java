@@ -11,9 +11,9 @@ import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 import com.sun.jersey.api.client.Client;
 
-import parser.CSVToEmpresas;
-import parser.ParserFormulaToIndicador;
-import parser.ParserJsonAEmpresaAdapter;
+import parser.parserArchivos.CSVToEmpresas;
+import parser.parserArchivos.ParserJsonAEmpresaAdapter;
+import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import com.google.gson.Gson;
 import usuario.*;

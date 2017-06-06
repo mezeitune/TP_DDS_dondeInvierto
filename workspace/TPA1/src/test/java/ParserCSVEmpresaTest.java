@@ -4,9 +4,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import Mocks.ListaLineasCsvFileMock;
-import parser.CSVObject;
-import parser.CSVToEmpresas;
-import parser.ParserJsonAEmpresaAdapter;
+import parser.parserArchivos.CSVObject;
+import parser.parserArchivos.CSVToEmpresas;
+import parser.parserArchivos.ParserJsonAEmpresaAdapter;
 import usuario.Cuenta;
 import usuario.Empresa;
 

@@ -7,7 +7,7 @@ import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.CSVInexistenteException;
-import parser.ParserFormulaToIndicador;
+import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import ui.windows.MenuWindow;
 import usuario.Indicador;

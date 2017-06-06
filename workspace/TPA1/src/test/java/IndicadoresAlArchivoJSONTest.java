@@ -7,9 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import com.google.gson.Gson;
 
-import parser.ParserFormulaToIndicador;
-import parser.ParserJsonAEmpresaAdapter;
 import parser.ParserJsonString;
+import parser.parserArchivos.ParserJsonAEmpresaAdapter;
+import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
 import usuario.IndicadorCustom;
