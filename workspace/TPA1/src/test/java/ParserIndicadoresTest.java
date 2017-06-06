@@ -61,7 +61,7 @@ public class ParserIndicadoresTest {
 	@Test
 	public void FormulaDCombinadaDeOperadoresConIndicadoresCuentasYNumeros() throws UserException{
 		Indicador indicadorConDistintasOperaciones = indicadores.get(6);
-		assertEquals(10.0,indicadorConDistintasOperaciones.calcular(),0);
+		assertEquals(198.0,indicadorConDistintasOperaciones.calcular(),0);
 	}
 	
 }	

@@ -7,13 +7,4 @@
 {"formula":"PruebaSuma-Indicador0","nombre":"PruebaResta"},
 {"formula":"Indicador2*Indicador3","nombre":"PruebaMultiplicacion"},
 {"formula":"Indicador2/Indicador3","nombre":"PruebaDivision"}
-,{"formula":"Indicador0+Indicador1+4","nombre":"Indicador4"},
-{"formula":"2*5","nombre":"Zeta"},{"formula":"1+2+Indicador1","nombre":"Manuelo2"},
-{"formula":"12+Indicador0","resultado":0,"nombre":"A"},
-{"formula":"12+Indicador0","resultado":0,"nombre":"B"},
-{"formula":"12+A","resultado":0,"nombre":"C"},
-{"formula":"12+C","resultado":0,"nombre":"D"},
-{"formula":"A+B","resultado":0,"nombre":"abcd"},
-{"nombre":"PruebaCombinatoria","formula":"12+A*B","resultado":0},
-{"nombre":"PruebaCombinadaNueva","formula":"A+B*C/D","resultado":0},
-,{"nombre":"test2","formula":"test","resultado":0},{"nombre":"testeando","formula":"1","resultado":0},{"nombre":"testeando2","formula":"1+Indicador0","resultado":0},{"nombre":"testeando3","formula":"1+Indicador0*Free CashFlow","resultado":0},{"nombre":"dsdsdd","formula":"Indicador2","resultado":0},{"nombre":"Indicador","formula":"Indicador0","resultado":0},{"nombre":"Indicador0","formula":"Indicador0+1+2+3","resultado":0},{"nombre":"sfaf","formula":"1+1","resultado":0},{"nombre":"asdasd","formula":"1+1","resultado":0},{"nombre":"ArbolTestSumaUnitaria","formula":"1+1","resultado":0},{"nombre":"ArbolTestRestaUnitaria","formula":"9-5","resultado":0},{"nombre":"ArbolTestMultiplicacionUnitaria","formula":"5*5","resultado":0},{"nombre":"ArbolTestDivisionUnitaria","formula":"8/4","resultado":0},{"nombre":"ArbolTestSumaMultiple","formula":"1+2+5+8+9","resultado":0},{"nombre":"ArbolTestRestaMultiple","formula":"8-5-10-7-9","resultado":0},{"nombre":"ArbolTestMultiplicacionMultiple","formula":"8*9*4*7*5","resultado":0},{"nombre":"ArbolTestDivisionMultiple","formula":"8/4/2","resultado":0},{"nombre":"asdasd","formula":"8+4-7*4/9","resultado":0},{"nombre":"asdasdasd","formula":"8*9+5/7-2","resultado":0},{"nombre":"ARbolTEst","formula":"1+1","resultado":0},{"nombre":"AAA","formula":"1+2/8*9-5","resultado":0},{"nombre":"AAAAA","formula":"9*3-8/4+12","resultado":0},{"nombre":"ArbolConCuentas","formula":"C1APP+3*10","resultado":0}]
+,{"formula":"Indicador0+Indicador1+4","nombre":"Indicador4"}]
