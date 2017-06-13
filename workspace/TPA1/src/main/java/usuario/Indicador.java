@@ -31,6 +31,14 @@ public class  Indicador extends Operacion implements Comparable<Indicador> {
 	public String getNombre() {
 		return nombre;
 	}
+	
+	public int getResultado(){
+		return this.resultado;
+	}
+	public void setResultado() throws UserException{
+		this.resultado = this.calcular();
+	}
+
 
 	public void setNombre(String nombreIndicador) {
 		this.nombre = nombreIndicador;
@@ -43,15 +51,9 @@ public class  Indicador extends Operacion implements Comparable<Indicador> {
     }
 
 
-	public int getResultado(){
-		return this.resultado;
-	}
-	public void setResultado() throws UserException{
-		this.resultado = this.calcular();
-	}
-
+	
 	public int calcular() {
-		return 0;
+		return ParserFormulaToIndicador.getCalculoIndicador(formula);
 	}
 
 	

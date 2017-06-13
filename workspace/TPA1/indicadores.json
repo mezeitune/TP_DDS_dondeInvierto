@@ -6,4 +6,4 @@
 {"formula":"Indicador0+Indicador2+Indicador3","nombre":"PruebaSuma"},
 {"formula":"PruebaSuma-Indicador0","nombre":"PruebaResta"},
 {"formula":"Indicador2*Indicador3","nombre":"PruebaMultiplicacion"},
-{"formula":"Indicador2/Indicador3","nombre":"PruebaDivision"},{"nombre":"PN","formula":"3423","resultado":0},{"nombre":"Indicador4","formula":"Indicador0+2","resultado":0}]
+{"formula":"Indicador2/Indicador3","nombre":"PruebaDivision"},{"nombre":"Indicador4","formula":"Indicador0+2","resultado":0},{"nombre":"Indicador2333","formula":"323+332","resultado":0},{"nombre":"dksldksd","formula":"3333","resultado":0},{"nombre":"Indicadrorrr33","formula":"3323333"},{"resultado":0,"nombre":"dsdd","formula":"3333"}]

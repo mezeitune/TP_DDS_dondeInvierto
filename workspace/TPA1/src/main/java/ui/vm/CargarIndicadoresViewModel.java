@@ -61,6 +61,7 @@ public class CargarIndicadoresViewModel {
 	public static void generarIndicador() throws IOException{
 		
 		Indicador nuevoIndicador = new IndicadorCustom(nombreIndicador,formulaIndicador);
+		
 		String jsonElement = new Gson().toJson(nuevoIndicador); 
 		
 		//validaciones
