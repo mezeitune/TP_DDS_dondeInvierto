@@ -4,6 +4,7 @@ import org.uqbar.commons.utils.Observable;
 
 //indicador predefinido que extiende de indicador para que todos tengan el metodo calcular en su dominio
 @Observable
+
 public class PatrimonioNeto extends Indicador{
 
 	
@@ -23,8 +24,10 @@ public class PatrimonioNeto extends Indicador{
 	public PatrimonioNeto(String nombre,String formula) {
 		super(nombre,formula);
 	}
-
-	
+	@Override
+	public int calcular(){
+		return 3;
+	}
 
 
 

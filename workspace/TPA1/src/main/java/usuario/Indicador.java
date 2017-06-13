@@ -51,7 +51,7 @@ public class  Indicador extends Operacion implements Comparable<Indicador> {
 	}
 
 	public int calcular() {
-		return ParserFormulaToIndicador.getCalculoIndicador(this.getFormula());
+		return 0;
 	}
 
 	
