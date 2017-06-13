@@ -6,6 +6,7 @@ import java.io.RandomAccessFile;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.omg.CORBA.UserException;
 import org.uqbar.commons.utils.Observable;
@@ -24,7 +25,7 @@ import usuario.Indicador;
 @Observable
 public class CargarIndicadoresViewModel {
 
-	private List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();;
+	private static List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();;
 	
 	private static String nombreIndicador;
 	private static String formulaIndicador;
@@ -62,13 +63,23 @@ public class CargarIndicadoresViewModel {
 		Indicador nuevoIndicador = new IndicadorCustom(nombreIndicador,formulaIndicador);
 		String jsonElement = new Gson().toJson(nuevoIndicador); 
 		
-		
-		catcheoYAnidadoAJSON(formulaIndicador,jsonElement);
-
+		//validaciones
+		catcheoYAnidadoAJSON(formulaIndicador,jsonElement);//si devuelve 0 sigue validando si hay repetidos
+		validacionDeIndicadoresRepetidos(nombreIndicador,formulaIndicador);
 
 		
 	}
+	public static void validacionDeIndicadoresRepetidos (String nombreIndicador,String formulaIndicador) throws IOException{
+		
+		if(ParserFormulaToIndicador.validarIndicadorRepetidoAntesDePrecargar(nombreIndicador,formulaIndicador)){
+			setCodigoDeError(3);
+		
+		}
+		else{
+			setCodigoDeError(0);
+		}
 	
+	}
 	public List<Indicador> getIndicadores(){
 		Collections.sort(this.indicadores);
 		return this.indicadores;

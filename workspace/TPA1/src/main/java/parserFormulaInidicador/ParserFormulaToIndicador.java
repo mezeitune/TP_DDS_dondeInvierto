@@ -361,6 +361,18 @@ public class ParserFormulaToIndicador {
 		return operandos;
 	}
 	*/
+	public static boolean validarIndicadorRepetidoAntesDePrecargar(String nombre , String formula) throws IOException {
+		List<Indicador> indicadoresRepetidos = indicadores.stream().filter(line -> line.getNombre().equals(nombre)).collect(Collectors.toList());
+		
+		if (indicadoresRepetidos.size() >= 1){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	
 	public static boolean validarAntesDePrecargar(String formula) throws IOException{ 
 		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
 		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());

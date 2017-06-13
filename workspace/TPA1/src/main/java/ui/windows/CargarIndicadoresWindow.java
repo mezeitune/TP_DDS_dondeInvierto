@@ -79,18 +79,21 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 													e1.printStackTrace();
 												}//Muestra Indicadores en tabla											
 												try{
-													
+												
 													if(CargarIndicadoresViewModel.getCodigoDeError() == 1){
 														this.getDelegate().close();
 														IndicadorVacioWindow();
 													}else if(CargarIndicadoresViewModel.getCodigoDeError() == 2){
 														this.getDelegate().close();
 														IndicadorErroneoWindow();
-													}else{
+													}else if (CargarIndicadoresViewModel.getCodigoDeError() == 3){
+														
+														this.getDelegate().close();
+														IndicadorRepetidoWindow();
+													} else {
 														this.getDelegate().close();
 														PreguntaNuevoIndicadorWindow();
 													}
-
 												}catch (IOException e) {
 													e.printStackTrace();
 												}
@@ -119,7 +122,12 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		dialog.onAccept(() -> {});
 		
 	}
-	
+	public void IndicadorRepetidoWindow() throws IOException {
+		Dialog<?> dialog = new IndicadorRepetidoWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+		
+	}
 	public void IndicadorVacioWindow() throws IOException {
 		Dialog<?> dialog = new IndicadorVacioWindow(this);
 		dialog.open();

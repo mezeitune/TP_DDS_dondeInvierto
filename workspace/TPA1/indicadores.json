@@ -6,5 +6,4 @@
 {"formula":"Indicador0+Indicador2+Indicador3","nombre":"PruebaSuma"},
 {"formula":"PruebaSuma-Indicador0","nombre":"PruebaResta"},
 {"formula":"Indicador2*Indicador3","nombre":"PruebaMultiplicacion"},
-{"formula":"Indicador2/Indicador3","nombre":"PruebaDivision"}
-,{"formula":"Indicador0+Indicador1+4","nombre":"Indicador4"}]
+{"formula":"Indicador2/Indicador3","nombre":"PruebaDivision"},{"nombre":"PN","formula":"3423","resultado":0},{"nombre":"Indicador4","formula":"Indicador0+2","resultado":0}]
