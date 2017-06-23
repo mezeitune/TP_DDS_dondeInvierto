@@ -37,7 +37,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 	}
 	protected void addActions(Panel actionsPanel){
 
-		new Button(actionsPanel).setCaption("Consultar Empresas")
+		new Button(actionsPanel).setCaption("Evaluar Empresas con Indicadores")
 								.onClick(() -> {
 												try{
 													this.getDelegate().close();
@@ -51,6 +51,20 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 													e.printStackTrace();
 												}
 									});
+		new Button(actionsPanel).setCaption("Evaluar Empresas con Metodologias")
+		.onClick(() -> {
+						try{
+							this.getDelegate().close();
+							
+							try{
+								MetodologiasEmpresasWindow();
+							} catch(ArchivoInexistenteException e){
+								SeleccionarArchivoWindow();
+							}
+						}catch (IOException e) {
+							e.printStackTrace();
+						}
+			});
 		new Button(actionsPanel).setCaption("Seleccionar archivo de cuentas")
 								.onClick(() -> {
 												try{
@@ -93,5 +107,9 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-
+	public void MetodologiasEmpresasWindow() throws IOException {
+		Dialog<?> dialog = new MetodologiasEmpresasWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
 }
