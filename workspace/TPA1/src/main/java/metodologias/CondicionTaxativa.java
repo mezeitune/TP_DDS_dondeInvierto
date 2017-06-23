@@ -19,7 +19,10 @@ public class CondicionTaxativa  {
 
 	}	
 	
-	public void evaluar(Empresa empresa){
+	public int evaluar(Empresa empresa){
+		
+		
+		return 0;
 		
 	}
 

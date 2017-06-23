@@ -19,8 +19,10 @@ public class CondicionComparativa implements EstadoCondicion{
 	}	
 	
 	@Override
-	public void evaluar(Empresa empresa1, Empresa empresa2) {
+	public int evaluar(Empresa empresa1, Empresa empresa2) {
 		// TODO Auto-generated method stub
+		
+		return 0;
 		
 	}
 

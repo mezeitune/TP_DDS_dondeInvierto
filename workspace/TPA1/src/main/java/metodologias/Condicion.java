@@ -10,12 +10,30 @@ public class Condicion {
 
 	private List<Indicador> indicadores = new LinkedList<>(); 
 	private EstadoCondicion estado;
+	private int peso;
 	
-	public void evaluar(Empresa empresa1,Empresa empresa2){
-		estado.evaluar(empresa1,empresa2);
+	public Condicion(int peso, EstadoCondicion estado){
+		this.peso=peso;
+		this.estado=estado;
+		
+		
+	}
+	
+	public EmpresaCumplimiento evaluar(Empresa empresa1,Empresa empresa2){
+		int cumplimiento=estado.evaluar(empresa1,empresa2);
+		
+		return new EmpresaCumplimiento(empresa1, cumplimiento, this.getPeso());
 	}
 	
 	
+	public int getPeso() {
+		return peso;
+	}
+
+	public void setPeso(int peso) {
+		this.peso = peso;
+	}
+
 	public List<Indicador> getIndicadores() {
 		return indicadores;
 	}

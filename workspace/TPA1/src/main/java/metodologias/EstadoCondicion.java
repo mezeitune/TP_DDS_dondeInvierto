@@ -4,7 +4,7 @@ import usuario.Empresa;
 
 public interface EstadoCondicion {
 
-	void evaluar(Empresa empresa1, Empresa empresa2);
+	int evaluar(Empresa empresa1, Empresa empresa2);
 
 	
 	
