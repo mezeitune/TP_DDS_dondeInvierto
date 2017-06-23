@@ -19,8 +19,8 @@ public class CondicionComparativa implements EstadoCondicion{
 	}	
 	
 	@Override
-	public int evaluar(Empresa empresa1, Empresa empresa2) {
-		// TODO Auto-generated method stub
+	public int evaluar(Empresa empresa1, Empresa empresa2, Condicion condicion) {
+		ParametroOperacion parametroOperacion=condicion.getParametroOperacionTaxativa();
 		
 		return 0;
 		
