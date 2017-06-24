@@ -1,23 +1,31 @@
 package metodologias;
 
+import usuario.Indicador;
+
 public class ParametroOperacion {
 
-	private String parametro;
+	private Indicador parametro;
 	private String operacion;
+	private int longevidadAEvaluar;
 	
 	
-	public ParametroOperacion(String parametro,String operacion){
+	public ParametroOperacion(Indicador parametro,String operacion, int longevidadAEvaluar){
 		this.parametro=parametro;
 		this.operacion=operacion;
+		this.longevidadAEvaluar=longevidadAEvaluar;
 	}
 	
-	public String getParametro() {
+	public Indicador getParametro() {
 		return parametro;
 	}
 
 	
 	public String getOperacion() {
 		return operacion;
+	}
+	
+	public int getLonngevidadAEvaluar() {
+		return longevidadAEvaluar;
 	}
 
 	

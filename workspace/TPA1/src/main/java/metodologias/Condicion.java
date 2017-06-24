@@ -8,7 +8,6 @@ import usuario.Indicador;
 
 public class Condicion {
 
-	private List<Indicador> indicadores = new LinkedList<>(); 
 	private EstadoCondicion estado;
 	private ParametroOperacion parametroOperacionTaxativa; 
 	private ParametroOperacion parametroOperacionComparativa; 
@@ -20,8 +19,6 @@ public class Condicion {
 		
 		
 	}
-	
-
 
 
 	public EmpresaCumplimiento evaluar(Empresa empresa1,Empresa empresa2){
@@ -44,13 +41,7 @@ public class Condicion {
 		this.peso = peso;
 	}
 
-	public List<Indicador> getIndicadores() {
-		return indicadores;
-	}
-	public void setIndicadores(List<Indicador> indicadores) {
-		this.indicadores = indicadores;
-	}
-	
+
 	public EstadoCondicion getEstado() {
 		return estado;
 	}
