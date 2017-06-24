@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.EmpresasAEvaluarRepository;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
@@ -370,7 +371,16 @@ public class ParserFormulaToIndicador {
 			return false;
 		}
 	}
-	
+	public static boolean validarEmpresaRepetidaAntesDePrecargar(Empresa unaEmpresa) throws IOException {
+		
+		List<Empresa> empresaRepetida = EmpresasAEvaluarRepository.empresasAEvaluar.stream().filter(line -> line.getNombre().equals(unaEmpresa.getNombre())).collect(Collectors.toList());
+		
+		if (empresaRepetida.size() >= 1){
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	
 	public static boolean validarAntesDePrecargar(String formula) throws IOException{ 

@@ -17,6 +17,7 @@ import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
+import org.uqbar.commons.model.ObservableUtils;
 
 import repository.EmpresasAEvaluarRepository;
 import ui.vm.DatosViewModel;
@@ -39,10 +40,12 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 		
 		new Label(Panel).setText("Lista de empresas a evaluar").setBackground(Color.ORANGE);
+		new Label(Panel).setText("Cuentas").setBackground(Color.ORANGE);
+		
 		Table<Cuenta> tableCuentas = new Table<Cuenta>(Panel, Cuenta.class);
+		
 		tableCuentas.bindItemsToProperty("empresasAEvaluar");
 		new Column<Cuenta>(tableCuentas).setTitle("Nombre").bindContentsToProperty("nombre");
-		
 		
 		new Button(Panel).setCaption("Agregar una Empresa")
 		.onClick(() -> {
@@ -66,13 +69,14 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 		new Button(Panel).setCaption("Vaciar la Lista")
 		.onClick(() -> {
-			
 			EmpresasAEvaluarRepository.vaciarListaDeEmpresasAEvaluar();
-		});
-		new Button(Panel).setCaption("Llenar la Lista con todas las empresas del archivo")
-		.onClick(() -> {
 			
+		});
+		new Button(Panel).setCaption("Completar la Lista con todas las empresas del archivo")
+		.onClick(() -> {
+		
 			EmpresasAEvaluarRepository.llenarListaDeEmpresasAEvaluar();
+			
 		});
 		new Label(Panel).setText("");
 		new Label(Panel).setText("");

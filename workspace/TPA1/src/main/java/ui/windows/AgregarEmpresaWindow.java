@@ -3,6 +3,9 @@ package ui.windows;
 import java.awt.Color;
 import java.io.IOException;
 
+import javax.management.RuntimeErrorException;
+
+import org.eclipse.ui.actions.LabelRetargetAction;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
@@ -14,6 +17,7 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import exceptions.ArchivoInexistenteException;
 import repository.EmpresasAEvaluarRepository;
+import scala.util.control.Exception;
 import ui.vm.AgregarEmpresaViewModel;
 import ui.vm.DatosViewModel;
 import usuario.Empresa;
@@ -32,28 +36,51 @@ public class AgregarEmpresaWindow extends Dialog<AgregarEmpresaViewModel>{
 		selectorEmpresa.bindItemsToProperty("empresas").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		selectorEmpresa.bindValueToProperty("empresa");
 		
-	}
+		
+}
 
 	protected void addActions(Panel actionsPanel){
 		
 		new Button(actionsPanel).setCaption("Agregar")
 		.onClick(() -> {
-						try{
-							this.getDelegate().close();
+						if(AgregarEmpresaViewModel.getCodigoError()==1){
 							
-								MetodologiasEmpresasWindow();
+								System.out.println("Empresa con periodo ya agregada a la lista, seleccione otra");
+						
+							}else{
+								try{
+									this.getDelegate().close();
 							
-						}catch (IOException e) {
-							e.printStackTrace();
+									MetodologiasEmpresasWindow();
+							
+								}catch (IOException e) {
+									e.printStackTrace();
+								}
 						}
 			});
-	}
+		new Button(actionsPanel).setCaption("Volver")
+		.onClick(() -> {
+								try{
+									this.getDelegate().close();
+							
+									MetodologiasEmpresasWindow();
+							
+								}catch (IOException e) {
+									e.printStackTrace();
+								}
+					
+				});
+}
+	
+
 	
 	public void MetodologiasEmpresasWindow() throws IOException {
 		Dialog<?> dialog = new MetodologiasEmpresasWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
+	
+
 }	
 	
 

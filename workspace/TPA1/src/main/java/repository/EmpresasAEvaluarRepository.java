@@ -11,14 +11,14 @@ import usuario.Empresa;
 import usuario.Indicador;
 
 public class EmpresasAEvaluarRepository {
-	private static List<Empresa> empresasAEvaluar = new LinkedList<>(); 
+	public static List<Empresa> empresasAEvaluar = new LinkedList<>(); 
 	
 	public static List<Empresa> getEmpresasAEvaluar() {
 		return empresasAEvaluar;
 	}
 
 	public static void agregarEmpresaAEvaluar(Empresa empresaAEvaluar) {
-		EmpresasAEvaluarRepository.empresasAEvaluar.add(empresaAEvaluar);
+			EmpresasAEvaluarRepository.empresasAEvaluar.add(empresaAEvaluar);
 	}
 	public static void vaciarListaDeEmpresasAEvaluar() {
 		EmpresasAEvaluarRepository.empresasAEvaluar.removeAll(empresasAEvaluar);
@@ -32,6 +32,7 @@ public class EmpresasAEvaluarRepository {
 	public static void llenarListaDeEmpresasAEvaluar() {
 		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
 		try {
+			EmpresasAEvaluarRepository.empresasAEvaluar.removeAll(empresasAEvaluar);
 			empresasAEvaluar=parser.csvFileToEmpresas();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

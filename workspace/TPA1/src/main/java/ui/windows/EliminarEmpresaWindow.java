@@ -46,6 +46,18 @@ public class EliminarEmpresaWindow extends Dialog<EliminarEmpresaViewModel>{
 							e.printStackTrace();
 						}
 			});
+		new Button(actionsPanel).setCaption("Volver")
+		.onClick(() -> {
+								try{
+									this.getDelegate().close();
+							
+									MetodologiasEmpresasWindow();
+							
+								}catch (IOException e) {
+									e.printStackTrace();
+								}
+					
+				});
 	}
 	
 	public void MetodologiasEmpresasWindow() throws IOException {

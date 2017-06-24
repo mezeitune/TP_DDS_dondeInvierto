@@ -25,7 +25,7 @@ public class MetodologiasEmpresasViewModel {
 	private List<Empresa> empresasRankeadas;
 	private List<Empresa> empresasQueNoConvieneInvertir;
 	private List<Empresa> empresasAEvaluar;
-	
+	private String periodo;	
 	
 	public void setMetodologias (){
 		Metodologia unaMetodologia = new Metodologia();
@@ -54,12 +54,11 @@ public class MetodologiasEmpresasViewModel {
 	
 	public void setEmpresasAEvaluar(){
 		this.empresasAEvaluar=EmpresasAEvaluarRepository.getEmpresasAEvaluar();
-		ObservableUtils.firePropertyChanged(this, "empresasAEvaluar");
+		
 	}
 	public List<Empresa> getEmpresasAEvaluar(){
 		return EmpresasAEvaluarRepository.getEmpresasAEvaluar();
 	}
-	
 	
 	public void setEmpresasRankeadas (){
 		
@@ -86,6 +85,10 @@ public class MetodologiasEmpresasViewModel {
 		this.empresa= empresas.get(0);
 		ParserFormulaToIndicador.setEmpresa(empresa);
 		
+	}
+	
+	public String getPeriodo(){
+		return periodo;
 	}
 	public void setSeleccionoTodasLasEmpresas(boolean seleccionoTodas){
 		this.seleccionoTodasLasEmpresas=seleccionoTodas;
