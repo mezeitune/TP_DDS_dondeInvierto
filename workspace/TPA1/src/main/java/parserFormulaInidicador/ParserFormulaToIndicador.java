@@ -12,15 +12,17 @@ import java.util.List;
 
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
+import repository.MetodologiasUsuarioRepository;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
-
+import usuario.Metodologia;
 public class ParserFormulaToIndicador {
 
 	private static List<Cuenta> cuentas = new LinkedList<>(); 
 	private static List<Empresa> empresas = new LinkedList<>(); 
 	private static List<Indicador> indicadores = new LinkedList<>();
+	
 	private static List<Cuenta> cuentasPorPeriodo;
 	private static Empresa empresa ;
 	private static String periodo;
@@ -42,6 +44,7 @@ public class ParserFormulaToIndicador {
 			cuentas.addAll(empresas.get(i).getCuentas());
 		}
 	}
+	
 	
 	/*Para testear*/
 	public static void init(List<Indicador> indicadoresTest, List<Cuenta> cuentasTest) throws IOException{

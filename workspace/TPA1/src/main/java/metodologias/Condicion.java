@@ -3,9 +3,11 @@ package metodologias;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
+
 import usuario.Empresa;
 import usuario.Indicador;
-
+@Observable
 public class Condicion {
 
 	private EstadoCondicion estado;

@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.uqbar.commons.utils.Observable;
+
 import metodologias.Condicion;
 import metodologias.EmpresaCumplimiento;
 import metodologias.EmpresaRank;
-
+@Observable
 public class Metodologia {
 
 	private List<Empresa> conjuntoDeEmpresasAEvaluar = new LinkedList<>();

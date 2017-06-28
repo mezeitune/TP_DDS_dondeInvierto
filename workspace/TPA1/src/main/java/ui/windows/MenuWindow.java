@@ -89,7 +89,16 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 													e.printStackTrace();
 												}
 								}).setWidth(200);
+		new Button(actionsPanel).setCaption("Cargar y consultar Metodologias")
+		.onClick(() -> {
 		
+								try {
+									CargarMetodologiaWindow();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+			});
 	}
 
 	public void CargarIndicadoresWindow() throws IOException {
@@ -109,6 +118,11 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 	}
 	public void MetodologiasEmpresasWindow() throws IOException {
 		Dialog<?> dialog = new MetodologiasEmpresasWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
+	public void CargarMetodologiaWindow() throws IOException {
+		Dialog<?> dialog = new CargarMetodologiaWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}

@@ -18,11 +18,13 @@ import exceptions.CSVInexistenteException;
 import parser.ParserJsonString;
 import usuario.Empresa;
 import usuario.Indicador;
+import usuario.Metodologia;
 
 public class ParserJsonAEmpresaAdapter {
 
 	private List <Empresa> empresasObtenidasDelArchivo = new ArrayList <Empresa> ();
 	private List <Indicador> indicadoresObtenidasDelArchivo = new ArrayList <Indicador> ();
+	private List <Metodologia> metodologiaObtenidasDelArchivo = new ArrayList <Metodologia> ();
 	private JSONParser parserJsonAObjetos = new JSONParser();
 	private Object objetoAOtrosObjetos;
 	private static String archivo;
@@ -48,7 +50,14 @@ public class ParserJsonAEmpresaAdapter {
 	
 	    return this.indicadoresObtenidasDelArchivo;
 	}
+public List<Metodologia> getMetodologiasDelArchivo() {
+		
+		Type listType = new TypeToken <List<Indicador>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
+		
+		this.metodologiaObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
 	
+	    return this.metodologiaObtenidasDelArchivo;
+	}
 	
 	
 	public Object definirObjetosDelArchivo() {
@@ -74,6 +83,11 @@ public class ParserJsonAEmpresaAdapter {
 	public String stringParaGson(){
 		JSONArray jsonArray=ParserJsonString.pasarDeObjetosAJSON(this.definirObjetosDelArchivo());
 		return ParserJsonString.pasarDeJSONArrayAString(jsonArray);
+	}
+
+	public void setMetodologias() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
