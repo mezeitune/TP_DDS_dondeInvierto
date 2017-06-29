@@ -20,7 +20,7 @@ import usuario.Empresa;
 import usuario.Indicador;
 import usuario.Metodologia;
 
-public class ParserJsonAEmpresaAdapter {
+public class ParserJsonAObjetosJava {
 
 	private List <Empresa> empresasObtenidasDelArchivo = new ArrayList <Empresa> ();
 	private List <Indicador> indicadoresObtenidasDelArchivo = new ArrayList <Indicador> ();
@@ -29,7 +29,7 @@ public class ParserJsonAEmpresaAdapter {
 	private Object objetoAOtrosObjetos;
 	private static String archivo;
 	
-	public ParserJsonAEmpresaAdapter(String archivo){
+	public ParserJsonAObjetosJava(String archivo){
 		this.archivo=archivo;
 	}
 	
@@ -50,7 +50,7 @@ public class ParserJsonAEmpresaAdapter {
 	
 	    return this.indicadoresObtenidasDelArchivo;
 	}
-public List<Metodologia> getMetodologiasDelArchivo() {
+		public List<Metodologia> getMetodologiasDelArchivo() {
 		
 		Type listType = new TypeToken <List<Indicador>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		

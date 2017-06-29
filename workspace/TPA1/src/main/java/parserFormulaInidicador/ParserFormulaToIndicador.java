@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import parser.parserArchivos.CSVToEmpresas;
-import parser.parserArchivos.ParserJsonAEmpresaAdapter;
+import parser.parserArchivos.ParserJsonAObjetosJava;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -30,7 +30,7 @@ public class ParserFormulaToIndicador {
 	
 	/*TODO: Tratar de pasarle los indicadores y las cuentas por constructor, asi limpiamos el metodo INIT que es solo para testear*/
 	public ParserFormulaToIndicador() throws IOException{
-		ParserJsonAEmpresaAdapter parserEmpIndicador = new ParserJsonAEmpresaAdapter("indicadores.json");
+		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("indicadores.json");
 		CSVToEmpresas parserCuentas = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
 		
 		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());

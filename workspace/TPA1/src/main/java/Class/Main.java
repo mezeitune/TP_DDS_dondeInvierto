@@ -7,8 +7,10 @@ import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.Observable;
 
 import exceptions.CSVInexistenteException;
+import parser.parserArchivos.CSVToEmpresas;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.MetodologiasUsuarioRepository;
 import ui.windows.MenuWindow;
 import usuario.Indicador;
 
@@ -17,7 +19,6 @@ public class Main extends Application{
 
 	
 	public static void main(String[] args){
-			
 			new Main().start();
 	}
 		@Override

@@ -1,6 +1,7 @@
 package ui.vm;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,16 +17,14 @@ import usuario.Metodologia;
 
 @Observable
 public class CargarMetodologiaViewModel {
-private static List<Metodologia> metodologias = MetodologiasUsuarioRepository.getMetodologiasDefinidosPorElUsuario();
-private static String nombre;
-private static Condicion condicion;
-public static List<Metodologia> getMetodologias() {
-	return metodologias;
-}
-public static void setMetodologias(List<Metodologia> metodologias) {
-	CargarMetodologiaViewModel.metodologias = metodologias;
-}
+	private static List<Metodologia> metodologias = MetodologiasUsuarioRepository.getMetodologiasDefinidosPorElUsuario();;
+	private static String nombreMetodologia;
+	private static Condicion condicion;
 	
+
+	public static List<Metodologia> getMetodologias() {
+		return CargarMetodologiaViewModel.metodologias;
+	}
 	
 	public static Condicion getCondicion() {
 		return condicion;
@@ -34,18 +33,18 @@ public static void setMetodologias(List<Metodologia> metodologias) {
 		CargarMetodologiaViewModel.condicion = condicion;
 	}
 	
-	public String getNombre() {
-		return nombre;
+	public String getNombreMetodologia() {
+		return nombreMetodologia;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreMetodologia(String nombre) {
+		this.nombreMetodologia = nombre;
 	}
 	
 	public static void generarMetodologia() throws IOException{
 		
 		Metodologia nuevaMetodologia = new Metodologia();
 		//nuevaMetodologia.setCondiciones(condiciones);
-		nuevaMetodologia.setNombre(nombre);
+		nuevaMetodologia.setNombre(nombreMetodologia);
 		
 		//String jsonElement = new Gson().toJson(nuevaMetodologia); 
 	

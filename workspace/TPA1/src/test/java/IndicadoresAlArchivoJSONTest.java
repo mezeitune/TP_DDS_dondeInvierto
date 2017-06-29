@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import parser.ParserJsonString;
-import parser.parserArchivos.ParserJsonAEmpresaAdapter;
+import parser.parserArchivos.ParserJsonAObjetosJava;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
@@ -19,7 +19,7 @@ public class IndicadoresAlArchivoJSONTest {
 	
 	@Before
  	public void init() throws IOException {
-		ParserJsonAEmpresaAdapter parserEmpIndicador = new ParserJsonAEmpresaAdapter("indicadores.json");
+		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("indicadores.json");
 		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
  	}
 	

@@ -12,7 +12,7 @@ import org.uqbar.commons.utils.Observable;
 import com.sun.jersey.api.client.Client;
 
 import parser.parserArchivos.CSVToEmpresas;
-import parser.parserArchivos.ParserJsonAEmpresaAdapter;
+import parser.parserArchivos.ParserJsonAObjetosJava;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import com.google.gson.Gson;

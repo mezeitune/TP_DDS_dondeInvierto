@@ -6,7 +6,7 @@ import org.mockito.Mockito;
 import Mocks.ListaLineasCsvFileMock;
 import parser.parserArchivos.CSVObject;
 import parser.parserArchivos.CSVToEmpresas;
-import parser.parserArchivos.ParserJsonAEmpresaAdapter;
+import parser.parserArchivos.ParserJsonAObjetosJava;
 import usuario.Cuenta;
 import usuario.Empresa;
 
@@ -45,7 +45,7 @@ public class ParserCSVEmpresaTest {
 	
 	@Test
 	public void ListaAsignadaCorrectamenteConParser(){
-		ParserJsonAEmpresaAdapter parserMock=Mockito.mock(ParserJsonAEmpresaAdapter.class);
+		ParserJsonAObjetosJava parserMock=Mockito.mock(ParserJsonAObjetosJava.class);
 		List<Empresa> someList = new ArrayList<Empresa>();
 
 	    Mockito.doReturn(someList).when(parserMock).getEmpresasDelArchivo();

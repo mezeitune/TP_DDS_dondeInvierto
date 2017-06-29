@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import parser.parserArchivos.CSVToEmpresas;
-import parser.parserArchivos.ParserJsonAEmpresaAdapter;
+import parser.parserArchivos.ParserJsonAObjetosJava;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;

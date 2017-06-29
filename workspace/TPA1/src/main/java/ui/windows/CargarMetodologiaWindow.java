@@ -38,7 +38,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 		new Label(form).setText("Escriba el nombre de la metodologia").setBackground(Color.orange);
 		
-	//	new TextBox(form).setWidth(300).bindValueToProperty("nombre");
+		new TextBox(form).setWidth(300).bindValueToProperty("nombreMetodologia");
 		
 		new Label(form).setText("Elija la condicion de la metodologia").setBackground(Color.orange);
 		

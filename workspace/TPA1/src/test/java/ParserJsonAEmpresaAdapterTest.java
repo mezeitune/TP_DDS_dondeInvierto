@@ -7,16 +7,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import exceptions.CSVInexistenteException;
-import parser.parserArchivos.ParserJsonAEmpresaAdapter;
+import parser.parserArchivos.ParserJsonAObjetosJava;
 import usuario.Empresa;
 
 public class ParserJsonAEmpresaAdapterTest {
 	
-	ParserJsonAEmpresaAdapter parserJsonAEmpresaAdapter;
+	ParserJsonAObjetosJava parserJsonAEmpresaAdapter;
 	
  	@Before
  	public void init() throws IOException {
- 		parserJsonAEmpresaAdapter = new ParserJsonAEmpresaAdapter("empresasTest.json");
+ 		parserJsonAEmpresaAdapter = new ParserJsonAObjetosJava("empresasTest.json");
  	}
 	
  	
