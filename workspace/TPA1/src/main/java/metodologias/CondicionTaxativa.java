@@ -18,17 +18,23 @@ public class CondicionTaxativa  implements EstadoCondicion {
 	public Comparador comparador;
 	public int valorRequerido;
 	
+	public CondicionTaxativa(Comparador comparador,int valorRequerido){
+		this.comparador=comparador;
+		this.valorRequerido = valorRequerido;
+	}
 
-
+	public CondicionTaxativa(){
+		
+	}
 
 	public static CondicionTaxativa getInstance( ) {
         if(instance == null){
             instance = new CondicionTaxativa();
         }
         return instance;
-
 	}	
 	
+	@Override
 		public List<Empresa> evaluar(List<Empresa> empresas,String periodo,Condicion condicion){
 			ParserFormulaToIndicador.setPeriodo(periodo);
 			Indicador indicador = condicion.getIndicador();

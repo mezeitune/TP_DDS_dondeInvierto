@@ -18,8 +18,6 @@ public class Condicion {
 	public Condicion(int peso, EstadoCondicion estado){
 		this.peso=peso;
 		this.estado=estado;
-		
-		
 	}
 	
 	public List<Empresa> evaluar(List<Empresa> listaAEvaluar,String periodo){

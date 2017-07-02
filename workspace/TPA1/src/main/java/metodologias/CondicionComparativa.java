@@ -17,7 +17,15 @@ public class CondicionComparativa implements EstadoCondicion{
 	public Comparador comparador;
 
 
-
+	public CondicionComparativa(Comparador comparador){
+		this.comparador = comparador;
+	}
+	
+	public CondicionComparativa(){
+		
+	}
+	
+	
 	public static CondicionComparativa getInstance( ) {
         if(instance == null){
             instance = new CondicionComparativa();
@@ -37,14 +45,15 @@ public class CondicionComparativa implements EstadoCondicion{
 	public List<Empresa> evaluar(List<Empresa> empresas,String periodo,Condicion condicion){
 		int i;
 		
-		
 		List<Empresa> empresasComparadas = new LinkedList<>();
 		List<Empresa> empresasPerdedoras = new LinkedList<>();
 		
 		for(i=0;i<empresas.size();i++){
-			Empresa empresaAComparar = empresas.remove(i);
+
+			Empresa empresaAComparar = empresas.get(i);
 			empresasPerdedoras = empresas.stream().filter(empresa2->this.comparar(empresaAComparar,empresa2,periodo,condicion.getIndicador())).collect(Collectors.toList());
-			empresaAComparar.actualizarPeso(empresasPerdedoras.size());
+
+			empresaAComparar.actualizarPeso(empresasPerdedoras.size()*condicion.getPeso()); // Cada victoria de la empresa, se le suma el peso de la condicion
 			empresasComparadas.add(empresaAComparar);
 		}
 		return empresasComparadas;
@@ -53,11 +62,12 @@ public class CondicionComparativa implements EstadoCondicion{
 	boolean comparar(Empresa empresa1,Empresa empresa2,String periodo,Indicador indicador){
 		int valor1;
 		int valor2;
-		
+		ParserFormulaToIndicador.setEmpresa(empresa1);
 		ParserFormulaToIndicador.setPeriodo(periodo);
-		ParserFormulaToIndicador.setEmpresa(empresa1);
 		valor1=indicador.calcular();
-		ParserFormulaToIndicador.setEmpresa(empresa1);
+		
+		ParserFormulaToIndicador.setEmpresa(empresa2);
+		ParserFormulaToIndicador.setPeriodo(periodo);
 		valor2=indicador.calcular();
 		
 		return this.comparador.comparar(valor1, valor2);

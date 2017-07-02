@@ -1,7 +1,7 @@
 package metodologias;
 
 import usuario.Empresa;
-
+/*
 public class CondicionTaxativaAdapter implements EstadoCondicion{
 
 	@Override
@@ -14,3 +14,4 @@ public class CondicionTaxativaAdapter implements EstadoCondicion{
 	}
 
 }
+*/

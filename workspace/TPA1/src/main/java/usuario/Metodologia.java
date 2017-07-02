@@ -68,9 +68,9 @@ public class Metodologia {
 		List<Empresa> listaActualizadaAEvaluar = new LinkedList<> (conjuntoDeEmpresasAEvaluar);
 		
 		for(i=0;i<condiciones.size();i++){
-			listaActualizada = condiciones.get(i).evaluar(listaActualizadaAEvaluar,periodo);
-			Collections.sort(listaActualizada,(empresa1,empresa2)->empresa1.getPeso() > empresa2.getPeso()? 1 : -1 );
-			listaActualizadaAEvaluar = listaActualizada;
+			listaActualizada = condiciones.get(i).evaluar(listaActualizadaAEvaluar,periodo); //La condicion suma puntos a las empresas o las saca
+			Collections.sort(listaActualizada,(empresa1,empresa2)->empresa1.getPeso() > empresa2.getPeso()? 1 : -1 ); //Ordeno la lista
+			listaActualizadaAEvaluar = listaActualizada; 
 		}
 		return listaActualizadaAEvaluar;
 	}

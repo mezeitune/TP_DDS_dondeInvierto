@@ -47,10 +47,14 @@ public class ParserFormulaToIndicador {
 	
 	
 	/*Para testear*/
-	public static void init(List<Indicador> indicadoresTest, List<Cuenta> cuentasTest) throws IOException{
+	public static void init(List<Indicador> indicadoresTest, List<Cuenta> cuentasTest){
 		indicadores = indicadoresTest;
 		cuentas = cuentasTest;
 		cuentasPorPeriodo = cuentasTest; 
+	}
+	
+	public static void init(List<Cuenta> cuentasTest){
+		cuentas = cuentasTest;
 	}
 	
 	public static void setEmpresa(Empresa unaEmpresa){
@@ -60,6 +64,7 @@ public class ParserFormulaToIndicador {
 	public static void setPeriodo(String unPeriodo){
 		periodo=unPeriodo;
 		cuentasPorPeriodo = empresa.getCuentasPorPeriodo(periodo);
+		cuentasPorPeriodo.stream().forEach(c1 -> System.out.println(c1.getNombre()));
 	}
 	
 	public static int getCalculoIndicador(String formula){
