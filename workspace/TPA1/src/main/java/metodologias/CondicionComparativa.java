@@ -1,16 +1,20 @@
 package metodologias;
 
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import Comparadores.Comparador;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 
 public class CondicionComparativa implements EstadoCondicion{
-
+	
 	
 	private static CondicionComparativa instance ;
-
+	public Comparador comparador;
 
 
 
@@ -22,6 +26,34 @@ public class CondicionComparativa implements EstadoCondicion{
 
 	}	
 	
+	public void setComparador(Comparador unComparador){
+		comparador = unComparador;
+	}
+	public Comparador getComparador(){
+		return this.comparador;
+	}
+	
+	@Override
+	public List<Empresa> evaluar(List<Empresa> empresas,Condicion condicion){
+		int i;
+		
+		
+		List<Empresa> empresasComparadas = new LinkedList<>();
+		List<Empresa> empresasPerdedoras = new LinkedList<>();
+		Empresa empresaAComparar;
+		
+		for(i=0;i<empresas.size();i++){
+			
+			empresaAComparar = empresas.remove(i);
+			empresasPerdedoras = empresas.stream().filter(empresa2 ->comparador.comparar(empresaAComparar,empresa2)).collect(Collectors.toList());
+			empresaAComparar.actualizarPeso(empresasPerdedoras.size());
+			empresasComparadas.add(empresaAComparar);
+			
+		}
+		return empresasComparadas;
+	}
+	
+	/*
 	@Override
 	public int evaluar(Empresa empresa1, Empresa empresa2, Condicion condicion) {
 		ParametroOperacion parametroOperacion=condicion.getParametroOperacionComparativa();
@@ -51,5 +83,6 @@ public class CondicionComparativa implements EstadoCondicion{
 		return ver;
 		
 	}
+	*/
 
 }

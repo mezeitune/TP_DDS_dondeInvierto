@@ -1,6 +1,5 @@
 package metodologias;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
@@ -21,13 +20,25 @@ public class Condicion {
 		
 		
 	}
+	
+	public List<Empresa> evaluar(List<Empresa> listaAEvaluar){
+		return estado.evaluar(listaAEvaluar,this);
+	}
+	
+	public Indicador getIndicador(){
+		return this.indicador;
+	}
+	public void setIndicador(Indicador indicador){
+		this.indicador=indicador;
+	}
 
-
+/*
 	public EmpresaCumplimiento evaluar(Empresa empresa1,Empresa empresa2){
 		int cumplimiento=estado.evaluar(empresa1,empresa2,this);
 		
 		return new EmpresaCumplimiento(empresa1, cumplimiento, this.getPeso());
 	}
+	*/
 	
 	public void setParametrosOperacion(ParametroOperacion parametroOperacionTaxativas, ParametroOperacion parametroOperacionComparativas){
 		//estan las dos juntas aca , por que puede ser que la defina como una combinada , entonces en el caso de que sea combinada tiene que evaluar las dos juntas

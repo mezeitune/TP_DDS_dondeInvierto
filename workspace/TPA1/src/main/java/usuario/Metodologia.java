@@ -1,5 +1,6 @@
 package usuario;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -61,8 +62,20 @@ public class Metodologia {
 	} 
 	
 	
+	public List<Empresa> evaluar(){ /*Evaluar podria devolver la lista final rankeada*/
+		int i;
+		List<Empresa> listaActualizada = new LinkedList<>();
+		List<Empresa> listaActualizadaAEvaluar = new LinkedList<> (conjuntoDeEmpresasAEvaluar);
+		
+		for(i=0;i<condiciones.size();i++){
+			listaActualizada = condiciones.get(i).evaluar(listaActualizadaAEvaluar);
+			Collections.sort(listaActualizada,(empresa1,empresa2)->empresa1.getPeso() > empresa2.getPeso()? 1 : -1 );
+			listaActualizadaAEvaluar = listaActualizada;
+		}
+		return listaActualizadaAEvaluar;
+	}
 	
-	public void evaluar(){
+	/*public void evaluar(){
 		//conjuntoDeEmpresasAEvaluar.stream().forEach(empresa -> evaluarUnaEmpresaATodasLasCondiciones(empresa));
 		//evaluo todas contra todas
 		List<EmpresaRank> empresasRank = new LinkedList<>();
@@ -91,7 +104,7 @@ public class Metodologia {
 			
 		}
 	}
-	
+	*/
 	public void evaluarUnaEmpresaATodasLasCondiciones(Empresa empresa1,Empresa empresa2){
 		
 		condiciones.stream().forEach(condicion ->conjuntoDeEmpresaConRankSinOrdenar.add(condicion.evaluar(empresa1,empresa2)) );

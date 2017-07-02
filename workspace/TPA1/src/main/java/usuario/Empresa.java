@@ -13,6 +13,7 @@ import org.uqbar.commons.utils.Observable;
 public class Empresa {
 
 	String nombre;
+	int peso=0;
 	private List<Cuenta> cuentas = new LinkedList<>(); 
 	
 	public  Empresa(String nombreEmpresa,List<Cuenta> cuentas){
@@ -48,6 +49,13 @@ public class Empresa {
 		Set <String> unSetPeriodos = new HashSet <String> (cuentas.stream().map(cuenta -> cuenta.getPeriodo()).collect(Collectors.toList()));
 		List <String> periodosSinRepetidos = new ArrayList <String> (unSetPeriodos);
 		return periodosSinRepetidos;
+	}
+	
+	public void actualizarPeso(int peso){
+		this.peso+=peso;
+	}
+	public int getPeso(){
+		return this.peso;
 	}
 
 }
