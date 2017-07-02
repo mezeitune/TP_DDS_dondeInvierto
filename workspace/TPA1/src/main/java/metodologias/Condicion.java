@@ -13,6 +13,7 @@ public class Condicion {
 	private ParametroOperacion parametroOperacionTaxativa; 
 	private ParametroOperacion parametroOperacionComparativa; 
 	private int peso;
+	private Indicador indicador;
 	
 	public Condicion(int peso, EstadoCondicion estado){
 		this.peso=peso;
@@ -21,8 +22,8 @@ public class Condicion {
 		
 	}
 	
-	public List<Empresa> evaluar(List<Empresa> listaAEvaluar){
-		return estado.evaluar(listaAEvaluar,this);
+	public List<Empresa> evaluar(List<Empresa> listaAEvaluar,String periodo){
+		return estado.evaluar(listaAEvaluar,periodo,this);
 	}
 	
 	public Indicador getIndicador(){

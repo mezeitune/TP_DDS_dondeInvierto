@@ -62,13 +62,13 @@ public class Metodologia {
 	} 
 	
 	
-	public List<Empresa> evaluar(){ /*Evaluar podria devolver la lista final rankeada*/
+	public List<Empresa> evaluar(String periodo){ /*Evaluar podria devolver la lista final rankeada*/
 		int i;
 		List<Empresa> listaActualizada = new LinkedList<>();
 		List<Empresa> listaActualizadaAEvaluar = new LinkedList<> (conjuntoDeEmpresasAEvaluar);
 		
 		for(i=0;i<condiciones.size();i++){
-			listaActualizada = condiciones.get(i).evaluar(listaActualizadaAEvaluar);
+			listaActualizada = condiciones.get(i).evaluar(listaActualizadaAEvaluar,periodo);
 			Collections.sort(listaActualizada,(empresa1,empresa2)->empresa1.getPeso() > empresa2.getPeso()? 1 : -1 );
 			listaActualizadaAEvaluar = listaActualizada;
 		}
@@ -105,11 +105,12 @@ public class Metodologia {
 		}
 	}
 	*/
+	/*
 	public void evaluarUnaEmpresaATodasLasCondiciones(Empresa empresa1,Empresa empresa2){
 		
 		condiciones.stream().forEach(condicion ->conjuntoDeEmpresaConRankSinOrdenar.add(condicion.evaluar(empresa1,empresa2)) );
 	}
 	
-	
+	*/
 	
 }

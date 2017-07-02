@@ -34,23 +34,33 @@ public class CondicionComparativa implements EstadoCondicion{
 	}
 	
 	@Override
-	public List<Empresa> evaluar(List<Empresa> empresas,Condicion condicion){
+	public List<Empresa> evaluar(List<Empresa> empresas,String periodo,Condicion condicion){
 		int i;
 		
 		
 		List<Empresa> empresasComparadas = new LinkedList<>();
 		List<Empresa> empresasPerdedoras = new LinkedList<>();
-		Empresa empresaAComparar;
 		
 		for(i=0;i<empresas.size();i++){
-			
-			empresaAComparar = empresas.remove(i);
-			empresasPerdedoras = empresas.stream().filter(empresa2 ->comparador.comparar(empresaAComparar,empresa2)).collect(Collectors.toList());
+			Empresa empresaAComparar = empresas.remove(i);
+			empresasPerdedoras = empresas.stream().filter(empresa2->this.comparar(empresaAComparar,empresa2,periodo,condicion.getIndicador())).collect(Collectors.toList());
 			empresaAComparar.actualizarPeso(empresasPerdedoras.size());
 			empresasComparadas.add(empresaAComparar);
-			
 		}
 		return empresasComparadas;
+	}
+	
+	boolean comparar(Empresa empresa1,Empresa empresa2,String periodo,Indicador indicador){
+		int valor1;
+		int valor2;
+		
+		ParserFormulaToIndicador.setPeriodo(periodo);
+		ParserFormulaToIndicador.setEmpresa(empresa1);
+		valor1=indicador.calcular();
+		ParserFormulaToIndicador.setEmpresa(empresa1);
+		valor2=indicador.calcular();
+		
+		return this.comparador.comparar(valor1, valor2);
 	}
 	
 	/*
