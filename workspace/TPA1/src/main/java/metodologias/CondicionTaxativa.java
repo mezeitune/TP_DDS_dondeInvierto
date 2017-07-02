@@ -1,17 +1,23 @@
 package metodologias;
 
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import Comparadores.Comparador;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 import usuario.PatrimonioNeto;
 
-public class CondicionTaxativa  {
+public class CondicionTaxativa  implements EstadoCondicion {
 	
 	
 	private static CondicionTaxativa instance ;
-
+	public Comparador comparador;
+	public int valorRequerido;
+	
 
 
 
@@ -23,6 +29,18 @@ public class CondicionTaxativa  {
 
 	}	
 	
+		public List<Empresa> evaluar(List<Empresa> empresas,String periodo,Condicion condicion){
+			ParserFormulaToIndicador.setPeriodo(periodo);
+			Indicador indicador = condicion.getIndicador();
+			return empresas.stream().filter(empresa1 -> this.verificarCriterio(empresa1,indicador)).collect(Collectors.toList());
+		}
+				
+		boolean verificarCriterio(Empresa empresa,Indicador indicador){
+			ParserFormulaToIndicador.setEmpresa(empresa);
+			return comparador.comparar(valorRequerido, indicador.calcular());
+		}
+	
+	/*
 	public int evaluar(Empresa empresa, Condicion condicion){
 		ParametroOperacion parametroOperacion=condicion.getParametroOperacionTaxativa();
 		int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -61,7 +79,7 @@ public class CondicionTaxativa  {
 		
 		
 	}
-
+*/
 	
 
 }
