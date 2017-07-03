@@ -14,6 +14,10 @@ public interface EstadoCondicion {
 	
 	void setComparador(Comparador comparadorTaxativo,Comparador comparadorCompetitivo);
 
+	void setPeso(int pesoRoe);
+
+
+
 	
 	
 	

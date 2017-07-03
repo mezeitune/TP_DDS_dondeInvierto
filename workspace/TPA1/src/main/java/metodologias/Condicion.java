@@ -12,16 +12,16 @@ public class Condicion {
 	private EstadoCondicion estado;
 	private int peso;
 	private Indicador indicador;
-	private int tiempo = 1;
 	
 	
 	private ParametroOperacion parametroOperacionTaxativa; 
 	private ParametroOperacion parametroOperacionComparativa; 
 	
 	
-	public Condicion( EstadoCondicion estado){
+	public Condicion(EstadoCondicion estado,Indicador indicador){
 		//this.peso=peso;
 		this.estado=estado;
+		this.indicador = indicador;
 	}
 	
 	
@@ -77,16 +77,5 @@ public class Condicion {
 	public ParametroOperacion getParametroOperacionComparativa() {
 		return parametroOperacionComparativa;
 	}
-
-
-	public int getTiempo() {
-		return tiempo;
-	}
-
-
-	public void setTiempo(int tiempo) {
-		this.tiempo = tiempo;
-	}
-
 	
 }

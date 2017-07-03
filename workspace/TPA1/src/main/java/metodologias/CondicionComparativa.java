@@ -37,10 +37,17 @@ public class CondicionComparativa implements EstadoCondicion{
 	}	
 	
 	public void setComparador(Comparador unComparador){
-		comparador = unComparador;
+		this.comparador = unComparador;
 	}
 	public Comparador getComparador(){
 		return this.comparador;
+	}
+	
+	public void setPeso(int peso){
+		this.peso = peso;
+	}
+	public int getPeso(){
+		return this.peso;
 	}
 	
 	@Override

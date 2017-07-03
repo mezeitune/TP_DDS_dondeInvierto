@@ -62,13 +62,13 @@ public class Metodologia {
 	} 
 	
 	
-	public List<Empresa> evaluar(String periodo){ /*Evaluar podria devolver la lista final rankeada*/
+	public List<Empresa> evaluar(List<String> periodos){ /*Evaluar podria devolver la lista final rankeada*/
 		int i;
 		List<Empresa> listaActualizada = new LinkedList<>();
 		List<Empresa> listaActualizadaAEvaluar = new LinkedList<> (conjuntoDeEmpresasAEvaluar);
 		
 		for(i=0;i<condiciones.size();i++){
-			listaActualizada = condiciones.get(i).evaluar(listaActualizadaAEvaluar,periodo); //La condicion suma puntos a las empresas o las saca
+			listaActualizada = condiciones.get(i).evaluar(listaActualizadaAEvaluar,periodos); //La condicion suma puntos a las empresas o las saca
 			Collections.sort(listaActualizada,(empresa1,empresa2)->empresa1.getPeso() > empresa2.getPeso()? 1 : -1 ); //Ordeno la lista
 			listaActualizadaAEvaluar = listaActualizada; 
 		}
