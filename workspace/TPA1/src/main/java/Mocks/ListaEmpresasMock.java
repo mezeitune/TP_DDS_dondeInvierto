@@ -26,7 +26,7 @@ public class ListaEmpresasMock {
 		
 		List<Cuenta> cuentasEmpresa2 = new ArrayList<>();
 		Cuenta cuenta5 = new Cuenta("Free CashFlow","2016",50);
-		Cuenta cuenta6 = new Cuenta("Revenue","2014",1000);
+		Cuenta cuenta6 = new Cuenta("Revenue","2010",1000);
 		Cuenta cuenta7 = new Cuenta("EBITDA","2016",400);
 		Cuenta cuenta8 = new Cuenta("Revenue","2016",1000);
 		cuentasEmpresa2.add(cuenta5);

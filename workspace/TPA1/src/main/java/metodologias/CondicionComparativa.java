@@ -15,10 +15,12 @@ public class CondicionComparativa implements EstadoCondicion{
 	
 	private static CondicionComparativa instance ;
 	public Comparador comparador;
+	public int peso;
 
 
-	public CondicionComparativa(Comparador comparador){
+	public CondicionComparativa(Comparador comparador,int peso){
 		this.comparador = comparador;
+		this.peso=peso;
 	}
 	
 	public CondicionComparativa(){
@@ -53,7 +55,7 @@ public class CondicionComparativa implements EstadoCondicion{
 			Empresa empresaAComparar = empresas.get(i);
 			empresasPerdedoras = empresas.stream().filter(empresa2->this.comparar(empresaAComparar,empresa2,periodo,condicion.getIndicador())).collect(Collectors.toList());
 
-			empresaAComparar.actualizarPeso(empresasPerdedoras.size()*condicion.getPeso()); // Cada victoria de la empresa, se le suma el peso de la condicion
+			empresaAComparar.actualizarPeso(empresasPerdedoras.size()*this.peso); // Cada victoria de la empresa, se le suma el peso de la condicion
 			empresasComparadas.add(empresaAComparar);
 		}
 		return empresasComparadas;

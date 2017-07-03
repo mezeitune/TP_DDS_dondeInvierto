@@ -36,13 +36,13 @@ public class CondicionTaxativa  implements EstadoCondicion {
 	
 	@Override
 		public List<Empresa> evaluar(List<Empresa> empresas,String periodo,Condicion condicion){
-			ParserFormulaToIndicador.setPeriodo(periodo);
 			Indicador indicador = condicion.getIndicador();
-			return empresas.stream().filter(empresa1 -> this.verificarCriterio(empresa1,indicador)).collect(Collectors.toList());
+			return empresas.stream().filter(empresa1 -> this.verificarCriterio(empresa1,periodo,indicador)).collect(Collectors.toList());
 		}
 				
-		boolean verificarCriterio(Empresa empresa,Indicador indicador){
+		boolean verificarCriterio(Empresa empresa,String periodo,Indicador indicador){
 			ParserFormulaToIndicador.setEmpresa(empresa);
+			ParserFormulaToIndicador.setPeriodo(periodo);
 			return comparador.comparar(valorRequerido, indicador.calcular());
 		}
 	

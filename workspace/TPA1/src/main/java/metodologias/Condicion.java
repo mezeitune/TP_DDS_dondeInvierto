@@ -15,8 +15,8 @@ public class Condicion {
 	private int peso;
 	private Indicador indicador;
 	
-	public Condicion(int peso, EstadoCondicion estado){
-		this.peso=peso;
+	public Condicion( EstadoCondicion estado){
+		//this.peso=peso;
 		this.estado=estado;
 	}
 	

@@ -61,6 +61,10 @@ public class ParserFormulaToIndicador {
 		empresa= unaEmpresa;
 	}
 	
+	public static Empresa getEmpresa(){
+		return ParserFormulaToIndicador.empresa;
+	}
+	
 	public static void setPeriodo(String unPeriodo){
 		periodo=unPeriodo;
 		cuentasPorPeriodo = empresa.getCuentasPorPeriodo(periodo);

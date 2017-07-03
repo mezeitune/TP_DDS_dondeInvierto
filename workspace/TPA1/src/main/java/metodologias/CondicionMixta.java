@@ -22,8 +22,8 @@ public class CondicionMixta implements EstadoCondicion{
 	public CondicionTaxativa taxativa;
 
 
-	public CondicionMixta(Comparador comparadorTaxativa,Comparador comparadorCompetitivo,int valorRequerido){
-		comparativa = new CondicionComparativa(comparadorCompetitivo);
+	public CondicionMixta(Comparador comparadorTaxativa,Comparador comparadorCompetitivo,int valorRequerido,int pesoComparativa){
+		comparativa = new CondicionComparativa(comparadorCompetitivo,pesoComparativa);
 		taxativa = new CondicionTaxativa(comparadorTaxativa,valorRequerido);
 	}
 	

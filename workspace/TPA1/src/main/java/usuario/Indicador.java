@@ -20,6 +20,10 @@ public class  Indicador extends Operacion implements Comparable<Indicador> {
 
 	}
 	
+	public Indicador(){
+		
+	}
+	
 	public String getFormula() {
 		return formula;
 	}
