@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,13 +23,13 @@ public class CondicionesTest {
 
 	public List<Empresa> empresas;
 	public List<Cuenta> cuentas;
-	public String periodo;
+	public List<String> periodos = new LinkedList<String>();
 	
 	@Before
 	public void init(){
 		empresas = new ListaEmpresasMock().mockearListaEmpresas();
 		cuentas = new ListaEmpresasMock().mockearListaCuentas();
-		periodo = "2016";
+		periodos.add("2016");
 		ParserFormulaToIndicador.init(cuentas);
 	}
 	
@@ -41,7 +42,7 @@ public class CondicionesTest {
 		Condicion condicion = new Condicion(estadoComparativo);
 		condicion.setIndicador(indicador);
 		
-		List<Empresa> listaEsperada = condicion.evaluar(empresas, periodo);
+		List<Empresa> listaEsperada = condicion.evaluar(empresas, periodos);
 		Empresa empresa1 = listaEsperada.get(0);
 		Empresa empresa2= listaEsperada.get(1);
 		
@@ -59,10 +60,12 @@ public class CondicionesTest {
 		Condicion longevidad = new Condicion(estadoTaxativo);
 		longevidad.setIndicador(edad);
 		
-		List<Empresa> listaEsperada = longevidad.evaluar(empresas, periodo);
+		List<Empresa> listaEsperada = longevidad.evaluar(empresas, periodos);
 
 		assertEquals("Apple",listaEsperada.get(0).getNombre()); //La unica con antiguedad mayor a 3 anos
 		
 	}
+	
+	
 	
 }

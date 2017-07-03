@@ -34,16 +34,35 @@ public class CondicionTaxativa  implements EstadoCondicion {
         return instance;
 	}	
 	
+	
+	public void setComparador(Comparador comparador){
+		this.comparador = comparador;
+	}
+	
 	@Override
-		public List<Empresa> evaluar(List<Empresa> empresas,String periodo,Condicion condicion){
+		public List<Empresa> evaluar(List<Empresa> empresas,List<String> periodos,Condicion condicion){
 			Indicador indicador = condicion.getIndicador();
-			return empresas.stream().filter(empresa1 -> this.verificarCriterio(empresa1,periodo,indicador)).collect(Collectors.toList());
+			return empresas.stream().filter(empresa1 -> this.verificarCriterio(empresa1,periodos,indicador)).collect(Collectors.toList());
 		}
 				
-		boolean verificarCriterio(Empresa empresa,String periodo,Indicador indicador){
+		boolean verificarCriterio(Empresa empresa,List<String> periodos,Indicador indicador){
+			
+			return periodos.stream().allMatch(periodo -> this.verificarCriterioEnPeriodo(empresa,periodo,indicador));
+			
+		}
+		
+	
+		boolean verificarCriterioEnPeriodo(Empresa empresa,String periodo,Indicador indicador){ //Muy parecido a compararEnPeriodo
+			
 			ParserFormulaToIndicador.setEmpresa(empresa);
 			ParserFormulaToIndicador.setPeriodo(periodo);
 			return comparador.comparar(valorRequerido, indicador.calcular());
+		}
+
+		@Override
+		public void setComparador(Comparador comparadorTaxativo, Comparador comparadorCompetitivo) {
+			// TODO Auto-generated method stub
+			
 		}
 	
 	/*

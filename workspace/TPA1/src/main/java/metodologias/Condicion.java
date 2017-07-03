@@ -10,18 +10,23 @@ import usuario.Indicador;
 public class Condicion {
 
 	private EstadoCondicion estado;
-	private ParametroOperacion parametroOperacionTaxativa; 
-	private ParametroOperacion parametroOperacionComparativa; 
 	private int peso;
 	private Indicador indicador;
+	private int tiempo = 1;
+	
+	
+	private ParametroOperacion parametroOperacionTaxativa; 
+	private ParametroOperacion parametroOperacionComparativa; 
+	
 	
 	public Condicion( EstadoCondicion estado){
 		//this.peso=peso;
 		this.estado=estado;
 	}
 	
-	public List<Empresa> evaluar(List<Empresa> listaAEvaluar,String periodo){
-		return estado.evaluar(listaAEvaluar,periodo,this);
+	
+	public List<Empresa> evaluar(List<Empresa> listaAEvaluar,List<String> periodos){
+		return estado.evaluar(listaAEvaluar,periodos,this);
 	}
 	
 	public Indicador getIndicador(){
@@ -71,6 +76,16 @@ public class Condicion {
 
 	public ParametroOperacion getParametroOperacionComparativa() {
 		return parametroOperacionComparativa;
+	}
+
+
+	public int getTiempo() {
+		return tiempo;
+	}
+
+
+	public void setTiempo(int tiempo) {
+		this.tiempo = tiempo;
 	}
 
 	

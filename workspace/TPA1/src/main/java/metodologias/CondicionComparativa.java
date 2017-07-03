@@ -44,7 +44,7 @@ public class CondicionComparativa implements EstadoCondicion{
 	}
 	
 	@Override
-	public List<Empresa> evaluar(List<Empresa> empresas,String periodo,Condicion condicion){
+	public List<Empresa> evaluar(List<Empresa> empresas,List <String> periodos,Condicion condicion){
 		int i;
 		
 		List<Empresa> empresasComparadas = new LinkedList<>();
@@ -53,7 +53,7 @@ public class CondicionComparativa implements EstadoCondicion{
 		for(i=0;i<empresas.size();i++){
 
 			Empresa empresaAComparar = empresas.get(i);
-			empresasPerdedoras = empresas.stream().filter(empresa2->this.comparar(empresaAComparar,empresa2,periodo,condicion.getIndicador())).collect(Collectors.toList());
+			empresasPerdedoras = empresas.stream().filter(empresa2->this.comparar(empresaAComparar,empresa2,periodos,condicion.getIndicador())).collect(Collectors.toList());
 
 			empresaAComparar.actualizarPeso(empresasPerdedoras.size()*this.peso); // Cada victoria de la empresa, se le suma el peso de la condicion
 			empresasComparadas.add(empresaAComparar);
@@ -61,18 +61,28 @@ public class CondicionComparativa implements EstadoCondicion{
 		return empresasComparadas;
 	}
 	
-	boolean comparar(Empresa empresa1,Empresa empresa2,String periodo,Indicador indicador){
-		int valor1;
-		int valor2;
+	boolean comparar(Empresa empresa1,Empresa empresa2,List<String> periodos,Indicador indicador){
+		return periodos.stream().allMatch(periodo -> this.compararEnPeriodo(empresa1,empresa2,periodo,indicador));
+	}
+	
+	boolean compararEnPeriodo(Empresa empresa1,Empresa empresa2,String periodo,Indicador indicador){
 		ParserFormulaToIndicador.setEmpresa(empresa1);
 		ParserFormulaToIndicador.setPeriodo(periodo);
-		valor1=indicador.calcular();
+		int valor1=indicador.calcular();
 		
 		ParserFormulaToIndicador.setEmpresa(empresa2);
 		ParserFormulaToIndicador.setPeriodo(periodo);
-		valor2=indicador.calcular();
+		int valor2=indicador.calcular();
 		
 		return this.comparador.comparar(valor1, valor2);
+	}
+	
+	
+
+	@Override
+	public void setComparador(Comparador comparadorTaxativo, Comparador comparadorCompetitivo) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/*
