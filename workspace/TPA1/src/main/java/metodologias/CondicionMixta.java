@@ -42,7 +42,7 @@ public class CondicionMixta implements EstadoCondicion{
 	
 	
 	@Override
-	public List<Empresa> evaluar(List<Empresa> empresas,String[] periodos,Condicion condicion){
+	public List<Empresa> evaluar(List<Empresa> empresas,List<String> periodos,Condicion condicion){
 		List<Empresa> empresasComparables = new LinkedList<>();
 		empresasComparables = taxativa.evaluar(empresas, periodos, condicion);
 		return comparativa.evaluar(empresasComparables, periodos, condicion);
@@ -58,6 +58,12 @@ public class CondicionMixta implements EstadoCondicion{
 
 	@Override
 	public void setComparador(Comparador comparador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPeso(int pesoRoe) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -64,6 +64,12 @@ public class CondicionTaxativa  implements EstadoCondicion {
 			// TODO Auto-generated method stub
 			
 		}
+
+		@Override
+		public void setPeso(int pesoRoe) {
+			// TODO Auto-generated method stub
+			
+		}
 	
 	/*
 	public int evaluar(Empresa empresa, Condicion condicion){
