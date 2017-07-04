@@ -1,7 +1,9 @@
 package metodologias;
 
-import usuario.Empresa;
+import org.uqbar.commons.utils.Observable;
 
+import usuario.Empresa;
+@Observable
 public class EmpresaRank {
 
 	private Empresa empresa;

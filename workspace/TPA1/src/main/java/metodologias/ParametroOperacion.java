@@ -1,7 +1,9 @@
 package metodologias;
 
-import usuario.Indicador;
+import org.uqbar.commons.utils.Observable;
 
+import usuario.Indicador;
+@Observable
 public class ParametroOperacion {
 
 	private Indicador parametro;

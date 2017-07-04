@@ -2,9 +2,11 @@ package metodologias;
 
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
+
 import Comparadores.Comparador;
 import usuario.Empresa;
-
+@Observable
 public interface EstadoCondicion {
 
 	//int evaluar(Empresa empresa1, Empresa empresa2,Condicion condicion);

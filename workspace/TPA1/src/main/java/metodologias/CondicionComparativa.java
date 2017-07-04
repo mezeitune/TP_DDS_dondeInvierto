@@ -5,11 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.uqbar.commons.utils.Observable;
+
 import Comparadores.Comparador;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
-
+@Observable
 public class CondicionComparativa implements EstadoCondicion{
 	
 	

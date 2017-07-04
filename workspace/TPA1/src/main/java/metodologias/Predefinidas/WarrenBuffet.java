@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.uqbar.arena.widgets.Link;
+import org.uqbar.commons.utils.Observable;
 
 import Comparadores.Comparador;
 import Comparadores.ComparadorMayor;
@@ -13,7 +14,7 @@ import metodologias.CondicionComparativa;
 import metodologias.EstadoCondicion;
 import usuario.Indicador;
 import usuario.Metodologia;
-
+@Observable
 public class WarrenBuffet extends Metodologia{
 
 	List<Condicion> condiciones = this.inicializarCondiciones();

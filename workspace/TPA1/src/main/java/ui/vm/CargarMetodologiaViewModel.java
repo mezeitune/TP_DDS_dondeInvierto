@@ -17,11 +17,19 @@ import usuario.Metodologia;
 
 @Observable
 public class CargarMetodologiaViewModel {
-	private static List<Metodologia> metodologias = MetodologiasUsuarioRepository.getMetodologiasDefinidosPorElUsuario();;
-	private static String nombreMetodologia;
+	private static List<Metodologia> metodologias;
+	private static String nombreMetodologia ;
+	private static List<Condicion> condiciones;
 	private static Condicion condicion;
 	
-
+	
+	public static List<Condicion> getCondiciones() {
+		return condiciones;
+	}
+	
+	
+	
+	
 	public static List<Metodologia> getMetodologias() {
 		return CargarMetodologiaViewModel.metodologias;
 	}
