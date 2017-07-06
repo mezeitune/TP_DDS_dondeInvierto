@@ -11,7 +11,9 @@ import usuario.Empresa;
 import usuario.Indicador;
 
 public class EmpresasAEvaluarRepository {
+	
 	public static List<Empresa> empresasAEvaluar = new LinkedList<>(); 
+	public static List<String> periodosAEvaluar = new LinkedList<>(); 
 	
 	public static List<Empresa> getEmpresasAEvaluar() {
 		return empresasAEvaluar;
@@ -26,6 +28,22 @@ public class EmpresasAEvaluarRepository {
 
 	public static void eliminarEmpresaAEvaluar(Empresa unaEmpresa) {
 		EmpresasAEvaluarRepository.empresasAEvaluar.remove(unaEmpresa);
+		
+	}
+	
+	public static List<String> getPeriodosAEvaluar() {
+		return periodosAEvaluar;
+	}
+
+	public static void agregarPeriodoAEvaluar(String periodoAEvaluar) {
+			EmpresasAEvaluarRepository.periodosAEvaluar.add(periodoAEvaluar);
+	}
+	public static void vaciarListaDePeriodosAEvaluar() {
+		EmpresasAEvaluarRepository.periodosAEvaluar.removeAll(periodosAEvaluar);
+	}
+
+	public static void eliminarEmpresaAEvaluar(String unPeriodo) {
+		EmpresasAEvaluarRepository.periodosAEvaluar.remove(unPeriodo);
 		
 	}
 

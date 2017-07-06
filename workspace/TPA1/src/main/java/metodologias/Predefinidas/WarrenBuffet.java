@@ -14,10 +14,36 @@ import metodologias.CondicionComparativa;
 import metodologias.EstadoCondicion;
 import usuario.Indicador;
 import usuario.Metodologia;
+import usuario.PatrimonioNeto;
 @Observable
 public class WarrenBuffet extends Metodologia{
 
+	
+	private static WarrenBuffet instance ;
 	List<Condicion> condiciones = this.inicializarCondiciones();
+
+
+
+	public static WarrenBuffet getInstance( ) {
+        if(instance == null){
+            instance = new WarrenBuffet();
+        }
+        return instance;
+
+	}	
+	
+	public WarrenBuffet() {
+		super();
+		inicializarCondiciones();
+	}
+	
+
+	@Override
+	public String getNombre(){
+		return "Buffet";
+	}
+	
+	
 	
 	
 	public List<Condicion> inicializarCondiciones(){

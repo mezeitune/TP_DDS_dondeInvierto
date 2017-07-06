@@ -5,6 +5,7 @@ import java.util.List;
 
 import metodologias.Condicion;
 import metodologias.EstadoCondicion;
+import metodologias.Predefinidas.WarrenBuffet;
 import parser.parserArchivos.ParserJsonAObjetosJava;
 import usuario.Empresa;
 import usuario.Indicador;
@@ -12,7 +13,7 @@ import usuario.Metodologia;
 import usuario.PatrimonioNeto;
 
 public class MetodologiasUsuarioRepository {
-	private static List<Metodologia> metodologiasDefinidasPorElUsuario = new LinkedList<>(); 
+	private static List<Metodologia> metodologiasDefinidasPorElUsuario = new LinkedList<>();
 
 	
 	public static List<Metodologia> getMetodologiasDefinidosPorElUsuario() {
@@ -24,9 +25,14 @@ public class MetodologiasUsuarioRepository {
 	}
 
 	
-	public static void addMetodologiasDefinidasPorElUsuario(Metodologia metodologiasDefinidasPorElUsuario) {
-		MetodologiasUsuarioRepository.metodologiasDefinidasPorElUsuario.add(metodologiasDefinidasPorElUsuario);
+	public static void addMetodologiasDefinidasPorElUsuario(Metodologia unaMetodologiasDefinidasPorElUsuario) {
+		MetodologiasUsuarioRepository.metodologiasDefinidasPorElUsuario.add(unaMetodologiasDefinidasPorElUsuario);
 	}
 	
+	
+	public static void  cargarMetodologiasPredefinidos(){
+	    WarrenBuffet wb = WarrenBuffet.getInstance();
+	    MetodologiasUsuarioRepository.addMetodologiasDefinidasPorElUsuario(wb);
+	}
 	
 }

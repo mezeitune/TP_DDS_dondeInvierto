@@ -11,6 +11,7 @@ import parser.parserArchivos.CSVToEmpresas;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
+import repository.MetodologiasUsuarioRepository;
 import usuario.Empresa;
 import usuario.Indicador;
 import usuario.Metodologia;
@@ -25,14 +26,12 @@ public class MetodologiasEmpresasViewModel {
 	private List<Empresa> empresasRankeadas;
 	private List<Empresa> empresasQueNoConvieneInvertir;
 	private List<Empresa> empresasAEvaluar;
-	private String periodo;	
+	private List<String> periodos;	
 	
-	public void setMetodologias (){
-		Metodologia unaMetodologia = new Metodologia();
-		unaMetodologia.setNombre("bone");
-		unaMetodologia.setCondiciones(null);
-		this.metodologias.add(unaMetodologia);
+	public void setMetodologias(){
+		metodologias= MetodologiasUsuarioRepository.getMetodologiasDefinidosPorElUsuario();
 	}
+
 	public List<Metodologia> getMetodologias(){
 		return this.metodologias;
 	}
@@ -43,6 +42,9 @@ public class MetodologiasEmpresasViewModel {
 		}
 		
 		this.metodologia= metodologiaSeleccionada;
+		
+		this.empresasRankeadas=this.metodologia.evaluar(this.getPeriodos());
+		ObservableUtils.firePropertyChanged(this, "empresasRankeadas");
 		//this.setPeriodo(null);
 	
 	}
@@ -58,6 +60,14 @@ public class MetodologiasEmpresasViewModel {
 	}
 	public List<Empresa> getEmpresasAEvaluar(){
 		return EmpresasAEvaluarRepository.getEmpresasAEvaluar();
+	}
+	
+	public void setPeriodos(){
+		this.periodos=EmpresasAEvaluarRepository.getPeriodosAEvaluar();
+		
+	}
+	public List<String> getPeriodos(){
+		return EmpresasAEvaluarRepository.getPeriodosAEvaluar();
 	}
 	
 	public void setEmpresasRankeadas (){
@@ -77,7 +87,9 @@ public class MetodologiasEmpresasViewModel {
 
 	public MetodologiasEmpresasViewModel() {
 		try {
+			
 			this.setEmpresas();
+			this.setMetodologias();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -87,9 +99,8 @@ public class MetodologiasEmpresasViewModel {
 		
 	}
 	
-	public String getPeriodo(){
-		return periodo;
-	}
+
+	
 	public void setSeleccionoTodasLasEmpresas(boolean seleccionoTodas){
 		this.seleccionoTodasLasEmpresas=seleccionoTodas;
 	}

@@ -25,6 +25,7 @@ import ui.vm.MetodologiasEmpresasViewModel;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
+import usuario.Metodologia;
 
 public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewModel>{
 	public MetodologiasEmpresasWindow(WindowOwner parent) throws IOException {
@@ -47,11 +48,22 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		tableCuentas.bindItemsToProperty("empresasAEvaluar");
 		new Column<Cuenta>(tableCuentas).setTitle("Nombre").bindContentsToProperty("nombre");
 		
+
 		new Button(Panel).setCaption("Agregar una Empresa")
 		.onClick(() -> {
 			try{
 				this.getDelegate().close();
 				AgregarEmpresaWindow();
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		new Button(Panel).setCaption("Agregar periodo")
+		.onClick(() -> {
+			try{
+				this.getDelegate().close();
+				AgregarPeriodoWindow();
 			}catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -99,9 +111,9 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		Panel2.setLayout(new VerticalLayout());
 		
 		new Label(Panel2).setText("Seleccione la metodologia").setBackground(Color.ORANGE);
-		Selector<Empresa> selectorMetodologia = new Selector<Empresa>(Panel2).allowNull(true);
+		Selector<Metodologia> selectorMetodologia = new Selector<Metodologia>(Panel2).allowNull(true);
 		selectorMetodologia.setWidth(100);
-		selectorMetodologia.bindItemsToProperty("metodologias").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
+		selectorMetodologia.bindItemsToProperty("metodologias").setAdapter(new PropertyAdapter(Metodologia.class, "nombre"));
 		selectorMetodologia.bindValueToProperty("metodologia");
 		
 		new Label(Panel2).setText("RANKING EMPRESAS").setBackground(Color.GREEN);
@@ -133,6 +145,11 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 	}
 	public void AgregarEmpresaWindow() throws IOException {
 		Dialog<?> dialog = new AgregarEmpresaWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
+	public void AgregarPeriodoWindow() throws IOException {
+		Dialog<?> dialog = new AgregarPeriodoWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}

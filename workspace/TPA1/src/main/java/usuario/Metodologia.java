@@ -21,6 +21,10 @@ public class Metodologia {
 	private List<Condicion> condiciones = new LinkedList<>();
 	private String nombre;
 	
+	public Metodologia(){
+		
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
