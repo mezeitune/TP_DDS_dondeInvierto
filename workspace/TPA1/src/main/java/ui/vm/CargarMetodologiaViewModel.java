@@ -9,7 +9,7 @@ import org.uqbar.commons.utils.Observable;
 
 import com.google.gson.Gson;
 
-import metodologias.Condicion;
+import Condiciones.Condicion;
 import parser.ParserJsonString;
 import repository.MetodologiasUsuarioRepository;
 import usuario.Metodologia;

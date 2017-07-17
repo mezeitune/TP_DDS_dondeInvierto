@@ -12,7 +12,7 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import metodologias.Condicion;
+import Condiciones.Condicion;
 import ui.vm.CargarCondicionViewModel;
 import ui.vm.CargarMetodologiaViewModel;
 

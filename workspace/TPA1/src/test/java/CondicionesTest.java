@@ -9,10 +9,10 @@ import org.junit.Test;
 import Comparadores.Comparador;
 import Comparadores.ComparadorMayor;
 import Comparadores.ComparadorMenor;
+import Condiciones.Comparativa;
+import Condiciones.Condicion;
+import Condiciones.Taxativa;
 import Mocks.ListaEmpresasMock;
-import metodologias.Condicion;
-import metodologias.CondicionComparativa;
-import metodologias.CondicionTaxativa;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Cuenta;
 import usuario.Antiguedad;
@@ -38,7 +38,7 @@ public class CondicionesTest {
 		int peso=10;
 		Indicador indicador = new Indicador("Indicador1","EBITDA/15");
 		Comparador mayor = new ComparadorMayor();
-		CondicionComparativa estadoComparativo = new CondicionComparativa(mayor,peso);
+		Comparativa estadoComparativo = new Comparativa(mayor,peso);
 		Condicion condicion = new Condicion(estadoComparativo,indicador);
 		
 		List<Empresa> listaEsperada = condicion.evaluar(empresas, periodos);
@@ -54,7 +54,7 @@ public class CondicionesTest {
 	public void laCondicionTaxativaDiscriminaBien(){ //Simulamos la longevidad taxativa
 		int anosRequeridos = 3;
 		Comparador menor = new ComparadorMenor(); 
-		CondicionTaxativa estadoTaxativo = new CondicionTaxativa(menor,anosRequeridos);
+		Taxativa estadoTaxativo = new Taxativa(menor,anosRequeridos);
 		Condicion longevidad = new Condicion(estadoTaxativo,new Antiguedad());
 		
 		List<Empresa> listaEsperada = longevidad.evaluar(empresas, periodos);
@@ -62,6 +62,8 @@ public class CondicionesTest {
 		assertEquals("Apple",listaEsperada.get(0).getNombre()); //La unica con antiguedad mayor a 3 anos
 		
 	}
+	
+	
 	
 	
 	

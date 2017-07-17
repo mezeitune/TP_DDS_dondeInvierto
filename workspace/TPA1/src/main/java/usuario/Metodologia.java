@@ -4,21 +4,21 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.mockito.internal.util.collections.Sets;
 import org.uqbar.commons.utils.Observable;
 
-import metodologias.Condicion;
-import metodologias.EmpresaCumplimiento;
-import metodologias.EmpresaRank;
+import Condiciones.Condicion;
+import Condiciones.Criterio;
 @Observable
 public class Metodologia {
 
 	private List<Empresa> conjuntoDeEmpresasAEvaluar = new LinkedList<>();
-	private List<EmpresaCumplimiento> conjuntoDeEmpresaConRankSinOrdenar = new LinkedList<>();
-	private List<EmpresaRank> conjuntoDeEmpresasEvaluadas = new LinkedList<>();
 	private List<Condicion> condiciones = new LinkedList<>();
+	private Criterio criterio = new Criterio();
 	private String nombre;
 	
 	public Metodologia(){
@@ -27,14 +27,6 @@ public class Metodologia {
 	
 	public String getNombre() {
 		return nombre;
-	}
-
-	public List<EmpresaCumplimiento> getConjuntoDeEmpresaConRankSinOrdenar() {
-		return conjuntoDeEmpresaConRankSinOrdenar;
-	}
-
-	public void setConjuntoDeEmpresaConRankSinOrdenar(List<EmpresaCumplimiento> conjuntoDeEmpresaConRankSinOrdenar) {
-		this.conjuntoDeEmpresaConRankSinOrdenar = conjuntoDeEmpresaConRankSinOrdenar;
 	}
 
 	public void setNombre(String nombre) {
@@ -57,64 +49,49 @@ public class Metodologia {
 		this.conjuntoDeEmpresasAEvaluar = conjuntoDeEmpresasAEvaluar;
 	}
 
-	public List<EmpresaRank> getConjuntoDeEmpresasEvaluadas() {
-		return conjuntoDeEmpresasEvaluadas;
-	}
-
-	public void setConjuntoDeEmpresasEvaluadas(List<EmpresaRank> conjuntoDeEmpresasEvaluadas) {
-		this.conjuntoDeEmpresasEvaluadas = conjuntoDeEmpresasEvaluadas;
-	} 
 	
+	public List<List<Empresa>> evaluar(List<String> periodos){ /*Evaluar podria devolver la lista final rankeada*/
 	
-	public List<Empresa> evaluar(List<String> periodos){ /*Evaluar podria devolver la lista final rankeada*/
-		int i;
-		List<Empresa> listaActualizada = new LinkedList<>();
-		List<Empresa> listaActualizadaAEvaluar = new LinkedList<> (conjuntoDeEmpresasAEvaluar);
+		/*
+		 * List<List> listaEmpresasEvaluadas = Criterio.evaluar(periodos,this.empresas);
+		 * con esta lista de empresas evaluadas: 1. Busco la interseccion ---> Obtengo en las que conviene invertir
+		 * 										 2. Defino el orden de la interseccion
+		 * 										 3. Busco el complemento de la lista interseccion ---> Obtengo en las que no conviene invertir
+		 * 										 4. Podria retornar una lista de dos listas de empresas. Para la UI
+		 * */
+		this.criterio.evaluar(this.conjuntoDeEmpresasAEvaluar, this.condiciones, periodos);
+		List<List<Empresa>> listasEvaluadas = this.criterio.getListasEmpresasEvaluadas();
 		
-		for(i=0;i<condiciones.size();i++){
-			listaActualizada = condiciones.get(i).evaluar(listaActualizadaAEvaluar,periodos); //La condicion suma puntos a las empresas o las saca
-			Collections.sort(listaActualizada,(empresa1,empresa2)->empresa1.getPeso() > empresa2.getPeso()? 1 : -1 ); //Ordeno la lista
-			listaActualizadaAEvaluar = listaActualizada; 
-		}
-		return listaActualizadaAEvaluar;
+		List<Empresa> empresasInvertibles = this.obtenerEmpresasInvertibles(listasEvaluadas);
+		
+		this.criterio.ordenarPorPuntaje(empresasInvertibles,this.condiciones); // TODO: Falta implementar
+		
+		List<Empresa> empresasNoInvertibles = this.obtenerEmpresasNoInvertibles(empresasInvertibles);
+		
+		
+		List<List<Empresa>> resultado = new LinkedList<>();
+		resultado.add(empresasInvertibles);
+		resultado.add(empresasNoInvertibles);
+		return resultado;
 	}
 	
-	/*public void evaluar(){
-		//conjuntoDeEmpresasAEvaluar.stream().forEach(empresa -> evaluarUnaEmpresaATodasLasCondiciones(empresa));
-		//evaluo todas contra todas
-		List<EmpresaRank> empresasRank = new LinkedList<>();
+	public List<Empresa> obtenerEmpresasInvertibles(List<List<Empresa>> listasEvaluadas){
 		
-		for (int i = 0; i < conjuntoDeEmpresasAEvaluar.size(); i++) {
-			  for (int j = i+1; j < conjuntoDeEmpresasAEvaluar.size(); j++) {
-				  evaluarUnaEmpresaATodasLasCondiciones(conjuntoDeEmpresasAEvaluar.get(i),conjuntoDeEmpresasAEvaluar.get(j));
-			  }
+		List<Empresa> interseccionAEvaluar = new LinkedList<>(listasEvaluadas.remove(0));
+		List<Empresa> interseccion = new LinkedList<>();
+		int i=0;
+		for(i=0;i<listasEvaluadas.size();i++){
+			
+			interseccion = interseccionAEvaluar.stream().filter(listasEvaluadas.get(i) :: contains).collect(Collectors.toList());
+			interseccionAEvaluar = interseccion;
 		}
-		int i;
-		for (i = 0; i < conjuntoDeEmpresasAEvaluar.size(); i++) {
-			List<EmpresaCumplimiento> aux = new LinkedList<>();
-			int j=i;
-			aux=conjuntoDeEmpresaConRankSinOrdenar.stream()
-					.filter(line-> line.getEmpresa().getNombre().equals(conjuntoDeEmpresasAEvaluar.get(j).getNombre()))
-					.collect(Collectors.toList());
-			
-			int rank=aux.stream()
-					.mapToInt(line ->(line.getCumplio()*line.getPesoCondicion())).sum();
-			
-			EmpresaRank empresaConRank=new EmpresaRank(conjuntoDeEmpresasAEvaluar.get(i), rank);
-			empresasRank.add(empresaConRank);
-			
-			
-			conjuntoDeEmpresasEvaluadas = (List<EmpresaRank>) empresasRank.stream().sorted(Comparator.comparing(EmpresaRank::getRank)).collect(Collectors.toList());
-			
-		}
-	}
-	*/
-	/*
-	public void evaluarUnaEmpresaATodasLasCondiciones(Empresa empresa1,Empresa empresa2){
-		
-		condiciones.stream().forEach(condicion ->conjuntoDeEmpresaConRankSinOrdenar.add(condicion.evaluar(empresa1,empresa2)) );
+		return interseccion;
 	}
 	
-	*/
+	public List<Empresa> obtenerEmpresasNoInvertibles (List<Empresa> empresasInvertibles){
+		List <Empresa> empresasNoInvertibles = new LinkedList<Empresa>(this.conjuntoDeEmpresasAEvaluar);
+		empresasNoInvertibles.removeAll(empresasInvertibles);
+		return empresasNoInvertibles;
+	}
 	
 }

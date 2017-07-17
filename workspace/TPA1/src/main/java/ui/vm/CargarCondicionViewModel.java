@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import metodologias.Condicion;
+import Condiciones.Condicion;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
 

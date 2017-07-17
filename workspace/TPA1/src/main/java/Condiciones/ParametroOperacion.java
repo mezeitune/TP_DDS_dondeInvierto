@@ -1,4 +1,4 @@
-package metodologias;
+package Condiciones;
 
 import org.uqbar.commons.utils.Observable;
 

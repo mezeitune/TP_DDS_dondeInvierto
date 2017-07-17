@@ -9,9 +9,9 @@ import org.uqbar.commons.utils.Observable;
 import Comparadores.Comparador;
 import Comparadores.ComparadorMayor;
 import Comparadores.ComparadorMenor;
-import metodologias.Condicion;
-import metodologias.CondicionComparativa;
-import metodologias.EstadoCondicion;
+import Condiciones.Comparativa;
+import Condiciones.Condicion;
+import Condiciones.TipoCondicion;
 import usuario.Indicador;
 import usuario.Metodologia;
 import usuario.PatrimonioNeto;
@@ -52,7 +52,7 @@ public class WarrenBuffet extends Metodologia{
 		
 		int pesoRoe = 20;
 		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
-		EstadoCondicion comparativa = new CondicionComparativa(new ComparadorMayor(),pesoRoe);
+		TipoCondicion comparativa = new Comparativa(new ComparadorMayor(),pesoRoe);
 		Condicion maximizarROE = new Condicion(comparativa,roe);
 		
 		condicionesPredefinidas.add(maximizarROE);		

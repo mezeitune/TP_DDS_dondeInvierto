@@ -3,8 +3,8 @@ package repository;
 import java.util.LinkedList;
 import java.util.List;
 
-import metodologias.Condicion;
-import metodologias.EstadoCondicion;
+import Condiciones.Condicion;
+import Condiciones.TipoCondicion;
 import metodologias.Predefinidas.WarrenBuffet;
 import parser.parserArchivos.ParserJsonAObjetosJava;
 import usuario.Empresa;
