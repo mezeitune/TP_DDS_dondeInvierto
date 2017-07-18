@@ -8,6 +8,7 @@ import javax.management.RuntimeErrorException;
 import org.eclipse.ui.actions.LabelRetargetAction;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;
+import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -20,14 +21,16 @@ import repository.EmpresasAEvaluarRepository;
 import scala.util.control.Exception;
 import ui.vm.AgregarEmpresaViewModel;
 import ui.vm.DatosViewModel;
+import usuario.Cuenta;
 import usuario.Empresa;
 
+@SuppressWarnings("serial")
 public class AgregarEmpresaWindow extends Dialog<AgregarEmpresaViewModel>{
 	public AgregarEmpresaWindow(WindowOwner parent) throws IOException {
 		super(parent, new AgregarEmpresaViewModel());
 	}
 	protected void createFormPanel(Panel mainPanel) {
-		mainPanel.setLayout(new HorizontalLayout());
+		mainPanel.setLayout(new VerticalLayout());
 		Panel Panel = new Panel(mainPanel);
 		
 		new Label(Panel).setText("Seleccione una empresa ").setBackground(Color.ORANGE);
@@ -35,7 +38,13 @@ public class AgregarEmpresaWindow extends Dialog<AgregarEmpresaViewModel>{
 		selectorEmpresa.setWidth(100);
 		selectorEmpresa.bindItemsToProperty("empresas").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		selectorEmpresa.bindValueToProperty("empresa");
-		
+
+		new Label(Panel).setText("Seleccione un Periodo ").setBackground(Color.ORANGE);
+		Selector<Empresa> selectorPeriodo = new Selector<Empresa>(Panel).allowNull(true);
+		selectorPeriodo.setWidth(100);
+		selectorPeriodo.bindItemsToProperty("periodos");
+		selectorPeriodo.bindValueToProperty("periodo");
+
 		
 }
 

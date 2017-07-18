@@ -12,7 +12,7 @@ import java.util.List;
 
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
-import repository.MetodologiasUsuarioRepository;
+import repository.MetodologiasRepository;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;

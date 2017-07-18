@@ -16,10 +16,10 @@ public class Empresa {
 	int peso=0;
 	private List<Cuenta> cuentas = new LinkedList<>(); 
 	
-	public  Empresa(String nombreEmpresa,List<Cuenta> cuentas){
+	/*public  Empresa(String nombreEmpresa,List<Cuenta> cuentas){
 		this.nombre = nombreEmpresa;
 		this.cuentas = cuentas;
-	}
+	}*/
 
 	
 	public String getNombre() {

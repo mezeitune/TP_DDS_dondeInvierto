@@ -6,8 +6,8 @@ import org.uqbar.commons.utils.Observable;
 
 import Comparadores.Comparador;
 import usuario.Empresa;
-@Observable
-public interface TipoCondicion {
+
+public abstract interface TipoCondicion {
 
 	List<Empresa> evaluar(List<Empresa> empresa,List<String> periodos, Condicion condicion);
 

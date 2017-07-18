@@ -34,8 +34,6 @@ public class AgregarPeriodoViewModel {
 	public void setPeriodo(String periodoSeleccionada) throws IOException{
 			EmpresasAEvaluarRepository.agregarPeriodoAEvaluar(periodoSeleccionada);
 			AgregarPeriodoViewModel.codigoError=0;
-		
-		
 	}
 	
 	public String getPeriodo(){

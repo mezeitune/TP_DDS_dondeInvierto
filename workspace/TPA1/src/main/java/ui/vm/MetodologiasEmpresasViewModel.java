@@ -11,7 +11,7 @@ import parser.parserArchivos.CSVToEmpresas;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
-import repository.MetodologiasUsuarioRepository;
+import repository.MetodologiasRepository;
 import usuario.Empresa;
 import usuario.Indicador;
 import usuario.Metodologia;
@@ -23,66 +23,11 @@ public class MetodologiasEmpresasViewModel {
 	private Boolean seleccionoTodasLasEmpresas;
 	private List<Metodologia> metodologias;
 	private Metodologia metodologia;
-	private List<Empresa> empresasRankeadas;
+	private List<List<Empresa>> empresasRankeadas;
 	private List<Empresa> empresasQueNoConvieneInvertir;
 	private List<Empresa> empresasAEvaluar;
 	private List<String> periodos;	
 	
-	public void setMetodologias(){
-		metodologias= MetodologiasUsuarioRepository.getMetodologiasDefinidosPorElUsuario();
-	}
-
-	public List<Metodologia> getMetodologias(){
-		return this.metodologias;
-	}
-	public void setMetodologia(Metodologia metodologiaSeleccionada){
-		if (metodologia==null){
-			this.metodologia=metodologias.get(0);
-			
-		}
-		
-		this.metodologia= metodologiaSeleccionada;
-		
-		this.empresasRankeadas=this.metodologia.evaluar(this.getPeriodos());
-		ObservableUtils.firePropertyChanged(this, "empresasRankeadas");
-		//this.setPeriodo(null);
-	
-	}
-	
-	public Metodologia getMetodologia(){
-		return this.metodologia;
-	}
-	
-	
-	public void setEmpresasAEvaluar(){
-		this.empresasAEvaluar=EmpresasAEvaluarRepository.getEmpresasAEvaluar();
-		
-	}
-	public List<Empresa> getEmpresasAEvaluar(){
-		return EmpresasAEvaluarRepository.getEmpresasAEvaluar();
-	}
-	
-	public void setPeriodos(){
-		this.periodos=EmpresasAEvaluarRepository.getPeriodosAEvaluar();
-		
-	}
-	public List<String> getPeriodos(){
-		return EmpresasAEvaluarRepository.getPeriodosAEvaluar();
-	}
-	
-	public void setEmpresasRankeadas (){
-		
-	}
-	public List<Empresa> getEmpresasRankeadas(){
-		return this.empresasRankeadas;
-	}
-	
-	public void setEmpresasQueNoConvieneInvertir (){
-	
-	}
-	public List<Empresa> getEmpresasQueNoConvieneInvertir(){
-		return this.empresasQueNoConvieneInvertir;
-	}
 	
 
 	public MetodologiasEmpresasViewModel() {
@@ -99,6 +44,70 @@ public class MetodologiasEmpresasViewModel {
 		
 	}
 	
+	
+	public void setMetodologias(){
+		
+		metodologias = MetodologiasRepository.getMetodologias();
+	}
+
+	public List<Metodologia> getMetodologias(){
+		return this.metodologias;
+	}
+	public void setMetodologia(Metodologia metodologiaSeleccionada){
+		if (metodologia==null){
+			this.metodologia=metodologias.get(0);
+			
+		}
+		
+		this.metodologia = metodologiaSeleccionada;
+		this.evaluar();
+		/*this.empresasRankeadas = this.metodologia.evaluar(this.getPeriodos());
+		ObservableUtils.firePropertyChanged(this, "empresasRankeadas");*/
+		//this.setPeriodo(null);
+	
+	}
+	
+	public void evaluar(){
+		this.empresasRankeadas = this.metodologia.evaluar(this.getPeriodos());
+		ObservableUtils.firePropertyChanged(this, "empresasRankeadas");		
+	}
+	
+	public Metodologia getMetodologia(){
+		return this.metodologia;
+	}
+	
+	
+	public void setEmpresasAEvaluar(){
+		this.empresasAEvaluar=EmpresasAEvaluarRepository.getEmpresasAEvaluar();
+		
+	}
+	public List<Empresa> getEmpresasAEvaluar(){
+		return EmpresasAEvaluarRepository.getEmpresasAEvaluar();
+	}
+	
+	public void setPeriodos(){
+		this.periodos = EmpresasAEvaluarRepository.getPeriodosAEvaluar();
+		
+	}
+	public List<String> getPeriodos(){
+		return EmpresasAEvaluarRepository.getPeriodosAEvaluar();
+	}
+	
+	public void setEmpresasRankeadas (){
+		
+	}
+	public List<List<Empresa>> getEmpresasRankeadas(){
+		return this.empresasRankeadas;
+	}
+	
+	public void setEmpresasQueNoConvieneInvertir (){
+	
+	}
+	public List<Empresa> getEmpresasQueNoConvieneInvertir(){
+		return this.empresasQueNoConvieneInvertir;
+	}
+	
+
 
 	
 	public void setSeleccionoTodasLasEmpresas(boolean seleccionoTodas){

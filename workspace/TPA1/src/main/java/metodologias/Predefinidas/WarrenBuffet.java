@@ -20,7 +20,7 @@ public class WarrenBuffet extends Metodologia{
 
 	
 	private static WarrenBuffet instance ;
-	List<Condicion> condiciones = this.inicializarCondiciones();
+	private static List<Condicion> condiciones;/* = this.inicializarCondiciones();*/
 
 
 
@@ -34,7 +34,7 @@ public class WarrenBuffet extends Metodologia{
 	
 	public WarrenBuffet() {
 		super();
-		inicializarCondiciones();
+		condiciones = inicializarCondiciones();
 	}
 	
 
@@ -42,9 +42,6 @@ public class WarrenBuffet extends Metodologia{
 	public String getNombre(){
 		return "Buffet";
 	}
-	
-	
-	
 	
 	public List<Condicion> inicializarCondiciones(){
 		
@@ -60,7 +57,7 @@ public class WarrenBuffet extends Metodologia{
 		int pesoNivelDeuda=10;
 		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");//TODO:Busar como se calcula
 		comparativa.setComparador(new ComparadorMenor());
-		comparativa.setPeso(pesoNivelDeuda);
+		((Comparativa) comparativa).setPeso(pesoNivelDeuda);
 		Condicion minimizarDeuda = new Condicion(comparativa,nivelDeuda);
 		
 		condicionesPredefinidas.add(minimizarDeuda);

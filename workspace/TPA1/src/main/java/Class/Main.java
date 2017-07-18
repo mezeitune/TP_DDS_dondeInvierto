@@ -10,7 +10,7 @@ import exceptions.CSVInexistenteException;
 import parser.parserArchivos.CSVToEmpresas;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
-import repository.MetodologiasUsuarioRepository;
+import repository.MetodologiasRepository;
 import ui.windows.MenuWindow;
 import usuario.Indicador;
 
@@ -19,7 +19,7 @@ public class Main extends Application{
 
 	
 	public static void main(String[] args){
-			//MetodologiasUsuarioRepository.cargarMetodologiasPredefinidos();
+			MetodologiasRepository.cargarMetodologiasPredefinidos();
 			new Main().start();
 	}
 		@Override
