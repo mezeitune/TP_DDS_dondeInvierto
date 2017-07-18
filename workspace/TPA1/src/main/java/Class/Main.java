@@ -19,7 +19,7 @@ public class Main extends Application{
 
 	
 	public static void main(String[] args){
-			//MetodologiasRepository.cargarMetodologiasPredefinidos();
+			MetodologiasRepository.cargarMetodologiasPredefinidos();
 			new Main().start();
 	}
 		@Override

@@ -64,6 +64,9 @@ public class Metodologia {
 		
 		List<Empresa> empresasInvertibles = this.obtenerEmpresasInvertibles(listasEvaluadas);
 		
+		
+		System.out.println("Empresa"+empresasInvertibles.get(0).getNombre());
+		
 		this.criterio.ordenarPorPuntaje(empresasInvertibles,this.condiciones); // TODO: Falta implementar
 		
 		List<Empresa> empresasNoInvertibles = this.obtenerEmpresasNoInvertibles(empresasInvertibles);

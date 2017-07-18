@@ -34,6 +34,7 @@ public class Criterio {
 	
 	
 	public List<List<Empresa>> getListasEmpresasEvaluadas(){
+		
 		return this.resultado;
 	}
 	

@@ -46,13 +46,8 @@ public class MetodologiasEmpresasViewModel {
 	
 	
 	public void setMetodologias(){
-		MetodologiasRepository.cargarMetodologiasPredefinidos();
-		metodologias = MetodologiasRepository.getMetodologias();
 		
-		for (int i = 0; i < metodologias.size(); i++) {
-			System.out.println("Metodologia" + metodologias.get(i).getNombre());
-			
-		}
+		metodologias = MetodologiasRepository.getMetodologias();
 	}
 
 	public List<Metodologia> getMetodologias(){
@@ -64,12 +59,17 @@ public class MetodologiasEmpresasViewModel {
 			
 		}
 		
-		this.metodologia= metodologiaSeleccionada;
-		
-		this.empresasRankeadas = this.metodologia.evaluar(this.getPeriodos());
-		ObservableUtils.firePropertyChanged(this, "empresasRankeadas");
+		this.metodologia = metodologiaSeleccionada;
+		this.evaluar();
+		/*this.empresasRankeadas = this.metodologia.evaluar(this.getPeriodos());
+		ObservableUtils.firePropertyChanged(this, "empresasRankeadas");*/
 		//this.setPeriodo(null);
 	
+	}
+	
+	public void evaluar(){
+		this.empresasRankeadas = this.metodologia.evaluar(this.getPeriodos());
+		ObservableUtils.firePropertyChanged(this, "empresasRankeadas");		
 	}
 	
 	public Metodologia getMetodologia(){
@@ -86,7 +86,7 @@ public class MetodologiasEmpresasViewModel {
 	}
 	
 	public void setPeriodos(){
-		this.periodos=EmpresasAEvaluarRepository.getPeriodosAEvaluar();
+		this.periodos = EmpresasAEvaluarRepository.getPeriodosAEvaluar();
 		
 	}
 	public List<String> getPeriodos(){

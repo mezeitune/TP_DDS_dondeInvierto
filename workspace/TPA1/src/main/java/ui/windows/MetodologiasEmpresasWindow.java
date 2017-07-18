@@ -10,6 +10,7 @@ import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Label;
+import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
@@ -20,6 +21,7 @@ import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.commons.model.ObservableUtils;
 
 import repository.EmpresasAEvaluarRepository;
+import ui.vm.AgregarEmpresaViewModel;
 import ui.vm.DatosViewModel;
 import ui.vm.MetodologiasEmpresasViewModel;
 import usuario.Cuenta;
@@ -27,10 +29,13 @@ import usuario.Empresa;
 import usuario.Indicador;
 import usuario.Metodologia;
 
+@SuppressWarnings("serial")
 public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewModel>{
 	public MetodologiasEmpresasWindow(WindowOwner parent) throws IOException {
 		super(parent, new MetodologiasEmpresasViewModel());
 	}
+	
+	int i = 0;
 	
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Consulta de Metodologias aplicadas a empresas");
@@ -39,15 +44,17 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		mainPanel.setLayout(new HorizontalLayout());
 		Panel Panel = new Panel(mainPanel);
 		
-		
 		new Label(Panel).setText("Lista de empresas a evaluar").setBackground(Color.ORANGE);
-		new Label(Panel).setText("Cuentas").setBackground(Color.ORANGE);
+		//new Label(Panel).setText("Cuentas").setBackground(Color.ORANGE);
 		
-		Table<Cuenta> tableCuentas = new Table<Cuenta>(Panel, Cuenta.class);
+		Table<Empresa> tableEmpresas = new Table<Empresa>(Panel, Empresa.class);
 		
-		tableCuentas.bindItemsToProperty("empresasAEvaluar");
-		new Column<Cuenta>(tableCuentas).setTitle("Nombre").bindContentsToProperty("nombre");
+		tableEmpresas.bindItemsToProperty("empresasAEvaluar");
+		new Column<Empresa>(tableEmpresas).setTitle("Nombre").bindContentsToProperty("nombre");
 		
+		new List<>(Panel).bindItemsToProperty("periodos");
+		
+		//new Column<Empresa>(tableEmpresas).setTitle("Periodo").bindContentsToProperty("periodo");
 
 		new Button(Panel).setCaption("Agregar una Empresa")
 		.onClick(() -> {
@@ -59,7 +66,7 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 			}
 		});
 		
-		new Button(Panel).setCaption("Agregar periodo")
+		/*new Button(Panel).setCaption("Agregar periodo")
 		.onClick(() -> {
 			try{
 				this.getDelegate().close();
@@ -67,7 +74,7 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 			}catch (IOException e) {
 				e.printStackTrace();
 			}
-		});
+		});*/
 		
 		new Button(Panel).setCaption("Eliminar una Empresa")
 		.onClick(() -> {
@@ -132,7 +139,6 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 }
 
-	
 	public void MenuWindow() throws IOException {
 		Dialog<?> dialog = new MenuWindow(this);
 		dialog.open();
