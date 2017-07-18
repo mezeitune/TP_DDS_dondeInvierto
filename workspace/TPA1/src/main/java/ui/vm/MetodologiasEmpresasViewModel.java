@@ -11,7 +11,7 @@ import parser.parserArchivos.CSVToEmpresas;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
-import repository.MetodologiasUsuarioRepository;
+import repository.MetodologiasRepository;
 import usuario.Empresa;
 import usuario.Indicador;
 import usuario.Metodologia;
@@ -28,8 +28,31 @@ public class MetodologiasEmpresasViewModel {
 	private List<Empresa> empresasAEvaluar;
 	private List<String> periodos;	
 	
+	
+
+	public MetodologiasEmpresasViewModel() {
+		try {
+			
+			this.setEmpresas();
+			this.setMetodologias();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.empresa= empresas.get(0);
+		ParserFormulaToIndicador.setEmpresa(empresa);
+		
+	}
+	
+	
 	public void setMetodologias(){
-		metodologias= MetodologiasUsuarioRepository.getMetodologiasDefinidosPorElUsuario();
+		MetodologiasRepository.cargarMetodologiasPredefinidos();
+		metodologias = MetodologiasRepository.getMetodologias();
+		
+		for (int i = 0; i < metodologias.size(); i++) {
+			System.out.println("Metodologia" + metodologias.get(i).getNombre());
+			
+		}
 	}
 
 	public List<Metodologia> getMetodologias(){
@@ -85,20 +108,6 @@ public class MetodologiasEmpresasViewModel {
 	}
 	
 
-	public MetodologiasEmpresasViewModel() {
-		try {
-			
-			this.setEmpresas();
-			this.setMetodologias();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		this.empresa= empresas.get(0);
-		ParserFormulaToIndicador.setEmpresa(empresa);
-		
-	}
-	
 
 	
 	public void setSeleccionoTodasLasEmpresas(boolean seleccionoTodas){

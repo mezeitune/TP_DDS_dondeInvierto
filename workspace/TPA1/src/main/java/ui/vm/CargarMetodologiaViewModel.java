@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 
 import Condiciones.Condicion;
 import parser.ParserJsonString;
-import repository.MetodologiasUsuarioRepository;
+import repository.MetodologiasRepository;
 import usuario.Metodologia;
 
 

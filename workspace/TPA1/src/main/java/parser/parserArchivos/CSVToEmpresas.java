@@ -62,10 +62,12 @@ public class CSVToEmpresas {
 		String nombreNuevaEmpresa;
 		List <Empresa> empresas = new ArrayList <Empresa> ();
 		
+		
 		Set<String> setNombreEmpresas = new HashSet<>(csvObjectList.stream().map(line -> line.getEmpresa()).collect(Collectors.toList()));
 		List<String> nombreEmpresasSinRepetidos = new ArrayList<>(setNombreEmpresas);
 		
 		while(i < nombreEmpresasSinRepetidos.size()){
+			Empresa empresa = new Empresa();
 			
 			nombreNuevaEmpresa=nombreEmpresasSinRepetidos.get(i);
 			
@@ -73,7 +75,10 @@ public class CSVToEmpresas {
 			
 			List <Cuenta> cuentasByEmpresa = this.filtrarPorCuentas(empresasByName);
 			
-			empresas.add(new Empresa(nombreNuevaEmpresa,cuentasByEmpresa));
+			empresa.setCuentas(cuentasByEmpresa);
+			empresa.setNombre(nombreNuevaEmpresa);
+			
+			empresas.add(empresa/*new Empresa(nombreNuevaEmpresa,cuentasByEmpresa)*/);
 			i++;
 		}
 		return empresas;

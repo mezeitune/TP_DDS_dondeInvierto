@@ -81,7 +81,6 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 												try {
 													new ParserFormulaToIndicador();
 												} catch (IOException e1) {
-													// TODO Auto-generated catch block
 													e1.printStackTrace();
 												}
 												try{
