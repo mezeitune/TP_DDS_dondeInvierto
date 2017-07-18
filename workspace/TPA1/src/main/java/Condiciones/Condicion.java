@@ -14,9 +14,10 @@ public class Condicion {
 	private Indicador indicador;
 	
 	
-	public Condicion(TipoCondicion tipo,Indicador indicador){
+	public Condicion(TipoCondicion tipo,Indicador indicador,int peso){
 		this.tipo=tipo;
 		this.indicador = indicador;
+		this.peso=peso;
 	}
 	
 	

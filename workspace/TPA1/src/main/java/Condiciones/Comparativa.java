@@ -53,9 +53,9 @@ public class Comparativa implements TipoCondicion{
 	
 	@Override
 	public List<Empresa> evaluar(List<Empresa> empresas,List <String> periodos,Condicion condicion){
-		List<Empresa> empresasOrdenadas = new LinkedList<Empresa> (empresas);
-		Collections.sort(empresasOrdenadas,(empresa1,empresa2)->this.comparar(empresa1, empresa2, periodos,condicion.getIndicador())? 1 : -1);
-		return empresasOrdenadas;
+		List<Empresa> empresasComparadas = new LinkedList<Empresa> (empresas);
+		Collections.sort(empresasComparadas,(empresa1,empresa2)->this.comparar(empresa1, empresa2, periodos,condicion.getIndicador())? 1 : -1);
+		return empresasComparadas;
 	}
 	
 	boolean comparar(Empresa empresa1,Empresa empresa2,List<String> periodos,Indicador indicador){

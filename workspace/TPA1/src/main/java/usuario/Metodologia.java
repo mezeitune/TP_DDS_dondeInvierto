@@ -16,13 +16,13 @@ import Condiciones.Criterio;
 @Observable
 public class Metodologia {
 
-	private List<Empresa> conjuntoDeEmpresasAEvaluar = new LinkedList<>();
+	private List<Empresa> empresasAEvaluar = new LinkedList<>();
 	private List<Condicion> condiciones = new LinkedList<>();
 	private Criterio criterio = new Criterio();
 	private String nombre;
 	
 	public Metodologia(){
-		
+		this.criterio = new Criterio();
 	}
 	
 	public String getNombre() {
@@ -42,27 +42,27 @@ public class Metodologia {
 	}
 
 	public List<Empresa> getConjuntoDeEmpresasAEvaluar() {
-		return conjuntoDeEmpresasAEvaluar;
+		return empresasAEvaluar;
 	}
 
-	public void setConjuntoDeEmpresasAEvaluar(List<Empresa> conjuntoDeEmpresasAEvaluar) {
-		this.conjuntoDeEmpresasAEvaluar = conjuntoDeEmpresasAEvaluar;
+	public void setEmpresasAEvaluar(List<Empresa> conjuntoDeEmpresasAEvaluar) {
+		this.empresasAEvaluar = conjuntoDeEmpresasAEvaluar;
 	}
 
 	
-	public List<List<Empresa>> evaluar(List<String> periodos){ /*Evaluar podria devolver la lista final rankeada*/
-	
+	public List<List<Empresa>> evaluar(List<String> periodos){ 
 		/*
 		 * List<List> listaEmpresasEvaluadas = Criterio.evaluar(periodos,this.empresas);
-		 * con esta lista de empresas evaluadas: 1. Busco la interseccion ---> Obtengo en las que conviene invertir
+		 * con esta lista de listas de empresas evaluadas: 1. Busco la interseccion ---> Obtengo en las que conviene invertir
 		 * 										 2. Defino el orden de la interseccion
 		 * 										 3. Busco el complemento de la lista interseccion ---> Obtengo en las que no conviene invertir
 		 * 										 4. Podria retornar una lista de dos listas de empresas. Para la UI
 		 * */
-		this.criterio.evaluar(this.conjuntoDeEmpresasAEvaluar, this.condiciones, periodos);
-		List<List<Empresa>> listasEvaluadas = this.criterio.getListasEmpresasEvaluadas();
+		this.criterio.evaluar(this.empresasAEvaluar, this.condiciones, periodos);
 		
-		List<Empresa> empresasInvertibles = this.obtenerEmpresasInvertibles(listasEvaluadas);
+		List<List<Empresa>> listasEmpresasEvaluadas = this.criterio.getListasEmpresasEvaluadas();
+		
+		List<Empresa> empresasInvertibles = this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas);
 		
 		this.criterio.ordenarPorPuntaje(empresasInvertibles,this.condiciones); // TODO: Falta implementar
 		
@@ -75,21 +75,21 @@ public class Metodologia {
 		return resultado;
 	}
 	
-	public List<Empresa> obtenerEmpresasInvertibles(List<List<Empresa>> listasEvaluadas){
+	public List<Empresa> obtenerEmpresasInvertibles(List<List<Empresa>> listasEmpresasEvaluadas){
 		
-		List<Empresa> interseccionAEvaluar = new LinkedList<>(listasEvaluadas.remove(0));
+		List<Empresa> interseccionAEvaluar = new LinkedList<>(listasEmpresasEvaluadas.remove(0));
 		List<Empresa> interseccion = new LinkedList<>();
 		int i=0;
-		for(i=0;i<listasEvaluadas.size();i++){
+		for(i=0;i<listasEmpresasEvaluadas.size();i++){
 			
-			interseccion = interseccionAEvaluar.stream().filter(listasEvaluadas.get(i) :: contains).collect(Collectors.toList());
+			interseccion = interseccionAEvaluar.stream().filter(listasEmpresasEvaluadas.get(i) :: contains).collect(Collectors.toList());
 			interseccionAEvaluar = interseccion;
 		}
 		return interseccion;
 	}
 	
 	public List<Empresa> obtenerEmpresasNoInvertibles (List<Empresa> empresasInvertibles){
-		List <Empresa> empresasNoInvertibles = new LinkedList<Empresa>(this.conjuntoDeEmpresasAEvaluar);
+		List <Empresa> empresasNoInvertibles = new LinkedList<Empresa>(this.empresasAEvaluar);
 		empresasNoInvertibles.removeAll(empresasInvertibles);
 		return empresasNoInvertibles;
 	}

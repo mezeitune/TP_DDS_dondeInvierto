@@ -44,14 +44,11 @@ public class Taxativa  implements TipoCondicion {
 		}
 				
 		boolean verificarCriterio(Empresa empresa,List<String> periodos,Indicador indicador){
-			
 			return periodos.stream().allMatch(periodo -> this.verificarCriterioEnPeriodo(empresa,periodo,indicador));
-			
 		}
 		
 	
 		boolean verificarCriterioEnPeriodo(Empresa empresa,String periodo,Indicador indicador){ //Muy parecido a compararEnPeriodo
-			
 			ParserFormulaToIndicador.setEmpresa(empresa);
 			ParserFormulaToIndicador.setPeriodo(periodo);
 			return comparador.comparar(valorRequerido, indicador.calcular());
