@@ -23,7 +23,7 @@ public class MetodologiasEmpresasViewModel {
 	private Boolean seleccionoTodasLasEmpresas;
 	private List<Metodologia> metodologias;
 	private Metodologia metodologia;
-	private List<Empresa> empresasRankeadas;
+	private List<List<Empresa>> empresasRankeadas;
 	private List<Empresa> empresasQueNoConvieneInvertir;
 	private List<Empresa> empresasAEvaluar;
 	private List<String> periodos;	
@@ -43,7 +43,7 @@ public class MetodologiasEmpresasViewModel {
 		
 		this.metodologia= metodologiaSeleccionada;
 		
-		this.empresasRankeadas=this.metodologia.evaluar(this.getPeriodos());
+		this.empresasRankeadas = this.metodologia.evaluar(this.getPeriodos());
 		ObservableUtils.firePropertyChanged(this, "empresasRankeadas");
 		//this.setPeriodo(null);
 	
@@ -73,7 +73,7 @@ public class MetodologiasEmpresasViewModel {
 	public void setEmpresasRankeadas (){
 		
 	}
-	public List<Empresa> getEmpresasRankeadas(){
+	public List<List<Empresa>> getEmpresasRankeadas(){
 		return this.empresasRankeadas;
 	}
 	

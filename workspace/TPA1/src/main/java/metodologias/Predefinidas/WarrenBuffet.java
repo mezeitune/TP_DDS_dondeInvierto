@@ -52,7 +52,7 @@ public class WarrenBuffet extends Metodologia{
 		
 		int pesoRoe = 20;
 		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
-		TipoCondicion comparativa = new Comparativa(new ComparadorMayor(),pesoRoe);
+		Comparativa comparativa = new Comparativa(new ComparadorMayor(),pesoRoe);
 		Condicion maximizarROE = new Condicion(comparativa,roe);
 		
 		condicionesPredefinidas.add(maximizarROE);		
