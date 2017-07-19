@@ -15,7 +15,6 @@ public class Metodologia {
 	private List<Condicion> condiciones = new LinkedList<>();
 	private Criterio criterio = new Criterio();
 	private String nombre;
-	private List<Empresa> conjuntoDeEmpresasAEvaluar;
 	
 	public Metodologia(){
 		this.criterio = new Criterio();
@@ -49,9 +48,9 @@ public class Metodologia {
 	
 	public List<List<Empresa>> evaluar(List<String> periodos){ 
 	
-		this.setEmpresasAEvaluar(EmpresasAEvaluarRepository.getEmpresasAEvaluar());
+		//this.setEmpresasAEvaluar(EmpresasAEvaluarRepository.getEmpresasAEvaluar());
 
-		this.criterio.evaluar(this.conjuntoDeEmpresasAEvaluar, this.condiciones, periodos);
+		this.criterio.evaluar(this.empresasAEvaluar, this.condiciones, periodos);
 		
 		List<List<Empresa>> listasEmpresasEvaluadas = this.criterio.getListasEmpresasEvaluadas();
 

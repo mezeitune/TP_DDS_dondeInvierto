@@ -11,7 +11,11 @@ import Comparadores.ComparadorMayor;
 import Comparadores.ComparadorMenor;
 import Condiciones.Comparativa;
 import Condiciones.Condicion;
+import Condiciones.Mixta;
+import Condiciones.Taxativa;
 import Condiciones.TipoCondicion;
+import usuario.Antiguedad;
+import usuario.Empresa;
 import usuario.Indicador;
 import usuario.Metodologia;
 import usuario.PatrimonioNeto;
@@ -20,7 +24,6 @@ public class WarrenBuffet extends Metodologia{
 
 	
 	private static WarrenBuffet instance ;
-	private static List<Condicion> condiciones;
 
 	public static WarrenBuffet getInstance( ) {
         if(instance == null){
@@ -32,35 +35,43 @@ public class WarrenBuffet extends Metodologia{
 	
 	public WarrenBuffet() {
 		super();
-		this.setCondiciones(inicializarCondiciones());
+		this.setCondiciones(this.inicializarCondiciones());
 		this.setNombre("Buffet");
 	}
 	
 	
 	public List<Condicion> inicializarCondiciones(){
-		
 		List<Condicion> condicionesPredefinidas = new LinkedList<>();
 		
 		int pesoRoe = 20;
 		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
-		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
-		Condicion maximizarROE = new Condicion(comparativa,roe,pesoRoe);
+		Condicion maximizarROE = new Condicion(new Comparativa(new ComparadorMayor()),roe,pesoRoe);
 		
 		condicionesPredefinidas.add(maximizarROE);		
 		
 		int pesoNivelDeuda=10;
 		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");
-		comparativa.setComparador(new ComparadorMenor());
-		Condicion minimizarDeuda = new Condicion(comparativa,nivelDeuda,pesoNivelDeuda);
+		Condicion minimizarDeuda = new Condicion(new Comparativa(new ComparadorMenor()),nivelDeuda,pesoNivelDeuda);
 		
 		condicionesPredefinidas.add(minimizarDeuda);
 		
 		int pesoMargenesCrecientes=10;
 		Indicador margen = new Indicador ("Margen","Activo/Capital Total");
-		comparativa.setComparador(new ComparadorMenor());
-		Condicion margenesCrecientes = new Condicion(comparativa,margen,pesoMargenesCrecientes);
+		Condicion margenesCrecientes = new Condicion(new Comparativa(new ComparadorMenor()),margen,pesoMargenesCrecientes);
 
 		condicionesPredefinidas.add(margenesCrecientes);
+		
+		int anosRequeridos = 3;
+		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
+		TipoCondicion taxativa = new Taxativa(new ComparadorMenor(),anosRequeridos);
+		List<TipoCondicion> tiposCondiciones = new LinkedList<TipoCondicion>();
+		tiposCondiciones.add(comparativa);
+		tiposCondiciones.add(taxativa);
+		TipoCondicion mixta = new Mixta(tiposCondiciones);
+		
+		Condicion longevidad = new Condicion(mixta,new Antiguedad(),0);
+		
+		condicionesPredefinidas.add(longevidad);
 		
 		return condicionesPredefinidas;
 	}

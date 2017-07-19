@@ -1,3 +1,5 @@
+import static org.junit.Assert.*;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -5,12 +7,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import Mocks.EmpresasMock;
+import metodologias.Predefinidas.WarrenBuffet;
+import repository.EmpresasAEvaluarRepository;
 import usuario.Empresa;
 import usuario.Metodologia;
 
 public class MetodologiaTest {
 
 	public Metodologia metodologia = new Metodologia();
+	public List<String> periodos = new LinkedList<String>();
+	public List<Empresa> empresasAEvaluarBuffet = new LinkedList<Empresa>();
 	
 	@Before
 	public void init(){
@@ -26,6 +33,9 @@ public class MetodologiaTest {
 		conjuntoDeEmpresasAEvaluar.add(empresa4);
 		conjuntoDeEmpresasAEvaluar.add(empresa5);
 		metodologia.setEmpresasAEvaluar(conjuntoDeEmpresasAEvaluar);
+		
+		periodos.add("2016");
+		this.empresasAEvaluarBuffet = new EmpresasMock().getEmpresasMockeadas();
 	}
 	
 	@Test
@@ -57,7 +67,7 @@ public class MetodologiaTest {
 		listaEsperada.add(empresa1);
 		listaEsperada.add(empresa3);
 		
-		Assert.assertEquals(listaEsperada,this.metodologia.obtenerEmpresasInvertibles(listasEmpresasEvaluadas));
+		assertEquals(listaEsperada,this.metodologia.obtenerEmpresasInvertibles(listasEmpresasEvaluadas));
 	}
 	
 	@Test
@@ -73,7 +83,19 @@ public class MetodologiaTest {
 		listaEsperada.add(conjuntoDeEmpresasAEvaluar.get(2));
 		listaEsperada.add(conjuntoDeEmpresasAEvaluar.get(4));
 		
-		Assert.assertEquals(listaEsperada, this.metodologia.obtenerEmpresasNoInvertibles(empresasInvertibles));
+		assertEquals(listaEsperada, this.metodologia.obtenerEmpresasNoInvertibles(empresasInvertibles));
 		
+	}
+	
+	@Test
+	public void laMetodologiaWarrenBuffetObtieneCorrectamenteLasEmpresasNoInvertibles(){
+		Metodologia warrenBuffet = new WarrenBuffet();
+		warrenBuffet.setEmpresasAEvaluar(this.empresasAEvaluarBuffet);
+		
+		List<Empresa> listaEsperada = new LinkedList<Empresa>();
+		
+		listaEsperada.add(this.empresasAEvaluarBuffet.get(0));
+		
+		assertEquals(listaEsperada,warrenBuffet.evaluar(this.periodos).get(1));
 	}
 }
