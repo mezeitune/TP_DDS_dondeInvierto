@@ -20,9 +20,7 @@ public class WarrenBuffet extends Metodologia{
 
 	
 	private static WarrenBuffet instance ;
-	private static List<Condicion> condiciones;/* = this.inicializarCondiciones();*/
-
-
+	private static List<Condicion> condiciones;
 
 	public static WarrenBuffet getInstance( ) {
         if(instance == null){
@@ -34,14 +32,10 @@ public class WarrenBuffet extends Metodologia{
 	
 	public WarrenBuffet() {
 		super();
-		condiciones = inicializarCondiciones();
+		this.setCondiciones(inicializarCondiciones());
+		this.setNombre("Buffet");
 	}
 	
-
-	@Override
-	public String getNombre(){
-		return "Buffet";
-	}
 	
 	public List<Condicion> inicializarCondiciones(){
 		

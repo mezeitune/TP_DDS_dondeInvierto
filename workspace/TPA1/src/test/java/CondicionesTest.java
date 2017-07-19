@@ -57,7 +57,7 @@ public class CondicionesTest {
 	}
 	
 	@Test
-	public void laCondicionTaxativaDiscriminaBien(){ //Simulamos la longevidad taxativa
+	public void laLongevidadTaxativaDiscriminaBien(){ 
 		int peso=20;
 		int anosRequeridos = 3;
 		Comparador menor = new ComparadorMenor(); 
@@ -86,6 +86,25 @@ public class CondicionesTest {
 		assertEquals(listaEsperada,maximizarROE.evaluar(empresas,periodos));
 		
 	}
+	
+	@Test
+	public void nivelDeDeudaComparaBienLasEmpresasEnUnUnicoPeriodo(){
+		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");//TODO:Busar como se calcula
+		TipoCondicion comparativa = new Comparativa(new ComparadorMenor());
+		Condicion minimizarDeuda = new Condicion(comparativa,nivelDeuda,0);
+		
+		List<Empresa> listaEsperada = new LinkedList<Empresa>();
+		
+		listaEsperada.add(empresas.get(2));
+		listaEsperada.add(empresas.get(0));
+		listaEsperada.add(empresas.get(1));
+		listaEsperada.add(empresas.get(3));
+		
+		assertEquals(listaEsperada,minimizarDeuda.evaluar(empresas,periodos));
+		
+	}
+	
+	
 	
 	
 	

@@ -25,6 +25,8 @@ public class EmpresasMock {
 		Cuenta cuenta5 = new Cuenta("Ingreso Neto","2016",1500);
 		Cuenta cuenta6 = new Cuenta("Dividendos","2016",500);
 		Cuenta cuenta7 = new Cuenta("Capital Total","2016",1500);
+		Cuenta cuenta8 = new Cuenta("Activo","2016",4000);
+		Cuenta cuenta9 = new Cuenta("Pasivo","2016",2000);
 		cuentasEmpresa1.add(cuenta1);
 		cuentasEmpresa1.add(cuenta2);
 		cuentasEmpresa1.add(cuenta3);
@@ -32,6 +34,8 @@ public class EmpresasMock {
 		cuentasEmpresa1.add(cuenta5);
 		cuentasEmpresa1.add(cuenta6);
 		cuentasEmpresa1.add(cuenta7);
+		cuentasEmpresa1.add(cuenta8);
+		cuentasEmpresa1.add(cuenta9);
 		Empresa empresa1 = new Empresa("Facebook", cuentasEmpresa1);
 		
 		
@@ -43,6 +47,8 @@ public class EmpresasMock {
 		Cuenta cuenta15 = new Cuenta("Ingreso Neto","2016",600);
 		Cuenta cuenta16 = new Cuenta("Dividendos","2016",400);
 		Cuenta cuenta17 = new Cuenta("Capital Total","2016",1000);
+		Cuenta cuenta18 = new Cuenta("Activo","2016",6000);
+		Cuenta cuenta19 = new Cuenta("Pasivo","2016",2000);
 		cuentasEmpresa2.add(cuenta11);
 		cuentasEmpresa2.add(cuenta12);
 		cuentasEmpresa2.add(cuenta13);
@@ -50,6 +56,8 @@ public class EmpresasMock {
 		cuentasEmpresa2.add(cuenta15);
 		cuentasEmpresa2.add(cuenta16);
 		cuentasEmpresa2.add(cuenta17);
+		cuentasEmpresa2.add(cuenta18);
+		cuentasEmpresa2.add(cuenta19);
 		Empresa empresa2 = new Empresa("Apple", cuentasEmpresa2);
 		
 		
@@ -61,6 +69,8 @@ public class EmpresasMock {
 		Cuenta cuenta25 = new Cuenta("Ingreso Neto","2016",2000);
 		Cuenta cuenta26 = new Cuenta("Dividendos","2016",400);
 		Cuenta cuenta27 = new Cuenta("Capital Total","2016",1000);
+		Cuenta cuenta28 = new Cuenta("Activo","2016",1000);
+		Cuenta cuenta29 = new Cuenta("Pasivo","2016",800);
 		cuentasEmpresa3.add(cuenta21);
 		cuentasEmpresa3.add(cuenta22);
 		cuentasEmpresa3.add(cuenta23);
@@ -68,6 +78,8 @@ public class EmpresasMock {
 		cuentasEmpresa3.add(cuenta25);
 		cuentasEmpresa3.add(cuenta26);
 		cuentasEmpresa3.add(cuenta27);
+		cuentasEmpresa3.add(cuenta28);
+		cuentasEmpresa3.add(cuenta29);
 		Empresa empresa3 = new Empresa("IBM", cuentasEmpresa3);
 
 		
@@ -79,6 +91,8 @@ public class EmpresasMock {
 		Cuenta cuenta35 = new Cuenta("Ingreso Neto","2016",900);
 		Cuenta cuenta36 = new Cuenta("Dividendos","2016",400);
 		Cuenta cuenta37 = new Cuenta("Capital Total","2016",1500);
+		Cuenta cuenta38 = new Cuenta("Activo","2016",3000);
+		Cuenta cuenta39 = new Cuenta("Pasivo","2016",800);
 		
 		cuentasEmpresa4.add(cuenta31);
 		cuentasEmpresa4.add(cuenta32);
@@ -87,6 +101,8 @@ public class EmpresasMock {
 		cuentasEmpresa4.add(cuenta35);
 		cuentasEmpresa4.add(cuenta36);
 		cuentasEmpresa4.add(cuenta37);
+		cuentasEmpresa4.add(cuenta38);
+		cuentasEmpresa4.add(cuenta39);
 		Empresa empresa4 = new Empresa("Oracle", cuentasEmpresa4);
 		
 		this.empresas.add(empresa1);
