@@ -11,6 +11,7 @@ import Comparadores.ComparadorMayor;
 import Comparadores.ComparadorMenor;
 import Condiciones.Comparativa;
 import Condiciones.Condicion;
+import Condiciones.Mixta;
 import Condiciones.Taxativa;
 import Condiciones.TipoCondicion;
 import Condiciones.Predefinidas.MargenesCrecientes;
@@ -58,20 +59,6 @@ public class CondicionesTest {
 	}
 	
 	@Test
-	public void laLongevidadTaxativaDiscriminaBien(){ /*TODO: Tener en cuentas las nuevas empresas que se agregaron al Mock*/
-		int peso=20;
-		int anosRequeridos = 3;
-		Comparador menor = new ComparadorMenor(); 
-		Taxativa estadoTaxativo = new Taxativa(menor,anosRequeridos);
-		Condicion longevidad = new Condicion(estadoTaxativo,new Antiguedad(),peso);
-		
-		List<Empresa> listaEsperada = longevidad.evaluar(empresas, periodos);
-
-		assertEquals("Apple",listaEsperada.get(0).getNombre()); 
-		
-	}
-	
-	@Test
 	public void maximizarROEComparaBienLasEmpresasEnUnUnicoPeriodo(){
 		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
 		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
@@ -107,6 +94,18 @@ public class CondicionesTest {
 	
 	
 	@Test
+	public void laLongevidadTaxativaDiscriminaBien(){ /*TODO: Tener en cuentas las nuevas empresas que se agregaron al Mock*/
+		int peso=20;
+		int anosRequeridos = 3;
+		Taxativa estadoTaxativo = new Taxativa(new ComparadorMenor(),anosRequeridos);
+		Condicion longevidad = new Condicion(estadoTaxativo,new Antiguedad(),peso);
+		
+		List<Empresa> listaEsperada = longevidad.evaluar(empresas, periodos);
+		
+		assertEquals("Apple",listaEsperada.get(0).getNombre()); 
+		
+	}
+	@Test
 	public void laLongevidadComparativaComparaBien(){ 
 		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
 		Condicion longevidad = new Condicion(comparativa,new Antiguedad(),0);
@@ -123,6 +122,28 @@ public class CondicionesTest {
 	}
 	
 	@Test
+	public void laLongevidadTaxativaDiscriminaYComparaBien(){
+		int anosRequeridos = 3;
+		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
+		TipoCondicion taxativa = new Taxativa(new ComparadorMenor(),anosRequeridos);
+		List<TipoCondicion> tiposCondiciones = new LinkedList<TipoCondicion>();
+		tiposCondiciones.add(comparativa);
+		tiposCondiciones.add(taxativa);
+		TipoCondicion mixta = new Mixta(tiposCondiciones);
+		
+		Condicion longevidad = new Condicion(mixta,new Antiguedad(),0);
+		
+		List<Empresa> listaEsperada = new LinkedList<Empresa>();
+		
+		listaEsperada.add(empresas.get(3));
+		listaEsperada.add(empresas.get(1));
+		listaEsperada.add(empresas.get(2));
+
+		assertEquals(listaEsperada,longevidad.evaluar(empresas, periodos)); 
+	}
+	
+	
+	@Test
 	public void losMargenesConsistenementesCrecientesComparanBienPeroParaUnSoloAno(){
 		Indicador margen = new Indicador("Margen","Activo/Capital Total");
 		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
@@ -134,10 +155,9 @@ public class CondicionesTest {
 		listaEsperada.add(empresas.get(0));
 		listaEsperada.add(empresas.get(3));
 		listaEsperada.add(empresas.get(2));
-
+		
 		assertEquals(listaEsperada,new Condicion(comparativa,margen,0).evaluar(empresas, periodos)); 
 	}
-	
 	
 	
 	

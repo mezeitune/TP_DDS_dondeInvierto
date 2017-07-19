@@ -54,7 +54,14 @@ public class WarrenBuffet extends Metodologia{
 		Condicion minimizarDeuda = new Condicion(comparativa,nivelDeuda,pesoNivelDeuda);
 		
 		condicionesPredefinidas.add(minimizarDeuda);
+		
+		int pesoMargenesCrecientes=10;
+		Indicador margen = new Indicador ("Margen","Activo/Capital Total");
+		comparativa.setComparador(new ComparadorMenor());
+		Condicion margenesCrecientes = new Condicion(comparativa,margen,pesoMargenesCrecientes);
 
+		condicionesPredefinidas.add(margenesCrecientes);
+		
 		return condicionesPredefinidas;
 	}
 	
