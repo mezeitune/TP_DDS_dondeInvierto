@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.experimental.theories.Theories;
 import org.uqbar.commons.utils.Observable;
 
 import com.google.gson.Gson;
@@ -17,38 +18,41 @@ import usuario.Metodologia;
 
 @Observable
 public class CargarMetodologiaViewModel {
-	private static List<Metodologia> metodologias;
-	private static String nombreMetodologia ;
-	private static List<Condicion> condiciones;
-	private static Condicion condicion;
+	private List<Metodologia> metodologias;
+	private Metodologia metodologia;
+	private String nombreMetodologia ;
+	private List<Condicion> condiciones;
+	private Condicion condicion;
 	
 	
-	public static List<Condicion> getCondiciones() {
+	public  List<Condicion> getCondiciones() {
 		return condiciones;
 	}
 	
-	
-	
-	
-	public static List<Metodologia> getMetodologias() {
-		return CargarMetodologiaViewModel.metodologias;
+	public void setMetodologias(){
+		metodologias = MetodologiasRepository.getMetodologias();
 	}
 	
-	public static Condicion getCondicion() {
+	
+	public List<Metodologia> getMetodologias() {
+		return this.metodologias;
+	}
+	
+	public Condicion getCondicion() {
 		return condicion;
 	}
-	public static void setCondicion(Condicion condicion) {
-		CargarMetodologiaViewModel.condicion = condicion;
+	public void setCondicion(Condicion condicion) {
+		condicion = condicion;
 	}
 	
 	public String getNombreMetodologia() {
-		return nombreMetodologia;
+		return metodologia.getNombre();
 	}
 	public void setNombreMetodologia(String nombre) {
 		this.nombreMetodologia = nombre;
 	}
 	
-	public static void generarMetodologia() throws IOException{
+	public void generarMetodologia() throws IOException{
 		
 		Metodologia nuevaMetodologia = new Metodologia();
 		//nuevaMetodologia.setCondiciones(condiciones);

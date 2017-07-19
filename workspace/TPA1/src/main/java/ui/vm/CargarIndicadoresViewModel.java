@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.omg.CORBA.UserException;
+import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
@@ -25,7 +26,7 @@ import usuario.Indicador;
 @Observable
 public class CargarIndicadoresViewModel {
 
-	private static List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();;
+	private static List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
 	
 	private static String nombreIndicador;
 	private static String formulaIndicador;
@@ -40,14 +41,14 @@ public class CargarIndicadoresViewModel {
 		return nombreIndicador;
 	}
 	public void setNombreIndicador(String nombreIndicador) {
-		this.nombreIndicador = nombreIndicador;
+		CargarIndicadoresViewModel.nombreIndicador = nombreIndicador;
 	}
 	public String getFormulaIndicador() {
 		return formulaIndicador;
 	}
 	public void setFormulaIndicador(String formulaIndicador) {
 
-		this.formulaIndicador = formulaIndicador;
+		CargarIndicadoresViewModel.formulaIndicador = formulaIndicador;
 	}
 	
 	public static int getCodigoDeError() {
@@ -60,40 +61,43 @@ public class CargarIndicadoresViewModel {
 	
 	public static void generarIndicador() throws IOException{
 		
-		Indicador nuevoIndicador = new IndicadorCustom(nombreIndicador,formulaIndicador);
+		Indicador nuevoIndicador = new Indicador(nombreIndicador,formulaIndicador);
 		
 		String jsonElement = new Gson().toJson(nuevoIndicador); 
 		
-		//validaciones
-		catcheoYAnidadoAJSON(formulaIndicador,jsonElement);//si devuelve 0 sigue validando si hay repetidos
-		validacionDeIndicadoresRepetidos(nombreIndicador,formulaIndicador);
+		catcheoYAnidadoAJSON(nuevoIndicador,jsonElement);
+		validacionDeIndicadoresRepetidos(nuevoIndicador);
 
 		
 	}
-	public static void validacionDeIndicadoresRepetidos (String nombreIndicador,String formulaIndicador) throws IOException{
+	public static  void validacionDeIndicadoresRepetidos (Indicador nuevoIndicador) throws IOException{
 		
-		if(ParserFormulaToIndicador.validarIndicadorRepetidoAntesDePrecargar(nombreIndicador,formulaIndicador)){
+		if(ParserFormulaToIndicador.validarIndicadorRepetidoAntesDePrecargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula())){
 			setCodigoDeError(3);
 		
 		}
 		else{
+			indicadores.add(nuevoIndicador);
+			new ParserFormulaToIndicador();
+			ObservableUtils.firePropertyChanged(new CargarIndicadoresViewModel(), "indicadores");
 			setCodigoDeError(0);
 		}
 	
 	}
 	public List<Indicador> getIndicadores(){
-		Collections.sort(this.indicadores);
-		return this.indicadores;
+		Collections.sort(CargarIndicadoresViewModel.indicadores);
+		return CargarIndicadoresViewModel.indicadores;
 	}
 	
-	public static void catcheoYAnidadoAJSON(String formulaIndicador, String jsonElement) throws IOException{
-		if(formulaIndicador != null && !formulaIndicador.trim().isEmpty()){
+	public static void catcheoYAnidadoAJSON(Indicador nuevoIndicador, String jsonElement) throws IOException{
+		if(nuevoIndicador.getFormula() != null && !nuevoIndicador.getFormula().trim().isEmpty()){
 
-			if(ParserFormulaToIndicador.validarAntesDePrecargar(formulaIndicador)){
-				new ParserFormulaToIndicador();
-				//ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
-	
-				ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );	
+			if(ParserFormulaToIndicador.validarAntesDePrecargar(nuevoIndicador.getFormula())){
+
+				ParserFormulaToIndicador.getCalculoIndicador(nuevoIndicador.getFormula());//Para poder entender Cuentas
+
+				ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );
+				
 				setCodigoDeError(0);//devolviendo al estado original , ya que es correcto
 			}else{
 				

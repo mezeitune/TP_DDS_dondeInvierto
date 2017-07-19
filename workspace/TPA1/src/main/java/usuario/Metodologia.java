@@ -1,18 +1,13 @@
 package usuario;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import org.mockito.internal.util.collections.Sets;
 import org.uqbar.commons.utils.Observable;
-
 import Condiciones.Condicion;
 import Condiciones.Criterio;
+import repository.EmpresasAEvaluarRepository;
+
 @Observable
 public class Metodologia {
 
@@ -20,6 +15,7 @@ public class Metodologia {
 	private List<Condicion> condiciones = new LinkedList<>();
 	private Criterio criterio = new Criterio();
 	private String nombre;
+	private List<Empresa> conjuntoDeEmpresasAEvaluar;
 	
 	public Metodologia(){
 		this.criterio = new Criterio();
@@ -50,7 +46,15 @@ public class Metodologia {
 	}
 
 	
-	public List<List<Empresa>> evaluar(List<String> periodos){ 
+	public void setConjuntoDeEmpresasAEvaluar(List<Empresa> conjuntoDeEmpresasAEvaluar) {
+		this.conjuntoDeEmpresasAEvaluar = conjuntoDeEmpresasAEvaluar;
+			
+	}
+
+	
+	public List<List<Empresa>> evaluar(List<String> periodos){ /*Evaluar podria devolver la lista final rankeada*/
+	
+		this.setConjuntoDeEmpresasAEvaluar(EmpresasAEvaluarRepository.getEmpresasAEvaluar());
 		/*
 		 * List<List> listaEmpresasEvaluadas = Criterio.evaluar(periodos,this.empresas);
 		 * con esta lista de listas de empresas evaluadas: 1. Busco la interseccion ---> Obtengo en las que conviene invertir
@@ -58,14 +62,12 @@ public class Metodologia {
 		 * 										 3. Busco el complemento de la lista interseccion ---> Obtengo en las que no conviene invertir
 		 * 										 4. Podria retornar una lista de dos listas de empresas. Para la UI
 		 * */
-		this.criterio.evaluar(this.empresasAEvaluar, this.condiciones, periodos);
 		
 		List<List<Empresa>> listasEmpresasEvaluadas = this.criterio.getListasEmpresasEvaluadas();
+
+		this.criterio.evaluar(this.conjuntoDeEmpresasAEvaluar, this.condiciones, periodos);
 		
 		List<Empresa> empresasInvertibles = this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas);
-		
-		
-		System.out.println("Empresa"+empresasInvertibles.get(0).getNombre());
 		
 		this.criterio.ordenarPorPuntaje(empresasInvertibles,this.condiciones); // TODO: Falta implementar
 		
@@ -73,8 +75,10 @@ public class Metodologia {
 		
 		
 		List<List<Empresa>> resultado = new LinkedList<>();
+		
 		resultado.add(empresasInvertibles);
 		resultado.add(empresasNoInvertibles);
+		
 		return resultado;
 	}
 	

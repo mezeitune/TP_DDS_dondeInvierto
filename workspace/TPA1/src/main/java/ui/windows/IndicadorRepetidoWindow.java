@@ -28,7 +28,7 @@ public class IndicadorRepetidoWindow extends Dialog<IndicadorRepetidoViewModel> 
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new ColumnLayout(2));
 		
-		new Label(mainPanel).setText("Ingreso un indicador repetido , ¿½Desea volver a intentar cargarlo?");
+		new Label(mainPanel).setText("Ingreso un indicador repetido , ¿Desea volver a intentar cargarlo?");
 		
 				
 	}

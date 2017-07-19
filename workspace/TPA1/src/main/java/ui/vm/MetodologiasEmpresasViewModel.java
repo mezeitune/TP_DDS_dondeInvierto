@@ -1,6 +1,7 @@
 package ui.vm;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,11 +25,15 @@ public class MetodologiasEmpresasViewModel {
 	private List<Metodologia> metodologias;
 	private Metodologia metodologia;
 	private List<List<Empresa>> empresasRankeadas;
+	
+	private List<Empresa> empresasValidas = new LinkedList<>();
+	private List<Empresa> empresasNoValidas = new LinkedList<>();
+	
 	private List<Empresa> empresasQueNoConvieneInvertir;
 	private List<Empresa> empresasAEvaluar;
 	private List<String> periodos;	
 	
-	
+
 
 	public MetodologiasEmpresasViewModel() {
 		try {
@@ -69,7 +74,11 @@ public class MetodologiasEmpresasViewModel {
 	
 	public void evaluar(){
 		this.empresasRankeadas = this.metodologia.evaluar(this.getPeriodos());
-		ObservableUtils.firePropertyChanged(this, "empresasRankeadas");		
+		this.empresasValidas = empresasRankeadas.get(0);
+		this.empresasNoValidas = empresasRankeadas.get(1);
+		
+		ObservableUtils.firePropertyChanged(this, "empresasValidas");
+		ObservableUtils.firePropertyChanged(this, "empresasNoValidas");
 	}
 	
 	public Metodologia getMetodologia(){
@@ -106,9 +115,6 @@ public class MetodologiasEmpresasViewModel {
 	public List<Empresa> getEmpresasQueNoConvieneInvertir(){
 		return this.empresasQueNoConvieneInvertir;
 	}
-	
-
-
 	
 	public void setSeleccionoTodasLasEmpresas(boolean seleccionoTodas){
 		this.seleccionoTodasLasEmpresas=seleccionoTodas;
@@ -147,4 +153,11 @@ public class MetodologiasEmpresasViewModel {
 		return this.empresas;
 	}
 	
+	public List<Empresa> getEmpresasValidas() {
+		return empresasValidas;
+	}
+	
+	public List<Empresa> getEmpresasNoValidas() {
+		return empresasNoValidas;
+	}
 }

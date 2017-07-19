@@ -13,12 +13,12 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import Condiciones.Condicion;
-import ui.vm.CargarCondicionViewModel;
+import ui.vm.CargarCriterioViewModel;
 import ui.vm.CargarMetodologiaViewModel;
 
-public class CargarCondicionWindow extends Dialog <CargarCondicionViewModel> {
-	public CargarCondicionWindow(WindowOwner owner) {
-		super(owner, new CargarCondicionViewModel());
+public class CargarCriterioWindow extends Dialog <CargarCriterioViewModel> {
+	public CargarCriterioWindow(WindowOwner owner) {
+		super(owner, new CargarCriterioViewModel());
 	}
 
 	@Override

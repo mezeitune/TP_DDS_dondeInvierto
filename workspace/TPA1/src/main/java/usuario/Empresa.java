@@ -20,6 +20,14 @@ public class Empresa {
 		this.nombre = nombreEmpresa;
 		this.cuentas = cuentas;
 	}*/
+	
+	public Empresa(String nombreEmpresa){
+		this.nombre=nombreEmpresa;
+	}
+	
+	public Empresa(){
+		
+	}
 
 	
 	public String getNombre() {
