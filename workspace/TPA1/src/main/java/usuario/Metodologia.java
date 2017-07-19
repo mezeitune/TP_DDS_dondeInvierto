@@ -46,15 +46,10 @@ public class Metodologia {
 	}
 
 	
-	public void setConjuntoDeEmpresasAEvaluar(List<Empresa> conjuntoDeEmpresasAEvaluar) {
-		this.conjuntoDeEmpresasAEvaluar = conjuntoDeEmpresasAEvaluar;
-			
-	}
-
 	
 	public List<List<Empresa>> evaluar(List<String> periodos){ /*Evaluar podria devolver la lista final rankeada*/
 	
-		this.setConjuntoDeEmpresasAEvaluar(EmpresasAEvaluarRepository.getEmpresasAEvaluar());
+		this.setEmpresasAEvaluar(EmpresasAEvaluarRepository.getEmpresasAEvaluar());
 		/*
 		 * List<List> listaEmpresasEvaluadas = Criterio.evaluar(periodos,this.empresas);
 		 * con esta lista de listas de empresas evaluadas: 1. Busco la interseccion ---> Obtengo en las que conviene invertir

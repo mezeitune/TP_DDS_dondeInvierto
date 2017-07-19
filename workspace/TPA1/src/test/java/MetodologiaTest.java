@@ -14,7 +14,18 @@ public class MetodologiaTest {
 	
 	@Before
 	public void init(){
-		
+		List<Empresa> conjuntoDeEmpresasAEvaluar = new LinkedList<Empresa>();
+		Empresa empresa1 = new Empresa("Facebook");
+		Empresa empresa2 = new Empresa("Apple");
+		Empresa empresa3 = new Empresa("Oracle");
+		Empresa empresa4 = new Empresa("Genius");
+		Empresa empresa5 = new Empresa("IBM");
+		conjuntoDeEmpresasAEvaluar.add(empresa1);
+		conjuntoDeEmpresasAEvaluar.add(empresa2);
+		conjuntoDeEmpresasAEvaluar.add(empresa3);
+		conjuntoDeEmpresasAEvaluar.add(empresa4);
+		conjuntoDeEmpresasAEvaluar.add(empresa5);
+		metodologia.setEmpresasAEvaluar(conjuntoDeEmpresasAEvaluar);
 	}
 	
 	@Test
@@ -47,5 +58,22 @@ public class MetodologiaTest {
 		listaEsperada.add(empresa3);
 		
 		Assert.assertEquals(listaEsperada,this.metodologia.obtenerEmpresasInvertibles(listasEmpresasEvaluadas));
+	}
+	
+	@Test
+	public void unaMetodologiaObtieneBienLasEmpresasNoInvertibles(){
+		List<Empresa> conjuntoDeEmpresasAEvaluar = this.metodologia.getConjuntoDeEmpresasAEvaluar();
+		List<Empresa> empresasInvertibles = new LinkedList<Empresa>();
+		
+		empresasInvertibles.add(conjuntoDeEmpresasAEvaluar.get(0));
+		empresasInvertibles.add(conjuntoDeEmpresasAEvaluar.get(3));
+		
+		List<Empresa> listaEsperada = new LinkedList<Empresa>();
+		listaEsperada.add(conjuntoDeEmpresasAEvaluar.get(1));
+		listaEsperada.add(conjuntoDeEmpresasAEvaluar.get(2));
+		listaEsperada.add(conjuntoDeEmpresasAEvaluar.get(4));
+		
+		Assert.assertEquals(listaEsperada, this.metodologia.obtenerEmpresasNoInvertibles(empresasInvertibles));
+		
 	}
 }
