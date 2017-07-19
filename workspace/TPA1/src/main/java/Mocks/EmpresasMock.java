@@ -2,24 +2,29 @@ package Mocks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import usuario.Cuenta;
 import usuario.Empresa;
 
-public class ListaEmpresasMock {
+public class EmpresasMock {
 	
 	List<Empresa> empresas = new ArrayList<>();
-	List<Cuenta> cuentas = new ArrayList<>();
 	
-	public List<Empresa> mockearListaEmpresas(){
+	
+	public EmpresasMock(){
+		this.mockearListaEmpresas();
+	}
+	
+	public void mockearListaEmpresas(){
 		List<Cuenta> cuentasEmpresa1 = new ArrayList<>();
 		Cuenta cuenta1 = new Cuenta("EBITDA","2016",200);
 		Cuenta cuenta2 = new Cuenta("EBITDA","2015",300);
 		Cuenta cuenta3 = new Cuenta("Free CashFlow","2015",1100);
 		Cuenta cuenta4 = new Cuenta("Free CashFlow","2016",900);
 		Cuenta cuenta5 = new Cuenta("Ingreso Neto","2016",1500);
-		Cuenta cuenta6 = new Cuenta("Dividendo","2016",500);
-		Cuenta cuenta7 = new Cuenta("Capital Social","2016",1500);
+		Cuenta cuenta6 = new Cuenta("Dividendos","2016",500);
+		Cuenta cuenta7 = new Cuenta("Capital Total","2016",1500);
 		cuentasEmpresa1.add(cuenta1);
 		cuentasEmpresa1.add(cuenta2);
 		cuentasEmpresa1.add(cuenta3);
@@ -36,8 +41,8 @@ public class ListaEmpresasMock {
 		Cuenta cuenta13 = new Cuenta("EBITDA","2016",400);
 		Cuenta cuenta14 = new Cuenta("Revenue","2016",1000);
 		Cuenta cuenta15 = new Cuenta("Ingreso Neto","2016",600);
-		Cuenta cuenta16 = new Cuenta("Dividendo","2016",400);
-		Cuenta cuenta17 = new Cuenta("Capital Social","2016",1000);
+		Cuenta cuenta16 = new Cuenta("Dividendos","2016",400);
+		Cuenta cuenta17 = new Cuenta("Capital Total","2016",1000);
 		cuentasEmpresa2.add(cuenta11);
 		cuentasEmpresa2.add(cuenta12);
 		cuentasEmpresa2.add(cuenta13);
@@ -53,9 +58,9 @@ public class ListaEmpresasMock {
 		Cuenta cuenta22 = new Cuenta("Revenue","2010",100);
 		Cuenta cuenta23= new Cuenta("EBITDA","2016",300);
 		Cuenta cuenta24= new Cuenta("Revenue","2016",500);
-		Cuenta cuenta25 = new Cuenta("Ingreso Neto","2016",200);
-		Cuenta cuenta26 = new Cuenta("Dividendo","2016",400);
-		Cuenta cuenta27 = new Cuenta("Capital Social","2016",1000);
+		Cuenta cuenta25 = new Cuenta("Ingreso Neto","2016",2000);
+		Cuenta cuenta26 = new Cuenta("Dividendos","2016",400);
+		Cuenta cuenta27 = new Cuenta("Capital Total","2016",1000);
 		cuentasEmpresa3.add(cuenta21);
 		cuentasEmpresa3.add(cuenta22);
 		cuentasEmpresa3.add(cuenta23);
@@ -63,7 +68,6 @@ public class ListaEmpresasMock {
 		cuentasEmpresa3.add(cuenta25);
 		cuentasEmpresa3.add(cuenta26);
 		cuentasEmpresa3.add(cuenta27);
-		
 		Empresa empresa3 = new Empresa("IBM", cuentasEmpresa3);
 
 		
@@ -73,8 +77,8 @@ public class ListaEmpresasMock {
 		Cuenta cuenta33 = new Cuenta("EBITDA","2016",324);
 		Cuenta cuenta34 = new Cuenta("Revenue","2016",900);
 		Cuenta cuenta35 = new Cuenta("Ingreso Neto","2016",900);
-		Cuenta cuenta36 = new Cuenta("Dividendo","2016",400);
-		Cuenta cuenta37 = new Cuenta("Capital Social","2016",1500);
+		Cuenta cuenta36 = new Cuenta("Dividendos","2016",400);
+		Cuenta cuenta37 = new Cuenta("Capital Total","2016",1500);
 		
 		cuentasEmpresa4.add(cuenta31);
 		cuentasEmpresa4.add(cuenta32);
@@ -85,28 +89,21 @@ public class ListaEmpresasMock {
 		cuentasEmpresa4.add(cuenta37);
 		Empresa empresa4 = new Empresa("Oracle", cuentasEmpresa4);
 		
-		
-		
 		this.empresas.add(empresa1);
 		this.empresas.add(empresa2);
 		this.empresas.add(empresa3);
 		this.empresas.add(empresa4);
+	}
+	
+	public List<Empresa> getEmpresasMockeadas(){
 		return this.empresas;
 	}
 	
-	public List<Cuenta> mockearListaCuentas(){
-		Cuenta cuenta1 = new Cuenta("EBITDA","2016",200);
-		Cuenta cuenta2 = new Cuenta("EBITDA","2015",300);
-		Cuenta cuenta3 = new Cuenta("Free CashFlow","2015",1100);
-		Cuenta cuenta4 = new Cuenta("Free CashFlow","2016",50);
-		Cuenta cuenta5 = new Cuenta("Revenue","2014",1000);
-		Cuenta cuenta6 = new Cuenta("Free CashFlow","2016",900);
-		this.cuentas.add(cuenta1);
-		this.cuentas.add(cuenta2);
-		this.cuentas.add(cuenta3);
-		this.cuentas.add(cuenta4);
-		this.cuentas.add(cuenta5);
-		this.cuentas.add(cuenta6);
-		return this.cuentas;
+	public List<Cuenta> getCuentasMockeadas(){
+		List<Cuenta> cuentas = new ArrayList<>();
+		
+		this.empresas.stream().forEach(empresa -> cuentas.addAll(empresa.getCuentas()));
+		
+		return cuentas;
 	}
 }

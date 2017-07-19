@@ -13,7 +13,7 @@ import Condiciones.Comparativa;
 import Condiciones.Condicion;
 import Condiciones.Taxativa;
 import Condiciones.TipoCondicion;
-import Mocks.ListaEmpresasMock;
+import Mocks.EmpresasMock;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Cuenta;
 import usuario.Antiguedad;
@@ -28,8 +28,10 @@ public class CondicionesTest {
 	
 	@Before
 	public void init(){
-		empresas = new ListaEmpresasMock().mockearListaEmpresas();
-		cuentas = new ListaEmpresasMock().mockearListaCuentas();
+		EmpresasMock listasEmpresasMockeadas = new EmpresasMock();
+		
+		empresas = listasEmpresasMockeadas.getEmpresasMockeadas();
+		cuentas = listasEmpresasMockeadas.getCuentasMockeadas();
 		periodos.add("2016");
 		ParserFormulaToIndicador.init(cuentas);
 	}
@@ -69,12 +71,19 @@ public class CondicionesTest {
 	}
 	
 	@Test
-	public void maximizarROEComparaBienLasEmpresas(){
+	public void maximizarROEComparaBienLasEmpresasEnUnUnicoPeriodo(){
 		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
 		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
 		Condicion maximizarROE = new Condicion(comparativa,roe,0);
 		
+		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		
+		listaEsperada.add(empresas.get(2));
+		listaEsperada.add(empresas.get(0));
+		listaEsperada.add(empresas.get(3));
+		listaEsperada.add(empresas.get(1));
+		
+		assertEquals(listaEsperada,maximizarROE.evaluar(empresas,periodos));
 		
 	}
 	

@@ -1,6 +1,6 @@
 import static org.junit.Assert.*;
 
-import Mocks.ListaEmpresasMock;
+import Mocks.EmpresasMock;
 import Mocks.ListaIndicadoresMock;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 
@@ -21,7 +21,7 @@ public class ParserIndicadoresTest {
 	@Before
  	public void init() throws IOException {
 		ListaIndicadoresMock mockListaIndicadores = new ListaIndicadoresMock ();
-		List<Cuenta> mockListaCuentas = new ListaEmpresasMock().mockearListaCuentas();
+		List<Cuenta> mockListaCuentas = new EmpresasMock().getCuentasMockeadas();
 		mockListaIndicadores.setIndicadoresMockeados();
 		indicadores = mockListaIndicadores.getIndicadoresMockeados();
 		ParserFormulaToIndicador.init(indicadores,mockListaCuentas);
