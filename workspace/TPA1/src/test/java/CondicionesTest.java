@@ -12,6 +12,7 @@ import Comparadores.ComparadorMenor;
 import Condiciones.Comparativa;
 import Condiciones.Condicion;
 import Condiciones.Taxativa;
+import Condiciones.TipoCondicion;
 import Mocks.ListaEmpresasMock;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Cuenta;
@@ -64,6 +65,16 @@ public class CondicionesTest {
 		List<Empresa> listaEsperada = longevidad.evaluar(empresas, periodos);
 
 		assertEquals("Apple",listaEsperada.get(0).getNombre()); //La unica con antiguedad mayor a 3 anos
+		
+	}
+	
+	@Test
+	public void maximizarROEComparaBienLasEmpresas(){
+		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
+		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
+		Condicion maximizarROE = new Condicion(comparativa,roe,0);
+		
+		
 		
 	}
 	

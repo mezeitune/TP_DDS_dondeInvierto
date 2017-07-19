@@ -47,21 +47,14 @@ public class Metodologia {
 
 	
 	
-	public List<List<Empresa>> evaluar(List<String> periodos){ /*Evaluar podria devolver la lista final rankeada*/
+	public List<List<Empresa>> evaluar(List<String> periodos){ 
 	
 		this.setEmpresasAEvaluar(EmpresasAEvaluarRepository.getEmpresasAEvaluar());
-		/*
-		 * List<List> listaEmpresasEvaluadas = Criterio.evaluar(periodos,this.empresas);
-		 * con esta lista de listas de empresas evaluadas: 1. Busco la interseccion ---> Obtengo en las que conviene invertir
-		 * 										 2. Defino el orden de la interseccion
-		 * 										 3. Busco el complemento de la lista interseccion ---> Obtengo en las que no conviene invertir
-		 * 										 4. Podria retornar una lista de dos listas de empresas. Para la UI
-		 * */
+
 		this.criterio.evaluar(this.conjuntoDeEmpresasAEvaluar, this.condiciones, periodos);
 		
 		List<List<Empresa>> listasEmpresasEvaluadas = this.criterio.getListasEmpresasEvaluadas();
 
-		
 		List<Empresa> empresasInvertibles = this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas);
 		
 		this.criterio.ordenarPorPuntaje(empresasInvertibles,this.condiciones); // TODO: Falta implementar
