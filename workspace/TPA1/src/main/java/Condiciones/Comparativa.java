@@ -42,26 +42,12 @@ public class Comparativa implements TipoCondicion{
 		return this.comparador;
 	}
 	
-	public void setPeso(int peso){
-		this.peso = peso;
-	}
-	public int getPeso(){
-		return this.peso;
-	}
 	
 	@Override
 	public List<Empresa> evaluar(List<Empresa> empresas,List <String> periodos,Condicion condicion){
-<<<<<<< HEAD
 		List<Empresa> empresasComparadas = new LinkedList<Empresa> (empresas);
-		Collections.sort(empresasComparadas,(empresa1,empresa2)->this.comparar(empresa1, empresa2, periodos,condicion.getIndicador())? 1 : -1);
+		Collections.sort(empresasComparadas,(empresa1,empresa2)->this.comparar(empresa1, empresa2, periodos,condicion.getIndicador())? -1 : 1);
 		return empresasComparadas;
-=======
-		List<Empresa> empresasOrdenadas = new LinkedList<Empresa> (empresas);
-		
-		Collections.sort(empresasOrdenadas,(empresa1,empresa2)->this.comparar(empresa1, empresa2, periodos,condicion.getIndicador())? 1 : -1);
-		
-		return empresasOrdenadas;
->>>>>>> ffed7e88ffbd6f022e1dc8e7aa6dead86d84847a
 	}
 	
 	boolean comparar(Empresa empresa1,Empresa empresa2,List<String> periodos,Indicador indicador){
@@ -74,9 +60,15 @@ public class Comparativa implements TipoCondicion{
 		
 		int valor1 = indicador.calcular();
 		
+		System.out.println(empresa1.getNombre());
+		System.out.println(valor1);
+		
 		ParserFormulaToIndicador.setEmpresa(empresa2);
 		ParserFormulaToIndicador.setPeriodo(periodo);
 		int valor2 = indicador.calcular();
+		
+		System.out.println(empresa2.getNombre());
+		System.out.println(valor2);
 		
 		return this.comparador.comparar(valor1, valor2);
 	}

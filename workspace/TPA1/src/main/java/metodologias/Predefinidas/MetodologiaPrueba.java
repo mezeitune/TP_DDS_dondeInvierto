@@ -43,16 +43,16 @@ public class MetodologiaPrueba extends Metodologia {
 	
 	public void inicializarCondiciones(){
 		
-		int pesoComparativa = 5;
+		int peso = 5;
 		
 		Indicador indicador1 = new Indicador("Indicadoraaaa", "12+5");
-		TipoCondicion comparativa = new Comparativa(new ComparadorMayorIgual(), pesoComparativa);
-		Condicion mayorFreeCashFlow = new Condicion(comparativa, indicador1);
+		TipoCondicion comparativa = new Comparativa(new ComparadorMayorIgual());
+		Condicion mayorFreeCashFlow = new Condicion(comparativa, indicador1,peso);
 		
 		
 		Indicador indicador2 = new Antiguedad("Edad", "10");
 		TipoCondicion taxativa = new Taxativa(new ComparadorMenorIgual(), 10);
-		Condicion masViejoQue2018 = new Condicion(taxativa,indicador2);
+		Condicion masViejoQue2018 = new Condicion(taxativa,indicador2,peso);
 		
 		
 		condiciones.add(masViejoQue2018);

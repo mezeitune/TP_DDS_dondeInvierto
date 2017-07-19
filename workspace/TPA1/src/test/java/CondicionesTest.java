@@ -34,19 +34,18 @@ public class CondicionesTest {
 	}
 	
 	@Test
-	public void unaCondicionComparativaOtorgaBienElPeso(){
+	public void unaCondicionComparativaOrdenaBienUnaListaDeEmpresasComparadas(){
 		int peso=10;
 		Indicador indicador = new Indicador("Indicador1","EBITDA/15");
 		Comparador mayor = new ComparadorMayor();
 		Comparativa estadoComparativo = new Comparativa(mayor);
 		Condicion condicion = new Condicion(estadoComparativo,indicador,peso);
 		
-		List<Empresa> listaEsperada = condicion.evaluar(empresas, periodos);
-		Empresa empresa1 = listaEsperada.get(0);
-		Empresa empresa2= listaEsperada.get(1);
 		
-		assertEquals(0,empresa1.getPeso());
-		assertEquals(10,empresa2.getPeso()); //En el mock, se hace que la empresa 2 tenga mayor EBITDA
+		List<Empresa> listaEsperada = condicion.evaluar(empresas, periodos);
+		
+		assertEquals("Apple",listaEsperada.get(0).getNombre()); //En el mock, se hace que Apple tenga mayor EBITDA
+		assertEquals("Facebook",listaEsperada.get(1).getNombre());
 		
 	}
 	

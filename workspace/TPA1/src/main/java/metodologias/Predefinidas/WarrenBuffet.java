@@ -49,16 +49,15 @@ public class WarrenBuffet extends Metodologia{
 		
 		int pesoRoe = 20;
 		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
-		TipoCondicion comparativa = new Comparativa(new ComparadorMayor(),pesoRoe);
-		Condicion maximizarROE = new Condicion(comparativa,roe);
+		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
+		Condicion maximizarROE = new Condicion(comparativa,roe,pesoRoe);
 		
 		condicionesPredefinidas.add(maximizarROE);		
 		
 		int pesoNivelDeuda=10;
 		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");//TODO:Busar como se calcula
 		comparativa.setComparador(new ComparadorMenor());
-		((Comparativa) comparativa).setPeso(pesoNivelDeuda);
-		Condicion minimizarDeuda = new Condicion(comparativa,nivelDeuda);
+		Condicion minimizarDeuda = new Condicion(comparativa,nivelDeuda,pesoNivelDeuda);
 		
 		condicionesPredefinidas.add(minimizarDeuda);
 
