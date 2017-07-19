@@ -13,6 +13,7 @@ import Condiciones.Comparativa;
 import Condiciones.Condicion;
 import Condiciones.Taxativa;
 import Condiciones.TipoCondicion;
+import Condiciones.Predefinidas.MargenesCrecientes;
 import Mocks.EmpresasMock;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Cuenta;
@@ -119,6 +120,22 @@ public class CondicionesTest {
 
 		assertEquals(listaEsperada,longevidad.evaluar(empresas, periodos)); 
 		
+	}
+	
+	@Test
+	public void losMargenesConsistenementesCrecientesComparanBienPeroParaUnSoloAno(){
+		Indicador margen = new Indicador("Margen","Activo/Capital Total");
+		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
+		//MargenesCrecientes margenesCrecientes = new MargenesCrecientes(comparativa,margen,0);
+		
+		List<Empresa> listaEsperada = new LinkedList<Empresa>();
+		
+		listaEsperada.add(empresas.get(1));
+		listaEsperada.add(empresas.get(0));
+		listaEsperada.add(empresas.get(3));
+		listaEsperada.add(empresas.get(2));
+
+		assertEquals(listaEsperada,new Condicion(comparativa,margen,0).evaluar(empresas, periodos)); 
 	}
 	
 	

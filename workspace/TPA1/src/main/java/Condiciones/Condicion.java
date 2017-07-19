@@ -9,9 +9,9 @@ import usuario.Indicador;
 @Observable
 public class Condicion {
 
-	private TipoCondicion tipo;
-	private int peso;
-	private Indicador indicador;
+	protected TipoCondicion tipo;
+	public int peso;
+	public Indicador indicador;
 	
 	
 	public Condicion(TipoCondicion tipo,Indicador indicador,int peso){
