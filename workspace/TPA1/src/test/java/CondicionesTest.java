@@ -42,10 +42,14 @@ public class CondicionesTest {
 		Condicion condicion = new Condicion(estadoComparativo,indicador,peso);
 		
 		
-		List<Empresa> listaEsperada = condicion.evaluar(empresas, periodos);
+		List<Empresa> listaEsperada = new LinkedList<>();
+		listaEsperada.add(empresas.get(1));
+		listaEsperada.add(empresas.get(3));
+		listaEsperada.add(empresas.get(2));
+		listaEsperada.add(empresas.get(0));
 		
-		assertEquals("Apple",listaEsperada.get(0).getNombre()); //En el mock, se hace que Apple tenga mayor EBITDA
-		assertEquals("Facebook",listaEsperada.get(1).getNombre());
+		
+		assertEquals(listaEsperada,condicion.evaluar(empresas, periodos)); 
 		
 	}
 	
