@@ -38,8 +38,8 @@ public class CondicionesTest {
 		int peso=10;
 		Indicador indicador = new Indicador("Indicador1","EBITDA/15");
 		Comparador mayor = new ComparadorMayor();
-		Comparativa estadoComparativo = new Comparativa(mayor,peso);
-		Condicion condicion = new Condicion(estadoComparativo,indicador);
+		Comparativa estadoComparativo = new Comparativa(mayor);
+		Condicion condicion = new Condicion(estadoComparativo,indicador,peso);
 		
 		List<Empresa> listaEsperada = condicion.evaluar(empresas, periodos);
 		Empresa empresa1 = listaEsperada.get(0);
@@ -52,10 +52,11 @@ public class CondicionesTest {
 	
 	@Test
 	public void laCondicionTaxativaDiscriminaBien(){ //Simulamos la longevidad taxativa
+		int peso=20;
 		int anosRequeridos = 3;
 		Comparador menor = new ComparadorMenor(); 
 		Taxativa estadoTaxativo = new Taxativa(menor,anosRequeridos);
-		Condicion longevidad = new Condicion(estadoTaxativo,new Antiguedad());
+		Condicion longevidad = new Condicion(estadoTaxativo,new Antiguedad(),peso);
 		
 		List<Empresa> listaEsperada = longevidad.evaluar(empresas, periodos);
 

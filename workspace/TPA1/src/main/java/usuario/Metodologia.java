@@ -62,10 +62,10 @@ public class Metodologia {
 		 * 										 3. Busco el complemento de la lista interseccion ---> Obtengo en las que no conviene invertir
 		 * 										 4. Podria retornar una lista de dos listas de empresas. Para la UI
 		 * */
+		this.criterio.evaluar(this.conjuntoDeEmpresasAEvaluar, this.condiciones, periodos);
 		
 		List<List<Empresa>> listasEmpresasEvaluadas = this.criterio.getListasEmpresasEvaluadas();
 
-		this.criterio.evaluar(this.conjuntoDeEmpresasAEvaluar, this.condiciones, periodos);
 		
 		List<Empresa> empresasInvertibles = this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas);
 		

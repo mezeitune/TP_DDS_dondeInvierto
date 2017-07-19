@@ -16,12 +16,10 @@ public class Comparativa implements TipoCondicion{
 	
 	private static Comparativa instance ;
 	public Comparador comparador;
-	public int peso;
 
 
-	public Comparativa(Comparador comparador,int peso){
+	public Comparativa(Comparador comparador){
 		this.comparador = comparador;
-		this.peso=peso;
 	}
 	
 	public Comparativa(){
