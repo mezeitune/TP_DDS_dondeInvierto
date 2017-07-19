@@ -14,6 +14,7 @@ import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
+import org.uqbar.commons.model.ObservableUtils;
 
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
@@ -66,37 +67,27 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		
 		new Button(actionsPanel).setCaption("Cargar Indicador")
 								.onClick(() -> {
-												try {
-													CargarIndicadoresViewModel.generarIndicador();
-												} catch (IOException e2) {
-													// TODO Auto-generated catch block
-													e2.printStackTrace();
-												}//Actualiza archivo sin cerrar programa
-												try {
-													new ParserFormulaToIndicador();
-												} catch (IOException e1) {
-													// TODO Auto-generated catch block
-													e1.printStackTrace();
-												}//Muestra Indicadores en tabla											
-												try{
-												
-													if(CargarIndicadoresViewModel.getCodigoDeError() == 1){
-														this.getDelegate().close();
-														IndicadorVacioWindow();
-													}else if(CargarIndicadoresViewModel.getCodigoDeError() == 2){
-														this.getDelegate().close();
-														IndicadorErroneoWindow();
-													}else if (CargarIndicadoresViewModel.getCodigoDeError() == 3){
-														
-														this.getDelegate().close();
-														IndicadorRepetidoWindow();
-													} else {
-														this.getDelegate().close();
-														PreguntaNuevoIndicadorWindow();
-													}
-												}catch (IOException e) {
-													e.printStackTrace();
-												}
+
+									try{
+										CargarIndicadoresViewModel.generarIndicador();
+										
+										if(CargarIndicadoresViewModel.getCodigoDeError() == 1){
+											this.getDelegate().close();
+											IndicadorVacioWindow();
+										}else if(CargarIndicadoresViewModel.getCodigoDeError() == 2){
+											this.getDelegate().close();
+											IndicadorErroneoWindow();
+										}else if (CargarIndicadoresViewModel.getCodigoDeError() == 3){
+											this.getDelegate().close();
+											IndicadorRepetidoWindow();
+										} else {
+											this.getDelegate().close();
+											PreguntaNuevoIndicadorWindow();
+											
+										}
+									}catch (IOException e) {
+										e.printStackTrace();
+									}
 								}).setWidth(200);
 	
 		new Button(actionsPanel).setCaption("Cancelar")

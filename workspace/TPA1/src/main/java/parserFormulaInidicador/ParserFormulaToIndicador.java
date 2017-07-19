@@ -33,16 +33,21 @@ public class ParserFormulaToIndicador {
 		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("indicadores.json");
 		CSVToEmpresas parserCuentas = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
 		
+		setIndicadoresDefinidosPorUsuario();
 		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
 		ArchivoEIndicadoresUsuarioRepository.cargarIndicadoresPredefinidos();
 		
-		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
 		
 		/*Obtengo todas las cuentas de las empresas del csv*/
 		empresas=parserCuentas.csvFileToEmpresas();
 		for(int i=0;i<empresas.size();i++){
 			cuentas.addAll(empresas.get(i).getCuentas());
 		}
+	}
+
+
+	private static void setIndicadoresDefinidosPorUsuario() {
+		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
 	}
 	
 	
@@ -385,7 +390,7 @@ public class ParserFormulaToIndicador {
 	
 	
 	public static boolean validarAntesDePrecargar(String formula) throws IOException{ 
-		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
+		setIndicadoresDefinidosPorUsuario();
 		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
 		List<Empresa> empresas = parser.csvFileToEmpresas();
 

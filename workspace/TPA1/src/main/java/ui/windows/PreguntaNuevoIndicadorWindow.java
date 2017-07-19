@@ -2,7 +2,6 @@ package ui.windows;
 
 import java.io.IOException;
 
-import org.omg.CORBA.UserException;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -10,11 +9,10 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import parserFormulaInidicador.ParserFormulaToIndicador;
-import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.PreguntaNuevoIndicadorViewModel;
 
 
+@SuppressWarnings("serial")
 public class PreguntaNuevoIndicadorWindow extends Dialog<PreguntaNuevoIndicadorViewModel> {
 	
 	public PreguntaNuevoIndicadorWindow (WindowOwner owner) {
@@ -25,7 +23,7 @@ public class PreguntaNuevoIndicadorWindow extends Dialog<PreguntaNuevoIndicadorV
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new ColumnLayout(2));
 		
-		new Label(mainPanel).setText("�Desea cargar un nuevo indicador?");
+		new Label(mainPanel).setText("Desea cargar un nuevo indicador?");
 		
 				
 	}
