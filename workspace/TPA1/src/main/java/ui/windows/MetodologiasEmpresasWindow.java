@@ -124,18 +124,18 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		selectorMetodologia.bindValueToProperty("metodologia");
 		
 		new Label(Panel2).setText("RANKING EMPRESAS").setBackground(Color.GREEN);
-		
-		Table<Empresa> tableEmpresasRankeadas = new Table<Empresa>(Panel2, Empresa.class);
+		new List<>(Panel2).bindItemsToProperty("empresasValidas").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
+		/*Table<Empresa> tableEmpresasRankeadas = new Table<Empresa>(Panel2, Empresa.class);
 		tableEmpresasRankeadas.setNumberVisibleRows(6).setWidth(200);
 		tableEmpresasRankeadas.bindItemsToProperty("empresasRankeadas"); 
-		new Column<Empresa>(tableEmpresasRankeadas).setTitle("Nombre").bindContentsToProperty("nombre");
+		new Column<Empresa>(tableEmpresasRankeadas).setTitle("Nombre").bindContentsToProperty("nombre");*/
 		
 		new Label(Panel2).setText("NO CONVIENE INVERTIR EN").setBackground(Color.RED);
-		
-		Table<Indicador> tableEmpresasQueNoConviene = new Table<Indicador>(Panel2, Indicador.class);
+		new List<>(Panel2).bindItemsToProperty("empresasNoValidas").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
+		/*Table<Indicador> tableEmpresasQueNoConviene = new Table<Indicador>(Panel2, Indicador.class);
 		tableEmpresasQueNoConviene.setNumberVisibleRows(6).setWidth(200);
 		tableEmpresasQueNoConviene.bindItemsToProperty("empresasQueNoConvieneInvertir"); 
-		new Column<Indicador>(tableEmpresasQueNoConviene).setTitle("Nombre").bindContentsToProperty("nombre");
+		new Column<Indicador>(tableEmpresasQueNoConviene).setTitle("Nombre").bindContentsToProperty("nombre");*/
 		
 }
 

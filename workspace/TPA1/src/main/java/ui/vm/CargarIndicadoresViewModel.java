@@ -91,7 +91,7 @@ public class CargarIndicadoresViewModel {
 
 			if(ParserFormulaToIndicador.validarAntesDePrecargar(formulaIndicador)){
 				new ParserFormulaToIndicador();
-				//ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
+				ParserFormulaToIndicador.getCalculoIndicador(formulaIndicador);
 	
 				ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );	
 				setCodigoDeError(0);//devolviendo al estado original , ya que es correcto

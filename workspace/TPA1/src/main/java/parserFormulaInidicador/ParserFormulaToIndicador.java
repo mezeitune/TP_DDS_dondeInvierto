@@ -68,33 +68,37 @@ public class ParserFormulaToIndicador {
 	public static void setPeriodo(String unPeriodo){
 		periodo=unPeriodo;
 		cuentasPorPeriodo = empresa.getCuentasPorPeriodo(periodo);
-		cuentasPorPeriodo.stream().forEach(c1 -> System.out.println(c1.getNombre()));
 	}
 	
 	public static int getCalculoIndicador(String formula){
-		return ParserFormulaToIndicador.construirArbolOperaciones(formula).calcular();
+		try{
+			return ParserFormulaToIndicador.construirArbolOperaciones(formula).calcular();
+		}catch(NullPointerException e){}
+		return 0;
 	}
 	
 
 	public static Operacion construirArbolOperaciones(String operandos){
-		String operadorSuma = "(.*)[+](.*)";
-		String operadorResta = "(.*)[-](.*)";
-		String operadorMultiplicacion = "(.*)[*](.*)";
-		String operadorDivision = "(.*)[/](.*)";
-		if(operandos.matches(operadorSuma)) return ParserFormulaToIndicador.getSuma(operandos.split("[+]"));
-		if(operandos.matches(operadorResta)) return ParserFormulaToIndicador.getResta(operandos.split("[-]"));
-		if(operandos.matches(operadorMultiplicacion)) return ParserFormulaToIndicador.getMultiplicacion(operandos.split("[*]"));
-		if (operandos.matches(operadorDivision)) return ParserFormulaToIndicador.getDivision(operandos.split("[/]"));
-		else {
-				return ParserFormulaToIndicador.getClaseOperador(operandos);
+
+				String operadorSuma = "(.*)[+](.*)";
+				String operadorResta = "(.*)[-](.*)";
+				String operadorMultiplicacion = "(.*)[*](.*)";
+				String operadorDivision = "(.*)[/](.*)";
+				if(operandos.matches(operadorSuma)) return ParserFormulaToIndicador.getSuma(operandos.split("[+]"));
+				if(operandos.matches(operadorResta)) return ParserFormulaToIndicador.getResta(operandos.split("[-]"));
+				if(operandos.matches(operadorMultiplicacion)) return ParserFormulaToIndicador.getMultiplicacion(operandos.split("[*]"));
+				if (operandos.matches(operadorDivision)) return ParserFormulaToIndicador.getDivision(operandos.split("[/]"));
+				else {
+					try{
+						return ParserFormulaToIndicador.getClaseOperador(operandos);
+					}catch(NumberFormatException e){}
+				}
+				return null;
 		}
-		/*El orden de los if nos determina el orden de la precedencia de este arbol*/
-	}
 
 	/*TODO: Buscar una abstraccion mas al getDivision-getMultiplicacion-getSuma-getResta. ----> getOperacion*/
 	/*TODO: Tratar de no repetir todo este codigo 4 veces. Solamente cambia el tipo de operacion + - * /   */
 	public static Division getDivision(String [] formula){
-		System.out.println("Creando nodo Division");
 
 		Division division = new Division();
 		List <String> operandos = new LinkedList<>();
@@ -102,12 +106,9 @@ public class ParserFormulaToIndicador {
 		for(i=0;i<formula.length;i++){
 			operandos.add(i, formula[i]);
 		}
-		System.out.println("Operador Izquierdo");
-		System.out.println(operandos.get(0));
 		
 		division.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
 		
-		System.out.println("HIjo izquierdo Division seteado");
 		
 		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
 			operandos.add(i,"/");
@@ -117,26 +118,22 @@ public class ParserFormulaToIndicador {
 		for(i=0;i<operandos.size();i++){
 			formulaString += operandos.get(i);
 		}
-		System.out.println("Operador Derecho");
-		System.out.println(formulaString);
 
-		division.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		System.out.println("HIjo derecho Division seteado");
+		try{
+			division.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
+		}catch(IndexOutOfBoundsException e){}
+		
 		return division;
 		}
 
 	public static Multiplicacion getMultiplicacion(String [] formula){
-		System.out.println("Creando nodo Multiplicacion");
 		Multiplicacion multiplicacion = new Multiplicacion();
 		List <String> operandos = new LinkedList<>();
 		int i;
 		for(i=0;i<formula.length;i++){
 			operandos.add(i, formula[i]);
 		}
-		System.out.println("Operador Izquierdo");
-		System.out.println(operandos.get(0));
 		multiplicacion.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		System.out.println("HIjo izquierdo Multiplicacion seteado");
 		
 		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
 			operandos.add(i,"*");
@@ -147,17 +144,15 @@ public class ParserFormulaToIndicador {
 		for(i=0;i<operandos.size();i++){
 			formulaString += operandos.get(i);
 		}
-		System.out.println("Operador Derecho");
-		System.out.println(formulaString);
-
-		multiplicacion.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		System.out.println("HIjo derecho Multiplicacion seteado");
+		try{
+			multiplicacion.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
+		}catch(IndexOutOfBoundsException e){}
+		
 		return multiplicacion;
 		
 	}
 
 	public static Resta getResta(String [] formula){
-		System.out.println("Creando nodo Resta");
 		
 		Resta resta = new Resta();
 		List <String> operandos = new LinkedList<>();
@@ -165,10 +160,7 @@ public class ParserFormulaToIndicador {
 		for(i=0;i<formula.length;i++){
 			operandos.add(i, formula[i]);
 		}
-		System.out.println("Operador IZquierdo");
-		System.out.println(operandos.get(0));
 		resta.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		System.out.println("HIjo izquierdo Resta seteado");
 		
 		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
 			operandos.add(i,"-");
@@ -178,11 +170,11 @@ public class ParserFormulaToIndicador {
 		for(i=0;i<operandos.size();i++){
 			formulaString += operandos.get(i);
 		}
-		System.out.println("Operador Derecho");
-		System.out.println(formulaString);
 
-		resta.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		System.out.println("HIjo derecho Resta seteado");
+		try{
+			resta.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
+		}catch(IndexOutOfBoundsException e){}
+		
 		return resta;
 	
 	}
@@ -190,19 +182,16 @@ public class ParserFormulaToIndicador {
 	
 	
 	public static Suma getSuma(String [] formula){
-		System.out.println("Creando nodo Suma");
+
 		Suma suma = new Suma();
 		List <String> operandos = new LinkedList<>();
 		int i;
 		for(i=0;i<formula.length;i++){
 			operandos.add(i, formula[i]);
 		}
-		System.out.println("Operador IZquierdo");
-		System.out.println(operandos.get(0));
 		
 		suma.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
 		
-		System.out.println("HIjo izquierdo Suma seteado");
 		
 		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
 			operandos.add(i,"+");
@@ -213,12 +202,10 @@ public class ParserFormulaToIndicador {
 		for(i=0;i<operandos.size();i++){
 			formulaString += operandos.get(i);
 		}
-		System.out.println("Operador Derecho");
-		System.out.println(formulaString);
+		try{
+			suma.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(formulaString));
+		}catch(IndexOutOfBoundsException e){}
 		
-		suma.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(formulaString));
-		
-		System.out.println("HIjo derecho Suma seteado");
 		return suma;
 	}
 	

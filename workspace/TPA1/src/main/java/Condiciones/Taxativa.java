@@ -40,7 +40,7 @@ public class Taxativa  implements TipoCondicion {
 	
 	@Override
 		public List<Empresa> evaluar(List<Empresa> empresas,List<String> periodos,Condicion condicion){
-			return empresas.stream().filter(empresa1 -> this.verificarCriterio(empresa1,periodos,condicion.getIndicador())).collect(Collectors.toList());
+			return empresas.stream().filter(empresa -> this.verificarCriterio(empresa,periodos,condicion.getIndicador())).collect(Collectors.toList());
 		}
 				
 		boolean verificarCriterio(Empresa empresa,List<String> periodos,Indicador indicador){

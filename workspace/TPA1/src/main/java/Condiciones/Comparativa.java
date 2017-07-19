@@ -54,7 +54,9 @@ public class Comparativa implements TipoCondicion{
 	@Override
 	public List<Empresa> evaluar(List<Empresa> empresas,List <String> periodos,Condicion condicion){
 		List<Empresa> empresasOrdenadas = new LinkedList<Empresa> (empresas);
+		
 		Collections.sort(empresasOrdenadas,(empresa1,empresa2)->this.comparar(empresa1, empresa2, periodos,condicion.getIndicador())? 1 : -1);
+		
 		return empresasOrdenadas;
 	}
 	
@@ -65,11 +67,12 @@ public class Comparativa implements TipoCondicion{
 	boolean compararEnPeriodo(Empresa empresa1,Empresa empresa2,String periodo,Indicador indicador){
 		ParserFormulaToIndicador.setEmpresa(empresa1);
 		ParserFormulaToIndicador.setPeriodo(periodo);
-		int valor1=indicador.calcular();
+		
+		int valor1 = indicador.calcular();
 		
 		ParserFormulaToIndicador.setEmpresa(empresa2);
 		ParserFormulaToIndicador.setPeriodo(periodo);
-		int valor2=indicador.calcular();
+		int valor2 = indicador.calcular();
 		
 		return this.comparador.comparar(valor1, valor2);
 	}

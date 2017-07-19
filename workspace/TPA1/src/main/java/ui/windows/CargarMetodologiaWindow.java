@@ -22,6 +22,7 @@ import usuario.Empresa;
 import usuario.Indicador;
 import usuario.Metodologia;
 
+@SuppressWarnings("serial")
 public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>{
 
 	public CargarMetodologiaWindow(WindowOwner owner) {

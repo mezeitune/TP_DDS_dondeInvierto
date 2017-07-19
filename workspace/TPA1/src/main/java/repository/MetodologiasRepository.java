@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Class.Main;
+import metodologias.Predefinidas.MetodologiaPrueba;
 import metodologias.Predefinidas.WarrenBuffet;
 import usuario.Metodologia;
 
@@ -27,7 +28,10 @@ public class MetodologiasRepository {
 	
 	public static void cargarMetodologiasPredefinidos(){
 		WarrenBuffet wb = WarrenBuffet.getInstance();
+		MetodologiaPrueba mp = MetodologiaPrueba.getInstance();
+		
 		MetodologiasRepository.addMetodologias(wb);
+		MetodologiasRepository.addMetodologias(mp);
 	}
 }
 
