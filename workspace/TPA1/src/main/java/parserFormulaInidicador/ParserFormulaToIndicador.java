@@ -106,10 +106,9 @@ public class ParserFormulaToIndicador {
 		for(i=0;i<formula.length;i++){
 			operandos.add(i, formula[i]);
 		}
-		
+
 		division.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		
-		
+
 		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
 			operandos.add(i,"/");
 		}
@@ -122,19 +121,21 @@ public class ParserFormulaToIndicador {
 		try{
 			division.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
 		}catch(IndexOutOfBoundsException e){}
-		
+
 		return division;
 		}
 
 	public static Multiplicacion getMultiplicacion(String [] formula){
+
 		Multiplicacion multiplicacion = new Multiplicacion();
 		List <String> operandos = new LinkedList<>();
 		int i;
 		for(i=0;i<formula.length;i++){
 			operandos.add(i, formula[i]);
 		}
+
 		multiplicacion.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		
+
 		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
 			operandos.add(i,"*");
 		}
@@ -153,15 +154,16 @@ public class ParserFormulaToIndicador {
 	}
 
 	public static Resta getResta(String [] formula){
-		
+
 		Resta resta = new Resta();
 		List <String> operandos = new LinkedList<>();
 		int i;
 		for(i=0;i<formula.length;i++){
 			operandos.add(i, formula[i]);
 		}
+
 		resta.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		
+
 		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
 			operandos.add(i,"-");
 		}
@@ -189,9 +191,8 @@ public class ParserFormulaToIndicador {
 		for(i=0;i<formula.length;i++){
 			operandos.add(i, formula[i]);
 		}
-		
+
 		suma.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		
 		
 		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
 			operandos.add(i,"+");
@@ -202,6 +203,7 @@ public class ParserFormulaToIndicador {
 		for(i=0;i<operandos.size();i++){
 			formulaString += operandos.get(i);
 		}
+
 		try{
 			suma.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(formulaString));
 		}catch(IndexOutOfBoundsException e){}

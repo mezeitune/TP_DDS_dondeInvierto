@@ -48,7 +48,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		//selectorMetodologia.bindItemsToProperty("condiciones");
 		//selectorMetodologia.bindValueToProperty("condicion");
 		
-		new Label(mainPanel).setText("Condiciones Disponibles").setBackground(Color.ORANGE);
+		new Label(mainPanel).setText("Criterios Disponibles").setBackground(Color.ORANGE);
 		
 		//Table<Condicion> tableCondiciones = new Table<Condicion>(mainPanel, Condicion.class);
 		
@@ -61,11 +61,11 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 		new Label(mainPanel).setText("Metodologias Disponibles").setBackground(Color.ORANGE);
 	
-		//Table<Metodologia> tableMetodologias = new Table<Metodologia>(mainPanel, Metodologia.class);
+		Table<Metodologia> tableMetodologias = new Table<Metodologia>(mainPanel, Metodologia.class);
 		
-		//tableMetodologias.setNumberVisibleRows(6).setWidth(200);
+		tableMetodologias.setNumberVisibleRows(6).setWidth(200);
 		
-		//tableMetodologias.bindItemsToProperty("metodologias"); 
+		tableMetodologias.bindItemsToProperty("metodologias"); 
 		
 		//new Column<Metodologia>(tableMetodologias).setTitle("Nombre").bindContentsToProperty("nombreMetodologia");
 		
@@ -125,7 +125,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 	}
 	public void CargarCondicionWindow() throws IOException {
-		Dialog<?> dialog = new CargarCondicionWindow(this);
+		Dialog<?> dialog = new CargarCriterioWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 		

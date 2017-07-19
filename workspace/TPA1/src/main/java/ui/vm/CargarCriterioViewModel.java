@@ -10,7 +10,7 @@ import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
 
 @Observable
-public class CargarCondicionViewModel {
+public class CargarCriterioViewModel {
 	private static String nombreCondicion;
 	private static List<Condicion> condiciones;
 	private static Condicion condicion;
@@ -27,7 +27,7 @@ public class CargarCondicionViewModel {
 
 
 	public void setIndicador(Indicador indicador) {
-		CargarCondicionViewModel.indicador = indicador;
+		CargarCriterioViewModel.indicador = indicador;
 	}
 
 
@@ -37,7 +37,7 @@ public class CargarCondicionViewModel {
 
 
 	public void setnombreCondicion(String nombreCondicion) {
-		CargarCondicionViewModel.nombreCondicion = nombreCondicion;
+		CargarCriterioViewModel.nombreCondicion = nombreCondicion;
 	}
 
 
@@ -47,7 +47,7 @@ public class CargarCondicionViewModel {
 
 
 	public void setCondiciones(List<Condicion> condiciones) {
-		CargarCondicionViewModel.condiciones = condiciones;
+		CargarCriterioViewModel.condiciones = condiciones;
 	}
 
 
@@ -57,7 +57,7 @@ public class CargarCondicionViewModel {
 
 
 	public void setCondicion(Condicion condicion) {
-		CargarCondicionViewModel.condicion = condicion;
+		CargarCriterioViewModel.condicion = condicion;
 	}
 
 
@@ -67,7 +67,7 @@ public class CargarCondicionViewModel {
 
 
 	public void setTipoCondiciones(List<String> tipoCondiciones) {
-		CargarCondicionViewModel.tipoCondiciones = tipoCondiciones;
+		CargarCriterioViewModel.tipoCondiciones = tipoCondiciones;
 	}
 
 
@@ -77,7 +77,7 @@ public class CargarCondicionViewModel {
 
 
 	public void setTipoCondicion(String tipoCondicion) {
-		CargarCondicionViewModel.tipoCondicion = tipoCondicion;
+		CargarCriterioViewModel.tipoCondicion = tipoCondicion;
 	}
 
 
@@ -87,7 +87,7 @@ public class CargarCondicionViewModel {
 
 
 	public void setComparadores(List<String> comparadores) {
-		CargarCondicionViewModel.comparadores = comparadores;
+		CargarCriterioViewModel.comparadores = comparadores;
 	}
 
 
@@ -97,12 +97,12 @@ public class CargarCondicionViewModel {
 
 
 	public void setComparador(String comparador) {
-		CargarCondicionViewModel.comparador = comparador;
+		CargarCriterioViewModel.comparador = comparador;
 	}
 
 
 	public void setIndicadores(List<Indicador> indicadores) {
-		CargarCondicionViewModel.indicadores = indicadores;
+		CargarCriterioViewModel.indicadores = indicadores;
 	}
 
 
