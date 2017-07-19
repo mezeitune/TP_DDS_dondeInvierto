@@ -63,7 +63,7 @@ public class EmpresasMock {
 		
 		List<Cuenta> cuentasEmpresa3 = new ArrayList<>();
 		Cuenta cuenta21 = new Cuenta("Free CashFlow","2016",100);
-		Cuenta cuenta22 = new Cuenta("Revenue","2010",100);
+		Cuenta cuenta22 = new Cuenta("Revenue","2011",100);
 		Cuenta cuenta23= new Cuenta("EBITDA","2016",300);
 		Cuenta cuenta24= new Cuenta("Revenue","2016",500);
 		Cuenta cuenta25 = new Cuenta("Ingreso Neto","2016",2000);
@@ -85,7 +85,7 @@ public class EmpresasMock {
 		
 		List<Cuenta> cuentasEmpresa4 = new ArrayList<>();
 		Cuenta cuenta31 = new Cuenta("Free CashFlow","2016",35);
-		Cuenta cuenta32 = new Cuenta("Revenue","2010",850);
+		Cuenta cuenta32 = new Cuenta("Revenue","2008",850);
 		Cuenta cuenta33 = new Cuenta("EBITDA","2016",324);
 		Cuenta cuenta34 = new Cuenta("Revenue","2016",900);
 		Cuenta cuenta35 = new Cuenta("Ingreso Neto","2016",900);

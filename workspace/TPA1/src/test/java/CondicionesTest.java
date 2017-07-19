@@ -57,7 +57,7 @@ public class CondicionesTest {
 	}
 	
 	@Test
-	public void laLongevidadTaxativaDiscriminaBien(){ 
+	public void laLongevidadTaxativaDiscriminaBien(){ /*TODO: Tener en cuentas las nuevas empresas que se agregaron al Mock*/
 		int peso=20;
 		int anosRequeridos = 3;
 		Comparador menor = new ComparadorMenor(); 
@@ -66,7 +66,7 @@ public class CondicionesTest {
 		
 		List<Empresa> listaEsperada = longevidad.evaluar(empresas, periodos);
 
-		assertEquals("Apple",listaEsperada.get(0).getNombre()); //La unica con antiguedad mayor a 3 anos
+		assertEquals("Apple",listaEsperada.get(0).getNombre()); 
 		
 	}
 	
@@ -89,7 +89,7 @@ public class CondicionesTest {
 	
 	@Test
 	public void nivelDeDeudaComparaBienLasEmpresasEnUnUnicoPeriodo(){
-		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");//TODO:Busar como se calcula
+		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");
 		TipoCondicion comparativa = new Comparativa(new ComparadorMenor());
 		Condicion minimizarDeuda = new Condicion(comparativa,nivelDeuda,0);
 		
@@ -105,7 +105,21 @@ public class CondicionesTest {
 	}
 	
 	
-	
+	@Test
+	public void laLongevidadComparativaComparaBien(){ 
+		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
+		Condicion longevidad = new Condicion(comparativa,new Antiguedad(),0);
+		
+		List<Empresa> listaEsperada = new LinkedList<Empresa>();
+		
+		listaEsperada.add(empresas.get(3));
+		listaEsperada.add(empresas.get(1));
+		listaEsperada.add(empresas.get(2));
+		listaEsperada.add(empresas.get(0));
+
+		assertEquals(listaEsperada,longevidad.evaluar(empresas, periodos)); 
+		
+	}
 	
 	
 	

@@ -49,7 +49,7 @@ public class WarrenBuffet extends Metodologia{
 		condicionesPredefinidas.add(maximizarROE);		
 		
 		int pesoNivelDeuda=10;
-		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");//TODO:Busar como se calcula
+		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");
 		comparativa.setComparador(new ComparadorMenor());
 		Condicion minimizarDeuda = new Condicion(comparativa,nivelDeuda,pesoNivelDeuda);
 		
