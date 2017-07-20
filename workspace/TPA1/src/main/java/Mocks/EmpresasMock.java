@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.uqbar.commons.utils.Observable;
+
 import usuario.Cuenta;
 import usuario.Empresa;
-
+@Observable
 public class EmpresasMock {
 	
 	List<Empresa> empresas = new ArrayList<>();

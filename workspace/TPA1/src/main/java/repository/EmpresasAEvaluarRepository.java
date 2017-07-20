@@ -1,23 +1,30 @@
 package repository;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import parser.parserArchivos.CSVToEmpresas;
 import parser.parserArchivos.ParserJsonAObjetosJava;
 import parserFormulaInidicador.ParserFormulaToIndicador;
+import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
 
 public class EmpresasAEvaluarRepository {
 	
-	public static List<Empresa> empresasAEvaluar = new LinkedList<>(); 
+	public static List<Empresa> empresasAEvaluar = new ArrayList<>(); 
 	public static List<String> periodosAEvaluar = new LinkedList<>(); 
+	
+	public EmpresasAEvaluarRepository(){
+		
+	}
 	
 	public static List<Empresa> getEmpresasAEvaluar() {
 		return empresasAEvaluar;
 	}
+
 
 	public static void agregarEmpresaAEvaluar(Empresa empresaAEvaluar) {
 			EmpresasAEvaluarRepository.empresasAEvaluar.add(empresaAEvaluar);
@@ -48,14 +55,7 @@ public class EmpresasAEvaluarRepository {
 	}
 
 	public static void llenarListaDeEmpresasAEvaluar() {
-		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
-		try {
-			EmpresasAEvaluarRepository.empresasAEvaluar.removeAll(empresasAEvaluar);
-			empresasAEvaluar=parser.csvFileToEmpresas();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 	}
 	
