@@ -44,7 +44,7 @@ public class CondicionesTest {
 		Indicador indicador = new Indicador("Indicador1","EBITDA/15");
 		Comparador mayor = new ComparadorMayor();
 		Comparativa estadoComparativo = new Comparativa(mayor);
-		Condicion condicion = new Condicion(estadoComparativo,indicador,peso);
+		Condicion condicion = new Condicion("condicion",estadoComparativo,indicador,peso);
 		
 		
 		List<Empresa> listaEsperada = new LinkedList<>();
@@ -62,7 +62,7 @@ public class CondicionesTest {
 	public void maximizarROEComparaBienLasEmpresasEnUnUnicoPeriodo(){
 		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
 		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
-		Condicion maximizarROE = new Condicion(comparativa,roe,0);
+		Condicion maximizarROE = new Condicion("maximizarRoe",comparativa,roe,0);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		
@@ -79,7 +79,7 @@ public class CondicionesTest {
 	public void nivelDeDeudaComparaBienLasEmpresasEnUnUnicoPeriodo(){
 		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");
 		TipoCondicion comparativa = new Comparativa(new ComparadorMenor());
-		Condicion minimizarDeuda = new Condicion(comparativa,nivelDeuda,0);
+		Condicion minimizarDeuda = new Condicion("minimizarDeuda",comparativa,nivelDeuda,0);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		
@@ -98,7 +98,7 @@ public class CondicionesTest {
 		int peso=20;
 		int anosRequeridos = 3;
 		Taxativa estadoTaxativo = new Taxativa(new ComparadorMenor(),anosRequeridos);
-		Condicion longevidad = new Condicion(estadoTaxativo,new Antiguedad(),peso);
+		Condicion longevidad = new Condicion("longevidadTaxativa",estadoTaxativo,new Antiguedad(),peso);
 		
 		List<Empresa> listaEsperada = longevidad.evaluar(empresas, periodos);
 		
@@ -108,7 +108,7 @@ public class CondicionesTest {
 	@Test
 	public void laLongevidadComparativaComparaBien(){ 
 		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
-		Condicion longevidad = new Condicion(comparativa,new Antiguedad(),0);
+		Condicion longevidad = new Condicion("longevidadComparativa",comparativa,new Antiguedad(),0);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		
@@ -131,7 +131,7 @@ public class CondicionesTest {
 		tiposCondiciones.add(taxativa);
 		TipoCondicion mixta = new Mixta(tiposCondiciones);
 		
-		Condicion longevidad = new Condicion(mixta,new Antiguedad(),0);
+		Condicion longevidad = new Condicion("longevidadMixta",mixta,new Antiguedad(),0);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		
@@ -156,7 +156,7 @@ public class CondicionesTest {
 		listaEsperada.add(empresas.get(3));
 		listaEsperada.add(empresas.get(2));
 		
-		assertEquals(listaEsperada,new Condicion(comparativa,margen,0).evaluar(empresas, periodos)); 
+		assertEquals(listaEsperada,new Condicion("margenesCrecientes",comparativa,margen,0).evaluar(empresas, periodos)); 
 	}
 	
 	

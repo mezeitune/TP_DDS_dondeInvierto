@@ -31,7 +31,7 @@ public class MetodologiaPrueba extends Metodologia {
 	
 	public MetodologiaPrueba() {
 		super();
-		this.inicializarCondiciones();
+		//this.inicializarCondiciones();
 	}
 	
 
@@ -41,7 +41,7 @@ public class MetodologiaPrueba extends Metodologia {
 	}
 	
 	
-	public void inicializarCondiciones(){
+/*public void inicializarCondiciones(){
 		
 		int peso = 5;
 		
@@ -59,7 +59,7 @@ public class MetodologiaPrueba extends Metodologia {
 		condiciones.add(mayorFreeCashFlow);
 		
 		
-	}
+	}*/
 	
 	
 	

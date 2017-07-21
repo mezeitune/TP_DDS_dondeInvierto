@@ -65,6 +65,9 @@ public class Metodologia {
 		resultado.add(empresasInvertibles);
 		resultado.add(empresasNoInvertibles);
 		
+		this.criterio.imprimirResultadosCondiciones(this.condiciones);
+		this.imprimirResultado(resultado);
+		
 		return resultado;
 	}
 	
@@ -85,6 +88,19 @@ public class Metodologia {
 		List <Empresa> empresasNoInvertibles = new LinkedList<Empresa>(this.empresasAEvaluar);
 		empresasNoInvertibles.removeAll(empresasInvertibles);
 		return empresasNoInvertibles;
+	}
+	
+	public void imprimirResultado(List<List<Empresa>> listasEmpresasEvaluadas){
+		int j;
+		
+			System.out.println("Empresas invertibles");
+				for(j=0;j<listasEmpresasEvaluadas.get(0).size();j++){
+					System.out.println(listasEmpresasEvaluadas.get(0).get(j).getNombre());
+				}
+			System.out.println("Empresas No invertibles");
+			for(j=0;j<listasEmpresasEvaluadas.get(1).size();j++){
+				System.out.println(listasEmpresasEvaluadas.get(1).get(j).getNombre());
+			}
 	}
 	
 }

@@ -11,8 +11,8 @@ import usuario.Indicador;
 public class MargenesCrecientes extends Condicion {
 
 	
-	public MargenesCrecientes(TipoCondicion tipo, Indicador indicador, int peso) {
-		super(tipo, indicador, peso);
+	public MargenesCrecientes(String nombre,TipoCondicion tipo, Indicador indicador, int peso) {
+		super(nombre,tipo, indicador, peso);
 	}
 	
 	@Override

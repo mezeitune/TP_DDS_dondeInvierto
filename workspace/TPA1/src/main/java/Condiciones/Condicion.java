@@ -12,9 +12,11 @@ public class Condicion {
 	protected TipoCondicion tipo;
 	public int peso;
 	public Indicador indicador;
+	public String nombre;
 	
 	
-	public Condicion(TipoCondicion tipo,Indicador indicador,int peso){
+	public Condicion(String nombre,TipoCondicion tipo,Indicador indicador,int peso){
+		this.nombre = nombre;
 		this.tipo=tipo;
 		this.indicador = indicador;
 		this.peso=peso;
@@ -50,5 +52,8 @@ public class Condicion {
 		this.tipo = estado;
 	}
 	
+	public String getNombre(){
+		return this.nombre;
+	}
 	
 }

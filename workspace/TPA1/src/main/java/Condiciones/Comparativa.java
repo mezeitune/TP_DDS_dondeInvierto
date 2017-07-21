@@ -55,21 +55,21 @@ public class Comparativa implements TipoCondicion{
 	}
 	
 	boolean compararEnPeriodo(Empresa empresa1,Empresa empresa2,String periodo,Indicador indicador){
-		System.out.println(periodo);
+		//System.out.println(periodo);
 		ParserFormulaToIndicador.setEmpresa(empresa1);
 		ParserFormulaToIndicador.setPeriodo(periodo);
 		
 		int valor1 = indicador.calcular();
 		
-		System.out.println(empresa1.getNombre());
-		System.out.println(valor1);
+		//System.out.println(empresa1.getNombre());
+		//System.out.println(valor1);
 		
 		ParserFormulaToIndicador.setEmpresa(empresa2);
 		ParserFormulaToIndicador.setPeriodo(periodo);
 		int valor2 = indicador.calcular();
 		
-		System.out.println(empresa2.getNombre());
-		System.out.println(valor2);
+		//System.out.println(empresa2.getNombre());
+		//System.out.println(valor2);
 		
 		return this.comparador.comparar(valor1, valor2);
 	}

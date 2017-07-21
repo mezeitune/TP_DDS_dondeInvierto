@@ -46,4 +46,17 @@ public class Criterio {
 		return posicion;
 	}
 	
+	public void imprimirResultadosCondiciones(List<Condicion> condiciones){
+		int i,j;
+		
+		System.out.println("Condiciones");
+		for(i=0;i<condiciones.size();i++){
+			System.out.println(condiciones.get(i).getNombre());
+		}
+		
+		for(i=0;i<this.listasEmpresasEvaluadas.size();i++){
+			
+		}
+	}
+	
 }
