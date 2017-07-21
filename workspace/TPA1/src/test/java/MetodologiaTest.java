@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import Mocks.EmpresasMock;
 import metodologias.Predefinidas.WarrenBuffet;
+import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.EmpresasAEvaluarRepository;
 import usuario.Empresa;
 import usuario.Metodologia;
@@ -36,6 +37,7 @@ public class MetodologiaTest {
 		
 		periodos.add("2016");
 		this.empresasAEvaluarBuffet = new EmpresasMock().getEmpresasMockeadas();
+		ParserFormulaToIndicador.init(new EmpresasMock().getCuentasMockeadas());
 	}
 	
 	@Test

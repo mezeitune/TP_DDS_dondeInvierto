@@ -24,8 +24,8 @@ import usuario.Indicador;
 
 public class CondicionesTest {
 
-	public List<Empresa> empresas;
-	public List<Cuenta> cuentas;
+	public List<Empresa> empresas = new LinkedList<Empresa>();
+	public List<Cuenta> cuentas = new LinkedList<Cuenta>();
 	public List<String> periodos = new LinkedList<String>();
 	
 	@Before
