@@ -89,7 +89,7 @@ public class MetodologiaTest {
 	
 	@Test
 	public void laMetodologiaWarrenBuffetObtieneCorrectamenteLasEmpresasNoInvertibles(){
-		Metodologia warrenBuffet = new WarrenBuffet();
+		WarrenBuffet warrenBuffet = new WarrenBuffet();
 		warrenBuffet.setEmpresasAEvaluar(this.empresasAEvaluarBuffet);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();

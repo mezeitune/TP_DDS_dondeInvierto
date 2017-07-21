@@ -10,16 +10,14 @@ import usuario.Empresa;
 
 public class Criterio {
 
-	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<>();
+	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
 	
 	public void evaluar(List<Empresa> empresas,List<Condicion> condiciones,List<String> periodos){
-		
 		this.listasEmpresasEvaluadas = condiciones.stream().map(condicion -> condicion.evaluar(empresas, periodos)).collect(Collectors.toList());
-	
 	}
 	public List<Empresa> ordenarPorPuntaje(List<Empresa> empresasInvertibles,List<Condicion> condiciones){
 		List<Empresa> empresasRankeadas = new LinkedList<>(empresasInvertibles);
-		Collections.sort(empresasRankeadas,(empresa1,empresa2)->this.tieneMejorPuntaje(empresa1, empresa2)? -1 : 1);
+		Collections.sort(empresasRankeadas,(empresa1,empresa2)->this.tieneMejorPuntaje(empresa1, empresa2)? 1 : -1);
 		return empresasRankeadas;
 	}
 
@@ -53,10 +51,17 @@ public class Criterio {
 		for(i=0;i<condiciones.size();i++){
 			System.out.println(condiciones.get(i).getNombre());
 		}
+		System.out.println("----------------------------------------------");
+		
+		System.out.println(this.listasEmpresasEvaluadas.size());
 		
 		for(i=0;i<this.listasEmpresasEvaluadas.size();i++){
-			
+			System.out.println("***************");
+			for(j=0;j<listasEmpresasEvaluadas.get(i).size();j++){
+				System.out.println(listasEmpresasEvaluadas.get(i).get(j).getNombre());
+			}
 		}
+		System.out.println("***************");
 	}
 	
 }

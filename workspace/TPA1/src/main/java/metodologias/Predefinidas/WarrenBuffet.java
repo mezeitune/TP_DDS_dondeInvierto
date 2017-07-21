@@ -41,36 +41,28 @@ public class WarrenBuffet extends Metodologia{
 	
 	
 	public List<Condicion> inicializarCondiciones(){
-		List<Condicion> condicionesPredefinidas = new LinkedList<>();
+		List<Condicion> condicionesPredefinidas = new LinkedList<Condicion>();
 		
-		int pesoRoe = 20;
+		int pesoRoe = 0;
 		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
 		Condicion maximizarROE = new Condicion("maximizarRoe",new Comparativa(new ComparadorMayor()),roe,pesoRoe);
-		
 		condicionesPredefinidas.add(maximizarROE);		
 		
-		int pesoNivelDeuda=10;
+		int pesoNivelDeuda=0;
 		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");
 		Condicion minimizarDeuda = new Condicion("minimizarDeuda",new Comparativa(new ComparadorMenor()),nivelDeuda,pesoNivelDeuda);
-		
 		condicionesPredefinidas.add(minimizarDeuda);
 		
-		int pesoMargenesCrecientes=10;
+		int pesoMargenesCrecientes=0;
 		Indicador margen = new Indicador ("Margen","Activo/Capital Total");
 		Condicion margenesCrecientes = new Condicion("margenesCrecientes",new Comparativa(new ComparadorMenor()),margen,pesoMargenesCrecientes);
-
 		condicionesPredefinidas.add(margenesCrecientes);
 		
 		int anosRequeridos = 3;
-		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
-		TipoCondicion taxativa = new Taxativa(new ComparadorMenor(),anosRequeridos);
 		List<TipoCondicion> tiposCondiciones = new LinkedList<TipoCondicion>();
-		tiposCondiciones.add(comparativa);
-		tiposCondiciones.add(taxativa);
-		TipoCondicion mixta = new Mixta(tiposCondiciones);
-		
-		Condicion longevidad = new Condicion("longevidad",mixta,new Antiguedad(),0);
-		
+		tiposCondiciones.add(new Comparativa(new ComparadorMayor()));
+		tiposCondiciones.add(new Taxativa(new ComparadorMenor(),anosRequeridos));
+		Condicion longevidad = new Condicion("longevidad",new Mixta(tiposCondiciones),new Antiguedad(),0);
 		condicionesPredefinidas.add(longevidad);
 		
 		return condicionesPredefinidas;

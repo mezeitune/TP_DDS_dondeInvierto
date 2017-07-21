@@ -61,10 +61,10 @@ public class CondicionesTest {
 	@Test
 	public void maximizarROEComparaBienLasEmpresasEnUnUnicoPeriodo(){
 		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
-		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
-		Condicion maximizarROE = new Condicion("maximizarRoe",comparativa,roe,0);
+		Condicion maximizarROE = new Condicion("maximizarRoe",new Comparativa(new ComparadorMayor()),roe,0);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
+		
 		
 		listaEsperada.add(empresas.get(2));
 		listaEsperada.add(empresas.get(0));

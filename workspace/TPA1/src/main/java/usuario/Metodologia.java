@@ -11,8 +11,8 @@ import repository.EmpresasAEvaluarRepository;
 @Observable
 public class Metodologia {
 
-	private List<Empresa> empresasAEvaluar = new LinkedList<>();
-	private List<Condicion> condiciones = new LinkedList<>();
+	private List<Empresa> empresasAEvaluar = new LinkedList<Empresa>();
+	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	private Criterio criterio = new Criterio();
 	private String nombre;
 	
@@ -52,20 +52,17 @@ public class Metodologia {
 
 		this.criterio.evaluar(this.empresasAEvaluar, this.condiciones, periodos);
 		
-		List<List<Empresa>> listasEmpresasEvaluadas = this.criterio.getListasEmpresasEvaluadas();
+		List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>(this.criterio.getListasEmpresasEvaluadas());
 
-		
-		List<Empresa> empresasInvertibles=this.criterio.ordenarPorPuntaje(this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas),this.condiciones); // TODO: Falta implementar
+		List<Empresa> empresasInvertibles= this.criterio.ordenarPorPuntaje(this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas),this.condiciones); // TODO: Falta implementar
 		
 		List<Empresa> empresasNoInvertibles = this.obtenerEmpresasNoInvertibles(empresasInvertibles);
-		
 		
 		List<List<Empresa>> resultado = new LinkedList<>();
 		
 		resultado.add(empresasInvertibles);
 		resultado.add(empresasNoInvertibles);
 		
-		this.criterio.imprimirResultadosCondiciones(this.condiciones);
 		this.imprimirResultado(resultado);
 		
 		return resultado;

@@ -1,5 +1,6 @@
 package Condiciones;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
@@ -24,7 +25,9 @@ public class Condicion {
 	
 	
 	public List<Empresa> evaluar(List<Empresa> listaAEvaluar,List<String> periodos){
-		return tipo.evaluar(listaAEvaluar,periodos,this);
+		List<Empresa> resultado = new LinkedList<Empresa>(this.tipo.evaluar(listaAEvaluar,periodos,this));
+		this.imprimirResultado(resultado);
+		return resultado;
 	}
 	
 	public Indicador getIndicador(){
@@ -54,6 +57,15 @@ public class Condicion {
 	
 	public String getNombre(){
 		return this.nombre;
+	}
+	
+	public void imprimirResultado(List<Empresa> empresas){
+		int i;
+		System.out.println(this.getNombre());
+		for(i=0;i<empresas.size();i++){
+			System.out.println(empresas.get(i).getNombre());
+		}
+		System.out.println("****************");
 	}
 	
 }
