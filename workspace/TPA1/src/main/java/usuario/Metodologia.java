@@ -13,11 +13,10 @@ public class Metodologia {
 
 	private List<Empresa> empresasAEvaluar = new LinkedList<Empresa>();
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
-	private Criterio criterio = new Criterio();
+	private Criterio criterio;
 	private String nombre;
 	
 	public Metodologia(){
-		this.criterio = new Criterio();
 	}
 	
 	public String getNombre() {
@@ -47,14 +46,14 @@ public class Metodologia {
 	
 	
 	public List<List<Empresa>> evaluar(List<String> periodos){ 
-	
+		this.criterio = new Criterio(this.condiciones);
 		//this.setEmpresasAEvaluar(EmpresasAEvaluarRepository.getEmpresasAEvaluar());
 
-		this.criterio.evaluar(this.empresasAEvaluar, this.condiciones, periodos);
+		this.criterio.evaluar(this.empresasAEvaluar, periodos);
 		
 		List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>(this.criterio.getListasEmpresasEvaluadas());
 
-		List<Empresa> empresasInvertibles= this.criterio.ordenarPorPuntaje(this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas),this.condiciones); // TODO: Falta implementar
+		List<Empresa> empresasInvertibles= this.criterio.ordenarPorPuntaje(this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas)); // TODO: Falta implementar
 		
 		List<Empresa> empresasNoInvertibles = this.obtenerEmpresasNoInvertibles(empresasInvertibles);
 		

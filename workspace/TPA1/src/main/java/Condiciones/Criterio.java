@@ -11,11 +11,16 @@ import usuario.Empresa;
 public class Criterio {
 
 	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
+	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	
-	public void evaluar(List<Empresa> empresas,List<Condicion> condiciones,List<String> periodos){
-		this.listasEmpresasEvaluadas = condiciones.stream().map(condicion -> condicion.evaluar(empresas, periodos)).collect(Collectors.toList());
+	public Criterio(List<Condicion> condiciones){
+		this.condiciones = condiciones;
 	}
-	public List<Empresa> ordenarPorPuntaje(List<Empresa> empresasInvertibles,List<Condicion> condiciones){
+	
+	public void evaluar(List<Empresa> empresas,List<String> periodos){
+		this.listasEmpresasEvaluadas = this.condiciones.stream().map(condicion -> condicion.evaluar(empresas, periodos)).collect(Collectors.toList());
+	}
+	public List<Empresa> ordenarPorPuntaje(List<Empresa> empresasInvertibles){
 		List<Empresa> empresasRankeadas = new LinkedList<>(empresasInvertibles);
 		Collections.sort(empresasRankeadas,(empresa1,empresa2)->this.tieneMejorPuntaje(empresa1, empresa2)? 1 : -1);
 		return empresasRankeadas;
