@@ -3,6 +3,8 @@ package parserFormulaInidicador;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+
+import excepciones.AccountNotFoundException;
 import parser.parserArchivos.CSVToEmpresas;
 import parser.parserArchivos.ParserJsonAObjetosJava;
 
@@ -96,7 +98,9 @@ public class ParserFormulaToIndicador {
 				else {
 					try{
 						return ParserFormulaToIndicador.getClaseOperador(operandos);
-					}catch(NumberFormatException e){}
+					}catch(NumberFormatException | AccountNotFoundException e){
+						/*TODO: Abortar si no encuentra la cuenta o el indicador*/
+					}
 				}
 				return null;
 		}
@@ -216,7 +220,7 @@ public class ParserFormulaToIndicador {
 		return suma;
 	}
 	
-	public static Operacion getClaseOperador(String operador){
+	public static Operacion getClaseOperador(String operador) throws AccountNotFoundException{
 		if (ParserFormulaToIndicador.esIndicador(operador)) return ParserFormulaToIndicador.buscarYObtenerIndicador(operador);
 		if (ParserFormulaToIndicador.esCuenta(operador)) return ParserFormulaToIndicador.buscarYObtenerCuenta(operador);
 		else return new Constante(Integer.parseInt(operador));
@@ -234,9 +238,10 @@ public class ParserFormulaToIndicador {
 		return indicadores.stream().filter(indicador -> indicador.getNombre().equals(operador)).collect(Collectors.toList()).get(0);
 	}
 	
-	public static Cuenta buscarYObtenerCuenta(String operador){
+	public static Cuenta buscarYObtenerCuenta(String operador) throws AccountNotFoundException{
+		if(!cuentasPorPeriodo.stream().anyMatch(cuenta -> cuenta.getNombre().equals(operador))) throw new AccountNotFoundException();
 		return cuentasPorPeriodo.stream().filter(cuenta -> cuenta.getNombre().equals(operador)).collect(Collectors.toList()).get(0);
-	}/*TODO: Tirar excepcion si no encuentra la Cuenta. Puede ser porque no es de la empresa o periodo seleccionado*/
+	}
 	
 	
 	
