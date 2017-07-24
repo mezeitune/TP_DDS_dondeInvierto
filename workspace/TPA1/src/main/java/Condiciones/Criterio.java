@@ -37,8 +37,8 @@ public class Criterio {
 	}
 	
 	public int obtenerPuntaje(Empresa empresa){
-		System.out.println("Puntaje Empresa:");
-		System.out.println(empresa.getNombre());
+		//System.out.println("Puntaje Empresa:");
+		//System.out.println(empresa.getNombre());
 		
 		int puntaje=0;
 		int i;
@@ -46,15 +46,16 @@ public class Criterio {
 		posiciones= listasEmpresasEvaluadas.stream().map(lista -> obtenerPosicionEmpresaEn(lista,empresa)).collect(Collectors.toList());
 		
 		for(i=0;i<posiciones.size();i++){
-			System.out.println("Posicion");
+			/*System.out.println("Posicion");
 			System.out.println(posiciones.get(i));
 			System.out.println("Condicion");
 			System.out.println(this.condiciones.get(i).getNombre());
 			System.out.println("---------------");
+			*/
 			puntaje += posiciones.get(i) * this.condiciones.get(i).getPeso();
 		}
-		System.out.println("Puntaje total");
-		System.out.println(puntaje);
+		//System.out.println("Puntaje total");
+		//System.out.println(puntaje);
 		return puntaje;
 		
 	}

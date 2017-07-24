@@ -53,7 +53,7 @@ public class Metodologia {
 		
 		List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>(this.criterio.getListasEmpresasEvaluadas());
 
-		List<Empresa> empresasInvertibles= this.criterio.ordenarPorPuntaje(this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas)); // TODO: Falta implementar
+		List<Empresa> empresasInvertibles= this.criterio.ordenarPorPuntaje(this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas));
 		
 		List<Empresa> empresasNoInvertibles = this.obtenerEmpresasNoInvertibles(empresasInvertibles);
 		

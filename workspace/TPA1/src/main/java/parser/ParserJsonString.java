@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 import org.json.simple.JSONArray;
-import exceptions.CSVInexistenteException;
+
+import excepciones.CSVInexistenteException;
 
 public class ParserJsonString {
 

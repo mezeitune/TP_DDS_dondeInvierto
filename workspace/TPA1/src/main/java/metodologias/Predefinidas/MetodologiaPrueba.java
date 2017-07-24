@@ -9,7 +9,7 @@ import Condiciones.Comparativa;
 import Condiciones.Condicion;
 import Condiciones.Taxativa;
 import Condiciones.TipoCondicion;
-import usuario.Antiguedad;
+import indicadoresPredefinidos.Antiguedad;
 import usuario.Indicador;
 import usuario.Metodologia;
 

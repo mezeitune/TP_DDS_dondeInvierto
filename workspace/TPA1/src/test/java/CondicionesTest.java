@@ -16,9 +16,9 @@ import Condiciones.Taxativa;
 import Condiciones.TipoCondicion;
 import Condiciones.Predefinidas.MargenesCrecientes;
 import Mocks.EmpresasMock;
+import indicadoresPredefinidos.Antiguedad;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Cuenta;
-import usuario.Antiguedad;
 import usuario.Empresa;
 import usuario.Indicador;
 

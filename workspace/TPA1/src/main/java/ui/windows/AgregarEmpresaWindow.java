@@ -16,7 +16,7 @@ import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import exceptions.ArchivoInexistenteException;
+import excepciones.ArchivoInexistenteException;
 import repository.EmpresasAEvaluarRepository;
 import scala.util.control.Exception;
 import ui.vm.AgregarEmpresaViewModel;

@@ -3,8 +3,8 @@ package repository;
 import java.util.LinkedList;
 import java.util.List;
 
+import indicadoresPredefinidos.PatrimonioNeto;
 import usuario.Indicador;
-import usuario.PatrimonioNeto;
 
 public class ArchivoEIndicadoresUsuarioRepository {
 	

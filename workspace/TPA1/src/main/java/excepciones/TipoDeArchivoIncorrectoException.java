@@ -1,4 +1,4 @@
-package exceptions;
+package excepciones;
 
 public class TipoDeArchivoIncorrectoException extends RuntimeException {
 	

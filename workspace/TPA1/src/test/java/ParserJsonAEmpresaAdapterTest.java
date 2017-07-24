@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.CSVInexistenteException;
+import excepciones.CSVInexistenteException;
 import parser.parserArchivos.ParserJsonAObjetosJava;
 import usuario.Empresa;
 

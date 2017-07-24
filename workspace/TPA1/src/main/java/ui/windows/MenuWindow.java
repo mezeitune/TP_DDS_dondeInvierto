@@ -11,7 +11,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import exceptions.ArchivoInexistenteException;
+import excepciones.ArchivoInexistenteException;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.MenuViewModel;

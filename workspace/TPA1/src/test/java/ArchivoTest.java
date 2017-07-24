@@ -6,9 +6,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.ArchivoInexistenteException;
-import exceptions.PathIncorrectoException;
-import exceptions.TipoDeArchivoIncorrectoException;
+import excepciones.ArchivoInexistenteException;
+import excepciones.PathIncorrectoException;
+import excepciones.TipoDeArchivoIncorrectoException;
 import parser.parserArchivos.CSVToEmpresas;
 import usuario.Empresa;
 

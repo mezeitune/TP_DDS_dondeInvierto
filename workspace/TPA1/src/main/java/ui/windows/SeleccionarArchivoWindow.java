@@ -15,9 +15,9 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import exceptions.ArchivoInexistenteException;
-import exceptions.PathIncorrectoException;
-import exceptions.TipoDeArchivoIncorrectoException;
+import excepciones.ArchivoInexistenteException;
+import excepciones.PathIncorrectoException;
+import excepciones.TipoDeArchivoIncorrectoException;
 import parser.parserArchivos.CSVToEmpresas;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;

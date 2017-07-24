@@ -8,11 +8,9 @@ import java.nio.file.Paths;
 import org.apache.commons.io.FilenameUtils;
 import org.uqbar.commons.utils.Observable;
 
-
-
-import exceptions.ArchivoInexistenteException;
-import exceptions.PathIncorrectoException;
-import exceptions.TipoDeArchivoIncorrectoException;
+import excepciones.ArchivoInexistenteException;
+import excepciones.PathIncorrectoException;
+import excepciones.TipoDeArchivoIncorrectoException;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 @Observable
 public class SeleccionarArchivoViewModel {

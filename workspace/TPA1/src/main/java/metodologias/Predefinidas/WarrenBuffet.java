@@ -14,11 +14,11 @@ import Condiciones.Condicion;
 import Condiciones.Mixta;
 import Condiciones.Taxativa;
 import Condiciones.TipoCondicion;
-import usuario.Antiguedad;
+import indicadoresPredefinidos.Antiguedad;
+import indicadoresPredefinidos.PatrimonioNeto;
 import usuario.Empresa;
 import usuario.Indicador;
 import usuario.Metodologia;
-import usuario.PatrimonioNeto;
 @Observable
 public class WarrenBuffet extends Metodologia{
 

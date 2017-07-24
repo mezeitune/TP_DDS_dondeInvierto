@@ -10,10 +10,10 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
-import exceptions.ArchivoInexistenteException;
-import exceptions.CSVMalFormadoException;
-import exceptions.PathIncorrectoException;
-import exceptions.TipoDeArchivoIncorrectoException;
+import excepciones.ArchivoInexistenteException;
+import excepciones.CSVMalFormadoException;
+import excepciones.PathIncorrectoException;
+import excepciones.TipoDeArchivoIncorrectoException;
 
 import java.io.FileReader;
 import java.io.IOException;
