@@ -102,15 +102,15 @@ public class MetodologiaTest {
 	}
 	
 	@Test
-	public void laMetodologiaWarrenBuffetObtieneCorrectamenteLasEmpresasInvertibles(){
+	public void laMetodologiaWarrenBuffetObtieneCorrectamenteLasEmpresasInvertiblesOrdenadas(){
 		WarrenBuffet warrenBuffet = new WarrenBuffet();
 		warrenBuffet.setEmpresasAEvaluar(this.empresasAEvaluarBuffet);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		
-		listaEsperada.add(this.empresasAEvaluarBuffet.get(2));
 		listaEsperada.add(this.empresasAEvaluarBuffet.get(1));
 		listaEsperada.add(this.empresasAEvaluarBuffet.get(3));
+		listaEsperada.add(this.empresasAEvaluarBuffet.get(2));
 		
 		assertEquals(listaEsperada,warrenBuffet.evaluar(this.periodos).get(0));
 	}

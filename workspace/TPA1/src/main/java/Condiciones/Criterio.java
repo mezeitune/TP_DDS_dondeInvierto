@@ -22,7 +22,7 @@ public class Criterio {
 	}
 	public List<Empresa> ordenarPorPuntaje(List<Empresa> empresasInvertibles){
 		List<Empresa> empresasRankeadas = new LinkedList<>(empresasInvertibles);
-		Collections.sort(empresasRankeadas,(empresa1,empresa2)->this.tieneMejorPuntaje(empresa1, empresa2)? 1 : -1);
+		Collections.sort(empresasRankeadas,(empresa1,empresa2)->this.tieneMejorPuntaje(empresa1, empresa2)? -1 : 1);
 		return empresasRankeadas;
 	}
 
@@ -37,16 +37,37 @@ public class Criterio {
 	}
 	
 	public int obtenerPuntaje(Empresa empresa){
-		return listasEmpresasEvaluadas.stream().mapToInt(lista -> obtenerPosicionEmpresaEn(lista,empresa)).sum();
+		System.out.println("Puntaje Empresa:");
+		System.out.println(empresa.getNombre());
+		
+		int puntaje=0;
+		int i;
+		List<Integer> posiciones = new LinkedList<Integer>();
+		posiciones= listasEmpresasEvaluadas.stream().map(lista -> obtenerPosicionEmpresaEn(lista,empresa)).collect(Collectors.toList());
+		
+		for(i=0;i<posiciones.size();i++){
+			System.out.println("Posicion");
+			System.out.println(posiciones.get(i));
+			System.out.println("Condicion");
+			System.out.println(this.condiciones.get(i).getNombre());
+			System.out.println("---------------");
+			puntaje += posiciones.get(i) * this.condiciones.get(i).getPeso();
+		}
+		System.out.println("Puntaje total");
+		System.out.println(puntaje);
+		return puntaje;
+		
 	}
 	
 	public int obtenerPosicionEmpresaEn(List<Empresa> listaEmpresas,Empresa empresa){
 		int i;
-		int posicion=-1;
+		int posicion=listaEmpresas.size() - 1;
 		for(i=0;i<listaEmpresas.size();i++){
-			if(listaEmpresas.get(i).equals(empresa)) posicion = i;
+			if(listaEmpresas.get(i).equals(empresa)) posicion = i + 1;
 		}
-		return posicion;
+		
+		return listaEmpresas.size() - posicion + 1;
+		//return posicion + 1;
 	}
 	
 	public void imprimirResultadosCondiciones(List<Condicion> condiciones){

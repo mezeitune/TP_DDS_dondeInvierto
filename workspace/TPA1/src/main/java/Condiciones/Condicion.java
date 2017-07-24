@@ -26,7 +26,7 @@ public class Condicion {
 	
 	public List<Empresa> evaluar(List<Empresa> listaAEvaluar,List<String> periodos){
 		List<Empresa> resultado = new LinkedList<Empresa>(this.tipo.evaluar(listaAEvaluar,periodos,this));
-		this.imprimirResultado(resultado);
+		//this.imprimirResultado(resultado);
 		return resultado;
 	}
 	
