@@ -9,14 +9,16 @@ import Condiciones.Condicion;
 import Condiciones.Predefinidas.MargenesCrecientes;
 import metodologias.Predefinidas.MetodologiaPrueba;
 import metodologias.Predefinidas.WarrenBuffet;
+import parser.parserArchivos.ParserJsonAObjetosJava;
 import usuario.Metodologia;
 
 public class MetodologiasRepository {
 	private static List<Metodologia> metodologias = new LinkedList<>();
 	private static List<Condicion> condiciones = new LinkedList<>();
 	
+	
 	public static List<Condicion> getCondiciones() {
-		System.out.println(metodologias);
+		
 		return condiciones;
 	}
 	

@@ -55,10 +55,11 @@ public class ParserJsonAObjetosJava {
 		Type listType = new TypeToken <List<Indicador>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		
 		this.metodologiaObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
-	
 	    return this.metodologiaObtenidasDelArchivo;
 	}
 	
+	
+		
 	
 	public Object definirObjetosDelArchivo() {
 		

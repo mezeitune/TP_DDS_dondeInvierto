@@ -15,6 +15,7 @@ import Condiciones.Comparativa;
 import Condiciones.Condicion;
 import metodologias.Predefinidas.WarrenBuffet;
 import parser.ParserJsonString;
+import parser.parserArchivos.ParserJsonAObjetosJava;
 import repository.MetodologiasRepository;
 import usuario.Indicador;
 import usuario.Metodologia;
@@ -34,6 +35,7 @@ public class CargarMetodologiaViewModel {
 		System.out.println(condiciones);
 	}
 	private void setCondiciones() {
+		
 		this.condiciones = MetodologiasRepository.getCondiciones();
 		
 	}
@@ -42,6 +44,9 @@ public class CargarMetodologiaViewModel {
 	}
 	
 	public void setMetodologias(){
+		ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("metodologias.json");
+		MetodologiasRepository.setMetodologiasDefinidasPorElUsuario(parser.getMetodologiasDelArchivo());
+		
 		metodologias = MetodologiasRepository.getMetodologias();
 	}
 	
