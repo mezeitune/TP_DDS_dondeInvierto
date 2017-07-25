@@ -10,9 +10,13 @@ import org.uqbar.commons.utils.Observable;
 
 import com.google.gson.Gson;
 
+import Comparadores.ComparadorMayor;
+import Condiciones.Comparativa;
 import Condiciones.Condicion;
+import metodologias.Predefinidas.WarrenBuffet;
 import parser.ParserJsonString;
 import repository.MetodologiasRepository;
+import usuario.Indicador;
 import usuario.Metodologia;
 
 
@@ -20,11 +24,19 @@ import usuario.Metodologia;
 public class CargarMetodologiaViewModel {
 	private List<Metodologia> metodologias;
 	private Metodologia metodologia;
-	private String nombreMetodologia ;
-	private List<Condicion> condiciones;
+	private static String nombreMetodologia ;
+	private static List<Condicion> condiciones;
 	private Condicion condicion;
 	
-	
+	public CargarMetodologiaViewModel(){
+		this.setMetodologias();
+		this.setCondiciones();
+		System.out.println(condiciones);
+	}
+	private void setCondiciones() {
+		this.condiciones = MetodologiasRepository.getCondiciones();
+		
+	}
 	public  List<Condicion> getCondiciones() {
 		return condiciones;
 	}
@@ -36,32 +48,39 @@ public class CargarMetodologiaViewModel {
 	
 	public List<Metodologia> getMetodologias() {
 		return this.metodologias;
+	
 	}
 	
 	public Condicion getCondicion() {
 		return condicion;
 	}
 	public void setCondicion(Condicion condicion) {
-		condicion = condicion;
+		this.condicion = condicion;
 	}
 	
 	public String getNombreMetodologia() {
-		return metodologia.getNombre();
+		return nombreMetodologia;
 	}
 	public void setNombreMetodologia(String nombre) {
 		this.nombreMetodologia = nombre;
 	}
 	
-	public void generarMetodologia() throws IOException{
+	public static void generarMetodologia() throws IOException{
+		int pesoRoe = 10;
+		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
+		Condicion maximizarROE = new Condicion("maximizarRoe",new Comparativa(new ComparadorMayor()),roe,pesoRoe);
+		condiciones.add(maximizarROE);
 		
 		Metodologia nuevaMetodologia = new Metodologia();
-		//nuevaMetodologia.setCondiciones(condiciones);
 		nuevaMetodologia.setNombre(nombreMetodologia);
+		nuevaMetodologia.setCondiciones(condiciones);
+	
 		
-		//String jsonElement = new Gson().toJson(nuevaMetodologia); 
+		
+		String jsonElement = new Gson().toJson(nuevaMetodologia); 
 	
 
-		//ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("metodologias",jsonElement );	
+		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("metodologias",jsonElement );	
 		
 	}
 	

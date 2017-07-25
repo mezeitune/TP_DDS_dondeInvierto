@@ -5,14 +5,38 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Class.Main;
+import Condiciones.Condicion;
+import Condiciones.Predefinidas.MargenesCrecientes;
 import metodologias.Predefinidas.MetodologiaPrueba;
 import metodologias.Predefinidas.WarrenBuffet;
 import usuario.Metodologia;
 
 public class MetodologiasRepository {
 	private static List<Metodologia> metodologias = new LinkedList<>();
+	private static List<Condicion> condiciones = new LinkedList<>();
+	
+	public static List<Condicion> getCondiciones() {
+		System.out.println(metodologias);
+		return condiciones;
+	}
+	
+	public static void setCondicionesDefinidasPorElUsuario(List<Condicion> list) {
+		MetodologiasRepository.condiciones.addAll(list);
+	}
+	
+	public static void addCondicion(Condicion unaCondicion) {
+		MetodologiasRepository.condiciones.add(unaCondicion);
+	}
+	
+	public static void cargarCondicionesPredefinidos(){
+		MargenesCrecientes mc = MargenesCrecientes.getInstance();
+		MetodologiasRepository.addCondicion(mc);
+		
+	}
+	
 	
 	public static List<Metodologia> getMetodologias() {
+		
 		return metodologias;
 	}
 
@@ -29,7 +53,7 @@ public class MetodologiasRepository {
 	public static void cargarMetodologiasPredefinidos(){
 		WarrenBuffet wb = WarrenBuffet.getInstance();
 		MetodologiaPrueba mp = MetodologiaPrueba.getInstance();
-		
+	
 		MetodologiasRepository.addMetodologias(wb);
 		MetodologiasRepository.addMetodologias(mp);
 	}

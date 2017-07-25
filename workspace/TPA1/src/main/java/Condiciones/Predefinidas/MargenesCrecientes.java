@@ -5,12 +5,13 @@ import java.util.List;
 
 import Condiciones.Condicion;
 import Condiciones.TipoCondicion;
+import metodologias.Predefinidas.WarrenBuffet;
 import usuario.Empresa;
 import usuario.Indicador;
 
 public class MargenesCrecientes extends Condicion {
 
-	
+	private static MargenesCrecientes instance ;
 	public MargenesCrecientes(String nombre,TipoCondicion tipo, Indicador indicador, int peso) {
 		super(nombre,tipo, indicador, peso);
 	}
@@ -30,6 +31,16 @@ public class MargenesCrecientes extends Condicion {
 		periodos.add("2016");
 		periodos.add("2017");
 		return this.tipo.evaluar(listaAEvaluar,periodos,this);
+	}
+
+	@SuppressWarnings("null")
+	public static MargenesCrecientes getInstance() {
+		
+	        if(instance == null){
+	            instance = new MargenesCrecientes(null,null,null,(Integer) null);
+	        }
+	        return instance;
+	
 	}
 
 }

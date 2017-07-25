@@ -30,24 +30,19 @@ public class PreguntaNuevaMetodologiaWindow extends Dialog<PreguntaNuevaMetodolo
 		new Button(actionsPanel).setCaption("Si")
 								.onClick(() -> {
 												
-												try{
+												
 													this.getDelegate().close();
-													CargarMetodologiaWindow();
-												}catch (IOException e) {
-													e.printStackTrace();
-												}
+													
+												
 								}).setWidth(200);
 
 		
 		new Button(actionsPanel).setCaption("No")
 								.onClick(() -> {
 									
-												try{
 													this.getDelegate().close();
-													MenuWindow();
-												}catch (IOException e) {
-													e.printStackTrace();
-												}
+													
+												
 								}).setWidth(200);
 	}
 	
