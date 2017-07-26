@@ -59,6 +59,15 @@ public class MetodologiasRepository {
 		MetodologiasRepository.addMetodologias(wb);
 		MetodologiasRepository.addMetodologias(mp);
 	}
+
+	public static void deleteCondicionesDefinidasPorElUsuario() {
+		MetodologiasRepository.condiciones.removeAll(condiciones);
+		
+	}
+	public static void deleteMetodologiasDefinidasPorElUsuario() {
+		MetodologiasRepository.metodologias.removeAll(metodologias);
+		MetodologiasRepository.cargarMetodologiasPredefinidos();
+	}
 }
 
 

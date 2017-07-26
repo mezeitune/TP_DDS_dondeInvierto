@@ -49,9 +49,8 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		selectorCondicion.bindItemsToProperty("condiciones").setAdapter(new PropertyAdapter(Metodologia.class, "nombre"));
 		selectorCondicion.bindValueToProperty("condicion");
 		
-		
 		new Label(mainPanel).setText("Metodologias Disponibles").setBackground(Color.ORANGE);
-	
+		
 		Table<Metodologia> tableMetodologias = new Table<Metodologia>(mainPanel, Metodologia.class);
 		
 		tableMetodologias.setNumberVisibleRows(6).setWidth(200);
@@ -59,7 +58,6 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		tableMetodologias.bindItemsToProperty("metodologias"); 
 		
 		new Column<Metodologia>(tableMetodologias).setTitle("Nombre").bindContentsToProperty("nombre");
-		
 	}
 	
 	

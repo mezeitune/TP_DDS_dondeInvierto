@@ -1,6 +1,7 @@
 package ui.vm;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,17 +27,22 @@ public class CargarMetodologiaViewModel {
 	private List<Metodologia> metodologias;
 	private Metodologia metodologia;
 	private static String nombreMetodologia ;
-	private static List<Condicion> condiciones;
+	private static List<Condicion> condiciones = new ArrayList<>();
 	private Condicion condicion;
 	
 	public CargarMetodologiaViewModel(){
 		this.setMetodologias();
 		this.setCondiciones();
-		System.out.println(condiciones);
+		this.nombreMetodologia=null;
+		this.condicion=null;
 	}
 	private void setCondiciones() {
+		ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("condiciones.json");
+		MetodologiasRepository.deleteCondicionesDefinidasPorElUsuario();
+		MetodologiasRepository.setCondicionesDefinidasPorElUsuario(parser.getCondicionesDelArchivo());
 		
 		this.condiciones = MetodologiasRepository.getCondiciones();
+		
 		
 	}
 	public  List<Condicion> getCondiciones() {
@@ -45,6 +51,7 @@ public class CargarMetodologiaViewModel {
 	
 	public void setMetodologias(){
 		ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("metodologias.json");
+		MetodologiasRepository.deleteMetodologiasDefinidasPorElUsuario();
 		MetodologiasRepository.setMetodologiasDefinidasPorElUsuario(parser.getMetodologiasDelArchivo());
 		
 		metodologias = MetodologiasRepository.getMetodologias();
@@ -61,6 +68,8 @@ public class CargarMetodologiaViewModel {
 	}
 	public void setCondicion(Condicion condicion) {
 		this.condicion = condicion;
+		Condicion condicionMet = new Condicion(condicion.nombre, condicion.getEstado(), condicion.getIndicador(), condicion.getPeso());
+		condiciones.add(condicionMet);
 	}
 	
 	public String getNombreMetodologia() {
@@ -71,20 +80,13 @@ public class CargarMetodologiaViewModel {
 	}
 	
 	public static void generarMetodologia() throws IOException{
-		int pesoRoe = 10;
-		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
-		Condicion maximizarROE = new Condicion("maximizarRoe",new Comparativa(new ComparadorMayor()),roe,pesoRoe);
-		condiciones.add(maximizarROE);
 		
 		Metodologia nuevaMetodologia = new Metodologia();
 		nuevaMetodologia.setNombre(nombreMetodologia);
 		nuevaMetodologia.setCondiciones(condiciones);
 	
-		
-		
 		String jsonElement = new Gson().toJson(nuevaMetodologia); 
 	
-
 		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("metodologias",jsonElement );	
 		
 	}

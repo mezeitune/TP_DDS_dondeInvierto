@@ -3,6 +3,7 @@ package ui.windows;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -15,6 +16,9 @@ import org.uqbar.arena.windows.WindowOwner;
 import Condiciones.Condicion;
 import ui.vm.CargarCriterioViewModel;
 import ui.vm.CargarMetodologiaViewModel;
+import usuario.Cuenta;
+import usuario.Indicador;
+import usuario.Metodologia;
 
 public class CargarCriterioWindow extends Dialog <CargarCriterioViewModel> {
 	public CargarCriterioWindow(WindowOwner owner) {
@@ -32,29 +36,37 @@ public class CargarCriterioWindow extends Dialog <CargarCriterioViewModel> {
 		
 		
 		new Label(mainPanel).setText("Elija el comparador siendo:  ").setBackground(Color.orange);
-		new Label(mainPanel).setText("'> mayor' '< menor' '<= mayor o igual' '>= menor o igual'");
+		new Label(mainPanel).setText("'> mayor' '< menor'");
 		
 		Selector<String> selectorComparador = new Selector<String>(mainPanel).allowNull(true);
 		selectorComparador.setWidth(50);
-		//selectorComparador.bindItemsToProperty("Comparadores");
-		//selectorComparador.bindValueToProperty("comparador");
+		selectorComparador.bindItemsToProperty("comparadores");
+		selectorComparador.bindValueToProperty("comparador");
 	
 		new Label( mainPanel).setText("Elija el tipo de condicion siendo:").setBackground(Color.orange);
 		new Label( mainPanel).setText("Taxativa: Determina si es conveniente invertir o no en una empresa de forma deterministica");
 		new Label( mainPanel).setText("Comparativa: Determina un ranking de empresas definiendo cual/es son las mejores para invertir");
-		new Label( mainPanel).setText("Mixta: Primero 'filtra' a las empresas donde NO conviene invertir y luego realiza un ranking");
+		
 
 		Selector<String> selectorTipoDeCondicion = new Selector<String>(mainPanel).allowNull(true);
 		selectorTipoDeCondicion.setWidth(100);
 		selectorTipoDeCondicion.bindItemsToProperty("tipoCondiciones");
 		selectorTipoDeCondicion.bindValueToProperty("tipoCondicion");
 		
-		new Label(mainPanel).setText("Elija el indicador por el cual se va evaluar la condicion en su metodologia  ").setBackground(Color.orange);
+		new Label( mainPanel).setText("Escriba el peso de la condicion:").setBackground(Color.orange);
 		
-		Selector<String> selectorIndicador = new Selector<String>(mainPanel).allowNull(true);
+		new TextBox(mainPanel).setWidth(300).bindValueToProperty("pesoCondicion");
+		
+		new Label(mainPanel).setText("Elija el indicador por el cual se va evaluar la condicion en su metodologia  ").setBackground(Color.orange);
+		Selector<Cuenta> selectorIndicadorAEvaluar = new Selector<Cuenta>(mainPanel).allowNull(true);
+		selectorIndicadorAEvaluar.bindItemsToProperty("indicadores").setAdapter(new PropertyAdapter(Cuenta.class, "nombre"));
+		selectorIndicadorAEvaluar.setWidth(100);
+		selectorIndicadorAEvaluar.bindValueToProperty("indicador");
+		
+		/*Selector<Indicador> selectorIndicador = new Selector<Indicador>(mainPanel).allowNull(true);
 		selectorIndicador.setWidth(50);
-		selectorIndicador.bindItemsToProperty("indicadores");
-		selectorIndicador.bindValueToProperty("indicador");
+		selectorIndicador.bindItemsToProperty("indicadores").setAdapter(new PropertyAdapter(Indicador.class, "nombre"));
+		selectorIndicador.bindValueToProperty("indicador");*/
 		
 	}
 	
@@ -63,6 +75,9 @@ public class CargarCriterioWindow extends Dialog <CargarCriterioViewModel> {
 		
 		new Button(actionsPanel).setCaption("Cargar Condicion")
 		.onClick(() -> {
+				
+					CargarCriterioViewModel.generarCondicion();
+				
 				this.getDelegate().close();												
 		}).setWidth(150);
 		

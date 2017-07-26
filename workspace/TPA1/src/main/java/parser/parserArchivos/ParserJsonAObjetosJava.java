@@ -14,6 +14,7 @@ import org.json.simple.parser.ParseException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import Condiciones.Condicion;
 import excepciones.CSVInexistenteException;
 import parser.ParserJsonString;
 import usuario.Empresa;
@@ -25,8 +26,10 @@ public class ParserJsonAObjetosJava {
 	private List <Empresa> empresasObtenidasDelArchivo = new ArrayList <Empresa> ();
 	private List <Indicador> indicadoresObtenidasDelArchivo = new ArrayList <Indicador> ();
 	private List <Metodologia> metodologiaObtenidasDelArchivo = new ArrayList <Metodologia> ();
+	private List<Condicion> condicionesObtenidasDelArchivo = new ArrayList <Condicion> ();
 	private JSONParser parserJsonAObjetos = new JSONParser();
 	private Object objetoAOtrosObjetos;
+	
 	private static String archivo;
 	
 	public ParserJsonAObjetosJava(String archivo){
@@ -57,7 +60,13 @@ public class ParserJsonAObjetosJava {
 		this.metodologiaObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
 	    return this.metodologiaObtenidasDelArchivo;
 	}
-	
+		public List<Condicion> getCondicionesDelArchivo() {
+			
+			Type listType = new TypeToken <List<Indicador>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
+			
+			this.condicionesObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
+		    return this.condicionesObtenidasDelArchivo;
+		}
 	
 		
 	

@@ -51,6 +51,7 @@ public class DatosViewModel{
 		this.periodo=empresas.get(0).getPeriodosSinRepetidos().get(0);
 		ParserFormulaToIndicador.setPeriodo(periodo);
 		this.indicadorSeleccionado=indicadores.get(0);
+		System.out.println(indicadores);
 	}
 	
 	
