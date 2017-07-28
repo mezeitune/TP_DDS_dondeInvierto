@@ -83,9 +83,15 @@ public class MetodologiasEmpresasViewModel {
 		}
 		
 		this.metodologia = metodologiaSeleccionada;
-		this.evaluar();
-		/*this.empresasRankeadas = this.metodologia.evaluar(this.getPeriodos());
-		ObservableUtils.firePropertyChanged(this, "empresasRankeadas");*/
+		getMetodologia().setEmpresasAEvaluar(getEmpresasAEvaluar());
+		
+		List<String> periodosHardcodeado = new LinkedList<String>();
+		periodosHardcodeado.add("2016");
+		
+		empresasQueConvieneInvertir = getMetodologia().evaluar(periodosHardcodeado).get(0);
+		empresasQueNoConvieneInvertir = getMetodologia().evaluar(periodosHardcodeado).get(1);
+		//this.empresasRankeadas = this.metodologia.evaluar(this.getPeriodos());
+		ObservableUtils.firePropertyChanged(this, "empresasQueConvieneInvertir");
 		//this.setPeriodo(null);
 	
 	}

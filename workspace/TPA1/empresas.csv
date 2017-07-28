@@ -1,0 +1,37 @@
+Empresa,Cuenta,Periodo,Valor
+Facebook,EBITDA,2016,200
+Facebook,EBITDA,2015,300
+Facebook,Free CashFlow,2015,1100
+Facebook,Free CashFlow,2016,900
+Facebook,Ingreso Neto,2016,1500
+Facebook,Dividendos,2016,500
+Facebook,Capital Total,2016,1500
+Facebook,Activo,2016,4000
+Facebook,Pasivo,2016,2000
+Apple,Free CashFlow,2016,50
+Apple,Revenue,2010,1000
+Apple,EBITDA,2016,400
+Apple,Revenue,2016,100
+Apple,Ingreso Neto,2016,600
+Apple,Dividendos,2016,400
+Apple,Capital Total,2016,1000
+Apple,Activo,2016,6000
+Apple,Pasivo,2016,2000
+IBM,Free CashFlow,2016,100
+IBM,Revenue,2011,100
+IBM,EBITDA,2016,300
+IBM,Revenue,2016,500
+IBM,Ingreso Neto,2016,200
+IBM,Dividendos,2016,400
+IBM,Capital Total,2016,1000
+IBM,Activo,2016,1000
+IBM,Pasivo,2016,800
+Oracle,Free CashFlow,2016,35
+Oracle,Revenue,2008,850
+Oracle,EBITDA,2016,324
+Oracle,Revenue,2016,900
+Oracle,Ingreso Neto,2016,900
+Oracle,Dividendos,2016,400
+Oracle,Capital Total,2016,1500
+Oracle,Activo,2016,3000
+Oracle,Pasivo,2016,800
