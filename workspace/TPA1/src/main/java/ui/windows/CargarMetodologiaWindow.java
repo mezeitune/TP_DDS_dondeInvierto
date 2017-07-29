@@ -42,7 +42,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 		new TextBox(form).setWidth(300).bindValueToProperty("nombreMetodologia");
 		
-		new Label(form).setText("Elija el criterio a aplicar de la metodologia").setBackground(Color.orange);
+		new Label(form).setText("Elija la condicion a aplicar de la metodologia").setBackground(Color.orange);
 		
 		Selector<Condicion> selectorCondicion = new Selector<Condicion>(mainPanel).allowNull(true);
 		selectorCondicion.setWidth(100);
@@ -63,7 +63,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 	
 	protected void addActions(Panel actionsPanel){
 		
-		new Button(actionsPanel).setCaption("Cargar una Condicion a aplicar")
+		new Button(actionsPanel).setCaption("Crear Condicion ")
 		.onClick(() -> {
 				try {
 					CargarCondicionWindow();
@@ -74,7 +74,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		}).setWidth(200);
 		
 		
-		new Button(actionsPanel).setCaption("Cargar Metodologia en JSON")
+		new Button(actionsPanel).setCaption("Crear Metodologia")
 								.onClick(() -> {
 										try {
 											CargarMetodologiaViewModel.generarMetodologia();

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.experimental.theories.Theories;
+import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import com.google.gson.Gson;
@@ -17,6 +18,8 @@ import Condiciones.Condicion;
 import metodologias.Predefinidas.WarrenBuffet;
 import parser.ParserJsonString;
 import parser.parserArchivos.ParserJsonAObjetosJava;
+import parserFormulaInidicador.ParserFormulaToIndicador;
+import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.MetodologiasRepository;
 import usuario.Indicador;
 import usuario.Metodologia;
@@ -90,5 +93,7 @@ public class CargarMetodologiaViewModel {
 		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("metodologias",jsonElement );	
 		
 	}
+	
+	
 	
 }

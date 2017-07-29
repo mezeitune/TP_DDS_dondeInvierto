@@ -13,13 +13,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import Comparadores.ComparadorMayor;
+import Comparadores.ComparadorMayorIgual;
 import Comparadores.ComparadorMenor;
+import Comparadores.ComparadorMenorIgual;
 import Condiciones.Comparativa;
 import Condiciones.Condicion;
 import Condiciones.Mixta;
 import Condiciones.Taxativa;
 import parser.ParserJsonString;
 import parser.parserArchivos.CSVToEmpresas;
+import parser.parserArchivos.ParserJsonAObjetosJava;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Empresa;
@@ -54,7 +57,8 @@ public class CargarCriterioViewModel {
 	private String periodo;
 	
 	public CargarCriterioViewModel(){
-
+		ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("indicadores.json");
+		indicadores=parser.getIndicadoresDelArchivo();
 		
 		CargarComparadoresParaElUsuario();
 		CargarTipoCondicionesParaElUsuario();
@@ -181,24 +185,39 @@ public class CargarCriterioViewModel {
 			if(comparador.equals(">")){
 					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Comparativa(new ComparadorMayor()),indicador,pesoCondicion);
 					return condicionDefinidaPorUsuario;
-			}else{
-					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Comparativa(new ComparadorMenor()),indicador,pesoCondicion);
+			}else if(comparador.equals(">=")){
+					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Comparativa(new ComparadorMayorIgual()),indicador,pesoCondicion);
+					return condicionDefinidaPorUsuario;
+			}else if(comparador.equals("<=")){
+					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Comparativa(new ComparadorMenorIgual()),indicador,pesoCondicion);
 					return condicionDefinidaPorUsuario;
 			}	
-			
+			else if(comparador.equals("<")){
+					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Comparativa(new ComparadorMenor()),indicador,pesoCondicion);
+					return condicionDefinidaPorUsuario;
+				}	
+		
 			
 		}else if (tipoCondicion.equals("Taxativa")){
 			
-			if(comparador.equals(">")){
-						Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Taxativa(new ComparadorMayor(), pesoCondicion),indicador,pesoCondicion);
-						return condicionDefinidaPorUsuario;
-			}else{
-					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Taxativa(new ComparadorMenor(), pesoCondicion),indicador,pesoCondicion);
-					return condicionDefinidaPorUsuario;
-			}
-			
-			
+		if(comparador.equals(">")){
+				Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Taxativa(new ComparadorMayor(), pesoCondicion),indicador,pesoCondicion);
+				return condicionDefinidaPorUsuario;
+		}else
+		if(comparador.equals(">=")){
+				Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Taxativa(new ComparadorMayorIgual(), pesoCondicion),indicador,pesoCondicion);
+				return condicionDefinidaPorUsuario;
+		}else
+		if(comparador.equals("<=")){
+				Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Taxativa(new ComparadorMenorIgual(), pesoCondicion),indicador,pesoCondicion);
+				return condicionDefinidaPorUsuario;
+		}else
+		if(comparador.equals("<")){
+				Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Taxativa(new ComparadorMenor(), pesoCondicion),indicador,pesoCondicion);
+				return condicionDefinidaPorUsuario;
+			}	
 		}
+			
 		return null;
 	}
 
@@ -210,6 +229,8 @@ public class CargarCriterioViewModel {
 		if(comparadores.isEmpty()){
 		CargarCriterioViewModel.comparadores.add(">");
 		CargarCriterioViewModel.comparadores.add("<");
+		CargarCriterioViewModel.comparadores.add("<=");
+		CargarCriterioViewModel.comparadores.add(">=");
 		}
 	
 	}

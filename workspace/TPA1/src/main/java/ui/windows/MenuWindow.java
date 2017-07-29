@@ -90,7 +90,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 													e.printStackTrace();
 												}
 								}).setWidth(250);
-		new Button(actionsPanel).setCaption("Cargar Metodologias")
+		new Button(actionsPanel).setCaption("Cargar y consultar Metodologias")
 		.onClick(() -> {
 		
 								try {

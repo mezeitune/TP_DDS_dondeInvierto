@@ -13,6 +13,7 @@ public class ArchivoEIndicadoresUsuarioRepository {
 	
 
 	public static List<Indicador> getIndicadoresDefinidosPorElUsuario() {
+	
 		return indicadoresDefinidosPorElUsuario;
 	}
 

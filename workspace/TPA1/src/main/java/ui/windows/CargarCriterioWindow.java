@@ -36,7 +36,7 @@ public class CargarCriterioWindow extends Dialog <CargarCriterioViewModel> {
 		
 		
 		new Label(mainPanel).setText("Elija el comparador siendo:  ").setBackground(Color.orange);
-		new Label(mainPanel).setText("'> mayor' '< menor'");
+		new Label(mainPanel).setText("'> mayor' '< menor' '<= menor o igual' '>= mayor o igual'");
 		
 		Selector<String> selectorComparador = new Selector<String>(mainPanel).allowNull(true);
 		selectorComparador.setWidth(50);

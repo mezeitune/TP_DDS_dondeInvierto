@@ -1,1 +1,1 @@
-[,{"tipo":{"comparador":{}},"peso":12,"nombre":"Bonnefon"},{"tipo":{"comparador":{}},"peso":150,"nombre":"criterio2"}]
+[,{"tipo":{"comparador":{}},"peso":12,"nombre":"Bonnefon"},{"tipo":{"comparador":{}},"peso":150,"nombre":"criterio2"},{"tipo":{"comparador":{},"valorRequerido":12},"peso":12,"indicador":{"nombre":"Indicador0","formula":"1+1","resultado":0},"nombre":"CondicionPruebaFullHD"}]
