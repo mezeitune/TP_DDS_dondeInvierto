@@ -42,12 +42,37 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 		new TextBox(form).setWidth(300).bindValueToProperty("nombreMetodologia");
 		
-		new Label(form).setText("Elija la condicion a aplicar de la metodologia").setBackground(Color.orange);
+		new Button(mainPanel).setCaption("Agregar Condicion")
+		.onClick(() -> {
+			try{
+				
+				AgregarCriterioSeleccionadoWindow();
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 		
-		Selector<Condicion> selectorCondicion = new Selector<Condicion>(mainPanel).allowNull(true);
-		selectorCondicion.setWidth(100);
-		selectorCondicion.bindItemsToProperty("condiciones").setAdapter(new PropertyAdapter(Metodologia.class, "nombre"));
-		selectorCondicion.bindValueToProperty("condicion");
+		
+		new Button(mainPanel).setCaption("Eliminar Condicion")
+		.onClick(() -> {
+			try{
+				
+				EliminarCriterioSeleccionadoWindow();
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		
+		new Label(mainPanel).setText("Condiciones Seleccionadas").setBackground(Color.ORANGE);
+		
+		Table<Condicion> tableCondSeleccionada = new Table<Condicion>(mainPanel, Condicion.class);
+		
+		tableCondSeleccionada.setNumberVisibleRows(6).setWidth(200);
+		
+		tableCondSeleccionada.bindItemsToProperty("criteriosSeleccionados"); 
+		
+		new Column<Condicion>(tableCondSeleccionada).setTitle("Nombre").bindContentsToProperty("nombre");
 		
 		new Label(mainPanel).setText("Metodologias Disponibles").setBackground(Color.ORANGE);
 		
@@ -111,7 +136,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 	}
 	public void CargarCondicionWindow() throws IOException {
-		Dialog<?> dialog = new CargarCriterioWindow(this);
+		Dialog<?> dialog = new CargarCondicionWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 		
@@ -122,6 +147,16 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		dialog.onAccept(() -> {});
 		
 	}
-	
+	public void AgregarCriterioSeleccionadoWindow() throws IOException {
+		Dialog<?> dialog = new AgregarCondicionSeleccionadaWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
+
+	public void EliminarCriterioSeleccionadoWindow() throws IOException {
+		Dialog<?> dialog = new EliminarCondicionSeleccionadaWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
 }
 

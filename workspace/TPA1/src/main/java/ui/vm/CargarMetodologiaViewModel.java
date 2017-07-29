@@ -20,6 +20,7 @@ import parser.ParserJsonString;
 import parser.parserArchivos.ParserJsonAObjetosJava;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.CriteriosSeleccionadosRepository;
 import repository.MetodologiasRepository;
 import usuario.Indicador;
 import usuario.Metodologia;
@@ -31,16 +32,29 @@ public class CargarMetodologiaViewModel {
 	private Metodologia metodologia;
 	private static String nombreMetodologia ;
 	private static List<Condicion> condiciones = new ArrayList<>();
-	private Condicion condicion;
-	
+	private Condicion condicion ;
+	private List<Condicion> criteriosSeleccionados = new LinkedList<Condicion>();
+
 	public CargarMetodologiaViewModel(){
 		this.setMetodologias();
 		this.setCondiciones();
 		this.nombreMetodologia=null;
-		this.condicion=null;
+		System.out.println(condiciones);
+	
 	}
+	
+	public void setCriteriosSeleccionados (){
+		criteriosSeleccionados= CriteriosSeleccionadosRepository.criteriosSeleccionados;
+	}
+	public List<Condicion> getCriteriosSeleccionados(){
+		System.out.println(CriteriosSeleccionadosRepository.criteriosSeleccionados);
+		return CriteriosSeleccionadosRepository.criteriosSeleccionados;
+		
+	}
+	
 	private void setCondiciones() {
 		ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("condiciones.json");
+		
 		MetodologiasRepository.deleteCondicionesDefinidasPorElUsuario();
 		MetodologiasRepository.setCondicionesDefinidasPorElUsuario(parser.getCondicionesDelArchivo());
 		

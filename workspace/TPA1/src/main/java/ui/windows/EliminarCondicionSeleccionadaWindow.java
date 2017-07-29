@@ -14,18 +14,18 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import Condiciones.Condicion;
 import ui.vm.EliminarEmpresaViewModel;
-import ui.vm.ElminarCriterioSeleccionadoViewModel;
+import ui.vm.ElminarCondicionSeleccionadaViewModel;
 import usuario.Empresa;
 
-public class EliminarCriterioSeleccionadoWindow extends Dialog <ElminarCriterioSeleccionadoViewModel>{
-	public EliminarCriterioSeleccionadoWindow(WindowOwner parent) throws IOException {
-		super(parent, new ElminarCriterioSeleccionadoViewModel());
+public class EliminarCondicionSeleccionadaWindow extends Dialog <ElminarCondicionSeleccionadaViewModel>{
+	public EliminarCondicionSeleccionadaWindow(WindowOwner parent) throws IOException {
+		super(parent, new ElminarCondicionSeleccionadaViewModel());
 	}
 	protected void createFormPanel(Panel mainPanel) {
 		mainPanel.setLayout(new HorizontalLayout());
 		Panel Panel = new Panel(mainPanel);
 		
-		new Label(Panel).setText("Seleccione un criterio a eliminar").setBackground(Color.ORANGE);
+		new Label(Panel).setText("Seleccione una condicion a eliminar").setBackground(Color.ORANGE);
 		Selector<Condicion> selectorEmpresa = new Selector<Condicion>(Panel).allowNull(true);
 		selectorEmpresa.setWidth(100);
 		selectorEmpresa.bindItemsToProperty("criteriosSeleccionados").setAdapter(new PropertyAdapter(Condicion.class, "nombre"));

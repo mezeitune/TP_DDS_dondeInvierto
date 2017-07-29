@@ -11,7 +11,7 @@ import parser.parserArchivos.ParserJsonAObjetosJava;
 import repository.CriteriosSeleccionadosRepository;
 import repository.MetodologiasRepository;
 @Observable
-public class ElminarCriterioSeleccionadoViewModel {
+public class ElminarCondicionSeleccionadaViewModel {
 	private List<Condicion> criteriosSeleccionados = new LinkedList<Condicion>();
 	private Condicion criterioSeleccionado;
 	

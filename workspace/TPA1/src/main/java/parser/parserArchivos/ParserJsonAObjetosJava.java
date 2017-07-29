@@ -55,16 +55,17 @@ public class ParserJsonAObjetosJava {
 	}
 		public List<Metodologia> getMetodologiasDelArchivo() {
 		
-		Type listType = new TypeToken <List<Indicador>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
+		Type listType = new TypeToken <List<Metodologia>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		
 		this.metodologiaObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
 	    return this.metodologiaObtenidasDelArchivo;
 	}
 		public List<Condicion> getCondicionesDelArchivo() {
 			
-			Type listType = new TypeToken <List<Indicador>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
+			Type listType = new TypeToken <List<Condicion>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 			
 			this.condicionesObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
+			
 		    return this.condicionesObtenidasDelArchivo;
 		}
 	

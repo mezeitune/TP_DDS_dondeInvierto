@@ -18,13 +18,13 @@ import repository.EmpresasAEvaluarRepository;
 import repository.MetodologiasRepository;
 import usuario.Empresa;
 @Observable
-public class AgregarCriterioSeleccionadoViewModel {
+public class AgregarCondicionSeleccionadaViewModel {
 
 	private static int codigoError;
 	private  List<Condicion> criteriosSeleccionados = new LinkedList<Condicion>();
 	private static Condicion condicion;
 	
-	public AgregarCriterioSeleccionadoViewModel(){
+	public AgregarCondicionSeleccionadaViewModel(){
 		setCriterios();
 		try {
 			this.setEmpresas();
@@ -71,13 +71,13 @@ public class AgregarCriterioSeleccionadoViewModel {
 	public static void agregarCondicionALaLista() {
 		if(CriteriosSeleccionadosRepository.criteriosSeleccionados.contains(condicion)==true){
 			
-			AgregarCriterioSeleccionadoViewModel.codigoError=1;
+			AgregarCondicionSeleccionadaViewModel.codigoError=1;
 			System.out.println("criterio ya seleccionado, seleccione otro por favor");
 			}else{
 				
 				System.out.println(condicion);
 				CriteriosSeleccionadosRepository.agregarCriterioSeleccionado(condicion);
-				AgregarCriterioSeleccionadoViewModel.codigoError=0;
+				AgregarCondicionSeleccionadaViewModel.codigoError=0;
 	}
 	
 	}

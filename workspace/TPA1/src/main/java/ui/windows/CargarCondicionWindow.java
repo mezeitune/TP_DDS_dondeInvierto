@@ -14,15 +14,15 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import Condiciones.Condicion;
-import ui.vm.CargarCriterioViewModel;
+import ui.vm.CargarCondicionViewModel;
 import ui.vm.CargarMetodologiaViewModel;
 import usuario.Cuenta;
 import usuario.Indicador;
 import usuario.Metodologia;
 
-public class CargarCriterioWindow extends Dialog <CargarCriterioViewModel> {
-	public CargarCriterioWindow(WindowOwner owner) {
-		super(owner, new CargarCriterioViewModel());
+public class CargarCondicionWindow extends Dialog <CargarCondicionViewModel> {
+	public CargarCondicionWindow(WindowOwner owner) {
+		super(owner, new CargarCondicionViewModel());
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class CargarCriterioWindow extends Dialog <CargarCriterioViewModel> {
 		new Button(actionsPanel).setCaption("Cargar Condicion")
 		.onClick(() -> {
 				
-					CargarCriterioViewModel.generarCondicion();
+					CargarCondicionViewModel.generarCondicion();
 				
 				this.getDelegate().close();												
 		}).setWidth(150);

@@ -13,19 +13,19 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import Condiciones.Condicion;
-import ui.vm.AgregarCriterioSeleccionadoViewModel;
+import ui.vm.AgregarCondicionSeleccionadaViewModel;
 import ui.vm.AgregarEmpresaViewModel;
 import usuario.Empresa;
 
-public class AgregarCriterioSeleccionadoWindow extends Dialog <AgregarCriterioSeleccionadoViewModel>{
-	public AgregarCriterioSeleccionadoWindow(WindowOwner parent) throws IOException {
-		super(parent, new AgregarCriterioSeleccionadoViewModel());
+public class AgregarCondicionSeleccionadaWindow extends Dialog <AgregarCondicionSeleccionadaViewModel>{
+	public AgregarCondicionSeleccionadaWindow(WindowOwner parent) throws IOException {
+		super(parent, new AgregarCondicionSeleccionadaViewModel());
 	}
 	protected void createFormPanel(Panel mainPanel) {
 		mainPanel.setLayout(new VerticalLayout());
 		Panel Panel = new Panel(mainPanel);
 		
-		new Label(mainPanel).setText("Elija el criterio a agregar a los criterios de la metodologia").setBackground(Color.orange);
+		new Label(mainPanel).setText("Elija la condicion a agregar").setBackground(Color.orange);
 		
 		Selector<Condicion> selectorCondicion = new Selector<Condicion>(mainPanel).allowNull(true);
 		selectorCondicion.setWidth(100);
@@ -40,8 +40,8 @@ public class AgregarCriterioSeleccionadoWindow extends Dialog <AgregarCriterioSe
 		new Button(actionsPanel).setCaption("Agregar")
 		.onClick(() -> {
 						
-									AgregarCriterioSeleccionadoViewModel.agregarCondicionALaLista();
-									if(AgregarCriterioSeleccionadoViewModel.getCodigoError()==1){
+									AgregarCondicionSeleccionadaViewModel.agregarCondicionALaLista();
+									if(AgregarCondicionSeleccionadaViewModel.getCodigoError()==1){
 									}else {
 										this.getDelegate().close();
 										}

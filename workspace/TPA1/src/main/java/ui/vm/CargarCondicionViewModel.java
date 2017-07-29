@@ -20,6 +20,7 @@ import Condiciones.Comparativa;
 import Condiciones.Condicion;
 import Condiciones.Mixta;
 import Condiciones.Taxativa;
+import Condiciones.TipoCondicion;
 import parser.ParserJsonString;
 import parser.parserArchivos.CSVToEmpresas;
 import parser.parserArchivos.ParserJsonAObjetosJava;
@@ -29,7 +30,7 @@ import usuario.Empresa;
 import usuario.Indicador;
 
 @Observable
-public class CargarCriterioViewModel {
+public class CargarCondicionViewModel {
 	private static String nombreCondicion;
 	
 	private static List<Condicion> condiciones;
@@ -56,7 +57,7 @@ public class CargarCriterioViewModel {
 
 	private String periodo;
 	
-	public CargarCriterioViewModel(){
+	public CargarCondicionViewModel(){
 		ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("indicadores.json");
 		indicadores=parser.getIndicadoresDelArchivo();
 		
@@ -82,7 +83,7 @@ public class CargarCriterioViewModel {
 
 
 	public void setIndicador(Indicador indicador) {
-		CargarCriterioViewModel.indicador = indicador;
+		CargarCondicionViewModel.indicador = indicador;
 	}
 
 
@@ -95,11 +96,11 @@ public class CargarCriterioViewModel {
 
 
 	public void setPesoCondicion(int pesoCondicion) {
-		CargarCriterioViewModel.pesoCondicion = pesoCondicion;
+		CargarCondicionViewModel.pesoCondicion = pesoCondicion;
 	}
 
 	public void setnombreCondicion(String nombreCondicion) {
-		CargarCriterioViewModel.nombreCondicion = nombreCondicion;
+		CargarCondicionViewModel.nombreCondicion = nombreCondicion;
 	}
 
 
@@ -109,7 +110,7 @@ public class CargarCriterioViewModel {
 
 
 	public void setCondiciones(List<Condicion> condiciones) {
-		CargarCriterioViewModel.condiciones = condiciones;
+		CargarCondicionViewModel.condiciones = condiciones;
 	}
 
 
@@ -119,7 +120,7 @@ public class CargarCriterioViewModel {
 
 
 	public void setCondicion(Condicion condicion) {
-		CargarCriterioViewModel.condicion = condicion;
+		CargarCondicionViewModel.condicion = condicion;
 	}
 
 
@@ -129,7 +130,7 @@ public class CargarCriterioViewModel {
 
 
 	public void setTipoCondiciones(List<String> tipoCondiciones) {
-		CargarCriterioViewModel.tipoCondiciones = tipoCondiciones;
+		CargarCondicionViewModel.tipoCondiciones = tipoCondiciones;
 	}
 
 
@@ -139,7 +140,7 @@ public class CargarCriterioViewModel {
 
 
 	public void setTipoCondicion(String tipoCondicion) {
-		CargarCriterioViewModel.tipoCondicion = tipoCondicion;
+		CargarCondicionViewModel.tipoCondicion = tipoCondicion;
 	}
 
 
@@ -149,7 +150,7 @@ public class CargarCriterioViewModel {
 
 
 	public void setComparadores(List<String> comparadores) {
-		CargarCriterioViewModel.comparadores = comparadores;
+		CargarCondicionViewModel.comparadores = comparadores;
 	}
 
 
@@ -159,12 +160,12 @@ public class CargarCriterioViewModel {
 
 
 	public void setComparador(String comparador) {
-		CargarCriterioViewModel.comparador = comparador;
+		CargarCondicionViewModel.comparador = comparador;
 		
 	}
 	
 	public List<Indicador> getIndicadores(){
-		Collections.sort(CargarCriterioViewModel.indicadores);
+		Collections.sort(CargarCondicionViewModel.indicadores);
 		return this.indicadores;
 	}
 	public static void generarCondicion() {
@@ -183,17 +184,21 @@ public class CargarCriterioViewModel {
 			if(tipoCondicion.equals("Comparativa")){
 			
 			if(comparador.equals(">")){
-					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Comparativa(new ComparadorMayor()),indicador,pesoCondicion);
+					TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
+					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,comparativa,indicador,pesoCondicion);
 					return condicionDefinidaPorUsuario;
 			}else if(comparador.equals(">=")){
-					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Comparativa(new ComparadorMayorIgual()),indicador,pesoCondicion);
+					TipoCondicion comparativa = new Comparativa(new ComparadorMayorIgual());
+					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,comparativa,indicador,pesoCondicion);
 					return condicionDefinidaPorUsuario;
 			}else if(comparador.equals("<=")){
-					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Comparativa(new ComparadorMenorIgual()),indicador,pesoCondicion);
+					TipoCondicion comparativa = new Comparativa(new ComparadorMenorIgual());
+					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,comparativa,indicador,pesoCondicion);
 					return condicionDefinidaPorUsuario;
 			}	
 			else if(comparador.equals("<")){
-					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,new Comparativa(new ComparadorMenor()),indicador,pesoCondicion);
+					TipoCondicion comparativa = new Comparativa(new ComparadorMenor());
+					Condicion condicionDefinidaPorUsuario = new Condicion(nombreCondicion,comparativa,indicador,pesoCondicion);
 					return condicionDefinidaPorUsuario;
 				}	
 		
@@ -227,17 +232,17 @@ public class CargarCriterioViewModel {
 
 	public void CargarComparadoresParaElUsuario() {
 		if(comparadores.isEmpty()){
-		CargarCriterioViewModel.comparadores.add(">");
-		CargarCriterioViewModel.comparadores.add("<");
-		CargarCriterioViewModel.comparadores.add("<=");
-		CargarCriterioViewModel.comparadores.add(">=");
+		CargarCondicionViewModel.comparadores.add(">");
+		CargarCondicionViewModel.comparadores.add("<");
+		CargarCondicionViewModel.comparadores.add("<=");
+		CargarCondicionViewModel.comparadores.add(">=");
 		}
 	
 	}
 	public void CargarTipoCondicionesParaElUsuario() {
 		if(tipoCondiciones.isEmpty()){
-		CargarCriterioViewModel.tipoCondiciones.add("Comparativa");
-		CargarCriterioViewModel.tipoCondiciones.add("Taxativa");
+		CargarCondicionViewModel.tipoCondiciones.add("Comparativa");
+		CargarCondicionViewModel.tipoCondiciones.add("Taxativa");
 		}
 	}
 }
