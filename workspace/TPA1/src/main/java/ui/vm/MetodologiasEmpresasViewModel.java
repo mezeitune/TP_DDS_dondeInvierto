@@ -10,6 +10,7 @@ import org.uqbar.commons.utils.Observable;
 
 import Mocks.EmpresasMock;
 import parser.parserArchivos.CSVToEmpresas;
+import parser.parserArchivos.ParserJsonAObjetosJava;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
@@ -40,6 +41,13 @@ public class MetodologiasEmpresasViewModel {
 
 
 	public MetodologiasEmpresasViewModel() {
+		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("metodologias.json");
+		
+		MetodologiasRepository.deleteMetodologiasDefinidasPorElUsuario();
+		MetodologiasRepository.setMetodologiasDefinidasPorElUsuario(parserEmpIndicador.getMetodologiasDelArchivo());
+		MetodologiasRepository.cargarMetodologiasPredefinidos();
+		
+		
 		try {
 			
 			this.setEmpresas();
