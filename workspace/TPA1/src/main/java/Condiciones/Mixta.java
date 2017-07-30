@@ -9,7 +9,7 @@ import Comparadores.Comparador;
 import usuario.Empresa;
 
 @Observable
-public class Mixta implements TipoCondicion{
+public class Mixta extends TipoCondicion{
 
 	
 	private static Mixta instance ;

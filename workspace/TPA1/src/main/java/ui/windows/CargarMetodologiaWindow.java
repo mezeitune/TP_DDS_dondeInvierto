@@ -14,6 +14,7 @@ import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
+import org.uqbar.commons.model.ObservableUtils;
 
 import Condiciones.Condicion;
 import parserFormulaInidicador.ParserFormulaToIndicador;

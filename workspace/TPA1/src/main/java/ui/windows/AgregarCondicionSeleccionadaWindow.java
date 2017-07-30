@@ -23,7 +23,6 @@ public class AgregarCondicionSeleccionadaWindow extends Dialog <AgregarCondicion
 	}
 	protected void createFormPanel(Panel mainPanel) {
 		mainPanel.setLayout(new VerticalLayout());
-		Panel Panel = new Panel(mainPanel);
 		
 		new Label(mainPanel).setText("Elija la condicion a agregar").setBackground(Color.orange);
 		

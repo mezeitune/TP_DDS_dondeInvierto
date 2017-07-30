@@ -11,7 +11,7 @@ import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 @Observable
-public class Comparativa implements TipoCondicion{
+public class Comparativa extends TipoCondicion{
 	
 	
 	private static Comparativa instance ;

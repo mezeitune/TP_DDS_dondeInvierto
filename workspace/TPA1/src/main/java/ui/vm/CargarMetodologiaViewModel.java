@@ -38,16 +38,16 @@ public class CargarMetodologiaViewModel {
 	public CargarMetodologiaViewModel(){
 		this.setMetodologias();
 		this.setCondiciones();
-		this.nombreMetodologia=null;
+		CargarMetodologiaViewModel.nombreMetodologia=null;
 		System.out.println(condiciones);
 	
 	}
 	
 	public void setCriteriosSeleccionados (){
-		criteriosSeleccionados= CriteriosSeleccionadosRepository.criteriosSeleccionados;
+		criteriosSeleccionados = CriteriosSeleccionadosRepository.criteriosSeleccionados;
 	}
+
 	public List<Condicion> getCriteriosSeleccionados(){
-		System.out.println(CriteriosSeleccionadosRepository.criteriosSeleccionados);
 		return CriteriosSeleccionadosRepository.criteriosSeleccionados;
 		
 	}
@@ -58,8 +58,8 @@ public class CargarMetodologiaViewModel {
 		MetodologiasRepository.deleteCondicionesDefinidasPorElUsuario();
 		MetodologiasRepository.setCondicionesDefinidasPorElUsuario(parser.getCondicionesDelArchivo());
 		
-		this.condiciones = MetodologiasRepository.getCondiciones();
-		
+		CargarMetodologiaViewModel.condiciones = MetodologiasRepository.getCondiciones();
+		ObservableUtils.firePropertyChanged(this, "condiciones");
 		
 	}
 	public  List<Condicion> getCondiciones() {
@@ -72,6 +72,7 @@ public class CargarMetodologiaViewModel {
 		MetodologiasRepository.setMetodologiasDefinidasPorElUsuario(parser.getMetodologiasDelArchivo());
 		
 		metodologias = MetodologiasRepository.getMetodologias();
+		ObservableUtils.firePropertyChanged(this, "metodologias");
 	}
 	
 	
@@ -93,7 +94,7 @@ public class CargarMetodologiaViewModel {
 		return nombreMetodologia;
 	}
 	public void setNombreMetodologia(String nombre) {
-		this.nombreMetodologia = nombre;
+		CargarMetodologiaViewModel.nombreMetodologia = nombre;
 	}
 	
 	public static void generarMetodologia() throws IOException{

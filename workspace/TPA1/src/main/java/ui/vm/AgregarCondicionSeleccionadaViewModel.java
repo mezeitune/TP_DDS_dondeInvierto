@@ -57,9 +57,7 @@ public class AgregarCondicionSeleccionadaViewModel {
 	}
 	public void setCondicion(Condicion criterioSeleccionado) {
 	this.condicion=criterioSeleccionado;
-		System.out.println("no lo agregue");
-	
-		
+	//	System.out.println("no lo agregue");
 	}
 	public static int getCodigoError() {
 		return codigoError;
@@ -75,9 +73,10 @@ public class AgregarCondicionSeleccionadaViewModel {
 			System.out.println("criterio ya seleccionado, seleccione otro por favor");
 			}else{
 				
-				System.out.println(condicion);
+				//System.out.println(condicion);
 				CriteriosSeleccionadosRepository.agregarCriterioSeleccionado(condicion);
 				AgregarCondicionSeleccionadaViewModel.codigoError=0;
+				
 	}
 	
 	}
