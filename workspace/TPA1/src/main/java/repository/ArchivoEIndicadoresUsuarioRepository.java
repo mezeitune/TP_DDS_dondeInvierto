@@ -38,9 +38,7 @@ public class ArchivoEIndicadoresUsuarioRepository {
 	
 	public static void  cargarIndicadoresPredefinidos() {
 	    PatrimonioNeto patrimonioNeto = PatrimonioNeto.getInstance();
-	    Antiguedad antiguedad = new Antiguedad();
 	    ArchivoEIndicadoresUsuarioRepository.addIndicadoresDefinidosPorElUsuario(patrimonioNeto);
-	    ArchivoEIndicadoresUsuarioRepository.addIndicadoresDefinidosPorElUsuario(antiguedad);
 	}
 
 	

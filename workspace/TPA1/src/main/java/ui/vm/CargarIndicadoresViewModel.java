@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 
+import excepciones.AccountNotFoundException;
 import indicadoresPredefinidos.IndicadorCustom;
 import parser.ParserJsonString;
 import parserFormulaInidicador.ParserFormulaToIndicador;
@@ -94,7 +95,13 @@ public class CargarIndicadoresViewModel {
 
 			if(ParserFormulaToIndicador.validarAntesDePrecargar(nuevoIndicador.getFormula())){
 
-				ParserFormulaToIndicador.getCalculoIndicador(nuevoIndicador.getFormula());//Para poder entender Cuentas
+				/*TODO: Importantisima excepecion esta. Hay que acomodarla para reflejarla en la UI*/
+				try {
+					ParserFormulaToIndicador.getCalculoIndicador(nuevoIndicador.getFormula());
+				} catch (AccountNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}//Para poder entender Cuentas
 
 				ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );
 				
