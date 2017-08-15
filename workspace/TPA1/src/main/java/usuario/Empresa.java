@@ -15,7 +15,6 @@ public class Empresa {
 	String nombre;
 	int peso=0;
 	private List<Cuenta> cuentas = new LinkedList<>(); 
-	private List<Periodo> periodos = new LinkedList<Periodo>();
 	
 	public Empresa(String nombreEmpresa,List<Cuenta> cuentas){
 		this.nombre = nombreEmpresa;

@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import indicadoresPredefinidos.IndicadorCustom;
 import parserFormulaInidicador.ParserFormulaToIndicador;
-import usuario.Indicador;
-import usuario.IndicadorCustom;;
+import usuario.Indicador;;
 
 /*public class IndicadoresMock {
 	Indicador nuevoIndicador = new IndicadorCustom("Indicador0","2+2+2+2+2");

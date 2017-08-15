@@ -7,12 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 import com.google.gson.Gson;
 
+import indicadoresPredefinidos.IndicadorCustom;
 import parser.ParserJsonString;
 import parser.parserArchivos.ParserJsonAObjetosJava;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
-import usuario.IndicadorCustom;
 
 
 public class IndicadoresAlArchivoJSONTest {

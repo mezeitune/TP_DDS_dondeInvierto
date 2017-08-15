@@ -78,11 +78,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 			}).setWidth(250);
 		new Button(actionsPanel).setCaption("Cargar y consultar indicadores")
 								.onClick(() -> {
-												try {
 													new ParserFormulaToIndicador();
-												} catch (IOException e1) {
-													e1.printStackTrace();
-												}
 												try{
 													this.getDelegate().close();
 													CargarIndicadoresWindow();

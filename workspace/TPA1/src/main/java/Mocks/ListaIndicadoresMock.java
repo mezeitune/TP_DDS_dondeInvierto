@@ -3,8 +3,8 @@ package Mocks;
 import java.util.LinkedList;
 import java.util.List;
 
+import indicadoresPredefinidos.IndicadorCustom;
 import usuario.Indicador;
-import usuario.IndicadorCustom;
 
 public class ListaIndicadoresMock {
 	private List<Indicador> indicadores = new LinkedList<Indicador>();

@@ -11,6 +11,7 @@ import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 import com.sun.jersey.api.client.Client;
 
+import indicadoresPredefinidos.IndicadorCustom;
 import parser.parserArchivos.CSVToEmpresas;
 import parser.parserArchivos.ParserJsonAObjetosJava;
 import parserFormulaInidicador.ParserFormulaToIndicador;
