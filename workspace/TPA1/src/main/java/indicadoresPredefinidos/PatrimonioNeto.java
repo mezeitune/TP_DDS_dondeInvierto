@@ -8,14 +8,10 @@ import usuario.Indicador;
 @Observable
 
 public class PatrimonioNeto extends Indicador{
-
 	
 	private static PatrimonioNeto instance ;
 
-
-
-
-	public static PatrimonioNeto getInstance( ) {
+	public static PatrimonioNeto getInstance( ){
         if(instance == null){
             instance = new PatrimonioNeto("PN", "1+2" );
         }
@@ -23,7 +19,7 @@ public class PatrimonioNeto extends Indicador{
 
 	}	
 	
-	public PatrimonioNeto(String nombre,String formula) {
+	public PatrimonioNeto(String nombre,String formula){
 		super(nombre,formula);
 	}
 	@Override

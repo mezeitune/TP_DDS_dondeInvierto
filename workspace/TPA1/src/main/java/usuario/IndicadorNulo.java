@@ -2,6 +2,8 @@ package usuario;
 
 import org.uqbar.commons.utils.Observable;
 
+import excepciones.AccountNotFoundException;
+
 //indicador predefinido que extiende de indicador para que todos tengan el metodo calcular en su dominio
 @Observable
 
@@ -10,10 +12,7 @@ public class IndicadorNulo extends Indicador{
 	
 	private static IndicadorNulo instance ;
 
-
-
-
-	public static IndicadorNulo getInstance( ) {
+	public static IndicadorNulo getInstance( ) throws AccountNotFoundException {
         if(instance == null){
             instance = new IndicadorNulo("indicadorNulo", "0" );
         }
@@ -21,7 +20,7 @@ public class IndicadorNulo extends Indicador{
 
 	}	
 	
-	public IndicadorNulo(String nombre,String formula) {
+	public IndicadorNulo(String nombre,String formula) throws AccountNotFoundException {
 		super(nombre,formula);
 	}
 	@Override

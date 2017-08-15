@@ -1,10 +1,10 @@
 package usuario;
 
 import org.uqbar.commons.utils.Observable;
-
 import parserFormulaInidicador.Operacion;
+
 @Observable
-public class Cuenta extends Operacion {
+public class Cuenta implements Operacion {
 
 	private String nombre;
 	private String periodo;
@@ -43,6 +43,18 @@ public class Cuenta extends Operacion {
 	
 	public int calcular(){
 		return valor;
+	}
+
+	@Override
+	public void setOperador1(Operacion operador1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setOperador2(Operacion operador2) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

@@ -56,7 +56,7 @@ public class ParserIndicadoresTest {
 	@Test
 	public void FormulaDeNumerosConDistintasOperacionesFuncionaCorrectamente() throws UserException{
 		Indicador indicadorConDistintasOperaciones = indicadores.get(5);
-		assertEquals(10.0,indicadorConDistintasOperaciones.calcular(),0);
+		assertEquals(-1.0,indicadorConDistintasOperaciones.calcular(),0);
 	}
 	@Test
 	public void FormulaDCombinadaDeOperadoresConIndicadoresCuentasYNumeros() throws UserException{

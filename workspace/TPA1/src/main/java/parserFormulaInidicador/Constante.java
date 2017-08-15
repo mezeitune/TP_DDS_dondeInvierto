@@ -1,6 +1,6 @@
 package parserFormulaInidicador;
 
-public class Constante extends Operacion{
+public class Constante implements Operacion{
 	private int valor;
 	
 	public Constante(int valor){
@@ -11,4 +11,18 @@ public class Constante extends Operacion{
 	public int calcular(){
 		return this.valor;
 	}
+
+	@Override
+	public void setOperador1(Operacion operador1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setOperador2(Operacion operador2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

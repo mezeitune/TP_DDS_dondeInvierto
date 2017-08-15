@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import excepciones.AccountNotFoundException;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
@@ -17,9 +18,8 @@ public class Antiguedad extends Indicador {
 		this.anioActual = anoActual;
 	}
 
-	public Antiguedad(String nombre, String formula) {
+	public Antiguedad(String nombre, String formula) throws AccountNotFoundException {
 		super(nombre, formula);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Antiguedad(){

@@ -3,6 +3,7 @@ package repository;
 import java.util.LinkedList;
 import java.util.List;
 
+import indicadoresPredefinidos.Antiguedad;
 import indicadoresPredefinidos.PatrimonioNeto;
 import usuario.Indicador;
 
@@ -35,9 +36,11 @@ public class ArchivoEIndicadoresUsuarioRepository {
 	}
 	
 	
-	public static void  cargarIndicadoresPredefinidos(){
-	    PatrimonioNeto pn = PatrimonioNeto.getInstance( );
-	    ArchivoEIndicadoresUsuarioRepository.addIndicadoresDefinidosPorElUsuario(pn);
+	public static void  cargarIndicadoresPredefinidos() {
+	    PatrimonioNeto patrimonioNeto = PatrimonioNeto.getInstance();
+	    Antiguedad antiguedad = new Antiguedad();
+	    ArchivoEIndicadoresUsuarioRepository.addIndicadoresDefinidosPorElUsuario(patrimonioNeto);
+	    ArchivoEIndicadoresUsuarioRepository.addIndicadoresDefinidosPorElUsuario(antiguedad);
 	}
 
 	

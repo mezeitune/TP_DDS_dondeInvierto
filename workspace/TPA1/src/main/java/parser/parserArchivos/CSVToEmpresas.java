@@ -11,7 +11,6 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
 import excepciones.ArchivoInexistenteException;
-import excepciones.CSVMalFormadoException;
 import excepciones.PathIncorrectoException;
 import excepciones.TipoDeArchivoIncorrectoException;
 
@@ -51,8 +50,14 @@ public class CSVToEmpresas {
 	}
 	
 	
-	public List<Empresa> csvFileToEmpresas() throws IOException{
-		List<CSVObject> CSVObjectList = this.CSVFileToCSVObjectList();
+	public List<Empresa> csvFileToEmpresas(){
+		List<CSVObject> CSVObjectList = null;
+		try {
+			CSVObjectList = this.CSVFileToCSVObjectList();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return this.CSVObjectListToEmpresasList(CSVObjectList);
 	}

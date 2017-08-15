@@ -14,11 +14,10 @@ import java.util.List;
 
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
-import repository.MetodologiasRepository;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
-import usuario.Metodologia;
+
 public class ParserFormulaToIndicador {
 
 	private static List<Cuenta> cuentas = new LinkedList<>(); 
@@ -29,9 +28,14 @@ public class ParserFormulaToIndicador {
 	private static Empresa empresa ;
 	private static String periodo;
 	
+	private static String operadorSuma = "(.*)[+](.*)";
+	private static String operadorResta = "(.*)[-](.*)";
+	private static String operadorMultiplicacion = "(.*)[*](.*)";
+	private static String operadorDivision = "(.*)[/](.*)";
+	
 	
 	/*TODO: Tratar de pasarle los indicadores y las cuentas por constructor, asi limpiamos el metodo INIT que es solo para testear*/
-	public ParserFormulaToIndicador() throws IOException{
+	public ParserFormulaToIndicador() {
 		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("indicadores.json");
 		CSVToEmpresas parserCuentas = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
 		
@@ -77,36 +81,142 @@ public class ParserFormulaToIndicador {
 		cuentasPorPeriodo = empresa.getCuentasPorPeriodo(periodo);
 	}
 	
-	public static int getCalculoIndicador(String formula){
-		try{
+	public static int getCalculoIndicador(String formula) throws AccountNotFoundException{
 			return ParserFormulaToIndicador.construirArbolOperaciones(formula).calcular();
-		}catch(NullPointerException e){}
-		return 0;
 	}
 	
+	public static Operacion construirArbolOperaciones(String operandos) throws AccountNotFoundException{
 
-	public static Operacion construirArbolOperaciones(String operandos){
+				if(operandos.matches(operadorSuma)) return ParserFormulaToIndicador.getOperacion(operandos.split("[+]"),new Suma());
+				if(operandos.matches(operadorResta)) return ParserFormulaToIndicador.getOperacion(operandos.split("[-]"),new Resta());
+				if(operandos.matches(operadorMultiplicacion)) return ParserFormulaToIndicador.getOperacion(operandos.split("[*]"),new Multiplicacion());
+				if(operandos.matches(operadorDivision)) return ParserFormulaToIndicador.getOperacion(operandos.split("[/]"),new Division());
+				
+				return ParserFormulaToIndicador.getClaseOperador(operandos);
+				
+		}
+	
+	public static Operacion getOperacion(String [] formula,Operacion nuevaOperacion) throws AccountNotFoundException{
+		List<String> operandos = new LinkedList<>();
+		int i;
+		for(i=0;i<formula.length;i++){
+			operandos.add(i, formula[i]);
+		}
+		nuevaOperacion.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
+		
+		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
+			operandos.add(i,"/");
+		}
+		
+		String formulaString = "";
+		for(i=0;i<operandos.size();i++){
+			formulaString += operandos.get(i);
+		}
+		nuevaOperacion.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
+		
+		return nuevaOperacion;
+	}
+	
+	
+	public static Operacion getClaseOperador(String operador) throws AccountNotFoundException{
+		if (ParserFormulaToIndicador.esIndicador(operador)) return ParserFormulaToIndicador.buscarYObtenerIndicador(operador);
+		if (ParserFormulaToIndicador.esCuenta(operador)) return ParserFormulaToIndicador.buscarYObtenerCuenta(operador);
+		else return new Constante(Integer.parseInt(operador));
+	}
+	
+	public static boolean esIndicador(String operador){
+		return indicadores.stream().anyMatch(indicador -> indicador.getNombre().equals(operador));
+	}
+	
+	public static boolean esCuenta(String operador){
+		return cuentas.stream().anyMatch(cuenta -> cuenta.getNombre().equals(operador));
+	}
+	
+	public static Indicador buscarYObtenerIndicador(String operador){
+		return indicadores.stream().filter(indicador -> indicador.getNombre().equals(operador)).collect(Collectors.toList()).get(0);
+	}
+	
+	
+	
+	public static Cuenta buscarYObtenerCuenta(String operador) throws AccountNotFoundException{
+		if(!cuentasPorPeriodo.stream().anyMatch(cuenta -> cuenta.getNombre().equals(operador))) throw new AccountNotFoundException();
+		return cuentasPorPeriodo.stream().filter(cuenta -> cuenta.getNombre().equals(operador)).collect(Collectors.toList()).get(0);
+	}
+	
+	public static boolean validarIndicadorRepetidoAntesDePrecargar(String nombre , String formula) throws IOException {
+		List<Indicador> indicadoresRepetidos = indicadores.stream().filter(line -> line.getNombre().equals(nombre)).collect(Collectors.toList());
+		
+		if (indicadoresRepetidos.size() >= 1){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public static boolean validarEmpresaRepetidaAntesDePrecargar(Empresa unaEmpresa) throws IOException {
+		
+		List<Empresa> empresaRepetida = EmpresasAEvaluarRepository.empresasAEvaluar.stream().filter(line -> line.getNombre().equals(unaEmpresa.getNombre())).collect(Collectors.toList());
+		
+		if (empresaRepetida.size() >= 1){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	public static boolean validarAntesDePrecargar(String formula) throws IOException{ 
+		setIndicadoresDefinidosPorUsuario();
+		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+		List<Empresa> empresas = parser.csvFileToEmpresas();
 
-				String operadorSuma = "(.*)[+](.*)";
-				String operadorResta = "(.*)[-](.*)";
-				String operadorMultiplicacion = "(.*)[*](.*)";
-				String operadorDivision = "(.*)[/](.*)";
-				if(operandos.matches(operadorSuma)) return ParserFormulaToIndicador.getSuma(operandos.split("[+]"));
-				if(operandos.matches(operadorResta)) return ParserFormulaToIndicador.getResta(operandos.split("[-]"));
-				if(operandos.matches(operadorMultiplicacion)) return ParserFormulaToIndicador.getMultiplicacion(operandos.split("[*]"));
-				if (operandos.matches(operadorDivision)) return ParserFormulaToIndicador.getDivision(operandos.split("[/]"));
-				else {
-					try{
-						return ParserFormulaToIndicador.getClaseOperador(operandos);
-					}catch(NumberFormatException | AccountNotFoundException e){
-						/*TODO: Abortar si no encuentra la cuenta o el indicador*/
-					}
+		for(int i=0;i<empresas.size();i++){
+				cuentas.addAll(empresas.get(i).getCuentas());
+			}
+	
+		
+		String[] result = formula.split("[-+*/]");
+		String[] ver = new String[result.length];
+		
+		for(int j=0;j<ver.length;j++){
+			ver[j]="no";
+		}
+		
+		for (int i = 0; i < result.length; i++) {
+			
+			if( StringUtils.isNumeric(result[i])){
+				ver[i]="si";
+			}else{
+				for(Indicador s : indicadores){
+					  if(s.getNombre().equals(result[i])){
+						  ver[i]="si";
+					  }
 				}
-				return null;
+				
+				for(Cuenta s : cuentas){
+					  if(s.getNombre().equals(result[i])){
+						  ver[i]="si";
+					  }
+				}
+			}
+		}
+		
+		for(int k=0;k<ver.length;k++){
+			if(ver[k].equals("no")){
+				return false;
+			}
 		}
 
-	/*TODO: Buscar una abstraccion mas al getDivision-getMultiplicacion-getSuma-getResta. ----> getOperacion*/
-	/*TODO: Tratar de no repetir todo este codigo 4 veces. Solamente cambia el tipo de operacion + - * /   */
+		
+		return true;
+		
+	}
+	
+}
+
+	
+
+
+/*
 	public static Division getDivision(String [] formula){
 
 		Division division = new Division();
@@ -220,227 +330,4 @@ public class ParserFormulaToIndicador {
 		return suma;
 	}
 	
-	public static Operacion getClaseOperador(String operador) throws AccountNotFoundException{
-		if (ParserFormulaToIndicador.esIndicador(operador)) return ParserFormulaToIndicador.buscarYObtenerIndicador(operador);
-		if (ParserFormulaToIndicador.esCuenta(operador)) return ParserFormulaToIndicador.buscarYObtenerCuenta(operador);
-		else return new Constante(Integer.parseInt(operador));
-	}
-	
-	public static boolean esIndicador(String operador){
-		return indicadores.stream().anyMatch(indicador -> indicador.getNombre().equals(operador));
-	}
-	
-	public static boolean esCuenta(String operador){
-		return cuentas.stream().anyMatch(cuenta -> cuenta.getNombre().equals(operador));
-	}
-	
-	public static Indicador buscarYObtenerIndicador(String operador){
-		return indicadores.stream().filter(indicador -> indicador.getNombre().equals(operador)).collect(Collectors.toList()).get(0);
-	}
-	
-	public static Cuenta buscarYObtenerCuenta(String operador) throws AccountNotFoundException{
-		if(!cuentasPorPeriodo.stream().anyMatch(cuenta -> cuenta.getNombre().equals(operador))) throw new AccountNotFoundException();
-		return cuentasPorPeriodo.stream().filter(cuenta -> cuenta.getNombre().equals(operador)).collect(Collectors.toList()).get(0);
-	}
-	
-	
-	
-
-	/*
-	public static Operacion construirArbolOperaciones(String formula){
-		String operadorSuma = "[+]";
-		String operadorResta = "[-]";
-		String operadorMultiplicacion = "[*]" ; 
-		String operadorDivision = "[/]";
-		//Indicador indicador;
-			if(formula.matches("(.*)[+](.*)")){
-				return ParserFormulaToIndicador.getSuma(formula.split(operadorSuma));
-			}
-			if(formula.matches("(.*)[-](.*)")){
-				return ParserFormulaToIndicador.getResta(formula.split(operadorResta));
-				
-			}
-			if(formula.matches("(.*)[*](.*)")){
-				return ParserFormulaToIndicador.getMultiplicacion(formula.split(operadorMultiplicacion));
-	
-			}
-			if(formula.matches("(.*)[/](.*)")){
-				return ParserFormulaToIndicador.getDivision(formula.split(operadorDivision));
-			}
-			
-			/*Esta para que la ventana de evaluacion indicadoresTexto pueda cargar un unico indicador*/	
-			/*if(!ParserFormulaToIndicador.indicador(formula).equals(0)){
-				indicador = ParserFormulaToIndicador.indicador(formula);
-				return indicador;
-			}
-			*/ /* Con el Else de abajo no haria falta esta entrada */ 
-			//else return ParserFormulaToIndicador.getClaseOperador(formula);
-	//}
-
-	
-	
-	
-	/*
-	private static Indicador indicador(String formula) {
-		int j;
-		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
-		for (j = 0; j < indicadores.size(); j++) {
-			if(indicadores.get(j).getNombre().equals(formula)){
-				return indicadores.get(j);
-			}
-		}
-		
-		return null;
-	}
-	*/
-	
-	
-	/*
-	
-	public static int[] parsearOperandosAInt(String[] operandos){
-		int[] numeros = new int[operandos.length];
-		
-		for(int i = 0;i < operandos.length;i++){
-		   numeros[i] = Integer.parseInt(operandos[i]);
-		}
-		return numeros;
-	}
-	*/
-	
-	/*
-	private static Operacion matcheaOtroOperador(String operandos){
-		String operadorSuma = "(.*)[+](.*)";
-		String operadorResta = "(.*)[-](.*)";
-		String operadorMultiplicacion = "(.*)[*](.*)";
-		String operadorDivision = "(.*)[/](.*)";
-		if(operandos.matches(operadorSuma)) return ParserFormulaToIndicador.getSuma(operandos.split("[+]"));
-		if(operandos.matches(operadorResta)) return ParserFormulaToIndicador.getResta(operandos.split("[-]"));
-		if(operandos.matches(operadorMultiplicacion)) return ParserFormulaToIndicador.getMultiplicacion(operandos.split("[*]"));
-		if (operandos.matches(operadorDivision)) return ParserFormulaToIndicador.getDivision(operandos.split("[/]"));
-		else {
-				return ParserFormulaToIndicador.getClaseOperador(operandos);
-		}
-	}
-	*/
-	/*
-	private static Operacion matcheaOtroOperadorADerecha(String operandos,Operacion operacion){
-		String operadorSuma = "(.*)[+](.*)";
-		String operadorResta = "(.*)[-](.*)";
-		String operadorMultiplicacion = "(.*)[*](.*)";
-		String operadorDivision = "(.*)[/](.*)";
-		if(operandos.matches(operadorSuma)) operacion.setOperador2(ParserFormulaToIndicador.getSuma(operandos.split("[+]")));
-		if(operandos.matches(operadorResta)) operacion.setOperador2(ParserFormulaToIndicador.getResta(operandos.split("[-]")));
-		if(operandos.matches(operadorMultiplicacion)) operacion.setOperador2(ParserFormulaToIndicador.getMultiplicacion(operandos.split("[*]")));
-		if (operandos.matches(operadorDivision)) operacion.setOperador2(ParserFormulaToIndicador.getDivision(operandos.split("[/]")));
-		else {
-				operacion.setOperador2(ParserFormulaToIndicador.getClaseOperador(operandos));
-		}
-	}*/
-	
-	
-	/*
-	public static String[] elementosToOperandos(String[] operandos) {
-		int i,j;
-		
-		
-		for (int j2 = 0; j2 < operandos.length; j2++) {
-		}
-		
-		
-		
-		
-		Si matchea con un indicador
-		for (i = 0; i < operandos.length; i++) {
-			for (j = 0; j < indicadores.size(); j++) {
-				if(indicadores.get(j).getNombre().equals(operandos[i])){
-
-						operandos[i] = String.valueOf(indicadores.get(j).calcular());
-				
-				}
-			}
-			Si matchea con una cuenta
-			try{
-				cuentasPorPeriodo=empresa.getCuentasPorPeriodo(periodo);
-				for (j= 0; j<cuentasPorPeriodo.size();j++){
-					if(cuentasPorPeriodo.get(j).getNombre().equals(operandos[i])){
-						operandos[i]= String.valueOf(cuentasPorPeriodo.get(j).getValor());
-					}
-				}
-			}catch(NullPointerException e){}
-			
-			Si no matchea ni cuenta ni indicador, entonces es un operador basico y no hay modificaciones en el buffer
-		}
-		return operandos;
-	}
-	*/
-	public static boolean validarIndicadorRepetidoAntesDePrecargar(String nombre , String formula) throws IOException {
-		List<Indicador> indicadoresRepetidos = indicadores.stream().filter(line -> line.getNombre().equals(nombre)).collect(Collectors.toList());
-		
-		if (indicadoresRepetidos.size() >= 1){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	public static boolean validarEmpresaRepetidaAntesDePrecargar(Empresa unaEmpresa) throws IOException {
-		
-		List<Empresa> empresaRepetida = EmpresasAEvaluarRepository.empresasAEvaluar.stream().filter(line -> line.getNombre().equals(unaEmpresa.getNombre())).collect(Collectors.toList());
-		
-		if (empresaRepetida.size() >= 1){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	
-	public static boolean validarAntesDePrecargar(String formula) throws IOException{ 
-		setIndicadoresDefinidosPorUsuario();
-		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
-		List<Empresa> empresas = parser.csvFileToEmpresas();
-
-		for(int i=0;i<empresas.size();i++){
-				cuentas.addAll(empresas.get(i).getCuentas());
-			}
-	
-		
-		String[] result = formula.split("[-+*/]");
-		String[] ver = new String[result.length];
-		
-		for(int j=0;j<ver.length;j++){
-			ver[j]="no";
-		}
-		
-		for (int i = 0; i < result.length; i++) {
-			
-			if( StringUtils.isNumeric(result[i])){
-				ver[i]="si";
-			}else{
-				for(Indicador s : indicadores){
-					  if(s.getNombre().equals(result[i])){
-						  ver[i]="si";
-					  }
-				}
-				
-				for(Cuenta s : cuentas){
-					  if(s.getNombre().equals(result[i])){
-						  ver[i]="si";
-					  }
-				}
-			}
-		}
-		
-		for(int k=0;k<ver.length;k++){
-			if(ver[k].equals("no")){
-				return false;
-			}
-		}
-
-		
-		return true;
-		
-	}
-	
-}
-
-	
+ */

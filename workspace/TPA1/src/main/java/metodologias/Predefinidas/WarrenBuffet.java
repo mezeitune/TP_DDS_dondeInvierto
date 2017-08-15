@@ -3,10 +3,8 @@ package metodologias.Predefinidas;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.uqbar.arena.widgets.Link;
 import org.uqbar.commons.utils.Observable;
 
-import Comparadores.Comparador;
 import Comparadores.ComparadorMayor;
 import Comparadores.ComparadorMenor;
 import Condiciones.Comparativa;
@@ -15,8 +13,6 @@ import Condiciones.Mixta;
 import Condiciones.Taxativa;
 import Condiciones.TipoCondicion;
 import indicadoresPredefinidos.Antiguedad;
-import indicadoresPredefinidos.PatrimonioNeto;
-import usuario.Empresa;
 import usuario.Indicador;
 import usuario.Metodologia;
 @Observable
@@ -25,7 +21,7 @@ public class WarrenBuffet extends Metodologia{
 	
 	private static WarrenBuffet instance ;
 
-	public static WarrenBuffet getInstance( ) {
+	public static WarrenBuffet getInstance( ){
         if(instance == null){
             instance = new WarrenBuffet();
         }
