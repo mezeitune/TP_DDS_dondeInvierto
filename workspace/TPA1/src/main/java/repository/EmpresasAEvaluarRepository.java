@@ -42,9 +42,8 @@ public class EmpresasAEvaluarRepository {
 		EmpresasAEvaluarRepository.periodosAEvaluar.removeAll(periodosAEvaluar);
 	}
 
-	public static void eliminarEmpresaAEvaluar(String unPeriodo) {
+	public static void eliminarPeriodoaAEvaluar(String unPeriodo) {
 		EmpresasAEvaluarRepository.periodosAEvaluar.remove(unPeriodo);
-		
 	}
 
 	public static void llenarListaDeEmpresasAEvaluar() {
@@ -54,6 +53,10 @@ public class EmpresasAEvaluarRepository {
 	
 	public static boolean esPeriodoRepetido(String periodo){
 		return periodosAEvaluar.stream().anyMatch(unPeriodo -> unPeriodo.equals(periodo));
+	}
+	
+	public static boolean esPeriodoInexistente(String periodo){
+		return !periodosAEvaluar.stream().anyMatch(unPeriodo -> unPeriodo.equals(periodo));
 	}
 	
 }

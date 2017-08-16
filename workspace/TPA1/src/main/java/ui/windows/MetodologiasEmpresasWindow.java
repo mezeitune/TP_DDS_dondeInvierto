@@ -44,15 +44,15 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		mainPanel.setLayout(new HorizontalLayout());
 		Panel Panel = new Panel(mainPanel);
 		
-		new Label(Panel).setText("Lista de empresas a evaluar").setBackground(Color.ORANGE);
+		new Label(Panel).setText("Empresas a evaluar").setBackground(Color.ORANGE);
 		Table<Empresa> tableEmpresas = new Table<Empresa>(Panel, Empresa.class);
 		tableEmpresas.bindItemsToProperty("empresasAEvaluar");
 		new Column<Empresa>(tableEmpresas).setTitle("Nombre").bindContentsToProperty("nombre");
 		
-		
+		new Label(Panel).setText("Periodos a evaluar").setBackground(Color.ORANGE);
 		new List<>(Panel).bindItemsToProperty("periodos");
 		
-		/*new Label(Panel).setText("Lista de periodos").setBackground(Color.ORANGE);
+		/*new Label(Panel).setText("Lista de periodos").setBackground(Color.ORANGE); //No funca porque String no es @Observable
 		Table<String> tablePeriodos = new Table<String>(Panel, String.class);
 		tablePeriodos.bindItemsToProperty("periodosAEvaluar");
 		new Column<String>(tablePeriodos).setTitle("Periodo");//.bindContentsToProperty("periodo");*/
@@ -75,6 +75,12 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 			}catch (IOException e) {
 				e.printStackTrace();
 			}
+		});
+		
+		new Button(Panel).setCaption("Eliminar un periodo")
+		.onClick(() -> {
+				this.getDelegate().close();
+				EliminarPeriodoWindow();
 		});
 		
 		new Button(Panel).setCaption("Eliminar una Empresa")
@@ -162,6 +168,11 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 	}
 	public void EliminarEmpresaWindow() throws IOException {
 		Dialog<?> dialog = new EliminarEmpresaWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
+	public void EliminarPeriodoWindow() {
+		Dialog<?> dialog = new EliminarPeriodoWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
