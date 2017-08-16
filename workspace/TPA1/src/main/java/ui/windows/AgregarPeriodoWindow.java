@@ -32,9 +32,9 @@ public class AgregarPeriodoWindow extends Dialog<AgregarPeriodoViewModel>{
 		new Button(actionsPanel).setCaption("Agregar")
 		.onClick(() -> {
 						if(AgregarPeriodoViewModel.esUnPeriodoYaIngresado()){
-							System.out.println("Periodo ya agregada a la lista, seleccione otra");
 							this.getDelegate().close();
-							PeriodoRepetidoWindow();
+							//PeriodoRepetidoWindow();
+							IngresoIncorrectoWindow("El periodo ya fue agregado a la lista, seleccione otro");
 						}
 						else{
 									AgregarPeriodoViewModel.setPeriodoIngresado();
@@ -62,6 +62,13 @@ public class AgregarPeriodoWindow extends Dialog<AgregarPeriodoViewModel>{
 		Dialog<?> dialog = new PeriodoRepetidoWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
+	}
+	
+	public void IngresoIncorrectoWindow(String mensaje){
+		Dialog<?> dialog = new IngresoIncorrectoWindow(this,mensaje);
+		dialog.open();
+		dialog.onAccept(() -> {});
+		dialog.close();
 	}
 	
 

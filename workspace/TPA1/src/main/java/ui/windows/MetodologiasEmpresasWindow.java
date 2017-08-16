@@ -17,7 +17,6 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import repository.EmpresasAEvaluarRepository;
 import ui.vm.MetodologiasEmpresasViewModel;
 import usuario.Empresa;
 import usuario.Indicador;

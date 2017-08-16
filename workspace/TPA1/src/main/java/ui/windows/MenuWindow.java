@@ -27,13 +27,9 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Sistema de carga y consulta");
-		/*Panel form = new Panel(mainPanel);
-		form.setLayout(new ColumnLayout(2));*/
-		
 		
 		new Label(mainPanel).setText("MENU PRINCIPAL").setBackground(Color.ORANGE).setHeight(40);
 		new Label(mainPanel).setText("Debe cargar un archivo .CSV previamente para poder consultar Empresas").setBackground(Color.GREEN);
-		
 		
 		new Button(mainPanel).setCaption("Seleccionar archivo de cuentas")
 		.onClick(() -> {

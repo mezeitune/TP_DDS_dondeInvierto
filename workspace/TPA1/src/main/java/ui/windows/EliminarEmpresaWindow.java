@@ -36,30 +36,17 @@ public class EliminarEmpresaWindow extends Dialog<EliminarEmpresaViewModel>{
 		
 		new Button(actionsPanel).setCaption("Eliminar")
 		.onClick(() -> {
-						try{
 							this.getDelegate().close();
-							
-								MetodologiasEmpresasWindow();
-							
-						}catch (IOException e) {
-							e.printStackTrace();
-						}
+							MetodologiasEmpresasWindow();
 			});
 		new Button(actionsPanel).setCaption("Volver")
 		.onClick(() -> {
-								try{
-									this.getDelegate().close();
-							
-									MetodologiasEmpresasWindow();
-							
-								}catch (IOException e) {
-									e.printStackTrace();
-								}
-					
+							this.getDelegate().close();
+							MetodologiasEmpresasWindow();
 				});
 	}
 	
-	public void MetodologiasEmpresasWindow() throws IOException {
+	public void MetodologiasEmpresasWindow()  {
 		Dialog<?> dialog = new MetodologiasEmpresasWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});

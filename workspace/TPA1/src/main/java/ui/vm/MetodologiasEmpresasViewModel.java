@@ -3,13 +3,10 @@ package ui.vm;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.uqbar.commons.model.ObservableUtils;
-import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
 
-import Mocks.EmpresasMock;
 import parser.parserArchivos.CSVToEmpresas;
 import parser.parserArchivos.ParserJsonAObjetosJava;
 import parserFormulaInidicador.ParserFormulaToIndicador;
@@ -17,12 +14,10 @@ import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
 import repository.MetodologiasRepository;
 import usuario.Empresa;
-import usuario.Indicador;
 import usuario.Metodologia;
 @Observable
 public class MetodologiasEmpresasViewModel {
 	private List<Empresa> empresas;
-	private String nombre;
 	private Empresa empresa;
 	private Boolean seleccionoTodasLasEmpresas;
 	private List<Metodologia> metodologias;

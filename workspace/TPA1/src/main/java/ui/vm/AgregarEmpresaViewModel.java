@@ -11,7 +11,6 @@ import parser.parserArchivos.CSVToEmpresas;
 import parserFormulaInidicador.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
-import usuario.Cuenta;
 import usuario.Empresa;
 @Observable
 public class AgregarEmpresaViewModel {

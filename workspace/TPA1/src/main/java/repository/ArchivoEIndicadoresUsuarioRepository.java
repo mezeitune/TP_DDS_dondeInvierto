@@ -3,7 +3,6 @@ package repository;
 import java.util.LinkedList;
 import java.util.List;
 
-import indicadoresPredefinidos.Antiguedad;
 import indicadoresPredefinidos.PatrimonioNeto;
 import usuario.Indicador;
 
