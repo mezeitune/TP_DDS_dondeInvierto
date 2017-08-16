@@ -38,11 +38,6 @@ public class MetodologiasEmpresasViewModel {
 	private List<Empresa> empresasAEvaluar = new LinkedList<Empresa>();
 	private List<String> periodosAEvaluar = new LinkedList<String>();
 	
-	public void setEmpresasAEvaluarMetodologia(){
-		empresasAEvaluarMetodologia = this.metodologia.evaluar(periodos);
-	}
-
-
 	public MetodologiasEmpresasViewModel() {
 		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("metodologias.json");
 		
@@ -115,10 +110,12 @@ public class MetodologiasEmpresasViewModel {
 		return this.metodologia;
 	}
 	
+	public void setEmpresasAEvaluarMetodologia(){
+		empresasAEvaluarMetodologia = this.metodologia.evaluar(periodos);
+	}
 	
-	public void setEmpresasAEvaluar(){
-		this.empresasAEvaluar=EmpresasAEvaluarRepository.getEmpresasAEvaluar();
-		
+	public void setEmpresasAEvaluar(List<Empresa> empresas){
+		this.empresasAEvaluar = empresas;
 	}
 	public List<Empresa> getEmpresasAEvaluar(){
 		return EmpresasAEvaluarRepository.getEmpresasAEvaluar();
@@ -198,7 +195,7 @@ public class MetodologiasEmpresasViewModel {
 	
 	
 	public void vaciarListaEmpresas(){
-		this.empresasAEvaluar.removeAll(this.empresasAEvaluar);
+		EmpresasAEvaluarRepository.vaciarListaDeEmpresasAEvaluar();
 		ObservableUtils.firePropertyChanged(this, "empresasAEvaluar");
 	}
 	
