@@ -35,6 +35,7 @@ public class EliminarPeriodoWindow extends Dialog<EliminarPeriodoViewModel>{
 		
 		new Button(actionsPanel).setCaption("Eliminar")
 		.onClick(() -> {
+			/*TODO: Falta agregar la ventana de la excepecion*/
 						if(EliminarPeriodoViewModel.esUnPeriodoNoExistente()){
 							System.out.println("El periodo nunca fue ingresado");
 							this.getDelegate().close();

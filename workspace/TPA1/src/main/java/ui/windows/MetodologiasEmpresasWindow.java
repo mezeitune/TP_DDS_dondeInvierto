@@ -8,23 +8,17 @@ import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
-import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
-import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
-import org.uqbar.commons.model.ObservableUtils;
 
 import repository.EmpresasAEvaluarRepository;
-import ui.vm.AgregarEmpresaViewModel;
-import ui.vm.DatosViewModel;
 import ui.vm.MetodologiasEmpresasViewModel;
-import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
 import usuario.Metodologia;
@@ -59,22 +53,14 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 
 		new Button(Panel).setCaption("Agregar una Empresa")
 		.onClick(() -> {
-			try{
 				this.getDelegate().close();
 				AgregarEmpresaWindow();
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
 		});
 		
 		new Button(Panel).setCaption("Agregar un periodo")
 		.onClick(() -> {
-			try{
 				this.getDelegate().close();
 				AgregarPeriodoWindow();
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
 		});
 		
 		new Button(Panel).setCaption("Eliminar un periodo")
@@ -85,19 +71,15 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 		new Button(Panel).setCaption("Eliminar una Empresa")
 		.onClick(() -> {
-			try{
 				this.getDelegate().close();
 				EliminarEmpresaWindow();
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
 		});
 		
 		new Button(Panel).setCaption("Vaciar la Lista")
 		.onClick(() -> {
-			EmpresasAEvaluarRepository.vaciarListaDeEmpresasAEvaluar();
-			
+			this.getModelObject().vaciarListaEmpresas();
 		});
+		
 		new Button(Panel).setCaption("Completar la Lista con todas las empresas del archivo")
 		.onClick(() -> {
 		
@@ -151,22 +133,22 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void CargaIndicadoresWindow() throws IOException {
+	public void CargaIndicadoresWindow()  {
 		Dialog<?> dialog = new CargarIndicadoresWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void AgregarEmpresaWindow() throws IOException {
+	public void AgregarEmpresaWindow()  {
 		Dialog<?> dialog = new AgregarEmpresaWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void AgregarPeriodoWindow() throws IOException {
+	public void AgregarPeriodoWindow()  {
 		Dialog<?> dialog = new AgregarPeriodoWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void EliminarEmpresaWindow() throws IOException {
+	public void EliminarEmpresaWindow()  {
 		Dialog<?> dialog = new EliminarEmpresaWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});

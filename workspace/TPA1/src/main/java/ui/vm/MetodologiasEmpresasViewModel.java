@@ -197,5 +197,10 @@ public class MetodologiasEmpresasViewModel {
 	}
 	
 	
+	public void vaciarListaEmpresas(){
+		this.empresasAEvaluar.removeAll(this.empresasAEvaluar);
+		ObservableUtils.firePropertyChanged(this, "empresasAEvaluar");
+	}
+	
 	
 }

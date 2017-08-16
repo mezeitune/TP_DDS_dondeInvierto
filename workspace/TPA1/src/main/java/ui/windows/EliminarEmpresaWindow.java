@@ -12,13 +12,12 @@ import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import repository.EmpresasAEvaluarRepository;
 
 import ui.vm.EliminarEmpresaViewModel;
 import usuario.Empresa;
 
 public class EliminarEmpresaWindow extends Dialog<EliminarEmpresaViewModel>{
-	public EliminarEmpresaWindow(WindowOwner parent) throws IOException {
+	public EliminarEmpresaWindow(WindowOwner parent)  {
 		super(parent, new EliminarEmpresaViewModel());
 	}
 	protected void createFormPanel(Panel mainPanel) {
