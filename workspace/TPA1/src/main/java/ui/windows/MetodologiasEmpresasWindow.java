@@ -82,8 +82,7 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 		new Button(Panel).setCaption("Completar la Lista con todas las empresas del archivo")
 		.onClick(() -> {
-		
-			EmpresasAEvaluarRepository.llenarListaDeEmpresasAEvaluar();
+			this.getModelObject().autocompletarListaEmpresasAEvaluar();
 			
 		});
 		new Label(Panel).setText("");

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.uqbar.commons.model.ObservableUtils;
+import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
 
 import Mocks.EmpresasMock;
@@ -193,10 +194,15 @@ public class MetodologiasEmpresasViewModel {
 		this.periodosAEvaluar = periodosAEvaluar;
 	}
 	
-	
 	public void vaciarListaEmpresas(){
 		EmpresasAEvaluarRepository.vaciarListaDeEmpresasAEvaluar();
 		ObservableUtils.firePropertyChanged(this, "empresasAEvaluar");
+	}
+	
+	public void autocompletarListaEmpresasAEvaluar(){
+		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+		EmpresasAEvaluarRepository.setEmpresasAEvaluar(parser.csvFileToEmpresas());
+		ObservableUtils.firePropertyChanged(this, "empresasAEvaluar");	
 	}
 	
 	

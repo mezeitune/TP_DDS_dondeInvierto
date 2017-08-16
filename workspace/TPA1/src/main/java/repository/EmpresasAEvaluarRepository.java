@@ -58,5 +58,9 @@ public class EmpresasAEvaluarRepository {
 	public static boolean esPeriodoInexistente(String periodo){
 		return !periodosAEvaluar.stream().anyMatch(unPeriodo -> unPeriodo.equals(periodo));
 	}
+
+	public static void setEmpresasAEvaluar(List<Empresa> empresas) {
+		EmpresasAEvaluarRepository.empresasAEvaluar = empresas;
+	}
 	
 }
