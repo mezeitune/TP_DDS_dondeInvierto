@@ -31,7 +31,7 @@ import usuario.Metodologia;
 
 @SuppressWarnings("serial")
 public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewModel>{
-	public MetodologiasEmpresasWindow(WindowOwner parent) throws IOException {
+	public MetodologiasEmpresasWindow(WindowOwner parent){
 		super(parent, new MetodologiasEmpresasViewModel());
 	}
 	
@@ -45,16 +45,17 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		Panel Panel = new Panel(mainPanel);
 		
 		new Label(Panel).setText("Lista de empresas a evaluar").setBackground(Color.ORANGE);
-		//new Label(Panel).setText("Cuentas").setBackground(Color.ORANGE);
-		
 		Table<Empresa> tableEmpresas = new Table<Empresa>(Panel, Empresa.class);
-		
 		tableEmpresas.bindItemsToProperty("empresasAEvaluar");
 		new Column<Empresa>(tableEmpresas).setTitle("Nombre").bindContentsToProperty("nombre");
 		
+		
 		new List<>(Panel).bindItemsToProperty("periodos");
 		
-		//new Column<Empresa>(tableEmpresas).setTitle("Periodo").bindContentsToProperty("periodo");
+		/*new Label(Panel).setText("Lista de periodos").setBackground(Color.ORANGE);
+		Table<String> tablePeriodos = new Table<String>(Panel, String.class);
+		tablePeriodos.bindItemsToProperty("periodosAEvaluar");
+		new Column<String>(tablePeriodos).setTitle("Periodo");//.bindContentsToProperty("periodo");*/
 
 		new Button(Panel).setCaption("Agregar una Empresa")
 		.onClick(() -> {
@@ -66,7 +67,7 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 			}
 		});
 		
-		/*new Button(Panel).setCaption("Agregar periodo")
+		new Button(Panel).setCaption("Agregar un periodo")
 		.onClick(() -> {
 			try{
 				this.getDelegate().close();
@@ -74,7 +75,7 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 			}catch (IOException e) {
 				e.printStackTrace();
 			}
-		});*/
+		});
 		
 		new Button(Panel).setCaption("Eliminar una Empresa")
 		.onClick(() -> {

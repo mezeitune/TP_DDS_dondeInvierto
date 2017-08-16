@@ -1,16 +1,9 @@
 package repository;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import parser.parserArchivos.CSVToEmpresas;
-import parser.parserArchivos.ParserJsonAObjetosJava;
-import parserFormulaInidicador.ParserFormulaToIndicador;
-import usuario.Cuenta;
 import usuario.Empresa;
-import usuario.Indicador;
 
 public class EmpresasAEvaluarRepository {
 	
@@ -25,7 +18,6 @@ public class EmpresasAEvaluarRepository {
 		return empresasAEvaluar;
 	}
 
-
 	public static void agregarEmpresaAEvaluar(Empresa empresaAEvaluar) {
 			EmpresasAEvaluarRepository.empresasAEvaluar.add(empresaAEvaluar);
 	}
@@ -38,12 +30,13 @@ public class EmpresasAEvaluarRepository {
 		
 	}
 	
+	
 	public static List<String> getPeriodosAEvaluar() {
 		return periodosAEvaluar;
 	}
 
 	public static void agregarPeriodoAEvaluar(String periodoAEvaluar) {
-			EmpresasAEvaluarRepository.periodosAEvaluar.add(periodoAEvaluar);
+		EmpresasAEvaluarRepository.periodosAEvaluar.add(periodoAEvaluar);
 	}
 	public static void vaciarListaDePeriodosAEvaluar() {
 		EmpresasAEvaluarRepository.periodosAEvaluar.removeAll(periodosAEvaluar);
@@ -57,6 +50,10 @@ public class EmpresasAEvaluarRepository {
 	public static void llenarListaDeEmpresasAEvaluar() {
 		
 		
+	}
+	
+	public static boolean esPeriodoRepetido(String periodo){
+		return periodosAEvaluar.stream().anyMatch(unPeriodo -> unPeriodo.equals(periodo));
 	}
 	
 }

@@ -31,9 +31,12 @@ public class MetodologiasEmpresasViewModel {
 	private List<Empresa> empresasQueConvieneInvertir = new LinkedList<>();
 	private List<Empresa> empresasQueNoConvieneInvertir = new LinkedList<>();
 
-	private List<Empresa> empresasAEvaluar = new LinkedList<Empresa>();
 	private List<List<Empresa>> empresasAEvaluarMetodologia; 
+	
+	
 	private List<String> periodos;	
+	private List<Empresa> empresasAEvaluar = new LinkedList<Empresa>();
+	private List<String> periodosAEvaluar = new LinkedList<String>();
 	
 	public void setEmpresasAEvaluarMetodologia(){
 		empresasAEvaluarMetodologia = this.metodologia.evaluar(periodos);
@@ -181,6 +184,16 @@ public class MetodologiasEmpresasViewModel {
 	public void setEmpresasQueNoConvieneInvertir(){
 		empresasQueNoConvieneInvertir= this.metodologia.obtenerEmpresasNoInvertibles(empresasQueConvieneInvertir);
 		System.out.println(empresasQueNoConvieneInvertir);
+	}
+
+
+	public List<String> getPeriodosAEvaluar() {
+		return periodosAEvaluar;
+	}
+
+
+	public void setPeriodosAEvaluar(List<String> periodosAEvaluar) {
+		this.periodosAEvaluar = periodosAEvaluar;
 	}
 	
 	
