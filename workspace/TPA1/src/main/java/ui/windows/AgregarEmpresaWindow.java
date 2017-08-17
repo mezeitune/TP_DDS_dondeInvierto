@@ -1,7 +1,6 @@
 package ui.windows;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.VerticalLayout;
@@ -43,37 +42,22 @@ public class AgregarEmpresaWindow extends Dialog<AgregarEmpresaViewModel>{
 		new Button(actionsPanel).setCaption("Agregar")
 		.onClick(() -> {
 						if(AgregarEmpresaViewModel.getCodigoError()==1){
-							
-								System.out.println("Empresa con periodo ya agregada a la lista, seleccione otra");
-						
+								this.showError("Empresa ya agregada, seleccione otra");
 							}else{
-								try{
 									this.getDelegate().close();
-							
 									MetodologiasEmpresasWindow();
-							
-								}catch (IOException e) {
-									e.printStackTrace();
-								}
-						}
+							}
 			});
 		new Button(actionsPanel).setCaption("Volver")
 		.onClick(() -> {
-								try{
 									this.getDelegate().close();
-							
 									MetodologiasEmpresasWindow();
-							
-								}catch (IOException e) {
-									e.printStackTrace();
-								}
-					
 				});
 }
 	
 
 	
-	public void MetodologiasEmpresasWindow() throws IOException {
+	public void MetodologiasEmpresasWindow() {
 		Dialog<?> dialog = new MetodologiasEmpresasWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});

@@ -1,7 +1,6 @@
 package ui.windows;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;

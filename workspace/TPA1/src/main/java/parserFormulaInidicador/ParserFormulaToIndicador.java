@@ -108,10 +108,6 @@ public class ParserFormulaToIndicador {
 			operandos.add(i,"/");
 		}
 		
-		String formulaString = "";
-		for(i=0;i<operandos.size();i++){
-			formulaString += operandos.get(i);
-		}
 		nuevaOperacion.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
 		
 		return nuevaOperacion;

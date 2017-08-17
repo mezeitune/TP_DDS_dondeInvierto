@@ -2,7 +2,6 @@ package ui.windows;
 
 
 import java.awt.Color;
-import java.io.IOException;
 
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;
@@ -90,12 +89,8 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 		new Button(Panel).setCaption("Volver al Menu Principal")
 		.onClick(() -> {
-			try{
 				this.getDelegate().close();
 				MenuWindow();
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
 		});
 }
 
@@ -126,7 +121,7 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 }
 
-	public void MenuWindow() throws IOException {
+	public void MenuWindow()  {
 		Dialog<?> dialog = new MenuWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
