@@ -2,8 +2,8 @@ package usuario;
 
 import org.uqbar.commons.utils.Observable;
 import excepciones.AccountNotFoundException;
-import parserFormulaInidicador.Operacion;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserIndicadores.Operacion;
+import parserIndicadores.ParserFormulaToIndicador;
 
 @Observable
 public class  Indicador implements Operacion,Comparable<Indicador> {

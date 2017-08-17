@@ -1,7 +1,8 @@
 package usuario;
 
 import org.uqbar.commons.utils.Observable;
-import parserFormulaInidicador.Operacion;
+
+import parserIndicadores.Operacion;
 
 @Observable
 public class Cuenta implements Operacion {

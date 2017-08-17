@@ -3,7 +3,7 @@ package Mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import parser.parserArchivos.CSVObject;
+import parserArchivos.CSVObject;
 
 public class ListaLineasCsvFileMock {
 

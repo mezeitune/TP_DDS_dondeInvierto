@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaToIndicador;
 import repository.EmpresasAEvaluarRepository;
 import usuario.Empresa;
 @Observable

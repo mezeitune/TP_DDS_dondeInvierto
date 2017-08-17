@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import excepciones.AccountNotFoundException;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 

@@ -9,9 +9,9 @@ import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import Condiciones.Condicion;
-import parser.parserArchivos.CSVToEmpresas;
-import parser.parserArchivos.ParserJsonAObjetosJava;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserArchivos.CSVToEmpresas;
+import parserArchivos.ParserJsonAObjetosJava;
+import parserIndicadores.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.CriteriosSeleccionadosRepository;
 import repository.EmpresasAEvaluarRepository;

@@ -1,4 +1,4 @@
-package parser.parserArchivos;
+package parserArchivos;
 
 import com.opencsv.bean.CsvBind;
 

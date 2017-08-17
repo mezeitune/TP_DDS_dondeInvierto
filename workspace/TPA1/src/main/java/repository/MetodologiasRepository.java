@@ -9,7 +9,7 @@ import Condiciones.Condicion;
 import Condiciones.Predefinidas.MargenesCrecientes;
 import metodologias.Predefinidas.MetodologiaPrueba;
 import metodologias.Predefinidas.WarrenBuffet;
-import parser.parserArchivos.ParserJsonAObjetosJava;
+import parserArchivos.ParserJsonAObjetosJava;
 import usuario.Metodologia;
 
 public class MetodologiasRepository {

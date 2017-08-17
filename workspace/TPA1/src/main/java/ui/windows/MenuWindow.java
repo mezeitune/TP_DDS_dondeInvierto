@@ -12,7 +12,7 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import excepciones.ArchivoInexistenteException;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.MenuViewModel;
 

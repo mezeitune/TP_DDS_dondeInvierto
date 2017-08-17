@@ -9,7 +9,7 @@ import org.junit.Test;
 import excepciones.ArchivoInexistenteException;
 import excepciones.PathIncorrectoException;
 import excepciones.TipoDeArchivoIncorrectoException;
-import parser.parserArchivos.CSVToEmpresas;
+import parserArchivos.CSVToEmpresas;
 import usuario.Empresa;
 
 public class ArchivoTest {

@@ -17,7 +17,7 @@ import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.commons.model.ObservableUtils;
 
 import Condiciones.Condicion;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.CargarMetodologiaViewModel;
 import usuario.Empresa;

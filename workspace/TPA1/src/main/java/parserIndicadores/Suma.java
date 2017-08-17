@@ -1,4 +1,4 @@
-package parserFormulaInidicador;
+package parserIndicadores;
 
 public class Suma implements Operacion {
 

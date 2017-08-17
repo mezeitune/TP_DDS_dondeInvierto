@@ -12,9 +12,9 @@ import org.uqbar.commons.utils.Observable;
 import com.sun.jersey.api.client.Client;
 
 import indicadoresPredefinidos.IndicadorCustom;
-import parser.parserArchivos.CSVToEmpresas;
-import parser.parserArchivos.ParserJsonAObjetosJava;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserArchivos.CSVToEmpresas;
+import parserArchivos.ParserJsonAObjetosJava;
+import parserIndicadores.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import com.google.gson.Gson;
 import usuario.*;

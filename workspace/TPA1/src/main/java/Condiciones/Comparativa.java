@@ -7,7 +7,7 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 
 import Comparadores.Comparador;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 @Observable

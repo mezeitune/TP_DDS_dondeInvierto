@@ -7,7 +7,7 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 
 import Condiciones.Condicion;
-import parser.parserArchivos.ParserJsonAObjetosJava;
+import parserArchivos.ParserJsonAObjetosJava;
 import repository.CriteriosSeleccionadosRepository;
 import repository.MetodologiasRepository;
 @Observable

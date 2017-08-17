@@ -1,4 +1,4 @@
-package parserFormulaInidicador;
+package parserIndicadores;
 
 public class Constante implements Operacion{
 	private int valor;

@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 
 import Mocks.EmpresasMock;
 import Mocks.ListaIndicadoresMock;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaToIndicador;
 
 import java.io.IOException;
 import java.util.List;

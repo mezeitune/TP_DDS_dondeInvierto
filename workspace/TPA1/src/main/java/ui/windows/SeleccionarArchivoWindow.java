@@ -18,8 +18,8 @@ import org.uqbar.arena.windows.WindowOwner;
 import excepciones.ArchivoInexistenteException;
 import excepciones.PathIncorrectoException;
 import excepciones.TipoDeArchivoIncorrectoException;
-import parser.parserArchivos.CSVToEmpresas;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserArchivos.CSVToEmpresas;
+import parserIndicadores.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import ui.vm.*;
 

@@ -1,4 +1,4 @@
-package parserFormulaInidicador;
+package parserIndicadores;
 
 import excepciones.AccountNotFoundException;
 

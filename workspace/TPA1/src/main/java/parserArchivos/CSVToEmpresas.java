@@ -1,4 +1,4 @@
-package parser.parserArchivos;
+package parserArchivos;
 
 import java.util.ArrayList;
 import java.util.HashSet;

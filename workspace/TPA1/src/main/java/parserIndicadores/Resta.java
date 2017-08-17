@@ -1,4 +1,4 @@
-package parserFormulaInidicador;
+package parserIndicadores;
 
 public class Resta implements Operacion{
 

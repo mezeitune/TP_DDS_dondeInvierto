@@ -10,7 +10,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaToIndicador;
 import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.IndicadorErroneoViewModel;
 import ui.vm.IndicadorRepetidoViewModel;
@@ -28,7 +28,7 @@ public class IndicadorRepetidoWindow extends Dialog<IndicadorRepetidoViewModel> 
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new ColumnLayout(2));
 		
-		new Label(mainPanel).setText("Ingreso un indicador repetido , ¿Desea volver a intentar cargarlo?");
+		new Label(mainPanel).setText("Ingreso un indicador repetido , ï¿½Desea volver a intentar cargarlo?");
 		
 				
 	}

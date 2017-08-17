@@ -1,4 +1,4 @@
-package parserFormulaInidicador;
+package parserIndicadores;
 
 public class Multiplicacion implements Operacion{
 

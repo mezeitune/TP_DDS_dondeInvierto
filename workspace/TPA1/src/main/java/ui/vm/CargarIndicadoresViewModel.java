@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import excepciones.AccountNotFoundException;
 import indicadoresPredefinidos.IndicadorCustom;
 import parser.ParserJsonString;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
 import usuario.Indicador;

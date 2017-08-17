@@ -7,8 +7,8 @@ import java.util.List;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import parser.parserArchivos.CSVToEmpresas;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserArchivos.CSVToEmpresas;
+import parserIndicadores.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
 import usuario.Empresa;

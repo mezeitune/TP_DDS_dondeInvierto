@@ -1,12 +1,12 @@
-package parserFormulaInidicador;
+package parserIndicadores;
 
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
 import excepciones.AccountNotFoundException;
-import parser.parserArchivos.CSVToEmpresas;
-import parser.parserArchivos.ParserJsonAObjetosJava;
+import parserArchivos.CSVToEmpresas;
+import parserArchivos.ParserJsonAObjetosJava;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -14,41 +14,37 @@ import java.util.List;
 
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
+import repository.EmpresasRepository;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
 
 public class ParserFormulaToIndicador {
 
-	private static List<Cuenta> cuentas = new LinkedList<>(); 
-	private static List<Empresa> empresas = new LinkedList<>(); 
+	private static List<String> nombreCuentas = new LinkedList<>(); 
 	private static List<Indicador> indicadores = new LinkedList<>();
 	
 	private static List<Cuenta> cuentasPorPeriodo;
 	private static Empresa empresa ;
 	private static String periodo;
 	
-	private static String operadorSuma = "(.*)[+](.*)";
-	private static String operadorResta = "(.*)[-](.*)";
-	private static String operadorMultiplicacion = "(.*)[*](.*)";
-	private static String operadorDivision = "(.*)[/](.*)";
+	private static String operadorSumaSplit = "(.*)[+](.*)";
+	private static String operadorRestaSplit = "(.*)[-](.*)";
+	private static String operadorMultiplicacionSplit = "(.*)[*](.*)";
+	private static String operadorDivisionSplit = "(.*)[/](.*)";
 	
 	
-	/*TODO: Tratar de pasarle los indicadores y las cuentas por constructor, asi limpiamos el metodo INIT que es solo para testear*/
+	
+	
 	public ParserFormulaToIndicador() {
 		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("indicadores.json");
-		CSVToEmpresas parserCuentas = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+		nombreCuentas=EmpresasRepository.getNombreCuentas();
 		
 		setIndicadoresDefinidosPorUsuario();
 		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
 		ArchivoEIndicadoresUsuarioRepository.cargarIndicadoresPredefinidos();
 		
 		
-		/*Obtengo todas las cuentas de las empresas del csv*/
-		empresas=parserCuentas.csvFileToEmpresas();
-		for(int i=0;i<empresas.size();i++){
-			cuentas.addAll(empresas.get(i).getCuentas());
-		}
 	}
 
 
@@ -60,12 +56,12 @@ public class ParserFormulaToIndicador {
 	/*Para testear*/
 	public static void init(List<Indicador> indicadoresTest, List<Cuenta> cuentasTest){
 		indicadores = indicadoresTest;
-		cuentas = cuentasTest;
+		nombreCuentas = cuentasTest.stream().map(cuenta -> cuenta.getNombre()).collect(Collectors.toList());
 		cuentasPorPeriodo = cuentasTest; 
 	}
 	
 	public static void init(List<Cuenta> cuentasTest){
-		cuentas = cuentasTest;
+		nombreCuentas = cuentasTest.stream().map(cuenta -> cuenta.getNombre()).collect(Collectors.toList());
 	}
 	
 	public static void setEmpresa(Empresa unaEmpresa){
@@ -87,10 +83,10 @@ public class ParserFormulaToIndicador {
 	
 	public static Operacion construirArbolOperaciones(String operandos) throws AccountNotFoundException{
 
-				if(operandos.matches(operadorSuma)) return ParserFormulaToIndicador.getOperacion(operandos.split("[+]"),new Suma());
-				if(operandos.matches(operadorResta)) return ParserFormulaToIndicador.getOperacion(operandos.split("[-]"),new Resta());
-				if(operandos.matches(operadorMultiplicacion)) return ParserFormulaToIndicador.getOperacion(operandos.split("[*]"),new Multiplicacion());
-				if(operandos.matches(operadorDivision)) return ParserFormulaToIndicador.getOperacion(operandos.split("[/]"),new Division());
+				if(operandos.matches(operadorSumaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[+]"),new Suma());
+				if(operandos.matches(operadorRestaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[-]"),new Resta());
+				if(operandos.matches(operadorMultiplicacionSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[*]"),new Multiplicacion());
+				if(operandos.matches(operadorDivisionSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[/]"),new Division());
 				
 				return ParserFormulaToIndicador.getClaseOperador(operandos);
 				
@@ -125,7 +121,7 @@ public class ParserFormulaToIndicador {
 	}
 	
 	public static boolean esCuenta(String operador){
-		return cuentas.stream().anyMatch(cuenta -> cuenta.getNombre().equals(operador));
+		return nombreCuentas.stream().anyMatch(cuenta -> cuenta.equals(operador));
 	}
 	
 	public static Indicador buscarYObtenerIndicador(String operador){
@@ -163,12 +159,6 @@ public class ParserFormulaToIndicador {
 	public static boolean validarAntesDePrecargar(String formula) throws IOException{ 
 		setIndicadoresDefinidosPorUsuario();
 		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
-		List<Empresa> empresas = parser.csvFileToEmpresas();
-
-		for(int i=0;i<empresas.size();i++){
-				cuentas.addAll(empresas.get(i).getCuentas());
-			}
-	
 		
 		String[] result = formula.split("[-+*/]");
 		String[] ver = new String[result.length];
@@ -188,8 +178,8 @@ public class ParserFormulaToIndicador {
 					  }
 				}
 				
-				for(Cuenta s : cuentas){
-					  if(s.getNombre().equals(result[i])){
+				for(String s : nombreCuentas){
+					  if(s.equals(result[i])){
 						  ver[i]="si";
 					  }
 				}
@@ -208,122 +198,3 @@ public class ParserFormulaToIndicador {
 	}
 	
 }
-
-	
-
-
-/*
-	public static Division getDivision(String [] formula){
-
-		Division division = new Division();
-		List <String> operandos = new LinkedList<>();
-		int i;
-		for(i=0;i<formula.length;i++){
-			operandos.add(i, formula[i]);
-		}
-
-		division.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-
-		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
-			operandos.add(i,"/");
-		}
-		
-		String formulaString = "";
-		for(i=0;i<operandos.size();i++){
-			formulaString += operandos.get(i);
-		}
-
-		try{
-			division.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		}catch(IndexOutOfBoundsException e){}
-
-		return division;
-		}
-
-	public static Multiplicacion getMultiplicacion(String [] formula){
-
-		Multiplicacion multiplicacion = new Multiplicacion();
-		List <String> operandos = new LinkedList<>();
-		int i;
-		for(i=0;i<formula.length;i++){
-			operandos.add(i, formula[i]);
-		}
-
-		multiplicacion.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-
-		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
-			operandos.add(i,"*");
-		}
-		
-		
-		String formulaString = "";
-		for(i=0;i<operandos.size();i++){
-			formulaString += operandos.get(i);
-		}
-		try{
-			multiplicacion.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		}catch(IndexOutOfBoundsException e){}
-		
-		return multiplicacion;
-		
-	}
-
-	public static Resta getResta(String [] formula){
-
-		Resta resta = new Resta();
-		List <String> operandos = new LinkedList<>();
-		int i;
-		for(i=0;i<formula.length;i++){
-			operandos.add(i, formula[i]);
-		}
-
-		resta.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-
-		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
-			operandos.add(i,"-");
-		}
-		
-		String formulaString = "";
-		for(i=0;i<operandos.size();i++){
-			formulaString += operandos.get(i);
-		}
-
-		try{
-			resta.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		}catch(IndexOutOfBoundsException e){}
-		
-		return resta;
-	
-	}
-
-	
-	
-	public static Suma getSuma(String [] formula){
-
-		Suma suma = new Suma();
-		List <String> operandos = new LinkedList<>();
-		int i;
-		for(i=0;i<formula.length;i++){
-			operandos.add(i, formula[i]);
-		}
-
-		suma.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
-		
-		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
-			operandos.add(i,"+");
-		}
-		
-		
-		String formulaString = "";
-		for(i=0;i<operandos.size();i++){
-			formulaString += operandos.get(i);
-		}
-
-		try{
-			suma.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(formulaString));
-		}catch(IndexOutOfBoundsException e){}
-		
-		return suma;
-	}
-	
- */

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import Mocks.EmpresasMock;
 import metodologias.Predefinidas.WarrenBuffet;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaToIndicador;
 import repository.EmpresasAEvaluarRepository;
 import usuario.Empresa;
 import usuario.Metodologia;

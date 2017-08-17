@@ -9,8 +9,8 @@ import com.google.gson.Gson;
 
 import indicadoresPredefinidos.IndicadorCustom;
 import parser.ParserJsonString;
-import parser.parserArchivos.ParserJsonAObjetosJava;
-import parserFormulaInidicador.ParserFormulaToIndicador;
+import parserArchivos.ParserJsonAObjetosJava;
+import parserIndicadores.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import usuario.Indicador;
 
