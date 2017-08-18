@@ -1,10 +1,8 @@
 package ui.windows;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import org.uqbar.arena.bindings.PropertyAdapter;
-import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -13,12 +11,8 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import Condiciones.Condicion;
 import ui.vm.CargarCondicionViewModel;
-import ui.vm.CargarMetodologiaViewModel;
 import usuario.Cuenta;
-import usuario.Indicador;
-import usuario.Metodologia;
 
 public class CargarCondicionWindow extends Dialog <CargarCondicionViewModel> {
 	public CargarCondicionWindow(WindowOwner owner) {

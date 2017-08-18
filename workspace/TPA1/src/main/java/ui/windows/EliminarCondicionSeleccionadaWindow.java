@@ -1,7 +1,6 @@
 package ui.windows;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;
@@ -13,12 +12,11 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import Condiciones.Condicion;
-import ui.vm.EliminarEmpresaViewModel;
+import excepciones.CondicionNotFoundException;
 import ui.vm.ElminarCondicionSeleccionadaViewModel;
-import usuario.Empresa;
 
 public class EliminarCondicionSeleccionadaWindow extends Dialog <ElminarCondicionSeleccionadaViewModel>{
-	public EliminarCondicionSeleccionadaWindow(WindowOwner parent) throws IOException {
+	public EliminarCondicionSeleccionadaWindow(WindowOwner parent) {
 		super(parent, new ElminarCondicionSeleccionadaViewModel());
 	}
 	protected void createFormPanel(Panel mainPanel) {
@@ -28,8 +26,8 @@ public class EliminarCondicionSeleccionadaWindow extends Dialog <ElminarCondicio
 		new Label(Panel).setText("Seleccione una condicion a eliminar").setBackground(Color.ORANGE);
 		Selector<Condicion> selectorEmpresa = new Selector<Condicion>(Panel).allowNull(true);
 		selectorEmpresa.setWidth(100);
-		selectorEmpresa.bindItemsToProperty("criteriosSeleccionados").setAdapter(new PropertyAdapter(Condicion.class, "nombre"));
-		selectorEmpresa.bindValueToProperty("criterioSeleccionado");
+		selectorEmpresa.bindItemsToProperty("condiciones").setAdapter(new PropertyAdapter(Condicion.class, "nombre"));
+		selectorEmpresa.bindValueToProperty("condicionSeleccionada");
 		
 	}
 
@@ -37,17 +35,16 @@ public class EliminarCondicionSeleccionadaWindow extends Dialog <ElminarCondicio
 		
 		new Button(actionsPanel).setCaption("Eliminar")
 		.onClick(() -> {
-					
+							try{
+							this.getModelObject().eliminarCondicion();
+							}catch(CondicionNotFoundException e){
+								this.showError("La condicion no fue agregada a la lista");
+							}
 							this.getDelegate().close();
-							
-						
 			});
 		new Button(actionsPanel).setCaption("Volver")
 		.onClick(() -> {
-							
-									this.getDelegate().close();
-							
-								
+							this.getDelegate().close();
 					
 				});
 	}

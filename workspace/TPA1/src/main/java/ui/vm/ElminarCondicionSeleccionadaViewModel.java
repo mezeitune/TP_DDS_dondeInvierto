@@ -1,35 +1,30 @@
 package ui.vm;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
 import Condiciones.Condicion;
-import parserArchivos.ParserJsonAObjetosJava;
-import repository.CriteriosSeleccionadosRepository;
-import repository.MetodologiasRepository;
+import excepciones.CondicionNotFoundException;
+import repository.CondicionesSeleccionadasRepository;
 @Observable
 public class ElminarCondicionSeleccionadaViewModel {
-	private List<Condicion> criteriosSeleccionados = new LinkedList<Condicion>();
-	private Condicion criterioSeleccionado;
 	
+	private Condicion condicionSeleccionada;
 	
-	public List<Condicion> getCriteriosSeleccionados() {
-		return criteriosSeleccionados;
-	}
-	public void setCriteriosSeleccionados() {
-		
-		this.criteriosSeleccionados = CriteriosSeleccionadosRepository.getCriteriosSeleccionados();
-		System.out.println(criteriosSeleccionados);
+	public List<Condicion> getCondiciones() {
+		return CondicionesSeleccionadasRepository.getCondicionesSeleccionados();
 	}
 
-	public Condicion getCriterioSeleccionado() {
-		return criterioSeleccionado;
+	public Condicion getCondicionSeleccionada() {
+		return condicionSeleccionada;
 	}
-	public void setCriterioSeleccionado(Condicion criterioSeleccionado) {
-		CriteriosSeleccionadosRepository.eliminarCriterioSeleccionado(criterioSeleccionado);
-		this.criterioSeleccionado= criterioSeleccionado;
+	public void setCondicionSeleccionada(Condicion condicionSeleccionada) {
+		this.condicionSeleccionada= condicionSeleccionada;
+	}
+	
+	public void eliminarCondicion() throws CondicionNotFoundException{
+		if(CondicionesSeleccionadasRepository.nuncaFueAgregada(this.condicionSeleccionada)) throw new CondicionNotFoundException();
+		CondicionesSeleccionadasRepository.eliminarCondicionSeleccionada(this.condicionSeleccionada);
 	}
 }

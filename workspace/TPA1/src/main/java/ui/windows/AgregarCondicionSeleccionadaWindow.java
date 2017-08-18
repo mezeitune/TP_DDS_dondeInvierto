@@ -12,6 +12,7 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import Condiciones.Condicion;
+import excepciones.CondicionRepetidaException;
 import ui.vm.AgregarCondicionSeleccionadaViewModel;
 
 public class AgregarCondicionSeleccionadaWindow extends Dialog <AgregarCondicionSeleccionadaViewModel>{
@@ -35,24 +36,18 @@ public class AgregarCondicionSeleccionadaWindow extends Dialog <AgregarCondicion
 		
 		new Button(actionsPanel).setCaption("Agregar")
 		.onClick(() -> {
-						
-									this.getModelObject().agregarCondicionALaLista();
-									if(AgregarCondicionSeleccionadaViewModel.getCodigoError()==1){
-									}else {
-										this.getDelegate().close();
-										}
-							
-						
+							try{
+							this.getModelObject().agregarCondicionALaLista();
+							}catch(CondicionRepetidaException e){
+								this.showError("La condicion seleccionada ya fue agregada, seleccione otra");
+							}
+							this.getDelegate().close();
 			});
 		new Button(actionsPanel).setCaption("Volver")
 		.onClick(() -> {
-									
-									this.getDelegate().close();
-							
-					
+							this.getDelegate().close();
 				});
 }
 	
-
 }	
 

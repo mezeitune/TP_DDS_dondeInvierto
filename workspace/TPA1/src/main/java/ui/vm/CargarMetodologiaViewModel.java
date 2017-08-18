@@ -2,50 +2,29 @@ package ui.vm;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.experimental.theories.Theories;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import com.google.gson.Gson;
 
-import Comparadores.ComparadorMayor;
-import Condiciones.Comparativa;
 import Condiciones.Condicion;
-import metodologias.Predefinidas.WarrenBuffet;
 import parser.ParserJsonString;
-import parserArchivos.ParserJsonAObjetosJava;
-import parserIndicadores.ParserFormulaToIndicador;
-import repository.IndicadoresRepository;
-import repository.CriteriosSeleccionadosRepository;
+import repository.CondicionesSeleccionadasRepository;
 import repository.MetodologiasRepository;
-import usuario.Indicador;
 import usuario.Metodologia;
 
 
 @Observable
 public class CargarMetodologiaViewModel {
-	private List<Metodologia> metodologias;
-	private Metodologia metodologia;
 	private static String nombreMetodologia ;
 	private static List<Condicion> condiciones = new ArrayList<>();
 	private Condicion condicion ;
-	private List<Condicion> criteriosSeleccionados = new LinkedList<Condicion>();
 
 	
-	public void setCriteriosSeleccionados (){
-		criteriosSeleccionados = CriteriosSeleccionadosRepository.criteriosSeleccionados;
-	}
-
-	public List<Condicion> getCriteriosSeleccionados(){
-		return CriteriosSeleccionadosRepository.criteriosSeleccionados;
-	}
-	
-	public  List<Condicion> getCondiciones() {
-		return MetodologiasRepository.getCondiciones();
+	public List<Condicion> getCondiciones(){
+		return CondicionesSeleccionadasRepository.getCondicionesSeleccionados();
 	}
 	
 	public List<Metodologia> getMetodologias() {
@@ -79,6 +58,10 @@ public class CargarMetodologiaViewModel {
 	
 		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("metodologias",jsonElement );	
 		
+	}
+
+	public void refresh() {
+		ObservableUtils.firePropertyChanged(this, "condiciones");
 	}
 	
 	

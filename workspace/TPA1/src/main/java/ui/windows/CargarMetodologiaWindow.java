@@ -3,25 +3,18 @@ package ui.windows;
 import java.awt.Color;
 import java.io.IOException;
 
-import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
-import org.uqbar.commons.model.ObservableUtils;
 
 import Condiciones.Condicion;
-import parserIndicadores.ParserFormulaToIndicador;
-import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.CargarMetodologiaViewModel;
-import usuario.Empresa;
-import usuario.Indicador;
 import usuario.Metodologia;
 
 @SuppressWarnings("serial")
@@ -45,16 +38,14 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 		new Button(mainPanel).setCaption("Agregar Condicion")
 		.onClick(() -> {
-				AgregarCriterioSeleccionadoWindow();
+				AgregarCondicionSeleccionada();
+				this.getModelObject().refresh();
 		});
 		
 		new Button(mainPanel).setCaption("Eliminar Condicion")
 		.onClick(() -> {
-			try{
 				EliminarCriterioSeleccionadoWindow();
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
+				this.getModelObject().refresh();
 		});
 		
 		
@@ -64,7 +55,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 		tableCondSeleccionada.setNumberVisibleRows(6).setWidth(200);
 		
-		tableCondSeleccionada.bindItemsToProperty("criteriosSeleccionados"); 
+		tableCondSeleccionada.bindItemsToProperty("condiciones"); 
 		
 		new Column<Condicion>(tableCondSeleccionada).setTitle("Nombre").bindContentsToProperty("nombre");
 		
@@ -84,12 +75,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 		new Button(actionsPanel).setCaption("Crear Condicion ")
 		.onClick(() -> {
-				try {
 					CargarCondicionWindow();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}												
 		}).setWidth(200);
 		
 		
@@ -112,42 +98,42 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 	}
 	
 	
-	public void MenuWindow() throws IOException {
+	public void MenuWindow() {
 		Dialog<?> dialog = new MenuWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void PreguntaNuevaMetodologia() throws IOException {
+	public void PreguntaNuevaMetodologia() {
 		Dialog<?> dialog = new PreguntaNuevaMetodologiaWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 		
 	}
-	public void MetodologiaRepetidaWindow() throws IOException {
+	public void MetodologiaRepetidaWindow() {
 		Dialog<?> dialog = new IndicadorRepetidoWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 		
 	}
-	public void CargarCondicionWindow() throws IOException {
+	public void CargarCondicionWindow() {
 		Dialog<?> dialog = new CargarCondicionWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 		
 	}
-	public void MetodologiaVaciaWindow() throws IOException {
+	public void MetodologiaVaciaWindow()  {
 		Dialog<?> dialog = new IndicadorVacioWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 		
 	}
-	public void AgregarCriterioSeleccionadoWindow()  {
+	public void AgregarCondicionSeleccionada()  {
 		Dialog<?> dialog = new AgregarCondicionSeleccionadaWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
 
-	public void EliminarCriterioSeleccionadoWindow() throws IOException {
+	public void EliminarCriterioSeleccionadoWindow() {
 		Dialog<?> dialog = new EliminarCondicionSeleccionadaWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
