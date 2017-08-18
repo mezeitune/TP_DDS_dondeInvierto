@@ -100,18 +100,23 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		selectorMetodologia.bindItemsToProperty("metodologias").setAdapter(new PropertyAdapter(Metodologia.class, "nombre"));
 		selectorMetodologia.bindValueToProperty("metodologia");
 		
+		new Button(Panel2).setCaption("Evaluar")
+		.onClick(() -> {
+				this.getModelObject().evaluar();
+		});
+		
 		new Label(Panel2).setText("RANKING EMPRESAS").setBackground(Color.GREEN);
 		//new List<>(Panel2).bindItemsToProperty("empresasQueConvieneInvertir").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		Table<Empresa> tableEmpresasRankeadas = new Table<Empresa>(Panel2, Empresa.class);
 		tableEmpresasRankeadas.setNumberVisibleRows(6).setWidth(200);
-		tableEmpresasRankeadas.bindItemsToProperty("empresasQueConvieneInvertir"); 
+		tableEmpresasRankeadas.bindItemsToProperty("empresasInvertibles"); 
 		new Column<Empresa>(tableEmpresasRankeadas).setTitle("Nombre").bindContentsToProperty("nombre");
 		
 		new Label(Panel2).setText("NO CONVIENE INVERTIR EN").setBackground(Color.RED);
 		//new List<>(Panel2).bindItemsToProperty("empresasQueNoConvieneInvertir").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		Table<Indicador> tableEmpresasQueNoConviene = new Table<Indicador>(Panel2, Indicador.class);
 		tableEmpresasQueNoConviene.setNumberVisibleRows(6).setWidth(200);
-		tableEmpresasQueNoConviene.bindItemsToProperty("empresasQueNoConvieneInvertir"); 
+		tableEmpresasQueNoConviene.bindItemsToProperty("empresasNoInvertibles"); 
 		new Column<Indicador>(tableEmpresasQueNoConviene).setTitle("Nombre").bindContentsToProperty("nombre");
 		
 }

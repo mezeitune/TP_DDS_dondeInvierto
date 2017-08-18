@@ -1,6 +1,5 @@
 package ui.vm;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import org.uqbar.commons.utils.Observable;
 
 import parserArchivos.CSVToEmpresas;
 import parserArchivos.ParserJsonAObjetosJava;
-import parserIndicadores.ParserFormulaToIndicador;
 import repository.EmpresasAEvaluarRepository;
 import repository.EmpresasRepository;
 import repository.MetodologiasRepository;
@@ -21,13 +19,9 @@ public class MetodologiasEmpresasViewModel {
 	private List<Metodologia> metodologias;
 	private Metodologia metodologia;
 
-	
-	private List<Empresa> empresasQueConvieneInvertir = new LinkedList<>();
-	private List<Empresa> empresasQueNoConvieneInvertir = new LinkedList<>();
+	private List<Empresa> empresasInvertibles = new LinkedList<>();
+	private List<Empresa> empresasNoInvertibles = new LinkedList<>();
 
-	private List<List<Empresa>> empresasAEvaluarMetodologia; 
-	
-	
 	private List<Empresa> empresas = new LinkedList<Empresa>();
 	private List<String> periodos = new LinkedList<String>();
 	
@@ -69,36 +63,25 @@ public class MetodologiasEmpresasViewModel {
 		return this.metodologias;
 	}
 	public void setMetodologia(Metodologia metodologiaSeleccionada){
-		if (metodologia==null){
-			this.metodologia=metodologias.get(0);
-			
-		}
 		
 		this.metodologia = metodologiaSeleccionada;
 		getMetodologia().setEmpresasAEvaluar(getEmpresas());
 		
-		List<String> periodosHardcodeado = new LinkedList<String>();
-		periodosHardcodeado.add("2016");
-		
-		empresasQueConvieneInvertir = getMetodologia().evaluar(periodosHardcodeado).get(0);
-		empresasQueNoConvieneInvertir = getMetodologia().evaluar(periodosHardcodeado).get(1);
-		//this.empresasRankeadas = this.metodologia.evaluar(this.getPeriodos());
-		ObservableUtils.firePropertyChanged(this, "empresasQueConvieneInvertir");
-		//this.setPeriodo(null);
-	
 	}
 	
 	public void evaluar(){
+		empresasInvertibles = metodologia.evaluar(periodos).get(0);
+		empresasNoInvertibles = metodologia.evaluar(periodos).get(1);
 		
+		ObservableUtils.firePropertyChanged(this, "empresasInvertibles");
+		ObservableUtils.firePropertyChanged(this, "empresasNoInvertibles");
+
 	}
 	
 	public Metodologia getMetodologia(){
 		return this.metodologia;
 	}
 	
-	public void setEmpresasAEvaluarMetodologia(){
-		empresasAEvaluarMetodologia = this.metodologia.evaluar(periodos);
-	}
 	
 	public void setEmpresas(List<Empresa> empresas){
 		this.empresas = empresas;
@@ -116,21 +99,14 @@ public class MetodologiasEmpresasViewModel {
 	}
 	
 	
-	public List<Empresa> getEmpresasQueConvieneInvertir() {
-		return empresasQueConvieneInvertir;
-	}
-	public void setEmpresasQueConvieneInvertir(){
-		empresasQueConvieneInvertir= this.metodologia.obtenerEmpresasInvertibles(empresasAEvaluarMetodologia);
-		System.out.println(empresasQueConvieneInvertir);
+	public List<Empresa> getEmpresasInvertibles() {
+		return empresasInvertibles;
 	}
 	
-	public List<Empresa> getEmpresasQueNoConvieneInvertir() {
-		return empresasQueNoConvieneInvertir;
+	
+	public List<Empresa> getEmpresasNoInvertibles() {
+		return empresasNoInvertibles;
 		
-	}
-	public void setEmpresasQueNoConvieneInvertir(){
-		empresasQueNoConvieneInvertir= this.metodologia.obtenerEmpresasNoInvertibles(empresasQueConvieneInvertir);
-		System.out.println(empresasQueNoConvieneInvertir);
 	}
 
 	public void vaciarListaEmpresas(){
