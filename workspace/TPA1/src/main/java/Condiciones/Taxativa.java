@@ -10,7 +10,7 @@ import parserIndicadores.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 @Observable
-public class Taxativa extends TipoCondicion {
+public class Taxativa implements TipoCondicion {
 	
 	
 	private static Taxativa instance ;

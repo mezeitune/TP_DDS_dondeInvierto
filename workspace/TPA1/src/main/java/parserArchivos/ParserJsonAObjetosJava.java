@@ -61,6 +61,7 @@ public class ParserJsonAObjetosJava {
 		this.metodologiaObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
 	    return this.metodologiaObtenidasDelArchivo;
 		}
+	
 	public List<Condicion> getCondicionesDelArchivo() {
 			
 		Type listType = new TypeToken <List<Condicion>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
