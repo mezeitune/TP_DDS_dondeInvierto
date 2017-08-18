@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import Mocks.EmpresasMock;
 import Mocks.ListaIndicadoresMock;
 import parserIndicadores.ParserFormulaToIndicador;
+import repository.EmpresasRepository;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,14 +13,16 @@ import org.junit.Test;
 import org.omg.CORBA.UserException;
 
 import usuario.Cuenta;
-import usuario.Empresa;
 import usuario.Indicador;
 public class ParserIndicadoresTest {
 	
 	private List<Indicador> indicadores;
 
 	@Before
- 	public void init() throws IOException {
+ 	public void init()  {
+		EmpresasRepository.setArchivo("empresas.csv"); /*TODO: El test esta ligado al archivo. Desacoplar al parser de esto!*/
+		ParserFormulaToIndicador.setModeTest(true); /*TODO: Esto es porque el parser esta ligado al archivo nuevamente*/
+		
 		ListaIndicadoresMock mockListaIndicadores = new ListaIndicadoresMock ();
 		List<Cuenta> mockListaCuentas = new EmpresasMock().getCuentasMockeadas();
 		mockListaIndicadores.setIndicadoresMockeados();

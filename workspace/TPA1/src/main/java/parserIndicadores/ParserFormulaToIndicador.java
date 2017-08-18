@@ -18,10 +18,12 @@ import usuario.Indicador;
 
 public class ParserFormulaToIndicador {
 
-	private static List<String> nombreCuentas = EmpresasRepository.getNombreCuentas(); 
-	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadores();
+	private static List<String> nombreCuentas = new LinkedList<String> ();
+	private static List<Indicador> indicadores = new LinkedList<Indicador>();
 	
 	private static List<Cuenta> cuentasPorPeriodo;
+	
+	private static boolean modeTest = false;
 	
 	/*Este conjunto de atributos {Empresa,Periodo} tiene que estar seteado antes de usar el parser
 	*Ya que el parser calcula la formula de un indicador esepecificamente para una empresa en un periodo.
@@ -33,6 +35,11 @@ public class ParserFormulaToIndicador {
 	private static String operadorRestaSplit = "(.*)[-](.*)";
 	private static String operadorMultiplicacionSplit = "(.*)[*](.*)";
 	private static String operadorDivisionSplit = "(.*)[/](.*)";
+	
+	public static void setModeTest(boolean bool){
+		modeTest = bool;
+	}
+	
 	
 	/*Para testear*/
 	public static void init(List<Indicador> indicadoresTest, List<Cuenta> cuentasTest){
@@ -64,7 +71,7 @@ public class ParserFormulaToIndicador {
 	
 	public static Operacion construirArbolOperaciones(String operandos) throws AccountNotFoundException{
 		
-		ParserFormulaToIndicador.update(); //Hay que actualizar las cuentas e indicadores de la empresa!
+		if(!modeTest)ParserFormulaToIndicador.update(); //Hay que actualizar las cuentas e indicadores de la empresa!
 		
 		if(operandos.matches(operadorSumaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[+]"),new Suma());
 		if(operandos.matches(operadorRestaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[-]"),new Resta());

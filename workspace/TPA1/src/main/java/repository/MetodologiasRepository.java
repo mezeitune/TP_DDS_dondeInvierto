@@ -40,10 +40,8 @@ public class MetodologiasRepository {
 	}
 	
 	public static void cargarCondiciones(){
-		List<Condicion> condicionesACargar = new LinkedList<Condicion>();
-		MetodologiasRepository.getCondicionesDefinidasPorElUsuario().stream().forEach(condicionDefinidaPorUsuario -> condicionesACargar.add(condicionDefinidaPorUsuario));
-		MetodologiasRepository.getCondicionesPredefinidas().stream().forEach(condicionPredefinida -> condicionesACargar.add(condicionPredefinida));
-		condiciones = condicionesACargar;
+		MetodologiasRepository.getCondicionesDefinidasPorElUsuario().stream().forEach(condicionDefinidaPorUsuario -> condiciones.add(condicionDefinidaPorUsuario));
+		MetodologiasRepository.getCondicionesPredefinidas().stream().forEach(condicionPredefinida -> condiciones.add(condicionPredefinida));
 	}
 	
 	public static void deleteCondicionesDefinidasPorElUsuario() {
@@ -63,10 +61,8 @@ public class MetodologiasRepository {
 	
 	
 	public static void cargarMetodologias() {
-		List<Metodologia> metodologiasACargar = new LinkedList<Metodologia>();
-		MetodologiasRepository.getMetodologiasDefinidasPorElUsuario().stream().forEach(metodologiaDefinidaPorUsuario -> metodologiasACargar.add(metodologiaDefinidaPorUsuario));
-		MetodologiasRepository.getMetodologiasPredefinidas().stream().forEach(metodologiaPredefinida -> metodologiasACargar.add(metodologiaPredefinida));
-		metodologias =  metodologiasACargar;
+		MetodologiasRepository.getMetodologiasDefinidasPorElUsuario().stream().forEach(metodologiaDefinidaPorUsuario -> metodologias.add(metodologiaDefinidaPorUsuario));
+		MetodologiasRepository.getMetodologiasPredefinidas().stream().forEach(metodologiaPredefinida -> metodologias.add(metodologiaPredefinida));
 	}
 
 	public static List<Metodologia> getMetodologiasPredefinidas(){

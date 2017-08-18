@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -23,52 +22,41 @@ import usuario.Metodologia;
 
 public class ParserJsonAObjetosJava {
 
-	private List <Empresa> empresasObtenidasDelArchivo = new ArrayList <Empresa> ();
-	private List <Indicador> indicadoresObtenidasDelArchivo = new ArrayList <Indicador> ();
-	private List <Metodologia> metodologiaObtenidasDelArchivo = new ArrayList <Metodologia> ();
-	private List<Condicion> condicionesObtenidasDelArchivo = new ArrayList <Condicion> ();
 	private JSONParser parserJsonAObjetos = new JSONParser();
-	private Object objetoAOtrosObjetos;
 	
-	private static String archivo;
+	private String archivo;
 	
-	public ParserJsonAObjetosJava(String archivo){
-		this.archivo=archivo;
+	public ParserJsonAObjetosJava(String nuevoArchivo){
+		archivo=nuevoArchivo;
 		}
+	
 	
 	public List<Empresa> getEmpresasDelArchivo() {
 			
 		Type listType = new TypeToken <List<Empresa>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		
-		this.empresasObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
-	
-	    return this.empresasObtenidasDelArchivo;
+		return new Gson().fromJson(stringParaGson(),listType);
 		}
 	
 	public List<Indicador> getIndicadoresDelArchivo() {
 		
 		Type listType = new TypeToken <List<Indicador>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		
-		this.indicadoresObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
-	
-	    return this.indicadoresObtenidasDelArchivo;
+		return new Gson().fromJson(stringParaGson(),listType);
 		}
 	
 	public List<Metodologia> getMetodologiasDelArchivo() {
 	
 		Type listType = new TypeToken <List<Metodologia>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		
-		this.metodologiaObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
-	    return this.metodologiaObtenidasDelArchivo;
+		return new Gson().fromJson(stringParaGson(),listType);
 		}
 	
 	public List<Condicion> getCondicionesDelArchivo() {
 			
 		Type listType = new TypeToken <List<Condicion>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		
-		this.condicionesObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
-		
-	    return this.condicionesObtenidasDelArchivo;
+		return new Gson().fromJson(stringParaGson(),listType);
 		}
 	
 		
@@ -76,8 +64,7 @@ public class ParserJsonAObjetosJava {
 	public Object definirObjetosDelArchivo() {
 		
 		try {
-			return parserJsonAObjetos.parse(new FileReader(ParserJsonAObjetosJava.archivo));
-			
+			return parserJsonAObjetos.parse(new FileReader(archivo));
 			
 		} catch (CSVInexistenteException ex) {
 
@@ -97,18 +84,5 @@ public class ParserJsonAObjetosJava {
 		JSONArray jsonArray=ParserJsonString.pasarDeObjetosAJSON(this.definirObjetosDelArchivo());
 		return ParserJsonString.pasarDeJSONArrayAString(jsonArray);
 	}
-
-	public void setMetodologias() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	
-
-	
-
-	
-	
 	
 }
