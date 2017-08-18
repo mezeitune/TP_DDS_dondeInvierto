@@ -61,7 +61,7 @@ public class Metodologia {
 		resultado.add(empresasInvertibles);
 		resultado.add(empresasNoInvertibles);
 		
-		this.imprimirResultado(resultado);
+		//this.imprimirResultado(resultado);
 		
 		return resultado;
 	}

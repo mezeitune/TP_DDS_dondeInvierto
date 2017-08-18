@@ -45,19 +45,12 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 		new Button(mainPanel).setCaption("Agregar Condicion")
 		.onClick(() -> {
-			try{
-				
 				AgregarCriterioSeleccionadoWindow();
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
 		});
-		
 		
 		new Button(mainPanel).setCaption("Eliminar Condicion")
 		.onClick(() -> {
 			try{
-				
 				EliminarCriterioSeleccionadoWindow();
 			}catch (IOException e) {
 				e.printStackTrace();
@@ -148,7 +141,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		dialog.onAccept(() -> {});
 		
 	}
-	public void AgregarCriterioSeleccionadoWindow() throws IOException {
+	public void AgregarCriterioSeleccionadoWindow()  {
 		Dialog<?> dialog = new AgregarCondicionSeleccionadaWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});

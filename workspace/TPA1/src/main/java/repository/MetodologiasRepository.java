@@ -14,28 +14,37 @@ public class MetodologiasRepository {
 	private static List<Metodologia> metodologias = new LinkedList<>();
 	private static List<Condicion> condiciones = new LinkedList<>();
 	
-	private static ParserJsonAObjetosJava parser= new ParserJsonAObjetosJava("metodologias.json");
-	
-	public MetodologiasRepository(){
-		MetodologiasRepository.cargarMetodologias();
-	}
+	private static ParserJsonAObjetosJava parserMetodologias= new ParserJsonAObjetosJava("metodologias.json");
+	private static ParserJsonAObjetosJava parserCondiciones = new ParserJsonAObjetosJava("condiciones.json");
 	
 	public static List<Condicion> getCondiciones() {
-		
+		if(condiciones.isEmpty()) MetodologiasRepository.cargarCondiciones();
 		return condiciones;
 	}
 	
-	public static void setCondicionesDefinidasPorElUsuario(List<Condicion> list) {
-		MetodologiasRepository.condiciones.addAll(list);
+	private static List<Condicion> getCondicionesPredefinidas() {
+		List<Condicion> condicionesPredefinidas = new LinkedList<Condicion>();
+		condicionesPredefinidas.add(MargenesCrecientes.getInstance());
+		return condicionesPredefinidas;
 	}
-	
+
+	private static List<Condicion> getCondicionesDefinidasPorElUsuario() {
+		return parserCondiciones.getCondicionesDelArchivo();
+	}
+
 	public static void addCondicion(Condicion unaCondicion) {
 		MetodologiasRepository.condiciones.add(unaCondicion);
 	}
 	
-	public static void cargarCondicionesPredefinidos(){
-		MargenesCrecientes mc = MargenesCrecientes.getInstance();
-		MetodologiasRepository.addCondicion(mc);
+	public static void cargarCondiciones(){
+		List<Condicion> condicionesACargar = new LinkedList<Condicion>();
+		MetodologiasRepository.getCondicionesDefinidasPorElUsuario().stream().forEach(condicionDefinidaPorUsuario -> condicionesACargar.add(condicionDefinidaPorUsuario));
+		MetodologiasRepository.getCondicionesPredefinidas().stream().forEach(condicionPredefinida -> condicionesACargar.add(condicionPredefinida));
+		condiciones = condicionesACargar;
+	}
+	
+	public static void deleteCondicionesDefinidasPorElUsuario() {
+		MetodologiasRepository.condiciones.removeAll(condiciones);
 		
 	}
 	
@@ -46,7 +55,7 @@ public class MetodologiasRepository {
 	}
 	
 	public static List<Metodologia> getMetodologiasDefinidasPorElUsuario(){
-		return parser.getMetodologiasDelArchivo();
+		return parserMetodologias.getMetodologiasDelArchivo();
 	}
 	
 	
@@ -69,10 +78,6 @@ public class MetodologiasRepository {
 	}
 	
 	
-	public static void deleteCondicionesDefinidasPorElUsuario() {
-		MetodologiasRepository.condiciones.removeAll(condiciones);
-		
-	}
 	public static void deleteMetodologiasDefinidasPorElUsuario() {
 		MetodologiasRepository.metodologias.removeAll(metodologias);
 	}

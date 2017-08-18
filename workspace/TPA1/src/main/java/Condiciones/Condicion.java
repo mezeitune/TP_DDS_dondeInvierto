@@ -10,7 +10,7 @@ import usuario.Indicador;
 @Observable
 public class Condicion {
 
-	protected TipoCondicion tipo;
+	public TipoCondicion tipo;
 	public int peso;
 	public Indicador indicador;
 	public String nombre;

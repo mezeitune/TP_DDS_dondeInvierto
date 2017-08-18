@@ -1,7 +1,6 @@
 package ui.windows;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.VerticalLayout;
@@ -14,11 +13,9 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import Condiciones.Condicion;
 import ui.vm.AgregarCondicionSeleccionadaViewModel;
-import ui.vm.AgregarEmpresaViewModel;
-import usuario.Empresa;
 
 public class AgregarCondicionSeleccionadaWindow extends Dialog <AgregarCondicionSeleccionadaViewModel>{
-	public AgregarCondicionSeleccionadaWindow(WindowOwner parent) throws IOException {
+	public AgregarCondicionSeleccionadaWindow(WindowOwner parent) {
 		super(parent, new AgregarCondicionSeleccionadaViewModel());
 	}
 	protected void createFormPanel(Panel mainPanel) {
@@ -28,8 +25,8 @@ public class AgregarCondicionSeleccionadaWindow extends Dialog <AgregarCondicion
 		
 		Selector<Condicion> selectorCondicion = new Selector<Condicion>(mainPanel).allowNull(true);
 		selectorCondicion.setWidth(100);
-		selectorCondicion.bindItemsToProperty("criteriosSeleccionados").setAdapter(new PropertyAdapter(Condicion.class, "nombre"));
-		selectorCondicion.bindValueToProperty("condicion");
+		selectorCondicion.bindItemsToProperty("condiciones").setAdapter(new PropertyAdapter(Condicion.class, "nombre"));
+		selectorCondicion.bindValueToProperty("condicionSeleccionada");
 
 		
 }
@@ -39,7 +36,7 @@ public class AgregarCondicionSeleccionadaWindow extends Dialog <AgregarCondicion
 		new Button(actionsPanel).setCaption("Agregar")
 		.onClick(() -> {
 						
-									AgregarCondicionSeleccionadaViewModel.agregarCondicionALaLista();
+									this.getModelObject().agregarCondicionALaLista();
 									if(AgregarCondicionSeleccionadaViewModel.getCodigoError()==1){
 									}else {
 										this.getDelegate().close();
