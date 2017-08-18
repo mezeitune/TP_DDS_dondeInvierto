@@ -16,6 +16,9 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+import excepciones.EmpresasIsEmptyException;
+import excepciones.MetodologiaNotFoundException;
+import excepciones.PeriodosIsEmptyException;
 import ui.vm.MetodologiasEmpresasViewModel;
 import usuario.Empresa;
 import usuario.Indicador;
@@ -28,6 +31,7 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 	}
 	
 	int i = 0;
+	
 	
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Consulta de Metodologias aplicadas a empresas");
@@ -87,11 +91,8 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 				this.getDelegate().close();
 				MenuWindow();
 		});
-}
-
-	protected void addActions(Panel actionsPanel){
 		
-		Panel Panel2 = new Panel(actionsPanel);
+		Panel Panel2 = new Panel(mainPanel);
 		Panel2.setLayout(new VerticalLayout());
 		
 		new Label(Panel2).setText("Seleccione la metodologia").setBackground(Color.ORANGE);
@@ -102,7 +103,12 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 		new Button(Panel2).setCaption("Evaluar")
 		.onClick(() -> {
-				this.getModelObject().evaluar();
+			
+				try {
+					this.getModelObject().evaluar();
+				}   catch (PeriodosIsEmptyException e) {this.showError("Debe seleccionar periodos para evaluar empresas");}
+					catch(EmpresasIsEmptyException e) {this.showError("Debe seleccionar empresas para evaluarlas");}
+					catch(MetodologiaNotFoundException e) {this.showError("Debe seleccionar una metodologia para evaluar");}
 		});
 		
 		new Label(Panel2).setText("RANKING EMPRESAS").setBackground(Color.GREEN);
@@ -114,12 +120,14 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 		new Label(Panel2).setText("NO CONVIENE INVERTIR EN").setBackground(Color.RED);
 		//new List<>(Panel2).bindItemsToProperty("empresasQueNoConvieneInvertir").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
-		Table<Indicador> tableEmpresasQueNoConviene = new Table<Indicador>(Panel2, Indicador.class);
+		Table<Empresa> tableEmpresasQueNoConviene = new Table<Empresa>(Panel2, Empresa.class);
 		tableEmpresasQueNoConviene.setNumberVisibleRows(6).setWidth(200);
 		tableEmpresasQueNoConviene.bindItemsToProperty("empresasNoInvertibles"); 
-		new Column<Indicador>(tableEmpresasQueNoConviene).setTitle("Nombre").bindContentsToProperty("nombre");
+		new Column<Empresa>(tableEmpresasQueNoConviene).setTitle("Nombre").bindContentsToProperty("nombre");
+		
 		
 }
+
 
 	public void MenuWindow()  {
 		Dialog<?> dialog = new MenuWindow(this);

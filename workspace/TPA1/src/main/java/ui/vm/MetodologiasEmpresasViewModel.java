@@ -6,6 +6,9 @@ import java.util.List;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
+import excepciones.EmpresasIsEmptyException;
+import excepciones.MetodologiaNotFoundException;
+import excepciones.PeriodosIsEmptyException;
 import parserArchivos.CSVToEmpresas;
 import parserArchivos.ParserJsonAObjetosJava;
 import repository.EmpresasAEvaluarRepository;
@@ -31,27 +34,8 @@ public class MetodologiasEmpresasViewModel {
 		MetodologiasRepository.deleteMetodologiasDefinidasPorElUsuario();
 		MetodologiasRepository.setMetodologiasDefinidasPorElUsuario(parserEmpIndicador.getMetodologiasDelArchivo());
 		MetodologiasRepository.cargarMetodologiasPredefinidos();
-		
-		
 			
-			this.setMetodologias();
-			this.setMetodologia(metodologias.get(0));
-
-			List<Empresa> conjuntoDeEmpresasAEvaluar = new LinkedList<Empresa>();
-		Empresa empresa1 = new Empresa("Facebook");
-		Empresa empresa2 = new Empresa("Apple");
-		Empresa empresa3 = new Empresa("Oracle");
-		Empresa empresa4 = new Empresa("Genius");
-		Empresa empresa5 = new Empresa("IBM");
-		conjuntoDeEmpresasAEvaluar.add(empresa1);
-		conjuntoDeEmpresasAEvaluar.add(empresa2);
-		conjuntoDeEmpresasAEvaluar.add(empresa3);
-		conjuntoDeEmpresasAEvaluar.add(empresa4);
-		conjuntoDeEmpresasAEvaluar.add(empresa5);
-		metodologia.setEmpresasAEvaluar(conjuntoDeEmpresasAEvaluar);
-		empresas= metodologia.getConjuntoDeEmpresasAEvaluar();
-		System.out.println(empresas);
-		
+		this.setMetodologias();
 	}
 	
 	
@@ -63,19 +47,23 @@ public class MetodologiasEmpresasViewModel {
 		return this.metodologias;
 	}
 	public void setMetodologia(Metodologia metodologiaSeleccionada){
-		
 		this.metodologia = metodologiaSeleccionada;
-		getMetodologia().setEmpresasAEvaluar(getEmpresas());
-		
 	}
 	
-	public void evaluar(){
-		empresasInvertibles = metodologia.evaluar(periodos).get(0);
-		empresasNoInvertibles = metodologia.evaluar(periodos).get(1);
+	public void evaluar() throws PeriodosIsEmptyException, EmpresasIsEmptyException, MetodologiaNotFoundException{
+		
+		if(getMetodologia() == null) throw new MetodologiaNotFoundException();
+		if(getPeriodos().isEmpty()) throw new PeriodosIsEmptyException();
+		if(getEmpresas().isEmpty()) throw new EmpresasIsEmptyException();
+		
+		metodologia.setEmpresasAEvaluar(empresas);
+		
+		List<List<Empresa>> resultado = metodologia.evaluar(periodos);
+		setEmpresasInvertibles(resultado.get(0));
+		setEmpresasNoInvertibles(resultado.get(1));
 		
 		ObservableUtils.firePropertyChanged(this, "empresasInvertibles");
 		ObservableUtils.firePropertyChanged(this, "empresasNoInvertibles");
-
 	}
 	
 	public Metodologia getMetodologia(){
@@ -99,16 +87,6 @@ public class MetodologiasEmpresasViewModel {
 	}
 	
 	
-	public List<Empresa> getEmpresasInvertibles() {
-		return empresasInvertibles;
-	}
-	
-	
-	public List<Empresa> getEmpresasNoInvertibles() {
-		return empresasNoInvertibles;
-		
-	}
-
 	public void vaciarListaEmpresas(){
 		EmpresasAEvaluarRepository.vaciarListaDeEmpresasAEvaluar();
 		ObservableUtils.firePropertyChanged(this, "empresas");
@@ -118,6 +96,26 @@ public class MetodologiasEmpresasViewModel {
 		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
 		EmpresasAEvaluarRepository.setEmpresasAEvaluar(parser.csvFileToEmpresas());
 		ObservableUtils.firePropertyChanged(this, "empresas");	
+	}
+
+
+	public List<Empresa> getEmpresasInvertibles() {
+		return empresasInvertibles;
+	}
+
+
+	public void setEmpresasInvertibles(List<Empresa> empresasInvertibles) {
+		this.empresasInvertibles = empresasInvertibles;
+	}
+
+
+	public List<Empresa> getEmpresasNoInvertibles() {
+		return empresasNoInvertibles;
+	}
+
+
+	public void setEmpresasNoInvertibles(List<Empresa> empresasNoInvertibles) {
+		this.empresasNoInvertibles = empresasNoInvertibles;
 	}
 	
 	

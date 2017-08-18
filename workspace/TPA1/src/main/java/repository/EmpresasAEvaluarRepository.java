@@ -46,10 +46,6 @@ public class EmpresasAEvaluarRepository {
 		EmpresasAEvaluarRepository.periodosAEvaluar.remove(unPeriodo);
 	}
 
-	public static void llenarListaDeEmpresasAEvaluar() {
-		
-		
-	}
 	
 	public static boolean esPeriodoRepetido(String periodo){
 		return periodosAEvaluar.stream().anyMatch(unPeriodo -> unPeriodo.equals(periodo));

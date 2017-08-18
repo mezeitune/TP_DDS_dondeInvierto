@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import repository.IndicadoresRepository;
-import repository.EmpresasAEvaluarRepository;
 import repository.EmpresasRepository;
 import usuario.Cuenta;
 import usuario.Empresa;
@@ -42,8 +41,6 @@ public class ParserFormulaToIndicador {
 		
 		IndicadoresRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
 		IndicadoresRepository.cargarIndicadoresPredefinidos();
-		
-		
 	}
 
 	/*Para testear*/
