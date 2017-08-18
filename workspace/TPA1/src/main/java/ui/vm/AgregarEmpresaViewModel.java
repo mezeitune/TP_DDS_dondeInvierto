@@ -1,15 +1,10 @@
 package ui.vm;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import parserArchivos.CSVToEmpresas;
-import parserIndicadores.ParserFormulaToIndicador;
-import repository.IndicadoresRepository;
 import repository.EmpresasAEvaluarRepository;
 import repository.EmpresasRepository;
 import usuario.Empresa;
@@ -17,73 +12,36 @@ import usuario.Empresa;
 public class AgregarEmpresaViewModel {
 
 	private Empresa empresa = new Empresa();
-	private String nombre;
-	
-	private String periodo;
-	private List<String> periodos = new LinkedList<>();
-	
 	private List<Empresa> empresas = new LinkedList<>();
-	private static int codigoError;
-	public static int getCodigoError(){
-		return codigoError;
-	}
+
 	public AgregarEmpresaViewModel() {
-		try {
 			this.setEmpresas();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
-	public void setPeriodo(String periodoSeleccionada) throws IOException{
-		EmpresasAEvaluarRepository.agregarPeriodoAEvaluar(periodoSeleccionada);
+	public void setEmpresas()  {
+		this.empresas=EmpresasRepository.getEmpresas();
 	}
-	
-	public String getPeriodo(){
-		return this.periodo;
-	}
-	
-	public void setPeriodos(List<String> periodos){
-		this.periodos = periodos;
-	}
-	
-	public List<String> getPeriodos(){
-		return empresa.getPeriodosSinRepetidos();
-	}
-	
-	
-	public void setEmpresas() throws IOException {
-		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
-		this.empresas = parser.csvFileToEmpresas();
-		
-		
+	public List<Empresa> getEmpresas(){
+		return this.empresas;
 	}
 	
 	public String getNombre(){
 		return empresa.getNombre();
 	}
 	
-	public void setEmpresa(Empresa empresaSeleccionada) throws IOException{
-		if(ParserFormulaToIndicador.validarEmpresaRepetidaAntesDePrecargar(empresaSeleccionada)==true){
-	
-		AgregarEmpresaViewModel.codigoError=1;
-		}else{
-			
-			EmpresasAEvaluarRepository.agregarEmpresaAEvaluar(empresaSeleccionada);
-			AgregarEmpresaViewModel.codigoError=0;
-		}
+	public void setEmpresa(Empresa empresaSeleccionada) {
 		this.empresa = empresaSeleccionada;
-		ObservableUtils.firePropertyChanged(this, "periodos");
-		
-		
 	}
 	
 	public Empresa getEmpresa(){
 		return this.empresa;
 	}
 	
-	public List<Empresa> getEmpresas(){
-		return this.empresas;
+	public boolean esUnaEmpresaYaCargada(){
+		return EmpresasAEvaluarRepository.esEmpresaRepetida(this.empresa);
+		
+	}
+	public void agregarNuevaEmpresaAEvaluar() {
+		EmpresasAEvaluarRepository.agregarEmpresaAEvaluar(this.empresa);
 	}
 }

@@ -28,22 +28,16 @@ public class AgregarEmpresaWindow extends Dialog<AgregarEmpresaViewModel>{
 		selectorEmpresa.bindItemsToProperty("empresas").setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		selectorEmpresa.bindValueToProperty("empresa");
 
-		/*new Label(Panel).setText("Seleccione un Periodo ").setBackground(Color.ORANGE);
-		Selector<Empresa> selectorPeriodo = new Selector<Empresa>(Panel).allowNull(true);
-		selectorPeriodo.setWidth(100);
-		selectorPeriodo.bindItemsToProperty("periodos");
-		selectorPeriodo.bindValueToProperty("periodo");*/
-
-		
 }
 
 	protected void addActions(Panel actionsPanel){
 		
 		new Button(actionsPanel).setCaption("Agregar")
 		.onClick(() -> {
-						if(AgregarEmpresaViewModel.getCodigoError()==1){
-								this.showError("Empresa ya agregada, seleccione otra");
+						if(this.getModelObject().esUnaEmpresaYaCargada()){
+									this.showError("Empresa ya agregada, seleccione otra");
 							}else{
+									this.getModelObject().agregarNuevaEmpresaAEvaluar();
 									this.getDelegate().close();
 									MetodologiasEmpresasWindow();
 							}

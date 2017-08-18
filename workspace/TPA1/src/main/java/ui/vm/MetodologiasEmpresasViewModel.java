@@ -42,15 +42,12 @@ public class MetodologiasEmpresasViewModel {
 		MetodologiasRepository.cargarMetodologiasPredefinidos();
 		
 		
-		try {
 			
 			this.setEmpresas();
 			this.setMetodologias();
 			this.setMetodologia(metodologias.get(0));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		List<Empresa> conjuntoDeEmpresasAEvaluar = new LinkedList<Empresa>();
+
+			List<Empresa> conjuntoDeEmpresasAEvaluar = new LinkedList<Empresa>();
 		Empresa empresa1 = new Empresa("Facebook");
 		Empresa empresa2 = new Empresa("Apple");
 		Empresa empresa3 = new Empresa("Oracle");
@@ -131,7 +128,7 @@ public class MetodologiasEmpresasViewModel {
 	public Boolean getSeleccionoTodasLasEmpresas(){
 		return this.seleccionoTodasLasEmpresas;
 	}
-	public void setEmpresas() throws IOException {
+	public void setEmpresas()  {
 		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
 		this.empresas=parser.csvFileToEmpresas();
 		

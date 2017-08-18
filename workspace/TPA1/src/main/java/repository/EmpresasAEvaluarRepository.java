@@ -62,5 +62,9 @@ public class EmpresasAEvaluarRepository {
 	public static void setEmpresasAEvaluar(List<Empresa> empresas) {
 		EmpresasAEvaluarRepository.empresasAEvaluar = empresas;
 	}
+
+	public static boolean esEmpresaRepetida(Empresa empresa) {
+		return empresasAEvaluar.stream().anyMatch(empresaCargada -> empresaCargada.equals(empresa));
+	}
 	
 }

@@ -137,17 +137,6 @@ public class ParserFormulaToIndicador {
 			return false;
 		}
 	}
-	public static boolean validarEmpresaRepetidaAntesDePrecargar(Empresa unaEmpresa) throws IOException {
-		
-		List<Empresa> empresaRepetida = EmpresasAEvaluarRepository.empresasAEvaluar.stream().filter(line -> line.getNombre().equals(unaEmpresa.getNombre())).collect(Collectors.toList());
-		
-		if (empresaRepetida.size() >= 1){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
 	
 	public static boolean validarAntesDePrecargar(String formula) throws IOException{ 
 		indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
