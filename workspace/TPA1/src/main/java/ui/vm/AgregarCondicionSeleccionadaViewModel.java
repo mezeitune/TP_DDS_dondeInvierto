@@ -23,7 +23,6 @@ public class AgregarCondicionSeleccionadaViewModel {
 	}
 	
 	public void setCondicion(Condicion condicion) {
-	this.condicionSeleccionada=condicion;
 	}
 	
 	public static int getCodigoError() {
