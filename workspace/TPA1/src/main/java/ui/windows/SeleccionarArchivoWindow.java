@@ -1,6 +1,5 @@
 package ui.windows;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,8 +17,6 @@ import org.uqbar.arena.windows.WindowOwner;
 import excepciones.ArchivoInexistenteException;
 import excepciones.PathIncorrectoException;
 import excepciones.TipoDeArchivoIncorrectoException;
-import parserArchivos.CSVToEmpresas;
-import parserIndicadores.ParserFormulaToIndicador;
 import repository.ArchivoEIndicadoresUsuarioRepository;
 import ui.vm.*;
 
@@ -51,72 +48,37 @@ public class SeleccionarArchivoWindow extends Dialog<SeleccionarArchivoViewModel
 		new FileSelector(actionsPanel).setCaption("Seleccione el Archivo a Cargar")
 	    							  .bindValueToProperty("archivo");
 		
-		/*new Button(actionsPanel).setCaption("Volver")
-		.onClick(() -> {
-						try{
-							this.getDelegate().close();
-							VerificarArchivo(ArchivoEIndicadoresUsuarioRepository.getArchivo());
-							CargaExitosaWindow();
-						}catch (ArchivoInexistenteException e) {
-							try {
-								MenuWindow();
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}
-						}catch (IOException e) {
-							e.printStackTrace();
-						}
-						
-		});*/
-
 		
 		new Button(actionsPanel).setCaption("Aceptar")
 		.onClick(() -> {
-						try{
-							this.getDelegate().close();
 							VerificarArchivo(ArchivoEIndicadoresUsuarioRepository.getArchivo());
-							CargaExitosaWindow();
-						}catch (IOException e) {
-							e.printStackTrace();
-						}
+							this.showInfo("El archivo se cargo exitosamente");
+							this.getDelegate().close();
+							MenuWindow();
 		});
 		new Button(actionsPanel).setCaption("Cancelar")
 		.onClick(() -> {
-						try{
 							this.getDelegate().close();
 							ArchivoEIndicadoresUsuarioRepository.setArchivo(null);
 							MenuWindow();
-						}catch (IOException e) {
-							e.printStackTrace();
-						}
 		});
 		
 		
 	}
 	
-	public void MenuWindow() throws IOException {
+	public void MenuWindow() {
 		Dialog<?> dialog = new MenuWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void CargaExitosaWindow() throws IOException {
-		Dialog<?> dialog = new CargaExitosaWindow(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
-	}
-	
+
 	public void VerificarArchivo(String archivo){
-		String extension;
-		if(archivo==null)
-			throw new ArchivoInexistenteException();
+		if(archivo==null) throw new ArchivoInexistenteException();
 		Path path = Paths.get(archivo);
 		if (Files.notExists(path))
 			throw new PathIncorrectoException();
-		if(!((extension=FilenameUtils.getExtension(archivo)).equals("csv")))
+		if(!((FilenameUtils.getExtension(archivo)).equals("csv")))
 			throw new TipoDeArchivoIncorrectoException();
 	}
 
-	
-	
-	
 }
