@@ -9,7 +9,7 @@ import org.uqbar.commons.utils.Observable;
 import excepciones.CSVInexistenteException;
 import parserArchivos.CSVToEmpresas;
 import parserIndicadores.ParserFormulaToIndicador;
-import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.IndicadoresRepository;
 import repository.MetodologiasRepository;
 import ui.windows.MenuWindow;
 import usuario.Indicador;

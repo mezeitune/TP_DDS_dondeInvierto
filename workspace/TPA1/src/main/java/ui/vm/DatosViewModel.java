@@ -15,7 +15,9 @@ import indicadoresPredefinidos.IndicadorCustom;
 import parserArchivos.CSVToEmpresas;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserIndicadores.ParserFormulaToIndicador;
-import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.IndicadoresRepository;
+import repository.EmpresasRepository;
+
 import com.google.gson.Gson;
 import usuario.*;
 
@@ -30,7 +32,7 @@ public class DatosViewModel{
 	private List<String> periodos;
 	private int calculo;
 	
-	private List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
+	private List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 	private String nombreIndicador;
 	private String formulaIndicador;
 	
@@ -96,7 +98,7 @@ public class DatosViewModel{
 	}
 	
 	public void setEmpresas() throws IOException {
-		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
 		this.empresas=parser.csvFileToEmpresas();
 		
 	}

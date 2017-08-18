@@ -12,9 +12,10 @@ import Condiciones.Condicion;
 import parserArchivos.CSVToEmpresas;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserIndicadores.ParserFormulaToIndicador;
-import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.IndicadoresRepository;
 import repository.CriteriosSeleccionadosRepository;
 import repository.EmpresasAEvaluarRepository;
+import repository.EmpresasRepository;
 import repository.MetodologiasRepository;
 import usuario.Empresa;
 @Observable
@@ -33,9 +34,7 @@ public class AgregarCondicionSeleccionadaViewModel {
 		}
 	}
 	public void setEmpresas() throws IOException {
-		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
-	
-		
+		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
 		
 	}
 	public List<Condicion> getCriteriosSeleccionados() {

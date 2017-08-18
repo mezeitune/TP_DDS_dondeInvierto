@@ -11,10 +11,12 @@ import java.util.stream.Collectors;
 import parserArchivos.CSVToEmpresas;
 
 public class EmpresasRepository {
+	
+	private static String archivo;
 
 	/*TODO: Desacoplarlo del repository de archivosIndicadores*/
 	public static List<Empresa> getEmpresas(){
-		return new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo()).csvFileToEmpresas();
+		return new CSVToEmpresas(archivo).csvFileToEmpresas();
 	}
 
 	public static List<String> getNombreCuentas() {
@@ -32,9 +34,16 @@ public class EmpresasRepository {
 		return cuentas;
 	}
 	
-	
 	private static void agregarCuentas(List<Cuenta> cuentas, List<Cuenta> cuentasEmpresa) {
 		cuentasEmpresa.forEach(cuenta -> cuentas.add(cuenta));
+	}
+
+	public static void setArchivo(String archivoEmpresas) {
+		archivo = archivoEmpresas;
+	}
+	
+	public static String getArchivo(){
+		return archivo;
 	}
 
 }

@@ -11,7 +11,7 @@ import indicadoresPredefinidos.IndicadorCustom;
 import parser.ParserJsonString;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserIndicadores.ParserFormulaToIndicador;
-import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.IndicadoresRepository;
 import usuario.Indicador;
 
 
@@ -20,7 +20,7 @@ public class IndicadoresAlArchivoJSONTest {
 	@Before
  	public void init() throws IOException {
 		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("indicadores.json");
-		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
+		IndicadoresRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
  	}
 	
 	@Test
@@ -32,7 +32,7 @@ public class IndicadoresAlArchivoJSONTest {
  	
 	@Test
 	public void consultaCorrectamenteUnIndicadorEnElArchivoJSON(){
-		List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();;
+		List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();;
 		assertEquals("Indicador0",indicadores.get(0).getNombre());
  	}
 	

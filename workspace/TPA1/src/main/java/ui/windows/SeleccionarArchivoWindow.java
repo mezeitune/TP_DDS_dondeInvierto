@@ -17,7 +17,8 @@ import org.uqbar.arena.windows.WindowOwner;
 import excepciones.ArchivoInexistenteException;
 import excepciones.PathIncorrectoException;
 import excepciones.TipoDeArchivoIncorrectoException;
-import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.IndicadoresRepository;
+import repository.EmpresasRepository;
 import ui.vm.*;
 
 
@@ -51,7 +52,7 @@ public class SeleccionarArchivoWindow extends Dialog<SeleccionarArchivoViewModel
 		
 		new Button(actionsPanel).setCaption("Aceptar")
 		.onClick(() -> {
-							VerificarArchivo(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+							VerificarArchivo(EmpresasRepository.getArchivo());
 							this.showInfo("El archivo se cargo exitosamente");
 							this.getDelegate().close();
 							MenuWindow();
@@ -59,7 +60,7 @@ public class SeleccionarArchivoWindow extends Dialog<SeleccionarArchivoViewModel
 		new Button(actionsPanel).setCaption("Cancelar")
 		.onClick(() -> {
 							this.getDelegate().close();
-							ArchivoEIndicadoresUsuarioRepository.setArchivo(null);
+							EmpresasRepository.setArchivo(null);
 							MenuWindow();
 		});
 		

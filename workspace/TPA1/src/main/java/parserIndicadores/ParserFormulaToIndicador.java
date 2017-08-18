@@ -5,14 +5,13 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 
 import excepciones.AccountNotFoundException;
-import parserArchivos.CSVToEmpresas;
 import parserArchivos.ParserJsonAObjetosJava;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.IndicadoresRepository;
 import repository.EmpresasAEvaluarRepository;
 import repository.EmpresasRepository;
 import usuario.Cuenta;
@@ -39,20 +38,14 @@ public class ParserFormulaToIndicador {
 	public ParserFormulaToIndicador() {
 		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("indicadores.json");
 		nombreCuentas=EmpresasRepository.getNombreCuentas();
+		indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 		
-		setIndicadoresDefinidosPorUsuario();
-		ArchivoEIndicadoresUsuarioRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
-		ArchivoEIndicadoresUsuarioRepository.cargarIndicadoresPredefinidos();
+		IndicadoresRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
+		IndicadoresRepository.cargarIndicadoresPredefinidos();
 		
 		
 	}
 
-
-	private static void setIndicadoresDefinidosPorUsuario() {
-		indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
-	}
-	
-	
 	/*Para testear*/
 	public static void init(List<Indicador> indicadoresTest, List<Cuenta> cuentasTest){
 		indicadores = indicadoresTest;
@@ -157,8 +150,7 @@ public class ParserFormulaToIndicador {
 	
 	
 	public static boolean validarAntesDePrecargar(String formula) throws IOException{ 
-		setIndicadoresDefinidosPorUsuario();
-		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+		indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 		
 		String[] result = formula.split("[-+*/]");
 		String[] ver = new String[result.length];

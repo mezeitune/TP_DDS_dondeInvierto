@@ -25,7 +25,8 @@ import parser.ParserJsonString;
 import parserArchivos.CSVToEmpresas;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserIndicadores.ParserFormulaToIndicador;
-import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.IndicadoresRepository;
+import repository.EmpresasRepository;
 import usuario.Empresa;
 import usuario.Indicador;
 
@@ -46,7 +47,7 @@ public class CargarCondicionViewModel {
 	private static List<String> comparadores = new ArrayList<>();
 	private static String comparador;
 	
-	private static List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
+	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 	private static Indicador indicador;
 
 	private List<Empresa> empresas;
@@ -71,7 +72,7 @@ public class CargarCondicionViewModel {
 	
 	
 	public void setEmpresas() throws IOException {
-		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
 		this.empresas=parser.csvFileToEmpresas();
 		
 	}

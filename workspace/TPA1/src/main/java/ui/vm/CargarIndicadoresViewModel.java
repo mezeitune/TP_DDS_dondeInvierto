@@ -21,13 +21,13 @@ import excepciones.AccountNotFoundException;
 import indicadoresPredefinidos.IndicadorCustom;
 import parser.ParserJsonString;
 import parserIndicadores.ParserFormulaToIndicador;
-import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.IndicadoresRepository;
 import usuario.Indicador;
 import usuario.Indicador;
 @Observable
 public class CargarIndicadoresViewModel {
 
-	private static List<Indicador> indicadores = ArchivoEIndicadoresUsuarioRepository.getIndicadoresDefinidosPorElUsuario();
+	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 	
 	private static String nombreIndicador;
 	private static String formulaIndicador;

@@ -19,7 +19,7 @@ import metodologias.Predefinidas.WarrenBuffet;
 import parser.ParserJsonString;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserIndicadores.ParserFormulaToIndicador;
-import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.IndicadoresRepository;
 import repository.CriteriosSeleccionadosRepository;
 import repository.MetodologiasRepository;
 import usuario.Indicador;

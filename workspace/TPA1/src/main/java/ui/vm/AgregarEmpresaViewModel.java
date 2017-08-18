@@ -9,8 +9,9 @@ import org.uqbar.commons.utils.Observable;
 
 import parserArchivos.CSVToEmpresas;
 import parserIndicadores.ParserFormulaToIndicador;
-import repository.ArchivoEIndicadoresUsuarioRepository;
+import repository.IndicadoresRepository;
 import repository.EmpresasAEvaluarRepository;
+import repository.EmpresasRepository;
 import usuario.Empresa;
 @Observable
 public class AgregarEmpresaViewModel {
@@ -53,7 +54,7 @@ public class AgregarEmpresaViewModel {
 	
 	
 	public void setEmpresas() throws IOException {
-		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
 		this.empresas = parser.csvFileToEmpresas();
 		
 		

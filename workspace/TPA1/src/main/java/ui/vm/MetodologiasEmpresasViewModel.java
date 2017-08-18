@@ -10,8 +10,8 @@ import org.uqbar.commons.utils.Observable;
 import parserArchivos.CSVToEmpresas;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserIndicadores.ParserFormulaToIndicador;
-import repository.ArchivoEIndicadoresUsuarioRepository;
 import repository.EmpresasAEvaluarRepository;
+import repository.EmpresasRepository;
 import repository.MetodologiasRepository;
 import usuario.Empresa;
 import usuario.Metodologia;
@@ -132,7 +132,7 @@ public class MetodologiasEmpresasViewModel {
 		return this.seleccionoTodasLasEmpresas;
 	}
 	public void setEmpresas() throws IOException {
-		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
 		this.empresas=parser.csvFileToEmpresas();
 		
 	}
@@ -195,7 +195,7 @@ public class MetodologiasEmpresasViewModel {
 	}
 	
 	public void autocompletarListaEmpresasAEvaluar(){
-		CSVToEmpresas parser = new CSVToEmpresas(ArchivoEIndicadoresUsuarioRepository.getArchivo());
+		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
 		EmpresasAEvaluarRepository.setEmpresasAEvaluar(parser.csvFileToEmpresas());
 		ObservableUtils.firePropertyChanged(this, "empresasAEvaluar");	
 	}
