@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.uqbar.commons.utils.Observable;
 import Condiciones.Condicion;
 import Condiciones.Criterio;
-import repository.EmpresasAEvaluarRepository;
 
 @Observable
 public class Metodologia {
@@ -48,7 +47,7 @@ public class Metodologia {
 	
 	public List<List<Empresa>> evaluar(List<String> periodos){ 
 		this.criterio = new Criterio(this.condiciones);
-		System.out.println(this.condiciones.size());
+
 		this.criterio.evaluar(this.empresasAEvaluar, periodos);
 		
 		List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>(this.criterio.getListasEmpresasEvaluadas());

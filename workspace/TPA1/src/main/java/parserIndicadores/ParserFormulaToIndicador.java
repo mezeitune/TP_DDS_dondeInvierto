@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 
 import excepciones.AccountNotFoundException;
-import parserArchivos.ParserJsonAObjetosJava;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -23,24 +22,22 @@ public class ParserFormulaToIndicador {
 	private static List<Indicador> indicadores = new LinkedList<>();
 	
 	private static List<Cuenta> cuentasPorPeriodo;
-	private static Empresa empresa ;
-	private static String periodo;
+	
+	/*Este conjunto de atributos {Empresa,Periodo} tiene que estar seteado antes de usar el parser
+	*Ya que el parser calcula la formula de un indicador esepecificamente para una empresa en un periodo.
+	 */
+	
+	private static Empresa empresa ; 
+	private static String periodo; 
 	
 	private static String operadorSumaSplit = "(.*)[+](.*)";
 	private static String operadorRestaSplit = "(.*)[-](.*)";
 	private static String operadorMultiplicacionSplit = "(.*)[*](.*)";
 	private static String operadorDivisionSplit = "(.*)[/](.*)";
 	
-	
-	
-	
 	public ParserFormulaToIndicador() {
-		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("indicadores.json");
 		nombreCuentas=EmpresasRepository.getNombreCuentas();
-		indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
-		
-		IndicadoresRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
-		IndicadoresRepository.cargarIndicadoresPredefinidos();
+		indicadores = IndicadoresRepository.getIndicadores();
 	}
 
 	/*Para testear*/

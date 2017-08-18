@@ -34,7 +34,7 @@ public class ParserJsonAObjetosJava {
 	
 	public ParserJsonAObjetosJava(String archivo){
 		this.archivo=archivo;
-	}
+		}
 	
 	public List<Empresa> getEmpresasDelArchivo() {
 			
@@ -43,7 +43,7 @@ public class ParserJsonAObjetosJava {
 		this.empresasObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
 	
 	    return this.empresasObtenidasDelArchivo;
-	}
+		}
 	
 	public List<Indicador> getIndicadoresDelArchivo() {
 		
@@ -52,21 +52,22 @@ public class ParserJsonAObjetosJava {
 		this.indicadoresObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
 	
 	    return this.indicadoresObtenidasDelArchivo;
-	}
-		public List<Metodologia> getMetodologiasDelArchivo() {
-		
+		}
+	
+	public List<Metodologia> getMetodologiasDelArchivo() {
+	
 		Type listType = new TypeToken <List<Metodologia>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
 		
 		this.metodologiaObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
 	    return this.metodologiaObtenidasDelArchivo;
-	}
-		public List<Condicion> getCondicionesDelArchivo() {
+		}
+	public List<Condicion> getCondicionesDelArchivo() {
 			
-			Type listType = new TypeToken <List<Condicion>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
-			
-			this.condicionesObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
-			
-		    return this.condicionesObtenidasDelArchivo;
+		Type listType = new TypeToken <List<Condicion>>() {}.getType(); // Para paramtrizar en fromJson(2) y poder castear.
+		
+		this.condicionesObtenidasDelArchivo = new Gson().fromJson(stringParaGson(),listType);
+		
+	    return this.condicionesObtenidasDelArchivo;
 		}
 	
 		

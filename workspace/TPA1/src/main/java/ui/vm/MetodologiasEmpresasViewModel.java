@@ -25,9 +25,6 @@ public class MetodologiasEmpresasViewModel {
 	private List<Empresa> empresasInvertibles = new LinkedList<>();
 	private List<Empresa> empresasNoInvertibles = new LinkedList<>();
 
-	private List<Empresa> empresas = new LinkedList<Empresa>();
-	private List<String> periodos = new LinkedList<String>();
-	
 	public MetodologiasEmpresasViewModel() {
 		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("metodologias.json");
 		
@@ -67,18 +64,10 @@ public class MetodologiasEmpresasViewModel {
 	}
 	
 	
-	
-	public void setEmpresas(List<Empresa> empresas){
-		this.empresas = empresas;
-	}
 	public List<Empresa> getEmpresas(){
 		return EmpresasAEvaluarRepository.getEmpresasAEvaluar();
 	}
 	
-	public void setPeriodos(){
-		this.periodos = EmpresasAEvaluarRepository.getPeriodosAEvaluar();
-		
-	}
 	public List<String> getPeriodos(){
 		return EmpresasAEvaluarRepository.getPeriodosAEvaluar();
 	}

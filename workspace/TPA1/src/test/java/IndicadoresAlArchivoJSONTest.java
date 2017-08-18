@@ -1,6 +1,5 @@
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.junit.Before;
@@ -9,8 +8,6 @@ import com.google.gson.Gson;
 
 import indicadoresPredefinidos.IndicadorCustom;
 import parser.ParserJsonString;
-import parserArchivos.ParserJsonAObjetosJava;
-import parserIndicadores.ParserFormulaToIndicador;
 import repository.IndicadoresRepository;
 import usuario.Indicador;
 
@@ -18,9 +15,7 @@ import usuario.Indicador;
 public class IndicadoresAlArchivoJSONTest {
 	
 	@Before
- 	public void init() throws IOException {
-		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("indicadores.json");
-		IndicadoresRepository.setIndicadoresDefinidosPorElUsuario(parserEmpIndicador.getIndicadoresDelArchivo());
+ 	public void init()  {
  	}
 	
 	@Test
