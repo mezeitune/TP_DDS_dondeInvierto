@@ -3,10 +3,13 @@ package repository;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import Condiciones.Condicion;
 import Condiciones.Predefinidas.MargenesCrecientes;
 import metodologias.Predefinidas.MetodologiaPrueba;
 import metodologias.Predefinidas.WarrenBuffet;
+import parser.ParserJsonString;
 import parserArchivos.ParserJsonAObjetosJava;
 import usuario.Metodologia;
 
@@ -80,6 +83,13 @@ public class MetodologiasRepository {
 	
 	public static void deleteMetodologiasDefinidasPorElUsuario() {
 		MetodologiasRepository.metodologias.removeAll(metodologias);
+	}
+
+	public static void addMetodologia(Metodologia nuevaMetodologia) {
+		metodologias.add(nuevaMetodologia);
+		
+		String jsonElement = new Gson().toJson(nuevaMetodologia); 
+		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("metodologias",jsonElement );
 	}
 }
 

@@ -1,7 +1,6 @@
 package ui.windows;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
@@ -14,6 +13,8 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import Condiciones.Condicion;
+import excepciones.CondicionesNotFoundException;
+import excepciones.NombreMetodologiaNotFoundException;
 import ui.vm.CargarMetodologiaViewModel;
 import usuario.Metodologia;
 
@@ -81,14 +82,19 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 		new Button(actionsPanel).setCaption("Crear Metodologia")
 								.onClick(() -> {
-										try {
-											CargarMetodologiaViewModel.generarMetodologia();
+									
+											try {
+												this.getModelObject().generarMetodologia();
+											} catch (NombreMetodologiaNotFoundException e) {
+												this.showError("Debe ingresar el nombre de la Metodologia");
+											} catch (CondicionesNotFoundException e) {
+												this.showError("Debe ingresar condiciones a la Metodologia");
+											}
+											this.showInfo("La metodologia ha sido cargada exitosamente");
 											PreguntaNuevaMetodologia();
-										} catch (IOException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}												
+											this.getModelObject().refresh();
 								}).setWidth(200);
+	
 	
 		new Button(actionsPanel).setCaption("Cancelar")
 									.onClick(() -> {

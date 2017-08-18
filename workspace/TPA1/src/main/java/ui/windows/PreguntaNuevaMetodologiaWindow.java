@@ -10,7 +10,6 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import ui.vm.PreguntaNuevaMetodologiaViewModel;
-import ui.vm.PreguntaNuevoIndicadorViewModel;
 
 public class PreguntaNuevaMetodologiaWindow extends Dialog<PreguntaNuevaMetodologiaViewModel>{
 
@@ -29,19 +28,13 @@ public class PreguntaNuevaMetodologiaWindow extends Dialog<PreguntaNuevaMetodolo
 	protected void addActions(Panel actionsPanel){
 		new Button(actionsPanel).setCaption("Si")
 								.onClick(() -> {
-												
-												
-													this.getDelegate().close();
-													
-												
+												this.getDelegate().close();
 								}).setWidth(200);
 
 		
 		new Button(actionsPanel).setCaption("No")
 								.onClick(() -> {
-									
-													this.getDelegate().close();
-													
+												this.getDelegate().close();
 												
 								}).setWidth(200);
 	}
