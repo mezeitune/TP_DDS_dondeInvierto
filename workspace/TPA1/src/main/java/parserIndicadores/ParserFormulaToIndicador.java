@@ -26,7 +26,6 @@ public class ParserFormulaToIndicador {
 	/*Este conjunto de atributos {Empresa,Periodo} tiene que estar seteado antes de usar el parser
 	*Ya que el parser calcula la formula de un indicador esepecificamente para una empresa en un periodo.
 	 */
-	
 	private static Empresa empresa ; 
 	private static String periodo; 
 	
@@ -41,7 +40,7 @@ public class ParserFormulaToIndicador {
 		nombreCuentas = cuentasTest.stream().map(cuenta -> cuenta.getNombre()).collect(Collectors.toList());
 		cuentasPorPeriodo = cuentasTest; 
 	}
-	
+	/*Para testear*/
 	public static void init(List<Cuenta> cuentasTest){
 		nombreCuentas = cuentasTest.stream().map(cuenta -> cuenta.getNombre()).collect(Collectors.toList());
 	}
@@ -64,15 +63,22 @@ public class ParserFormulaToIndicador {
 	}
 	
 	public static Operacion construirArbolOperaciones(String operandos) throws AccountNotFoundException{
-
-				if(operandos.matches(operadorSumaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[+]"),new Suma());
-				if(operandos.matches(operadorRestaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[-]"),new Resta());
-				if(operandos.matches(operadorMultiplicacionSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[*]"),new Multiplicacion());
-				if(operandos.matches(operadorDivisionSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[/]"),new Division());
-				
-				return ParserFormulaToIndicador.getClaseOperador(operandos);
+		
+		ParserFormulaToIndicador.update(); //Hay que actualizar las cuentas e indicadores de la empresa!
+		
+		if(operandos.matches(operadorSumaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[+]"),new Suma());
+		if(operandos.matches(operadorRestaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[-]"),new Resta());
+		if(operandos.matches(operadorMultiplicacionSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[*]"),new Multiplicacion());
+		if(operandos.matches(operadorDivisionSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[/]"),new Division());
+		
+		return ParserFormulaToIndicador.getClaseOperador(operandos);
 				
 		}
+	
+	private static void update() {
+		nombreCuentas = EmpresasRepository.getNombreCuentas(); 
+		indicadores = IndicadoresRepository.getIndicadores();
+	}
 	
 	public static Operacion getOperacion(String [] formula,Operacion nuevaOperacion) throws AccountNotFoundException{
 		List<String> operandos = new LinkedList<>();
