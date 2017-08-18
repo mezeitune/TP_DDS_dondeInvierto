@@ -6,7 +6,7 @@ import parserIndicadores.Operacion;
 import parserIndicadores.ParserFormulaToIndicador;
 
 @Observable
-public class  Indicador implements Operacion,Comparable<Indicador> {
+public class Indicador implements Operacion,Comparable<Indicador> {
 
 	private String nombre;
 	private String formula;
@@ -55,6 +55,8 @@ public class  Indicador implements Operacion,Comparable<Indicador> {
 	
 	public int calcular() {
 		int valor = 0;
+		//ParserFormulaToIndicador.setEmpresa(empresa);
+		//ParserFormulaToIndicador.setPeriodo(periodo);
 		try {
 			valor = ParserFormulaToIndicador.construirArbolOperaciones(this.formula).calcular();
 		} catch (AccountNotFoundException e) {
@@ -75,5 +77,6 @@ public class  Indicador implements Operacion,Comparable<Indicador> {
 		
 	}
 
+	
 	
 }

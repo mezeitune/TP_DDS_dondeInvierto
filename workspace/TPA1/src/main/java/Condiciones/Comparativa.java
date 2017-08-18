@@ -59,9 +59,8 @@ public class Comparativa extends TipoCondicion{
 		ParserFormulaToIndicador.setEmpresa(empresa1);
 		ParserFormulaToIndicador.setPeriodo(periodo);
 		
-		int valor1 = indicador.calcular();
-		
 		//System.out.println(empresa1.getNombre());
+		int valor1 = indicador.calcular();
 		//System.out.println(valor1);
 		
 		ParserFormulaToIndicador.setEmpresa(empresa2);

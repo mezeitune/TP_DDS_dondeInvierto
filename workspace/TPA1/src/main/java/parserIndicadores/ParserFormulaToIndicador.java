@@ -18,8 +18,8 @@ import usuario.Indicador;
 
 public class ParserFormulaToIndicador {
 
-	private static List<String> nombreCuentas = new LinkedList<>(); 
-	private static List<Indicador> indicadores = new LinkedList<>();
+	private static List<String> nombreCuentas = EmpresasRepository.getNombreCuentas(); 
+	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadores();
 	
 	private static List<Cuenta> cuentasPorPeriodo;
 	
@@ -35,11 +35,6 @@ public class ParserFormulaToIndicador {
 	private static String operadorMultiplicacionSplit = "(.*)[*](.*)";
 	private static String operadorDivisionSplit = "(.*)[/](.*)";
 	
-	public ParserFormulaToIndicador() {
-		nombreCuentas=EmpresasRepository.getNombreCuentas();
-		indicadores = IndicadoresRepository.getIndicadores();
-	}
-
 	/*Para testear*/
 	public static void init(List<Indicador> indicadoresTest, List<Cuenta> cuentasTest){
 		indicadores = indicadoresTest;
@@ -104,7 +99,6 @@ public class ParserFormulaToIndicador {
 	}
 	
 	public static boolean esIndicador(String operador){
-		System.out.println(indicadores);
 		return indicadores.stream().anyMatch(indicador -> indicador.getNombre().equals(operador));
 	}
 	
