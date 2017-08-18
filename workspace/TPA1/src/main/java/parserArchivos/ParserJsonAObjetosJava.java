@@ -76,7 +76,7 @@ public class ParserJsonAObjetosJava {
 	public Object definirObjetosDelArchivo() {
 		
 		try {
-			return parserJsonAObjetos.parse(new FileReader(this.archivo));
+			return parserJsonAObjetos.parse(new FileReader(ParserJsonAObjetosJava.archivo));
 			
 			
 		} catch (CSVInexistenteException ex) {

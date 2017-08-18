@@ -104,6 +104,7 @@ public class ParserFormulaToIndicador {
 	}
 	
 	public static boolean esIndicador(String operador){
+		System.out.println(indicadores);
 		return indicadores.stream().anyMatch(indicador -> indicador.getNombre().equals(operador));
 	}
 	

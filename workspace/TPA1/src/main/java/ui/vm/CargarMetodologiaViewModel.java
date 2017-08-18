@@ -36,7 +36,6 @@ public class CargarMetodologiaViewModel {
 	private List<Condicion> criteriosSeleccionados = new LinkedList<Condicion>();
 
 	public CargarMetodologiaViewModel(){
-		this.setMetodologias();
 		this.setCondiciones();
 		CargarMetodologiaViewModel.nombreMetodologia=null;
 		System.out.println(condiciones);
@@ -64,15 +63,6 @@ public class CargarMetodologiaViewModel {
 	}
 	public  List<Condicion> getCondiciones() {
 		return condiciones;
-	}
-	
-	public void setMetodologias(){
-		ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("metodologias.json");
-		MetodologiasRepository.deleteMetodologiasDefinidasPorElUsuario();
-		MetodologiasRepository.setMetodologiasDefinidasPorElUsuario(parser.getMetodologiasDelArchivo());
-		
-		metodologias = MetodologiasRepository.getMetodologias();
-		ObservableUtils.firePropertyChanged(this, "metodologias");
 	}
 	
 	

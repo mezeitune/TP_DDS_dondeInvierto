@@ -10,7 +10,6 @@ import excepciones.EmpresasIsEmptyException;
 import excepciones.MetodologiaNotFoundException;
 import excepciones.PeriodosIsEmptyException;
 import parserArchivos.CSVToEmpresas;
-import parserArchivos.ParserJsonAObjetosJava;
 import repository.EmpresasAEvaluarRepository;
 import repository.EmpresasRepository;
 import repository.MetodologiasRepository;
@@ -19,29 +18,20 @@ import usuario.Metodologia;
 @Observable
 public class MetodologiasEmpresasViewModel {
 	
-	private List<Metodologia> metodologias;
 	private Metodologia metodologia;
 
 	private List<Empresa> empresasInvertibles = new LinkedList<>();
 	private List<Empresa> empresasNoInvertibles = new LinkedList<>();
 
 	public MetodologiasEmpresasViewModel() {
-		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("metodologias.json");
 		
-		MetodologiasRepository.deleteMetodologiasDefinidasPorElUsuario();
-		MetodologiasRepository.setMetodologiasDefinidasPorElUsuario(parserEmpIndicador.getMetodologiasDelArchivo());
-		MetodologiasRepository.cargarMetodologiasPredefinidos();
-			
-		this.setMetodologias();
 	}
 	
-	public void setMetodologias(){
-		metodologias = MetodologiasRepository.getMetodologias();
-	}
-
 	public List<Metodologia> getMetodologias(){
-		return this.metodologias;
+		return MetodologiasRepository.getMetodologias();
 	}
+	
+	
 	public void setMetodologia(Metodologia metodologiaSeleccionada){
 		this.metodologia = metodologiaSeleccionada;
 	}

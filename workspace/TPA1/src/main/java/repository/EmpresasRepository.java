@@ -12,11 +12,18 @@ import parserArchivos.CSVToEmpresas;
 
 public class EmpresasRepository {
 	
+	private static List<Empresa> empresas = new LinkedList<Empresa> ();
 	private static String archivo;
 
-	/*TODO: Desacoplarlo del repository de archivosIndicadores*/
+	
+
 	public static List<Empresa> getEmpresas(){
-		return new CSVToEmpresas(archivo).csvFileToEmpresas();
+		if(empresas.isEmpty()) EmpresasRepository.cargarEmpresas();
+		return empresas;
+	}
+	
+	public static void cargarEmpresas(){
+		empresas = new CSVToEmpresas(archivo).csvFileToEmpresas();
 	}
 
 	public static List<String> getNombreCuentas() {
