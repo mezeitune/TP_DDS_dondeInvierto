@@ -82,7 +82,7 @@ public class ParserFormulaToIndicador {
 				
 		}
 	
-	private static void update() {
+	public static void update() {
 		nombreCuentas = EmpresasRepository.getNombreCuentas(); 
 		indicadores = IndicadoresRepository.getIndicadores();
 	}

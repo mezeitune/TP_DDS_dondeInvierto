@@ -69,18 +69,14 @@ public class CargarCondicionWindow extends Dialog <CargarCondicionViewModel> {
 		
 		new Button(actionsPanel).setCaption("Cargar Condicion")
 		.onClick(() -> {
-				
-					CargarCondicionViewModel.generarCondicion();
-				
-				this.getDelegate().close();												
+					this.getModelObject().generarCondicion();
+					this.getDelegate().close();												
 		}).setWidth(150);
-		
-		
 	
 		new Button(actionsPanel).setCaption("Cancelar")
-									.onClick(() -> {
-													this.getDelegate().close();
-									}).setWidth(150);
+		.onClick(() -> {
+						this.getDelegate().close();
+		}).setWidth(150);
 	}
 	
 	

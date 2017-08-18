@@ -2,7 +2,6 @@ package ui.vm;
 import repository.EmpresasRepository;
 import org.uqbar.commons.utils.Observable;
 
-import repository.IndicadoresRepository;
 @Observable
 public class SeleccionarArchivoViewModel {
 	

@@ -1,7 +1,6 @@
 package ui.vm;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
@@ -23,7 +22,6 @@ public class CargarMetodologiaViewModel {
 	}
 	
 	public List<Metodologia> getMetodologias() {
-		System.out.println(MetodologiasRepository.getMetodologias().stream().map(m -> m.getNombre()).collect(Collectors.toList()));
 		return MetodologiasRepository.getMetodologias();
 	}
 	

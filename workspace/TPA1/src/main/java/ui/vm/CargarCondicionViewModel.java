@@ -1,16 +1,11 @@
 package ui.vm;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.swt.internal.C;
 import org.uqbar.commons.utils.Observable;
 
-import com.fasterxml.jackson.databind.AnnotationIntrospector.ReferenceProperty.Type;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 
 import Comparadores.ComparadorMayor;
 import Comparadores.ComparadorMayorIgual;
@@ -18,73 +13,50 @@ import Comparadores.ComparadorMenor;
 import Comparadores.ComparadorMenorIgual;
 import Condiciones.Comparativa;
 import Condiciones.Condicion;
-import Condiciones.Mixta;
 import Condiciones.Taxativa;
 import Condiciones.TipoCondicion;
-import parser.ParserJsonString;
-import parserArchivos.CSVToEmpresas;
 import parserArchivos.ParserJsonAObjetosJava;
-import parserIndicadores.ParserFormulaToIndicador;
 import repository.IndicadoresRepository;
-import repository.EmpresasRepository;
-import usuario.Empresa;
+import repository.MetodologiasRepository;
 import usuario.Indicador;
 
 @Observable
 public class CargarCondicionViewModel {
-	private static String nombreCondicion;
+	private  String nombreCondicion;
 	
-	private static List<Condicion> condiciones;
-	private static Condicion condicion;
+	private  List<Condicion> condiciones;
+	private  Condicion condicion;
 	
-	private static List<String> tipoCondiciones = new ArrayList<>();
+	private  List<TipoCondicion> tipoCondiciones = new ArrayList<>();
+	private  TipoCondicion tipoCondicion;
 	
-	private static String tipoCondicion;
-	
-	private static int pesoCondicion;
+	private  int pesoCondicion;
 	
 	
-	private static List<String> comparadores = new ArrayList<>();
-	private static String comparador;
+	private  List<String> comparadores = new ArrayList<>();
+	private  String comparador;
 	
-	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
-	private static Indicador indicador;
+	private  List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
+	private  Indicador indicador;
 
-	private List<Empresa> empresas;
-
-	private Empresa empresa;
-
-	private List<String> periodos;
-
-	private String periodo;
 	
 	public CargarCondicionViewModel(){
 		ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("indicadores.json");
 		indicadores=parser.getIndicadoresDelArchivo();
 		
-		CargarComparadoresParaElUsuario();
-		CargarTipoCondicionesParaElUsuario();
 		nombreCondicion=null;
 		tipoCondicion= tipoCondiciones.get(0);
 		comparador= comparadores.get(0);
-		
 	}
 	
 	
-	public void setEmpresas() throws IOException {
-		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
-		this.empresas=parser.csvFileToEmpresas();
-		
-	}
-
-
 	public Indicador getIndicador() {
 		return indicador;
 	}
 
 
 	public void setIndicador(Indicador indicador) {
-		CargarCondicionViewModel.indicador = indicador;
+		this.indicador = indicador;
 	}
 
 
@@ -97,11 +69,11 @@ public class CargarCondicionViewModel {
 
 
 	public void setPesoCondicion(int pesoCondicion) {
-		CargarCondicionViewModel.pesoCondicion = pesoCondicion;
+		this.pesoCondicion = pesoCondicion;
 	}
 
 	public void setnombreCondicion(String nombreCondicion) {
-		CargarCondicionViewModel.nombreCondicion = nombreCondicion;
+		this.nombreCondicion = nombreCondicion;
 	}
 
 
@@ -111,7 +83,7 @@ public class CargarCondicionViewModel {
 
 
 	public void setCondiciones(List<Condicion> condiciones) {
-		CargarCondicionViewModel.condiciones = condiciones;
+		this.condiciones = condiciones;
 	}
 
 
@@ -121,27 +93,21 @@ public class CargarCondicionViewModel {
 
 
 	public void setCondicion(Condicion condicion) {
-		CargarCondicionViewModel.condicion = condicion;
+		this.condicion = condicion;
 	}
 
 
-	public List<String> getTipoCondiciones() {
+	public List<TipoCondicion> getTipoCondiciones() {
 		return tipoCondiciones;
 	}
 
-
-	public void setTipoCondiciones(List<String> tipoCondiciones) {
-		CargarCondicionViewModel.tipoCondiciones = tipoCondiciones;
+	public TipoCondicion getTipoCondicion() {
+		return this.tipoCondicion;
 	}
 
 
-	public String getTipoCondicion() {
-		return tipoCondicion;
-	}
-
-
-	public void setTipoCondicion(String tipoCondicion) {
-		CargarCondicionViewModel.tipoCondicion = tipoCondicion;
+	public void setTipoCondicion(TipoCondicion tipoCondicion) {
+		this.tipoCondicion = tipoCondicion;
 	}
 
 
@@ -151,7 +117,7 @@ public class CargarCondicionViewModel {
 
 
 	public void setComparadores(List<String> comparadores) {
-		CargarCondicionViewModel.comparadores = comparadores;
+		this.comparadores = comparadores;
 	}
 
 
@@ -161,26 +127,22 @@ public class CargarCondicionViewModel {
 
 
 	public void setComparador(String comparador) {
-		CargarCondicionViewModel.comparador = comparador;
+		this.comparador = comparador;
 		
 	}
 	
 	public List<Indicador> getIndicadores(){
-		Collections.sort(CargarCondicionViewModel.indicadores);
+		Collections.sort(this.indicadores);
 		return this.indicadores;
 	}
-	public static void generarCondicion() {
-		
-		
-		
+	
+	
+	public void generarCondicion() {
 		Condicion condicionDefinidaPorUsuario = crearObjetoCondicion();
-		
-		
-		String jsonElement = new Gson().toJson(condicionDefinidaPorUsuario); 
-		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("condiciones",jsonElement );
+		MetodologiasRepository.addCondicion(condicionDefinidaPorUsuario);
 	}
 	
-	private static Condicion crearObjetoCondicion() {
+	private  Condicion crearObjetoCondicion() {
 			
 			if(tipoCondicion.equals("Comparativa")){
 			
@@ -226,24 +188,5 @@ public class CargarCondicionViewModel {
 			
 		return null;
 	}
-
-
-
-
-
-	public void CargarComparadoresParaElUsuario() {
-		if(comparadores.isEmpty()){
-		CargarCondicionViewModel.comparadores.add(">");
-		CargarCondicionViewModel.comparadores.add("<");
-		CargarCondicionViewModel.comparadores.add("<=");
-		CargarCondicionViewModel.comparadores.add(">=");
-		}
 	
-	}
-	public void CargarTipoCondicionesParaElUsuario() {
-		if(tipoCondiciones.isEmpty()){
-		CargarCondicionViewModel.tipoCondiciones.add("Comparativa");
-		CargarCondicionViewModel.tipoCondiciones.add("Taxativa");
-		}
-	}
 }

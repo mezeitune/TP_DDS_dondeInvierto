@@ -35,8 +35,11 @@ public class MetodologiasRepository {
 		return parserCondiciones.getCondicionesDelArchivo();
 	}
 
-	public static void addCondicion(Condicion unaCondicion) {
-		MetodologiasRepository.condiciones.add(unaCondicion);
+	public static void addCondicion(Condicion condicion) {
+		MetodologiasRepository.condiciones.add(condicion);
+		
+		String jsonElement = new Gson().toJson(condicion); 
+		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("condiciones",jsonElement );
 	}
 	
 	public static void cargarCondiciones(){

@@ -55,8 +55,7 @@ public class Indicador implements Operacion,Comparable<Indicador> {
 	
 	public int calcular() {
 		int valor = 0;
-		//ParserFormulaToIndicador.setEmpresa(empresa);
-		//ParserFormulaToIndicador.setPeriodo(periodo);
+
 		try {
 			valor = ParserFormulaToIndicador.construirArbolOperaciones(this.formula).calcular();
 		} catch (AccountNotFoundException e) {
