@@ -17,6 +17,10 @@ public class Criterio {
 		this.condiciones = condiciones;
 	}
 	
+	public Criterio() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void evaluar(List<Empresa> empresas,List<String> periodos){
 		this.listasEmpresasEvaluadas = this.condiciones.stream().map(condicion -> condicion.evaluar(empresas, periodos)).collect(Collectors.toList());
 	}

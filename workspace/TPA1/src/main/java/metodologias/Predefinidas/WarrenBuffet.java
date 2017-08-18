@@ -32,7 +32,7 @@ public class WarrenBuffet extends Metodologia{
 	public WarrenBuffet() {
 		super();
 		this.setCondiciones(this.inicializarCondiciones());
-		this.setNombre("Buffet");
+		this.setNombre("Warren Buffet");
 	}
 	
 	

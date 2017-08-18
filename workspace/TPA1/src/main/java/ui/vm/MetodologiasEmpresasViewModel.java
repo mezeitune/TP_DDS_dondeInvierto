@@ -38,7 +38,6 @@ public class MetodologiasEmpresasViewModel {
 		this.setMetodologias();
 	}
 	
-	
 	public void setMetodologias(){
 		metodologias = MetodologiasRepository.getMetodologias();
 	}
@@ -49,6 +48,9 @@ public class MetodologiasEmpresasViewModel {
 	public void setMetodologia(Metodologia metodologiaSeleccionada){
 		this.metodologia = metodologiaSeleccionada;
 	}
+	public Metodologia getMetodologia(){
+		return this.metodologia;
+	}
 	
 	public void evaluar() throws PeriodosIsEmptyException, EmpresasIsEmptyException, MetodologiaNotFoundException{
 		
@@ -56,19 +58,14 @@ public class MetodologiasEmpresasViewModel {
 		if(getPeriodos().isEmpty()) throw new PeriodosIsEmptyException();
 		if(getEmpresas().isEmpty()) throw new EmpresasIsEmptyException();
 		
-		metodologia.setEmpresasAEvaluar(empresas);
+		metodologia.setEmpresasAEvaluar(getEmpresas());
 		
-		List<List<Empresa>> resultado = metodologia.evaluar(periodos);
+		
+		List<List<Empresa>> resultado = metodologia.evaluar(getPeriodos());
 		setEmpresasInvertibles(resultado.get(0));
 		setEmpresasNoInvertibles(resultado.get(1));
-		
-		ObservableUtils.firePropertyChanged(this, "empresasInvertibles");
-		ObservableUtils.firePropertyChanged(this, "empresasNoInvertibles");
 	}
 	
-	public Metodologia getMetodologia(){
-		return this.metodologia;
-	}
 	
 	
 	public void setEmpresas(List<Empresa> empresas){

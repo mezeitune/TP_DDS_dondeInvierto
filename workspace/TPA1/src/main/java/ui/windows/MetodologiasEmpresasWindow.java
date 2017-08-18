@@ -21,7 +21,6 @@ import excepciones.MetodologiaNotFoundException;
 import excepciones.PeriodosIsEmptyException;
 import ui.vm.MetodologiasEmpresasViewModel;
 import usuario.Empresa;
-import usuario.Indicador;
 import usuario.Metodologia;
 
 @SuppressWarnings("serial")
