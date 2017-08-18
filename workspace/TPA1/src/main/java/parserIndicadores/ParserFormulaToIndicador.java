@@ -137,7 +137,7 @@ public class ParserFormulaToIndicador {
 			return false;
 		}
 	}
-	
+ 	
 	public static boolean validarAntesDePrecargar(String formula) throws IOException{ 
 		indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 		

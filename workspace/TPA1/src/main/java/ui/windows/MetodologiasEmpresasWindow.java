@@ -38,17 +38,12 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 		new Label(Panel).setText("Empresas a evaluar").setBackground(Color.ORANGE);
 		Table<Empresa> tableEmpresas = new Table<Empresa>(Panel, Empresa.class);
-		tableEmpresas.bindItemsToProperty("empresasAEvaluar");
+		tableEmpresas.bindItemsToProperty("empresas");
 		new Column<Empresa>(tableEmpresas).setTitle("Nombre").bindContentsToProperty("nombre");
 		
 		new Label(Panel).setText("Periodos a evaluar").setBackground(Color.ORANGE);
 		new List<>(Panel).bindItemsToProperty("periodos");
 		
-		/*new Label(Panel).setText("Lista de periodos").setBackground(Color.ORANGE); //No funca porque String no es @Observable
-		Table<String> tablePeriodos = new Table<String>(Panel, String.class);
-		tablePeriodos.bindItemsToProperty("periodosAEvaluar");
-		new Column<String>(tablePeriodos).setTitle("Periodo");//.bindContentsToProperty("periodo");*/
-
 		new Button(Panel).setCaption("Agregar una Empresa")
 		.onClick(() -> {
 				this.getDelegate().close();

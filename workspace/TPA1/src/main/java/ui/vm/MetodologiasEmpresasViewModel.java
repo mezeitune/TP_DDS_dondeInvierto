@@ -17,9 +17,7 @@ import usuario.Empresa;
 import usuario.Metodologia;
 @Observable
 public class MetodologiasEmpresasViewModel {
-	private List<Empresa> empresas;
-	private Empresa empresa;
-	private Boolean seleccionoTodasLasEmpresas;
+	
 	private List<Metodologia> metodologias;
 	private Metodologia metodologia;
 
@@ -30,9 +28,8 @@ public class MetodologiasEmpresasViewModel {
 	private List<List<Empresa>> empresasAEvaluarMetodologia; 
 	
 	
-	private List<String> periodos;	
-	private List<Empresa> empresasAEvaluar = new LinkedList<Empresa>();
-	private List<String> periodosAEvaluar = new LinkedList<String>();
+	private List<Empresa> empresas = new LinkedList<Empresa>();
+	private List<String> periodos = new LinkedList<String>();
 	
 	public MetodologiasEmpresasViewModel() {
 		ParserJsonAObjetosJava parserEmpIndicador = new ParserJsonAObjetosJava("metodologias.json");
@@ -43,7 +40,6 @@ public class MetodologiasEmpresasViewModel {
 		
 		
 			
-			this.setEmpresas();
 			this.setMetodologias();
 			this.setMetodologia(metodologias.get(0));
 
@@ -59,16 +55,13 @@ public class MetodologiasEmpresasViewModel {
 		conjuntoDeEmpresasAEvaluar.add(empresa4);
 		conjuntoDeEmpresasAEvaluar.add(empresa5);
 		metodologia.setEmpresasAEvaluar(conjuntoDeEmpresasAEvaluar);
-		empresasAEvaluar= metodologia.getConjuntoDeEmpresasAEvaluar();
-		System.out.println(empresasAEvaluar);
-		this.empresa= empresas.get(0);
-		ParserFormulaToIndicador.setEmpresa(empresa);
+		empresas= metodologia.getConjuntoDeEmpresasAEvaluar();
+		System.out.println(empresas);
 		
 	}
 	
 	
 	public void setMetodologias(){
-		
 		metodologias = MetodologiasRepository.getMetodologias();
 	}
 
@@ -82,7 +75,7 @@ public class MetodologiasEmpresasViewModel {
 		}
 		
 		this.metodologia = metodologiaSeleccionada;
-		getMetodologia().setEmpresasAEvaluar(getEmpresasAEvaluar());
+		getMetodologia().setEmpresasAEvaluar(getEmpresas());
 		
 		List<String> periodosHardcodeado = new LinkedList<String>();
 		periodosHardcodeado.add("2016");
@@ -107,10 +100,10 @@ public class MetodologiasEmpresasViewModel {
 		empresasAEvaluarMetodologia = this.metodologia.evaluar(periodos);
 	}
 	
-	public void setEmpresasAEvaluar(List<Empresa> empresas){
-		this.empresasAEvaluar = empresas;
+	public void setEmpresas(List<Empresa> empresas){
+		this.empresas = empresas;
 	}
-	public List<Empresa> getEmpresasAEvaluar(){
+	public List<Empresa> getEmpresas(){
 		return EmpresasAEvaluarRepository.getEmpresasAEvaluar();
 	}
 	
@@ -122,42 +115,6 @@ public class MetodologiasEmpresasViewModel {
 		return EmpresasAEvaluarRepository.getPeriodosAEvaluar();
 	}
 	
-	public void setSeleccionoTodasLasEmpresas(boolean seleccionoTodas){
-		this.seleccionoTodasLasEmpresas=seleccionoTodas;
-	}
-	public Boolean getSeleccionoTodasLasEmpresas(){
-		return this.seleccionoTodasLasEmpresas;
-	}
-	public void setEmpresas()  {
-		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
-		this.empresas=parser.csvFileToEmpresas();
-		
-	}
-	
-	public String getNombre(){
-		return empresa.getNombre();
-	}
-	
-	
-	public void setEmpresa(Empresa empresaSeleccionada){
-		if (empresa==null){
-			this.empresa=empresas.get(0);
-			ParserFormulaToIndicador.setEmpresa(empresa);
-		}
-		
-		this.empresa = empresaSeleccionada;
-		//this.setPeriodo(null);
-		ParserFormulaToIndicador.setEmpresa(empresaSeleccionada); /*Le setea al parser la empresa seleccionada. Lo necesita para reconocer cuentas*/
-		ObservableUtils.firePropertyChanged(this, "periodos");
-	}
-	
-	public Empresa getEmpresa(){
-		return this.empresa;
-	}
-	
-	public List<Empresa> getEmpresas(){
-		return this.empresas;
-	}
 	
 	public List<Empresa> getEmpresasQueConvieneInvertir() {
 		return empresasQueConvieneInvertir;
@@ -176,25 +133,15 @@ public class MetodologiasEmpresasViewModel {
 		System.out.println(empresasQueNoConvieneInvertir);
 	}
 
-
-	public List<String> getPeriodosAEvaluar() {
-		return periodosAEvaluar;
-	}
-
-
-	public void setPeriodosAEvaluar(List<String> periodosAEvaluar) {
-		this.periodosAEvaluar = periodosAEvaluar;
-	}
-	
 	public void vaciarListaEmpresas(){
 		EmpresasAEvaluarRepository.vaciarListaDeEmpresasAEvaluar();
-		ObservableUtils.firePropertyChanged(this, "empresasAEvaluar");
+		ObservableUtils.firePropertyChanged(this, "empresas");
 	}
 	
 	public void autocompletarListaEmpresasAEvaluar(){
 		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
 		EmpresasAEvaluarRepository.setEmpresasAEvaluar(parser.csvFileToEmpresas());
-		ObservableUtils.firePropertyChanged(this, "empresasAEvaluar");	
+		ObservableUtils.firePropertyChanged(this, "empresas");	
 	}
 	
 	
