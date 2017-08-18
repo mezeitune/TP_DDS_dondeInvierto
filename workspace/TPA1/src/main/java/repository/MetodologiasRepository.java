@@ -49,7 +49,6 @@ public class MetodologiasRepository {
 		
 	}
 	
-	
 	public static List<Metodologia> getMetodologias(){
 		if(metodologias.isEmpty()) MetodologiasRepository.cargarMetodologias();
 		return metodologias;
@@ -72,10 +71,6 @@ public class MetodologiasRepository {
 		return metodologiasPredefinidas;
 	}
 
-	public static void addMetodologias(Metodologia unaMetodologia) {
-		MetodologiasRepository.metodologias.add(unaMetodologia);
-	}
-	
 	
 	public static void deleteMetodologiasDefinidasPorElUsuario() {
 		MetodologiasRepository.metodologias.removeAll(metodologias);

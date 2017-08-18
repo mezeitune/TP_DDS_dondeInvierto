@@ -5,7 +5,6 @@ import Mocks.ListaIndicadoresMock;
 import parserIndicadores.ParserFormulaToIndicador;
 import repository.EmpresasRepository;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.junit.Before;

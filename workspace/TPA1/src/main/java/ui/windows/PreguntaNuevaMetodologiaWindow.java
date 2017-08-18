@@ -35,11 +35,12 @@ public class PreguntaNuevaMetodologiaWindow extends Dialog<PreguntaNuevaMetodolo
 		new Button(actionsPanel).setCaption("No")
 								.onClick(() -> {
 												this.getDelegate().close();
+												MenuWindow();
 												
 								}).setWidth(200);
 	}
 	
-	public void MenuWindow() throws IOException {
+	public void MenuWindow()  {
 		Dialog<?> dialog = new MenuWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});

@@ -44,6 +44,8 @@ public class CargarMetodologiaViewModel {
 		nuevaMetodologia.setCondiciones(this.getCondiciones());
 	
 		MetodologiasRepository.addMetodologia(nuevaMetodologia);
+		
+		this.reset();
 	}
 
 	public void refresh() {
@@ -51,6 +53,11 @@ public class CargarMetodologiaViewModel {
 		ObservableUtils.firePropertyChanged(this, "metodologias");
 	}
 	
+	public void reset(){
+		nombreMetodologia = null;
+		CondicionesSeleccionadasRepository.vaciarListaDeCondicionesSeleccionadas();
+		ObservableUtils.firePropertyChanged(this, "condiciones");
+	}
 	
 	
 }
