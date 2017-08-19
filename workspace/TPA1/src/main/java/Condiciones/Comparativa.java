@@ -23,7 +23,7 @@ public class Comparativa extends TipoCondicion{
 	}
 	
 	public Comparativa(){
-		
+		this.nombre = "Comparativa";
 	}
 	
 	
@@ -34,7 +34,7 @@ public class Comparativa extends TipoCondicion{
         return instance;
 
 	}	
-	
+	@Override
 	public void setComparador(Comparador unComparador){
 		this.comparador = unComparador;
 	}
@@ -42,6 +42,9 @@ public class Comparativa extends TipoCondicion{
 		return this.comparador;
 	}
 	
+	public String getNombre(){
+		return this.nombre;
+	}
 	
 	@Override
 	public List<Empresa> evaluar(List<Empresa> empresas,List <String> periodos,Condicion condicion){

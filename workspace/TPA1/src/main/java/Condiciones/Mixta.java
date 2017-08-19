@@ -4,14 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
-
-import Comparadores.Comparador;
 import usuario.Empresa;
 
 @Observable
 public class Mixta extends TipoCondicion{
 
-	
 	private static Mixta instance ;
 	private List<TipoCondicion> tiposCondiciones = new LinkedList<TipoCondicion> ();
 
@@ -20,7 +17,7 @@ public class Mixta extends TipoCondicion{
 	}
 	
 	public Mixta(){
-		
+		this.nombre = "Mixta";
 	}
 	
 	
@@ -31,7 +28,6 @@ public class Mixta extends TipoCondicion{
         return instance;
 
 	}	
-	
 	
 	@Override
 	public List<Empresa> evaluar(List<Empresa> empresas,List<String> periodos,Condicion condicion){
@@ -49,15 +45,5 @@ public class Mixta extends TipoCondicion{
 		return empresasEvaluadas;
 	}
 
-	
-
-	@Override
-	public void setComparador(Comparador comparador) {
-		// TODO Auto-generated method stub
-		
-	}
-
-			
-	
 }
 

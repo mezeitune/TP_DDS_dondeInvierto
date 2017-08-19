@@ -9,9 +9,9 @@ import Comparadores.Comparador;
 import parserIndicadores.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
+
 @Observable
 public class Taxativa extends TipoCondicion {
-	
 	
 	private static Taxativa instance ;
 	public Comparador comparador;
@@ -23,7 +23,7 @@ public class Taxativa extends TipoCondicion {
 	}
 
 	public Taxativa(){
-		
+		this.nombre = "Taxativa";
 	}
 
 	public static Taxativa getInstance( ) {
@@ -33,7 +33,7 @@ public class Taxativa extends TipoCondicion {
         return instance;
 	}	
 	
-	
+	@Override
 	public void setComparador(Comparador comparador){
 		this.comparador = comparador;
 	}
@@ -46,7 +46,6 @@ public class Taxativa extends TipoCondicion {
 		boolean verificarCriterio(Empresa empresa,List<String> periodos,Indicador indicador){
 			return periodos.stream().allMatch(periodo -> this.verificarCriterioEnPeriodo(empresa,periodo,indicador));
 		}
-		
 	
 		boolean verificarCriterioEnPeriodo(Empresa empresa,String periodo,Indicador indicador){ //Muy parecido a compararEnPeriodo
 			ParserFormulaToIndicador.setEmpresa(empresa);

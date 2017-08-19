@@ -12,17 +12,15 @@ import parserArchivos.CSVToEmpresas;
 
 public class EmpresasRepository {
 	
-	private static List<Empresa> empresas = new LinkedList<Empresa> ();
 	private static String archivo;
 
-	
-
 	public static List<Empresa> getEmpresas(){
-		if(empresas.isEmpty()) EmpresasRepository.cargarEmpresas();
+		List<Empresa> empresas = new LinkedList<Empresa> ();
+		EmpresasRepository.cargarEmpresas(empresas);
 		return empresas;
 	}
 	
-	public static void cargarEmpresas(){
+	public static void cargarEmpresas(List<Empresa> empresas){
 		empresas = new CSVToEmpresas(archivo).csvFileToEmpresas();
 	}
 

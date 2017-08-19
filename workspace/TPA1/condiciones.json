@@ -1,1 +1,1 @@
-[{"tipo":{"comparador":{},"valorRequerido":5},"peso":5,"indicador":{"nombre":"Indicador1","formula":"3-1","resultado":0},"nombre":"Condicion"}]
+[,{"tipo":{"comparador":{"nombre":"\u003e\u003d"},"nombre":"Comparativa"},"peso":20,"indicador":{"nombre":"PN","formula":"1+2","resultado":0},"nombre":"NuevaCondicion"}]
