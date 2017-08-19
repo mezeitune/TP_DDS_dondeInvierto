@@ -13,6 +13,7 @@ import usuario.Indicador;
 @Observable
 public class Comparativa extends TipoCondicion{
 	
+	public String nombre = "Comparativa";
 	
 	private static Comparativa instance ;
 	public Comparador comparador;
@@ -42,6 +43,9 @@ public class Comparativa extends TipoCondicion{
 		return this.comparador;
 	}
 	
+	public String getNombre(){
+		return this.nombre;
+	}
 	
 	@Override
 	public List<Empresa> evaluar(List<Empresa> empresas,List <String> periodos,Condicion condicion){

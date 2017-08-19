@@ -6,15 +6,15 @@ import org.uqbar.commons.utils.Observable;
 
 import Condiciones.Condicion;
 import excepciones.CondicionRepetidaException;
+import repository.CondicionesRepository;
 import repository.CondicionesSeleccionadasRepository;
-import repository.MetodologiasRepository;
 @Observable
 public class AgregarCondicionSeleccionadaViewModel {
 
 	private  Condicion condicionSeleccionada;
 	
 	public List<Condicion> getCondiciones() {
-		return MetodologiasRepository.getCondiciones();
+		return CondicionesRepository.getCondiciones();
 	}
 	
 	public Condicion getCondicionSeleccionada() {

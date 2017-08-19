@@ -12,7 +12,7 @@ import usuario.Indicador;
 @Observable
 public class Taxativa extends TipoCondicion {
 	
-	
+	public String nombre = "Taxativa";
 	private static Taxativa instance ;
 	public Comparador comparador;
 	public int valorRequerido;
@@ -33,6 +33,9 @@ public class Taxativa extends TipoCondicion {
         return instance;
 	}	
 	
+	public String getNombre(){
+		return this.getNombre();
+	}
 	
 	public void setComparador(Comparador comparador){
 		this.comparador = comparador;

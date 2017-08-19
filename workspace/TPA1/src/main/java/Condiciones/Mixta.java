@@ -11,7 +11,7 @@ import usuario.Empresa;
 @Observable
 public class Mixta extends TipoCondicion{
 
-	
+	public String nombre = "Mixta";
 	private static Mixta instance ;
 	private List<TipoCondicion> tiposCondiciones = new LinkedList<TipoCondicion> ();
 
@@ -32,6 +32,9 @@ public class Mixta extends TipoCondicion{
 
 	}	
 	
+	public String getNombre(){
+		return this.nombre;
+	}
 	
 	@Override
 	public List<Empresa> evaluar(List<Empresa> empresas,List<String> periodos,Condicion condicion){

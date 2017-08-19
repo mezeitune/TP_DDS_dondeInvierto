@@ -77,6 +77,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		new Button(actionsPanel).setCaption("Crear Condicion ")
 		.onClick(() -> {
 					CargarCondicionWindow();
+					this.getModelObject().refresh();
 		}).setWidth(200);
 		
 		
