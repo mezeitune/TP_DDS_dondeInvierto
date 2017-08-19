@@ -21,8 +21,8 @@ public class CargarCondicionViewModel {
 	private  String nombreCondicion;
 	private  TipoCondicion tipoCondicion;
 	private  int pesoCondicion = -1;
-	private  Comparador comparador;
 	private  Indicador indicador;
+	private Comparador comparador;
 	
 	public Indicador getIndicador() {
 		return indicador;
@@ -56,12 +56,12 @@ public class CargarCondicionViewModel {
 		this.tipoCondicion = tipoCondicion;
 	}
 
-	public Comparador getComparador() {
-		return comparador;
-	}
-
 	public void setComparador(Comparador comparador) {
-		this.comparador = comparador;
+		this.comparador = comparador;;
+	}
+	
+	public Comparador getComparador() {
+		return this.comparador;
 	}
 	
 	public List<Condicion> getCondiciones() {
@@ -85,6 +85,8 @@ public class CargarCondicionViewModel {
 		if(this.tipoCondicion == null) throw new TipoCondicionNotFound();
 		if(this.indicador == null) throw new IndicadorNotFound();
 		if(this.pesoCondicion == -1) throw new PesoCondicionNotFound();
+		
+		this.tipoCondicion.setComparador(this.comparador);
 			
 		Condicion condicionDefinidaPorUsuario = new Condicion(this.nombreCondicion,this.tipoCondicion,this.indicador,this.pesoCondicion);
 		CondicionesRepository.addCondicion(condicionDefinidaPorUsuario);

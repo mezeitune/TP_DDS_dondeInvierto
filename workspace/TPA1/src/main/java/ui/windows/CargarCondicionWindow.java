@@ -79,11 +79,10 @@ public class CargarCondicionWindow extends Dialog <CargarCondicionViewModel> {
 					} catch (IndicadorNotFound e) {
 						this.showError("Debe ingresar el indicador de la condicion");
 					}
-					
-					this.getDelegate().close();												
+						this.showInfo("Condicion cargada exitosamente");
 		}).setWidth(150);
 	
-		new Button(actionsPanel).setCaption("Cancelar")
+		new Button(actionsPanel).setCaption("Volver")
 		.onClick(() -> {
 						this.getDelegate().close();
 		}).setWidth(150);

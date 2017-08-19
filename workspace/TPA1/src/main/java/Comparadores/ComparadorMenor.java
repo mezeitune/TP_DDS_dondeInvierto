@@ -4,7 +4,9 @@ import org.uqbar.commons.utils.Observable;
 
 @Observable
 public class ComparadorMenor extends Comparador {
-	public String nombre = "<";
+	public ComparadorMenor(){
+		this.nombre = "<";
+	}
 	@Override
 	public boolean comparar(int valor1, int valor2){
 		return valor1 < valor2;

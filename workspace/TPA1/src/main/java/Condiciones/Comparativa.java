@@ -13,7 +13,6 @@ import usuario.Indicador;
 @Observable
 public class Comparativa extends TipoCondicion{
 	
-	public String nombre = "Comparativa";
 	
 	private static Comparativa instance ;
 	public Comparador comparador;
@@ -24,7 +23,7 @@ public class Comparativa extends TipoCondicion{
 	}
 	
 	public Comparativa(){
-		
+		this.nombre = "Comparativa";
 	}
 	
 	
@@ -35,7 +34,7 @@ public class Comparativa extends TipoCondicion{
         return instance;
 
 	}	
-	
+	@Override
 	public void setComparador(Comparador unComparador){
 		this.comparador = unComparador;
 	}
