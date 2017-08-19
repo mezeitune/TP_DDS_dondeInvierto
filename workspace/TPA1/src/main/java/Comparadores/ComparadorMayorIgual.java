@@ -1,6 +1,8 @@
 package Comparadores;
 
+import org.uqbar.commons.utils.Observable;
 
+@Observable
 public class ComparadorMayorIgual extends Comparador {
 	public String nombre = ">=";
 	@Override

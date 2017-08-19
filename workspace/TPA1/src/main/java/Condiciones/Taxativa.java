@@ -9,6 +9,7 @@ import Comparadores.Comparador;
 import parserIndicadores.ParserFormulaToIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
+
 @Observable
 public class Taxativa extends TipoCondicion {
 	
@@ -49,7 +50,6 @@ public class Taxativa extends TipoCondicion {
 		boolean verificarCriterio(Empresa empresa,List<String> periodos,Indicador indicador){
 			return periodos.stream().allMatch(periodo -> this.verificarCriterioEnPeriodo(empresa,periodo,indicador));
 		}
-		
 	
 		boolean verificarCriterioEnPeriodo(Empresa empresa,String periodo,Indicador indicador){ //Muy parecido a compararEnPeriodo
 			ParserFormulaToIndicador.setEmpresa(empresa);
