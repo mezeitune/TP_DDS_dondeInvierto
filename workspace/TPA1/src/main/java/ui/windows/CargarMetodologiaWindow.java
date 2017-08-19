@@ -14,6 +14,7 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import Condiciones.Condicion;
 import excepciones.CondicionesNotFoundException;
+import excepciones.MetodologiaRepetidaException;
 import excepciones.NombreMetodologiaNotFoundException;
 import ui.vm.CargarMetodologiaViewModel;
 import usuario.Metodologia;
@@ -86,21 +87,20 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 									
 											try {
 												this.getModelObject().generarMetodologia();
+												this.showInfo("La metodologia ha sido cargada exitosamente");
 											} catch (NombreMetodologiaNotFoundException e) {
 												this.showError("Debe ingresar el nombre de la Metodologia");
 											} catch (CondicionesNotFoundException e) {
 												this.showError("Debe ingresar condiciones a la Metodologia");
+											} catch (MetodologiaRepetidaException e) {
+												this.showError("El nombre de la metodologia ya fue ingresado");
 											}
-											this.showInfo("La metodologia ha sido cargada exitosamente");
-											PreguntaNuevaMetodologia();
-											this.getModelObject().refresh();
 								}).setWidth(200);
 	
 	
-		new Button(actionsPanel).setCaption("Cancelar")
+		new Button(actionsPanel).setCaption("Volver")
 									.onClick(() -> {
-														this.getDelegate().close();
-												
+											this.getDelegate().close();
 									}).setWidth(200);
 	}
 	
@@ -110,12 +110,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void PreguntaNuevaMetodologia() {
-		Dialog<?> dialog = new PreguntaNuevaMetodologiaWindow(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
-		
-	}
+	
 	public void MetodologiaRepetidaWindow() {
 		Dialog<?> dialog = new IndicadorRepetidoWindow(this);
 		dialog.open();

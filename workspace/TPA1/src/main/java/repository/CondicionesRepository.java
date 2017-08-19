@@ -21,11 +21,11 @@ import parserArchivos.ParserJsonAObjetosJava;
 
 public class CondicionesRepository {
 
-	private static List<Condicion> condiciones = new LinkedList<>();
 	private static ParserJsonAObjetosJava parserCondiciones = new ParserJsonAObjetosJava("condiciones.json");
 	
 	public static List<Condicion> getCondiciones() {
-		if(condiciones.isEmpty()) CondicionesRepository.cargarCondiciones();
+		List<Condicion> condiciones = new LinkedList<Condicion>();
+		CondicionesRepository.cargarCondiciones(condiciones);
 		return condiciones;
 	}
 	
@@ -40,21 +40,15 @@ public class CondicionesRepository {
 	}
 
 	public static void addCondicion(Condicion condicion) {
-		condiciones.add(condicion);
-		
 		String jsonElement = new Gson().toJson(condicion); 
 		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("condiciones",jsonElement );
 	}
 	
-	public static void cargarCondiciones(){
+	public static void cargarCondiciones(List<Condicion> condiciones){
 		CondicionesRepository.getCondicionesDefinidasPorElUsuario().stream().forEach(condicionDefinidaPorUsuario -> condiciones.add(condicionDefinidaPorUsuario));
 		CondicionesRepository.getCondicionesPredefinidas().stream().forEach(condicionPredefinida -> condiciones.add(condicionPredefinida));
 	}
 	
-	public static void deleteCondicionesDefinidasPorElUsuario() {
-		condiciones.removeAll(condiciones);
-	}
-
 	public static List<TipoCondicion> getTipoCondiciones() {
 		List<TipoCondicion> tipoCondiciones = new LinkedList<TipoCondicion>();
 		tipoCondiciones.add(new Comparativa());

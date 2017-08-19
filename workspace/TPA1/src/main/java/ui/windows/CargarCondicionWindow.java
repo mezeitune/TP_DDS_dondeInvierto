@@ -70,6 +70,7 @@ public class CargarCondicionWindow extends Dialog <CargarCondicionViewModel> {
 		.onClick(() -> {
 					try {
 						this.getModelObject().generarCondicion();
+						this.showInfo("Condicion cargada exitosamente");
 					} catch (NombreCondicionNotFound e) {
 						this.showError("Debe ingresar el nombre de la condicion");
 					} catch (TipoCondicionNotFound e) {
@@ -79,7 +80,6 @@ public class CargarCondicionWindow extends Dialog <CargarCondicionViewModel> {
 					} catch (IndicadorNotFound e) {
 						this.showError("Debe ingresar el indicador de la condicion");
 					}
-						this.showInfo("Condicion cargada exitosamente");
 		}).setWidth(150);
 	
 		new Button(actionsPanel).setCaption("Volver")

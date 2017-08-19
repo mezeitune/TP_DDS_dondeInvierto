@@ -9,13 +9,12 @@ import usuario.Indicador;
 
 public class IndicadoresRepository {
 	
-	private static List<Indicador> indicadores = new LinkedList<Indicador>();
 	private static ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("indicadores.json");
 
 	
-
 	public static List<Indicador> getIndicadores(){
-		if(indicadores.isEmpty()) IndicadoresRepository.cargarIndicadores();
+		List<Indicador> indicadores = new LinkedList<Indicador>();
+		IndicadoresRepository.cargarIndicadores(indicadores);
 		return indicadores;
 	}
 	public static List<Indicador> getIndicadoresDefinidosPorElUsuario() {
@@ -28,11 +27,9 @@ public class IndicadoresRepository {
 		return indicadoresPredefinidos;
 	}
 	
-	public static void cargarIndicadores() {
-		List<Indicador> indicadoresACargar = new LinkedList<Indicador>();
-		IndicadoresRepository.getIndicadoresPredefinidos().stream().forEach(indicadorPredefinido -> indicadoresACargar.add(indicadorPredefinido));
-		IndicadoresRepository.getIndicadoresDefinidosPorElUsuario().stream().forEach(indicadorDefinidoPorUsuario -> indicadoresACargar.add(indicadorDefinidoPorUsuario));
-		indicadores = indicadoresACargar;
+	public static void cargarIndicadores(List<Indicador> indicadores) {
+		IndicadoresRepository.getIndicadoresPredefinidos().stream().forEach(indicadorPredefinido -> indicadores.add(indicadorPredefinido));
+		IndicadoresRepository.getIndicadoresDefinidosPorElUsuario().stream().forEach(indicadorDefinidoPorUsuario -> indicadores.add(indicadorDefinidoPorUsuario));
 	}
 
 	
