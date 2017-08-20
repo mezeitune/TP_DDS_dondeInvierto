@@ -60,7 +60,7 @@ public class CargarIndicadoresViewModel {
 		CargarIndicadoresViewModel.codigoDeError = codigoDeError;
 	}
 	
-	public static void generarIndicador() throws IOException{
+	public static void generarIndicador() {
 		
 		Indicador nuevoIndicador = new Indicador(nombreIndicador,formulaIndicador);
 		
@@ -71,7 +71,7 @@ public class CargarIndicadoresViewModel {
 
 		
 	}
-	public static  void validacionDeIndicadoresRepetidos (Indicador nuevoIndicador) throws IOException{
+	public static  void validacionDeIndicadoresRepetidos (Indicador nuevoIndicador) {
 		
 		if(ParserFormulaToIndicador.validarIndicadorRepetidoAntesDePrecargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula())){
 			setCodigoDeError(3);
@@ -90,7 +90,7 @@ public class CargarIndicadoresViewModel {
 		return CargarIndicadoresViewModel.indicadores;
 	}
 	
-	public static void catcheoYAnidadoAJSON(Indicador nuevoIndicador, String jsonElement) throws IOException{
+	public static void catcheoYAnidadoAJSON(Indicador nuevoIndicador, String jsonElement) {
 		if(nuevoIndicador.getFormula() != null && !nuevoIndicador.getFormula().trim().isEmpty()){
 
 			if(ParserFormulaToIndicador.validarAntesDePrecargar(nuevoIndicador.getFormula())){

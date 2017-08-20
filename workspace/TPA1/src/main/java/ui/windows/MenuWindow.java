@@ -1,9 +1,7 @@
 package ui.windows;
 
 import java.awt.Color;
-import java.io.IOException;
 
-import org.omg.CORBA.UserException;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -11,9 +9,6 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import excepciones.ArchivoInexistenteException;
-import parserIndicadores.ParserFormulaToIndicador;
-import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.MenuViewModel;
 
 
@@ -29,93 +24,76 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 		this.setTitle("Sistema de carga y consulta");
 		
 		new Label(mainPanel).setText("MENU PRINCIPAL").setBackground(Color.ORANGE).setHeight(40);
-		new Label(mainPanel).setText("Debe cargar un archivo .CSV previamente para poder consultar Empresas").setBackground(Color.GREEN);
+		
+		new Label(mainPanel).setText("Estado carga de cuentas y empresas:");
+		if(this.getModelObject().archivosCuentasCargados()) new Label(mainPanel).setText("Archivo csv cargado").setBackground(Color.GREEN);
+		else new Label(mainPanel).setText("El sistema no registra un archivo csv").setBackground(Color.RED);
 		
 		new Button(mainPanel).setCaption("Seleccionar archivo de cuentas")
 		.onClick(() -> {
-			try{
 				this.getDelegate().close();
 				SeleccionarArchivoWindow();
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
 		});
 		
 	}
 	protected void addActions(Panel actionsPanel){
+		
 		actionsPanel.setLayout(new ColumnLayout(2));
 		new Button(actionsPanel).setCaption("Evaluar Empresas con Indicadores")
-								.onClick(() -> {
-												try{
-													this.getDelegate().close();
-													new ParserFormulaToIndicador();
-													try{
-														DatosIndicadoresWindow();
-													} catch(ArchivoInexistenteException e){
-														SeleccionarArchivoWindow();
-													}
-												}catch (IOException e) {
-													e.printStackTrace();
-												}
-									}).setWidth(250);
+		.onClick(() -> {
+				if(this.getModelObject().archivosCuentasCargados()) {
+					this.getDelegate().close();
+					DatosIndicadoresWindow();
+				}
+				else this.showError("Debe cargar un archivo de cuentas");
+			}).setWidth(250);
+		
 		new Button(actionsPanel).setCaption("Evaluar Empresas con Metodologias")
 		.onClick(() -> {
-						try{
-							this.getDelegate().close();
-							
-							try{
-								MetodologiasEmpresasWindow();
-							} catch(ArchivoInexistenteException e){
-								SeleccionarArchivoWindow();
-							}
-						}catch (IOException e) {
-							e.printStackTrace();
-						}
+			
+			if(this.getModelObject().archivosCuentasCargados()) {
+				this.getDelegate().close();
+				MetodologiasEmpresasWindow();
+			}
+			else this.showError("Debe cargar un archivo de cuentas");
 			}).setWidth(250);
+		
+		
 		new Button(actionsPanel).setCaption("Cargar y consultar indicadores")
-								.onClick(() -> {
-													new ParserFormulaToIndicador();
-												try{
-													this.getDelegate().close();
-													CargarIndicadoresWindow();
-												}catch (IOException e) {
-													e.printStackTrace();
-												}
-								}).setWidth(250);
+		.onClick(() -> {
+					this.getDelegate().close();
+					CargarIndicadoresWindow();
+		}).setWidth(250);
+		
 		new Button(actionsPanel).setCaption("Cargar y consultar Metodologias")
 		.onClick(() -> {
-		
-								try {
-									CargarMetodologiaWindow();
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+				this.getDelegate().close();
+					CargarMetodologiaWindow();
 			}).setWidth(250);
 	
 	}
 
-	public void CargarIndicadoresWindow() throws IOException {
+	public void CargarIndicadoresWindow() {
 		Dialog<?> dialog = new CargarIndicadoresWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void DatosIndicadoresWindow() throws IOException {
-		Dialog<?> dialog = new DatosWindow(this);
+	public void DatosIndicadoresWindow() {
+		Dialog<?> dialog = new DatosCuentasWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void SeleccionarArchivoWindow() throws IOException {
+	public void SeleccionarArchivoWindow(){
 		Dialog<?> dialog = new SeleccionarArchivoWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void MetodologiasEmpresasWindow() throws IOException {
+	public void MetodologiasEmpresasWindow() {
 		Dialog<?> dialog = new MetodologiasEmpresasWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void CargarMetodologiaWindow() throws IOException {
+	public void CargarMetodologiaWindow() {
 		Dialog<?> dialog = new CargarMetodologiaWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});

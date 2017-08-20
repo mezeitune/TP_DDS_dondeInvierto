@@ -23,7 +23,7 @@ import usuario.*;
 
 
 @Observable
-public class DatosViewModel{
+public class DatosCuentasViewModel{
 	
 	private Empresa empresa;
 	private String nombre;
@@ -41,7 +41,7 @@ public class DatosViewModel{
 	private Indicador indicadorSeleccionado;
 	
 	
-	public DatosViewModel() {
+	public DatosCuentasViewModel() {
 		try {
 			this.setEmpresas();
 		} catch (IOException e) {

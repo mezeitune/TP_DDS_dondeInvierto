@@ -61,69 +61,39 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		new Button(actionsPanel).setCaption("Cargar Indicador")
 								.onClick(() -> {
 
-									try{
 										CargarIndicadoresViewModel.generarIndicador();
 										
 										if(CargarIndicadoresViewModel.getCodigoDeError() == 1){
-											this.getDelegate().close();
-											IndicadorVacioWindow();
+											this.showError("No se ha ingresado la formula del indicador");
 										}else if(CargarIndicadoresViewModel.getCodigoDeError() == 2){
-											this.getDelegate().close();
-											IndicadorErroneoWindow();
+											this.showError("El indicador ingresado no contiene cuentas ni indicadores validos,revise la formula ingresada");
 										}else if (CargarIndicadoresViewModel.getCodigoDeError() == 3){
-											this.getDelegate().close();
-											IndicadorRepetidoWindow();
+											this.showError("El nombre ingresado ya existe");
 										} else {
 											this.getDelegate().close();
 											PreguntaNuevoIndicadorWindow();
-											
 										}
-									}catch (IOException e) {
-										e.printStackTrace();
-									}
 								}).setWidth(200);
 	
-		new Button(actionsPanel).setCaption("Cancelar")
-									.onClick(() -> {
-													try{
-														this.getDelegate().close();
-														MenuWindow();
-													}catch (IOException e) {
-														e.printStackTrace();
-													}
-									}).setWidth(200);
+		new Button(actionsPanel).setCaption("Volver")
+		.onClick(() -> {
+			this.getDelegate().close();
+			MenuWindow();
+		}).setWidth(200);
 	}
 	
 	
-	public void MenuWindow() throws IOException {
+	public void MenuWindow(){
 		Dialog<?> dialog = new MenuWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void PreguntaNuevoIndicadorWindow() throws IOException {
+	public void PreguntaNuevoIndicadorWindow()  {
 		Dialog<?> dialog = new PreguntaNuevoIndicadorWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 		
 	}
-	public void IndicadorRepetidoWindow() throws IOException {
-		Dialog<?> dialog = new IndicadorRepetidoWindow(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
-		
-	}
-	public void IndicadorVacioWindow() throws IOException {
-		Dialog<?> dialog = new IndicadorVacioWindow(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
-		
-	}
 	
-	public void IndicadorErroneoWindow() throws IOException {
-		Dialog<?> dialog = new IndicadorErroneoWindow(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
-		
-	}
 	
 }

@@ -3,7 +3,6 @@ package ui.windows;
 import java.awt.Color;
 import java.io.IOException;
 
-import org.omg.CORBA.UserException;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
@@ -17,14 +16,14 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import ui.vm.DatosViewModel;
+import ui.vm.DatosCuentasViewModel;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
 
-public class DatosWindow extends Dialog<DatosViewModel>{
-	public DatosWindow(WindowOwner parent) throws IOException {
-		super(parent, new DatosViewModel());
+public class DatosCuentasWindow extends Dialog<DatosCuentasViewModel>{
+	public DatosCuentasWindow(WindowOwner parent)  {
+		super(parent, new DatosCuentasViewModel());
 	}
 	
 	protected void createFormPanel(Panel mainPanel) {

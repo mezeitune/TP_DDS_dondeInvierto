@@ -101,6 +101,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		new Button(actionsPanel).setCaption("Volver")
 									.onClick(() -> {
 											this.getDelegate().close();
+											MenuWindow();
 									}).setWidth(200);
 	}
 	

@@ -130,7 +130,7 @@ public class ParserFormulaToIndicador {
 		return cuentasPorPeriodo.stream().filter(cuenta -> cuenta.getNombre().equals(operador)).collect(Collectors.toList()).get(0);
 	}
 	
-	public static boolean validarIndicadorRepetidoAntesDePrecargar(String nombre , String formula) throws IOException {
+	public static boolean validarIndicadorRepetidoAntesDePrecargar(String nombre , String formula) {
 		List<Indicador> indicadoresRepetidos = indicadores.stream().filter(line -> line.getNombre().equals(nombre)).collect(Collectors.toList());
 		
 		if (indicadoresRepetidos.size() >= 1){
@@ -140,7 +140,7 @@ public class ParserFormulaToIndicador {
 		}
 	}
  	
-	public static boolean validarAntesDePrecargar(String formula) throws IOException{ 
+	public static boolean validarAntesDePrecargar(String formula){ 
 		indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 		
 		String[] result = formula.split("[-+*/]");
