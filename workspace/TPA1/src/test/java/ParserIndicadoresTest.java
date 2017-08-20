@@ -7,6 +7,7 @@ import repository.EmpresasRepository;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.omg.CORBA.UserException;
@@ -64,6 +65,11 @@ public class ParserIndicadoresTest {
 	public void FormulaDCombinadaDeOperadoresConIndicadoresCuentasYNumeros() throws UserException{
 		Indicador indicadorConDistintasOperaciones = indicadores.get(6);
 		assertEquals(198.0,indicadorConDistintasOperaciones.calcular(),0);
+	}
+	
+	@After
+	public void delete(){
+		ParserFormulaToIndicador.setModeTest(false);
 	}
 	
 }	

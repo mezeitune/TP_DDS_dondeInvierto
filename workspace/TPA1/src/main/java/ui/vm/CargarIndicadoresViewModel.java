@@ -1,28 +1,17 @@
 package ui.vm;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.omg.CORBA.UserException;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.google.gson.Gson;
-
-import excepciones.AccountNotFoundException;
-import indicadoresPredefinidos.IndicadorCustom;
-import parser.ParserJsonString;
+import excepciones.FormulaIndicadorNotFound;
+import excepciones.FormulaIndicadorNotValidException;
+import excepciones.IndicadorRepetidoException;
+import excepciones.NombreIndicadorNotFound;
 import parserIndicadores.ParserFormulaToIndicador;
 import repository.IndicadoresRepository;
-import usuario.Indicador;
 import usuario.Indicador;
 @Observable
 public class CargarIndicadoresViewModel {
@@ -60,60 +49,28 @@ public class CargarIndicadoresViewModel {
 		CargarIndicadoresViewModel.codigoDeError = codigoDeError;
 	}
 	
-	public static void generarIndicador() {
+	public void generarIndicador() throws NombreIndicadorNotFound, FormulaIndicadorNotFound, IndicadorRepetidoException, FormulaIndicadorNotValidException {
+		
+		if(nombreIndicador == null) throw new NombreIndicadorNotFound();
+		if(formulaIndicador == null) throw new FormulaIndicadorNotFound();
 		
 		Indicador nuevoIndicador = new Indicador(nombreIndicador,formulaIndicador);
 		
-		String jsonElement = new Gson().toJson(nuevoIndicador); 
+		if(this.esUnIndicadorYaIngresado(nuevoIndicador)) throw new IndicadorRepetidoException();
 		
-		catcheoYAnidadoAJSON(nuevoIndicador,jsonElement);
-		validacionDeIndicadoresRepetidos(nuevoIndicador);
+		if(ParserFormulaToIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
+		IndicadoresRepository.addIndicador(nuevoIndicador);
 		
+		ObservableUtils.firePropertyChanged(this, "indicadores");
 	}
-	public static  void validacionDeIndicadoresRepetidos (Indicador nuevoIndicador) {
-		
-		if(ParserFormulaToIndicador.validarIndicadorRepetidoAntesDePrecargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula())){
-			setCodigoDeError(3);
-		
-		}
-		else{
-			indicadores.add(nuevoIndicador);
-			new ParserFormulaToIndicador();
-			ObservableUtils.firePropertyChanged(new CargarIndicadoresViewModel(), "indicadores");
-			setCodigoDeError(0);
-		}
+	public boolean esUnIndicadorYaIngresado (Indicador nuevoIndicador) {
+		return ParserFormulaToIndicador.validarIndicadorRepetidoAntesDePrecargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
 	
 	}
 	public List<Indicador> getIndicadores(){
 		Collections.sort(CargarIndicadoresViewModel.indicadores);
 		return CargarIndicadoresViewModel.indicadores;
-	}
-	
-	public static void catcheoYAnidadoAJSON(Indicador nuevoIndicador, String jsonElement) {
-		if(nuevoIndicador.getFormula() != null && !nuevoIndicador.getFormula().trim().isEmpty()){
-
-			if(ParserFormulaToIndicador.validarAntesDePrecargar(nuevoIndicador.getFormula())){
-
-				/*TODO: Importantisima excepecion esta. Hay que acomodarla para reflejarla en la UI*/
-				try {
-					ParserFormulaToIndicador.getCalculoIndicador(nuevoIndicador.getFormula());
-				} catch (AccountNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}//Para poder entender Cuentas
-
-				ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );
-				
-				setCodigoDeError(0);//devolviendo al estado original , ya que es correcto
-			}else{
-				
-				setCodigoDeError(2);//codigo de error 2 , significa que se genero indicadores erroneos
-			}
-		
-		}else{
-			setCodigoDeError(1);//Codigo de error 1 , significa que se genero un indicador vacio
-		}
 	}
 	
 	

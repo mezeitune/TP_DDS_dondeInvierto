@@ -33,15 +33,13 @@ public class EmpresasRepository {
 	}
 	
 	public static List<Cuenta> getAllCuentas(){
-		List<Empresa> empresas = EmpresasRepository.getEmpresas();
 		List<Cuenta> cuentas = new LinkedList<Cuenta>();
-		empresas.stream().forEach(empresa -> EmpresasRepository.agregarCuentas(cuentas,empresa.getCuentas()));
+		EmpresasRepository.getEmpresas().stream().forEach(empresa -> empresa.getCuentas().
+																			 stream().forEach(cuenta -> cuentas.add(cuenta)));
+		System.out.println(cuentas);
 		return cuentas;
 	}
 	
-	private static void agregarCuentas(List<Cuenta> cuentas, List<Cuenta> cuentasEmpresa) {
-		cuentasEmpresa.forEach(cuenta -> cuentas.add(cuenta));
-	}
 
 	public static void setArchivo(String archivoEmpresas) {
 		archivo = archivoEmpresas;

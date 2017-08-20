@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import excepciones.AccountNotFoundException;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -70,7 +69,7 @@ public class ParserFormulaToIndicador {
 	}
 	
 	public static Operacion construirArbolOperaciones(String operandos) throws AccountNotFoundException{
-		
+		System.out.println(modeTest);
 		if(!modeTest)ParserFormulaToIndicador.update(); //Hay que actualizar las cuentas e indicadores de la empresa!
 		
 		if(operandos.matches(operadorSumaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[+]"),new Suma());
@@ -140,7 +139,7 @@ public class ParserFormulaToIndicador {
 		}
 	}
  	
-	public static boolean validarAntesDePrecargar(String formula){ 
+	public static boolean formulaIndicadorValida(String formula){  /*TODO: No estaria funcionando*/
 		indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 		
 		String[] result = formula.split("[-+*/]");

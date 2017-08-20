@@ -1,7 +1,6 @@
 package ui.windows;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
@@ -12,6 +11,11 @@ import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
+
+import excepciones.FormulaIndicadorNotFound;
+import excepciones.FormulaIndicadorNotValidException;
+import excepciones.IndicadorRepetidoException;
+import excepciones.NombreIndicadorNotFound;
 import ui.vm.CargarIndicadoresViewModel;
 import usuario.Indicador;
 
@@ -48,8 +52,6 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		
 		tableIndicadores.bindItemsToProperty("indicadores"); 
 		
-		
-		
 		new Column<Indicador>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
 		new Column<Indicador>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
 		
@@ -61,17 +63,18 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		new Button(actionsPanel).setCaption("Cargar Indicador")
 								.onClick(() -> {
 
-										CargarIndicadoresViewModel.generarIndicador();
-										
-										if(CargarIndicadoresViewModel.getCodigoDeError() == 1){
-											this.showError("No se ha ingresado la formula del indicador");
-										}else if(CargarIndicadoresViewModel.getCodigoDeError() == 2){
-											this.showError("El indicador ingresado no contiene cuentas ni indicadores validos,revise la formula ingresada");
-										}else if (CargarIndicadoresViewModel.getCodigoDeError() == 3){
-											this.showError("El nombre ingresado ya existe");
-										} else {
+										try {
+											this.getModelObject().generarIndicador();
 											this.getDelegate().close();
 											PreguntaNuevoIndicadorWindow();
+										} catch (NombreIndicadorNotFound e) {
+											this.showError("No se ha ingresado un nombre para el indicador");
+										} catch (FormulaIndicadorNotFound e) {
+											this.showError("No se ha ingresado la formula del indicador");
+										} catch (IndicadorRepetidoException e) {
+											this.showError("El nombre ingresado ya existe");
+										} catch (FormulaIndicadorNotValidException e) {
+											this.showError("El indicador ingresado no contiene cuentas ni indicadores validos,revise la formula ingresada");
 										}
 								}).setWidth(200);
 	
