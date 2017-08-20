@@ -34,6 +34,7 @@ public class CondicionesTest {
 		cuentas = listasEmpresasMockeadas.getCuentasMockeadas();
 		periodos.add("2016");
 		ParserFormulaIndicador.init(cuentas);
+		ParserFormulaIndicador.setModeTest(true);/*TODO: Sigue ligado al archivo*/
 	}
 	
 	@Test
@@ -87,7 +88,6 @@ public class CondicionesTest {
 		listaEsperada.add(empresas.get(3));
 		
 		assertEquals(listaEsperada,minimizarDeuda.evaluar(empresas,periodos));
-		
 	}
 	
 	
