@@ -15,15 +15,9 @@ public class EmpresasRepository {
 	private static String archivo;
 
 	public static List<Empresa> getEmpresas(){
-		List<Empresa> empresas = new LinkedList<Empresa> ();
-		EmpresasRepository.cargarEmpresas(empresas);
-		return empresas;
+		return new CSVToEmpresas(archivo).csvFileToEmpresas();
 	}
 	
-	public static void cargarEmpresas(List<Empresa> empresas){
-		empresas = new CSVToEmpresas(archivo).csvFileToEmpresas();
-	}
-
 	public static List<String> getNombreCuentas() {
 		Set<String> unSetNombreCuentas = new HashSet<String> (EmpresasRepository.getAllCuentas()
 																				.stream().map(cuenta -> cuenta.getNombre())

@@ -42,12 +42,7 @@ public class DatosCuentasViewModel{
 	
 	
 	public DatosCuentasViewModel() {
-		try {
 			this.setEmpresas();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		this.empresa= empresas.get(0);
 		ParserFormulaToIndicador.setEmpresa(empresa);
 		this.periodos=this.empresa.getPeriodosSinRepetidos();
@@ -97,10 +92,9 @@ public class DatosCuentasViewModel{
 		return empresa.getPeriodosSinRepetidos();
 	}
 	
-	public void setEmpresas() throws IOException {
+	public void setEmpresas() {
 		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
 		this.empresas=parser.csvFileToEmpresas();
-		
 	}
 	
 	public String getNombre(){

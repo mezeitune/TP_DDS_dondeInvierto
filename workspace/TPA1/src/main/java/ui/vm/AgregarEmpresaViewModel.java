@@ -1,6 +1,5 @@
 package ui.vm;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
@@ -12,17 +11,9 @@ import usuario.Empresa;
 public class AgregarEmpresaViewModel {
 
 	private Empresa empresa = new Empresa();
-	private List<Empresa> empresas = new LinkedList<>();
 
-	public AgregarEmpresaViewModel() {
-			this.setEmpresas();
-	}
-
-	public void setEmpresas()  {
-		this.empresas=EmpresasRepository.getEmpresas();
-	}
 	public List<Empresa> getEmpresas(){
-		return this.empresas;
+		return EmpresasRepository.getEmpresas();
 	}
 	
 	public String getNombre(){
