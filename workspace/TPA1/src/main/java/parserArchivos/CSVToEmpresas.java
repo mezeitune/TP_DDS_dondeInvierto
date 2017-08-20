@@ -6,21 +6,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.FilenameUtils;
+
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
-import excepciones.ArchivoInexistenteException;
-import excepciones.PathIncorrectoException;
-import excepciones.TipoDeArchivoIncorrectoException;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import org.apache.commons.io.FilenameUtils;
 
 import usuario.Cuenta;
 import usuario.Empresa;
@@ -28,15 +23,8 @@ import usuario.Empresa;
 public class CSVToEmpresas {
 
 	private  String archivo;
-	private  String extension;
+	
 	public CSVToEmpresas(String archivo){
-		if(archivo==null)
-			throw new ArchivoInexistenteException();
-		Path path = Paths.get(archivo);
-		if (Files.notExists(path))
-			throw new PathIncorrectoException();
-		if(!((extension=FilenameUtils.getExtension(archivo)).equals("csv")))
-			throw new TipoDeArchivoIncorrectoException();
 		this.archivo=archivo;
 	}
 	
@@ -49,13 +37,11 @@ public class CSVToEmpresas {
 		return CSVObjectList;
 	}
 	
-	
 	public List<Empresa> csvFileToEmpresas(){
 		List<CSVObject> CSVObjectList = null;
 		try {
 			CSVObjectList = this.CSVFileToCSVObjectList();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -110,4 +96,12 @@ public class CSVToEmpresas {
 		return new Cuenta(line.getCuenta(),line.getPeriodo(),line.getValor());
 	}
 
+	public boolean esArchivoExistente(String archivo) {
+		return Files.exists(Paths.get(archivo));
+	}
+
+	public boolean extensionValida(String archivo) {
+		return FilenameUtils.getExtension(archivo).equals("csv");
+	}
+	
 }

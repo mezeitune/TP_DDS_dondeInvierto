@@ -1,10 +1,6 @@
 package ui.windows;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import org.apache.commons.io.FilenameUtils;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.FileSelector;
@@ -14,10 +10,9 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import excepciones.ArchivoInexistenteException;
-import excepciones.PathIncorrectoException;
+import excepciones.ArchivoNotFoundException;
+import excepciones.PathNotExistsException;
 import excepciones.TipoDeArchivoIncorrectoException;
-import repository.IndicadoresRepository;
 import repository.EmpresasRepository;
 import ui.vm.*;
 
@@ -52,10 +47,19 @@ public class SeleccionarArchivoWindow extends Dialog<SeleccionarArchivoViewModel
 		
 		new Button(actionsPanel).setCaption("Aceptar")
 		.onClick(() -> {
-							VerificarArchivo(EmpresasRepository.getArchivo());
+						try {
+							this.getModelObject().cargarArchivo();
 							this.showInfo("El archivo se cargo exitosamente");
 							this.getDelegate().close();
 							MenuWindow();
+						} catch (ArchivoNotFoundException e) {
+							this.showError("Debe ingresar un archivo.csv");
+						} catch (PathNotExistsException e) {
+							this.showError("El archivo no existe, vuelva a intentarlo");
+						} catch (TipoDeArchivoIncorrectoException e) {
+							this.showError("La extension del archivo debe ser .csv");
+						}
+						
 		});
 		new Button(actionsPanel).setCaption("Cancelar")
 		.onClick(() -> {
@@ -73,13 +77,5 @@ public class SeleccionarArchivoWindow extends Dialog<SeleccionarArchivoViewModel
 		dialog.onAccept(() -> {});
 	}
 
-	public void VerificarArchivo(String archivo){
-		if(archivo==null) throw new ArchivoInexistenteException();
-		Path path = Paths.get(archivo);
-		if (Files.notExists(path))
-			throw new PathIncorrectoException();
-		if(!((FilenameUtils.getExtension(archivo)).equals("csv")))
-			throw new TipoDeArchivoIncorrectoException();
-	}
 
 }

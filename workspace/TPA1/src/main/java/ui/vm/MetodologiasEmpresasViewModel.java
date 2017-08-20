@@ -9,9 +9,7 @@ import org.uqbar.commons.utils.Observable;
 import excepciones.EmpresasIsEmptyException;
 import excepciones.MetodologiaNotFoundException;
 import excepciones.PeriodosIsEmptyException;
-import parserArchivos.CSVToEmpresas;
 import repository.EmpresasAEvaluarRepository;
-import repository.EmpresasRepository;
 import repository.MetodologiasRepository;
 import usuario.Empresa;
 import usuario.Metodologia;
@@ -69,8 +67,7 @@ public class MetodologiasEmpresasViewModel {
 	}
 	
 	public void autocompletarListaEmpresasAEvaluar(){
-		CSVToEmpresas parser = new CSVToEmpresas(EmpresasRepository.getArchivo());
-		EmpresasAEvaluarRepository.setEmpresasAEvaluar(parser.csvFileToEmpresas());
+		EmpresasAEvaluarRepository.cargarTodasLasEmpresas();
 		ObservableUtils.firePropertyChanged(this, "empresas");	
 	}
 

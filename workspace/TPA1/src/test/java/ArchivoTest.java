@@ -3,12 +3,10 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import excepciones.ArchivoInexistenteException;
-import excepciones.PathIncorrectoException;
-import excepciones.TipoDeArchivoIncorrectoException;
 import parserArchivos.CSVToEmpresas;
 import usuario.Empresa;
 
@@ -22,36 +20,28 @@ public class ArchivoTest {
  	}
 	
 	@Test
- 	public void pasarArchivoExistenteYQueFuncioneCorrectamente() throws IOException {
+ 	public void pasarArchivoExistenteYQueFuncioneCorrectamente()  {
  		
 		CSVToEmpresas CSVparser = new CSVToEmpresas("Prueba.csv");
 		CSVparser.csvFileToEmpresas();
  	    
  	}
- 	
- 	@Test(expected = PathIncorrectoException.class)
-	public void pasarPathIncorrectoYQueExplote() throws IOException {
+ 	@Test
+	public void pasarPathIncorrectoYQueExplote()  {
 		
-		CSVToEmpresas CSVparser = new CSVToEmpresas("Inexistente.csv");
-		CSVparser.csvFileToEmpresas();
+		CSVToEmpresas parser = new CSVToEmpresas("Inexistente.csv");
+		Assert.assertEquals(false, parser.esArchivoExistente("Inexistente.csv"));
 	}
 	
-	@Test(expected = ArchivoInexistenteException.class)
-	public void pasarArchivoInexistenteYQueExplote() throws IOException {
+ 	@Test
+	public void pasarArchivoConExtensionIncorrectaYQueExplote() {
 		
-		CSVToEmpresas CSVparser = new CSVToEmpresas(null);
-		CSVparser.csvFileToEmpresas();
-	}
-	
-	@Test(expected = TipoDeArchivoIncorrectoException.class)
-	public void pasarArchivoConExtensionIncorrectaYQueExplote() throws IOException {
-		
-		CSVToEmpresas CSVparser = new CSVToEmpresas("empresas.json");
-		CSVparser.csvFileToEmpresas();
+		CSVToEmpresas parser = new CSVToEmpresas("empresas.json");
+		Assert.assertEquals(false, parser.extensionValida("empresas.json"));
 	}
  	
 	@Test
- 	public void recibeCorrectamente2EmpresasDeUnArchivoCSV() throws IOException{
+ 	public void recibeCorrectamente2EmpresasDeUnArchivoCSV() {
  		List <Empresa> empresasCargadas = parserCSV.csvFileToEmpresas();
  		assertEquals(2,empresasCargadas.size());
  		

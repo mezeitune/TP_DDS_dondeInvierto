@@ -3,6 +3,7 @@ package repository;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 import usuario.Empresa;
 
 public class EmpresasAEvaluarRepository {
@@ -61,6 +62,10 @@ public class EmpresasAEvaluarRepository {
 
 	public static boolean esEmpresaRepetida(Empresa empresa) {
 		return empresasAEvaluar.stream().anyMatch(empresaCargada -> empresaCargada.equals(empresa));
+	}
+
+	public static void cargarTodasLasEmpresas() {
+		EmpresasAEvaluarRepository.setEmpresasAEvaluar(EmpresasRepository.getEmpresas());
 	}
 	
 }
