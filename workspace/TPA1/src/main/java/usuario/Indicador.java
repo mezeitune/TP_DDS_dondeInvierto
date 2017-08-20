@@ -3,12 +3,12 @@ package usuario;
 import org.uqbar.commons.utils.Observable;
 import excepciones.AccountNotFoundException;
 import parserIndicadores.Operacion;
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 
 @Observable
 public class Indicador implements Operacion,Comparable<Indicador> {
 
-	private String nombre;
+	public String nombre;
 	private String formula;
 	private int resultado;
 	
@@ -57,7 +57,7 @@ public class Indicador implements Operacion,Comparable<Indicador> {
 		int valor = 0;
 
 		try {
-			valor = ParserFormulaToIndicador.construirArbolOperaciones(this.formula).calcular();
+			valor = ParserFormulaIndicador.construirArbolOperaciones(this.formula).calcular();
 		} catch (AccountNotFoundException e) {
 			e.printStackTrace();
 		}

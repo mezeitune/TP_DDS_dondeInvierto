@@ -20,25 +20,25 @@ import java.nio.file.Paths;
 import usuario.Cuenta;
 import usuario.Empresa;
 
-public class CSVToEmpresas {
+public class ParserCsv {
 
 	private  String archivo;
 	
-	public CSVToEmpresas(String archivo){
+	public ParserCsv(String archivo){
 		this.archivo=archivo;
 	}
 	
-	public  List<CSVObject> CSVFileToCSVObjectList() throws IOException{
-		HeaderColumnNameMappingStrategy<CSVObject> strategy = new HeaderColumnNameMappingStrategy<>();
-		strategy.setType(CSVObject.class);
-		CsvToBean<CSVObject> lineToCSVObject = new CsvToBean<>();
+	public  List<CsvEmpresa> CSVFileToCSVObjectList() throws IOException{
+		HeaderColumnNameMappingStrategy<CsvEmpresa> strategy = new HeaderColumnNameMappingStrategy<>();
+		strategy.setType(CsvEmpresa.class);
+		CsvToBean<CsvEmpresa> lineToCSVObject = new CsvToBean<>();
 		CSVReader reader = new CSVReader(new FileReader(archivo));
-		List <CSVObject> CSVObjectList = lineToCSVObject.parse(strategy,reader);
+		List <CsvEmpresa> CSVObjectList = lineToCSVObject.parse(strategy,reader);
 		return CSVObjectList;
 	}
 	
 	public List<Empresa> csvFileToEmpresas(){
-		List<CSVObject> CSVObjectList = null;
+		List<CsvEmpresa> CSVObjectList = null;
 		try {
 			CSVObjectList = this.CSVFileToCSVObjectList();
 		} catch (IOException e) {
@@ -48,7 +48,7 @@ public class CSVToEmpresas {
 		return this.CSVObjectListToEmpresasList(CSVObjectList);
 	}
 	
-	public List <Empresa> CSVObjectListToEmpresasList(List <CSVObject> csvObjectList){
+	public List <Empresa> CSVObjectListToEmpresasList(List <CsvEmpresa> csvObjectList){
 		int i=0;
 		String nombreNuevaEmpresa;
 		List <Empresa> empresas = new ArrayList <Empresa> ();
@@ -62,7 +62,7 @@ public class CSVToEmpresas {
 			
 			nombreNuevaEmpresa=nombreEmpresasSinRepetidos.get(i);
 			
-			List <CSVObject> empresasByName = this.filtrarPorNombre(nombreNuevaEmpresa,csvObjectList);
+			List <CsvEmpresa> empresasByName = this.filtrarPorNombre(nombreNuevaEmpresa,csvObjectList);
 			
 			List <Cuenta> cuentasByEmpresa = this.filtrarPorCuentas(empresasByName);
 			
@@ -76,8 +76,8 @@ public class CSVToEmpresas {
 	}
 	
 	
-	public List <CSVObject> filtrarPorNombre(String empresa, List<CSVObject> listCSVObjects){
-		List <CSVObject> listaFiltrada = new ArrayList<CSVObject> ();
+	public List <CsvEmpresa> filtrarPorNombre(String empresa, List<CsvEmpresa> listCSVObjects){
+		List <CsvEmpresa> listaFiltrada = new ArrayList<CsvEmpresa> ();
 		
 		try{
 			listaFiltrada = listCSVObjects.stream().filter(line -> line.getEmpresa().equals(empresa)).collect(Collectors.toList());
@@ -87,12 +87,12 @@ public class CSVToEmpresas {
 		return listaFiltrada;
 	}
 	
-	public List <Cuenta> filtrarPorCuentas(List <CSVObject> empresasByName){
+	public List <Cuenta> filtrarPorCuentas(List <CsvEmpresa> empresasByName){
 
 		return empresasByName.stream().map(line ->this.convertirACuenta(line)).collect(Collectors.toList());
 	}
 	
-	public Cuenta convertirACuenta(CSVObject line){
+	public Cuenta convertirACuenta(CsvEmpresa line){
 		return new Cuenta(line.getCuenta(),line.getPeriodo(),line.getValor());
 	}
 

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.uqbar.commons.utils.Observable;
 
 import Comparadores.Comparador;
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 
@@ -48,8 +48,8 @@ public class Taxativa extends TipoCondicion {
 		}
 	
 		boolean verificarCriterioEnPeriodo(Empresa empresa,String periodo,Indicador indicador){ //Muy parecido a compararEnPeriodo
-			ParserFormulaToIndicador.setEmpresa(empresa);
-			ParserFormulaToIndicador.setPeriodo(periodo);
+			ParserFormulaIndicador.setEmpresa(empresa);
+			ParserFormulaIndicador.setPeriodo(periodo);
 			return comparador.comparar(valorRequerido, indicador.calcular());
 		}
 

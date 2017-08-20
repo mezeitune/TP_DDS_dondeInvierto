@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 
 import Mocks.EmpresasMock;
 import Mocks.ListaIndicadoresMock;
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import repository.EmpresasRepository;
 
 import java.util.List;
@@ -21,13 +21,13 @@ public class ParserIndicadoresTest {
 	@Before
  	public void init()  {
 		EmpresasRepository.setArchivo("empresas.csv"); /*TODO: El test esta ligado al archivo. Desacoplar al parser de esto!*/
-		ParserFormulaToIndicador.setModeTest(true); /*TODO: Esto es porque el parser esta ligado al archivo nuevamente*/
+		ParserFormulaIndicador.setModeTest(true); /*TODO: Esto es porque el parser esta ligado al archivo nuevamente*/
 		
 		ListaIndicadoresMock mockListaIndicadores = new ListaIndicadoresMock ();
 		List<Cuenta> mockListaCuentas = new EmpresasMock().getCuentasMockeadas();
 		mockListaIndicadores.setIndicadoresMockeados();
 		indicadores = mockListaIndicadores.getIndicadoresMockeados();
-		ParserFormulaToIndicador.init(indicadores,mockListaCuentas);
+		ParserFormulaIndicador.init(indicadores,mockListaCuentas);
  	}
 
 	@Test
@@ -69,7 +69,7 @@ public class ParserIndicadoresTest {
 	
 	@After
 	public void delete(){
-		ParserFormulaToIndicador.setModeTest(false);
+		ParserFormulaIndicador.setModeTest(false);
 	}
 	
 }	

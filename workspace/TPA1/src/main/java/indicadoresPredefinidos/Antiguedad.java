@@ -4,13 +4,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import excepciones.AccountNotFoundException;
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 
 public class Antiguedad extends Indicador {
 	
+	private static Antiguedad instance ;
 	public Empresa empresa;
 	int anioActual; /*TODO: Hardcodeado para testear*/
 
@@ -18,17 +18,20 @@ public class Antiguedad extends Indicador {
 		this.anioActual = anoActual;
 	}
 
-	public Antiguedad(String nombre, String formula) throws AccountNotFoundException {
-		super(nombre, formula);
-	}
-	
 	public Antiguedad(){
-		
+		this.nombre = "Antiguedad";
 	}
 	
 	public void setEmpresa(Empresa empresa){
 		this.empresa = empresa;
 	}
+	
+	public static Antiguedad getInstance( ){
+        if(instance == null){
+            instance = new Antiguedad();
+        }
+        return instance;
+	}	
 	
 	@Override
 	public int calcular(){ //Devuelve el ano mas viejos
@@ -39,7 +42,7 @@ public class Antiguedad extends Indicador {
 		this.setAnioActual(anio);
 		
 		
-		this.empresa = ParserFormulaToIndicador.getEmpresa();
+		this.empresa = ParserFormulaIndicador.getEmpresa();
 		List<Integer> periodos = empresa.getCuentas().stream().map(c1 ->Integer.parseInt(c1.getPeriodo())).collect(Collectors.toList());
 		
 		List<Integer> periodosOrdenados =  periodos.stream().sorted( (p1,p2) -> p1 < p2 ? -1:1 ).collect(Collectors.toList());

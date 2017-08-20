@@ -10,7 +10,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import ui.vm.CargarIndicadoresViewModel;
 import ui.vm.IndicadorErroneoViewModel;
 import ui.vm.IndicadorRepetidoViewModel;

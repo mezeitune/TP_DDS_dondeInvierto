@@ -2,7 +2,6 @@ import static org.junit.Assert.*;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,10 +13,9 @@ import Condiciones.Condicion;
 import Condiciones.Mixta;
 import Condiciones.Taxativa;
 import Condiciones.TipoCondicion;
-import Condiciones.Predefinidas.MargenesCrecientes;
 import Mocks.EmpresasMock;
 import indicadoresPredefinidos.Antiguedad;
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
@@ -35,7 +33,7 @@ public class CondicionesTest {
 		empresas = listasEmpresasMockeadas.getEmpresasMockeadas();
 		cuentas = listasEmpresasMockeadas.getCuentasMockeadas();
 		periodos.add("2016");
-		ParserFormulaToIndicador.init(cuentas);
+		ParserFormulaIndicador.init(cuentas);
 	}
 	
 	@Test

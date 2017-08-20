@@ -13,7 +13,7 @@ public class PatrimonioNeto extends Indicador{
 
 	public static PatrimonioNeto getInstance( ){
         if(instance == null){
-            instance = new PatrimonioNeto("PN", "1+2" );
+            instance = new PatrimonioNeto("Patrimonio Neto", "1+2" );
         }
         return instance;
 

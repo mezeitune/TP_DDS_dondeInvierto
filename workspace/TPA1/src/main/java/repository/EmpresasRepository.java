@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import parserArchivos.CSVToEmpresas;
+import parserArchivos.ParserCsv;
 
 public class EmpresasRepository {
 	
 	private static String archivo;
 
 	public static List<Empresa> getEmpresas(){
-		return new CSVToEmpresas(archivo).csvFileToEmpresas();
+		return new ParserCsv(archivo).csvFileToEmpresas();
 	}
 	
 	public static List<String> getNombreCuentas() {
@@ -30,7 +30,6 @@ public class EmpresasRepository {
 		List<Cuenta> cuentas = new LinkedList<Cuenta>();
 		EmpresasRepository.getEmpresas().stream().forEach(empresa -> empresa.getCuentas().
 																			 stream().forEach(cuenta -> cuentas.add(cuenta)));
-		System.out.println(cuentas);
 		return cuentas;
 	}
 	

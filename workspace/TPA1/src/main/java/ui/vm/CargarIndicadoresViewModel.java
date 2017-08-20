@@ -10,7 +10,7 @@ import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.IndicadorRepetidoException;
 import excepciones.NombreIndicadorNotFound;
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import repository.IndicadoresRepository;
 import usuario.Indicador;
 @Observable
@@ -58,14 +58,14 @@ public class CargarIndicadoresViewModel {
 		
 		if(this.esUnIndicadorYaIngresado(nuevoIndicador)) throw new IndicadorRepetidoException();
 		
-		if(ParserFormulaToIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
+		if(ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
 		IndicadoresRepository.addIndicador(nuevoIndicador);
 		
 		ObservableUtils.firePropertyChanged(this, "indicadores");
 	}
 	public boolean esUnIndicadorYaIngresado (Indicador nuevoIndicador) {
-		return ParserFormulaToIndicador.validarIndicadorRepetidoAntesDePrecargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
+		return ParserFormulaIndicador.validarIndicadorRepetidoAntesDePrecargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
 	
 	}
 	public List<Indicador> getIndicadores(){

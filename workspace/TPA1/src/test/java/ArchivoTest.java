@@ -7,36 +7,36 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import parserArchivos.CSVToEmpresas;
+import parserArchivos.ParserCsv;
 import usuario.Empresa;
 
 public class ArchivoTest {
 
-	CSVToEmpresas parserCSV;
+	ParserCsv parserCSV;
 	
 	@Before
  	public void init() throws IOException {
-		parserCSV = new CSVToEmpresas("Prueba.csv");
+		parserCSV = new ParserCsv("Prueba.csv");
  	}
 	
 	@Test
  	public void pasarArchivoExistenteYQueFuncioneCorrectamente()  {
  		
-		CSVToEmpresas CSVparser = new CSVToEmpresas("Prueba.csv");
+		ParserCsv CSVparser = new ParserCsv("Prueba.csv");
 		CSVparser.csvFileToEmpresas();
  	    
  	}
  	@Test
 	public void pasarPathIncorrectoYQueExplote()  {
 		
-		CSVToEmpresas parser = new CSVToEmpresas("Inexistente.csv");
+		ParserCsv parser = new ParserCsv("Inexistente.csv");
 		Assert.assertEquals(false, parser.esArchivoExistente("Inexistente.csv"));
 	}
 	
  	@Test
 	public void pasarArchivoConExtensionIncorrectaYQueExplote() {
 		
-		CSVToEmpresas parser = new CSVToEmpresas("empresas.json");
+		ParserCsv parser = new ParserCsv("empresas.json");
 		Assert.assertEquals(false, parser.extensionValida("empresas.json"));
 	}
  	

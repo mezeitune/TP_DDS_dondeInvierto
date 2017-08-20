@@ -6,7 +6,7 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import indicadoresPredefinidos.IndicadorCustom;
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import usuario.Indicador;;
 
 /*public class IndicadoresMock {

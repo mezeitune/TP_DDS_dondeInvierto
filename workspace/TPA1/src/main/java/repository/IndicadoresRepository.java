@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 
+import indicadoresPredefinidos.Antiguedad;
 import indicadoresPredefinidos.PatrimonioNeto;
 import parser.ParserJsonString;
 import parserArchivos.ParserJsonAObjetosJava;
@@ -34,6 +35,7 @@ public class IndicadoresRepository {
 	public static List<Indicador>  getIndicadoresPredefinidos() {
 		List<Indicador> indicadoresPredefinidos = new LinkedList<Indicador>();
 		indicadoresPredefinidos.add(PatrimonioNeto.getInstance());
+		indicadoresPredefinidos.add(Antiguedad.getInstance());
 		return indicadoresPredefinidos;
 	}
 	

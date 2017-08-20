@@ -15,7 +15,7 @@ import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
 
-public class ParserFormulaToIndicador {
+public class ParserFormulaIndicador {
 
 	private static List<String> nombreCuentas = new LinkedList<String> ();
 	private static List<Indicador> indicadores = new LinkedList<Indicador>();
@@ -56,7 +56,7 @@ public class ParserFormulaToIndicador {
 	}
 	
 	public static Empresa getEmpresa(){
-		return ParserFormulaToIndicador.empresa;
+		return ParserFormulaIndicador.empresa;
 	}
 	
 	public static void setPeriodo(String unPeriodo){
@@ -65,19 +65,18 @@ public class ParserFormulaToIndicador {
 	}
 	
 	public static int getCalculoIndicador(String formula) throws AccountNotFoundException{
-			return ParserFormulaToIndicador.construirArbolOperaciones(formula).calcular();
+			return ParserFormulaIndicador.construirArbolOperaciones(formula).calcular();
 	}
 	
 	public static Operacion construirArbolOperaciones(String operandos) throws AccountNotFoundException{
-		System.out.println(modeTest);
-		if(!modeTest)ParserFormulaToIndicador.update(); //Hay que actualizar las cuentas e indicadores de la empresa!
+		if(!modeTest)ParserFormulaIndicador.update(); //Hay que actualizar las cuentas e indicadores de la empresa!
 		
-		if(operandos.matches(operadorSumaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[+]"),new Suma());
-		if(operandos.matches(operadorRestaSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[-]"),new Resta());
-		if(operandos.matches(operadorMultiplicacionSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[*]"),new Multiplicacion());
-		if(operandos.matches(operadorDivisionSplit)) return ParserFormulaToIndicador.getOperacion(operandos.split("[/]"),new Division());
+		if(operandos.matches(operadorSumaSplit)) return ParserFormulaIndicador.getOperacion(operandos.split("[+]"),new Suma());
+		if(operandos.matches(operadorRestaSplit)) return ParserFormulaIndicador.getOperacion(operandos.split("[-]"),new Resta());
+		if(operandos.matches(operadorMultiplicacionSplit)) return ParserFormulaIndicador.getOperacion(operandos.split("[*]"),new Multiplicacion());
+		if(operandos.matches(operadorDivisionSplit)) return ParserFormulaIndicador.getOperacion(operandos.split("[/]"),new Division());
 		
-		return ParserFormulaToIndicador.getClaseOperador(operandos);
+		return ParserFormulaIndicador.getClaseOperador(operandos);
 				
 		}
 	
@@ -92,21 +91,21 @@ public class ParserFormulaToIndicador {
 		for(i=0;i<formula.length;i++){
 			operandos.add(i, formula[i]);
 		}
-		nuevaOperacion.setOperador1(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
+		nuevaOperacion.setOperador1(ParserFormulaIndicador.construirArbolOperaciones(operandos.remove(0)));
 		
 		for(i=1;i<=operandos.size() && operandos.size()!= 1;i+=2){
 			operandos.add(i,"/");
 		}
 		
-		nuevaOperacion.setOperador2(ParserFormulaToIndicador.construirArbolOperaciones(operandos.remove(0)));
+		nuevaOperacion.setOperador2(ParserFormulaIndicador.construirArbolOperaciones(operandos.remove(0)));
 		
 		return nuevaOperacion;
 	}
 	
 	
 	public static Operacion getClaseOperador(String operador) throws AccountNotFoundException{
-		if (ParserFormulaToIndicador.esIndicador(operador)) return ParserFormulaToIndicador.buscarYObtenerIndicador(operador);
-		if (ParserFormulaToIndicador.esCuenta(operador)) return ParserFormulaToIndicador.buscarYObtenerCuenta(operador);
+		if (ParserFormulaIndicador.esIndicador(operador)) return ParserFormulaIndicador.buscarYObtenerIndicador(operador);
+		if (ParserFormulaIndicador.esCuenta(operador)) return ParserFormulaIndicador.buscarYObtenerCuenta(operador);
 		else return new Constante(Integer.parseInt(operador));
 	}
 	

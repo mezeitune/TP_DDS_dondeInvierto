@@ -8,7 +8,7 @@ import java.util.List;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import repository.IndicadoresRepository;
 import repository.EmpresasRepository;
 
@@ -95,8 +95,8 @@ public class DatosCuentasViewModel{
 	}
 	
 	public void calcular(){
-		ParserFormulaToIndicador.setEmpresa(this.empresa);
-		ParserFormulaToIndicador.setPeriodo(this.periodo);
+		ParserFormulaIndicador.setEmpresa(this.empresa);
+		ParserFormulaIndicador.setPeriodo(this.periodo);
 		this.calculo = this.indicadorSeleccionado.calcular();
 		
 		ObservableUtils.firePropertyChanged(this, "calculo");

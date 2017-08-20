@@ -1,12 +1,10 @@
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import excepciones.CSVInexistenteException;
 import parserArchivos.ParserJsonAObjetosJava;
 import usuario.Empresa;
 

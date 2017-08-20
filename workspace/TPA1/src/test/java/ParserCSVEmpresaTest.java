@@ -4,29 +4,25 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import Mocks.ListaLineasCsvFileMock;
-import parserArchivos.CSVObject;
-import parserArchivos.CSVToEmpresas;
+import parserArchivos.ParserCsv;
 import parserArchivos.ParserJsonAObjetosJava;
 import usuario.Cuenta;
 import usuario.Empresa;
 
-
-import static org.mockito.Mockito.when;   // ...or...
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;      // ...with the caveat noted below.
 
 
 public class ParserCSVEmpresaTest {
 
-	CSVToEmpresas parser;
+	ParserCsv parser;
 	@Before
  	public void init() throws IOException {
- 		parser = new CSVToEmpresas("Prueba.csv");
+ 		parser = new ParserCsv("Prueba.csv");
  	}
 	
 	@Test

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import repository.EmpresasAEvaluarRepository;
 import usuario.Empresa;
 @Observable
@@ -13,7 +13,7 @@ public class EliminarEmpresaViewModel {
 	private Empresa empresa;
 	public EliminarEmpresaViewModel() {
 		
-		ParserFormulaToIndicador.setEmpresa(empresa);
+		ParserFormulaIndicador.setEmpresa(empresa);
 	
 	}
 	

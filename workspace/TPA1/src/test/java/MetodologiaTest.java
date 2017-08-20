@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import Mocks.EmpresasMock;
 import metodologias.Predefinidas.WarrenBuffet;
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import usuario.Empresa;
 import usuario.Metodologia;
 
@@ -25,8 +25,8 @@ public class MetodologiaTest {
 		this.empresasAEvaluar = mockEmpresas.getEmpresasMockeadas();
 		this.periodosAEvaluar.add("2016");
 		
-		ParserFormulaToIndicador.init(mockEmpresas.getCuentasMockeadas());
-		ParserFormulaToIndicador.setModeTest(true); /*TODO: Desacoplarlo del archivo*/
+		ParserFormulaIndicador.init(mockEmpresas.getCuentasMockeadas());
+		ParserFormulaIndicador.setModeTest(true); /*TODO: Desacoplarlo del archivo*/
 	}
 	
 	@Test

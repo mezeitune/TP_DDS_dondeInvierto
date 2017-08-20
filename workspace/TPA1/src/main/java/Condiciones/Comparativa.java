@@ -7,7 +7,7 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 
 import Comparadores.Comparador;
-import parserIndicadores.ParserFormulaToIndicador;
+import parserIndicadores.ParserFormulaIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 @Observable
@@ -59,15 +59,15 @@ public class Comparativa extends TipoCondicion{
 	
 	boolean compararEnPeriodo(Empresa empresa1,Empresa empresa2,String periodo,Indicador indicador){
 		//System.out.println(periodo);
-		ParserFormulaToIndicador.setEmpresa(empresa1);
-		ParserFormulaToIndicador.setPeriodo(periodo);
+		ParserFormulaIndicador.setEmpresa(empresa1);
+		ParserFormulaIndicador.setPeriodo(periodo);
 		
 		//System.out.println(empresa1.getNombre());
 		int valor1 = indicador.calcular();
 		//System.out.println(valor1);
 		
-		ParserFormulaToIndicador.setEmpresa(empresa2);
-		ParserFormulaToIndicador.setPeriodo(periodo);
+		ParserFormulaIndicador.setEmpresa(empresa2);
+		ParserFormulaIndicador.setPeriodo(periodo);
 		int valor2 = indicador.calcular();
 		
 		//System.out.println(empresa2.getNombre());
