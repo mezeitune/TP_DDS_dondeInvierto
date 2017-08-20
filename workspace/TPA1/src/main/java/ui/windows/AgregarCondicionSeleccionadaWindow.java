@@ -11,7 +11,7 @@ import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import Condiciones.Condicion;
+import condiciones.Condicion;
 import excepciones.CondicionRepetidaException;
 import ui.vm.AgregarCondicionSeleccionadaViewModel;
 

@@ -5,8 +5,6 @@ import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.Observable;
 
 import excepciones.CSVInexistenteException;
-import repository.EmpresasRepository;
-import repository.MetodologiasRepository;
 import ui.windows.MenuWindow;
 
 @Observable

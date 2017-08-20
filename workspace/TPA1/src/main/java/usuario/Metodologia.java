@@ -4,8 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.uqbar.commons.utils.Observable;
-import Condiciones.Condicion;
-import Condiciones.Criterio;
+
+import condiciones.Condicion;
+import condiciones.Criterio;
 
 @Observable
 public class Metodologia {

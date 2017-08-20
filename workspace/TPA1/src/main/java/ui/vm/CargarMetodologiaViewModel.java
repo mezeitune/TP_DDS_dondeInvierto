@@ -5,12 +5,12 @@ import java.util.List;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import Condiciones.Condicion;
+import condiciones.Condicion;
 import excepciones.CondicionesNotFoundException;
 import excepciones.MetodologiaRepetidaException;
 import excepciones.NombreMetodologiaNotFoundException;
-import repository.CondicionesSeleccionadasRepository;
-import repository.MetodologiasRepository;
+import repositorios.CondicionesSeleccionadasRepository;
+import repositorios.MetodologiasRepository;
 import usuario.Metodologia;
 
 

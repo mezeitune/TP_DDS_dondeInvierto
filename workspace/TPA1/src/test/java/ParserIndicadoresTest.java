@@ -1,9 +1,7 @@
 import static org.junit.Assert.*;
 
-import Mocks.EmpresasMock;
-import Mocks.ListaIndicadoresMock;
 import parserIndicadores.ParserFormulaIndicador;
-import repository.EmpresasRepository;
+import repositorios.EmpresasRepository;
 
 import java.util.List;
 
@@ -12,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.omg.CORBA.UserException;
 
+import mocks.EmpresasMock;
+import mocks.ListaIndicadoresMock;
 import usuario.Cuenta;
 import usuario.Indicador;
 public class ParserIndicadoresTest {

@@ -12,7 +12,7 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import Condiciones.Condicion;
+import condiciones.Condicion;
 import excepciones.CondicionesNotFoundException;
 import excepciones.MetodologiaRepetidaException;
 import excepciones.NombreMetodologiaNotFoundException;

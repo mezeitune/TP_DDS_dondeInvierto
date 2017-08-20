@@ -20,6 +20,7 @@ public class Antiguedad extends Indicador {
 
 	public Antiguedad(){
 		this.nombre = "Antiguedad";
+		this.formula = "Edad de la Empresa";
 	}
 	
 	public void setEmpresa(Empresa empresa){
@@ -40,7 +41,6 @@ public class Antiguedad extends Indicador {
 		int anio = cal.get(Calendar.YEAR);
 		
 		this.setAnioActual(anio);
-		
 		
 		this.empresa = ParserFormulaIndicador.getEmpresa();
 		List<Integer> periodos = empresa.getCuentas().stream().map(c1 ->Integer.parseInt(c1.getPeriodo())).collect(Collectors.toList());

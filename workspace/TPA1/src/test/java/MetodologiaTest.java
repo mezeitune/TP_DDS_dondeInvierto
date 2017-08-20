@@ -6,8 +6,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import Mocks.EmpresasMock;
-import metodologias.Predefinidas.WarrenBuffet;
+import metodologiasPredefinidas.WarrenBuffet;
+import mocks.EmpresasMock;
 import parserIndicadores.ParserFormulaIndicador;
 import usuario.Empresa;
 import usuario.Metodologia;

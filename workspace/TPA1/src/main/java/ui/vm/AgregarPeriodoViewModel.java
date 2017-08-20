@@ -1,7 +1,8 @@
 package ui.vm;
 
 import org.uqbar.commons.utils.Observable;
-import repository.EmpresasAEvaluarRepository;
+
+import repositorios.EmpresasAEvaluarRepository;
 @Observable
 public class AgregarPeriodoViewModel {
 

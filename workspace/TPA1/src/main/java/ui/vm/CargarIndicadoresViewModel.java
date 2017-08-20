@@ -11,7 +11,7 @@ import excepciones.FormulaIndicadorNotValidException;
 import excepciones.IndicadorRepetidoException;
 import excepciones.NombreIndicadorNotFound;
 import parserIndicadores.ParserFormulaIndicador;
-import repository.IndicadoresRepository;
+import repositorios.IndicadoresRepository;
 import usuario.Indicador;
 @Observable
 public class CargarIndicadoresViewModel {

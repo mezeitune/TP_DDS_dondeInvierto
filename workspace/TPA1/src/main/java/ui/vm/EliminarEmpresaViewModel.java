@@ -5,7 +5,7 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 
 import parserIndicadores.ParserFormulaIndicador;
-import repository.EmpresasAEvaluarRepository;
+import repositorios.EmpresasAEvaluarRepository;
 import usuario.Empresa;
 @Observable
 public class EliminarEmpresaViewModel {

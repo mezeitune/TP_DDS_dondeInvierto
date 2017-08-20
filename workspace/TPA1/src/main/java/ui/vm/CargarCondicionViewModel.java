@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import Comparadores.Comparador;
-import Condiciones.Condicion;
-import Condiciones.TipoCondicion;
+import comparadores.Comparador;
+import condiciones.Condicion;
+import condiciones.TipoCondicion;
 import excepciones.IndicadorNotFound;
 import excepciones.NombreCondicionNotFound;
 import excepciones.PesoCondicionNotFound;
 import excepciones.TipoCondicionNotFound;
-import repository.CondicionesRepository;
-import repository.IndicadoresRepository;
+import repositorios.CondicionesRepository;
+import repositorios.IndicadoresRepository;
 import usuario.Indicador;
 
 @Observable

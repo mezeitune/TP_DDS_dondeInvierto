@@ -13,7 +13,7 @@ import org.uqbar.arena.windows.WindowOwner;
 import excepciones.ArchivoNotFoundException;
 import excepciones.PathNotExistsException;
 import excepciones.TipoDeArchivoIncorrectoException;
-import repository.EmpresasRepository;
+import repositorios.EmpresasRepository;
 import ui.vm.*;
 
 

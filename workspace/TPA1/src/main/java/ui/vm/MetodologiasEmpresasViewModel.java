@@ -9,8 +9,8 @@ import org.uqbar.commons.utils.Observable;
 import excepciones.EmpresasIsEmptyException;
 import excepciones.MetodologiaNotFoundException;
 import excepciones.PeriodosIsEmptyException;
-import repository.EmpresasAEvaluarRepository;
-import repository.MetodologiasRepository;
+import repositorios.EmpresasAEvaluarRepository;
+import repositorios.MetodologiasRepository;
 import usuario.Empresa;
 import usuario.Metodologia;
 @Observable

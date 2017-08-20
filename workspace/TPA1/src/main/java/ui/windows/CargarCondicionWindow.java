@@ -11,8 +11,8 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import Comparadores.Comparador;
-import Condiciones.TipoCondicion;
+import comparadores.Comparador;
+import condiciones.TipoCondicion;
 import excepciones.IndicadorNotFound;
 import excepciones.NombreCondicionNotFound;
 import excepciones.PesoCondicionNotFound;

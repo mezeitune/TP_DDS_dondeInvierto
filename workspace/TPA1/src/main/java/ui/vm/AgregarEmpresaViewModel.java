@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import repository.EmpresasAEvaluarRepository;
-import repository.EmpresasRepository;
+import repositorios.EmpresasAEvaluarRepository;
+import repositorios.EmpresasRepository;
 import usuario.Empresa;
 @Observable
 public class AgregarEmpresaViewModel {

@@ -9,9 +9,8 @@ import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
 import parserIndicadores.ParserFormulaIndicador;
-import repository.IndicadoresRepository;
-import repository.EmpresasRepository;
-
+import repositorios.EmpresasRepository;
+import repositorios.IndicadoresRepository;
 import usuario.*;
 
 
@@ -58,7 +57,9 @@ public class DatosCuentasViewModel{
 	
 	public void setEmpresa(Empresa empresaSeleccionada){
 		this.empresa = empresaSeleccionada;
+		this.periodo = null;
 		ObservableUtils.firePropertyChanged(this, "periodos");
+		ObservableUtils.firePropertyChanged(this, "cuentasFiltradas");
 	}
 	
 	public Empresa getEmpresa(){

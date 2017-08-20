@@ -1,6 +1,6 @@
 package ui.vm;
 
-import repository.EmpresasRepository;
+import repositorios.EmpresasRepository;
 
 public class MenuViewModel {
 

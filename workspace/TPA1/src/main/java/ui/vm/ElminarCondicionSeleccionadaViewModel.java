@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import Condiciones.Condicion;
+import condiciones.Condicion;
 import excepciones.CondicionNotFoundException;
-import repository.CondicionesSeleccionadasRepository;
+import repositorios.CondicionesSeleccionadasRepository;
 @Observable
 public class ElminarCondicionSeleccionadaViewModel {
 	

@@ -2,7 +2,7 @@ package ui.vm;
 
 import java.util.List;
 
-import repository.EmpresasAEvaluarRepository;
+import repositorios.EmpresasAEvaluarRepository;
 
 public class EliminarPeriodoViewModel {
 

@@ -7,8 +7,8 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import indicadoresPredefinidos.IndicadorCustom;
-import parser.ParserJsonString;
-import repository.IndicadoresRepository;
+import parserArchivos.ParserJsonString;
+import repositorios.IndicadoresRepository;
 import usuario.Indicador;
 
 

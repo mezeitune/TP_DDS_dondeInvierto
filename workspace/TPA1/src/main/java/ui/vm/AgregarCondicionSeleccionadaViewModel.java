@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import Condiciones.Condicion;
+import condiciones.Condicion;
 import excepciones.CondicionRepetidaException;
-import repository.CondicionesRepository;
-import repository.CondicionesSeleccionadasRepository;
+import repositorios.CondicionesRepository;
+import repositorios.CondicionesSeleccionadasRepository;
 @Observable
 public class AgregarCondicionSeleccionadaViewModel {
 

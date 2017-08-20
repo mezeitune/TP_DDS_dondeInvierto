@@ -8,8 +8,8 @@ import parserIndicadores.ParserFormulaIndicador;
 @Observable
 public class Indicador implements Operacion,Comparable<Indicador> {
 
-	public String nombre;
-	private String formula;
+	protected String nombre;
+	protected String formula;
 	private int resultado;
 	
 	
