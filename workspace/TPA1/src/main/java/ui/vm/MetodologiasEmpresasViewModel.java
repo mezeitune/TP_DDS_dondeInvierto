@@ -43,10 +43,8 @@ public class MetodologiasEmpresasViewModel {
 		if(getPeriodos().isEmpty()) throw new PeriodosIsEmptyException();
 		if(getEmpresas().isEmpty()) throw new EmpresasIsEmptyException();
 		
-		metodologia.setEmpresasAEvaluar(getEmpresas());
+		List<List<Empresa>> resultado = metodologia.evaluar(this.getEmpresas(),this.getPeriodos());
 		
-		
-		List<List<Empresa>> resultado = metodologia.evaluar(getPeriodos());
 		setEmpresasInvertibles(resultado.get(0));
 		setEmpresasNoInvertibles(resultado.get(1));
 	}

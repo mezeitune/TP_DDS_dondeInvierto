@@ -15,16 +15,15 @@ import usuario.Metodologia;
 public class MetodologiaTest {
 
 	public Metodologia metodologia = new Metodologia();
-	public List<String> periodos = new LinkedList<String>();
-	public List<Empresa> empresasAEvaluarBuffet = new LinkedList<Empresa>();
+	public List<String> periodosAEvaluar= new LinkedList<String>();
+	public List<Empresa> empresasAEvaluar = new LinkedList<Empresa>();
 	
 	@Before
 	public void init(){
 		EmpresasMock mockEmpresas = new EmpresasMock();
 		
-		this.metodologia.setEmpresasAEvaluar(mockEmpresas.getEmpresasMockeadas());
-		this.periodos.add("2016");
-		this.empresasAEvaluarBuffet = mockEmpresas.getEmpresasMockeadas();
+		this.empresasAEvaluar = mockEmpresas.getEmpresasMockeadas();
+		this.periodosAEvaluar.add("2016");
 		
 		ParserFormulaToIndicador.init(mockEmpresas.getCuentasMockeadas());
 		ParserFormulaToIndicador.setModeTest(true); /*TODO: Desacoplarlo del archivo*/
@@ -64,7 +63,7 @@ public class MetodologiaTest {
 	
 	@Test
 	public void unaMetodologiaObtieneBienLasEmpresasNoInvertibles(){
-		List<Empresa> conjuntoDeEmpresasAEvaluar = this.metodologia.getConjuntoDeEmpresasAEvaluar();
+		List<Empresa> conjuntoDeEmpresasAEvaluar = this.empresasAEvaluar;
 		List<Empresa> empresasInvertibles = new LinkedList<Empresa>();
 		
 		empresasInvertibles.add(conjuntoDeEmpresasAEvaluar.get(0));
@@ -74,33 +73,30 @@ public class MetodologiaTest {
 		listaEsperada.add(conjuntoDeEmpresasAEvaluar.get(1));
 		listaEsperada.add(conjuntoDeEmpresasAEvaluar.get(2));
 		
-		assertEquals(listaEsperada, this.metodologia.obtenerEmpresasNoInvertibles(empresasInvertibles));
-		
+		assertEquals(listaEsperada, this.metodologia.obtenerEmpresasNoInvertibles(this.empresasAEvaluar,empresasInvertibles));
 	}
 	
 	@Test
 	public void laMetodologiaWarrenBuffetObtieneCorrectamenteLasEmpresasNoInvertibles(){
 		WarrenBuffet warrenBuffet = new WarrenBuffet();
-		warrenBuffet.setEmpresasAEvaluar(this.empresasAEvaluarBuffet);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		
-		listaEsperada.add(this.empresasAEvaluarBuffet.get(0));
+		listaEsperada.add(this.empresasAEvaluar.get(0));
 		
-		assertEquals(listaEsperada,warrenBuffet.evaluar(this.periodos).get(1));
+		assertEquals(listaEsperada,warrenBuffet.evaluar(this.empresasAEvaluar,this.periodosAEvaluar).get(1));
 	}
 	
 	@Test
 	public void laMetodologiaWarrenBuffetObtieneCorrectamenteLasEmpresasInvertiblesOrdenadas(){
 		WarrenBuffet warrenBuffet = new WarrenBuffet();
-		warrenBuffet.setEmpresasAEvaluar(this.empresasAEvaluarBuffet);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		
-		listaEsperada.add(this.empresasAEvaluarBuffet.get(1));
-		listaEsperada.add(this.empresasAEvaluarBuffet.get(3));
-		listaEsperada.add(this.empresasAEvaluarBuffet.get(2));
+		listaEsperada.add(this.empresasAEvaluar.get(1));
+		listaEsperada.add(this.empresasAEvaluar.get(3));
+		listaEsperada.add(this.empresasAEvaluar.get(2));
 		
-		assertEquals(listaEsperada,warrenBuffet.evaluar(this.periodos).get(0));
+		assertEquals(listaEsperada,warrenBuffet.evaluar(this.empresasAEvaluar,this.periodosAEvaluar).get(0));
 	}
 }

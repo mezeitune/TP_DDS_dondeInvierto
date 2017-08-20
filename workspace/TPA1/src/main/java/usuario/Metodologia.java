@@ -10,7 +10,6 @@ import Condiciones.Criterio;
 @Observable
 public class Metodologia {
 
-	private List<Empresa> empresasAEvaluar = new LinkedList<Empresa>();
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	private Criterio criterio;
 	private String nombre;
@@ -35,26 +34,16 @@ public class Metodologia {
 		this.condiciones = condiciones;
 	}
 
-	public List<Empresa> getConjuntoDeEmpresasAEvaluar() {
-		return empresasAEvaluar;
-	}
-
-	public void setEmpresasAEvaluar(List<Empresa> conjuntoDeEmpresasAEvaluar) {
-		this.empresasAEvaluar = conjuntoDeEmpresasAEvaluar;
-	}
-
-	
-	
-	public List<List<Empresa>> evaluar(List<String> periodos){ 
+	public List<List<Empresa>> evaluar(List<Empresa> empresas,List<String> periodos){
 		this.criterio = new Criterio(this.condiciones);
 
-		this.criterio.evaluar(this.empresasAEvaluar, periodos);
+		this.criterio.evaluar(empresas, periodos);
 		
 		List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>(this.criterio.getListasEmpresasEvaluadas());
 
 		List<Empresa> empresasInvertibles= this.criterio.ordenarPorPuntaje(this.obtenerEmpresasInvertibles(listasEmpresasEvaluadas));
 		
-		List<Empresa> empresasNoInvertibles = this.obtenerEmpresasNoInvertibles(empresasInvertibles);
+		List<Empresa> empresasNoInvertibles = this.obtenerEmpresasNoInvertibles(empresas,empresasInvertibles);
 		
 		List<List<Empresa>> resultado = new LinkedList<>();
 		
@@ -79,8 +68,8 @@ public class Metodologia {
 		return interseccion;
 	}
 	
-	public List<Empresa> obtenerEmpresasNoInvertibles (List<Empresa> empresasInvertibles){
-		List <Empresa> empresasNoInvertibles = new LinkedList<Empresa>(this.empresasAEvaluar);
+	public List<Empresa> obtenerEmpresasNoInvertibles (List<Empresa> empresas,List<Empresa> empresasInvertibles){
+		List <Empresa> empresasNoInvertibles = new LinkedList<Empresa>(empresas);
 		empresasNoInvertibles.removeAll(empresasInvertibles);
 		return empresasNoInvertibles;
 	}
