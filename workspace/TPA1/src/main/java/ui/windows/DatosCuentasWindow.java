@@ -1,7 +1,6 @@
 package ui.windows;
 
 import java.awt.Color;
-import java.io.IOException;
 
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;
@@ -10,7 +9,6 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
-import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
@@ -67,12 +65,8 @@ public class DatosCuentasWindow extends Dialog<DatosCuentasViewModel>{
 		
 		new Button(Panel).setCaption("Volver al Menu Principal")
 		.onClick(() -> {
-			try{
 				this.getDelegate().close();
 				MenuWindow();
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
 		});
 }
 	
@@ -90,32 +84,37 @@ public class DatosCuentasWindow extends Dialog<DatosCuentasViewModel>{
 		new Column<Indicador>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
 		new Column<Indicador>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
 		
+		new Label(Panel2).setText("Seleccionar un indicador para calcular").setBackground(Color.GREEN);
 		
 		Selector<Cuenta> selectorIndicadorAEvaluar = new Selector<Cuenta>(Panel2).allowNull(true);
 		selectorIndicadorAEvaluar.bindItemsToProperty("indicadores").setAdapter(new PropertyAdapter(Cuenta.class, "nombre"));
 		selectorIndicadorAEvaluar.setWidth(100);
 		selectorIndicadorAEvaluar.bindValueToProperty("indicadorSeleccionado");
 		
-		new Label(Panel2).setText("Seleccionar un indicador para calcular").setBackground(Color.GREEN);
 		
-		new Label(Panel2).setText("Resultado de indicador Indicado").setBackground(Color.GREEN);
-		new Label(Panel2).setBackground(Color.GREEN).bindValueToProperty("indicadorSeleccionado.calcular");
+		new Button(Panel2).setCaption("Calcular")
+		.onClick(() -> {
+				this.getModelObject().calcular();
+		});
+		
+		//new Label(Panel2).setText("Resultado de indicador Indicado").setBackground(Color.GREEN);
+		new Label(Panel2).setBackground(Color.GREEN).bindValueToProperty("calculo");
 		
 		/*****************************************************textbox*************************/
-		new Label(Panel2).setHeight(25);
+		/*new Label(Panel2).setHeight(25);
 		new TextBox(Panel2).bindValueToProperty("indicadorAEvaluar");
 		new Label(Panel2).setText("El resultado es").setBackground(Color.GREEN);
-		new Label(Panel2).setBackground(Color.GREEN).bindValueToProperty("calculo");
+		new Label(Panel2).setBackground(Color.GREEN).bindValueToProperty("calculo");*/
 		/*****************************************************textbox*************************/
 	}
 
 	
-	public void MenuWindow() throws IOException {
+	public void MenuWindow()  {
 		Dialog<?> dialog = new MenuWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
-	public void CargaIndicadoresWindow() throws IOException {
+	public void CargaIndicadoresWindow()  {
 		Dialog<?> dialog = new CargarIndicadoresWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
