@@ -3,14 +3,12 @@ import static org.junit.Assert.*;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import Mocks.EmpresasMock;
 import metodologias.Predefinidas.WarrenBuffet;
 import parserIndicadores.ParserFormulaToIndicador;
-import repository.EmpresasAEvaluarRepository;
 import usuario.Empresa;
 import usuario.Metodologia;
 
@@ -22,22 +20,14 @@ public class MetodologiaTest {
 	
 	@Before
 	public void init(){
-		List<Empresa> conjuntoDeEmpresasAEvaluar = new LinkedList<Empresa>();
-		Empresa empresa1 = new Empresa("Facebook");
-		Empresa empresa2 = new Empresa("Apple");
-		Empresa empresa3 = new Empresa("Oracle");
-		Empresa empresa4 = new Empresa("Genius");
-		Empresa empresa5 = new Empresa("IBM");
-		conjuntoDeEmpresasAEvaluar.add(empresa1);
-		conjuntoDeEmpresasAEvaluar.add(empresa2);
-		conjuntoDeEmpresasAEvaluar.add(empresa3);
-		conjuntoDeEmpresasAEvaluar.add(empresa4);
-		conjuntoDeEmpresasAEvaluar.add(empresa5);
-		metodologia.setEmpresasAEvaluar(conjuntoDeEmpresasAEvaluar);
+		EmpresasMock mockEmpresas = new EmpresasMock();
 		
-		periodos.add("2016");
-		this.empresasAEvaluarBuffet = new EmpresasMock().getEmpresasMockeadas();
-		ParserFormulaToIndicador.init(new EmpresasMock().getCuentasMockeadas());
+		this.metodologia.setEmpresasAEvaluar(mockEmpresas.getEmpresasMockeadas());
+		this.periodos.add("2016");
+		this.empresasAEvaluarBuffet = mockEmpresas.getEmpresasMockeadas();
+		
+		ParserFormulaToIndicador.init(mockEmpresas.getCuentasMockeadas());
+		ParserFormulaToIndicador.setModeTest(true); /*TODO: Desacoplarlo del archivo*/
 	}
 	
 	@Test
@@ -83,7 +73,6 @@ public class MetodologiaTest {
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		listaEsperada.add(conjuntoDeEmpresasAEvaluar.get(1));
 		listaEsperada.add(conjuntoDeEmpresasAEvaluar.get(2));
-		listaEsperada.add(conjuntoDeEmpresasAEvaluar.get(4));
 		
 		assertEquals(listaEsperada, this.metodologia.obtenerEmpresasNoInvertibles(empresasInvertibles));
 		
