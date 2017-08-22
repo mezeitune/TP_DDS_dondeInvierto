@@ -18,8 +18,8 @@ public class DBRelacionalRepository<E> {//Usamos Generics para cualquier tabla
 		this.typeParameterClass = typeParameterClass;
 	}
 	
-	public <E> void agregar(E vehiculo){
-		entityManager.persist(vehiculo);
+	public <E> void agregar(E elemento){
+		entityManager.persist(elemento);
 	
 	}
 	
@@ -28,7 +28,7 @@ public class DBRelacionalRepository<E> {//Usamos Generics para cualquier tabla
 		
 	}
 	
-	public List<E> all(int criterioFiltro){
+	public List<E> all(int criterioFiltro){  //falta ver bien como van a ser los criterios de filtro 
 		Query query = entityManager.createQuery("from Indicador");
 		//query.setParameter("code", criterioFiltro);
 		List<E> listado = query.getResultList();
