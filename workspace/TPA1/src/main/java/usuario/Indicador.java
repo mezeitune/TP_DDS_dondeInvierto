@@ -1,13 +1,19 @@
 package usuario;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.uqbar.commons.utils.Observable;
 import excepciones.AccountNotFoundException;
 import parserIndicadores.Operacion;
 import parserIndicadores.ParserFormulaIndicador;
 
 @Observable
+@Entity
 public class Indicador implements Operacion,Comparable<Indicador> {
-
+	@Id @GeneratedValue
+	private Long id;
 	protected String nombre;
 	protected String formula;
 	private int resultado;

@@ -6,13 +6,9 @@ import javax.persistence.EntityManager;
 public class DBRelacionalRepository<E> {
 	private EntityManager entityManager;
 
-
-
     final Class<E> typeParameterClass;
 
-   
-
-	
+  
 	public DBRelacionalRepository(Class<E> typeParameterClass,EntityManager em){
 		this.entityManager=em;
 		this.typeParameterClass = typeParameterClass;
