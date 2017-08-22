@@ -59,7 +59,7 @@ public class Main extends Application{
 		indicador.setNombre("Allahabad");
 		entityManager.getTransaction().commit();
 		
-		List<Indicador> indicadores=repo.filtrarPorOtroCampo("Indicador", "sd", "sd");
+		List<Indicador> indicadores=repo.filtrarPorCampoEspecifico("Indicador", "formula", "otrooo");
 		System.out.println(indicadores.toString());
 	}
 		
