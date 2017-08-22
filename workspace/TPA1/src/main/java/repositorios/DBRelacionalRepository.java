@@ -1,6 +1,10 @@
 package repositorios;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 
 public class DBRelacionalRepository<E> {//Usamos Generics para cualquier tabla
@@ -14,7 +18,7 @@ public class DBRelacionalRepository<E> {//Usamos Generics para cualquier tabla
 		this.typeParameterClass = typeParameterClass;
 	}
 	
-	public <E> void agregar(E vehiculo){//Poer
+	public <E> void agregar(E vehiculo){
 		entityManager.persist(vehiculo);
 	
 	}
@@ -24,8 +28,11 @@ public class DBRelacionalRepository<E> {//Usamos Generics para cualquier tabla
 		
 	}
 	
-	public void all(){
-		entityManager .createQuery("from Vehiculo where patente=123").getResultList();//adaptar
+	public List<E> all(int criterioFiltro){
+		Query query = entityManager.createQuery("from Indicador");
+		//query.setParameter("code", criterioFiltro);
+		List<E> listado = query.getResultList();
+		return listado;
 	}
 
 

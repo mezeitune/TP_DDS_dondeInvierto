@@ -1,5 +1,7 @@
 package Class;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.uqbar.arena.Application;
@@ -57,7 +59,8 @@ public class Main extends Application{
 		indicador.setNombre("Allahabad");
 		entityManager.getTransaction().commit();
 		
-		
+		List<Indicador> indicadores=repo.all(1);
+		System.out.println(indicadores.toString());
 	}
 		
 }
