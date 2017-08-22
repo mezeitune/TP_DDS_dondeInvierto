@@ -6,14 +6,23 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
 import org.uqbar.commons.utils.Observable;
 
 
 @Observable
+@Entity
 public class Empresa {
 
-	String nombre;
+	@Id @GeneratedValue
+	private int id;
+	private String nombre;
 	int peso=0;
+	@Transient
 	private List<Cuenta> cuentas = new LinkedList<>(); 
 	
 	public Empresa(String nombreEmpresa,List<Cuenta> cuentas){
