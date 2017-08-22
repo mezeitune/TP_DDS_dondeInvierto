@@ -3,6 +3,7 @@ package usuario;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -10,6 +11,7 @@ import parserIndicadores.Operacion;
 
 @Observable
 @Entity
+@Table(name="Cuentas")
 public class Cuenta implements Operacion {
 	@Id @GeneratedValue
 	private Long id;
