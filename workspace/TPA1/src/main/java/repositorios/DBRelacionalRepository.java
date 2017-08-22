@@ -20,7 +20,7 @@ public class DBRelacionalRepository<E> {
 	}
 	
 	public <E> E findeById(long id){
-		return (E) entityManager.find(typeParameterClass.getClass(),new Long(id));//el repo o el que implemente la interfaz de ORM deberia ser el encargado de hacer esto
+		return (E) entityManager.find(typeParameterClass,new Long(id));//el repo o el que implemente la interfaz de ORM deberia ser el encargado de hacer esto
 		
 	}
 	

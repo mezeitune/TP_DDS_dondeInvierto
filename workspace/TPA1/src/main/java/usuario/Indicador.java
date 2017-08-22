@@ -82,6 +82,10 @@ public class Indicador implements Operacion,Comparable<Indicador> {
 		
 	}
 
+	public String toString (){
+        String mensaje="El indicador"+id+" es "+nombre+" con la fomrula: "+formula;
+        return mensaje;
+    }
 	
 	
 }
