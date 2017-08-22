@@ -28,8 +28,8 @@ public class DBRelacionalRepository<E> {//Usamos Generics para cualquier tabla
 		
 	}
 	
-	public List<E> all(int criterioFiltro){  //falta ver bien como van a ser los criterios de filtro 
-		Query query = entityManager.createQuery("from Indicador");
+	public List<E> filtrarPorOtroCampo(String tabla,String campoFiltro, String value){  //falta ver bien como van a ser los criterios de filtro 
+		Query query = entityManager.createQuery("from "+tabla);
 		//query.setParameter("code", criterioFiltro);
 		List<E> listado = query.getResultList();
 		return listado;
