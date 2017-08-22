@@ -3,17 +3,28 @@ package usuario;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
 import org.uqbar.commons.utils.Observable;
 
 import condiciones.Condicion;
 import condiciones.Criterio;
 
 @Observable
+@Entity
 public class Metodologia {
 
-	private List<Condicion> condiciones = new LinkedList<Condicion>();
+	@Id @GeneratedValue
+	private Long id;
+	@Transient
 	private Criterio criterio;
 	private String nombre;
+	@Transient
+	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	
 	public Metodologia(){
 		criterio = new Criterio();
