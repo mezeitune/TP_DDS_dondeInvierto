@@ -30,11 +30,5 @@ public class JPAUtility {
 		emFactory.close();
 	}
 	
-	public void comenzarTransaccion(){
-		((EntityManager) emFactory).getTransaction().begin();
-	}
 	
-	public void commitTransaccion(){
-		((EntityManager) emFactory).getTransaction().commit();
-	}
 } 

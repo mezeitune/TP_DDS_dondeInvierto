@@ -3,7 +3,7 @@ package repositorios;
 import javax.persistence.EntityManager;
 
 
-public class DBRelacionalRepository<E> {
+public class DBRelacionalRepository<E> {//Usamos Generics para cualquier tabla
 	private EntityManager entityManager;
 
     final Class<E> typeParameterClass;
