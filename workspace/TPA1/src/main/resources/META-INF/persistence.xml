@@ -11,6 +11,7 @@
     	<class>usuario.Indicador</class>
     	<class>usuario.Empresa</class>
     	<class>usuario.Metodologia</class>
+    	<class>usuario.Cuenta</class>
     	
     	
   

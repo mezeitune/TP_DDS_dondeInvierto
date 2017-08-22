@@ -1,12 +1,18 @@
 package usuario;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.uqbar.commons.utils.Observable;
 
 import parserIndicadores.Operacion;
 
 @Observable
+@Entity
 public class Cuenta implements Operacion {
-
+	@Id @GeneratedValue
+	private Long id;
 	private String nombre;
 	private String periodo;
 	private int valor;
@@ -15,6 +21,10 @@ public class Cuenta implements Operacion {
 		this.nombre=nombre;
 		this.periodo=periodo;
 		this.valor=valor;
+	}
+	
+	public Cuenta(){
+		
 	}
 	
 	public String getNombre (){
