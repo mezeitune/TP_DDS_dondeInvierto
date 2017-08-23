@@ -35,49 +35,38 @@ public class CargarBDWindow extends Dialog<CargarBDViewModel> {
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new ColumnLayout(2));
 		
-		new Label(form).setText("Escriba el nombre del Indicador").setBackground(Color.orange);
+		new Label(form).setText("Escriba el id del Indicador").setBackground(Color.orange);
 		
-		new TextBox(form).setWidth(300).bindValueToProperty("nombreIndicador");
+		new TextBox(form).setWidth(300).bindValueToProperty("idIndicador");
+		
+	
 		
 		new Label(form).setText("Escriba la formula del Indicador").setBackground(Color.orange);
 		
-		new TextBox(form).setWidth(300).bindValueToProperty("formulaIndicador");		
+		new TextBox(form).setWidth(300).bindValueToProperty("formulaIndicador");
 		
-		new Label(form).setText("Puede agregar indicadores pre-existentes en su formula").setBackground(Color.green);
+		new Label(form).setText("Resultado Indicador").setBackground(Color.green);
 		
-		new Label(mainPanel).setText("Indicadores Disponibles").setBackground(Color.ORANGE);
+		new Label(form).setBackground(Color.GREEN).bindValueToProperty("resultadoIndicador");
 		
-		Table<Indicador> tableIndicadores = new Table<Indicador>(mainPanel, Indicador.class);
 		
-		tableIndicadores.setNumberVisibleRows(6).setWidth(200);
+
 		
-		tableIndicadores.bindItemsToProperty("indicadores"); 
-		
-		new Column<Indicador>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
-		new Column<Indicador>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
 		
 	}
 	
 	
 	protected void addActions(Panel actionsPanel){
 		
-		new Button(actionsPanel).setCaption("Cargar Indicador")
-								.onClick(() -> {
-
-										try {
-											this.getModelObject().generarIndicador();
-											this.getDelegate().close();
-											PreguntaNuevoIndicadorWindow();
-										} catch (NombreIndicadorNotFound e) {
-											this.showError("No se ha ingresado un nombre para el indicador");
-										} catch (FormulaIndicadorNotFound e) {
-											this.showError("No se ha ingresado la formula del indicador");
-										} catch (IndicadorRepetidoException e) {
-											this.showError("El nombre ingresado ya existe");
-										} catch (FormulaIndicadorNotValidException e) {
-											this.showError("El indicador ingresado no contiene cuentas ni indicadores validos,revise la formula ingresada");
-										}
-								}).setWidth(200);
+		new Button(actionsPanel).setCaption("Consultar por ID")
+		.onClick(() -> {
+			this.getModelObject().traerResultadoPorID();
+		}).setWidth(250);
+		
+		new Button(actionsPanel).setCaption("Consultar por formula")
+		.onClick(() -> {
+				this.getModelObject().traerResultadoPorFormula();
+		}).setWidth(250);
 	
 		new Button(actionsPanel).setCaption("Volver")
 		.onClick(() -> {

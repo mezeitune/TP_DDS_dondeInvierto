@@ -3,6 +3,8 @@ package ui.vm;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
@@ -11,27 +13,35 @@ import excepciones.FormulaIndicadorNotValidException;
 import excepciones.IndicadorRepetidoException;
 import excepciones.NombreIndicadorNotFound;
 import parserIndicadores.ParserFormulaIndicador;
+import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
 import usuario.Indicador;
+import utilities.JPAUtility;
 @Observable
 public class CargarBDViewModel {
 
 	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 	
-	private static String nombreIndicador;
+	private static String idIndicador;
 	private static String formulaIndicador;
+	private static String resultadoIndicador;
+	
+	JPAUtility jpa=JPAUtility.getInstance();
+	EntityManager entityManager = jpa.getEntityManager();
+	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
+	
+
 
 	public CargarBDViewModel(){
-		nombreIndicador=null;
+		idIndicador=null;
 		formulaIndicador=null;
 	}
-	private static int codigoDeError;
 	
-	public String getNombreIndicador() {
-		return nombreIndicador;
+	public String getIdIndicador() {
+		return idIndicador;
 	}
-	public void setNombreIndicador(String nombreIndicador) {
-		CargarBDViewModel.nombreIndicador = nombreIndicador;
+	public void setIdIndicador(String idIndicador) {
+		CargarBDViewModel.idIndicador = idIndicador;
 	}
 	public String getFormulaIndicador() {
 		return formulaIndicador;
@@ -41,37 +51,27 @@ public class CargarBDViewModel {
 		CargarBDViewModel.formulaIndicador = formulaIndicador;
 	}
 	
-	public static int getCodigoDeError() {
-		return codigoDeError;
+	public String getResultadoIndicador() {
+		return resultadoIndicador;
 	}
-	
-	public static void setCodigoDeError(int codigoDeError) {
-		CargarBDViewModel.codigoDeError = codigoDeError;
-	}
-	
-	public void generarIndicador() throws NombreIndicadorNotFound, FormulaIndicadorNotFound, IndicadorRepetidoException, FormulaIndicadorNotValidException {
-		
-		if(nombreIndicador == null) throw new NombreIndicadorNotFound();
-		if(formulaIndicador == null) throw new FormulaIndicadorNotFound();
-		
-		Indicador nuevoIndicador = new Indicador(nombreIndicador,formulaIndicador);
-		
-		if(this.esUnIndicadorYaIngresado(nuevoIndicador)) throw new IndicadorRepetidoException();
-		
-		if(ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
-		IndicadoresRepository.addIndicador(nuevoIndicador);
-		
-		ObservableUtils.firePropertyChanged(this, "indicadores");
+	public void setResultadoIndicador(String resultadoIndicador) {
+		CargarBDViewModel.resultadoIndicador = resultadoIndicador;
 	}
-	public boolean esUnIndicadorYaIngresado (Indicador nuevoIndicador) {
-		return ParserFormulaIndicador.validarIndicadorRepetidoAntesDePrecargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
+
+	public void traerResultadoPorID(){
+		//Consulta por un id de cualquier tabla sea
+		Indicador indicador=(Indicador) repo.findById(Indicador.class,1);
+		CargarBDViewModel.resultadoIndicador = indicador.toString();
+
+		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
+	}
 	
+	public void traerResultadoPorFormula(){
+		
 	}
-	public List<Indicador> getIndicadores(){
-		Collections.sort(CargarBDViewModel.indicadores);
-		return CargarBDViewModel.indicadores;
-	}
+
+	
 	
 	
 	
