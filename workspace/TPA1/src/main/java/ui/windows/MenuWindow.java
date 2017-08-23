@@ -65,12 +65,21 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 					CargarIndicadoresWindow();
 		}).setWidth(250);
 		
+		
+
 		new Button(actionsPanel).setCaption("Cargar y consultar Metodologias")
 		.onClick(() -> {
 				this.getDelegate().close();
 					CargarMetodologiaWindow();
 			}).setWidth(250);
 	
+		
+		new Button(actionsPanel).setCaption("Cargar y Consultar BD")
+		.onClick(() -> {
+					this.getDelegate().close();
+					CargarBDWindow();
+		}).setWidth(250);
+		
 	}
 
 	public void CargarIndicadoresWindow() {
@@ -95,6 +104,12 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 	}
 	public void CargarMetodologiaWindow() {
 		Dialog<?> dialog = new CargarMetodologiaWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
+	
+	public void CargarBDWindow() {
+		Dialog<?> dialog = new CargarBDWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
