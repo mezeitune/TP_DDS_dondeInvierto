@@ -22,7 +22,7 @@ public class CargarBDViewModel {
 
 	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 	
-	private static String idIndicador;
+	private static long idIndicador;
 	private static String formulaIndicador;
 	private static String resultadoIndicador;
 	private static String nombreIndicador;
@@ -35,14 +35,13 @@ public class CargarBDViewModel {
 
 
 	public CargarBDViewModel(){
-		idIndicador=null;
 		formulaIndicador=null;
 	}
 	
-	public String getIdIndicador() {
+	public Long getIdIndicador() {
 		return idIndicador;
 	}
-	public void setIdIndicador(String idIndicador) {
+	public void setIdIndicador(Long idIndicador) {
 		CargarBDViewModel.idIndicador = idIndicador;
 	}
 	public String getFormulaIndicador() {
@@ -72,7 +71,7 @@ public class CargarBDViewModel {
 
 	public void traerResultadoPorID(){
 		//Consulta por un id de cualquier tabla sea
-		Indicador indicador=(Indicador) repo.findById(Indicador.class,1);
+		Indicador indicador=(Indicador) repo.findById(Indicador.class,this.idIndicador);
 		CargarBDViewModel.resultadoIndicador = indicador.toString();
 
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
@@ -80,7 +79,7 @@ public class CargarBDViewModel {
 	
 	public void traerResultadoPorFormula(){
 		//Consulta por un id de cualquier tabla sea
-		List<Indicador> indicadores=repo.filtrarPorCampoEspecifico(Indicador.class,"Indicador", "formula", "otrooo");
+		List<Indicador> indicadores=repo.filtrarPorCampoEspecifico(Indicador.class,"Indicador", "formula", this.formulaIndicador);
 		CargarBDViewModel.resultadoIndicador = indicadores.toString().substring(0, 9);
 
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
