@@ -27,7 +27,7 @@ import org.uqbar.commons.utils.Observable;
 public class Empresa {
 
 	@Id @GeneratedValue
-	private int id;
+	private Long id;
 	private String nombre;
 	int peso=0;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

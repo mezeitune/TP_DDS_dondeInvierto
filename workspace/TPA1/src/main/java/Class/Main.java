@@ -70,8 +70,8 @@ public class Main extends Application{
 		System.out.println(cuenta.toString());
 		
 		
-		//Empresa empresa=(Empresa) repo.findById(Empresa.class,1);
-		//System.out.println(empresa.getCuentas().get(0).toString());*/
+		Empresa empresa=(Empresa) repo.findById(Empresa.class,1);
+		System.out.println(empresa.getCuentas().get(0).toString());
 		
 	}
 		
