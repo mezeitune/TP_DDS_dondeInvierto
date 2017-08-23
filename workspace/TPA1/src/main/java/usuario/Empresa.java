@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -29,7 +30,8 @@ public class Empresa {
 	private int id;
 	private String nombre;
 	int peso=0;
-	@Transient
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "empresa_id")
 	private List<Cuenta> cuentas = new LinkedList<>(); 
 	
 	public Empresa(String nombreEmpresa,List<Cuenta> cuentas){
