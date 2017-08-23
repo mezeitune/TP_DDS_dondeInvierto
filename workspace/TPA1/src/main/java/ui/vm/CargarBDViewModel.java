@@ -68,7 +68,11 @@ public class CargarBDViewModel {
 	}
 	
 	public void traerResultadoPorFormula(){
-		
+		//Consulta por un id de cualquier tabla sea
+		List<Indicador> indicadores=repo.filtrarPorCampoEspecifico(Indicador.class,"Indicador", "formula", "otrooo");
+		CargarBDViewModel.resultadoIndicador = indicadores.toString().substring(0, 9);
+
+		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 	}
 
 	
