@@ -3,6 +3,8 @@ package ui.windows;
 import java.awt.Color;
 
 import org.uqbar.arena.layout.ColumnLayout;
+import org.uqbar.arena.layout.HorizontalLayout;
+import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -35,6 +37,7 @@ public class CargarBDWindow extends Dialog<CargarBDViewModel> {
 		Panel form = new Panel(mainPanel);
 		form.setLayout(new ColumnLayout(2));
 		
+		
 		new Label(form).setText("Escriba el id del Indicador").setBackground(Color.orange);
 		
 		new TextBox(form).setWidth(300).bindValueToProperty("idIndicador");
@@ -44,6 +47,11 @@ public class CargarBDWindow extends Dialog<CargarBDViewModel> {
 		new Label(form).setText("Escriba la formula del Indicador").setBackground(Color.orange);
 		
 		new TextBox(form).setWidth(300).bindValueToProperty("formulaIndicador");
+		
+		new Label(form).setText("Escriba nombre de Indicador para ingresarlo en la BD").setBackground(Color.orange);
+		
+		new TextBox(form).setWidth(300).bindValueToProperty("nombreIndicador");
+		
 		
 		new Label(form).setText("Resultado Indicador").setBackground(Color.green);
 		
@@ -57,6 +65,11 @@ public class CargarBDWindow extends Dialog<CargarBDViewModel> {
 	
 	
 	protected void addActions(Panel actionsPanel){
+		
+		new Button(actionsPanel).setCaption("Agregar a BD indicador")
+		.onClick(() -> {
+			this.getModelObject().agregarABD();
+		}).setWidth(250);
 		
 		new Button(actionsPanel).setCaption("Consultar por ID")
 		.onClick(() -> {

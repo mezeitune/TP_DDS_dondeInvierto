@@ -25,7 +25,9 @@ public class CargarBDViewModel {
 	private static String idIndicador;
 	private static String formulaIndicador;
 	private static String resultadoIndicador;
+	private static String nombreIndicador;
 	
+
 	JPAUtility jpa=JPAUtility.getInstance();
 	EntityManager entityManager = jpa.getEntityManager();
 	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
@@ -58,6 +60,15 @@ public class CargarBDViewModel {
 	public void setResultadoIndicador(String resultadoIndicador) {
 		CargarBDViewModel.resultadoIndicador = resultadoIndicador;
 	}
+	
+	public String getNombreIndicador() {
+		return nombreIndicador;
+	}
+
+	public void setNombreIndicador(String nombreIndicador) {
+		CargarBDViewModel.nombreIndicador = nombreIndicador;
+	}
+
 
 	public void traerResultadoPorID(){
 		//Consulta por un id de cualquier tabla sea
@@ -71,6 +82,17 @@ public class CargarBDViewModel {
 		//Consulta por un id de cualquier tabla sea
 		List<Indicador> indicadores=repo.filtrarPorCampoEspecifico(Indicador.class,"Indicador", "formula", "otrooo");
 		CargarBDViewModel.resultadoIndicador = indicadores.toString().substring(0, 9);
+
+		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
+	}
+	
+	public void agregarABD(){
+		//Consulta por un id de cualquier tabla sea
+		Indicador indicador=new Indicador(this.nombreIndicador,"bla");
+		CargarBDViewModel.resultadoIndicador = "registro ingresado en la BD";
+		entityManager.getTransaction().begin();
+		repo.agregar(indicador);
+		entityManager.getTransaction().commit();
 
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 	}
