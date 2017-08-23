@@ -40,11 +40,11 @@ public class Main extends Application{
 		//Instanciacion del repo que contiene todas las consultas a BD , el JPA que maneja el factory del entity
 		JPAUtility jpa=JPAUtility.getInstance();
 		EntityManager entityManager = jpa.getEntityManager();
-		DBRelacionalRepository<Indicador> repo=new DBRelacionalRepository<>(Indicador.class,entityManager);
+		DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 		
 		
 		//Consulta por un id de cualquier tabla sea
-		Indicador indicador=repo.findeById(1);
+		Indicador indicador=(Indicador) repo.findById(Indicador.class,1);
 		System.out.println(indicador.toString());
 		
 		//hace un insert de cualquier tabla sea
@@ -61,15 +61,17 @@ public class Main extends Application{
 		indicador.setNombre("Allahabad");
 		entityManager.getTransaction().commit();
 		
-		List<Indicador> indicadores=repo.filtrarPorCampoEspecifico("Indicador", "formula", "otrooo");
+		List<Indicador> indicadores=repo.filtrarPorCampoEspecifico(Indicador.class,"Indicador", "formula", "otrooo");
 		System.out.println(indicadores.toString());
 		
-		DBRelacionalRepository<Cuenta> repoCuenta=new DBRelacionalRepository<>(Cuenta.class,entityManager);
-		DBRelacionalRepository<Empresa> repoEmpresa=new DBRelacionalRepository<>(Empresa.class,entityManager);
 		
 		
-		Cuenta cuenta=repoCuenta.findeById(1);
+		Cuenta cuenta=(Cuenta) repo.findById(Cuenta.class,1);
 		System.out.println(cuenta.toString());
+		
+		
+		//Empresa empresa=(Empresa) repo.findById(Empresa.class,1);
+		//System.out.println(empresa.getCuentas().get(0).toString());*/
 		
 	}
 		

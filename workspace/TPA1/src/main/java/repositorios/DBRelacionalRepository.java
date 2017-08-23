@@ -10,25 +10,24 @@ import javax.persistence.Query;
 public class DBRelacionalRepository<E> {//Usamos Generics para cualquier tabla
 	private EntityManager entityManager;
 
-    final Class<E> typeParameterClass;
 
   
-	public DBRelacionalRepository(Class<E> typeParameterClass,EntityManager em){
+	public DBRelacionalRepository(EntityManager em){
 		this.entityManager=em;
-		this.typeParameterClass = typeParameterClass;
 	}
 	
 	public <E> void agregar(E elemento){
+		
 		entityManager.persist(elemento);
 	
 	}
 	
-	public <E> E findeById(long id){
+	public <E> E findById(Class<E> typeParameterClass, long id){
 		return (E) entityManager.find(typeParameterClass,new Long(id));//el repo o el que implemente la interfaz de ORM deberia ser el encargado de hacer esto
 		
 	}
 	
-	public List<E> filtrarPorCampoEspecifico(String tabla,String campoFiltro, String value){  //falta ver bien como van a ser los criterios de filtro 
+	public List<E> filtrarPorCampoEspecifico(Class<E> typeParameterClass,String tabla,String campoFiltro, String value){  //falta ver bien como van a ser los criterios de filtro 
 		Query query = entityManager.createQuery("from "+tabla+" where "+campoFiltro+" = :value");
 		query.setParameter("value", value);
 		List<E> listado = query.getResultList();
