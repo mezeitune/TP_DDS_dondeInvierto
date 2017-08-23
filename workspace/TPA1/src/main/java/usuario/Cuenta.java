@@ -69,6 +69,11 @@ public class Cuenta implements Operacion {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public String toString (){
+        String mensaje="La cuenta"+id+" es "+nombre+" con el: "+valor;
+        return mensaje;
+    }
 }
 
 

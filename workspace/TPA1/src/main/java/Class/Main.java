@@ -11,6 +11,8 @@ import org.uqbar.commons.utils.Observable;
 import excepciones.CSVInexistenteException;
 import repositorios.DBRelacionalRepository;
 import ui.windows.MenuWindow;
+import usuario.Cuenta;
+import usuario.Empresa;
 import usuario.Indicador;
 import utilities.JPAUtility;
 
@@ -61,6 +63,14 @@ public class Main extends Application{
 		
 		List<Indicador> indicadores=repo.filtrarPorCampoEspecifico("Indicador", "formula", "otrooo");
 		System.out.println(indicadores.toString());
+		
+		DBRelacionalRepository<Cuenta> repoCuenta=new DBRelacionalRepository<>(Cuenta.class,entityManager);
+		DBRelacionalRepository<Empresa> repoEmpresa=new DBRelacionalRepository<>(Empresa.class,entityManager);
+		
+		
+		Cuenta cuenta=repoCuenta.findeById(1);
+		System.out.println(cuenta.toString());
+		
 	}
 		
 }

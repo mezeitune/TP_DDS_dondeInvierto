@@ -83,5 +83,10 @@ public class Empresa {
 	public int getPeso(){
 		return this.peso;
 	}
+	
+	public String toString (){
+        String mensaje="La empresa"+id+" es "+nombre+" con el: "+peso;
+        return mensaje;
+    }
 
 }
