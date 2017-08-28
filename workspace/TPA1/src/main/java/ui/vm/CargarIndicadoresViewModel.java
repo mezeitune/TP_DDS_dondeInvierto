@@ -3,6 +3,8 @@ package ui.vm;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
@@ -11,12 +13,19 @@ import excepciones.FormulaIndicadorNotValidException;
 import excepciones.IndicadorRepetidoException;
 import excepciones.NombreIndicadorNotFound;
 import parserIndicadores.ParserFormulaIndicador;
+import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
 import usuario.Indicador;
+import utilities.JPAUtility;
 @Observable
 public class CargarIndicadoresViewModel {
 
 	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
+	
+	JPAUtility jpa=JPAUtility.getInstance();
+	EntityManager entityManager = jpa.getEntityManager();
+	@SuppressWarnings("rawtypes")
+	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	
 	private static String nombreIndicador;
 	private static String formulaIndicador;
@@ -49,6 +58,7 @@ public class CargarIndicadoresViewModel {
 		CargarIndicadoresViewModel.codigoDeError = codigoDeError;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void generarIndicador() throws NombreIndicadorNotFound, FormulaIndicadorNotFound, IndicadorRepetidoException, FormulaIndicadorNotValidException {
 		
 		if(nombreIndicador == null) throw new NombreIndicadorNotFound();
@@ -58,9 +68,17 @@ public class CargarIndicadoresViewModel {
 		
 		if(this.esUnIndicadorYaIngresado(nuevoIndicador)) throw new IndicadorRepetidoException();
 		
-		if(ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
+		//if(ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
 		IndicadoresRepository.addIndicador(nuevoIndicador);
+		
+		Indicador indicador=new Indicador(nombreIndicador,formulaIndicador);
+		
+		entityManager.getTransaction().begin();
+		repo.agregar(indicador);
+		entityManager.getTransaction().commit();
+
+		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 		
 		ObservableUtils.firePropertyChanged(this, "indicadores");
 	}
