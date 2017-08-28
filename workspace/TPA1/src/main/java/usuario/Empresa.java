@@ -30,9 +30,14 @@ public class Empresa {
 	private Long id;
 	private String nombre;
 	int peso=0;
+	
+	
+	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "empresa_id")
 	private List<Cuenta> cuentas = new LinkedList<>(); 
+	
+	
 	
 	public Empresa(String nombreEmpresa,List<Cuenta> cuentas){
 		this.nombre = nombreEmpresa;
@@ -84,9 +89,13 @@ public class Empresa {
 		return this.peso;
 	}
 	
-	public String toString (){
+	public String toString (){//Para testear a mano lo que nos devuelve
+		
+		
         String mensaje="La empresa"+id+" es "+nombre+" con el: "+peso;
         return mensaje;
+        
+        
     }
 
 }

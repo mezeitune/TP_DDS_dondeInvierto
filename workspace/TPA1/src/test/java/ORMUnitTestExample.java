@@ -3,8 +3,12 @@ import org.hibernate.SessionFactory;
 /*import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;*/
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 import org.junit.Before;
 import org.junit.Test;
+
+import usuario.Empresa;
 
 /**
  * This template demonstrates how to develop a standalone test case for Hibernate ORM.  Although this is perfectly
@@ -12,11 +16,29 @@ import org.junit.Test;
  */
 public class ORMUnitTestExample {
 
+
+	private Configuration cfg;
+
 	private SessionFactory sf;
 
 	@Before
 	public void setup() {
-		/*StandardServiceRegistryBuilder srb = new StandardServiceRegistryBuilder()
+		/*cfg = new Configuration();
+
+		// Add your entities here.
+		// cfg.addAnnotatedClass(Foo.class);
+
+		// Add in any settings that are specific to your test.  See resources/hibernate.properties for the defaults.
+		cfg.setProperty("hibernate.show_sql", "true");
+		cfg.setProperty("hibernate.format_sql", "true");
+		cfg.setProperty("hibernate.hbm2ddl.auto", "update");
+
+		StandardServiceRegistryBuilder srb = new StandardServiceRegistryBuilder();
+		ServiceRegistry sr = srb.build();
+		sf = cfg.buildSessionFactory(sr);*/
+		
+		/*
+		 * 		StandardServiceRegistryBuilder srb = new StandardServiceRegistryBuilder()
 			// Add in any settings that are specific to your test. See resources/hibernate.properties for the defaults.
 			.applySetting( "hibernate.show_sql", "true" )
 			.applySetting( "hibernate.format_sql", "true" )
@@ -27,13 +49,26 @@ public class ORMUnitTestExample {
 		//	.addAnnotatedClass( Foo.class )
 			.buildMetadata();
 
-		sf = metadata.buildSessionFactory();*/
-	}
+sf = metadata.buildSessionFactory();
+		 * 
+		 * */
+}
 
 	// Add your tests, using standard JUnit.
 
+	
+	
+	
+	
+	
+	
 	@Test
 	public void hhh123Test() throws Exception {
 
+		
+		
+		
+		
+		
 	}
 }

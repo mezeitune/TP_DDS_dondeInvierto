@@ -20,14 +20,22 @@ public class JPAUtility {
 	
 
 	public JPAUtility() {
-		   emFactory = Persistence.createEntityManagerFactory("db");
+		   
+		
+		emFactory = Persistence.createEntityManagerFactory("db");//Factory para obtener entity de nuestra db
+		   
+		   
 	}
 	
-	public EntityManager getEntityManager(){
+	public EntityManager getEntityManager(){//singleton para el entity
 		return emFactory.createEntityManager();
 	}
-	public void close(){
+	public void close(){//usar siempre que terminemos con las transactions
+		
+		
 		emFactory.close();
+
+	
 	}
 	
 	

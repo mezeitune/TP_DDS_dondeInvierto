@@ -39,6 +39,8 @@ public class ParserCSVEmpresaTest {
 	 	
 	}
 	
+	
+	
 	@Test
 	public void ListaAsignadaCorrectamenteConParser(){
 		ParserJsonAObjetosJava parserMock=Mockito.mock(ParserJsonAObjetosJava.class);
@@ -49,12 +51,18 @@ public class ParserCSVEmpresaTest {
 		Assert.assertEquals(someList, parserMock.getEmpresasDelArchivo());	
 	}
 	
+	
+	
 	@Test
  	public void recibeCorrectamenteCantidadDeEmpresas() throws IOException {
  	   List <Empresa> listaEmpresas = new ArrayList<Empresa>();
  	   listaEmpresas= parser.CSVObjectListToEmpresasList(new ListaLineasCsvFileMock().mockearListaLineas());
  	   assertEquals(2,listaEmpresas.size());
  	}
+	
+	
+	
+	
 	
 	@Test
 	public void filtraBienPorCuentasYNombre(){
