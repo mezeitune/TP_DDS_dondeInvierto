@@ -54,6 +54,28 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 	}
 
 	public void agregarDatosALaBDDDeLosArchivos(){
+		this.agregarEmpresas();
+		
+		this.agregarMetodologias();
+		
+		this.agregarIndicadores();
+	}
+	
+	public void agregarMetodologias(){
+		ParserJsonAObjetosJava parserMetodologias = new ParserJsonAObjetosJava("metodologias.json");
+		List <Metodologia> metodologiasAAgregarEnLaBD= parserMetodologias.getMetodologiasDelArchivo();
+		Query queryMetodologias = entityManager.createQuery("from Metodologia"); 
+		List <Condicion> metodologiasEnLaBD = queryMetodologias.getResultList(); 
+		if(metodologiasEnLaBD.isEmpty()){
+			entityManager.getTransaction().begin();
+			
+			metodologiasAAgregarEnLaBD.forEach(unaMet -> this.agregar(unaMet));
+			
+			entityManager.getTransaction().commit();
+		}
+	}
+	
+	public void agregarEmpresas(){
 		ParserCsv parserCsv = new ParserCsv("empresas.csv");
 		Query queryEmpresas = entityManager.createQuery("from Empresa"); 
 		List <Empresa> empresasEnLaBD = queryEmpresas.getResultList(); 
@@ -67,9 +89,9 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 			entityManager.getTransaction().commit();
 		
 		}
-		
-		this.agregarMetodologias();
-		
+	}
+	
+	public void agregarIndicadores(){
 		ParserJsonAObjetosJava parserIndicadores = new ParserJsonAObjetosJava("indicadores.json");
 		List<Indicador> indicadoresAAgregarEnLaBD= parserIndicadores.getIndicadoresDelArchivo();
 		Query queryIndicadores = entityManager.createQuery("from Indicador"); 
@@ -78,20 +100,6 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 			entityManager.getTransaction().begin();
 			
 			indicadoresAAgregarEnLaBD.forEach(unInd->this.agregar(unInd));
-			
-			entityManager.getTransaction().commit();
-		}
-	}
-	
-	public void agregarMetodologias(){
-		ParserJsonAObjetosJava parserMetodologias = new ParserJsonAObjetosJava("metodologias.json");
-		List <Metodologia> metodologiasAAgregarEnLaBD= parserMetodologias.getMetodologiasDelArchivo();
-		Query queryMetodologias = entityManager.createQuery("from Metodologia"); 
-		List <Condicion> metodologiasEnLaBD = queryMetodologias.getResultList(); 
-		if(metodologiasEnLaBD.isEmpty()){
-			entityManager.getTransaction().begin();
-			
-			metodologiasAAgregarEnLaBD.forEach(unaMet -> this.agregar(unaMet));
 			
 			entityManager.getTransaction().commit();
 		}
