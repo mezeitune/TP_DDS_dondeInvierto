@@ -6,11 +6,14 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -26,7 +29,8 @@ public class Metodologia {
 
 	@Id @GeneratedValue
 	private Long id;
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST) //En el der un vehiculo puede tener muchos robos
+	@OrderColumn//agrega un campo que es el orden en el que estaba en la lista , para que cuando lo mapee los traiga en el mismo orden en el cual los persistio
 	private Criterio criterio;
 	private String nombre;
 	

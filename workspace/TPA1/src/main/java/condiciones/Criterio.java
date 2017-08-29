@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import usuario.Empresa;
 @Entity
@@ -16,7 +17,9 @@ public class Criterio {
 	@Id @GeneratedValue
 	private Long id;
 	
+	@ManyToMany
 	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
+	@ManyToMany
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	
 	public Criterio(List<Condicion> condiciones){
