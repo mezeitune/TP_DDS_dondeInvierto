@@ -75,12 +75,13 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		
 		new Label(mainPanel).setText("Eliminar Metodologia").setBackground(Color.ORANGE);
 		new Label(mainPanel).setText("Elija la metodologia a eliminar de la BDD").setBackground(Color.green);
+		
 		Selector<Metodologia> selectorCondicion = new Selector<Metodologia>(mainPanel).allowNull(true);
 		selectorCondicion.setWidth(100);
 		selectorCondicion.bindItemsToProperty("metodologias").setAdapter(new PropertyAdapter(Metodologia.class, "nombre"));
 		selectorCondicion.bindValueToProperty("metodologiaSeleccionada");
 		
-		new Label(form).setBackground(Color.GREEN).bindValueToProperty("resultadoIndicador");
+		new Label(mainPanel).setBackground(Color.GREEN).bindValueToProperty("resultadoIndicador");
 		
 	}
 	
