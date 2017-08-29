@@ -34,7 +34,7 @@ public class Metodologia {
 	private Criterio criterio;
 	private String nombre;
 	
-	@ManyToMany
+	@Transient
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	
 	public Metodologia(){

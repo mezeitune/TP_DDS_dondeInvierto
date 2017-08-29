@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import usuario.Empresa;
 @Entity
@@ -17,9 +18,9 @@ public class Criterio {
 	@Id @GeneratedValue
 	private Long id;
 	
-	@ManyToMany
+	@Transient
 	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
-	@ManyToMany
+	@Transient
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	
 	public Criterio(List<Condicion> condiciones){

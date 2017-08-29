@@ -22,7 +22,7 @@ public class Condicion {
 	@Transient
 	public TipoCondicion tipo;
 	public int peso;
-	@ManyToMany
+	@Transient
 	public Indicador indicador;
 	public String nombre;
 	
