@@ -38,7 +38,7 @@ public class CargarIndicadoresViewModel {
 	private Indicador indicadorSeleccionado;
 	private static String nombreIndicador;
 	private static String formulaIndicador;
-
+	private static String resultadoIndicador;
 	public CargarIndicadoresViewModel(){
 		nombreIndicador=null;
 		formulaIndicador=null;
@@ -71,6 +71,13 @@ public class CargarIndicadoresViewModel {
 	
 	public static void setCodigoDeError(int codigoDeError) {
 		CargarIndicadoresViewModel.codigoDeError = codigoDeError;
+	}
+	public String getResultadoIndicador() {
+		return resultadoIndicador;
+	}
+
+	public void setResultadoIndicador(String resultadoIndicador) {
+		this.resultadoIndicador = resultadoIndicador;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -114,6 +121,8 @@ public class CargarIndicadoresViewModel {
 		
 		repo.eliminar(indicadorAEliminar.get(0));
 		entityManager.getTransaction().commit();
+		this.setResultadoIndicador("Se ha eliminado correctamente el indicador :"+indicadorAEliminar.get(0));
+		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 	}
 	
 }

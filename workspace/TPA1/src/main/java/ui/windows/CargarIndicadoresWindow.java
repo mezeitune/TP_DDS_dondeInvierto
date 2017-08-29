@@ -66,6 +66,8 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		selectorCondicion.bindItemsToProperty("indicadores").setAdapter(new PropertyAdapter(Indicador.class, "nombre"));
 		selectorCondicion.bindValueToProperty("indicadorSeleccionado");
 		
+		
+		new Label(form).setBackground(Color.GREEN).bindValueToProperty("resultadoIndicador");
 	}
 	
 	

@@ -80,6 +80,8 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		selectorCondicion.bindItemsToProperty("metodologias").setAdapter(new PropertyAdapter(Metodologia.class, "nombre"));
 		selectorCondicion.bindValueToProperty("metodologiaSeleccionada");
 		
+		new Label(form).setBackground(Color.GREEN).bindValueToProperty("resultadoIndicador");
+		
 	}
 	
 	

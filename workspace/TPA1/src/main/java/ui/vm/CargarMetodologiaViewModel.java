@@ -29,7 +29,7 @@ public class CargarMetodologiaViewModel {
 	JPAUtility jpa=JPAUtility.getInstance();
 	EntityManager entityManager = jpa.getEntityManager();
 	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
-	
+	private String resultadoIndicador;
 	private Metodologia metodologiaSeleccionada;
 	public Metodologia getMetodologiaSeleccionada() {
 		return metodologiaSeleccionada;
@@ -53,6 +53,15 @@ public class CargarMetodologiaViewModel {
 	}
 	public void setNombreMetodologia(String nombre) {
 		CargarMetodologiaViewModel.nombreMetodologia = nombre;
+	}
+	
+	public String getResultadoIndicador() {
+		
+		return resultadoIndicador;
+	}
+
+	public void setResultadoIndicador(String resultadoIndicador) {
+		this.resultadoIndicador = resultadoIndicador;
 	}
 	
 	public  void generarMetodologia() throws NombreMetodologiaNotFoundException, CondicionesNotFoundException, MetodologiaRepetidaException {
@@ -79,6 +88,9 @@ public class CargarMetodologiaViewModel {
 		repo.eliminar( metodologiaAEliminar.get(0));
 		
 		entityManager.getTransaction().commit();
+		
+		this.setResultadoIndicador("Se ha eliminado correctamente la metodologia :"+metodologiaAEliminar.get(0));
+		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 	}
 	public void reset(){
 		nombreMetodologia = null;
