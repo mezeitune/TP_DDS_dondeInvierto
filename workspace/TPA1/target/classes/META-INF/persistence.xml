@@ -12,6 +12,8 @@
     	<class>usuario.Empresa</class>
     	<class>usuario.Metodologia</class>
     	<class>usuario.Cuenta</class>
+    	<class>condiciones.Condicion</class>
+    	<class>condiciones.Criterio</class>
     	
     	
   
