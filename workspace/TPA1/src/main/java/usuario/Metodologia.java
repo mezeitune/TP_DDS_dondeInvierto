@@ -30,8 +30,7 @@ public class Metodologia {
 
 	@Id @GeneratedValue
 	private Long id;
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST) 
-	@OrderColumn
+	@Transient
 	private Criterio criterio;
 	private String nombre;
 	

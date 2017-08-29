@@ -15,16 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 import usuario.Empresa;
-@Entity
+
 public class Criterio {
 
-	@Id @GeneratedValue
-	private Long id;
-	
-	@Transient
 	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
-	@ManyToMany(cascade=CascadeType.ALL)  
-    @JoinTable(name="criterio_condicion", joinColumns=@JoinColumn(name="criterio_id"), inverseJoinColumns=@JoinColumn(name="condicion_id"))  
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	
 	public Criterio(List<Condicion> condiciones){
