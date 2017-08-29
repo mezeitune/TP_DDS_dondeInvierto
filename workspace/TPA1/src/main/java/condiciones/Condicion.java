@@ -10,6 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import javax.persistence.CascadeType;
@@ -23,6 +24,7 @@ import usuario.Empresa;
 import usuario.Indicador;
 @Observable
 @Entity
+@Table(name="Condiciones")
 public class Condicion {
 
 	@Id @GeneratedValue

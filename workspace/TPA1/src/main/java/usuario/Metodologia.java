@@ -35,7 +35,7 @@ public class Metodologia {
 	private String nombre;
 	
 	@ManyToMany(cascade=CascadeType.ALL)  
-    @JoinTable(name="metodologia_condicion", joinColumns=@JoinColumn(name="metodologia_id"), inverseJoinColumns=@JoinColumn(name="condicion_id"))  
+    @JoinTable(name="metodologias_condiciones", joinColumns=@JoinColumn(name="metodologia_id"), inverseJoinColumns=@JoinColumn(name="condicion_id"))  
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	
 	public Metodologia(){
