@@ -31,18 +31,11 @@ public class CargarIndicadoresViewModel {
 	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	
 	private static List<Indicador> indicadoresArchivo = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
+	
 	Query queryIndicadores = entityManager.createQuery("from Indicador"); 
 	private List<Indicador> indicadores = queryIndicadores.getResultList(); 
 	
 	private Indicador indicadorSeleccionado;
-	public Indicador getIndicadorSeleccionado() {
-		return indicadorSeleccionado;
-	}
-	public void setIndicadorSeleccionado(Indicador indicadorSeleccionado) {
-		this.indicadorSeleccionado = indicadorSeleccionado;
-	}
-	
-	
 	private static String nombreIndicador;
 	private static String formulaIndicador;
 
@@ -52,6 +45,12 @@ public class CargarIndicadoresViewModel {
 	}
 	private static int codigoDeError;
 	
+	public Indicador getIndicadorSeleccionado() {
+		return indicadorSeleccionado;
+	}
+	public void setIndicadorSeleccionado(Indicador indicadorSeleccionado) {
+		this.indicadorSeleccionado = indicadorSeleccionado;
+	}
 	public String getNombreIndicador() {
 		return nombreIndicador;
 	}
@@ -109,11 +108,11 @@ public class CargarIndicadoresViewModel {
 	
 	public void eliminarIndicadorDeLaBDD(){
 		
-		List <Indicador> i = indicadores.stream().filter(unInd -> unInd.getNombre()==indicadorSeleccionado.getNombre()).collect(Collectors.toList());
+		List <Indicador> indicadorAEliminar = indicadores.stream().filter(unInd -> unInd.getNombre()==indicadorSeleccionado.getNombre()).collect(Collectors.toList());
 		
 		entityManager.getTransaction().begin();
 		
-		repo.eliminar(i.get(0));
+		repo.eliminar(indicadorAEliminar.get(0));
 		entityManager.getTransaction().commit();
 	}
 	

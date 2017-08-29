@@ -13,6 +13,7 @@ import condiciones.Condicion;
 import excepciones.CondicionesNotFoundException;
 import excepciones.MetodologiaRepetidaException;
 import excepciones.NombreMetodologiaNotFoundException;
+import metodologiasPredefinidas.WarrenBuffet;
 import repositorios.CondicionesSeleccionadasRepository;
 import repositorios.DBRelacionalRepository;
 import repositorios.MetodologiasRepository;
@@ -71,11 +72,11 @@ public class CargarMetodologiaViewModel {
 
 	public void eliminarMetodologiaDeBDD(){
 		System.out.println(metodologiaSeleccionada);
-		List <Metodologia> i = this.getMetodologias().stream().filter(unInd -> unInd.getNombre()==metodologiaSeleccionada.getNombre()).collect(Collectors.toList());
+		List <Metodologia> metodologiaAEliminar = this.getMetodologias().stream().filter(unInd -> unInd.getNombre()==metodologiaSeleccionada.getNombre()).collect(Collectors.toList());
 		
 		entityManager.getTransaction().begin();
 		
-		repo.eliminar(i.get(0));
+		repo.eliminar( metodologiaAEliminar.get(0));
 		
 		entityManager.getTransaction().commit();
 	}
