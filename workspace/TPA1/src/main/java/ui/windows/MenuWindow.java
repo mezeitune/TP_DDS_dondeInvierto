@@ -59,7 +59,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 			}).setWidth(250);
 		
 		
-		new Button(actionsPanel).setCaption("Cargar y consultar indicadores")
+		new Button(actionsPanel).setCaption("Cargar, consultar y eliminar indicadores")
 		.onClick(() -> {
 					this.getDelegate().close();
 					CargarIndicadoresWindow();
@@ -67,7 +67,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 		
 		
 
-		new Button(actionsPanel).setCaption("Cargar y consultar Metodologias")
+		new Button(actionsPanel).setCaption("Cargar, consultar y eliminar Metodologias")
 		.onClick(() -> {
 				this.getDelegate().close();
 					CargarMetodologiaWindow();
