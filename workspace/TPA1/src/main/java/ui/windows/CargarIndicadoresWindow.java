@@ -64,7 +64,7 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		Selector<Indicador> selectorCondicion = new Selector<Indicador>(mainPanel).allowNull(true);
 		selectorCondicion.setWidth(100);
 		selectorCondicion.bindItemsToProperty("indicadores").setAdapter(new PropertyAdapter(Indicador.class, "nombre"));
-		//selectorCondicion.bindValueToProperty("indicadorSeleccionado");
+		selectorCondicion.bindValueToProperty("indicadorSeleccionado");
 		
 	}
 	

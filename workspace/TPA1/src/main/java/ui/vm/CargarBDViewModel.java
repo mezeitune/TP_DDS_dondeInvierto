@@ -22,6 +22,7 @@ public class CargarBDViewModel {
 
 	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 	
+	
 	private static long idIndicador;
 	private static String formulaIndicador;
 	private static String resultadoIndicador;

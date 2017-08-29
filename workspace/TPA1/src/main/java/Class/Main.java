@@ -47,6 +47,7 @@ public class Main extends Application{
 		EntityManager entityManager = jpa.getEntityManager();
 		DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 		
+	
 		
 		//Consulta por un id de cualquier tabla sea
 		Indicador indicador=(Indicador) repo.findById(Indicador.class,1);
@@ -56,6 +57,9 @@ public class Main extends Application{
 		Query queryEmpresas = entityManager.createQuery("from Empresa"); 
 		List <Empresa> empresasEnLaBD = queryEmpresas.getResultList(); 
 		List <Empresa> empresasAAgregarEnLaBD= parserCsv.csvFileToEmpresas();
+		
+	
+		
 		if(empresasAAgregarEnLaBD.containsAll(empresasEnLaBD)){
 			entityManager.getTransaction().begin();			
 
@@ -91,6 +95,18 @@ public class Main extends Application{
 			entityManager.getTransaction().begin();
 			
 			metodologiasAAgregarEnLaBD.forEach(unaMet -> repo.agregar(unaMet));
+			
+			entityManager.getTransaction().commit();
+		}
+		
+		ParserJsonAObjetosJava parserIndicadores = new ParserJsonAObjetosJava("indicadores.json");
+		List<Indicador> indicadoresAAgregarEnLaBD= parserIndicadores.getIndicadoresDelArchivo();
+		Query queryIndicadores = entityManager.createQuery("from Indicador"); 
+		List <Indicador> indicadoresEnLaBD = queryIndicadores.getResultList(); 
+		if(indicadoresAAgregarEnLaBD.containsAll(indicadoresEnLaBD)){
+			entityManager.getTransaction().begin();
+			
+			indicadoresAAgregarEnLaBD.forEach(unInd-> repo.agregar(unInd));
 			
 			entityManager.getTransaction().commit();
 		}

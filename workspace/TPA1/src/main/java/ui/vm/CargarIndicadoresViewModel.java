@@ -2,8 +2,11 @@ package ui.vm;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
@@ -12,20 +15,34 @@ import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.IndicadorRepetidoException;
 import excepciones.NombreIndicadorNotFound;
+import parserArchivos.ParserJsonAObjetosJava;
 import parserIndicadores.ParserFormulaIndicador;
 import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
 import usuario.Indicador;
+import usuario.Metodologia;
 import utilities.JPAUtility;
 @Observable
 public class CargarIndicadoresViewModel {
-
-	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
-	private Indicador indicadorSeleccionado;
+	
 	JPAUtility jpa=JPAUtility.getInstance();
 	EntityManager entityManager = jpa.getEntityManager();
 	@SuppressWarnings("rawtypes")
 	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
+	
+	private Metodologia metodologia;
+	private static List<Indicador> indicadoresArchivo = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
+	Query queryIndicadores = entityManager.createQuery("from Indicador"); 
+	private List<Indicador> indicadores = queryIndicadores.getResultList(); 
+	
+	private Indicador indicadorSeleccionado;
+	public Indicador getIndicadorSeleccionado() {
+		return indicadorSeleccionado;
+	}
+	public void setIndicadorSeleccionado(Indicador indicadorSeleccionado) {
+		this.indicadorSeleccionado = indicadorSeleccionado;
+	}
+	
 	
 	private static String nombreIndicador;
 	private static String formulaIndicador;
@@ -68,7 +85,7 @@ public class CargarIndicadoresViewModel {
 		
 		if(this.esUnIndicadorYaIngresado(nuevoIndicador)) throw new IndicadorRepetidoException();
 		
-		//if(ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
+		if(ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
 		IndicadoresRepository.addIndicador(nuevoIndicador);
 		
@@ -87,12 +104,18 @@ public class CargarIndicadoresViewModel {
 	
 	}
 	public List<Indicador> getIndicadores(){
-		Collections.sort(CargarIndicadoresViewModel.indicadores);
-		return CargarIndicadoresViewModel.indicadores;
+		Collections.sort(indicadores);
+		return indicadores;
 	}
 	
 	public void eliminarIndicadorDeLaBDD(){
-		repo.eliminar(indicadorSeleccionado);
+		
+		List <Indicador> i = indicadores.stream().filter(unInd -> unInd.getNombre()==indicadorSeleccionado.getNombre()).collect(Collectors.toList());
+		
+		entityManager.getTransaction().begin();
+		
+		repo.eliminar(i.get(0));
+		entityManager.getTransaction().commit();
 	}
 	
 }

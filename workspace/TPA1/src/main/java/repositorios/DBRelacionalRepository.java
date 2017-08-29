@@ -4,6 +4,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import condiciones.Condicion;
+import usuario.Metodologia;
+
 
 public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier tabla
 	private EntityManager entityManager;
@@ -29,7 +32,12 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 		return entityManager.find(typeParameterClass,new Long(id));//el repo o el que implemente la interfaz de ORM deberia ser el encargado de hacer esto
 		
 	}
+	public List <Entity> traerTodosLosCamposDeUnaTabla (Class<Entity> typeParameterClass ){
 	
+		Query query = entityManager.createQuery("from "+ typeParameterClass); 
+		List <Entity> datosEnLaBD = query.getResultList(); 
+		return datosEnLaBD;
+	}
 	public List<Entity> filtrarPorCampoEspecifico(Class<Entity> typeParameterClass,String tabla,String campoFiltro, String value){  //falta ver bien como van a ser los criterios de filtro 
 		Query query = entityManager.createQuery("from "+tabla+" where "+campoFiltro+" = :value");
 		query.setParameter("value", value);
