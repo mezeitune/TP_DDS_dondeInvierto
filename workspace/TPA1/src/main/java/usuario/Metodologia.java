@@ -29,8 +29,8 @@ public class Metodologia {
 
 	@Id @GeneratedValue
 	private Long id;
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST) //En el der un vehiculo puede tener muchos robos
-	@OrderColumn//agrega un campo que es el orden en el que estaba en la lista , para que cuando lo mapee los traiga en el mismo orden en el cual los persistio
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST) 
+	@OrderColumn
 	private Criterio criterio;
 	private String nombre;
 	

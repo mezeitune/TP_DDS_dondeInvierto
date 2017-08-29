@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -17,9 +19,10 @@ public class Condicion {
 
 	@Id @GeneratedValue
 	private Long id;
+	@Transient
 	public TipoCondicion tipo;
 	public int peso;
-	
+	@ManyToMany
 	public Indicador indicador;
 	public String nombre;
 	
