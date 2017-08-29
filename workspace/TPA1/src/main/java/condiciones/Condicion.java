@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Transient;
 
 import javax.persistence.CascadeType;
@@ -27,7 +30,8 @@ public class Condicion {
 	@Transient
 	public TipoCondicion tipo;
 	public int peso;
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST) 
+	@OrderColumn
 	public Indicador indicador;
 	public String nombre;
 	
