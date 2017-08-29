@@ -3,18 +3,26 @@ package condiciones;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import org.uqbar.commons.utils.Observable;
 
 import usuario.Empresa;
 import usuario.Indicador;
 @Observable
+@Entity
 public class Condicion {
 
+	
 	public TipoCondicion tipo;
 	public int peso;
+	
 	public Indicador indicador;
 	public String nombre;
 	
+	public Condicion(){
+		
+	}
 	
 	public Condicion(String nombre,TipoCondicion tipo,Indicador indicador,int peso){
 		this.nombre = nombre;

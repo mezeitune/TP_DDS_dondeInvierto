@@ -5,8 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import usuario.Empresa;
+import javax.persistence.Entity;
 
+import usuario.Empresa;
+@Entity
 public class Criterio {
 
 	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
