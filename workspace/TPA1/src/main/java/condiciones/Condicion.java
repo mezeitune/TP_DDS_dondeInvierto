@@ -9,6 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Convert;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.FetchType;
 import org.uqbar.commons.utils.Observable;
 
 import usuario.Empresa;

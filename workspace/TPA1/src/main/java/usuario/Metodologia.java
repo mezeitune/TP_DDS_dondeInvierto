@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -34,7 +35,8 @@ public class Metodologia {
 	private Criterio criterio;
 	private String nombre;
 	
-	@Transient
+	@ManyToMany(cascade=CascadeType.ALL)  
+    @JoinTable(name="metodologia_condicion", joinColumns=@JoinColumn(name="metodologia_id"), inverseJoinColumns=@JoinColumn(name="condicion_id"))  
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	
 	public Metodologia(){
