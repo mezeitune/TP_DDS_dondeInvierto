@@ -30,7 +30,9 @@ public class EmpresasAEvaluarRepository {
 		EmpresasAEvaluarRepository.empresasAEvaluar.remove(unaEmpresa);
 		
 	}
-	
+	public static void setPeriodosAEvaluar(){
+		EmpresasAEvaluarRepository.periodosAEvaluar.addAll(getPeriodosAEvaluar());
+	}
 	
 	public static List<String> getPeriodosAEvaluar() {
 		return periodosAEvaluar;
@@ -66,6 +68,7 @@ public class EmpresasAEvaluarRepository {
 
 	public static void cargarTodasLasEmpresas() {
 		EmpresasAEvaluarRepository.setEmpresasAEvaluar(EmpresasRepository.getEmpresas());
+	
 	}
 	
 }

@@ -21,6 +21,9 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 	
 	}
 	
+	public <Entity> void eliminar (Entity elemento){
+		entityManager.remove(elemento);
+	}
 	@SuppressWarnings("hiding")
 	public <Entity> Entity findById(Class<Entity> typeParameterClass, long id){
 		return entityManager.find(typeParameterClass,new Long(id));//el repo o el que implemente la interfaz de ORM deberia ser el encargado de hacer esto

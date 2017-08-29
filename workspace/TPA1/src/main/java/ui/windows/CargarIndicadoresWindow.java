@@ -2,10 +2,12 @@ package ui.windows;
 
 import java.awt.Color;
 
+import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
@@ -18,6 +20,7 @@ import excepciones.IndicadorRepetidoException;
 import excepciones.NombreIndicadorNotFound;
 import ui.vm.CargarIndicadoresViewModel;
 import usuario.Indicador;
+import usuario.Metodologia;
 
 @SuppressWarnings("serial")
 public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> {
@@ -55,10 +58,23 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		new Column<Indicador>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
 		new Column<Indicador>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
 		
+		new Label(mainPanel).setText("Eliminar Indicador de la BDD").setBackground(Color.ORANGE);
+		new Label(mainPanel).setText("Seleccione el indicador a eliminar de la BDD").setBackground(Color.green);
+		
+		Selector<Indicador> selectorCondicion = new Selector<Indicador>(mainPanel).allowNull(true);
+		selectorCondicion.setWidth(100);
+		selectorCondicion.bindItemsToProperty("indicadores").setAdapter(new PropertyAdapter(Indicador.class, "nombre"));
+		//selectorCondicion.bindValueToProperty("indicadorSeleccionado");
+		
 	}
 	
 	
 	protected void addActions(Panel actionsPanel){
+		new Button(actionsPanel).setCaption("Eliminar Indicador Seleccionado")
+		.onClick(() -> {
+
+				this.getModelObject().eliminarIndicadorDeLaBDD();
+		}).setWidth(200);
 		
 		new Button(actionsPanel).setCaption("Cargar Indicador")
 								.onClick(() -> {

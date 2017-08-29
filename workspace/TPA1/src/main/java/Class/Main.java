@@ -62,9 +62,10 @@ public class Main extends Application{
 			empresasAAgregarEnLaBD.forEach(unaEmp -> repo.agregar(unaEmp));
 			
 			entityManager.getTransaction().commit();
+		
 		}
 		
-		
+	
 		
 		/*ParserJsonAObjetosJava parserCondiciones = new ParserJsonAObjetosJava("condiciones.json");
 		List<Condicion> condicionesAAgregarEnLaBD = parserCondiciones.getCondicionesDelArchivo();

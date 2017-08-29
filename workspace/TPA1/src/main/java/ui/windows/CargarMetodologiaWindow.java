@@ -2,10 +2,12 @@ package ui.windows;
 
 import java.awt.Color;
 
+import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
@@ -70,10 +72,24 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		tableMetodologias.bindItemsToProperty("metodologias"); 
 		
 		new Column<Metodologia>(tableMetodologias).setTitle("Nombre").bindContentsToProperty("nombre");
+		
+		new Label(mainPanel).setText("Eliminar Metodologia").setBackground(Color.ORANGE);
+		new Label(mainPanel).setText("Elija la metodologia a eliminar de la BDD").setBackground(Color.green);
+		Selector<Metodologia> selectorCondicion = new Selector<Metodologia>(mainPanel).allowNull(true);
+		selectorCondicion.setWidth(100);
+		selectorCondicion.bindItemsToProperty("metodologias").setAdapter(new PropertyAdapter(Metodologia.class, "nombre"));
+		//selectorCondicion.bindValueToProperty("MetodologiaSeleccionada");
+		
 	}
 	
 	
 	protected void addActions(Panel actionsPanel){
+		
+		new Button(actionsPanel).setCaption("Eliminar metodolologia seleccionada")
+		.onClick(() -> {
+					getModelObject().eliminarMetodologiaDeBDD();
+					this.getModelObject().refresh();
+		}).setWidth(200);
 		
 		new Button(actionsPanel).setCaption("Crear Condicion ")
 		.onClick(() -> {

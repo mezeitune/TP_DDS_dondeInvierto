@@ -66,6 +66,7 @@ public class MetodologiasEmpresasViewModel {
 	
 	public void autocompletarListaEmpresasAEvaluar(){
 		EmpresasAEvaluarRepository.cargarTodasLasEmpresas();
+		
 		ObservableUtils.firePropertyChanged(this, "empresas");	
 	}
 

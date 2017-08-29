@@ -21,7 +21,7 @@ import utilities.JPAUtility;
 public class CargarIndicadoresViewModel {
 
 	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
-	
+	private Indicador indicadorSeleccionado;
 	JPAUtility jpa=JPAUtility.getInstance();
 	EntityManager entityManager = jpa.getEntityManager();
 	@SuppressWarnings("rawtypes")
@@ -91,6 +91,8 @@ public class CargarIndicadoresViewModel {
 		return CargarIndicadoresViewModel.indicadores;
 	}
 	
-	
+	public void eliminarIndicadorDeLaBDD(){
+		repo.eliminar(indicadorSeleccionado);
+	}
 	
 }
