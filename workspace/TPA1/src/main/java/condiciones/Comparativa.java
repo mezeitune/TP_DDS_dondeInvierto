@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import org.uqbar.commons.utils.Observable;
 
 import comparadores.Comparador;
@@ -11,11 +13,12 @@ import parserIndicadores.ParserFormulaIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 @Observable
+@Entity
 public class Comparativa extends TipoCondicion{
 	
 	
 	private static Comparativa instance ;
-	public Comparador comparador;
+
 
 
 	public Comparativa(Comparador comparador){

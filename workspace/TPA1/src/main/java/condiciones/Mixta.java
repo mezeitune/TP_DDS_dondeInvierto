@@ -3,13 +3,22 @@ package condiciones;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import org.uqbar.commons.utils.Observable;
 import usuario.Empresa;
 
 @Observable
+@Entity
 public class Mixta extends TipoCondicion{
 
 	private static Mixta instance ;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	
+	@JoinColumn(name = "tipoCondicionComposite_id",nullable = false)//el nullable es para poder eliminar deshabilitando las FK
 	private List<TipoCondicion> tiposCondiciones = new LinkedList<TipoCondicion> ();
 
 	public Mixta(List<TipoCondicion> tiposCondiciones){

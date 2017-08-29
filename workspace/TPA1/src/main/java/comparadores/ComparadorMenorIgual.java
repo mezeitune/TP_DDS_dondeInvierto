@@ -1,8 +1,11 @@
 package comparadores;
 
+import javax.persistence.Entity;
+
 import org.uqbar.commons.utils.Observable;
 
 @Observable
+@Entity
 public class ComparadorMenorIgual extends Comparador{
 	public ComparadorMenorIgual(){
 		this.nombre = "<=";
