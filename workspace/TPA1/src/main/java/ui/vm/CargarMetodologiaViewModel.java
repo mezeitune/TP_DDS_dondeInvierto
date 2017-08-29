@@ -1,8 +1,10 @@
 package ui.vm;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
@@ -14,6 +16,7 @@ import excepciones.NombreMetodologiaNotFoundException;
 import repositorios.CondicionesSeleccionadasRepository;
 import repositorios.DBRelacionalRepository;
 import repositorios.MetodologiasRepository;
+import usuario.Indicador;
 import usuario.Metodologia;
 import utilities.JPAUtility;
 
@@ -26,13 +29,22 @@ public class CargarMetodologiaViewModel {
 	EntityManager entityManager = jpa.getEntityManager();
 	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	
-	private Metodologia MetodologiaSeleccionada = new Metodologia();
+	private Metodologia metodologiaSeleccionada;
+	public Metodologia getMetodologiaSeleccionada() {
+		return metodologiaSeleccionada;
+	}
+
+	public void setMetodologiaSeleccionada(Metodologia metodologiaSeleccionadaa) {
+		metodologiaSeleccionada = metodologiaSeleccionadaa;
+	}
+
 	public List<Condicion> getCondiciones(){
 		return CondicionesSeleccionadasRepository.getCondicionesSeleccionados();
 	}
 	
 	public List<Metodologia> getMetodologias() {
-		return MetodologiasRepository.getMetodologias();
+		Query queryIndicadores = entityManager.createQuery("from Metodologia");
+		return queryIndicadores.getResultList(); 
 	}
 	
 	public String getNombreMetodologia() {
@@ -58,9 +70,12 @@ public class CargarMetodologiaViewModel {
 	}
 
 	public void eliminarMetodologiaDeBDD(){
+		System.out.println(metodologiaSeleccionada);
+		List <Metodologia> i = this.getMetodologias().stream().filter(unInd -> unInd.getNombre()==metodologiaSeleccionada.getNombre()).collect(Collectors.toList());
+		
 		entityManager.getTransaction().begin();
-		System.out.println(MetodologiaSeleccionada);
-		repo.eliminar(MetodologiaSeleccionada);
+		
+		repo.eliminar(i.get(0));
 		
 		entityManager.getTransaction().commit();
 	}

@@ -30,7 +30,6 @@ public class CargarIndicadoresViewModel {
 	@SuppressWarnings("rawtypes")
 	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	
-	private Metodologia metodologia;
 	private static List<Indicador> indicadoresArchivo = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 	Query queryIndicadores = entityManager.createQuery("from Indicador"); 
 	private List<Indicador> indicadores = queryIndicadores.getResultList(); 

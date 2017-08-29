@@ -78,7 +78,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 		Selector<Metodologia> selectorCondicion = new Selector<Metodologia>(mainPanel).allowNull(true);
 		selectorCondicion.setWidth(100);
 		selectorCondicion.bindItemsToProperty("metodologias").setAdapter(new PropertyAdapter(Metodologia.class, "nombre"));
-		//selectorCondicion.bindValueToProperty("MetodologiaSeleccionada");
+		selectorCondicion.bindValueToProperty("metodologiaSeleccionada");
 		
 	}
 	
