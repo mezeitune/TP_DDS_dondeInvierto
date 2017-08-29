@@ -4,9 +4,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,7 +29,8 @@ public class Metodologia {
 	@Transient
 	private Criterio criterio;
 	private String nombre;
-	@Transient
+	
+	@ManyToMany
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	
 	public Metodologia(){
