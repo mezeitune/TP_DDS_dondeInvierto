@@ -30,7 +30,7 @@ public class Metodologia {
 
 	@Id @GeneratedValue
 	private Long id;
-	@Transient
+	@Transient //tiene sentido que no se persista criterio , por que es una clase auxiliar que ayuda a la metodologia
 	private Criterio criterio;
 	private String nombre;
 	
