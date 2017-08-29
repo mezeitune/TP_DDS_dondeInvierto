@@ -5,6 +5,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import condiciones.Condicion;
+import parserArchivos.ParserCsv;
+import parserArchivos.ParserJsonAObjetosJava;
+import usuario.Empresa;
+import usuario.Indicador;
 import usuario.Metodologia;
 
 
@@ -28,16 +32,19 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 		entityManager.remove(elemento);
 	}
 	@SuppressWarnings("hiding")
+	
 	public <Entity> Entity findById(Class<Entity> typeParameterClass, long id){
 		return entityManager.find(typeParameterClass,new Long(id));//el repo o el que implemente la interfaz de ORM deberia ser el encargado de hacer esto
 		
 	}
+	
 	public List <Entity> traerTodosLosCamposDeUnaTabla (Class<Entity> typeParameterClass ){
 	
 		Query query = entityManager.createQuery("from "+ typeParameterClass); 
 		List <Entity> datosEnLaBD = query.getResultList(); 
 		return datosEnLaBD;
 	}
+	
 	public List<Entity> filtrarPorCampoEspecifico(Class<Entity> typeParameterClass,String tabla,String campoFiltro, String value){  //falta ver bien como van a ser los criterios de filtro 
 		Query query = entityManager.createQuery("from "+tabla+" where "+campoFiltro+" = :value");
 		query.setParameter("value", value);
@@ -46,6 +53,55 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 		return listado;
 	}
 
+	public void agregarDatosALaBDDDeLosArchivos(){
+		ParserCsv parserCsv = new ParserCsv("empresas.csv");
+		Query queryEmpresas = entityManager.createQuery("from Empresa"); 
+		List <Empresa> empresasEnLaBD = queryEmpresas.getResultList(); 
+		List <Empresa> empresasAAgregarEnLaBD= parserCsv.csvFileToEmpresas();
+				
+		if(empresasAAgregarEnLaBD.containsAll(empresasEnLaBD)){
+			entityManager.getTransaction().begin();			
 
+			empresasAAgregarEnLaBD.forEach(unaEmp -> this.agregar(unaEmp));
+			
+			entityManager.getTransaction().commit();
+		
+		}
+		
+		/*ParserJsonAObjetosJava parserCondiciones = new ParserJsonAObjetosJava("condiciones.json");
+		List<Condicion> condicionesAAgregarEnLaBD = parserCondiciones.getCondicionesDelArchivo();
+		Query queryCondiciones = entityManager.createQuery("from Condicion"); 
+		List <Condicion> condicionesEnLaBD = queryCondiciones.getResultList(); 
+		if(condicionesAAgregarEnLaBD.containsAll(empresasAAgregarEnLaBD)){
+			entityManager.getTransaction().begin();
+			//condicionesAAgregarEnLaBD.forEach(unaCond -> repo.agregar(unaCond));
+			entityManager.getTransaction().commit();
+		}*/
+		
+		ParserJsonAObjetosJava parserMetodologias = new ParserJsonAObjetosJava("metodologias.json");
+		List <Metodologia> metodologiasAAgregarEnLaBD= parserMetodologias.getMetodologiasDelArchivo();
+		Query queryMetodologias = entityManager.createQuery("from Metodologia"); 
+		List <Condicion> metodologiasEnLaBD = queryMetodologias.getResultList(); 
+		if(metodologiasEnLaBD.isEmpty()){
+			entityManager.getTransaction().begin();
+			
+			metodologiasAAgregarEnLaBD.forEach(unaMet -> this.agregar(unaMet));
+			
+			entityManager.getTransaction().commit();
+		}
+		
+		ParserJsonAObjetosJava parserIndicadores = new ParserJsonAObjetosJava("indicadores.json");
+		List<Indicador> indicadoresAAgregarEnLaBD= parserIndicadores.getIndicadoresDelArchivo();
+		Query queryIndicadores = entityManager.createQuery("from Indicador"); 
+		List <Indicador> indicadoresEnLaBD = queryIndicadores.getResultList(); 
+		if(indicadoresEnLaBD.isEmpty()){
+			entityManager.getTransaction().begin();
+			
+			indicadoresAAgregarEnLaBD.forEach(unInd->this.agregar(unInd));
+			
+			entityManager.getTransaction().commit();
+		}
+	}
+	
 }
 
