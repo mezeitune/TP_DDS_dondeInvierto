@@ -89,7 +89,7 @@ public class CargarMetodologiaViewModel {
 		
 		entityManager.getTransaction().commit();
 		
-		this.setResultadoIndicador("Se ha eliminado correctamente la metodologia :"+metodologiaAEliminar.get(0));
+		this.setResultadoIndicador("Se ha eliminado correctamente la metodologia :"+metodologiaAEliminar.get(0).getNombre());
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 	}
 	public void reset(){

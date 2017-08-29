@@ -121,7 +121,7 @@ public class CargarIndicadoresViewModel {
 		
 		repo.eliminar(indicadorAEliminar.get(0));
 		entityManager.getTransaction().commit();
-		this.setResultadoIndicador("Se ha eliminado correctamente el indicador :"+indicadorAEliminar.get(0));
+		this.setResultadoIndicador("Se ha eliminado correctamente el indicador :"+indicadorAEliminar.get(0).getNombre());
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 	}
 	
