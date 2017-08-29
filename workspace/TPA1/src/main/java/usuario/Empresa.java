@@ -33,6 +33,8 @@ public class Empresa {
 	
 	
 	
+	
+	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	
 	@JoinColumn(name = "empresa_id",nullable = false)//el nullable es para poder eliminar deshabilitando las FK

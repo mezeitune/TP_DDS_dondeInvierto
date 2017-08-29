@@ -37,6 +37,10 @@ public class Condicion {
 	public Indicador indicador;
 	public String nombre;
 	
+	
+	
+	
+	
 	public Condicion(){
 		
 	}
