@@ -6,11 +6,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import usuario.Empresa;
 @Entity
 public class Criterio {
 
+	@Id @GeneratedValue
+	private Long id;
+	
 	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	

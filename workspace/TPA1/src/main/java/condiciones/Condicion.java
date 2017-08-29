@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -13,7 +15,8 @@ import usuario.Indicador;
 @Entity
 public class Condicion {
 
-	
+	@Id @GeneratedValue
+	private Long id;
 	public TipoCondicion tipo;
 	public int peso;
 	
