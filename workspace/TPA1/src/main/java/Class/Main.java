@@ -47,27 +47,8 @@ public class Main extends Application{
 		EntityManager entityManager = jpa.getEntityManager();
 		DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 		
-	
-		
-		//Consulta por un id de cualquier tabla sea
-		Indicador indicador=(Indicador) repo.findById(Indicador.class,1);
-		//System.out.println(indicador.toString());
-		
 		repo.agregarDatosALaBDDDeLosArchivos();
-		
-		
-		List<Indicador> indicadores=repo.filtrarPorCampoEspecifico(Indicador.class,"Indicador", "formula", "otrooo");
-		//System.out.println(indicadores.toString());
-		
-		
-		
-		Cuenta cuenta=(Cuenta) repo.findById(Cuenta.class,1);
-		//System.out.println(cuenta.toString());
-		
-		
-		Empresa empresa=(Empresa) repo.findById(Empresa.class,1);
-		//System.out.println(empresa.getCuentas().get(0).toString());
-		
+
 	}
 
 }

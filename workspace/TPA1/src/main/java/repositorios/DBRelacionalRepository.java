@@ -75,6 +75,9 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 		}
 	}
 	
+	
+	
+	
 	public void agregarEmpresas(){
 		ParserCsv parserCsv = new ParserCsv("empresas.csv");
 		Query queryEmpresas = entityManager.createQuery("from Empresa"); 
