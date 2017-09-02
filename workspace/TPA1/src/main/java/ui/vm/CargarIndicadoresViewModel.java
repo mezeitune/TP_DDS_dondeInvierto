@@ -30,10 +30,10 @@ public class CargarIndicadoresViewModel {
 	@SuppressWarnings("rawtypes")
 	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	
-	private static List<Indicador> indicadoresArchivo = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
+	//private static List<Indicador> indicadoresArchivo = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 	
-	Query queryIndicadores = entityManager.createQuery("from Indicador"); 
-	private List<Indicador> indicadores = queryIndicadores.getResultList(); 
+	
+	private List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 	
 	private Indicador indicadorSeleccionado;
 	private static String nombreIndicador;
@@ -96,10 +96,7 @@ public class CargarIndicadoresViewModel {
 		
 		Indicador indicador=new Indicador(nombreIndicador,formulaIndicador);
 		
-		entityManager.getTransaction().begin();
-		repo.agregar(indicador);
-		entityManager.getTransaction().commit();
-
+		
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 		
 		ObservableUtils.firePropertyChanged(this, "indicadores");
@@ -117,12 +114,10 @@ public class CargarIndicadoresViewModel {
 		
 		List <Indicador> indicadorAEliminar = indicadores.stream().filter(unInd -> unInd.getNombre()==indicadorSeleccionado.getNombre()).collect(Collectors.toList());
 		
-		entityManager.getTransaction().begin();
-		
-		repo.eliminar(indicadorAEliminar.get(0));
-		entityManager.getTransaction().commit();
+		IndicadoresRepository.deleteIndicador(indicadorAEliminar.get(0));
 		this.setResultadoIndicador("Se ha eliminado correctamente el indicador :"+indicadorAEliminar.get(0).getNombre());
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
+		ObservableUtils.firePropertyChanged(this, "condiciones");
 	}
 	
 }

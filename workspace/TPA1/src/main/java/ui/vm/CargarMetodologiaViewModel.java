@@ -29,6 +29,8 @@ public class CargarMetodologiaViewModel {
 	JPAUtility jpa=JPAUtility.getInstance();
 	EntityManager entityManager = jpa.getEntityManager();
 	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
+	
+	
 	private String resultadoIndicador;
 	private Metodologia metodologiaSeleccionada;
 	private List <Condicion> condiciones;
@@ -48,8 +50,7 @@ public class CargarMetodologiaViewModel {
 	}
 	
 	public List<Metodologia> getMetodologias() {
-		Query queryIndicadores = entityManager.createQuery("from Metodologia");
-		return queryIndicadores.getResultList(); 
+		return MetodologiasRepository.getMetodologiasDefinidasPorElUsuario();
 	}
 	
 	public String getNombreMetodologia() {
@@ -87,14 +88,11 @@ public class CargarMetodologiaViewModel {
 		
 		List <Metodologia> metodologiaAEliminar = this.getMetodologias().stream().filter(unInd -> unInd.getNombre()==metodologiaSeleccionada.getNombre()).collect(Collectors.toList());
 		
-		entityManager.getTransaction().begin();
-		
-		repo.eliminar( metodologiaAEliminar.get(0));
-		
-		entityManager.getTransaction().commit();
+		MetodologiasRepository.deleteMetodologia(metodologiaAEliminar.get(0));
 		
 		this.setResultadoIndicador("Se ha eliminado correctamente la metodologia :"+metodologiaAEliminar.get(0).getNombre());
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
+		ObservableUtils.firePropertyChanged(this, "metodologias");
 	}
 	public void reset(){
 		nombreMetodologia = null;

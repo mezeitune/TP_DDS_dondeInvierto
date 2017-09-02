@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.google.gson.Gson;
 
@@ -30,7 +31,8 @@ public class MetodologiasRepository {
 	}
 	
 	public static List<Metodologia> getMetodologiasDefinidasPorElUsuario(){
-		return parserMetodologias.getMetodologiasDelArchivo();
+		Query queryIndicadores = entityManager.createQuery("from Metodologia");
+		return queryIndicadores.getResultList(); 
 	}
 	
 	
@@ -56,6 +58,14 @@ public class MetodologiasRepository {
 
 	public static boolean esMetodologiaRepetida(String nombreMetodologia) {
 		return MetodologiasRepository.getMetodologias().stream().map(metodologia -> metodologia.getNombre()).collect(Collectors.toList()).contains(nombreMetodologia);
+	}
+
+	public static void deleteMetodologia(Metodologia metodologiaAEliminar) {
+		entityManager.getTransaction().begin();
+		
+		repo.eliminar(metodologiaAEliminar);
+		
+		entityManager.getTransaction().commit();
 	}
 }
 
