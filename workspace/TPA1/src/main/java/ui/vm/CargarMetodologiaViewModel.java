@@ -31,10 +31,14 @@ public class CargarMetodologiaViewModel {
 	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	private String resultadoIndicador;
 	private Metodologia metodologiaSeleccionada;
+	private List <Condicion> condiciones;
 	public Metodologia getMetodologiaSeleccionada() {
 		return metodologiaSeleccionada;
 	}
-
+	public CargarMetodologiaViewModel(){
+		this.nombreMetodologia=null;
+		this.condiciones=null;
+	}
 	public void setMetodologiaSeleccionada(Metodologia metodologiaSeleccionadaa) {
 		metodologiaSeleccionada = metodologiaSeleccionadaa;
 	}
@@ -80,7 +84,7 @@ public class CargarMetodologiaViewModel {
 	}
 
 	public void eliminarMetodologiaDeBDD(){
-		System.out.println(metodologiaSeleccionada);
+		
 		List <Metodologia> metodologiaAEliminar = this.getMetodologias().stream().filter(unInd -> unInd.getNombre()==metodologiaSeleccionada.getNombre()).collect(Collectors.toList());
 		
 		entityManager.getTransaction().begin();

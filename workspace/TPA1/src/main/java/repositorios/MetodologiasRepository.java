@@ -4,16 +4,24 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
 import com.google.gson.Gson;
 
 import metodologiasPredefinidas.WarrenBuffet;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
 import usuario.Metodologia;
+import utilities.JPAUtility;
 
 public class MetodologiasRepository {
 	private static ParserJsonAObjetosJava parserMetodologias= new ParserJsonAObjetosJava("metodologias.json");
 	
+	static JPAUtility jpa=JPAUtility.getInstance();
+	static EntityManager entityManager = jpa.getEntityManager();
+	@SuppressWarnings("rawtypes")
+	static
+	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	
 	public static List<Metodologia> getMetodologias(){
 		List<Metodologia> metodologias = new LinkedList<Metodologia> ();
@@ -39,8 +47,11 @@ public class MetodologiasRepository {
 
 	
 	public static void addMetodologia(Metodologia nuevaMetodologia) {
-		String jsonElement = new Gson().toJson(nuevaMetodologia); 
-		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("metodologias",jsonElement );
+		entityManager.getTransaction().begin();
+		repo.agregar(nuevaMetodologia);
+		entityManager.getTransaction().commit();
+		//String jsonElement = new Gson().toJson(nuevaMetodologia); 
+		//ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("metodologias",jsonElement );
 	}
 
 	public static boolean esMetodologiaRepetida(String nombreMetodologia) {

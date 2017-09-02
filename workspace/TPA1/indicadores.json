@@ -3,4 +3,4 @@
 {"nombre":"Indicador1","formula":"3-1"},
 {"nombre":"Indicador2","formula":"2*1"},
 {"nombre":"Indicador3","formula":"4/2"}
-,{"nombre":"indicadorBD","formula":"","resultado":0},{"nombre":"Indicador4","formula":"2+2","resultado":0}]
+,{"nombre":"indicadorBD","formula":"","resultado":0},{"nombre":"Indicador4","formula":"2+2","resultado":0},{"nombre":"Indicador5","formula":"1+2+Activo","resultado":0}]

@@ -3,6 +3,9 @@ package repositorios;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import com.google.gson.Gson;
 
 import comparadores.Comparador;
@@ -18,10 +21,18 @@ import condiciones.TipoCondicion;
 import condicionesPredefinidas.MargenesCrecientes;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
+import usuario.Indicador;
+import utilities.JPAUtility;
 
 public class CondicionesRepository {
 
 	private static ParserJsonAObjetosJava parserCondiciones = new ParserJsonAObjetosJava("condiciones.json");
+	
+	static JPAUtility jpa=JPAUtility.getInstance();
+	static EntityManager entityManager = jpa.getEntityManager();
+	@SuppressWarnings("rawtypes")
+	static
+	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	
 	public static List<Condicion> getCondiciones() {
 		List<Condicion> condiciones = new LinkedList<Condicion>();
@@ -36,12 +47,17 @@ public class CondicionesRepository {
 	}
 
 	private static List<Condicion> getCondicionesDefinidasPorElUsuario() {
-		return parserCondiciones.getCondicionesDelArchivo();
+		Query queryIndicadores = entityManager.createQuery("from Condicion"); 
+		return queryIndicadores.getResultList(); 
+		
 	}
 
 	public static void addCondicion(Condicion condicion) {
-		String jsonElement = new Gson().toJson(condicion); 
-		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("condiciones",jsonElement );
+		entityManager.getTransaction().begin();
+		repo.agregar(condicion);
+		entityManager.getTransaction().commit();
+		//String jsonElement = new Gson().toJson(condicion); 
+		//ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("condiciones",jsonElement );
 	}
 	
 	public static void cargarCondiciones(List<Condicion> condiciones){
