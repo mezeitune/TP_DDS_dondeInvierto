@@ -25,10 +25,6 @@ public class IndicadoresAlArchivoJSONTest {
 		ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadoresTest",nuevoIndicadorJSON);	
  	}
  	
-	@Test
-	public void consultaCorrectamenteUnIndicadorEnElArchivoJSON(){
-		List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();;
-		assertEquals("Indicador0",indicadores.get(0).getNombre());
- 	}
+
 	
 }
