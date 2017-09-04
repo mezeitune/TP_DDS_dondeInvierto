@@ -2,6 +2,8 @@ package ui.vm;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.uqbar.commons.utils.Observable;
 
 import comparadores.Comparador;
@@ -14,6 +16,7 @@ import excepciones.TipoCondicionNotFound;
 import repositorios.CondicionesRepository;
 import repositorios.IndicadoresRepository;
 import usuario.Indicador;
+import utilities.JPAUtility;
 
 @Observable
 public class CargarCondicionViewModel {
@@ -85,11 +88,13 @@ public class CargarCondicionViewModel {
 		if(this.tipoCondicion == null) throw new TipoCondicionNotFound();
 		if(this.indicador == null) throw new IndicadorNotFound();
 		if(this.pesoCondicion == -1) throw new PesoCondicionNotFound();
-		
+		JPAUtility jpa=JPAUtility.getInstance();
+		EntityManager entityManager = jpa.getEntityManager();
 		this.tipoCondicion.setComparador(this.comparador);
-			
+		entityManager.getTransaction().begin();
 		Condicion condicionDefinidaPorUsuario = new Condicion(this.nombreCondicion,this.tipoCondicion,this.indicador,this.pesoCondicion);
 		CondicionesRepository.addCondicion(condicionDefinidaPorUsuario);
+		entityManager.getTransaction().commit();
 	}
 	
 }

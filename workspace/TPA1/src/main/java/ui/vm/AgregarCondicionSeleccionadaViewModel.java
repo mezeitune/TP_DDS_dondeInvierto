@@ -26,8 +26,12 @@ public class AgregarCondicionSeleccionadaViewModel {
 	}
 	
 	public void agregarCondicionALaLista() throws CondicionRepetidaException {
-		if(CondicionesSeleccionadasRepository.esCondicionYaAgregada(condicionSeleccionada)) throw new CondicionRepetidaException();
-		else CondicionesSeleccionadasRepository.agregarCondicionSeleccionada(this.condicionSeleccionada);
+		if(CondicionesSeleccionadasRepository.esCondicionYaAgregada(condicionSeleccionada)) {
+			throw new CondicionRepetidaException();
+		}
+		else{
+			CondicionesSeleccionadasRepository.agregarCondicionSeleccionada(this.condicionSeleccionada);
+		}
 	}
 	
 }
