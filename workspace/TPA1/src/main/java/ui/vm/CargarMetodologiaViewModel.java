@@ -79,13 +79,26 @@ public class CargarMetodologiaViewModel {
 			entityManager.getTransaction().begin();
 		} 
 		
+	
+		
+		
+
+		JPAUtility jpa=JPAUtility.getInstance();
+		EntityManager entityManager = jpa.getEntityManager();
+		DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
+		
+
+		
+		//CondicionesRepository.addCondicion(condicionDefinidaPorUsuario);
+		//repo.agregar(condicionDefinidaPorUsuario);
+		
+		
+		entityManager.getTransaction().begin();
+		
 		Metodologia nuevaMetodologia = new Metodologia();
 		nuevaMetodologia.setNombre(nombreMetodologia);
 		nuevaMetodologia.setCondiciones(this.getCondiciones());
-		
-		
-		
-		MetodologiasRepository.addMetodologia(nuevaMetodologia);
+		repo.agregar(nuevaMetodologia);
 
 		entityManager.getTransaction().commit();
 		
