@@ -34,7 +34,7 @@ public class Metodologia {
 	private Criterio criterio;
 	private String nombre;
 	
-	@ManyToMany(cascade=CascadeType.ALL)  
+	@ManyToMany(cascade=CascadeType.MERGE)  
     @JoinTable(name="metodologias_condiciones", joinColumns=@JoinColumn(name="metodologia_id"), inverseJoinColumns=@JoinColumn(name="condicion_id"))  
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 	
