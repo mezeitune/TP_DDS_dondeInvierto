@@ -74,11 +74,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 			}).setWidth(250);
 	
 		
-		new Button(actionsPanel).setCaption("Cargar y Consultar BD")
-		.onClick(() -> {
-					this.getDelegate().close();
-					CargarBDWindow();
-		}).setWidth(250);
+		
 		
 	}
 

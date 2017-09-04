@@ -49,9 +49,9 @@ public class MetodologiasRepository {
 
 	
 	public static void addMetodologia(Metodologia nuevaMetodologia) {
-		entityManager.getTransaction().begin();
+		
 		repo.agregar(nuevaMetodologia);
-		entityManager.getTransaction().commit();
+		
 		//String jsonElement = new Gson().toJson(nuevaMetodologia); 
 		//ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("metodologias",jsonElement );
 	}

@@ -75,11 +75,20 @@ public class CargarMetodologiaViewModel {
 		if(MetodologiasRepository.esMetodologiaRepetida(nombreMetodologia)) throw new MetodologiaRepetidaException();
 		if(this.getCondiciones().isEmpty()) throw new CondicionesNotFoundException();
 		
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		} 
+		
 		Metodologia nuevaMetodologia = new Metodologia();
 		nuevaMetodologia.setNombre(nombreMetodologia);
 		nuevaMetodologia.setCondiciones(this.getCondiciones());
-	
+		
+		
+		
 		MetodologiasRepository.addMetodologia(nuevaMetodologia);
+
+		entityManager.getTransaction().commit();
+		
 		
 		ObservableUtils.firePropertyChanged(this, "metodologias");
 	}
