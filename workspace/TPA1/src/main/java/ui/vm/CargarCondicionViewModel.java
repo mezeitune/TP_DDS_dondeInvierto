@@ -8,11 +8,13 @@ import org.uqbar.commons.utils.Observable;
 
 import comparadores.Comparador;
 import condiciones.Condicion;
+import condiciones.Taxativa;
 import condiciones.TipoCondicion;
 import excepciones.IndicadorNotFound;
 import excepciones.NombreCondicionNotFound;
 import excepciones.PesoCondicionNotFound;
 import excepciones.TipoCondicionNotFound;
+import indicadoresPredefinidos.PatrimonioNeto;
 import repositorios.CondicionesRepository;
 import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
@@ -94,11 +96,19 @@ public class CargarCondicionViewModel {
 		EntityManager entityManager = jpa.getEntityManager();
 		DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 		this.tipoCondicion.setComparador(this.comparador);
-		entityManager.getTransaction().begin();
-		Condicion condicionDefinidaPorUsuario = new Condicion(this.nombreCondicion,this.tipoCondicion,this.indicador,this.pesoCondicion);
-		CondicionesRepository.addCondicion(condicionDefinidaPorUsuario);
+
+		
+		//CondicionesRepository.addCondicion(condicionDefinidaPorUsuario);
 		//repo.agregar(condicionDefinidaPorUsuario);
+		
+		
+		entityManager.getTransaction().begin();
+		
+		Condicion condicionDefinidaPorUsuario = new Condicion(this.nombreCondicion,this.tipoCondicion,this.indicador,this.pesoCondicion);
+		repo.agregar(condicionDefinidaPorUsuario);
+
 		entityManager.getTransaction().commit();
+		
 	}
 	
 }

@@ -54,8 +54,8 @@ public class CondicionesRepository {
 
 	public static void addCondicion(Condicion condicion) {
 		
-		repo.agregar(condicion);
-		
+		//repo.agregar(condicion);
+		entityManager.persist(condicion);
 		//String jsonElement = new Gson().toJson(condicion); 
 		//ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("condiciones",jsonElement );
 	}

@@ -10,7 +10,10 @@ import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.Observable;
 
 import condiciones.Condicion;
+import condiciones.Taxativa;
+import condiciones.TipoCondicion;
 import excepciones.CSVInexistenteException;
+import indicadoresPredefinidos.PatrimonioNeto;
 import parserArchivos.ParserCsv;
 import parserArchivos.ParserJsonAObjetosJava;
 import repositorios.DBRelacionalRepository;
@@ -48,6 +51,7 @@ public class Main extends Application{
 		DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 		
 		repo.agregarDatosALaBDDDeLosArchivos();
+
 
 	}
 

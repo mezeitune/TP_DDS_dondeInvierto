@@ -33,7 +33,7 @@ public class Condicion {
 	@Transient
 	public TipoCondicion tipo;
 	public int peso;
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE) 
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL) 
 	@OrderColumn
 	public Indicador indicador;
 	public String nombre;
