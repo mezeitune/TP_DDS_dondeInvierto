@@ -56,9 +56,9 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 	public void agregarDatosALaBDDDeLosArchivos(){
 		this.agregarEmpresas();
 		
-		this.agregarMetodologias();
+		//this.agregarMetodologias();
 		
-		this.agregarIndicadores();
+		//this.agregarIndicadores();
 	}
 	
 	public void agregarMetodologias(){

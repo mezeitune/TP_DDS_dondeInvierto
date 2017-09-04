@@ -14,6 +14,7 @@ import excepciones.NombreCondicionNotFound;
 import excepciones.PesoCondicionNotFound;
 import excepciones.TipoCondicionNotFound;
 import repositorios.CondicionesRepository;
+import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
 import usuario.Indicador;
 import utilities.JPAUtility;
@@ -88,12 +89,15 @@ public class CargarCondicionViewModel {
 		if(this.tipoCondicion == null) throw new TipoCondicionNotFound();
 		if(this.indicador == null) throw new IndicadorNotFound();
 		if(this.pesoCondicion == -1) throw new PesoCondicionNotFound();
+		
 		JPAUtility jpa=JPAUtility.getInstance();
 		EntityManager entityManager = jpa.getEntityManager();
+		DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 		this.tipoCondicion.setComparador(this.comparador);
 		entityManager.getTransaction().begin();
 		Condicion condicionDefinidaPorUsuario = new Condicion(this.nombreCondicion,this.tipoCondicion,this.indicador,this.pesoCondicion);
 		CondicionesRepository.addCondicion(condicionDefinidaPorUsuario);
+		//repo.agregar(condicionDefinidaPorUsuario);
 		entityManager.getTransaction().commit();
 	}
 	
