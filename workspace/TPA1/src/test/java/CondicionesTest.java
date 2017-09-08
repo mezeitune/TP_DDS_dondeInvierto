@@ -2,6 +2,8 @@ import static org.junit.Assert.*;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,25 +27,45 @@ public class CondicionesTest {
 	public List<Empresa> empresas = new LinkedList<Empresa>();
 	public List<Cuenta> cuentas = new LinkedList<Cuenta>();
 	public List<String> periodos = new LinkedList<String>();
+	public List<Indicador> indicadores = new LinkedList<Indicador>();
+	
+	public static Indicador indicadorEstandar;
+	public static Indicador roe;
+	public static Indicador nivelDeuda;
+	public static Indicador antiguedad;
+	public static Indicador margen;
 	
 	@Before
 	public void init(){
-		EmpresasMock listasEmpresasMockeadas = new EmpresasMock();
+		EmpresasMock empresasMockeadas = new EmpresasMock();
 		
-		empresas = listasEmpresasMockeadas.getEmpresasMockeadas();
-		cuentas = listasEmpresasMockeadas.getCuentasMockeadas();
+		empresas = empresasMockeadas.getEmpresasMockeadas();
+		cuentas = empresasMockeadas.getCuentasMockeadas();
+		
 		periodos.add("2016");
-		ParserFormulaIndicador.init(cuentas);
-		ParserFormulaIndicador.setModeTest(true);/*TODO: Sigue ligado al archivo*/
+		
+		indicadorEstandar = new Indicador("Indicador1","EBITDA/15");
+		roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
+		nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");
+		antiguedad = new Antiguedad();
+		margen = new Indicador("Margen","Activo/Capital Total");
+		
+		indicadores.add(indicadorEstandar);
+		indicadores.add(antiguedad);
+		indicadores.add(margen);
+		indicadores.add(nivelDeuda);
+		indicadores.add(roe);
+		
+		
+		ParserFormulaIndicador.mockearParserFormulaIndicador(cuentas,indicadores);
 	}
 	
 	@Test
 	public void unaCondicionComparativaOrdenaBienUnaListaDeEmpresasComparadas(){
 		int peso=10;
-		Indicador indicador = new Indicador("Indicador1","EBITDA/15");
 		Comparador mayor = new ComparadorMayor();
 		Comparativa estadoComparativo = new Comparativa(mayor);
-		Condicion condicion = new Condicion("condicion",estadoComparativo,indicador,peso);
+		Condicion condicion = new Condicion("condicion",estadoComparativo,indicadorEstandar,peso);
 		
 		
 		List<Empresa> listaEsperada = new LinkedList<>();
@@ -59,7 +81,6 @@ public class CondicionesTest {
 	
 	@Test
 	public void maximizarROEComparaBienLasEmpresasEnUnUnicoPeriodo(){
-		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
 		Condicion maximizarROE = new Condicion("maximizarRoe",new Comparativa(new ComparadorMayor()),roe,0);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
@@ -76,7 +97,6 @@ public class CondicionesTest {
 	
 	@Test
 	public void nivelDeDeudaComparaBienLasEmpresasEnUnUnicoPeriodo(){
-		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");
 		TipoCondicion comparativa = new Comparativa(new ComparadorMenor());
 		Condicion minimizarDeuda = new Condicion("minimizarDeuda",comparativa,nivelDeuda,0);
 		
@@ -96,7 +116,7 @@ public class CondicionesTest {
 		int peso=20;
 		int anosRequeridos = 3;
 		Taxativa estadoTaxativo = new Taxativa(new ComparadorMenor(),anosRequeridos);
-		Condicion longevidad = new Condicion("longevidadTaxativa",estadoTaxativo,new Antiguedad(),peso);
+		Condicion longevidad = new Condicion("longevidadTaxativa",estadoTaxativo,antiguedad,peso);
 		
 		List<Empresa> listaEsperada = longevidad.evaluar(empresas, periodos);
 		
@@ -106,7 +126,7 @@ public class CondicionesTest {
 	@Test
 	public void laLongevidadComparativaComparaBien(){ 
 		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
-		Condicion longevidad = new Condicion("longevidadComparativa",comparativa,new Antiguedad(),0);
+		Condicion longevidad = new Condicion("longevidadComparativa",comparativa,antiguedad,0);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		
@@ -129,7 +149,7 @@ public class CondicionesTest {
 		tiposCondiciones.add(taxativa);
 		TipoCondicion mixta = new Mixta(tiposCondiciones);
 		
-		Condicion longevidad = new Condicion("longevidadMixta",mixta,new Antiguedad(),0);
+		Condicion longevidad = new Condicion("longevidadMixta",mixta,antiguedad,0);
 		
 		List<Empresa> listaEsperada = new LinkedList<Empresa>();
 		
@@ -143,7 +163,7 @@ public class CondicionesTest {
 	
 	@Test
 	public void losMargenesConsistenementesCrecientesComparanBienPeroParaUnSoloAno(){
-		Indicador margen = new Indicador("Margen","Activo/Capital Total");
+		
 		TipoCondicion comparativa = new Comparativa(new ComparadorMayor());
 		//MargenesCrecientes margenesCrecientes = new MargenesCrecientes(comparativa,margen,0);
 		
@@ -157,6 +177,10 @@ public class CondicionesTest {
 		assertEquals(listaEsperada,new Condicion("margenesCrecientes",comparativa,margen,0).evaluar(empresas, periodos)); 
 	}
 	
+	@After
+	public void restart() {
+		ParserFormulaIndicador.restart();
+	}
 	
 	
 }

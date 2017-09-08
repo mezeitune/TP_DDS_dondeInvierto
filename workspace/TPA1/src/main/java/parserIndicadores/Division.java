@@ -1,5 +1,6 @@
 package parserIndicadores;
 
+
 public class Division implements Operacion{
 
 	public Operacion operador1;

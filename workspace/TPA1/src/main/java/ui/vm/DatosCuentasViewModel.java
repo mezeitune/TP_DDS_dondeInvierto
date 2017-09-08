@@ -96,8 +96,7 @@ public class DatosCuentasViewModel{
 	}
 	
 	public void calcular(){
-		ParserFormulaIndicador.setEmpresa(this.empresa);
-		ParserFormulaIndicador.setPeriodo(this.periodo);
+		this.indicadorSeleccionado.construirOperadorRaiz(this.empresa, this.periodo);
 		this.calculo = this.indicadorSeleccionado.calcular();
 		
 		ObservableUtils.firePropertyChanged(this, "calculo");

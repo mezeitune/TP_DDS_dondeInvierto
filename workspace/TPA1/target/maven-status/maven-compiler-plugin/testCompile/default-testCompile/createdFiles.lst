@@ -1,6 +1,10 @@
+PersistenciaRelacionalTest.class
 ParserCSVEmpresaTest.class
+MetodologiaTest.class
+JPAUnitTestCase.class
 ArchivoTest.class
-IndicadoresAlArchivoJSONTest.class
+ORMUnitTestExample.class
 ParserJsonAEmpresaAdapterTest.class
+IndicadoresAlArchivoJSONTest.class
 ParserIndicadoresTest.class
 CondicionesTest.class

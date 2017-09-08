@@ -13,7 +13,7 @@ public class EliminarEmpresaViewModel {
 	private Empresa empresa;
 	public EliminarEmpresaViewModel() {
 		
-		ParserFormulaIndicador.setEmpresa(empresa);
+		ParserFormulaIndicador.getInstance().setEmpresa(empresa);
 	
 	}
 	

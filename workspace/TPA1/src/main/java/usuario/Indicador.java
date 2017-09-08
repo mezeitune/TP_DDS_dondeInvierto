@@ -1,5 +1,6 @@
 package usuario;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,12 +15,14 @@ import parserIndicadores.ParserFormulaIndicador;
 @Observable
 @Entity
 @Table(name="Indicadores")
-public class Indicador implements Operacion,Comparable<Indicador> {
+public class Indicador implements Comparable<Indicador> {
 	@Id @GeneratedValue
 	private Long id;
 	protected String nombre;
 	protected String formula;
-	private int resultado;
+	
+	@Transient
+	protected Operacion raiz;
 	
 	
 	public Indicador(String nombre,String formula){
@@ -44,16 +47,15 @@ public class Indicador implements Operacion,Comparable<Indicador> {
 		return nombre;
 	}
 	
-	public int getResultado(){
-		return this.resultado;
-	}
-	public void setResultado(){
-		this.resultado = this.calcular();
-	}
-
-
 	public void setNombre(String nombreIndicador) {
 		this.nombre = nombreIndicador;
+	}
+	
+	public void setRaiz(Operacion raiz) {
+		this.raiz = raiz;
+	}
+	public Operacion getRaiz() {
+		return this.raiz;
 	}
 	
 
@@ -62,33 +64,40 @@ public class Indicador implements Operacion,Comparable<Indicador> {
         return this.getNombre().compareTo(unIndicador.getNombre());
     }
 	
-	public int calcular() {
-		int valor = 0;
-
+	
+	public void construirOperadorRaiz(Empresa empresa,String periodo){
+		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
+		parser.setEmpresa(empresa);
+		parser.setPeriodo(periodo);
+		
 		try {
-			valor = ParserFormulaIndicador.construirArbolOperaciones(this.formula).calcular();
+			this.raiz = parser.construirArbolOperaciones(this.formula);
 		} catch (AccountNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return valor;
 	}
-
-	@Override
-	public void setOperador1(Operacion operador1) {
-		// TODO Auto-generated method stub
-		
+	
+	//Para testear solo indicadores con formulas de numeros
+	public void construirOperadorRaiz() {
+		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
+		try {
+			this.raiz = parser.construirArbolOperaciones(this.formula);
+		} catch (AccountNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
-	@Override
-	public void setOperador2(Operacion operador2) {
-		// TODO Auto-generated method stub
-		
+	
+	public int calcular() {
+		return raiz.calcular();
 	}
-
+	
 	public String toString (){
-        String mensaje="El indicador"+id+" es "+nombre+" con la fomrula: "+formula;
+        String mensaje="El indicador"+id+" es "+nombre+" con la formula: "+formula;
         return mensaje;
     }
-	
+
+
 	
 }

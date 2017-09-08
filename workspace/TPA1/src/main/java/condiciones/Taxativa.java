@@ -50,8 +50,7 @@ public class Taxativa extends TipoCondicion {
 		}
 	
 		boolean verificarCriterioEnPeriodo(Empresa empresa,String periodo,Indicador indicador){ //Muy parecido a compararEnPeriodo
-			ParserFormulaIndicador.setEmpresa(empresa);
-			ParserFormulaIndicador.setPeriodo(periodo);
+			indicador.construirOperadorRaiz(empresa, periodo);
 			return comparador.comparar(valorRequerido, indicador.calcular());
 		}
 

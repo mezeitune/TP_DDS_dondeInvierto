@@ -7,4 +7,5 @@ public interface Operacion  {
 
 	public void setOperador1(Operacion operador1);
 	public void setOperador2(Operacion operador2);
+
 }

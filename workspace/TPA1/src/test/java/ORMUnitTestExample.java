@@ -2,13 +2,10 @@
 import org.hibernate.SessionFactory;
 /*import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;*/
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 import org.junit.Before;
 import org.junit.Test;
 
-import usuario.Empresa;
 
 /**
  * This template demonstrates how to develop a standalone test case for Hibernate ORM.  Although this is perfectly

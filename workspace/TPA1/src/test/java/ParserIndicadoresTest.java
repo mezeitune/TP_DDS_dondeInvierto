@@ -1,7 +1,6 @@
 import static org.junit.Assert.*;
 
 import parserIndicadores.ParserFormulaIndicador;
-import repositorios.EmpresasRepository;
 
 import java.util.List;
 
@@ -11,65 +10,72 @@ import org.junit.Test;
 import org.omg.CORBA.UserException;
 
 import mocks.EmpresasMock;
-import mocks.ListaIndicadoresMock;
+import mocks.IndicadoresMock;
 import usuario.Cuenta;
+import usuario.Empresa;
 import usuario.Indicador;
 public class ParserIndicadoresTest {
 	
-	private List<Indicador> indicadores;
+	public static List<Indicador> indicadoresMockeados;
+	public static List<Cuenta> cuentasMockeadas;
+	public static Empresa empresa;
+	public static String periodo;
+	public static ParserFormulaIndicador parser;
 
 	@Before
  	public void init()  {
-		EmpresasRepository.setArchivo("empresas.csv"); /*TODO: El test esta ligado al archivo. Desacoplar al parser de esto!*/
-		ParserFormulaIndicador.setModeTest(true); /*TODO: Esto es porque el parser esta ligado al archivo nuevamente*/
 		
-		ListaIndicadoresMock mockListaIndicadores = new ListaIndicadoresMock ();
-		List<Cuenta> mockListaCuentas = new EmpresasMock().getCuentasMockeadas();
-		mockListaIndicadores.setIndicadoresMockeados();
-		indicadores = mockListaIndicadores.getIndicadoresMockeados();
-		ParserFormulaIndicador.init(indicadores,mockListaCuentas);
+		indicadoresMockeados = new IndicadoresMock().getIndicadoresMockeados();
+		cuentasMockeadas = new EmpresasMock().getCuentasMockeadas();
+		
+		empresa = new EmpresasMock().getEmpresasMockeadas().get(0);
+		periodo = "2016";
+		
+		ParserFormulaIndicador.mockearParserFormulaIndicador(cuentasMockeadas,indicadoresMockeados);
+		parser = ParserFormulaIndicador.getInstance();
  	}
 
 	@Test
 	public void FormulaSoloConSumasFuncionaCorrectamente() throws UserException{
-		Indicador indicadorConFormulaSuma = indicadores.get(0);
+		Indicador indicadorConFormulaSuma = indicadoresMockeados.get(0);
+		indicadorConFormulaSuma.construirOperadorRaiz();
 		assertEquals(2.0,indicadorConFormulaSuma.calcular(),0);
 	}
 	
 	@Test
 	public void FormulaSoloConRestasFuncionaCorrectamente() throws UserException{
-		Indicador indicadorConFormulaResta = indicadores.get(1);
+		Indicador indicadorConFormulaResta = indicadoresMockeados.get(1);
+		indicadorConFormulaResta.construirOperadorRaiz();
 		assertEquals(2.0,indicadorConFormulaResta.calcular(),0);
 	}
 	@Test
 	public void FormulaSoloConProductosFuncionaCorrectamente() throws UserException{
-		Indicador indicadorConFormulaProducto = indicadores.get(2);
+		Indicador indicadorConFormulaProducto = indicadoresMockeados.get(2);
+		indicadorConFormulaProducto.construirOperadorRaiz();
 		assertEquals(2.0,indicadorConFormulaProducto.calcular(),0);
 	}
 	@Test
 	public void FormulaSoloConDivisionesFuncionaCorrectamente() throws UserException{
-		Indicador indicadorConFormulaDivisiones = indicadores.get(3);
+		Indicador indicadorConFormulaDivisiones = indicadoresMockeados.get(3);
+		indicadorConFormulaDivisiones.construirOperadorRaiz();
 		assertEquals(2.0,indicadorConFormulaDivisiones.calcular(),0);
 	}
 	@Test
-	public void FormulaConIndicadoresYNumeros() throws UserException{
-		Indicador indicadorConIndicadoresYCuentas = indicadores.get(4);
-		assertEquals(0.0,indicadorConIndicadoresYCuentas.calcular(),0);
-	}
-	@Test
-	public void FormulaDeNumerosConDistintasOperacionesFuncionaCorrectamente() throws UserException{
-		Indicador indicadorConDistintasOperaciones = indicadores.get(5);
+	public void FormulaDeNumerosConDistintasOperacionesFuncionaCorrectamente() {
+		Indicador indicadorConDistintasOperaciones = indicadoresMockeados.get(5);
+		indicadorConDistintasOperaciones.construirOperadorRaiz();
 		assertEquals(-1.0,indicadorConDistintasOperaciones.calcular(),0);
 	}
 	@Test
-	public void FormulaDCombinadaDeOperadoresConIndicadoresCuentasYNumeros() throws UserException{
-		Indicador indicadorConDistintasOperaciones = indicadores.get(6);
+	public void FormulaCombinadaDeOperadoresConIndicadoresCuentasYNumeros() {
+		Indicador indicadorConDistintasOperaciones = indicadoresMockeados.get(6);
+		indicadorConDistintasOperaciones.construirOperadorRaiz(empresa,periodo);
 		assertEquals(198.0,indicadorConDistintasOperaciones.calcular(),0);
 	}
 	
 	@After
-	public void delete(){
-		ParserFormulaIndicador.setModeTest(false);
+	public void restart(){
+		ParserFormulaIndicador.restart();
 	}
 	
 }	

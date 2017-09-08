@@ -94,8 +94,6 @@ public class CargarIndicadoresViewModel {
 
 		IndicadoresRepository.addIndicador(nuevoIndicador);
 		
-		Indicador indicador=new Indicador(nombreIndicador,formulaIndicador);
-		
 		
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 		

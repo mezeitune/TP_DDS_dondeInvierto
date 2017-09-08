@@ -7,12 +7,10 @@ import javax.persistence.Table;
 
 import org.uqbar.commons.utils.Observable;
 
-import parserIndicadores.Operacion;
-
 @Observable
 @Entity
 @Table(name="Cuentas")
-public class Cuenta implements Operacion {
+public class Cuenta{
 	@Id @GeneratedValue
 	private Long id;
 	private String nombre;
@@ -57,23 +55,13 @@ public class Cuenta implements Operacion {
 	public int calcular(){
 		return valor;
 	}
-
-	@Override
-	public void setOperador1(Operacion operador1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setOperador2(Operacion operador2) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public String toString (){
         String mensaje="La cuenta"+id+" es "+nombre+" con el: "+valor;
         return mensaje;
     }
+
+
 }
 
 

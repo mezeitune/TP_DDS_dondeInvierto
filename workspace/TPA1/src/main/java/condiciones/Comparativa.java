@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import org.uqbar.commons.utils.Observable;
 
 import comparadores.Comparador;
-import parserIndicadores.ParserFormulaIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 @Observable
@@ -62,15 +61,13 @@ public class Comparativa extends TipoCondicion{
 	
 	boolean compararEnPeriodo(Empresa empresa1,Empresa empresa2,String periodo,Indicador indicador){
 		//System.out.println(periodo);
-		ParserFormulaIndicador.setEmpresa(empresa1);
-		ParserFormulaIndicador.setPeriodo(periodo);
 		
 		//System.out.println(empresa1.getNombre());
+		indicador.construirOperadorRaiz(empresa1, periodo);
 		int valor1 = indicador.calcular();
 		//System.out.println(valor1);
 		
-		ParserFormulaIndicador.setEmpresa(empresa2);
-		ParserFormulaIndicador.setPeriodo(periodo);
+		indicador.construirOperadorRaiz(empresa2, periodo);
 		int valor2 = indicador.calcular();
 		
 		//System.out.println(empresa2.getNombre());
