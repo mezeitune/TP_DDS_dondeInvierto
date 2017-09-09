@@ -1,6 +1,5 @@
 package ui.windows;
 
-import java.awt.Color;
 
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -12,7 +11,6 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import parserArchivos.CsvFile;
 import ui.vm.ArchivoCuentasImportadosViewModel;
-import usuario.Cuenta;
 
 @SuppressWarnings("serial")
 public class ArchivoCuentasImportadosWindow extends Dialog<ArchivoCuentasImportadosViewModel> {
@@ -35,5 +33,17 @@ public class ArchivoCuentasImportadosWindow extends Dialog<ArchivoCuentasImporta
 			new Column<CsvFile>(csvFilesTable).setTitle("Nombre").bindContentsToProperty("nombre");
 			new Column<CsvFile>(csvFilesTable).setTitle("Directorio").bindContentsToProperty("directorio");
 			
+			
+			new Button(mainPanel).setCaption("Volver al Menu Principal")
+			.onClick(() -> {
+					this.getDelegate().close();
+					MenuWindow();
+			});
+		}
+		
+		public void MenuWindow()  {
+			Dialog<?> dialog = new MenuWindow(this);
+			dialog.open();
+			dialog.onAccept(() -> {});
 		}
 }

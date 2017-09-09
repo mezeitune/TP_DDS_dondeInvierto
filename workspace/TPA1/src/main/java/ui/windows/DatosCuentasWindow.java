@@ -19,6 +19,7 @@ import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
 
+@SuppressWarnings("serial")
 public class DatosCuentasWindow extends Dialog<DatosCuentasViewModel>{
 	public DatosCuentasWindow(WindowOwner parent)  {
 		super(parent, new DatosCuentasViewModel());

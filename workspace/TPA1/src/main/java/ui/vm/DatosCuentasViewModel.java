@@ -8,7 +8,6 @@ import java.util.List;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import parserIndicadores.ParserFormulaIndicador;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
 import usuario.*;
