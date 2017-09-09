@@ -14,35 +14,31 @@ public class ArchivoTest {
 
 	ParserCsv parserCSV;
 	
+	
 	@Before
  	public void init() throws IOException {
-		parserCSV = new ParserCsv("Prueba.csv");
+		parserCSV = new ParserCsv();
  	}
 	
 	@Test
  	public void pasarArchivoExistenteYQueFuncioneCorrectamente()  {
- 		
-		ParserCsv CSVparser = new ParserCsv("Prueba.csv");
-		CSVparser.csvFileToEmpresas();
+		parserCSV.csvFileToEmpresas("Prueba.csv");
  	    
  	}
  	@Test
 	public void pasarPathIncorrectoYQueExplote()  {
-		
-		ParserCsv parser = new ParserCsv("Inexistente.csv");
-		Assert.assertEquals(false, parser.esArchivoExistente("Inexistente.csv"));
+		Assert.assertEquals(false, parserCSV.esArchivoExistente("Inexistente.csv"));
 	}
 	
  	@Test
 	public void pasarArchivoConExtensionIncorrectaYQueExplote() {
 		
-		ParserCsv parser = new ParserCsv("empresas.json");
-		Assert.assertEquals(false, parser.extensionValida("empresas.json"));
+		Assert.assertEquals(false, parserCSV.extensionValida("empresas.json"));
 	}
  	
 	@Test
  	public void recibeCorrectamente2EmpresasDeUnArchivoCSV() {
- 		List <Empresa> empresasCargadas = parserCSV.csvFileToEmpresas();
+ 		List <Empresa> empresasCargadas = parserCSV.csvFileToEmpresas("Prueba.csv");
  		assertEquals(2,empresasCargadas.size());
  		
  	}

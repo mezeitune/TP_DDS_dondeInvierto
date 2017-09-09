@@ -64,7 +64,6 @@ public class SeleccionarArchivoWindow extends Dialog<SeleccionarArchivoViewModel
 		new Button(actionsPanel).setCaption("Cancelar")
 		.onClick(() -> {
 							this.getDelegate().close();
-							EmpresasRepository.setArchivo(null);
 							MenuWindow();
 		});
 		

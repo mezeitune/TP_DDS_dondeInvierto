@@ -1,10 +1,10 @@
 package ui.vm;
 
-import repositorios.EmpresasRepository;
+import repositorios.ArchivosCuentasRepository;
 
 public class MenuViewModel {
 
 	public boolean archivosCuentasCargados() {
-		return EmpresasRepository.getArchivo() != null;
+		return ArchivosCuentasRepository.existenArchivosCargados();
 	}
 }

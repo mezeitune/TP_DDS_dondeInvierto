@@ -22,13 +22,12 @@ import usuario.Empresa;
 
 public class ParserCsv {
 
-	private  String archivo;
 	
-	public ParserCsv(String archivo){
-		this.archivo=archivo;
+	public ParserCsv() {
+		// TODO Auto-generated constructor stub
 	}
-	
-	public  List<CsvEmpresa> CSVFileToCSVObjectList() throws IOException{
+
+	public  List<CsvEmpresa> CSVFileToCSVObjectList(String archivo) throws IOException{
 		HeaderColumnNameMappingStrategy<CsvEmpresa> strategy = new HeaderColumnNameMappingStrategy<>();
 		strategy.setType(CsvEmpresa.class);
 		CsvToBean<CsvEmpresa> lineToCSVObject = new CsvToBean<>();
@@ -37,10 +36,10 @@ public class ParserCsv {
 		return CSVObjectList;
 	}
 	
-	public List<Empresa> csvFileToEmpresas(){
+	public List<Empresa> csvFileToEmpresas(String archivo){
 		List<CsvEmpresa> CSVObjectList = null;
 		try {
-			CSVObjectList = this.CSVFileToCSVObjectList();
+			CSVObjectList = this.CSVFileToCSVObjectList(archivo);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

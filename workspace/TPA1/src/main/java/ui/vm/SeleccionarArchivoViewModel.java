@@ -4,8 +4,9 @@ import org.uqbar.commons.utils.Observable;
 import excepciones.ArchivoNotFoundException;
 import excepciones.PathNotExistsException;
 import excepciones.TipoDeArchivoIncorrectoException;
+import parserArchivos.CsvFile;
 import parserArchivos.ParserCsv;
-import repositorios.EmpresasRepository;
+import repositorios.ArchivosCuentasRepository;
 
 @Observable
 public class SeleccionarArchivoViewModel {
@@ -22,11 +23,13 @@ public class SeleccionarArchivoViewModel {
 	}
 
 	public void cargarArchivo() throws ArchivoNotFoundException, PathNotExistsException, TipoDeArchivoIncorrectoException {
-		ParserCsv parser = new ParserCsv(archivo);
+		ParserCsv parser = new ParserCsv();
 		if(archivo == null) throw new ArchivoNotFoundException();
 		if(!parser.esArchivoExistente(archivo)) throw new PathNotExistsException();
 		if(!parser.extensionValida(archivo))throw new TipoDeArchivoIncorrectoException();
 		
-		EmpresasRepository.setArchivo(archivo);
+		
+		CsvFile archivoCuentas = new CsvFile(archivo);
+		ArchivosCuentasRepository.addArchivo(archivoCuentas);
 	}
 }

@@ -79,10 +79,10 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 	
 	
 	public void agregarEmpresas(){
-		ParserCsv parserCsv = new ParserCsv("empresas.csv");
+		ParserCsv parserCsv = new ParserCsv();
 		Query queryEmpresas = entityManager.createQuery("from Empresa"); 
 		List <Empresa> empresasEnLaBD = queryEmpresas.getResultList(); 
-		List <Empresa> empresasAAgregarEnLaBD= parserCsv.csvFileToEmpresas();
+		List <Empresa> empresasAAgregarEnLaBD= parserCsv.csvFileToEmpresas("empresas.csv");
 				
 		if(empresasAAgregarEnLaBD.containsAll(empresasEnLaBD)){
 			entityManager.getTransaction().begin();			

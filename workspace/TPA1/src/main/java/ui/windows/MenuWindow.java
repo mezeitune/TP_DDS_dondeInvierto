@@ -23,7 +23,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Sistema de carga y consulta");
 		
-		new Label(mainPanel).setText("MENU PRINCIPAL").setBackground(Color.ORANGE).setHeight(40);
+		new Label(mainPanel).setText("MENU PRINCIPAL").setBackground(Color.ORANGE).setHeight(80);
 		
 		new Label(mainPanel).setText("Estado carga de cuentas y empresas:");
 		if(this.getModelObject().archivosCuentasCargados()) new Label(mainPanel).setText("Archivo csv cargado").setBackground(Color.GREEN);
@@ -73,6 +73,13 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 					CargarMetodologiaWindow();
 			}).setWidth(250);
 	
+		new Button(actionsPanel).setCaption("Ver archivos de cuentas importados")
+		.onClick(() -> {
+				this.getDelegate().close();
+					ArchivosCuentasImportadosWindow();
+			}).setWidth(250);
+	
+		
 		
 		
 		
@@ -106,6 +113,12 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 	
 	public void CargarBDWindow() {
 		Dialog<?> dialog = new CargarBDWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
+	
+	public void ArchivosCuentasImportadosWindow() {
+		Dialog<?> dialog = new ArchivoCuentasImportadosWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}

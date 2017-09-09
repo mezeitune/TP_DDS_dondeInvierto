@@ -22,7 +22,7 @@ public class ParserCSVEmpresaTest {
 	ParserCsv parser;
 	@Before
  	public void init() throws IOException {
- 		parser = new ParserCsv("Prueba.csv");
+ 		parser = new ParserCsv();
  	}
 	
 	@Test
