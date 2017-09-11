@@ -1,5 +1,6 @@
 package repositorios;
 import usuario.Empresa;
+import utilities.JPAUtility;
 import usuario.Cuenta;
 
 import java.util.HashSet;
@@ -8,15 +9,28 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import parserArchivos.CsvFile;
 import parserArchivos.ParserCsv;
 
 public class EmpresasRepository {
 	
-
+	
+	static JPAUtility jpa=JPAUtility.getInstance();
+	static EntityManager entityManager = jpa.getEntityManager();
+	static DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
+	
+	
 	public static List<Empresa> getEmpresas(){
+		
+		Query query = entityManager.createQuery("from Empresa");
+		
 		List<Empresa> empresas = new LinkedList<Empresa>();
-		ArchivosCuentasRepository.getArchivosCuentas().forEach(file -> EmpresasRepository.concatenarEmpresas(file,empresas));
+		//ArchivosCuentasRepository.getArchivosCuentas().forEach(file -> EmpresasRepository.concatenarEmpresas(file,empresas));
+		empresas = query.getResultList();
+		
 		return empresas;
 	}
 	

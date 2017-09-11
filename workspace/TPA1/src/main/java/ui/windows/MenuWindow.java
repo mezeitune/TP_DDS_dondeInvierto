@@ -2,6 +2,9 @@ package ui.windows;
 
 import java.awt.Color;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -9,11 +12,17 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+import repositorios.DBRelacionalRepository;
 import ui.vm.MenuViewModel;
+import utilities.JPAUtility;
 
 
 @SuppressWarnings("serial")
 public class MenuWindow extends Dialog<MenuViewModel> {
+	
+	static JPAUtility jpa=JPAUtility.getInstance();
+	static EntityManager entityManager = jpa.getEntityManager();
+	static DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 
 	public MenuWindow(WindowOwner cargaExitosaWindow) {
 		super(cargaExitosaWindow, new MenuViewModel());
@@ -38,14 +47,19 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 	}
 	protected void addActions(Panel actionsPanel){
 		
+		Query query = entityManager.createQuery("from Empresa");
+		
+				
 		actionsPanel.setLayout(new ColumnLayout(2));
 		new Button(actionsPanel).setCaption("Evaluar Empresas con Indicadores")
 		.onClick(() -> {
-				if(this.getModelObject().archivosCuentasCargados()) {
-					this.getDelegate().close();
+				//if(this.getModelObject().archivosCuentasCargados()) {
+				if(!(query.getFirstResult() < 0)) {
+					System.out.println(query.getResultList().get(0).toString());
+					//this.getDelegate().close();
 					DatosIndicadoresWindow();
 				}
-				else this.showError("Debe cargar un archivo de cuentas");
+				else this.showError("BD sin datos, debe cargar un archivo csv");
 			}).setWidth(250);
 		
 		new Button(actionsPanel).setCaption("Evaluar Empresas con Metodologias")
@@ -122,4 +136,6 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
+
+
 }

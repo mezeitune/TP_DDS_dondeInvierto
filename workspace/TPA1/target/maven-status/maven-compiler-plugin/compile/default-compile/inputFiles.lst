@@ -34,7 +34,6 @@
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/comparadores/ComparadorMenorIgual.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/comparadores/ComparadorMayorIgual.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/IndicadorRepetidoWindow.java
-/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/parserIndicadores/Hoja.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/condicionesPredefinidas/MargenesCrecientes.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/condiciones/ParametroOperacion.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/CargarIndicadoresViewModel.java
@@ -58,8 +57,10 @@
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/usuario/Indicador.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/EmpresasIsEmptyException.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/DatosCuentasWindow.java
+/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/repositorios/ArchivosCuentasRepository.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/AgregarPeriodoWindow.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/mocks/ListaLineasCsvFileMock.java
+/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/ArchivoCuentasImportadosWindow.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/CargarMetodologiaWindow.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/EliminarEmpresaViewModel.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/repositorios/EmpresasRepository.java
@@ -82,10 +83,12 @@
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/repositorios/MetodologiasRepository.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/MetodologiasEmpresasWindow.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/repositorios/IndicadoresRepository.java
+/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/ArchivoCuentasImportadosViewModel.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/FormulaIndicadorNotFound.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/indicadoresPredefinidos/IndicadorNulo.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/parserIndicadores/Multiplicacion.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/repositorios/CondicionesRepository.java
+/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/parserArchivos/CsvFile.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/parserArchivos/ParserJsonAObjetosJava.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/NombreCondicionNotFound.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/AgregarEmpresaViewModel.java

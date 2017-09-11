@@ -107,6 +107,7 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 			entityManager.getTransaction().commit();
 		}
 	}
+
 	
 }
 

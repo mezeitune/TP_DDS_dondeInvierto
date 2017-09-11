@@ -33,6 +33,7 @@ ui/windows/EliminarCondicionSeleccionadaWindow.class
 repositorios/EmpresasRepository.class
 excepciones/IndicadorRepetidoException.class
 indicadoresPredefinidos/PatrimonioNeto.class
+ui/windows/ArchivoCuentasImportadosWindow.class
 ui/vm/CargarMetodologiaViewModel.class
 comparadores/ComparadorMenorIgual.class
 parserArchivos/ParserCsv.class
@@ -59,6 +60,7 @@ ui/vm/ElminarCondicionSeleccionadaViewModel.class
 parserIndicadores/Operacion.class
 excepciones/NombreIndicadorNotFound.class
 ui/windows/SeleccionarArchivoWindow.class
+repositorios/ArchivosCuentasRepository.class
 comparadores/ComparadorMayor.class
 usuario/Valor.class
 condiciones/Criterio.class
@@ -77,6 +79,7 @@ ui/windows/IndicadorErroneoWindow.class
 comparadores/ComparadorMayorIgual.class
 excepciones/EmpresasIsEmptyException.class
 usuario/Indicador.class
+parserArchivos/CsvFile.class
 ui/windows/PreguntaNuevoIndicadorWindow.class
 ui/vm/MetodologiasEmpresasViewModel.class
 comparadores/ComparadorMenor.class
@@ -94,6 +97,7 @@ ui/vm/DatosCuentasViewModel.class
 ui/vm/AgregarEmpresaViewModel.class
 excepciones/MetodologiaNotFoundException.class
 ui/vm/IndicadorErroneoViewModel.class
+ui/vm/ArchivoCuentasImportadosViewModel.class
 ui/vm/CargarCondicionViewModel.class
 repositorios/EmpresasAEvaluarRepository.class
 mocks/ListaLineasCsvFileMock.class
@@ -101,7 +105,6 @@ excepciones/AccountNotFoundException.class
 Class/Main.class
 repositorios/CondicionesSeleccionadasRepository.class
 repositorios/CondicionesRepository.class
-parserIndicadores/Hoja.class
 ui/windows/CargarMetodologiaWindow.class
 condiciones/Comparativa.class
 parserIndicadores/Constante.class

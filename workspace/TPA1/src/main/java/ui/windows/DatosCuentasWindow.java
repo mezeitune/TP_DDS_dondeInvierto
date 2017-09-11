@@ -9,6 +9,7 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
+import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
@@ -58,9 +59,9 @@ public class DatosCuentasWindow extends Dialog<DatosCuentasViewModel>{
 		
 		
 		/*****************************************************textbox*************************/
-		new Label(Panel).setHeight(20);
+		/*new Label(Panel).setHeight(20);
 		new Label(Panel).setText("En el cuadro de la derecha puede escribir una formula a evaluar").setBackground(Color.ORANGE);
-		new Label(Panel).setText("Es posible la utilizaci�n de indicadores y cuentas").setBackground(Color.ORANGE);
+		new Label(Panel).setText("Es posible la utilizaci�n de indicadores y cuentas").setBackground(Color.ORANGE);*/
 		/*****************************************************textbox*************************/
 		
 		
@@ -98,7 +99,7 @@ public class DatosCuentasWindow extends Dialog<DatosCuentasViewModel>{
 				this.getModelObject().calcular();
 		});
 		
-		//new Label(Panel2).setText("Resultado de indicador Indicado").setBackground(Color.GREEN);
+		new Label(Panel2).setText("Resultado de indicador Indicado").setBackground(Color.GREEN);
 		new Label(Panel2).setBackground(Color.GREEN).bindValueToProperty("calculo");
 		
 		/*****************************************************textbox*************************/

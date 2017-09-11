@@ -96,9 +96,6 @@ public class CargarBDViewModel {
 
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 	}
-
-	
-	
 	
 	
 }
