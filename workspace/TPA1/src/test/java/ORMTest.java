@@ -1,4 +1,33 @@
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ORMTest {
 
+	private EntityManagerFactory entityManagerFactory;
+
+	@Before
+	public void init() {
+		entityManagerFactory = Persistence.createEntityManagerFactory( "db" );
+	}
+
+	@After
+	public void destroy() {
+		entityManagerFactory.close();
+	}
+
+	// Entities are auto-discovered, so just add them anywhere on class-path
+	// Add your tests, using standard JUnit.
+	@Test
+	public void hhh123Test() throws Exception {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		entityManager.getTransaction().begin();
+		// Do stuff...
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
 }
