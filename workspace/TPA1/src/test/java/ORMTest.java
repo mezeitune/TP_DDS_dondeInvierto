@@ -61,7 +61,10 @@ public class ORMTest {
 		List<Indicador> listaConIndicadoresTraidosDeLaBDD= query.getResultList();
 		
 		assertEquals(listaConIndicadoresTraidosDeLaBDD.size(), 2);
-		
+		entityManager.getTransaction().begin();
+		repo.eliminar(met1);
+		repo.eliminar(met2);
+		entityManager.getTransaction().commit();
 		entityManager.close();
 	}
 }
