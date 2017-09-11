@@ -6,6 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import repositorios.DBRelacionalRepository;
+import usuario.Indicador;
+import utilities.JPAUtility;
+
 public class ORMTest {
 
 	private EntityManagerFactory entityManagerFactory;
@@ -13,6 +17,10 @@ public class ORMTest {
 	@Before
 	public void init() {
 		entityManagerFactory = Persistence.createEntityManagerFactory( "db" );
+		JPAUtility jpa=JPAUtility.getInstance();
+		EntityManager entityManager = jpa.getEntityManager();
+		DBRelacionalRepository<EntityManager> repo=new DBRelacionalRepository<EntityManager>(entityManager);
+		
 	}
 
 	@After
@@ -22,12 +30,5 @@ public class ORMTest {
 
 	// Entities are auto-discovered, so just add them anywhere on class-path
 	// Add your tests, using standard JUnit.
-	@Test
-	public void hhh123Test() throws Exception {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		entityManager.getTransaction().begin();
-		// Do stuff...
-		entityManager.getTransaction().commit();
-		entityManager.close();
-	}
+	
 }
