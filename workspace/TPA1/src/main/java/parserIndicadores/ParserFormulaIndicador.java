@@ -2,12 +2,15 @@ package parserIndicadores;
 
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.experimental.theories.Theories;
 
 import excepciones.AccountNotFoundException;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
 
+import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -108,16 +111,16 @@ public class ParserFormulaIndicador {
 	
 	
 	public Operacion getConstante(String operador) throws AccountNotFoundException{
-		if (this.esIndicador(operador)) return new Constante().setIndicador(this.buscarYObtenerIndicador(operador));
-		if (this.esCuenta(operador)) return new Constante().setCuenta(this.buscarYObtenerCuenta(operador));
+		if (ParserFormulaIndicador.esIndicador(operador)) return new Constante().setIndicador(this.buscarYObtenerIndicador(operador));
+		if (ParserFormulaIndicador.esCuenta(operador)) return new Constante().setCuenta(this.buscarYObtenerCuenta(operador));
 		return  new Constante(Integer.parseInt(operador));
 	}
 	
-	public  boolean esIndicador(String operador){
+	public static  boolean esIndicador(String operador){
 		return indicadores.stream().anyMatch(indicador -> indicador.getNombre().equals(operador));
 	}
 	
-	public  boolean esCuenta(String operador){
+	public static  boolean esCuenta(String operador){
 		return nombreCuentas.stream().anyMatch(cuenta -> cuenta.equals(operador));
 	}
 	
@@ -144,9 +147,34 @@ public class ParserFormulaIndicador {
 		indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
 		
 		String[] result = formula.split("[-+*/]");
-		String[] ver = new String[result.length];
+		int[] validacion = new int[result.length];
+	
 		
-		for(int j=0;j<ver.length;j++){
+		for (int i = 0; i < validacion.length; i++) {
+			if(NumberUtils.isNumber(result[i]) || esIndicador(result[i]) || esCuenta(result[i])) {
+				
+				System.out.println("Resultado True" + result[i]);
+				validacion[i] = 1;
+			}
+			else {
+				
+				System.out.println("Resultado False" + result[i]);
+				validacion[i] = 0;
+			}
+		}
+		
+		for(int k=0;k< validacion.length;k++){
+			if(validacion[k] == 0){
+				System.out.println("Di False");
+				return false;
+			}
+		}
+
+		
+		return true;
+		
+		
+		/*for(int j=0;j<ver.length;j++){
 			ver[j]="no";
 		}
 		
@@ -168,16 +196,13 @@ public class ParserFormulaIndicador {
 				}
 			}
 		}
-		
-		for(int k=0;k<ver.length;k++){
-			if(ver[k].equals("no")){
-				return false;
-			}
-		}
 
-		
-		return true;
-		
+*
+*
+*
+*/		
+
+
 	}
 
 	public static void restart() {

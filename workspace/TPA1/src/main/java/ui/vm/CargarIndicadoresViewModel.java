@@ -80,8 +80,8 @@ public class CargarIndicadoresViewModel {
 		this.resultadoIndicador = resultadoIndicador;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void generarIndicador() throws NombreIndicadorNotFound, FormulaIndicadorNotFound, IndicadorRepetidoException, FormulaIndicadorNotValidException {
+	//@SuppressWarnings("unchecked")
+	public void generarIndicador() throws NombreIndicadorNotFound, IndicadorRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorNotFound {
 		
 		if(nombreIndicador == null) throw new NombreIndicadorNotFound();
 		if(formulaIndicador == null) throw new FormulaIndicadorNotFound();
@@ -90,7 +90,9 @@ public class CargarIndicadoresViewModel {
 		
 		if(this.esUnIndicadorYaIngresado(nuevoIndicador)) throw new IndicadorRepetidoException();
 		
-		if(ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
+		System.out.println("Formula " + formulaIndicador);
+		
+		if(!ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
 		IndicadoresRepository.addIndicador(nuevoIndicador);
 		
