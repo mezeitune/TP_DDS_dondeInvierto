@@ -116,8 +116,7 @@ public class CargarIndicadoresViewModel {
 		
 		IndicadoresRepository.deleteIndicador(indicadorAEliminar.get(0));
 		this.setResultadoIndicador("Se ha eliminado correctamente el indicador :"+indicadorAEliminar.get(0).getNombre());
-		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
-		ObservableUtils.firePropertyChanged(this, "condiciones");
+
 	}
 	
 }

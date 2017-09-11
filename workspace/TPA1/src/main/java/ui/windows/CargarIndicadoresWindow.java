@@ -58,8 +58,8 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		new Column<Indicador>(tableIndicadores).setTitle("Nombre").bindContentsToProperty("nombre");
 		new Column<Indicador>( tableIndicadores).setTitle("Formula").bindContentsToProperty("formula");
 		
-		new Label(mainPanel).setText("Eliminar Indicador de la BDD").setBackground(Color.ORANGE);
-		new Label(mainPanel).setText("Seleccione el indicador a eliminar de la BDD").setBackground(Color.green);
+		new Label(mainPanel).setText("Eliminar Indicador").setBackground(Color.ORANGE);
+		new Label(mainPanel).setText("Seleccione el indicador a eliminar").setBackground(Color.green);
 		
 		Selector<Indicador> selectorCondicion = new Selector<Indicador>(mainPanel).allowNull(true);
 		selectorCondicion.setWidth(100);
@@ -77,6 +77,9 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 		.onClick(() -> {
 
 				this.getModelObject().eliminarIndicadorDeLaBDD();
+				this.getDelegate().close();
+				CargarIndicadoresWindow();
+
 		}).setWidth(200);
 		
 		new Button(actionsPanel).setCaption("Cargar Indicador")
@@ -112,6 +115,13 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 	}
 	public void PreguntaNuevoIndicadorWindow()  {
 		Dialog<?> dialog = new PreguntaNuevoIndicadorWindow(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+		
+	}
+	
+	public void CargarIndicadoresWindow()  {
+		Dialog<?> dialog = new CargarIndicadoresWindow(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 		
