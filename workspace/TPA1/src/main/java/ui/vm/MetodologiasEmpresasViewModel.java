@@ -23,6 +23,8 @@ public class MetodologiasEmpresasViewModel {
 
 	public MetodologiasEmpresasViewModel() {
 		
+		new EmpresasAEvaluarRepository();
+		
 	}
 	
 	public List<Metodologia> getMetodologias(){

@@ -53,10 +53,9 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 		actionsPanel.setLayout(new ColumnLayout(2));
 		new Button(actionsPanel).setCaption("Evaluar Empresas con Indicadores")
 		.onClick(() -> {
-				//if(this.getModelObject().archivosCuentasCargados()) {
 				if(!(query.getFirstResult() < 0)) {
 					System.out.println(query.getResultList().get(0).toString());
-					//this.getDelegate().close();
+					this.getDelegate().close();
 					DatosIndicadoresWindow();
 				}
 				else this.showError("BD sin datos, debe cargar un archivo csv");
@@ -65,11 +64,13 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 		new Button(actionsPanel).setCaption("Evaluar Empresas con Metodologias")
 		.onClick(() -> {
 			
-			if(this.getModelObject().archivosCuentasCargados()) {
+			//if(this.getModelObject().archivosCuentasCargados()) {
+			if(!(query.getFirstResult() < 0)) {
 				this.getDelegate().close();
 				MetodologiasEmpresasWindow();
 			}
-			else this.showError("Debe cargar un archivo de cuentas");
+			//else this.showError("Debe cargar un archivo de cuentas");
+			else this.showError("BD sin datos, debe cargar un archivo csv");
 			}).setWidth(250);
 		
 		

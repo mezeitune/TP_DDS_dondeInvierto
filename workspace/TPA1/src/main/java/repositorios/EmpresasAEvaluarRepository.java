@@ -4,15 +4,28 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import usuario.Empresa;
+import utilities.JPAUtility;
 
 public class EmpresasAEvaluarRepository {
 	
 	public static List<Empresa> empresasAEvaluar = new ArrayList<>(); 
 	public static List<String> periodosAEvaluar = new LinkedList<>(); 
 	
+	static JPAUtility jpa=JPAUtility.getInstance();
+	static EntityManager entityManager = jpa.getEntityManager();
+	static DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
+	
+	
+	
 	public EmpresasAEvaluarRepository(){
 		
+		Query query = entityManager.createQuery("from Empresa");
+		
+		empresasAEvaluar = query.getResultList();
 	}
 	
 	public static List<Empresa> getEmpresasAEvaluar() {

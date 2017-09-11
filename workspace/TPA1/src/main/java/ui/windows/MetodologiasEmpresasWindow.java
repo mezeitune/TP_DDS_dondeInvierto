@@ -41,6 +41,7 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 		
 		new Label(Panel).setText("Empresas a evaluar").setBackground(Color.ORANGE);
 		Table<Empresa> tableEmpresas = new Table<Empresa>(Panel, Empresa.class);
+		tableEmpresas.setNumberVisibleRows(6);
 		tableEmpresas.bindItemsToProperty("empresas");
 		new Column<Empresa>(tableEmpresas).setTitle("Nombre").bindContentsToProperty("nombre");
 		
@@ -81,9 +82,6 @@ public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewM
 			this.getModelObject().autocompletarListaEmpresasAEvaluar();
 			
 		});
-		new Label(Panel).setText("");
-		new Label(Panel).setText("");
-		new Label(Panel).setText("");
 		
 		new Button(Panel).setCaption("Volver al Menu Principal")
 		.onClick(() -> {
