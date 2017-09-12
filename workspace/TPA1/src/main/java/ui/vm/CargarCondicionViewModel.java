@@ -18,11 +18,16 @@ import indicadoresPredefinidos.PatrimonioNeto;
 import repositorios.CondicionesRepository;
 import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
+import repositorios.MetodologiasRepository;
 import usuario.Indicador;
 import utilities.JPAUtility;
 
 @Observable
 public class CargarCondicionViewModel {
+	
+	private JPAUtility jpa=JPAUtility.getInstance();
+	private EntityManager entityManager = this.jpa.getEntityManager();
+	private IndicadoresRepository repo=new IndicadoresRepository(this.entityManager);
 	
 	private  String nombreCondicion;
 	private  TipoCondicion tipoCondicion;
@@ -83,7 +88,7 @@ public class CargarCondicionViewModel {
 	}
 	
 	public List<Indicador> getIndicadores(){
-		return IndicadoresRepository.getIndicadores();
+		return repo.getIndicadores();
 	}
 	
 	public void generarCondicion() throws NombreCondicionNotFound, TipoCondicionNotFound, PesoCondicionNotFound, IndicadorNotFound {

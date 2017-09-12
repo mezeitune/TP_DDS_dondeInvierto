@@ -14,30 +14,29 @@ import indicadoresPredefinidos.PatrimonioNeto;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
 import usuario.Indicador;
+import usuario.Metodologia;
 import utilities.JPAUtility;
 
-public class IndicadoresRepository {
+public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 	
-	private static ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("indicadores.json");
-
-	static JPAUtility jpa=JPAUtility.getInstance();
-	static EntityManager entityManager = jpa.getEntityManager();
-	@SuppressWarnings("rawtypes")
-	static
-	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
+	public IndicadoresRepository(EntityManager em) {
+		super(em);
+		// TODO Auto-generated constructor stub
+	}
+	private ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("indicadores.json");
 	
-	public static List<Indicador> getIndicadores(){
+	public List<Indicador> getIndicadores(){
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		IndicadoresRepository.cargarIndicadores(indicadores);
+		this.cargarIndicadores(indicadores);
 		return indicadores;
 	}
 	
-	public static List<String> getNombreIndicadores(){
-		return IndicadoresRepository.getIndicadores().stream().map(indicador -> indicador.getNombre())
+	public List<String> getNombreIndicadores(){
+		return this.getIndicadores().stream().map(indicador -> indicador.getNombre())
 													 .collect(Collectors.toList());
 	}
 	
-	public static List<Indicador> getIndicadoresDefinidosPorElUsuario() {
+	public List<Indicador> getIndicadoresDefinidosPorElUsuario() {
 		Query queryIndicadores = entityManager.createQuery("from Indicador"); 
 		return queryIndicadores.getResultList(); 
 	}
@@ -49,23 +48,11 @@ public class IndicadoresRepository {
 		return indicadoresPredefinidos;
 	}
 	
-	public static void cargarIndicadores(List<Indicador> indicadores) {
-		IndicadoresRepository.getIndicadoresPredefinidos().stream().forEach(indicadorPredefinido -> indicadores.add(indicadorPredefinido));
-		IndicadoresRepository.getIndicadoresDefinidosPorElUsuario().stream().forEach(indicadorDefinidoPorUsuario -> indicadores.add(indicadorDefinidoPorUsuario));
+	public void cargarIndicadores(List<Indicador> indicadores) {
+		this.getIndicadoresPredefinidos().stream().forEach(indicadorPredefinido -> indicadores.add(indicadorPredefinido));
+		this.getIndicadoresDefinidosPorElUsuario().stream().forEach(indicadorDefinidoPorUsuario -> indicadores.add(indicadorDefinidoPorUsuario));
 	}
-	public static void addIndicador(Indicador nuevoIndicador) {
-		entityManager.getTransaction().begin();
-		repo.agregar(nuevoIndicador);
-		entityManager.getTransaction().commit();
 
-		//String jsonElement = new Gson().toJson(nuevoIndicador); 
-		//ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("indicadores",jsonElement );
-	}
-	public static void deleteIndicador(Indicador indicadorAEliminar){
-		
-		entityManager.getTransaction().begin();
-		repo.eliminar(indicadorAEliminar);
-		entityManager.getTransaction().commit();
-	}
+
 	
 }

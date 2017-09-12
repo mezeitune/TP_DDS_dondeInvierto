@@ -2,6 +2,8 @@ package parserIndicadores;
 
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.experimental.theories.Theories;
@@ -17,6 +19,7 @@ import java.util.List;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
+import utilities.JPAUtility;
 
 public class ParserFormulaIndicador {
 
@@ -27,6 +30,10 @@ public class ParserFormulaIndicador {
 	
 	private static List<Cuenta> cuentasPorPeriodo;
 	
+	private static JPAUtility jpa=JPAUtility.getInstance();
+	private static EntityManager entityManager = jpa.getEntityManager();
+	private static IndicadoresRepository repo=new IndicadoresRepository(entityManager);
+	
 	
 	public static ParserFormulaIndicador getInstance() {
 		if(parserInstance == null) return new ParserFormulaIndicador();
@@ -35,7 +42,7 @@ public class ParserFormulaIndicador {
 	
 	public ParserFormulaIndicador() {
 		nombreCuentas = EmpresasRepository.getNombreCuentas(); 
-		indicadores = IndicadoresRepository.getIndicadores(); 
+		indicadores = repo.getIndicadores(); 
 	}
 	
 	public ParserFormulaIndicador(List<Cuenta> cuentasMockeadas,List<Indicador> indicadoresMockeados) {
@@ -144,7 +151,7 @@ public class ParserFormulaIndicador {
 	}
  	
 	public static  boolean formulaIndicadorValida(String formula){  /*TODO: No estaria funcionando*/
-		indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
+		indicadores = repo.getIndicadoresDefinidosPorElUsuario();
 		
 		String[] result = formula.split("[-+*/]");
 		int[] validacion = new int[result.length];

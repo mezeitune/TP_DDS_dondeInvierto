@@ -15,12 +15,17 @@ import excepciones.NombreIndicadorNotFound;
 import parserIndicadores.ParserFormulaIndicador;
 import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
+import repositorios.MetodologiasRepository;
 import usuario.Indicador;
 import utilities.JPAUtility;
 @Observable
 public class CargarBDViewModel {
 
-	private static List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
+	private JPAUtility jpa=JPAUtility.getInstance();
+	private EntityManager entityManager = this.jpa.getEntityManager();
+	private IndicadoresRepository repo=new IndicadoresRepository(this.entityManager);
+	
+	private List<Indicador> indicadores = repo.getIndicadoresDefinidosPorElUsuario();
 	
 	
 	private static long idIndicador;
@@ -28,10 +33,6 @@ public class CargarBDViewModel {
 	private static String resultadoIndicador;
 	private static String nombreIndicador;
 	
-
-	JPAUtility jpa=JPAUtility.getInstance();
-	EntityManager entityManager = jpa.getEntityManager();
-	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	
 
 

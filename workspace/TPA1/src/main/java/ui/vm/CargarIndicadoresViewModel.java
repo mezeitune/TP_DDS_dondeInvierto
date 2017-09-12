@@ -19,21 +19,19 @@ import parserArchivos.ParserJsonAObjetosJava;
 import parserIndicadores.ParserFormulaIndicador;
 import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
+import repositorios.MetodologiasRepository;
 import usuario.Indicador;
 import usuario.Metodologia;
 import utilities.JPAUtility;
 @Observable
 public class CargarIndicadoresViewModel {
 	
-	JPAUtility jpa=JPAUtility.getInstance();
-	EntityManager entityManager = jpa.getEntityManager();
-	@SuppressWarnings("rawtypes")
-	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
-	
-	//private static List<Indicador> indicadoresArchivo = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
+	private JPAUtility jpa=JPAUtility.getInstance();
+	private EntityManager entityManager = this.jpa.getEntityManager();
+	private IndicadoresRepository repo=new IndicadoresRepository(this.entityManager);
 	
 	
-	private List<Indicador> indicadores = IndicadoresRepository.getIndicadoresDefinidosPorElUsuario();
+	private List<Indicador> indicadores = repo.getIndicadoresDefinidosPorElUsuario();
 	
 	private Indicador indicadorSeleccionado;
 	private static String nombreIndicador;
@@ -94,8 +92,13 @@ public class CargarIndicadoresViewModel {
 		
 		if(!ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
-		IndicadoresRepository.addIndicador(nuevoIndicador);
 		
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		} 
+		
+		repo.agregar(nuevoIndicador);
+		entityManager.getTransaction().commit();
 		
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 		
@@ -114,7 +117,14 @@ public class CargarIndicadoresViewModel {
 		
 		List <Indicador> indicadorAEliminar = indicadores.stream().filter(unInd -> unInd.getNombre()==indicadorSeleccionado.getNombre()).collect(Collectors.toList());
 		
-		IndicadoresRepository.deleteIndicador(indicadorAEliminar.get(0));
+		
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		} 
+		
+		
+		repo.eliminar(indicadorAEliminar.get(0));
+		entityManager.getTransaction().commit();
 		this.setResultadoIndicador("Se ha eliminado correctamente el indicador :"+indicadorAEliminar.get(0).getNombre());
 
 	}

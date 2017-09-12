@@ -19,11 +19,15 @@ import utilities.JPAUtility;
 @Observable
 public class DatosCuentasViewModel{
 	
+	private JPAUtility jpa=JPAUtility.getInstance();
+	private EntityManager entityManager = this.jpa.getEntityManager();
+	private IndicadoresRepository repo=new IndicadoresRepository(this.entityManager);
+	
 	private Empresa empresa;
 	private String periodo;	
 	private int calculo;
 	
-	private List<Indicador> indicadores = IndicadoresRepository.getIndicadores();
+	private List<Indicador> indicadores = repo.getIndicadores();
 	private String nombreIndicador;
 	private String formulaIndicador;
 	
