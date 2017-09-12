@@ -14,4 +14,3 @@ contrasena
 
 
 
-Acordarse de poner todas las id como Long o como bigint(20) si es en la DB , sino el one to many no va a funcionar
