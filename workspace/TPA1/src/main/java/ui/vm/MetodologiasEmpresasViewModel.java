@@ -3,6 +3,8 @@ package ui.vm;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
@@ -13,6 +15,7 @@ import repositorios.EmpresasAEvaluarRepository;
 import repositorios.MetodologiasRepository;
 import usuario.Empresa;
 import usuario.Metodologia;
+import utilities.JPAUtility;
 @Observable
 public class MetodologiasEmpresasViewModel {
 	
@@ -20,15 +23,16 @@ public class MetodologiasEmpresasViewModel {
 
 	private List<Empresa> empresasInvertibles = new LinkedList<>();
 	private List<Empresa> empresasNoInvertibles = new LinkedList<>();
-
+	private JPAUtility jpa=JPAUtility.getInstance();
+	private EntityManager entityManager = this.jpa.getEntityManager();
+	private MetodologiasRepository repo=new MetodologiasRepository(this.entityManager);
+	
 	public MetodologiasEmpresasViewModel() {
-		
-		new EmpresasAEvaluarRepository();
 		
 	}
 	
 	public List<Metodologia> getMetodologias(){
-		return MetodologiasRepository.getMetodologias();
+		return repo.getMetodologias();
 	}
 	
 	

@@ -26,9 +26,9 @@ import utilities.JPAUtility;
 public class CargarMetodologiaViewModel {
 	private static String nombreMetodologia ;
 	
-	JPAUtility jpa=JPAUtility.getInstance();
-	EntityManager entityManager = jpa.getEntityManager();
-	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
+	private JPAUtility jpa=JPAUtility.getInstance();
+	private EntityManager entityManager = this.jpa.getEntityManager();
+	private MetodologiasRepository repo=new MetodologiasRepository(this.entityManager);
 	
 	
 	private String resultadoIndicador;
@@ -50,7 +50,7 @@ public class CargarMetodologiaViewModel {
 	}
 	
 	public List<Metodologia> getMetodologias() {
-		return MetodologiasRepository.getMetodologiasDefinidasPorElUsuario();
+		return repo.getMetodologiasDefinidasPorElUsuario();
 	}
 	
 	public String getNombreMetodologia() {
@@ -72,7 +72,7 @@ public class CargarMetodologiaViewModel {
 	public  void generarMetodologia() throws NombreMetodologiaNotFoundException, CondicionesNotFoundException, MetodologiaRepetidaException {
 		
 		if(nombreMetodologia == null) throw new NombreMetodologiaNotFoundException();
-		if(MetodologiasRepository.esMetodologiaRepetida(nombreMetodologia)) throw new MetodologiaRepetidaException();
+		if(repo.esMetodologiaRepetida(nombreMetodologia)) throw new MetodologiaRepetidaException();
 		if(this.getCondiciones().isEmpty()) throw new CondicionesNotFoundException();
 		
 		if (!entityManager.getTransaction().isActive()) {
@@ -81,26 +81,12 @@ public class CargarMetodologiaViewModel {
 		
 	
 		
-		
-
-		JPAUtility jpa=JPAUtility.getInstance();
-		EntityManager entityManager = jpa.getEntityManager();
-		DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
-		
-
-		
-		//CondicionesRepository.addCondicion(condicionDefinidaPorUsuario);
-		//repo.agregar(condicionDefinidaPorUsuario);
-		
-		
-		entityManager.getTransaction().begin();
-		
 		Metodologia nuevaMetodologia = new Metodologia();
 		nuevaMetodologia.setNombre(nombreMetodologia);
 		nuevaMetodologia.setCondiciones(this.getCondiciones());
 		repo.agregar(nuevaMetodologia);
 
-		entityManager.getTransaction().commit();
+		this.entityManager.getTransaction().commit();
 		
 		
 		ObservableUtils.firePropertyChanged(this, "metodologias");
@@ -108,10 +94,16 @@ public class CargarMetodologiaViewModel {
 
 	public void eliminarMetodologiaDeBDD(){
 		
+		
 		List <Metodologia> metodologiaAEliminar = this.getMetodologias().stream().filter(unInd -> unInd.getNombre()==metodologiaSeleccionada.getNombre()).collect(Collectors.toList());
 		
-		MetodologiasRepository.deleteMetodologia(metodologiaAEliminar.get(0));
 		
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		} 
+		
+		repo.eliminar(metodologiaAEliminar.get(0));
+		entityManager.getTransaction().commit();
 		this.setResultadoIndicador("Se ha eliminado correctamente la metodologia :"+metodologiaAEliminar.get(0).getNombre());
 		ObservableUtils.firePropertyChanged(this, "resultadoIndicador");
 		ObservableUtils.firePropertyChanged(this, "metodologias");

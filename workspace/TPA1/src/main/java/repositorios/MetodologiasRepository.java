@@ -15,59 +15,46 @@ import parserArchivos.ParserJsonString;
 import usuario.Metodologia;
 import utilities.JPAUtility;
 
-public class MetodologiasRepository {
-	private static ParserJsonAObjetosJava parserMetodologias= new ParserJsonAObjetosJava("metodologias.json");
+public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> {
+	public MetodologiasRepository(EntityManager em) {
+		super(em);
+		// TODO Auto-generated constructor stub
+	}
+
+	private ParserJsonAObjetosJava parserMetodologias= new ParserJsonAObjetosJava("metodologias.json");
 	
-	static JPAUtility jpa=JPAUtility.getInstance();
-	static EntityManager entityManager = jpa.getEntityManager();
-	@SuppressWarnings("rawtypes")
-	static
-	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	
-	public static List<Metodologia> getMetodologias(){
+	public List<Metodologia> getMetodologias(){
 		List<Metodologia> metodologias = new LinkedList<Metodologia> ();
-		MetodologiasRepository.cargarMetodologias(metodologias);
+		this.cargarMetodologias(metodologias);
 		return metodologias;
 	}
 	
-	public static List<Metodologia> getMetodologiasDefinidasPorElUsuario(){
+	public List<Metodologia> getMetodologiasDefinidasPorElUsuario(){
 		Query queryIndicadores = entityManager.createQuery("from Metodologia");
 		return queryIndicadores.getResultList(); 
 	}
 	
 	
-	public static void cargarMetodologias(List<Metodologia> metodologias) {
-		MetodologiasRepository.getMetodologiasDefinidasPorElUsuario().stream().forEach(metodologiaDefinidaPorUsuario -> metodologias.add(metodologiaDefinidaPorUsuario));
-		MetodologiasRepository.getMetodologiasPredefinidas().stream().forEach(metodologiaPredefinida -> metodologias.add(metodologiaPredefinida));
+	public void cargarMetodologias(List<Metodologia> metodologias) {
+		this.getMetodologiasDefinidasPorElUsuario().stream().forEach(metodologiaDefinidaPorUsuario -> metodologias.add(metodologiaDefinidaPorUsuario));
+		this.getMetodologiasPredefinidas().stream().forEach(metodologiaPredefinida -> metodologias.add(metodologiaPredefinida));
 	}
 
-	public static List<Metodologia> getMetodologiasPredefinidas(){
+	public List<Metodologia> getMetodologiasPredefinidas(){
 		List<Metodologia> metodologiasPredefinidas = new LinkedList<Metodologia>();
 		metodologiasPredefinidas.add(WarrenBuffet.getInstance());
 		return metodologiasPredefinidas;
 	}
 
 	
-	public static void addMetodologia(Metodologia nuevaMetodologia) {
-		
-		repo.agregar(nuevaMetodologia);
-		
-		//String jsonElement = new Gson().toJson(nuevaMetodologia); 
-		//ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("metodologias",jsonElement );
+
+
+	public boolean esMetodologiaRepetida(String nombreMetodologia) {
+		return this.getMetodologias().stream().map(metodologia -> metodologia.getNombre()).collect(Collectors.toList()).contains(nombreMetodologia);
 	}
 
-	public static boolean esMetodologiaRepetida(String nombreMetodologia) {
-		return MetodologiasRepository.getMetodologias().stream().map(metodologia -> metodologia.getNombre()).collect(Collectors.toList()).contains(nombreMetodologia);
-	}
 
-	public static void deleteMetodologia(Metodologia metodologiaAEliminar) {
-		entityManager.getTransaction().begin();
-		
-		repo.eliminar(metodologiaAEliminar);
-		
-		entityManager.getTransaction().commit();
-	}
 }
-
 
 
