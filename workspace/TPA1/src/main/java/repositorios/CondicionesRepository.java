@@ -22,50 +22,45 @@ import condicionesPredefinidas.MargenesCrecientes;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
 import usuario.Indicador;
+import usuario.Metodologia;
 import utilities.JPAUtility;
 
-public class CondicionesRepository {
+public class CondicionesRepository extends DBRelacionalRepository<Condicion>{
 
-	private static ParserJsonAObjetosJava parserCondiciones = new ParserJsonAObjetosJava("condiciones.json");
+	public CondicionesRepository(EntityManager em) {
+		super(em);
+		// TODO Auto-generated constructor stub
+	}
+
+	private ParserJsonAObjetosJava parserCondiciones = new ParserJsonAObjetosJava("condiciones.json");
+
 	
-	static JPAUtility jpa=JPAUtility.getInstance();
-	static EntityManager entityManager = jpa.getEntityManager();
-	@SuppressWarnings("rawtypes")
-	static
-	DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
-	
-	public static List<Condicion> getCondiciones() {
+	public List<Condicion> getCondiciones() {
 		List<Condicion> condiciones = new LinkedList<Condicion>();
-		CondicionesRepository.cargarCondiciones(condiciones);
+		this.cargarCondiciones(condiciones);
 		return condiciones;
 	}
 	
-	private static List<Condicion> getCondicionesPredefinidas() {
+	private List<Condicion> getCondicionesPredefinidas() {
 		List<Condicion> condicionesPredefinidas = new LinkedList<Condicion>();
 		condicionesPredefinidas.add(MargenesCrecientes.getInstance());
 		return condicionesPredefinidas;
 	}
 
-	private static List<Condicion> getCondicionesDefinidasPorElUsuario() {
+	private List<Condicion> getCondicionesDefinidasPorElUsuario() {
 		Query queryIndicadores = entityManager.createQuery("from Condicion"); 
 		return queryIndicadores.getResultList(); 
 		
 	}
 
-	public static void addCondicion(Condicion condicion) {
-		
-		//repo.agregar(condicion);
-		entityManager.persist(condicion);
-		//String jsonElement = new Gson().toJson(condicion); 
-		//ParserJsonString.anidadoDeJsonAUnJsonArrayEnUnArchivo("condiciones",jsonElement );
+
+	
+	public void cargarCondiciones(List<Condicion> condiciones){
+		this.getCondicionesDefinidasPorElUsuario().stream().forEach(condicionDefinidaPorUsuario -> condiciones.add(condicionDefinidaPorUsuario));
+		this.getCondicionesPredefinidas().stream().forEach(condicionPredefinida -> condiciones.add(condicionPredefinida));
 	}
 	
-	public static void cargarCondiciones(List<Condicion> condiciones){
-		CondicionesRepository.getCondicionesDefinidasPorElUsuario().stream().forEach(condicionDefinidaPorUsuario -> condiciones.add(condicionDefinidaPorUsuario));
-		CondicionesRepository.getCondicionesPredefinidas().stream().forEach(condicionPredefinida -> condiciones.add(condicionPredefinida));
-	}
-	
-	public static List<TipoCondicion> getTipoCondiciones() {
+	public List<TipoCondicion> getTipoCondiciones() {
 		List<TipoCondicion> tipoCondiciones = new LinkedList<TipoCondicion>();
 		tipoCondiciones.add(new Comparativa());
 		tipoCondiciones.add(new Taxativa());
@@ -73,7 +68,7 @@ public class CondicionesRepository {
 		return tipoCondiciones;
 	}
 
-	public static List<Comparador> getComparadores() {
+	public List<Comparador> getComparadores() {
 		List<Comparador> comparadores = new LinkedList<Comparador>();
 		comparadores.add(new ComparadorMayor());
 		comparadores.add(new ComparadorMayorIgual());

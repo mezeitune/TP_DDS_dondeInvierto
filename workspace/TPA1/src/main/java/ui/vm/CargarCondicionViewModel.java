@@ -27,7 +27,10 @@ public class CargarCondicionViewModel {
 	
 	private JPAUtility jpa=JPAUtility.getInstance();
 	private EntityManager entityManager = this.jpa.getEntityManager();
-	private IndicadoresRepository repo=new IndicadoresRepository(this.entityManager);
+	private IndicadoresRepository repoIndicadores=new IndicadoresRepository(this.entityManager);
+	
+
+	private CondicionesRepository repoCondiciones=new CondicionesRepository(this.entityManager);
 	
 	private  String nombreCondicion;
 	private  TipoCondicion tipoCondicion;
@@ -76,19 +79,19 @@ public class CargarCondicionViewModel {
 	}
 	
 	public List<Condicion> getCondiciones() {
-		return CondicionesRepository.getCondiciones();
+		return repoCondiciones.getCondiciones();
 	}
 
 	public List<TipoCondicion> getTipoCondiciones() {
-		return CondicionesRepository.getTipoCondiciones();
+		return repoCondiciones.getTipoCondiciones();
 	}
 	
 	public List<Comparador> getComparadores() {
-		return CondicionesRepository.getComparadores();
+		return repoCondiciones.getComparadores();
 	}
 	
 	public List<Indicador> getIndicadores(){
-		return repo.getIndicadores();
+		return repoIndicadores.getIndicadores();
 	}
 	
 	public void generarCondicion() throws NombreCondicionNotFound, TipoCondicionNotFound, PesoCondicionNotFound, IndicadorNotFound {
@@ -97,20 +100,16 @@ public class CargarCondicionViewModel {
 		if(this.indicador == null) throw new IndicadorNotFound();
 		if(this.pesoCondicion == -1) throw new PesoCondicionNotFound();
 		
-		JPAUtility jpa=JPAUtility.getInstance();
-		EntityManager entityManager = jpa.getEntityManager();
-		DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
+
 		this.tipoCondicion.setComparador(this.comparador);
 
 		
-		//CondicionesRepository.addCondicion(condicionDefinidaPorUsuario);
-		//repo.agregar(condicionDefinidaPorUsuario);
-		
-		
-		entityManager.getTransaction().begin();
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		} 
 		
 		Condicion condicionDefinidaPorUsuario = new Condicion(this.nombreCondicion,this.tipoCondicion,this.indicador,this.pesoCondicion);
-		repo.agregar(condicionDefinidaPorUsuario);
+		repoCondiciones.agregar(condicionDefinidaPorUsuario);
 
 		entityManager.getTransaction().commit();
 		
