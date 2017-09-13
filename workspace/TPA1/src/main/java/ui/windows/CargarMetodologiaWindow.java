@@ -107,6 +107,7 @@ public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>
 											try {
 												this.getModelObject().generarMetodologia();
 												this.showInfo("La metodologia ha sido cargada exitosamente");
+												this.getModelObject().refresh();
 											} catch (NombreMetodologiaNotFoundException e) {
 												this.showError("Debe ingresar el nombre de la Metodologia");
 											} catch (CondicionesNotFoundException e) {

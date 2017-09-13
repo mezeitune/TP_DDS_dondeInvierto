@@ -87,7 +87,8 @@ public class CargarMetodologiaViewModel {
 		repo.agregar(nuevaMetodologia);
 
 		this.entityManager.getTransaction().commit();
-		
+		this.nombreMetodologia=null;
+		this.condiciones=null;
 		
 		ObservableUtils.firePropertyChanged(this, "metodologias");
 	}
@@ -116,6 +117,7 @@ public class CargarMetodologiaViewModel {
 
 	public void refresh() {
 		ObservableUtils.firePropertyChanged(this, "condiciones");
+		
 	}
 	
 	
