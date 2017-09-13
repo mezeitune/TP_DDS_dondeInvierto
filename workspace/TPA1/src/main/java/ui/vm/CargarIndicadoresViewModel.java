@@ -13,7 +13,7 @@ import org.uqbar.commons.utils.Observable;
 
 import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
-import excepciones.IndicadorRepetidoException;
+import excepciones.DatoRepetidoException;
 import excepciones.NombreIndicadorNotFound;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserIndicadores.ParserFormulaIndicador;
@@ -80,14 +80,14 @@ public class CargarIndicadoresViewModel {
 	}
 	
 	//@SuppressWarnings("unchecked")
-	public void generarIndicador() throws NombreIndicadorNotFound, IndicadorRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorNotFound {
+	public void generarIndicador() throws NombreIndicadorNotFound, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorNotFound {
 		
 		if(nombreIndicador == null) throw new NombreIndicadorNotFound();
 		if(formulaIndicador == null) throw new FormulaIndicadorNotFound();
 		
 		Indicador nuevoIndicador = new Indicador(nombreIndicador,formulaIndicador);
 		
-		if(this.esUnIndicadorYaIngresado(nuevoIndicador)) throw new IndicadorRepetidoException();
+		if(this.esUnIndicadorYaIngresado(nuevoIndicador)) throw new DatoRepetidoException();
 		
 		System.out.println("Formula " + formulaIndicador);
 		

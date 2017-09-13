@@ -2,6 +2,7 @@ package repositorios;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -67,7 +68,15 @@ public class CondicionesRepository extends DBRelacionalRepository<Condicion>{
 		tipoCondiciones.add(new Mixta());
 		return tipoCondiciones;
 	}
-
+	public boolean validarCondicionRepetidoAntesCargar(String nombre) {
+		List<Condicion> condicionesRepetidos = this.getCondiciones().stream().filter(line -> line.getNombre().equals(nombre)).collect(Collectors.toList());
+		
+		if (condicionesRepetidos.size() >= 1){
+			return true;
+		} else {
+			return false;
+		}
+	}
 	public List<Comparador> getComparadores() {
 		List<Comparador> comparadores = new LinkedList<Comparador>();
 		comparadores.add(new ComparadorMayor());

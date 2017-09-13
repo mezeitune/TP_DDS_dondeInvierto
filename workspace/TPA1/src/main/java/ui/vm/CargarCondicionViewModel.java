@@ -11,6 +11,7 @@ import condiciones.Condicion;
 import condiciones.Taxativa;
 import condiciones.TipoCondicion;
 import excepciones.IndicadorNotFound;
+import excepciones.DatoRepetidoException;
 import excepciones.NombreCondicionNotFound;
 import excepciones.PesoCondicionNotFound;
 import excepciones.TipoCondicionNotFound;
@@ -94,7 +95,7 @@ public class CargarCondicionViewModel {
 		return repoIndicadores.getIndicadores();
 	}
 	
-	public void generarCondicion() throws NombreCondicionNotFound, TipoCondicionNotFound, PesoCondicionNotFound, IndicadorNotFound {
+	public void generarCondicion() throws NombreCondicionNotFound, TipoCondicionNotFound, PesoCondicionNotFound, IndicadorNotFound, DatoRepetidoException {
 		if(this.nombreCondicion == null) throw new NombreCondicionNotFound();
 		if(this.tipoCondicion == null) throw new TipoCondicionNotFound();
 		if(this.indicador == null) throw new IndicadorNotFound();
@@ -102,16 +103,24 @@ public class CargarCondicionViewModel {
 		
 
 		this.tipoCondicion.setComparador(this.comparador);
-
+		Condicion condicionDefinidaPorUsuario = new Condicion(this.nombreCondicion,this.tipoCondicion,this.indicador,this.pesoCondicion);
+		
+		if(this.esUnaCondicionRepetida(condicionDefinidaPorUsuario.getNombre())) throw new DatoRepetidoException();
 		
 		if (!entityManager.getTransaction().isActive()) {
 			entityManager.getTransaction().begin();
 		} 
 		
-		Condicion condicionDefinidaPorUsuario = new Condicion(this.nombreCondicion,this.tipoCondicion,this.indicador,this.pesoCondicion);
+		
 		repoCondiciones.agregar(condicionDefinidaPorUsuario);
 
 		entityManager.getTransaction().commit();
+		
+	}
+
+	private boolean esUnaCondicionRepetida(String nombre) {
+		CondicionesRepository repoDeCondiciones = new CondicionesRepository(entityManager);
+		return repoDeCondiciones.validarCondicionRepetidoAntesCargar(nombre);
 		
 	}
 	

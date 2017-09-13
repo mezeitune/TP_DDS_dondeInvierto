@@ -13,6 +13,7 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import comparadores.Comparador;
 import condiciones.TipoCondicion;
+import excepciones.DatoRepetidoException;
 import excepciones.IndicadorNotFound;
 import excepciones.NombreCondicionNotFound;
 import excepciones.PesoCondicionNotFound;
@@ -79,6 +80,9 @@ public class CargarCondicionWindow extends Dialog <CargarCondicionViewModel> {
 						this.showError("Debe ingresar el peso de la condicion");
 					} catch (IndicadorNotFound e) {
 						this.showError("Debe ingresar el indicador de la condicion");
+					} catch (DatoRepetidoException e) {
+						this.showError("Nombre de condicion repetido");
+						e.printStackTrace();
 					}
 		}).setWidth(150);
 	

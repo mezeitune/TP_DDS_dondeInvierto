@@ -10,7 +10,7 @@ import org.uqbar.commons.utils.Observable;
 
 import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
-import excepciones.IndicadorRepetidoException;
+import excepciones.DatoRepetidoException;
 import excepciones.NombreIndicadorNotFound;
 import parserIndicadores.ParserFormulaIndicador;
 import repositorios.DBRelacionalRepository;

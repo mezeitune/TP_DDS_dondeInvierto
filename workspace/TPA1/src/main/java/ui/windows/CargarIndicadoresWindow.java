@@ -16,7 +16,7 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
-import excepciones.IndicadorRepetidoException;
+import excepciones.DatoRepetidoException;
 import excepciones.NombreIndicadorNotFound;
 import ui.vm.CargarIndicadoresViewModel;
 import usuario.Indicador;
@@ -93,7 +93,7 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 											this.showError("No se ha ingresado un nombre para el indicador");
 										} catch (FormulaIndicadorNotFound e) {
 											this.showError("No se ha ingresado la formula del indicador");
-										} catch (IndicadorRepetidoException e) {
+										} catch (DatoRepetidoException e) {
 											this.showError("El nombre ingresado ya existe");
 										} catch (FormulaIndicadorNotValidException e) {
 											this.showError("El indicador ingresado no contiene cuentas ni indicadores validos,revise la formula ingresada");

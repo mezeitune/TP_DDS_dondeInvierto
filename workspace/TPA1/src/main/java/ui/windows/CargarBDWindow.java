@@ -16,7 +16,7 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
-import excepciones.IndicadorRepetidoException;
+import excepciones.DatoRepetidoException;
 import excepciones.NombreIndicadorNotFound;
 import ui.vm.CargarBDViewModel;
 import ui.vm.CargarIndicadoresViewModel;
