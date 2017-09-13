@@ -52,6 +52,15 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 		this.getIndicadoresPredefinidos().stream().forEach(indicadorPredefinido -> indicadores.add(indicadorPredefinido));
 		this.getIndicadoresDefinidosPorElUsuario().stream().forEach(indicadorDefinidoPorUsuario -> indicadores.add(indicadorDefinidoPorUsuario));
 	}
+	public boolean validarIndicadorRepetidoAntesCargar(String nombre , String formula) {
+		List<Indicador> indicadoresRepetidos = this.getIndicadores().stream().filter(line -> line.getNombre().equals(nombre)).collect(Collectors.toList());
+		
+		if (indicadoresRepetidos.size() >= 1){
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 
 	

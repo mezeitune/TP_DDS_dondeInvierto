@@ -40,6 +40,7 @@ public class CargarIndicadoresViewModel {
 	public CargarIndicadoresViewModel(){
 		nombreIndicador=null;
 		formulaIndicador=null;
+		
 	}
 	private static int codigoDeError;
 	
@@ -105,8 +106,9 @@ public class CargarIndicadoresViewModel {
 		ObservableUtils.firePropertyChanged(this, "indicadores");
 	}
 	public boolean esUnIndicadorYaIngresado (Indicador nuevoIndicador) {
-		return ParserFormulaIndicador.validarIndicadorRepetidoAntesDePrecargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
-	
+		IndicadoresRepository repositorioDeIndicadores = new IndicadoresRepository(entityManager);
+
+		return repositorioDeIndicadores.validarIndicadorRepetidoAntesCargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
 	}
 	public List<Indicador> getIndicadores(){
 		Collections.sort(indicadores);
