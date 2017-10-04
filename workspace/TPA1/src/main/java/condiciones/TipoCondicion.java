@@ -20,9 +20,6 @@ import org.uqbar.commons.utils.Observable;
 import comparadores.Comparador;
 
 @Observable
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name="TipoCondiciones")
 public class TipoCondicion { //Si senor, clase abstracta para la persistencia en Json.
 
 	@Id @GeneratedValue

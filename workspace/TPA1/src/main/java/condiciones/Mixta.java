@@ -12,7 +12,6 @@ import org.uqbar.commons.utils.Observable;
 import usuario.Empresa;
 
 @Observable
-@Entity
 public class Mixta extends TipoCondicion{
 
 	private static Mixta instance ;

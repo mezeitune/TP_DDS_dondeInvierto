@@ -8,12 +8,10 @@ import javax.persistence.Entity;
 import org.uqbar.commons.utils.Observable;
 
 import comparadores.Comparador;
-import parserIndicadores.ParserFormulaIndicador;
 import usuario.Empresa;
 import usuario.Indicador;
 
 @Observable
-@Entity
 public class Taxativa extends TipoCondicion {
 	
 	private static Taxativa instance ;

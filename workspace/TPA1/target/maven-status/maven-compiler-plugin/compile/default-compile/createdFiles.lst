@@ -31,7 +31,6 @@ indicadoresPredefinidos/IndicadorCustom.class
 usuario/Cuenta.class
 ui/windows/EliminarCondicionSeleccionadaWindow.class
 repositorios/EmpresasRepository.class
-excepciones/IndicadorRepetidoException.class
 indicadoresPredefinidos/PatrimonioNeto.class
 ui/windows/ArchivoCuentasImportadosWindow.class
 ui/vm/CargarMetodologiaViewModel.class
@@ -79,6 +78,7 @@ ui/windows/IndicadorErroneoWindow.class
 comparadores/ComparadorMayorIgual.class
 excepciones/EmpresasIsEmptyException.class
 usuario/Indicador.class
+excepciones/DatoRepetidoException.class
 parserArchivos/CsvFile.class
 ui/windows/PreguntaNuevoIndicadorWindow.class
 ui/vm/MetodologiasEmpresasViewModel.class

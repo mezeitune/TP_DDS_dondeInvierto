@@ -38,6 +38,7 @@
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/condiciones/ParametroOperacion.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/CargarIndicadoresViewModel.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/EliminarPeriodoViewModel.java
+/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/DatoRepetidoException.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/mocks/IndicadoresMock.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/EliminarEmpresaWindow.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/metodologiasPredefinidas/WarrenBuffet.java
@@ -50,7 +51,6 @@
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/repositorios/CondicionesSeleccionadasRepository.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/ElminarCondicionSeleccionadaViewModel.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/AgregarCondicionSeleccionadaViewModel.java
-/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/IndicadorRepetidoException.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/mocks/EmpresasMock.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/IndicadorErroneoViewModel.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/indicadoresPredefinidos/PatrimonioNeto.java
