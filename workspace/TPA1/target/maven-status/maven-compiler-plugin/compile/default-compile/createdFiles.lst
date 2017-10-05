@@ -29,6 +29,7 @@ ui/vm/AgregarCondicionSeleccionadaViewModel.class
 excepciones/CSVMalFormadoException.class
 indicadoresPredefinidos/IndicadorCustom.class
 usuario/Cuenta.class
+Server/DarkMagic.class
 ui/windows/EliminarCondicionSeleccionadaWindow.class
 repositorios/EmpresasRepository.class
 indicadoresPredefinidos/PatrimonioNeto.class
@@ -64,6 +65,7 @@ comparadores/ComparadorMayor.class
 usuario/Valor.class
 excepciones/CondicionNotFoundException.class
 condiciones/TipoCondicion.class
+Server/Controller.class
 condiciones/Taxativa.class
 ui/windows/DatosCuentasWindow.class
 repositorios/MetodologiasRepository.class
@@ -105,10 +107,12 @@ Class/Main.class
 repositorios/CondicionesSeleccionadasRepository.class
 repositorios/CondicionesRepository.class
 ui/windows/CargarMetodologiaWindow.class
+Server/Router.class
 condiciones/Comparativa.class
 parserIndicadores/Constante.class
 mocks/IndicadoresMock.class
 parserIndicadores/Division.class
+Server/HandlebarsTemplateEngineBuilder.class
 parserArchivos/ParserJsonAObjetosJava$4.class
 Server/Server.class
 excepciones/MetodologiaRepetidaException.class

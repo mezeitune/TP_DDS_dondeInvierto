@@ -4,12 +4,11 @@ package Server;
 import spark.Spark;
 import spark.debug.DebugScreen;
 
-public class Server {
+public class DondeInviertoServer {
 	public static void main(String[] args) {
-		Spark.port(9000);
+		Spark.port(7000);
 		DebugScreen.enableDebugScreen();
 		Router.configure();
-		
 	}
 
 }

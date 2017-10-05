@@ -106,4 +106,5 @@
   <classpathentry kind="var" path="M2_REPO/com/github/jknack/handlebars-humanize/4.0.6/handlebars-humanize-4.0.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/github/mfornos/humanize-slim/1.1.1/humanize-slim-1.1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/ocpsoft/prettytime/prettytime/2.1.2.Final/prettytime-2.1.2.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-simple/1.7.21/slf4j-simple-1.7.21.jar"/>
 </classpath>

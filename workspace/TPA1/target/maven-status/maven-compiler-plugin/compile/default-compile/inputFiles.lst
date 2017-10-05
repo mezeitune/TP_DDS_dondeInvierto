@@ -28,6 +28,7 @@
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/FormulaIndicadorNotValidException.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/CSVInexistenteException.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/parserIndicadores/Suma.java
+/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/Server/Router.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/indicadoresPredefinidos/IndicadorCustom.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/usuario/Cuenta.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/MetodologiaRepetidaException.java
@@ -39,6 +40,7 @@
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/CargarIndicadoresViewModel.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/EliminarPeriodoViewModel.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/DatoRepetidoException.java
+/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/Server/Controller.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/mocks/IndicadoresMock.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/EliminarEmpresaWindow.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/metodologiasPredefinidas/WarrenBuffet.java
@@ -57,6 +59,7 @@
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/usuario/Indicador.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/EmpresasIsEmptyException.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/Server/Server.java
+/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/Server/DarkMagic.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/DatosCuentasWindow.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/repositorios/ArchivosCuentasRepository.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/AgregarPeriodoWindow.java
@@ -67,6 +70,7 @@
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/repositorios/EmpresasRepository.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/PreguntaNuevoIndicadorViewModel.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/vm/MenuViewModel.java
+/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/Server/HandlebarsTemplateEngineBuilder.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/PeriodosIsEmptyException.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/TipoDeArchivoIncorrectoException.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/usuario/Empresa.java
