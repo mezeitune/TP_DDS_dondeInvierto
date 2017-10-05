@@ -51,6 +51,10 @@ public class Empresa {
 		this.nombre=nombreEmpresa;
 	}
 	
+	public String getCantidad() {
+		return Integer.toString(this.getCuentas().size());
+	}
+	
 	public Empresa(){
 		
 	}

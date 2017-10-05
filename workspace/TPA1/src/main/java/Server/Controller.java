@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import mocks.EmpresasMock;
 import repositorios.EmpresasRepository;
 
 public class Controller {
@@ -23,11 +24,12 @@ public static String saludar(Request request, Response response) {
 
 public static ModelAndView consultarEmpresas(Request request, Response response) {
 	List<Empresa> empresas = new LinkedList<Empresa>();
-	empresas = EmpresasRepository.getEmpresas();
-	HashMap<Object,Object> viewModel = new HashMap <>();
-	empresas.forEach(empresa -> viewModel.put(empresa.getNombre(), Integer.toString(empresa.getCuentas().size())));
+	//empresas = EmpresasRepository.getEmpresas();
+	//HashMap<Object,Object> viewModel = new HashMap <>();
+	//empresas.forEach(empresa -> viewModel.put(empresa.getNombre(), Integer.toString(empresa.getCuentas().size())));
 
-	return new ModelAndView(viewModel, "empresas.hbs");
+	empresas = EmpresasRepository.getEmpresas();
+	return new ModelAndView(empresas, "empresas.hbs");
 }
 
 
