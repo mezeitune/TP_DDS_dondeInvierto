@@ -110,4 +110,5 @@ parserIndicadores/Constante.class
 mocks/IndicadoresMock.class
 parserIndicadores/Division.class
 parserArchivos/ParserJsonAObjetosJava$4.class
+Server/Server.class
 excepciones/MetodologiaRepetidaException.class

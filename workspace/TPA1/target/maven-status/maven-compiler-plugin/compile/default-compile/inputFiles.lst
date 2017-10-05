@@ -56,6 +56,7 @@
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/indicadoresPredefinidos/PatrimonioNeto.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/usuario/Indicador.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/excepciones/EmpresasIsEmptyException.java
+/home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/Server/Server.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/DatosCuentasWindow.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/repositorios/ArchivosCuentasRepository.java
 /home/manuel/workspace/2017-jm-group-11/workspace/TPA1/src/main/java/ui/windows/AgregarPeriodoWindow.java
