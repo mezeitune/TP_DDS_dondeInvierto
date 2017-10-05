@@ -26,8 +26,8 @@ public class Metodologia {
 
 	@Id @GeneratedValue
 	private Long id;
-	@Transient //tiene sentido que no se persista criterio , por que es una clase auxiliar que ayuda a la metodologia
-	List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
+	@Transient
+	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
 	private String nombre;
 	
 	@ManyToMany(cascade=CascadeType.DETACH)  

@@ -62,7 +62,6 @@ ui/windows/SeleccionarArchivoWindow.class
 repositorios/ArchivosCuentasRepository.class
 comparadores/ComparadorMayor.class
 usuario/Valor.class
-condiciones/Criterio.class
 excepciones/CondicionNotFoundException.class
 condiciones/TipoCondicion.class
 condiciones/Taxativa.class
