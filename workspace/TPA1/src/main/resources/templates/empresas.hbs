@@ -40,11 +40,9 @@
  </header>
 
 <div class="conteiner-fluid">
-  <div class="col-8 text-center">
-    <h1 class="text-info">Mis empresas</h1>
-  </div>
-   <div class= "row">
-     	<div class="col-8">
+   <div class= "row justify-content-center">
+     	<div class="col-4">
+        <h1 class="text-info text-center">Mis empresas</h1>
        	<table class="table table-striped">
        		<thead class="table-inverse">
   	     		<tr>
@@ -65,12 +63,34 @@
        	</table>
       </div>
    </div>
-   <div class="col-8 text-center">
-     <h1 class="text-info">Seleccion de cuentas</h1>
+   <div class="row justify-content-center"">
+     <h1 class="text-info text-center">Seleccion de cuentas</h1>
+  </div>
+  <div class="row justify-content-center"">
+  <div class="col-4">  
+     <div class="form-group">
+       <label for="Empresas">Empresas</label>
+       <select class="form-control" id="empresasDisponibles">
+         {{#each this}}
+         <option>{{nombre}}</option>
+         {{/each}}
+       </select>
+     </div>
+     <table class="table table-striped">
+      <thead class= "table-inverse">
+       <tr>
+         <th>#</th>
+         <th>Nombre</th>
+         <th>Valor</th>
+         <th>Periodo</th>
+       </tr>
+     </thead>
+      <tbody class="cuentas-list">
+           
+      </tbody>
+     </table>
    </div>
-   <div class="row">
-     
-   </div>
+ </div>
 </div>
 
 
