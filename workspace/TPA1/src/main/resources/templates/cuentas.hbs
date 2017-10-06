@@ -45,23 +45,32 @@
         <h1 class="text-info text-center">Mis empresas</h1>
              <h1 class="text-info text-center"></h1>
        	<table class="table table-striped">
-       		<thead class="table-inverse">
-  	     		<tr>
-  	     			<th>#</th>
-  	     			<th class="text-center">Nombre</th>
-  	     			<th class="text-center">Cantidad de Cuentas</th>
-  	     		</tr>
-  			  </thead>
-  			  <tbody class="empresas_list">
-          {{#each this.[0]}}
-  				<tr>
-  					<th scope="row">{{@index}}</th>
-  					<th class="text-center">{{nombre}}</th>
-  					<th class="text-center">{{cantidad}}</th>
-  				</tr>
+          <thead class="table-inverse">
+            <tr>
+              <th>#</th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Cantidad de Cuentas</th>
+              <th class="text-center">Periodos</th>
+            </tr>
+          </thead>
+          <tbody class="empresas_list">
+          {{#each empresas}}
+          <tr>
+            <th scope="row">{{@index}}</th>
+            <th class="text-center">{{nombre}}</th>
+            <th class="text-center">{{cantidad}}</th>
+            <th class="text-center">
+            <select class="custom-select mb-2 mr-sm-2 mb-sm-0">
+              <option selected>Ver</option>
+              {{#each this.periodosSinRepetidos}}
+              <option>{{this}}</option>>
+              {{/each}}
+            </select>
+            </th>
+          </tr>
           {{/each}}
-  			  </tbody>
-       	</table>
+          </tbody>
+        </table>
       </div>
    </div>
    <div class="row justify-content-center"">
@@ -72,9 +81,9 @@
     <form action="/empresas/cuentas" method="get">
      <div class="form-group">
        <label for="empresa">Empresa</label>
-       <input type="text"  class="form-control" id="empresa" placeholder="Empresa" name="empresa">
+       <input type="text"  class="form-control" id="empresa" placeholder="Empresa" name="empresa" value="{{empresaSeleccionada}}">
        <label for="periodo">Periodo</label>
-       <input type="text" class="form-control" id="periodo" placeholder="Periodo" name="periodo">
+       <input type="text" class="form-control" id="periodo" placeholder="Periodo" name="periodo" value="{{periodoSeleccionado}}">
      </div> 
      <button class="btn btn-primary" type="submit">Buscar</button>
       </form>
@@ -88,7 +97,7 @@
        </tr>
      </thead>
       <tbody class="cuentas-list">
-           {{#each this.[1]}}
+           {{#each cuentas}}
           <tr>
             <th scope="row">{{@index}}</th>
             <th class="text-center">{{nombre}}</th>

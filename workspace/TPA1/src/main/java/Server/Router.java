@@ -11,8 +11,8 @@ public class Router {
 			TemplateEngine engine = HandlebarsTemplateEngineBuilder.create().build();
 			
 			
-			Spark.get("empresas", Controller::consultarEmpresas,engine);
-			Spark.get("empresas/cuentas", Controller::mostrarCuentas,engine);
+			Spark.get("empresas", ControllerCuentas::consultarEmpresas,engine);
+			Spark.get("empresas/cuentas", ControllerCuentas::mostrarCuentas,engine);
 
 			Spark.post("login/entry", Controller::crearSessionDeLogin,engine);
 			Spark.get("login/clear", Controller::eliminarSessionDeLogin,engine);

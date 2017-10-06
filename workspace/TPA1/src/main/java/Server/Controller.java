@@ -49,41 +49,6 @@ public class Controller {
 	private static EntityManager entityManager1 = jpa1.getEntityManager();
 	private static UsuariosRepository usRepo=new UsuariosRepository(entityManager1);
 	
-	public static ModelAndView consultarEmpresas(Request request, Response response) {
-		
-		Map<String, Object> parametros = new HashMap<String, Object>();
-		
-		List<Empresa> empresas = EmpresasRepository.getEmpresas();
-		Map<String,Object> periodos = EmpresasRepository.getHashMapPeriodos();
-		
-		parametros.put("username", request.session().attribute(SESSION_NAME));
-		parametros.put("empresas", empresas);
-		parametros.put("periodos", periodos);
-		
-		ModelAndView mv=new ModelAndView(parametros, "empresas.hbs");
-		
-		return mv;
-	}
-	
-	public static ModelAndView mostrarCuentas(Request request,Response response) {
-		List<Cuenta> cuentas = new LinkedList<Cuenta>();
-		List<Empresa> empresas = new LinkedList<Empresa>();
-		List<List> viewModel = new LinkedList<List>();
-		
-		String nombreEmpresa = request.queryParams("empresa");
-		String periodo = request.queryParams("periodo");
-		
-		empresas = EmpresasRepository.getEmpresas();
-		Empresa empresa = empresas.stream().filter(e -> e.getNombre().equals(nombreEmpresa)).collect(Collectors.toList()).get(0);
-		
-		if(periodo.isEmpty()) cuentas = empresa.getCuentas();
-		else cuentas = empresa.getCuentasPorPeriodo(periodo);
-		
-		viewModel.add(empresas);
-		viewModel.add(cuentas);
-		return new ModelAndView(viewModel,"cuentas.hbs");
-	}
-	
 	//----------------------------------------------------------------------------------------------------
 	private JPAUtility jpa=JPAUtility.getInstance();
 	private EntityManager entityManager = this.jpa1.getEntityManager();
