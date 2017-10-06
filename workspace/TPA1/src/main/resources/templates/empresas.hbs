@@ -71,9 +71,11 @@
     <form action="/empresas/cuentas" method="get">
      <div class="form-group">
        <label for="empresa">Empresa</label>
-       <input type="text"  class="form-control" id="empresa" paceholder="Empresa" name="empresa">
+       <input type="text"  class="form-control is-invalid" id="empresa" placeholder="Empresa" name="empresa">
+       <div class="invalid-feedback">Porfavor, ingresa una empresa</div>
        <label for="periodo">Periodo</label>
-       <input type="text" class="form-control" id="periodo" placeholder="Periodo" name="periodo">
+       <input type="text" class="form-control is-invalid" id="periodo" placeholder="Periodo" name="periodo">
+       <div class="invalid-feedback">Porfavor, ingresa un periodo</div
      </div> 
      <button class="btn btn-primary" type="submit">Buscar</button>
       </form>
