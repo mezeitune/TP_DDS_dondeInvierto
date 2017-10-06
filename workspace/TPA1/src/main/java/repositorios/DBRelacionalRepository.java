@@ -4,15 +4,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import condiciones.Condicion;
 import parserArchivos.ParserCsv;
-import parserArchivos.ParserJsonAObjetosJava;
 import usuario.Empresa;
-import usuario.Indicador;
-import usuario.Metodologia;
 
 public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier tabla
-	protected EntityManager entityManager;
+	protected static EntityManager entityManager;
 
 
   
@@ -21,13 +17,13 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 	}
 	
 	@SuppressWarnings("hiding")
-	public <Entity> void agregar(Entity elemento){
+	public static <Entity> void agregar(Entity elemento){
 		
 		entityManager.persist(elemento);
 	
 	}
 	
-	public <Entity> void eliminar (Entity elemento){
+	public static <Entity> void eliminar (Entity elemento){
 		entityManager.remove(elemento);
 	}
 	@SuppressWarnings("hiding")

@@ -17,10 +17,10 @@ public class Router {
 			Spark.post("login/entry", Controller::crearSessionDeLogin,engine);
 			Spark.get("login/clear", Controller::eliminarSessionDeLogin,engine);
 			
-			Spark.get("indicadores", Controller::consultarIndicadores,engine);
-			Spark.get("indicadores/agregar", Controller::agregarIndicador,engine);
-			Spark.get("indicadores/eliminar", Controller::eliminarIndicador,engine);
-			Spark.get("indicadores/evaluar", Controller::evaluarIndicador,engine);
+			Spark.get("indicadores", ControllerIndicadores::consultarIndicadores,engine);
+			Spark.get("indicadores/agregar", ControllerIndicadores::agregarIndicador,engine);
+			Spark.get("indicadores/eliminar", ControllerIndicadores::eliminarIndicador,engine);
+			Spark.get("indicadores/evaluar", ControllerIndicadores::evaluarIndicador,engine);
 			
 						
 			Spark.get("metodologias",Controller::consultarMetodologias,engine);
