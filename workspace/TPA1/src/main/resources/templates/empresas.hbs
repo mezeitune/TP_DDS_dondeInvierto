@@ -49,6 +49,7 @@
   	     			<th>#</th>
   	     			<th class="text-center">Nombre</th>
   	     			<th class="text-center">Cantidad de Cuentas</th>
+              <th class="text-center">Periodos</th>
   	     		</tr>
   			  </thead>
   			  <tbody class="empresas_list">
@@ -58,6 +59,14 @@
   					<th scope="row">{{@index}}</th>
   					<th class="text-center">{{nombre}}</th>
   					<th class="text-center">{{cantidad}}</th>
+            <th class="text-center">
+            <select class="custom-select mb-2 mr-sm-2 mb-sm-0">
+              <option selected>Ver</option>
+              {{#each this.periodosSinRepetidos}}
+              <option>{{this}}</option>>
+              {{/each}}
+            </select>
+            </th>
   				</tr>
           {{/each}}
   			  </tbody>

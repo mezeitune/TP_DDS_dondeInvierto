@@ -52,20 +52,14 @@ public class Controller {
 	public static ModelAndView consultarEmpresas(Request request, Response response) {
 		
 		Map<String, Object> parametros = new HashMap<String, Object>();
-
 		
-		List<Empresa> empresas = new LinkedList<Empresa>();
-		//List<String> periodos = new LinkedList<String>();
-		//empresas = EmpresasRepository.getEmpresas();
-		//HashMap<Object,Object> viewModel = new HashMap <>();
-		//empresas.forEach(empresa -> viewModel.put(empresa.getNombre(), Integer.toString(empresa.getCuentas().size())));
-		//List<List> viewmodel = new LinkedList<List>();
-		empresas = EmpresasRepository.getEmpresas();
-		//periodos = EmpresasRepository.
-		//viewmodel.add(empresas);
-		//viewmodel.add
+		List<Empresa> empresas = EmpresasRepository.getEmpresas();
+		Map<String,Object> periodos = EmpresasRepository.getHashMapPeriodos();
+		
 		parametros.put("username", request.session().attribute(SESSION_NAME));
 		parametros.put("empresas", empresas);
+		parametros.put("periodos", periodos);
+		
 		ModelAndView mv=new ModelAndView(parametros, "empresas.hbs");
 		
 		return mv;
