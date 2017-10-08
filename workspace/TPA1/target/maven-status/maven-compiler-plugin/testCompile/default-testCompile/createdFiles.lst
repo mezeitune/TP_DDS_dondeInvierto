@@ -1,9 +1,0 @@
-PersistenciaRelacionalTest.class
-ORMTest.class
-ParserCSVEmpresaTest.class
-MetodologiaTest.class
-ArchivoTest.class
-ParserJsonAEmpresaAdapterTest.class
-IndicadoresAlArchivoJSONTest.class
-ParserIndicadoresTest.class
-CondicionesTest.class

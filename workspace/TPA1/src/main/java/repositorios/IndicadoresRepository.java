@@ -7,12 +7,19 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.uqbar.commons.model.ObservableUtils;
+
 import com.google.gson.Gson;
 
+import excepciones.DatoRepetidoException;
+import excepciones.FormulaIndicadorNotFound;
+import excepciones.FormulaIndicadorNotValidException;
+import excepciones.NombreIndicadorNotFound;
 import indicadoresPredefinidos.Antiguedad;
 import indicadoresPredefinidos.PatrimonioNeto;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
+import parserIndicadores.ParserFormulaIndicador;
 import usuario.Indicador;
 import usuario.Metodologia;
 import utilities.JPAUtility;
@@ -63,5 +70,65 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 	}
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void generarIndicador(String nombreIndicador, String formulaIndicador) throws NombreIndicadorNotFound, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorNotFound {
+		
+		if(nombreIndicador == null) throw new NombreIndicadorNotFound();
+		if(formulaIndicador == null) throw new FormulaIndicadorNotFound();
+		
+		Indicador nuevoIndicador = new Indicador(nombreIndicador,formulaIndicador);
+		
+		if(this.esUnIndicadorYaIngresado(nuevoIndicador)) throw new DatoRepetidoException();
+		
+		if(!ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
+
+		
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		} 
+		
+		this.agregar(nuevoIndicador);
+		entityManager.getTransaction().commit();
+
+	}
+	public boolean esUnIndicadorYaIngresado (Indicador nuevoIndicador) {
+		IndicadoresRepository repositorioDeIndicadores = new IndicadoresRepository(entityManager);
+
+		return repositorioDeIndicadores.validarIndicadorRepetidoAntesCargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

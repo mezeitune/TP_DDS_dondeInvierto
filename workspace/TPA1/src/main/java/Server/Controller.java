@@ -6,14 +6,27 @@ import spark.Request;
 import spark.Response;
 import usuario.Cuenta;
 import usuario.Empresa;
+import usuario.Indicador;
+import utilities.JPAUtility;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
+import org.uqbar.commons.model.ObservableUtils;
+
+import excepciones.DatoRepetidoException;
+import excepciones.FormulaIndicadorNotFound;
+import excepciones.FormulaIndicadorNotValidException;
+import excepciones.NombreIndicadorNotFound;
 import mocks.EmpresasMock;
+import parserIndicadores.ParserFormulaIndicador;
 import repositorios.EmpresasRepository;
+import repositorios.IndicadoresRepository;
 
 public class Controller {
 
@@ -56,6 +69,37 @@ public static ModelAndView mostrarCuentas(Request request,Response response) {
 	viewModel.add(empresas);
 	viewModel.add(cuentas);
 	return new ModelAndView(viewModel,"cuentas.hbs");
+}
+
+private JPAUtility jpa=JPAUtility.getInstance();
+private EntityManager entityManager = this.jpa.getEntityManager();
+private IndicadoresRepository repo = new IndicadoresRepository(this.entityManager);
+
+
+public static ModelAndView consultarIndicadores(Request request,Response response) {
+	
+	Controller controlador = new Controller();//para poder usar referencias no estaticas
+
+	
+	String nombreIndicador = request.queryParams("nombre");
+	String formulaIndicador = request.queryParams("formula");
+
+	try {
+		controlador.repo.generarIndicador(nombreIndicador, formulaIndicador);
+	} catch (NombreIndicadorNotFound | DatoRepetidoException | FormulaIndicadorNotValidException | FormulaIndicadorNotFound e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+	List<Indicador> indicadores = new LinkedList<Indicador>();
+	indicadores = controlador.getIndicadores();
+	
+	return new ModelAndView(indicadores,"indicadores.hbs");
+}
+
+public List<Indicador> getIndicadores(){
+	return repo.getIndicadores();
 }
 
 

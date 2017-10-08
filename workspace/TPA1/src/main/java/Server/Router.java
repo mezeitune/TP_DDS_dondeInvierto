@@ -12,5 +12,6 @@ public class Router {
 			Spark.get("saludar", Controller::saludar );
 			Spark.get("empresas", Controller::consultarEmpresas,engine);
 			Spark.get("empresas/cuentas", Controller::mostrarCuentas,engine);
+			Spark.get("indicadores", Controller::consultarIndicadores,engine);
 	}
 }
