@@ -44,18 +44,22 @@
         </div>
         <div class="col-md-6 order-md-1 text-center text-md-left pr-md-5">
           <h1 class="mb-3 text-info">Donde Invierto </h1>
-          <p class="lead">
-            Ingresa al competitivo mundo de la bolsa con simplicidad y seguridad, utilizando un soporte interactivo y confiable.
-          </p>
-          <p class="lead">
-            DondeInvierto es una aplicacion open-source desarrollada por estudiantes de
-            la catedra de Diseno de Sistemas, en al Universidad Tecnologica Nacional - FRBA.
-            Brinda un apoyo a inversores en desarrollo, con un unico objetivo, permitir sumergir al usuario en la bolsa actual, potenciando sus propias ideas.
-          </p>
-          <p class="text-info">¿No estas registrado?</p>
-          <div class="d-flex flex-column flex-md-row lead mb-3">
-            <a class="btn btn-block btn-outline-info"  href="/login.html" role="button">Empezar!</a>
-          </div>
+
+            <div class="col-4">
+              <form action="/pendiente" method="get">
+               <div class="form-group">
+                 <label for="empresa">Usuario:</label>
+                 <input type="text"  class="form-control is-invalid" id="empresa" placeholder="Usuario" name="usuario">
+                 <div class="invalid-feedback">Porfavor, ingresa un usuario</div>
+                 <label for="periodo">Contrasena</label>
+                 <input type="text" class="form-control is-invalid" id="periodo" placeholder="Contrasena" name="contrasena">
+                 <div class="invalid-feedback">Porfavor, ingresa una contrasena</div
+               </div>
+               <button class="btn btn-primary" type="submit">Buscar</button>
+                </form>
+
+
+
           <p class="text-muted mb-0">Version actual 1.0</p>
         </div>
       </div>
