@@ -12,7 +12,7 @@ public class Router {
 			Spark.get("saludar", Controller::saludar );
 			Spark.get("empresas", Controller::consultarEmpresas,engine);
 			Spark.post("login/entry", Controller::crearSessionDeLogin,engine);
-			//Spark.get("login/clear", Controller::eliminarSessionDeLogin);
+			Spark.get("login/clear", Controller::eliminarSessionDeLogin,engine);
 			Spark.get("empresas/cuentas", Controller::mostrarCuentas,engine);
 			Spark.get("indicadores", Controller::consultarIndicadores,engine);
 			Spark.get("indicadores/agregar", Controller::agregarIndicador,engine);

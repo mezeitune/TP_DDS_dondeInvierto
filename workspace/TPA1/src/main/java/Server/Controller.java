@@ -145,12 +145,15 @@ public class Controller {
 		
 	}
 	
-	public static void eliminarSessionDeLogin(Request request,Response response) {
+	public static ModelAndView eliminarSessionDeLogin(Request request,Response response) {
 		
 		Controller controlador = new Controller();//para poder usar referencias no estaticas
 	
         request.session().removeAttribute(SESSION_NAME);
         response.redirect("/dondeInvierto.html");
+		
+		return null;
+		
 
 
 		
