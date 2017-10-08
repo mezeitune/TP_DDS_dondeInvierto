@@ -105,7 +105,19 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 		return repositorioDeIndicadores.validarIndicadorRepetidoAntesCargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
 	}
 
-	
+	public void eliminarIndicadorDeLaBDD(String nombreIndicador){
+		
+		List<Indicador> indicadorAEliminar = this.getIndicadores().stream().filter(unInd -> unInd.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
+		
+				
+		if (!entityManager.getTransaction().isActive()) {
+			entityManager.getTransaction().begin();
+		} 
+		this.eliminar(indicadorAEliminar.get(0));
+		entityManager.getTransaction().commit();
+		//this.setResultadoIndicador("Se ha eliminado correctamente el indicador :"+ nombreIndicador);
+
+	}
 	
 	
 	

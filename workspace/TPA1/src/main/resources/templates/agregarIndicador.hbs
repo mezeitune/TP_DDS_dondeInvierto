@@ -64,21 +64,24 @@
    </div>
 
   <div class="row justify-content-center"">
-  <div class="col-4">  
-    <div class="form-group">
-        <label for="">Nro. remito</label>
-        <div class="input-group">
-             <form action="/indicadores/agregar" method="get">
-            <button class="btn btn-primary" type="submit">Ingresar Indicador</button>
-            </form>
-          <span class="input-group-addon"> </span>
-            <form action="/indicadores/eliminar" method="get">
-             <button class="btn btn-primary" type="submit">Eliminar Indicador</button>
-           </form>
-        </div>
-    </div>
+  <h2 class="text-info text-center">Ingresar nuevo Indicador</h2>
   </div>
+  <div class="row justify-content-center"">
+  <div class="col-4">  
+    <form action="/indicadores/agregar" method="get">
+     <div class="form-group">
+       <label for="indicador">Nombre</label>
+       <input type="text"  class="form-control is-invalid" id="nombre" placeholder="Nombre" name="nombre">
+       <!--<div class="invalid-feedback">Porfavor, ingresa una empresa</div>-->
+       <label for="formula">Formula</label>
+       <input type="text" class="form-control is-invalid" id="formula" placeholder="Formula" name="formula">
+       <!---<div class="invalid-feedback">Porfavor, ingresa un periodo</div-->
+     </div> 
+     <button class="btn btn-primary" type="submit">Agregar</button>
+      </form>
+   </div>
  </div>
+
 
 </div>
 </body>

@@ -80,18 +80,6 @@ public static ModelAndView consultarIndicadores(Request request,Response respons
 	
 	Controller controlador = new Controller();//para poder usar referencias no estaticas
 
-	
-	String nombreIndicador = request.queryParams("nombre");
-	String formulaIndicador = request.queryParams("formula");
-
-	try {
-		controlador.repo.generarIndicador(nombreIndicador, formulaIndicador);
-	} catch (NombreIndicadorNotFound | DatoRepetidoException | FormulaIndicadorNotValidException | FormulaIndicadorNotFound e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	
 	List<Indicador> indicadores = new LinkedList<Indicador>();
 	indicadores = controlador.getIndicadores();
 	
@@ -100,6 +88,43 @@ public static ModelAndView consultarIndicadores(Request request,Response respons
 
 public List<Indicador> getIndicadores(){
 	return repo.getIndicadores();
+}
+
+
+public static ModelAndView agregarIndicador(Request request,Response response) {
+	
+	Controller controlador = new Controller();//para poder usar referencias no estaticas
+
+	
+	String nombreIndicador = request.queryParams("nombre");
+	String formulaIndicador = request.queryParams("formula");
+
+	try {
+		controlador.repo.generarIndicador(nombreIndicador, formulaIndicador);
+	} catch (NombreIndicadorNotFound | DatoRepetidoException | FormulaIndicadorNotValidException | FormulaIndicadorNotFound e) {
+		//TODO [Que hacer aca]
+	}
+	
+	
+	List<Indicador> indicadores = new LinkedList<Indicador>();
+	indicadores = controlador.getIndicadores();
+	
+	return new ModelAndView(indicadores,"agregarIndicador.hbs");
+}
+
+public static ModelAndView eliminarIndicador(Request request,Response response) {
+	
+	Controller controlador = new Controller();//para poder usar referencias no estaticas
+
+	
+	String nombreIndicador = request.queryParams("nombre");
+
+	if(nombreIndicador != null)	controlador.repo.eliminarIndicadorDeLaBDD(nombreIndicador);
+	
+	List<Indicador> indicadores = new LinkedList<Indicador>();
+	indicadores = controlador.getIndicadores();
+	
+	return new ModelAndView(indicadores,"eliminarIndicador.hbs");
 }
 
 
