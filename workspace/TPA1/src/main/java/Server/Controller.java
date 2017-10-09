@@ -148,14 +148,17 @@ public class Controller {
 	
 		
 		
-        String name = request.queryParams("usuario");
-        if (name != null && usRepo.usuarioExistente(name)) {
-        	
-        		request.session().attribute(SESSION_NAME, name);
+		String username = request.queryParams("usuario");
+		String password = request.queryParams("contrasena");
+        if (username != null && usRepo.usuarioExistente(username)) {
+        	if(usRepo.logeoCorrecto(username, password)){
+        		request.session().attribute(SESSION_NAME, username);
         		response.redirect("/empresas");
-        }else{
-        	response.redirect("/login.html");
+        	}
         }
+        
+        response.redirect("/login.html");//Ver si login realmente deberia ser estatico , por que hay que mandar un mensaje de error
+        
         
         
 		

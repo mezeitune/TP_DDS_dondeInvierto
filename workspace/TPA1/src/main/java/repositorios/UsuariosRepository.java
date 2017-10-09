@@ -48,10 +48,23 @@ public class UsuariosRepository extends DBRelacionalRepository<Metodologia> {
 		this.getUsuariosDefinidosPorElUsuario().stream().forEach(UsuarioDefinidoPorUsuario -> usuarios.add(UsuarioDefinidoPorUsuario));
 	}
 	
+	public Usuarios obtUsuario(String usuario){
+		List<Usuarios> usersFiltrados=this.getUsuarios().stream().filter(us -> us.getUsername().equals(usuario))
+				 .collect(Collectors.toList());
+		return usersFiltrados.get(0);
+	}
 
 
-	public Boolean usuarioExistente(String Usuario){
-		return this.getNombreUsuarios().contains(Usuario);
+	public Boolean usuarioExistente(String usuario){
+		return this.getNombreUsuarios().contains(usuario);
+	}
+	
+	public Boolean logeoCorrecto(String usuario,String password){
+		if(this.usuarioExistente(usuario) && this.obtUsuario(usuario).getPassword().equals(password)){
+			return true;
+		}
+		
+		return false;
 	}
 
 
