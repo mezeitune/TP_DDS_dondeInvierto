@@ -145,7 +145,7 @@ public class Controller {
             request.session().attribute(SESSION_NAME, name);
         }
         
-        response.redirect("/dondeInvierto.html");
+        response.redirect("/empresas");
 		
 		return null;
 
