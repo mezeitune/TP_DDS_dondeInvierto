@@ -42,7 +42,7 @@ public class Controller {
 	
 	public static ModelAndView consultarEmpresas(Request request, Response response) {
 		
-		Map<String, Object> model = new HashMap<String, Object>();
+		Map<String, Object> parametros = new HashMap<String, Object>();
 
 		
 		List<Empresa> empresas = new LinkedList<Empresa>();
@@ -55,9 +55,9 @@ public class Controller {
 		//periodos = EmpresasRepository.
 		//viewmodel.add(empresas);
 		//viewmodel.add
-		model.put("username", request.session().attribute(SESSION_NAME));
-		model.put("empresas", empresas);
-		ModelAndView mv=new ModelAndView(model, "empresas.hbs");
+		parametros.put("username", request.session().attribute(SESSION_NAME));
+		parametros.put("empresas", empresas);
+		ModelAndView mv=new ModelAndView(parametros, "empresas.hbs");
 		
 		return mv;
 	}
