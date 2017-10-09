@@ -50,8 +50,8 @@ public class UsuariosRepository extends DBRelacionalRepository<Metodologia> {
 	
 
 
-	public boolean esMetodologiaRepetida(String nombreUsuario) {
-		return this.getUsuarios().stream().map(usuario -> usuario.getUsername()).collect(Collectors.toList()).contains(nombreUsuario);
+	public Boolean usuarioExistente(String Usuario){
+		return this.getNombreUsuarios().contains(Usuario);
 	}
 
 

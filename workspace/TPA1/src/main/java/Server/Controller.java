@@ -28,10 +28,16 @@ import mocks.EmpresasMock;
 import parserIndicadores.ParserFormulaIndicador;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
+import repositorios.UsuariosRepository;
+
+import utilities.JPAUtility;
 
 public class Controller {
 
-	 private static final String SESSION_NAME = "username";
+	private static final String SESSION_NAME = "username";
+	private static JPAUtility jpa1=JPAUtility.getInstance();
+	private static EntityManager entityManager1 = jpa1.getEntityManager();
+	private static UsuariosRepository usRepo=new UsuariosRepository(entityManager1);
 		
 	public static String saludar(Request request, Response response) {
 			
@@ -82,8 +88,8 @@ public class Controller {
 	}
 	
 	private JPAUtility jpa=JPAUtility.getInstance();
-	private EntityManager entityManager = this.jpa.getEntityManager();
-	private IndicadoresRepository repo = new IndicadoresRepository(this.entityManager);
+	private EntityManager entityManager = this.jpa1.getEntityManager();
+	private IndicadoresRepository repo = new IndicadoresRepository(this.entityManager1);
 	
 	
 	public static ModelAndView consultarIndicadores(Request request,Response response) {
@@ -140,12 +146,18 @@ public class Controller {
 		
 		Controller controlador = new Controller();//para poder usar referencias no estaticas
 	
+		
+		
         String name = request.queryParams("usuario");
-        if (name != null) {
-            request.session().attribute(SESSION_NAME, name);
+        if (name != null && usRepo.usuarioExistente(name)) {
+        	
+        		request.session().attribute(SESSION_NAME, name);
+        		response.redirect("/empresas");
+        }else{
+        	response.redirect("/login.html");
         }
         
-        response.redirect("/empresas");
+        
 		
 		return null;
 
