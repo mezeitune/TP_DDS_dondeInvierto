@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -40,6 +41,10 @@ public class Controller {
 		}
 	
 	public static ModelAndView consultarEmpresas(Request request, Response response) {
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+
+		
 		List<Empresa> empresas = new LinkedList<Empresa>();
 		//List<String> periodos = new LinkedList<String>();
 		//empresas = EmpresasRepository.getEmpresas();
@@ -50,8 +55,11 @@ public class Controller {
 		//periodos = EmpresasRepository.
 		//viewmodel.add(empresas);
 		//viewmodel.add
+		model.put("username", request.session().attribute(SESSION_NAME));
+		model.put("empresas", empresas);
+		ModelAndView mv=new ModelAndView(model, "empresas.hbs");
 		
-		return new ModelAndView(empresas, "empresas.hbs");
+		return mv;
 	}
 	
 	public static ModelAndView mostrarCuentas(Request request,Response response) {
