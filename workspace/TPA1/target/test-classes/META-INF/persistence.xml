@@ -12,6 +12,7 @@
     	<class>usuario.Empresa</class>
     	<class>usuario.Metodologia</class>
     	<class>usuario.Cuenta</class>
+    	<class>usuario.Usuarios</class>
     	<class>condiciones.Condicion</class>
     	<class>condiciones.TipoCondicion</class>
     	<class>condiciones.Comparativa</class>
