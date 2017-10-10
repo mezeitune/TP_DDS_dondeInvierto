@@ -7,6 +7,7 @@ import spark.Response;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
+import usuario.Metodologia;
 import utilities.JPAUtility;
 
 import java.util.Collections;
@@ -28,6 +29,7 @@ import mocks.EmpresasMock;
 import parserIndicadores.ParserFormulaIndicador;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
+import repositorios.MetodologiasRepository;
 
 public class Controller {
 
@@ -166,6 +168,25 @@ public class Controller {
 
 		
 	}
+	public static ModelAndView consultarMetodologias(Request request,Response response) {
+		
+		Controller controlador = new Controller();//para poder usar referencias no estaticas
+	
+		List<Metodologia> metodologias = new LinkedList<Metodologia>();
+		metodologias= controlador.getMetodologias();
+		
+		return new ModelAndView(metodologias,"metodologias.hbs");
+	}
+	private MetodologiasRepository repoMetodologias=new MetodologiasRepository(this.entityManager);
+	public List<Metodologia> getMetodologias(){
+		
+		return repoMetodologias.getMetodologias();
+		
+	}
+	
+		
 
+	
+	
 
 }
