@@ -39,7 +39,30 @@
      </ul>
  </header>
 <div class="conteiner-fluid">
-<div class= "row justify-content-center">
+  <div class= "row justify-content-left ">
+      <div class="col-4">
+        <h1 class="text-info text-center">Mis Indicadores</h1>
+        <table class="table table-striped">
+          <thead class="table-inverse">
+            <tr>
+              <th>#</th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Fórmula</th>
+            </tr>
+          </thead>
+          <tbody class="empresas_list">
+          {{#each this}}
+          <tr>
+            <th scope="row">{{@index}}</th>
+            <th class="text-center">{{nombre}}</th>
+            <th class="text-center">{{formula}}</th>
+          </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+   </div>
+<div class= "row justify-content-right">
       <div class="col-4">
         <h1 class="text-info text-center">Mis Indicadores</h1>
         <table class="table table-striped">

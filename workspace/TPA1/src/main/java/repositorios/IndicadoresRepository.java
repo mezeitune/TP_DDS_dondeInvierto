@@ -120,7 +120,13 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 	}
 	
 	
-	
+	public Indicador getIndicador(String nombreIndicador){
+		
+		List<Indicador> indicador = this.getIndicadores().stream().filter(unInd -> unInd.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
+		return indicador.get(0);
+		
+		
+	}
 	
 	
 	

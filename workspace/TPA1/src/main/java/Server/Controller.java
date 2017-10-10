@@ -13,6 +13,7 @@ import utilities.JPAUtility;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,8 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 
 import org.uqbar.commons.model.ObservableUtils;
+
+import com.github.jknack.handlebars.Handlebars;
 
 import condiciones.Condicion;
 import excepciones.DatoRepetidoException;
@@ -45,13 +48,6 @@ public class Controller {
 	private static JPAUtility jpa1=JPAUtility.getInstance();
 	private static EntityManager entityManager1 = jpa1.getEntityManager();
 	private static UsuariosRepository usRepo=new UsuariosRepository(entityManager1);
-		
-	public static String saludar(Request request, Response response) {
-			
-			String nombre = request.params("nombre");
-			return "Hola" + nombre;
-			
-		}
 	
 	public static ModelAndView consultarEmpresas(Request request, Response response) {
 		
@@ -94,6 +90,7 @@ public class Controller {
 		return new ModelAndView(viewModel,"cuentas.hbs");
 	}
 	
+	//----------------------------------------------------------------------------------------------------
 	private JPAUtility jpa=JPAUtility.getInstance();
 	private EntityManager entityManager = this.jpa1.getEntityManager();
 	private IndicadoresRepository repo = new IndicadoresRepository(this.entityManager1);
@@ -149,6 +146,47 @@ public class Controller {
 		
 		return new ModelAndView(indicadores,"eliminarIndicador.hbs");
 	}
+	
+
+	public static ModelAndView evaluarIndicador(Request request,Response response) {
+		
+		Controller controlador = new Controller();//para poder usar referencias no estaticas
+		
+		List<Indicador> indicadores = new LinkedList<Indicador>();
+		indicadores = controlador.getIndicadores();
+		
+		Map<String, Object> diccionario = new HashMap<String, Object>();
+		Map<String, Object> diccionarioPeriodos = EmpresasRepository.getHashMapPeriodos();
+		
+		int resultado = 0;
+		
+		String nombreIndicador = request.queryParams("indicador");
+		String nombreEmpresa = request.queryParams("empresa");
+		String periodo = request.queryParams("periodo");
+		
+		
+		if(nombreIndicador != null && nombreEmpresa != null){
+		
+			Indicador indicador = controlador.repo.getIndicador(nombreIndicador);
+			Empresa empresa = EmpresasRepository.getEmpresa(nombreEmpresa);
+		
+			indicador.construirOperadorRaiz(empresa,periodo);
+			resultado = indicador.calcular();
+		}
+
+		diccionario.put("indicadores", indicadores);
+		diccionario.put("periodos", diccionarioPeriodos);
+		diccionario.put("resultado", String.valueOf(resultado));
+		
+
+		return new ModelAndView(diccionario,"evaluarIndicador.hbs");
+	}
+	
+	
+	
+	
+
+	//----------------------------------------------------------------------------------------------------
 	public static ModelAndView crearSessionDeLogin(Request request,Response response) {
 		
 		Controller controlador = new Controller();//para poder usar referencias no estaticas
@@ -171,7 +209,6 @@ public class Controller {
 		
 		return null;
 
-
 		
 	}
 	
@@ -185,7 +222,7 @@ public class Controller {
 		return null;
 		
 
-
+		//--------------------------------------------------------------------------------------------------
 		
 	}
 	public static ModelAndView consultarMetodologias(Request request,Response response) {

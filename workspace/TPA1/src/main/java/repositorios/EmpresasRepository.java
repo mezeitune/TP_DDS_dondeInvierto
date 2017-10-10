@@ -3,9 +3,11 @@ import usuario.Empresa;
 import utilities.JPAUtility;
 import usuario.Cuenta;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,5 +57,35 @@ public class EmpresasRepository {
 	}
 
 
+	
+	public static Map<String, Object> getHashMapPeriodos(){
+
+		List<Empresa> empresas = new LinkedList<Empresa>();
+		List<List<Cuenta>> cuentasPorEmpresa = new LinkedList<List<Cuenta>>();
+		List<List<String>> periodos = new LinkedList<List<String>>();
+		
+
+		empresas = EmpresasRepository.getEmpresas();
+
+		cuentasPorEmpresa = empresas.stream().map(e -> e.getCuentas()).collect(Collectors.toList());
+
+		
+		periodos = cuentasPorEmpresa.stream().map(cuentasPorEmp -> cuentasPorEmp.stream().map(cuenta -> cuenta.getPeriodo()).collect(Collectors.toList())).collect(Collectors.toList());
+
+		periodos = periodos.stream().map(p -> p.stream().distinct().collect(Collectors.toList())).collect(Collectors.toList());
+		Map<String, Object> diccionarioPeriodos = new HashMap<String, Object>();
+		
+		
+		for (int i = 0; i < periodos.size(); i++) {
+			diccionarioPeriodos.put(empresas.get(i).getNombre(), periodos.get(i));
+		}
+		return diccionarioPeriodos;
+		
+	}
+	
+	public static Empresa getEmpresa(String nombreEmpresa){
+		return EmpresasRepository.getEmpresas().stream().filter(empresa -> empresa.getNombre().equals(nombreEmpresa)).collect(Collectors.toList()).get(0);
+		
+	}
 
 }
