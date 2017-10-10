@@ -4,6 +4,7 @@ package Server;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import ui.vm.CargarMetodologiaViewModel;
 import usuario.Cuenta;
 import usuario.Empresa;
 import usuario.Indicador;
@@ -21,12 +22,14 @@ import javax.persistence.EntityManager;
 
 import org.uqbar.commons.model.ObservableUtils;
 
+import condiciones.Condicion;
 import excepciones.DatoRepetidoException;
 import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.NombreIndicadorNotFound;
 import mocks.EmpresasMock;
 import parserIndicadores.ParserFormulaIndicador;
+import repositorios.CondicionesSeleccionadasRepository;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
 import repositorios.MetodologiasRepository;
@@ -192,18 +195,38 @@ public class Controller {
 		List<Metodologia> metodologias = new LinkedList<Metodologia>();
 		metodologias= controlador.getMetodologias();
 		
+		
 		return new ModelAndView(metodologias,"metodologias.hbs");
 	}
 	private MetodologiasRepository repoMetodologias=new MetodologiasRepository(this.entityManager);
+	
 	public List<Metodologia> getMetodologias(){
 		
 		return repoMetodologias.getMetodologias();
 		
 	}
-	
 		
+	public static ModelAndView evaluarMetodologia(Request request, Response responce){
+		Controller controlador = new Controller();//para poder usar referencias no estaticas
+		
+		Map<String, Object> parametros = new HashMap<String, Object>();
 
-	
+		String metSeleccionadaNombre = request.queryParams("metodologia");
+		
+		List<Empresa> empresas = new LinkedList<Empresa>();
+		
+		List <Metodologia> metodologias = controlador.getMetodologias();
+		
+		Metodologia metodologia = metodologias.stream().filter(e -> e.getNombre().equals(metSeleccionadaNombre)).collect(Collectors.toList()).get(0);
+		//parametros.put("metSeleccionada", metodologia);
+		
+		
+		ModelAndView mv=new ModelAndView(metodologia, "evaluarMetodologia.hbs");
+		
+		return mv;
+		
+		
+	}
 	
 
 }

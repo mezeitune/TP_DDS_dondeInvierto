@@ -41,20 +41,22 @@
 <div class="conteiner-fluid">
 <div class= "row justify-content-center">
       <div class="col-4">
-        <h1 class="text-info text-center">Mis Metodologias</h1>
+       <h3 class="text-info text-center">Metodologia Seleccionada: "{{nombre}}"</h3>
+        <h1 class="text-info text-center">Empresas a evaluar</h1>
         <table class="table table-striped">
           <thead class="table-inverse">
             <tr>
               <th>#</th>
               <th class="text-center">Nombre</th>
-             
+             <th class="text-center">Cantidad de cuentas</th>
             </tr>
           </thead>
           <tbody class="metodologias_list">
           {{#each this}}
           <tr>
-            <th scope="row">{{@index}}</th>
-            <th class="text-center">{{nombre}}</th>
+            <th scope="row"></th>
+            <th class="text-center"></th>
+              <th class="text-center"></th>
           </tr>
           {{/each}}
           </tbody>
@@ -62,22 +64,24 @@
       </div>
    </div>
 <div class="row justify-content-center"">
-     <h1 class="text-info text-center">Seleccion de Metodologia</h1>
+     <h1 class="text-info text-center">Seleccion de Empresas</h1>
   </div>
   <div class="row justify-content-center"">
   <div class="col-4">  
   	
-  	<form action="/metodologias/evaluar" method="get">
+  	
      <div class="form-group">
-       <label for="metodologia"></label>
-       <input type="text"  class="form-control is-invalid" id="metodologia" placeholder="Metodologia" name="metodologia">
-       <div class="invalid-feedback">Porfavor, ingresa una metodologia</div>
-        <button class="btn btn-primary" type="submit">Evaluar Metodologia</button>
-     </div>
-     
-      </form>
+       <label for="empresa"></label>
+       <input type="text"  class="form-control is-invalid" id="empresa" placeholder="empresa" name="empresa">
+       <div class="invalid-feedback">Porfavor, ingresa una empresa</div>
+       
+     </div> 
       
-      <form action="/dondeInvierto.html" method="get">
+    
+      <button class="btn btn-primary" type="submit">Evaluar!</button>
+      
+      
+      <form action="/metodologias" method="get">
       <button class="btn btn-primary" type="submit">Volver</button>
       </form>
           
