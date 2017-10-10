@@ -31,9 +31,17 @@ import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
 import repositorios.MetodologiasRepository;
 
+import repositorios.UsuariosRepository;
+
+import utilities.JPAUtility;
+
+
 public class Controller {
 
-	 private static final String SESSION_NAME = "username";
+	private static final String SESSION_NAME = "username";
+	private static JPAUtility jpa1=JPAUtility.getInstance();
+	private static EntityManager entityManager1 = jpa1.getEntityManager();
+	private static UsuariosRepository usRepo=new UsuariosRepository(entityManager1);
 		
 	public static String saludar(Request request, Response response) {
 			
@@ -84,8 +92,8 @@ public class Controller {
 	}
 	
 	private JPAUtility jpa=JPAUtility.getInstance();
-	private EntityManager entityManager = this.jpa.getEntityManager();
-	private IndicadoresRepository repo = new IndicadoresRepository(this.entityManager);
+	private EntityManager entityManager = this.jpa1.getEntityManager();
+	private IndicadoresRepository repo = new IndicadoresRepository(this.entityManager1);
 	
 	
 	public static ModelAndView consultarIndicadores(Request request,Response response) {
@@ -142,12 +150,21 @@ public class Controller {
 		
 		Controller controlador = new Controller();//para poder usar referencias no estaticas
 	
-        String name = request.queryParams("usuario");
-        if (name != null) {
-            request.session().attribute(SESSION_NAME, name);
+		
+		
+		String username = request.queryParams("usuario");
+		String password = request.queryParams("contrasena");
+        if (username != null && usRepo.usuarioExistente(username)) {
+        	if(usRepo.logeoCorrecto(username, password)){
+        		request.session().attribute(SESSION_NAME, username);
+        		response.redirect("/empresas");
+        	}
         }
         
-        response.redirect("/dondeInvierto.html");
+        response.redirect("/login.html");//Ver si login realmente deberia ser estatico , por que hay que mandar un mensaje de error
+        
+        
+        
 		
 		return null;
 
