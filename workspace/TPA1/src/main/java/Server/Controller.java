@@ -27,7 +27,7 @@ import repositorios.UsuariosRepository;
 
 public class Controller {
 
-	private static final String SESSION_NAME = "username";
+	//private static final String SESSION_NAME = "username";
 	private static JPAUtility jpa1=JPAUtility.getInstance();
 	private static EntityManager entityManager1 = jpa1.getEntityManager();
 	private static UsuariosRepository usRepo=new UsuariosRepository(entityManager1);
@@ -72,7 +72,7 @@ public class Controller {
 		String password = request.queryParams("contrasena");
         if (username != null && usRepo.usuarioExistente(username)) {
         	if(usRepo.logeoCorrecto(username, password)){
-        		request.session().attribute(SESSION_NAME, username);
+        		request.session().attribute("usuario", username);
         		response.redirect("/empresas");
         	}
         }
@@ -85,7 +85,7 @@ public class Controller {
 	}
 	
 	public static ModelAndView eliminarSessionDeLogin(Request request,Response response) {
-        request.session().removeAttribute(SESSION_NAME);
+        request.session().removeAttribute("usuario");
         response.redirect("/dondeInvierto.html");
 		
 		return null;

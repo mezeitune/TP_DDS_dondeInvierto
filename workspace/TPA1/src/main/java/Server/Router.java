@@ -3,19 +3,41 @@ package Server;
 import spark.Spark;
 import spark.TemplateEngine;
 
+import spark.Filter;
+import spark.Request;
+import spark.Response;
+
+import static spark.Spark.after;
+import static spark.Spark.before;
+import static spark.Spark.get;
+import static spark.Spark.halt;
 
 public class Router {
 
 		public static void configure() {
+			
+			//private static final String SESSION_NAME = "username";
+			
 			Spark.staticFiles.location("/public"); // Archivos estaticos en Public
 			TemplateEngine engine = HandlebarsTemplateEngineBuilder.create().build();
+			
+			
+			Spark.post("login/entry", Controller::crearSessionDeLogin,engine);
+			Spark.get("login/clear", Controller::eliminarSessionDeLogin,engine);
+			
+			
+		    AuthenticationFilter authentication = new AuthenticationFilter();
+		    Spark.before((req,res)->{
+		    	  authentication.isAuthorized(req, res);
+		    	   
+		    });
 			
 			
 			Spark.get("empresas", ControllerCuentas::consultarEmpresas,engine);
 			Spark.get("empresas/cuentas", ControllerCuentas::mostrarCuentas,engine);
 
-			Spark.post("login/entry", Controller::crearSessionDeLogin,engine);
-			Spark.get("login/clear", Controller::eliminarSessionDeLogin,engine);
+
+
 			
 			Spark.get("indicadores", ControllerIndicadores::consultarIndicadores,engine);
 			Spark.get("indicadores/agregar", ControllerIndicadores::agregarIndicador,engine);

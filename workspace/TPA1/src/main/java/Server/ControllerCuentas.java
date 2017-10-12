@@ -17,7 +17,9 @@ public class ControllerCuentas {
 
 	private static final String SESSION_NAME = "username";
 	
-public static ModelAndView consultarEmpresas(Request request, Response response) {
+
+	
+	public static ModelAndView consultarEmpresas(Request request, Response response) {
 		Map<String, Object> parametros = new HashMap<String, Object>();
 		List<Empresa> empresas = EmpresasRepository.getEmpresas();
 		
