@@ -25,14 +25,8 @@ public class Empresa {
 	@Id @GeneratedValue
 	private Long id;
 	private String nombre;
-	int peso=0;
-	
-	
-	
-	
-	
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	
 	@JoinColumn(name = "empresa_id",nullable = false)//el nullable es para poder eliminar deshabilitando las FK
 	private List<Cuenta> cuentas = new LinkedList<>(); 
 	
@@ -84,21 +78,5 @@ public class Empresa {
 		List <String> periodosSinRepetidos = new ArrayList <String> (unSetPeriodos);
 		return periodosSinRepetidos;
 	}
-	
-	public void actualizarPeso(int peso){
-		this.peso+=peso;
-	}
-	public int getPeso(){
-		return this.peso;
-	}
-	
-	public String toString (){//Para testear a mano lo que nos devuelve
-		
-		
-        String mensaje="La empresa"+id+" es "+nombre+" con el: "+peso;
-        return mensaje;
-        
-        
-    }
 
 }

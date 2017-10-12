@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
 public class Usuarios {
@@ -24,6 +23,22 @@ public class Usuarios {
 	private List<Metodologia> metodologias = new LinkedList<>(); 
 	
 	
+	public List<Metodologia> getMetodologias() {
+		return metodologias;
+	}
+
+	public void setMetodologias(List<Metodologia> metodologias) {
+		this.metodologias = metodologias;
+	}
+
+	public List<Indicador> getIndicadores() {
+		return indicadores;
+	}
+
+	public void setIndicadores(List<Indicador> indicadores) {
+		this.indicadores = indicadores;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "usuario_id",nullable = false)
 	private List<Indicador> indicadores = new LinkedList<>(); 
