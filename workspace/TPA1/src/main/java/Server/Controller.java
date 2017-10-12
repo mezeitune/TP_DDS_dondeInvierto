@@ -32,34 +32,7 @@ public class Controller {
 	private static EntityManager entityManager1 = jpa1.getEntityManager();
 	private static UsuariosRepository usRepo=new UsuariosRepository(entityManager1);
 
-	public static ModelAndView crearSessionDeLogin(Request request,Response response) {
-		
-		String username = request.queryParams("usuario");
-		String password = request.queryParams("contrasena");
-        if (username != null && usRepo.usuarioExistente(username)) {
-        	if(usRepo.logeoCorrecto(username, password)){
-        		request.session().attribute(SESSION_NAME, username);
-        		response.redirect("/empresas");
-        	}
-        }
-        
-        response.redirect("/login.html");//Ver si login realmente deberia ser estatico , por que hay que mandar un mensaje de error
-        
-		return null;
 
-		
-	}
-	
-	public static ModelAndView eliminarSessionDeLogin(Request request,Response response) {
-        request.session().removeAttribute(SESSION_NAME);
-        response.redirect("/dondeInvierto.html");
-		
-		return null;
-		
-
-		//--------------------------------------------------------------------------------------------------
-		
-	}
 	public static ModelAndView consultarMetodologias(Request request,Response response) {
 		
 	
@@ -92,5 +65,34 @@ public class Controller {
 		
 	}
 	
+	
+	public static ModelAndView crearSessionDeLogin(Request request,Response response) {
+		
+		String username = request.queryParams("usuario");
+		String password = request.queryParams("contrasena");
+        if (username != null && usRepo.usuarioExistente(username)) {
+        	if(usRepo.logeoCorrecto(username, password)){
+        		request.session().attribute(SESSION_NAME, username);
+        		response.redirect("/empresas");
+        	}
+        }
+        
+        response.redirect("/login.html");//Ver si login realmente deberia ser estatico , por que hay que mandar un mensaje de error
+        
+		return null;
+
+		
+	}
+	
+	public static ModelAndView eliminarSessionDeLogin(Request request,Response response) {
+        request.session().removeAttribute(SESSION_NAME);
+        response.redirect("/dondeInvierto.html");
+		
+		return null;
+		
+
+		//--------------------------------------------------------------------------------------------------
+		
+	}
 
 }

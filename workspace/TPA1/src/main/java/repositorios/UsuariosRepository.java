@@ -17,7 +17,7 @@ import usuario.Metodologia;
 import usuario.Usuarios;
 import utilities.JPAUtility;
 
-public class UsuariosRepository extends DBRelacionalRepository<Metodologia> {
+public class UsuariosRepository extends DBRelacionalRepository<Usuarios> {
 	public UsuariosRepository(EntityManager em) {
 		super(em);
 		// TODO Auto-generated constructor stub
