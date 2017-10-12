@@ -31,6 +31,11 @@ public class Controller {
 	private static EntityManager entityManager1 = jpa1.getEntityManager();
 	private static UsuariosRepository usRepo=new UsuariosRepository(entityManager1);
 
+	public static ModelAndView home(Request request,Response response) {
+		
+		return new ModelAndView(null, "home/home.hbs");
+
+	}
 
 	public static ModelAndView consultarMetodologias(Request request,Response response) {
 		

@@ -2,7 +2,7 @@ package Server;
 
 import spark.Spark;
 import spark.TemplateEngine;
-
+import utilities.HandlebarsTemplateEngineBuilder;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
@@ -28,7 +28,7 @@ public class Router {
 		    	   
 		    });
 			
-			
+		    Spark.get("/", Controller::home,engine);
 			
 			Spark.post("login/entry", Controller::crearSessionDeLogin,engine);
 			Spark.get("login/clear", Controller::eliminarSessionDeLogin,engine);

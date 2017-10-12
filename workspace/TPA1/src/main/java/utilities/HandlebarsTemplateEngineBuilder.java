@@ -1,4 +1,4 @@
-package Server;
+package utilities;
 
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
