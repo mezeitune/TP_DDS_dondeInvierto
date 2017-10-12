@@ -15,7 +15,7 @@ public class AuthenticationFilter {
 	}
 	
 	private boolean isPublic(String pathInfo){
-		return pathInfo.equals("/login.html");
+		return pathInfo.equals("/") || pathInfo.equals("/login/entry");
 	}
 	
 }
