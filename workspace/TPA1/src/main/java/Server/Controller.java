@@ -27,7 +27,6 @@ import repositorios.UsuariosRepository;
 
 public class Controller {
 
-	//private static final String SESSION_NAME = "username";
 	private static JPAUtility jpa1=JPAUtility.getInstance();
 	private static EntityManager entityManager1 = jpa1.getEntityManager();
 	private static UsuariosRepository usRepo=new UsuariosRepository(entityManager1);

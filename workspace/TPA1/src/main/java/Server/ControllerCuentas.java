@@ -15,7 +15,6 @@ import usuario.Empresa;
 
 public class ControllerCuentas {
 
-	private static final String SESSION_NAME = "username";
 	
 
 	
@@ -23,7 +22,7 @@ public class ControllerCuentas {
 		Map<String, Object> parametros = new HashMap<String, Object>();
 		List<Empresa> empresas = EmpresasRepository.getEmpresas();
 		
-		parametros.put("username", request.session().attribute(SESSION_NAME));
+		parametros.put("usuario", request.session().attribute("usuario"));
 		parametros.put("empresas", empresas);
 		
 		return new ModelAndView(parametros, "empresas.hbs");

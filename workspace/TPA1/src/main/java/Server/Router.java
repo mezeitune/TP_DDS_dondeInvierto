@@ -22,10 +22,6 @@ public class Router {
 			TemplateEngine engine = HandlebarsTemplateEngineBuilder.create().build();
 			
 			
-			Spark.post("login/entry", Controller::crearSessionDeLogin,engine);
-			Spark.get("login/clear", Controller::eliminarSessionDeLogin,engine);
-			
-			
 		    AuthenticationFilter authentication = new AuthenticationFilter();
 		    Spark.before((req,res)->{
 		    	  authentication.isAuthorized(req, res);
@@ -33,11 +29,13 @@ public class Router {
 		    });
 			
 			
+			
+			Spark.post("login/entry", Controller::crearSessionDeLogin,engine);
+			Spark.get("login/clear", Controller::eliminarSessionDeLogin,engine);
+			
+
 			Spark.get("empresas", ControllerCuentas::consultarEmpresas,engine);
 			Spark.get("empresas/cuentas", ControllerCuentas::mostrarCuentas,engine);
-
-
-
 			
 			Spark.get("indicadores", ControllerIndicadores::consultarIndicadores,engine);
 			Spark.get("indicadores/agregar", ControllerIndicadores::agregarIndicador,engine);
