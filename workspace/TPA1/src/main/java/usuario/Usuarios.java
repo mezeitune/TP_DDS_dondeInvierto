@@ -46,6 +46,11 @@ public class Usuarios {
 	public Usuarios(){
 		
 	}
+	
+	public Usuarios(String username,String password){
+	this.username = username;
+	this.password = password;
+	}
 
 	public Long getId() {
 		return id;
