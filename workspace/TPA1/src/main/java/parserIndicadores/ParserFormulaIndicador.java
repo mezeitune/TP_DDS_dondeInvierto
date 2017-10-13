@@ -30,10 +30,9 @@ public class ParserFormulaIndicador {
 	
 	private static List<Cuenta> cuentasPorPeriodo;
 	
-	private static JPAUtility jpa=JPAUtility.getInstance();
-	private static EntityManager entityManager = jpa.getEntityManager();
-	private static IndicadoresRepository repo=new IndicadoresRepository(entityManager);
 	
+	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository(JPAUtility.getInstance().getEntityManager());
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
 	
 	public static ParserFormulaIndicador getInstance() {
 		if(parserInstance == null) return new ParserFormulaIndicador();
@@ -41,8 +40,8 @@ public class ParserFormulaIndicador {
 	}
 	
 	public ParserFormulaIndicador() {
-		nombreCuentas = EmpresasRepository.getNombreCuentas(); 
-		indicadores = repo.getIndicadores(); 
+		nombreCuentas = repositorio_empresas.getNombreCuentas(); 
+		indicadores = repositorio_indicadores.getIndicadores(); 
 	}
 	
 	public ParserFormulaIndicador(List<Cuenta> cuentasMockeadas,List<Indicador> indicadoresMockeados) {
@@ -151,7 +150,7 @@ public class ParserFormulaIndicador {
 	}
  	
 	public static  boolean formulaIndicadorValida(String formula){  /*TODO: No estaria funcionando*/
-		indicadores = repo.getIndicadoresDefinidosPorElUsuario();
+		indicadores = repositorio_indicadores.getIndicadoresDefinidosPorElUsuario();
 		
 		String[] result = formula.split("[-+*/]");
 		int[] validacion = new int[result.length];

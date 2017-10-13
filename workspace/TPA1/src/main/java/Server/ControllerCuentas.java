@@ -7,20 +7,23 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import repositorios.EmpresasRepository;
+import repositorios.IndicadoresRepository;
+import repositorios.UsuariosRepository;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import usuario.Cuenta;
 import usuario.Empresa;
+import utilities.JPAUtility;
 
 public class ControllerCuentas {
 
-	
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
 
 	
 	public static ModelAndView consultarEmpresas(Request request, Response response) {
 		Map<String, Object> parametros = new HashMap<String, Object>();
-		List<Empresa> empresas = EmpresasRepository.getEmpresas();
+		List<Empresa> empresas = repositorio_empresas.getEmpresas();
 		
 		parametros.put("usuario", request.session().attribute("usuario"));
 		parametros.put("empresas", empresas);
@@ -37,7 +40,7 @@ public class ControllerCuentas {
 		String nombreEmpresa = request.queryParams("empresa");
 		String periodo = request.queryParams("periodo");
 		
-		empresas = EmpresasRepository.getEmpresas();
+		empresas = repositorio_empresas.getEmpresas();
 		Empresa empresa = empresas.stream().filter(e -> e.getNombre().equals(nombreEmpresa)).collect(Collectors.toList()).get(0);
 		
 		if(periodo.isEmpty()) cuentas = empresa.getCuentas();

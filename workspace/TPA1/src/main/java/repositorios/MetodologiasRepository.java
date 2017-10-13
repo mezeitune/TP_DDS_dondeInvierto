@@ -24,24 +24,24 @@ public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> 
 	private ParserJsonAObjetosJava parserMetodologias= new ParserJsonAObjetosJava("metodologias.json");
 	
 	
-	public static List<Metodologia> getMetodologias(){
+	public  List<Metodologia> getMetodologias(){
 		List<Metodologia> metodologias = new LinkedList<Metodologia> ();
-		MetodologiasRepository.cargarMetodologias(metodologias);
+		this.cargarMetodologias(metodologias);
 		return metodologias;
 	}
 	
-	public static List<Metodologia> getMetodologiasDefinidasPorElUsuario(){
+	public List<Metodologia> getMetodologiasDefinidasPorElUsuario(){
 		Query queryIndicadores = entityManager.createQuery("from Metodologia");
 		return queryIndicadores.getResultList(); 
 	}
 	
 	
-	public static void cargarMetodologias(List<Metodologia> metodologias) {
-		MetodologiasRepository.getMetodologiasDefinidasPorElUsuario().stream().forEach(metodologiaDefinidaPorUsuario -> metodologias.add(metodologiaDefinidaPorUsuario));
-		MetodologiasRepository.getMetodologiasPredefinidas().stream().forEach(metodologiaPredefinida -> metodologias.add(metodologiaPredefinida));
+	public  void cargarMetodologias(List<Metodologia> metodologias) {
+		this.getMetodologiasDefinidasPorElUsuario().stream().forEach(metodologiaDefinidaPorUsuario -> metodologias.add(metodologiaDefinidaPorUsuario));
+		this.getMetodologiasPredefinidas().stream().forEach(metodologiaPredefinida -> metodologias.add(metodologiaPredefinida));
 	}
 
-	public static List<Metodologia> getMetodologiasPredefinidas(){
+	public  List<Metodologia> getMetodologiasPredefinidas(){
 		List<Metodologia> metodologiasPredefinidas = new LinkedList<Metodologia>();
 		metodologiasPredefinidas.add(WarrenBuffet.getInstance());
 		return metodologiasPredefinidas;

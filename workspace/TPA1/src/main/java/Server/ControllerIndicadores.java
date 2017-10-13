@@ -11,17 +11,24 @@ import excepciones.FormulaIndicadorNotValidException;
 import excepciones.NombreIndicadorNotFound;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
+import repositorios.MetodologiasRepository;
 import repositorios.UsuariosRepository;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import usuario.Empresa;
 import usuario.Indicador;
+import utilities.JPAUtility;
 
 public class ControllerIndicadores {
+	
+	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository(JPAUtility.getInstance().getEntityManager());
+	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository(JPAUtility.getInstance().getEntityManager());
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
+	
 	public static ModelAndView consultarIndicadores(Request request,Response response) {
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = UsuariosRepository.getIndicadoresPorUsuario(request.session().attribute("usuario"));
+		indicadores = repositorio_usuarios.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		
 		return new ModelAndView(indicadores,"indicadores.hbs");
 	}
@@ -33,14 +40,14 @@ public class ControllerIndicadores {
 		String formulaIndicador = request.queryParams("formula");
 	
 		try {
-			IndicadoresRepository.generarIndicador(nombreIndicador, formulaIndicador);
+			repositorio_indicadores.generarIndicador(nombreIndicador, formulaIndicador);
 		} catch (NombreIndicadorNotFound | DatoRepetidoException | FormulaIndicadorNotValidException | FormulaIndicadorNotFound e) {
 			//TODO [Que hacer aca]
 		}
 		
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = IndicadoresRepository.getIndicadores();
+		indicadores = repositorio_indicadores.getIndicadores();
 		
 		return new ModelAndView(indicadores,"agregarIndicador.hbs");
 	}
@@ -48,10 +55,10 @@ public class ControllerIndicadores {
 	public static ModelAndView eliminarIndicador(Request request,Response response) {
 		String nombreIndicador = request.queryParams("nombre");
 	
-		if(nombreIndicador != null)	IndicadoresRepository.eliminarIndicadorDeLaBDD(nombreIndicador);
+		if(nombreIndicador != null)	repositorio_indicadores.eliminarIndicadorDeLaBDD(nombreIndicador);
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = IndicadoresRepository.getIndicadores();
+		indicadores = repositorio_indicadores.getIndicadores();
 		
 		return new ModelAndView(indicadores,"eliminarIndicador.hbs");
 	}
@@ -60,10 +67,10 @@ public class ControllerIndicadores {
 	public static ModelAndView evaluarIndicador(Request request,Response response) {
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = IndicadoresRepository.getIndicadores();
+		indicadores = repositorio_indicadores.getIndicadores();
 		
 		Map<String, Object> diccionario = new HashMap<String, Object>();
-		Map<String, Object> diccionarioPeriodos = EmpresasRepository.getHashMapPeriodos();
+		Map<String, Object> diccionarioPeriodos = repositorio_empresas.getHashMapPeriodos();
 		
 		int resultado = 0;
 		
@@ -74,8 +81,8 @@ public class ControllerIndicadores {
 		
 		if(nombreIndicador != null && nombreEmpresa != null){
 		
-			Indicador indicador = IndicadoresRepository.getIndicador(nombreIndicador);
-			Empresa empresa = EmpresasRepository.getEmpresa(nombreEmpresa);
+			Indicador indicador = repositorio_indicadores.getIndicador(nombreIndicador);
+			Empresa empresa = repositorio_empresas.getEmpresa(nombreEmpresa);
 		
 			indicador.construirOperadorRaiz(empresa,periodo);
 			resultado = indicador.calcular();

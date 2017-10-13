@@ -10,16 +10,11 @@ import javax.persistence.Query;
 import usuario.Empresa;
 import utilities.JPAUtility;
 
-public class EmpresasAEvaluarRepository {
+public class EmpresasAEvaluarRepository extends DBRelacionalRepository<Empresa> {
 	
 	public static List<Empresa> empresasAEvaluar = new ArrayList<>(); 
 	public static List<String> periodosAEvaluar = new LinkedList<>(); 
-	
-	static JPAUtility jpa=JPAUtility.getInstance();
-	static EntityManager entityManager = jpa.getEntityManager();
-	static DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
-	
-	
+	public EmpresasRepository repositorio_empresas = new EmpresasRepository();
 	
 	public EmpresasAEvaluarRepository(){
 		
@@ -28,6 +23,10 @@ public class EmpresasAEvaluarRepository {
 		empresasAEvaluar = query.getResultList();
 	}
 	
+	public EmpresasAEvaluarRepository(EntityManager entityManager) {
+		super(entityManager);
+	}
+
 	public static List<Empresa> getEmpresasAEvaluar() {
 		return empresasAEvaluar;
 	}
@@ -71,17 +70,16 @@ public class EmpresasAEvaluarRepository {
 		return !periodosAEvaluar.stream().anyMatch(unPeriodo -> unPeriodo.equals(periodo));
 	}
 
-	public static void setEmpresasAEvaluar(List<Empresa> empresas) {
-		EmpresasAEvaluarRepository.empresasAEvaluar = empresas;
+	public void setEmpresasAEvaluar(List<Empresa> empresas) {
+		this.empresasAEvaluar = empresas;
 	}
 
 	public static boolean esEmpresaRepetida(Empresa empresa) {
 		return empresasAEvaluar.stream().anyMatch(empresaCargada -> empresaCargada.equals(empresa));
 	}
 
-	public static void cargarTodasLasEmpresas() {
-		EmpresasAEvaluarRepository.setEmpresasAEvaluar(EmpresasRepository.getEmpresas());
-	
+	public void cargarTodasLasEmpresas() {
+		this.setEmpresasAEvaluar(repositorio_empresas.getEmpresas());
 	}
 	
 }

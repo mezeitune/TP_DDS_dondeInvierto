@@ -7,13 +7,15 @@ import org.uqbar.commons.utils.Observable;
 import repositorios.EmpresasAEvaluarRepository;
 import repositorios.EmpresasRepository;
 import usuario.Empresa;
+import utilities.JPAUtility;
 @Observable
 public class AgregarEmpresaViewModel {
 
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
 	private Empresa empresa = new Empresa();
-
+	
 	public List<Empresa> getEmpresas(){
-		return EmpresasRepository.getEmpresas();
+		return repositorio_empresas.getEmpresas();
 	}
 	
 	public String getNombre(){

@@ -8,22 +8,23 @@ import parserArchivos.ParserCsv;
 import usuario.Empresa;
 
 public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier tabla
-	protected static EntityManager entityManager;
+	protected EntityManager entityManager;
 
-
-  
 	public DBRelacionalRepository(EntityManager em){
 		this.entityManager=em;
 	}
 	
+	public DBRelacionalRepository(){
+	}
+	
 	@SuppressWarnings("hiding")
-	public static <Entity> void agregar(Entity elemento){
+	public <Entity> void agregar(Entity elemento){
 		
 		entityManager.persist(elemento);
 	
 	}
 	
-	public static <Entity> void eliminar (Entity elemento){
+	public <Entity> void eliminar (Entity elemento){
 		entityManager.remove(elemento);
 	}
 	@SuppressWarnings("hiding")
@@ -63,8 +64,14 @@ public class DBRelacionalRepository<Entity> {//Usamos Generics para cualquier ta
 		
 		}
 	}
-
 	
-
+	public void begin() {
+		entityManager.getTransaction().begin();	
+	}
+	
+	public void commit () {
+		entityManager.getTransaction().commit();
+	}
+	
 	
 }

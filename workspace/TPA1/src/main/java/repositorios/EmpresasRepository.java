@@ -17,15 +17,18 @@ import javax.persistence.Query;
 import parserArchivos.CsvFile;
 import parserArchivos.ParserCsv;
 
-public class EmpresasRepository {
+public class EmpresasRepository extends DBRelacionalRepository<Empresa> {
 	
 	
-	static JPAUtility jpa=JPAUtility.getInstance();
-	static EntityManager entityManager = jpa.getEntityManager();
-	static DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
 	
+	public EmpresasRepository(EntityManager entityManager) {
+		super(entityManager);
+	}
 	
-	public static List<Empresa> getEmpresas(){
+	public EmpresasRepository() {
+	}
+
+	public List<Empresa> getEmpresas(){
 		
 		Query query = entityManager.createQuery("from Empresa");
 		
@@ -41,31 +44,31 @@ public class EmpresasRepository {
 		parser.csvFileToEmpresas(archivoCuentas.getDirectorio()).forEach(empresa -> empresas.add(empresa));
 	}
 	
-	public static List<String> getNombreCuentas() {
-		Set<String> unSetNombreCuentas = new HashSet<String> (EmpresasRepository.getAllCuentas()
+	public List<String> getNombreCuentas() {
+		Set<String> unSetNombreCuentas = new HashSet<String> (this.getAllCuentas()
 																				.stream().map(cuenta -> cuenta.getNombre())
 																				.collect(Collectors.toList()));
 		List<String> nombreCuentasSinRepetidos = new LinkedList<String> (unSetNombreCuentas);
 		return nombreCuentasSinRepetidos;
 	}
 	
-	public static List<Cuenta> getAllCuentas(){
+	public List<Cuenta> getAllCuentas(){
 		List<Cuenta> cuentas = new LinkedList<Cuenta>();
-		EmpresasRepository.getEmpresas().stream().forEach(empresa -> empresa.getCuentas().
+		this.getEmpresas().stream().forEach(empresa -> empresa.getCuentas().
 																			 stream().forEach(cuenta -> cuentas.add(cuenta)));
 		return cuentas;
 	}
 
 
 	
-	public static Map<String, Object> getHashMapPeriodos(){
+	public Map<String, Object> getHashMapPeriodos(){
 
 		List<Empresa> empresas = new LinkedList<Empresa>();
 		List<List<Cuenta>> cuentasPorEmpresa = new LinkedList<List<Cuenta>>();
 		List<List<String>> periodos = new LinkedList<List<String>>();
 		
 
-		empresas = EmpresasRepository.getEmpresas();
+		empresas = this.getEmpresas();
 
 		cuentasPorEmpresa = empresas.stream().map(e -> e.getCuentas()).collect(Collectors.toList());
 
@@ -83,8 +86,8 @@ public class EmpresasRepository {
 		
 	}
 	
-	public static Empresa getEmpresa(String nombreEmpresa){
-		return EmpresasRepository.getEmpresas().stream().filter(empresa -> empresa.getNombre().equals(nombreEmpresa)).collect(Collectors.toList()).get(0);
+	public Empresa getEmpresa(String nombreEmpresa){
+		return this.getEmpresas().stream().filter(empresa -> empresa.getNombre().equals(nombreEmpresa)).collect(Collectors.toList()).get(0);
 		
 	}
 

@@ -19,18 +19,19 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 
+import repositorios.EmpresasRepository;
 import repositorios.MetodologiasRepository;
 
 import repositorios.UsuariosRepository;
 
 
-
 public class Controller {
 
-	private static JPAUtility jpa1=JPAUtility.getInstance();
-	private static EntityManager entityManager1 = jpa1.getEntityManager();
-	private static UsuariosRepository usRepo=new UsuariosRepository(entityManager1);
 
+	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository(JPAUtility.getInstance().getEntityManager());
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
+	private static MetodologiasRepository repositorio_metodologias=new MetodologiasRepository(JPAUtility.getInstance().getEntityManager());
+	
 	public static ModelAndView home(Request request,Response response) {
 		
 		return new ModelAndView(null, "home/home.hbs");
@@ -41,7 +42,7 @@ public class Controller {
 		
 	
 		List<Metodologia> metodologias = new LinkedList<Metodologia>();
-		metodologias= MetodologiasRepository.getMetodologias();
+		metodologias= repositorio_metodologias.getMetodologias();
 		
 		
 		return new ModelAndView(metodologias,"metodologias.hbs");
@@ -56,7 +57,7 @@ public class Controller {
 		
 		List<Empresa> empresas = new LinkedList<Empresa>();
 		
-		List <Metodologia> metodologias = MetodologiasRepository.getMetodologias();
+		List <Metodologia> metodologias = repositorio_metodologias.getMetodologias();
 		
 		Metodologia metodologia = metodologias.stream().filter(e -> e.getNombre().equals(metSeleccionadaNombre)).collect(Collectors.toList()).get(0);
 		//parametros.put("metSeleccionada", metodologia);
@@ -74,8 +75,8 @@ public class Controller {
 		
 		String username = request.queryParams("usuario");
 		String password = request.queryParams("contrasena");
-        if (username != null && usRepo.usuarioExistente(username)) {
-        	if(usRepo.logeoCorrecto(username, password)){
+        if (username != null && repositorio_usuarios.usuarioExistente(username)) {
+        	if(repositorio_usuarios.logeoCorrecto(username, password)){
         		request.session().attribute("usuario", username);
         		response.redirect("/empresas");
         	}

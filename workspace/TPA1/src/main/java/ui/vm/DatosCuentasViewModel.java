@@ -19,15 +19,14 @@ import utilities.JPAUtility;
 @Observable
 public class DatosCuentasViewModel{
 	
-	private JPAUtility jpa=JPAUtility.getInstance();
-	private EntityManager entityManager = this.jpa.getEntityManager();
-	private IndicadoresRepository repo=new IndicadoresRepository(this.entityManager);
+	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository(JPAUtility.getInstance().getEntityManager());
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
 	
 	private Empresa empresa;
 	private String periodo;	
 	private int calculo;
 	
-	private List<Indicador> indicadores = repo.getIndicadores();
+	private List<Indicador> indicadores = repositorio_indicadores.getIndicadores();
 	private String nombreIndicador;
 	private String formulaIndicador;
 	
@@ -73,7 +72,7 @@ public class DatosCuentasViewModel{
 	}
 	
 	public List<Empresa> getEmpresas(){
-		return EmpresasRepository.getEmpresas();
+		return repositorio_empresas.getEmpresas();
 	}
 	
 	public List<Cuenta> getCuentasFiltradas(){
