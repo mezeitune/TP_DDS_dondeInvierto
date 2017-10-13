@@ -4,18 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.google.gson.Gson;
-
-import metodologiasPredefinidas.WarrenBuffet;
 import model.Indicador;
-import model.Metodologia;
 import model.Usuario;
-import parserArchivos.ParserJsonAObjetosJava;
-import parserArchivos.ParserJsonString;
-import utilities.JPAUtility;
 
 public class UsuariosRepository extends DBRelacionalRepository<Usuario> {
 	
@@ -33,7 +25,7 @@ public class UsuariosRepository extends DBRelacionalRepository<Usuario> {
 	}
 
 	public List<Usuario> getUsuariosDefinidosPorElUsuario() {
-		Query queryUsuarios = entityManager().createQuery("from Usuarios"); 
+		Query queryUsuarios = entityManager().createQuery("from Usuario"); 
 		return queryUsuarios.getResultList(); 
 	}
 	
