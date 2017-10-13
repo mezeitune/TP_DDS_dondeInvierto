@@ -23,7 +23,7 @@ public class CargarBDViewModel {
 
 	private JPAUtility jpa=JPAUtility.getInstance();
 	private EntityManager entityManager = this.jpa.getEntityManager();
-	private IndicadoresRepository repo=new IndicadoresRepository(this.entityManager);
+	private IndicadoresRepository repo=new IndicadoresRepository();
 	
 	private List<Indicador> indicadores = repo.getIndicadoresDefinidosPorElUsuario();
 	

@@ -28,7 +28,7 @@ public class CargarMetodologiaViewModel {
 	
 	private JPAUtility jpa=JPAUtility.getInstance();
 	private EntityManager entityManager = this.jpa.getEntityManager();
-	private MetodologiasRepository repo=new MetodologiasRepository(this.entityManager);
+	private MetodologiasRepository repo=new MetodologiasRepository();
 	
 	
 	private String resultadoIndicador;

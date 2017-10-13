@@ -28,10 +28,6 @@ import utilities.JPAUtility;
 
 public class CondicionesRepository extends DBRelacionalRepository<Condicion>{
 
-	public CondicionesRepository(EntityManager em) {
-		super(em);
-		// TODO Auto-generated constructor stub
-	}
 
 	private ParserJsonAObjetosJava parserCondiciones = new ParserJsonAObjetosJava("condiciones.json");
 
@@ -49,13 +45,10 @@ public class CondicionesRepository extends DBRelacionalRepository<Condicion>{
 	}
 
 	private List<Condicion> getCondicionesDefinidasPorElUsuario() {
-		Query queryIndicadores = entityManager.createQuery("from Condicion"); 
+		Query queryIndicadores = entityManager().createQuery("from Condicion"); 
 		return queryIndicadores.getResultList(); 
-		
 	}
 
-
-	
 	public void cargarCondiciones(List<Condicion> condiciones){
 		this.getCondicionesDefinidasPorElUsuario().stream().forEach(condicionDefinidaPorUsuario -> condiciones.add(condicionDefinidaPorUsuario));
 		this.getCondicionesPredefinidas().stream().forEach(condicionPredefinida -> condiciones.add(condicionPredefinida));

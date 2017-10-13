@@ -21,16 +21,12 @@ public class EmpresasRepository extends DBRelacionalRepository<Empresa> {
 	
 	
 	
-	public EmpresasRepository(EntityManager entityManager) {
-		super(entityManager);
-	}
-	
 	public EmpresasRepository() {
 	}
 
 	public List<Empresa> getEmpresas(){
 		
-		Query query = entityManager.createQuery("from Empresa");
+		Query query = entityManager().createQuery("from Empresa");
 		
 		List<Empresa> empresas = new LinkedList<Empresa>();
 		//ArchivosCuentasRepository.getArchivosCuentas().forEach(file -> EmpresasRepository.concatenarEmpresas(file,empresas));

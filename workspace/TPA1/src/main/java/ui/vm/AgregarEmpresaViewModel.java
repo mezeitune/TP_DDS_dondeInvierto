@@ -11,7 +11,7 @@ import utilities.JPAUtility;
 @Observable
 public class AgregarEmpresaViewModel {
 
-	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
 	private Empresa empresa = new Empresa();
 	
 	public List<Empresa> getEmpresas(){

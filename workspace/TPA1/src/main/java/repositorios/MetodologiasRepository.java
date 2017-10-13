@@ -16,10 +16,6 @@ import usuario.Metodologia;
 import utilities.JPAUtility;
 
 public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> {
-	public MetodologiasRepository(EntityManager em) {
-		super(em);
-		// TODO Auto-generated constructor stub
-	}
 
 	private ParserJsonAObjetosJava parserMetodologias= new ParserJsonAObjetosJava("metodologias.json");
 	
@@ -31,7 +27,7 @@ public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> 
 	}
 	
 	public List<Metodologia> getMetodologiasDefinidasPorElUsuario(){
-		Query queryIndicadores = entityManager.createQuery("from Metodologia");
+		Query queryIndicadores = entityManager().createQuery("from Metodologia");
 		return queryIndicadores.getResultList(); 
 	}
 	

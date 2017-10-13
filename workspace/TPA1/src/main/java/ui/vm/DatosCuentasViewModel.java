@@ -19,8 +19,8 @@ import utilities.JPAUtility;
 @Observable
 public class DatosCuentasViewModel{
 	
-	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository(JPAUtility.getInstance().getEntityManager());
-	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
+	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository();
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
 	
 	private Empresa empresa;
 	private String periodo;	

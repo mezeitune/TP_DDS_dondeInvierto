@@ -27,10 +27,6 @@ import utilities.JPAUtility;
 
 public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 	
-	public IndicadoresRepository(EntityManager em) {
-		super(em);
-		// TODO Auto-generated constructor stub
-	}
 	private ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("indicadores.json");
 	
 	public List<Indicador> getIndicadores(){
@@ -47,7 +43,7 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 	}
 	
 	public List<Indicador> getIndicadoresDefinidosPorElUsuario() {
-		Query queryIndicadores = entityManager.createQuery("from Indicador"); 
+		Query queryIndicadores = entityManager().createQuery("from Indicador"); 
 		return queryIndicadores.getResultList(); 
 	}
 	
@@ -85,16 +81,16 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 		if(!ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
 		
-		if (!entityManager.getTransaction().isActive()) {
-			entityManager.getTransaction().begin();
+		if (!entityManager().getTransaction().isActive()) {
+			entityManager().getTransaction().begin();
 		} 
 		
 		this.agregar(nuevoIndicador);
-		entityManager.getTransaction().commit();
+		entityManager().getTransaction().commit();
 
 	}
 	public boolean esUnIndicadorYaIngresado (Indicador nuevoIndicador) {
-		IndicadoresRepository repositorioDeIndicadores = new IndicadoresRepository(entityManager);
+		IndicadoresRepository repositorioDeIndicadores = new IndicadoresRepository();
 
 		return repositorioDeIndicadores.validarIndicadorRepetidoAntesCargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
 	}
@@ -104,11 +100,11 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 		List<Indicador> indicadorAEliminar =this.getIndicadores().stream().filter(unInd -> unInd.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
 		
 				
-		if (!entityManager.getTransaction().isActive()) {
-			entityManager.getTransaction().begin();
+		if (!entityManager().getTransaction().isActive()) {
+			entityManager().getTransaction().begin();
 		} 
 		this.eliminar(indicadorAEliminar.get(0));
-		entityManager.getTransaction().commit();
+		entityManager().getTransaction().commit();
 		//this.setResultadoIndicador("Se ha eliminado correctamente el indicador :"+ nombreIndicador);
 
 	}

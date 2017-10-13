@@ -22,7 +22,7 @@ public class MenuWindow extends Dialog<MenuViewModel> {
 	
 	static JPAUtility jpa=JPAUtility.getInstance();
 	static EntityManager entityManager = jpa.getEntityManager();
-	static DBRelacionalRepository repo=new DBRelacionalRepository<>(entityManager);
+	static DBRelacionalRepository repo=new DBRelacionalRepository<>();
 
 	public MenuWindow(WindowOwner cargaExitosaWindow) {
 		super(cargaExitosaWindow, new MenuViewModel());

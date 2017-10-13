@@ -22,9 +22,9 @@ import utilities.JPAUtility;
 
 public class ControllerIndicadores {
 	
-	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository(JPAUtility.getInstance().getEntityManager());
-	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository(JPAUtility.getInstance().getEntityManager());
-	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
+	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository();
+	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository();
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
 	
 	public static ModelAndView consultarIndicadores(Request request,Response response) {
 		List<Indicador> indicadores = new LinkedList<Indicador>();

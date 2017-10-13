@@ -18,7 +18,7 @@ import utilities.JPAUtility;
 
 public class ControllerCuentas {
 
-	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
 
 	
 	public static ModelAndView consultarEmpresas(Request request, Response response) {

@@ -26,8 +26,8 @@ public class MetodologiasEmpresasViewModel {
 	private List<Empresa> empresasInvertibles = new LinkedList<>();
 	private List<Empresa> empresasNoInvertibles = new LinkedList<>();
 	
-	private static MetodologiasRepository repositorio_metodologias=new MetodologiasRepository(JPAUtility.getInstance().getEntityManager());
-	private static EmpresasAEvaluarRepository repositorio_empresas_evaluables=new EmpresasAEvaluarRepository(JPAUtility.getInstance().getEntityManager());
+	private static MetodologiasRepository repositorio_metodologias=new MetodologiasRepository();
+	private static EmpresasAEvaluarRepository repositorio_empresas_evaluables=new EmpresasAEvaluarRepository();
 	
 	public MetodologiasEmpresasViewModel() {
 		

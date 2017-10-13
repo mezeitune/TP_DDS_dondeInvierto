@@ -31,8 +31,8 @@ public class ParserFormulaIndicador {
 	private static List<Cuenta> cuentasPorPeriodo;
 	
 	
-	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository(JPAUtility.getInstance().getEntityManager());
-	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
+	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository();
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
 	
 	public static ParserFormulaIndicador getInstance() {
 		if(parserInstance == null) return new ParserFormulaIndicador();

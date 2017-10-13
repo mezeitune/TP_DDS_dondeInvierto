@@ -18,12 +18,6 @@ import usuario.Usuarios;
 import utilities.JPAUtility;
 
 public class UsuariosRepository extends DBRelacionalRepository<Usuarios> {
-	public UsuariosRepository(EntityManager em) {
-		super(em);
-		// TODO Auto-generated constructor stub
-	}
-
-
 	
 	public List<Usuarios> getUsuarios(){
 		List<Usuarios> usuarios = new LinkedList<Usuarios> ();
@@ -39,14 +33,14 @@ public class UsuariosRepository extends DBRelacionalRepository<Usuarios> {
 	}
 
 	public List<Usuarios> getUsuariosDefinidosPorElUsuario() {
-		Query queryUsuarios = entityManager.createQuery("from Usuarios"); 
+		Query queryUsuarios = entityManager().createQuery("from Usuarios"); 
 		return queryUsuarios.getResultList(); 
 	}
 	
 	
 
 	public List<Indicador> getIndicadoresPorUsuario(String user) {
-		Query queryUsuarios = entityManager.createQuery("from Indicador where usuario_id=:us");
+		Query queryUsuarios = entityManager().createQuery("from Indicador where usuario_id=:us");
 		queryUsuarios.setParameter("us", obtUsuario(user).getId());
 		return queryUsuarios.getResultList(); 
 	}

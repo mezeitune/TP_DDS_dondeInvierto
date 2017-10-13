@@ -18,15 +18,11 @@ public class EmpresasAEvaluarRepository extends DBRelacionalRepository<Empresa> 
 	
 	public EmpresasAEvaluarRepository(){
 		
-		Query query = entityManager.createQuery("from Empresa");
+		Query query = entityManager().createQuery("from Empresa");
 		
 		empresasAEvaluar = query.getResultList();
 	}
 	
-	public EmpresasAEvaluarRepository(EntityManager entityManager) {
-		super(entityManager);
-	}
-
 	public static List<Empresa> getEmpresasAEvaluar() {
 		return empresasAEvaluar;
 	}

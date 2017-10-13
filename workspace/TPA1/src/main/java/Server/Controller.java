@@ -4,12 +4,8 @@ package Server;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import ui.vm.CargarMetodologiaViewModel;
-import usuario.Cuenta;
 import usuario.Empresa;
-import usuario.Indicador;
 import usuario.Metodologia;
-import utilities.JPAUtility;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -17,9 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
-
-import repositorios.EmpresasRepository;
 import repositorios.MetodologiasRepository;
 
 import repositorios.UsuariosRepository;
@@ -28,9 +21,8 @@ import repositorios.UsuariosRepository;
 public class Controller {
 
 
-	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository(JPAUtility.getInstance().getEntityManager());
-	private static EmpresasRepository repositorio_empresas=new EmpresasRepository(JPAUtility.getInstance().getEntityManager());
-	private static MetodologiasRepository repositorio_metodologias=new MetodologiasRepository(JPAUtility.getInstance().getEntityManager());
+	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository();
+	private static MetodologiasRepository repositorio_metodologias=new MetodologiasRepository();
 	
 	public static ModelAndView home(Request request,Response response) {
 		
