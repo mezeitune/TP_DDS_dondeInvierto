@@ -11,6 +11,7 @@ import excepciones.FormulaIndicadorNotValidException;
 import excepciones.NombreIndicadorNotFound;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
+import repositorios.UsuariosRepository;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -20,7 +21,7 @@ import usuario.Indicador;
 public class ControllerIndicadores {
 	public static ModelAndView consultarIndicadores(Request request,Response response) {
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = IndicadoresRepository.getIndicadores();
+		indicadores = UsuariosRepository.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		
 		return new ModelAndView(indicadores,"indicadores.hbs");
 	}

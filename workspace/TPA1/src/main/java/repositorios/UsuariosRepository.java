@@ -25,9 +25,9 @@ public class UsuariosRepository extends DBRelacionalRepository<Usuarios> {
 
 
 	
-	public List<Usuarios> getUsuarios(){
+	public static List<Usuarios> getUsuarios(){
 		List<Usuarios> usuarios = new LinkedList<Usuarios> ();
-		this.cargarUsuarios(usuarios);
+		UsuariosRepository.cargarUsuarios(usuarios);
 		return usuarios;
 	}
 	
@@ -38,18 +38,27 @@ public class UsuariosRepository extends DBRelacionalRepository<Usuarios> {
 													 .collect(Collectors.toList());
 	}
 
-	public List<Usuarios> getUsuariosDefinidosPorElUsuario() {
+	public static List<Usuarios> getUsuariosDefinidosPorElUsuario() {
 		Query queryUsuarios = entityManager.createQuery("from Usuarios"); 
 		return queryUsuarios.getResultList(); 
 	}
 	
 	
-	public void cargarUsuarios(List<Usuarios> usuarios) {
-		this.getUsuariosDefinidosPorElUsuario().stream().forEach(UsuarioDefinidoPorUsuario -> usuarios.add(UsuarioDefinidoPorUsuario));
+
+	public static List<Indicador> getIndicadoresPorUsuario(String user) {
+		Query queryUsuarios = entityManager.createQuery("from Indicador where usuario_id=:us");
+		queryUsuarios.setParameter("us", obtUsuario(user).getId());
+		return queryUsuarios.getResultList(); 
 	}
 	
-	public Usuarios obtUsuario(String usuario){
-		List<Usuarios> usersFiltrados=this.getUsuarios().stream().filter(us -> us.getUsername().equals(usuario))
+	
+	
+	public static void cargarUsuarios(List<Usuarios> usuarios) {
+		UsuariosRepository.getUsuariosDefinidosPorElUsuario().stream().forEach(UsuarioDefinidoPorUsuario -> usuarios.add(UsuarioDefinidoPorUsuario));
+	}
+	
+	public static Usuarios obtUsuario(String usuario){
+		List<Usuarios> usersFiltrados=UsuariosRepository.getUsuarios().stream().filter(us -> us.getUsername().equals(usuario))
 				 .collect(Collectors.toList());
 		return usersFiltrados.get(0);
 	}

@@ -22,6 +22,7 @@ import parserArchivos.ParserJsonString;
 import parserIndicadores.ParserFormulaIndicador;
 import usuario.Indicador;
 import usuario.Metodologia;
+import usuario.Usuarios;
 import utilities.JPAUtility;
 
 public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
@@ -37,6 +38,8 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 		IndicadoresRepository.cargarIndicadores(indicadores);
 		return indicadores;
 	}
+	
+
 	
 	public List<String> getNombreIndicadores(){
 		return this.getIndicadores().stream().map(indicador -> indicador.getNombre())
