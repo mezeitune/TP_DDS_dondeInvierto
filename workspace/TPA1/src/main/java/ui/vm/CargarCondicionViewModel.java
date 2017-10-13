@@ -16,11 +16,11 @@ import excepciones.NombreCondicionNotFound;
 import excepciones.PesoCondicionNotFound;
 import excepciones.TipoCondicionNotFound;
 import indicadoresPredefinidos.PatrimonioNeto;
+import model.Indicador;
 import repositorios.CondicionesRepository;
 import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
 import repositorios.MetodologiasRepository;
-import usuario.Indicador;
 import utilities.JPAUtility;
 
 @Observable

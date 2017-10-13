@@ -18,8 +18,8 @@ import excepciones.IndicadorNotFound;
 import excepciones.NombreCondicionNotFound;
 import excepciones.PesoCondicionNotFound;
 import excepciones.TipoCondicionNotFound;
+import model.Cuenta;
 import ui.vm.CargarCondicionViewModel;
-import usuario.Cuenta;
 
 public class CargarCondicionWindow extends Dialog <CargarCondicionViewModel> {
 	public CargarCondicionWindow(WindowOwner owner) {

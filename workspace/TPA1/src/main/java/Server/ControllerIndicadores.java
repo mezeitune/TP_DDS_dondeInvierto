@@ -9,16 +9,14 @@ import excepciones.DatoRepetidoException;
 import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.NombreIndicadorNotFound;
+import model.Empresa;
+import model.Indicador;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
-import repositorios.MetodologiasRepository;
 import repositorios.UsuariosRepository;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import usuario.Empresa;
-import usuario.Indicador;
-import utilities.JPAUtility;
 
 public class ControllerIndicadores {
 	

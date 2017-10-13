@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import com.google.gson.Gson;
 
+import model.Indicador;
 import parserArchivos.ParserJsonString;
-import usuario.Indicador;
 
 public class IndicadoresAlArchivoJSONTest {
 	

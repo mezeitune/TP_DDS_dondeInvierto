@@ -3,7 +3,7 @@ package mocks;
 import java.util.LinkedList;
 import java.util.List;
 
-import usuario.Indicador;
+import model.Indicador;
 
 public class IndicadoresMock {
 	private List<Indicador> indicadores = new LinkedList<Indicador>();

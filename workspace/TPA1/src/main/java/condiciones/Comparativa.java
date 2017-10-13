@@ -8,8 +8,8 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 
 import comparadores.Comparador;
-import usuario.Empresa;
-import usuario.Indicador;
+import model.Empresa;
+import model.Indicador;
 @Observable
 
 public class Comparativa extends TipoCondicion{

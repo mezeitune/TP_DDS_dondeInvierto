@@ -20,10 +20,10 @@ import condiciones.Mixta;
 import condiciones.Taxativa;
 import condiciones.TipoCondicion;
 import condicionesPredefinidas.MargenesCrecientes;
+import model.Indicador;
+import model.Metodologia;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
-import usuario.Indicador;
-import usuario.Metodologia;
 import utilities.JPAUtility;
 
 public class CondicionesRepository extends DBRelacionalRepository<Condicion>{

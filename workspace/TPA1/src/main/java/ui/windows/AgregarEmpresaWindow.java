@@ -10,8 +10,9 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
+
+import model.Empresa;
 import ui.vm.AgregarEmpresaViewModel;
-import usuario.Empresa;
 
 @SuppressWarnings("serial")
 public class AgregarEmpresaWindow extends Dialog<AgregarEmpresaViewModel>{

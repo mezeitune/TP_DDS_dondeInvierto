@@ -6,8 +6,8 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.Empresa;
 import parserArchivos.ParserJsonAObjetosJava;
-import usuario.Empresa;
 
 public class ParserJsonAEmpresaAdapterTest {
 	

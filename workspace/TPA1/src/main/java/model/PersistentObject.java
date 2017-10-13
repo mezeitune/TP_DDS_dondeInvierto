@@ -1,4 +1,4 @@
-package usuario;
+package model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

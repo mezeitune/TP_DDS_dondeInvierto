@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import model.Cuenta;
+import model.Empresa;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
 import repositorios.UsuariosRepository;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import usuario.Cuenta;
-import usuario.Empresa;
 import utilities.JPAUtility;
 
 public class ControllerCuentas {

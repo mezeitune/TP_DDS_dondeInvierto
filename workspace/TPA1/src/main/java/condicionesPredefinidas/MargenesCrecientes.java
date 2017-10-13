@@ -5,7 +5,7 @@ import comparadores.ComparadorMayor;
 import condiciones.Comparativa;
 import condiciones.Condicion;
 import condiciones.TipoCondicion;
-import usuario.Indicador;
+import model.Indicador;
 
 public class MargenesCrecientes extends Condicion {
 

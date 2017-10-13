@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import usuario.Cuenta;
-import usuario.Empresa;
+import model.Cuenta;
+import model.Empresa;
 @Observable
 public class EmpresasMock {
 	

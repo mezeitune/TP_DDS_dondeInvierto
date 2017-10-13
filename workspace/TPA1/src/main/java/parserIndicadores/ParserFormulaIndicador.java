@@ -9,6 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.experimental.theories.Theories;
 
 import excepciones.AccountNotFoundException;
+import model.Cuenta;
+import model.Empresa;
+import model.Indicador;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
 
@@ -16,9 +19,6 @@ import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.List;
 
-import usuario.Cuenta;
-import usuario.Empresa;
-import usuario.Indicador;
 import utilities.JPAUtility;
 
 public class ParserFormulaIndicador {

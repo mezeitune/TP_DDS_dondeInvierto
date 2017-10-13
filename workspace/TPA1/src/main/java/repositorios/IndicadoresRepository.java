@@ -17,12 +17,12 @@ import excepciones.FormulaIndicadorNotValidException;
 import excepciones.NombreIndicadorNotFound;
 import indicadoresPredefinidos.Antiguedad;
 import indicadoresPredefinidos.PatrimonioNeto;
+import model.Indicador;
+import model.Metodologia;
+import model.Usuario;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
 import parserIndicadores.ParserFormulaIndicador;
-import usuario.Indicador;
-import usuario.Metodologia;
-import usuario.Usuarios;
 import utilities.JPAUtility;
 
 public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {

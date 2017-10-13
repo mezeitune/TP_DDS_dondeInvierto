@@ -3,14 +3,6 @@ package Server;
 import spark.Spark;
 import spark.TemplateEngine;
 import utilities.HandlebarsTemplateEngineBuilder;
-import spark.Filter;
-import spark.Request;
-import spark.Response;
-
-import static spark.Spark.after;
-import static spark.Spark.before;
-import static spark.Spark.get;
-import static spark.Spark.halt;
 
 public class Router {
 

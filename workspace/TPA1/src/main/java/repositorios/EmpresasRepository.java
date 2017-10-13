@@ -1,7 +1,5 @@
 package repositorios;
-import usuario.Empresa;
 import utilities.JPAUtility;
-import usuario.Cuenta;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +12,8 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import model.Cuenta;
+import model.Empresa;
 import parserArchivos.CsvFile;
 import parserArchivos.ParserCsv;
 

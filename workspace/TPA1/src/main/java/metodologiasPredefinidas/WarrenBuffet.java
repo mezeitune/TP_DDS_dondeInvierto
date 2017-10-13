@@ -13,8 +13,8 @@ import condiciones.Mixta;
 import condiciones.Taxativa;
 import condiciones.TipoCondicion;
 import indicadoresPredefinidos.Antiguedad;
-import usuario.Indicador;
-import usuario.Metodologia;
+import model.Indicador;
+import model.Metodologia;
 @Observable
 public class WarrenBuffet extends Metodologia{
 

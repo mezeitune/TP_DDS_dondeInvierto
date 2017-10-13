@@ -5,11 +5,10 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import mocks.ListaLineasCsvFileMock;
+import model.Cuenta;
+import model.Empresa;
 import parserArchivos.ParserCsv;
 import parserArchivos.ParserJsonAObjetosJava;
-import usuario.Cuenta;
-import usuario.Empresa;
-
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import usuario.Empresa;
+import model.Empresa;
 import utilities.JPAUtility;
 
 public class EmpresasAEvaluarRepository extends DBRelacionalRepository<Empresa> {

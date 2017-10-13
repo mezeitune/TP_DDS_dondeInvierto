@@ -19,9 +19,9 @@ import org.uqbar.arena.windows.WindowOwner;
 import excepciones.EmpresasIsEmptyException;
 import excepciones.MetodologiaNotFoundException;
 import excepciones.PeriodosIsEmptyException;
+import model.Empresa;
+import model.Metodologia;
 import ui.vm.MetodologiasEmpresasViewModel;
-import usuario.Empresa;
-import usuario.Metodologia;
 
 @SuppressWarnings("serial")
 public class MetodologiasEmpresasWindow extends Dialog<MetodologiasEmpresasViewModel>{

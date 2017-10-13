@@ -10,10 +10,10 @@ import javax.persistence.EntityManager;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
+import model.*;
 import repositorios.DBRelacionalRepository;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
-import usuario.*;
 import utilities.JPAUtility;
 
 @Observable

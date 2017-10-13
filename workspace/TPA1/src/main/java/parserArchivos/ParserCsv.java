@@ -12,13 +12,13 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
+import model.Cuenta;
+import model.Empresa;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import usuario.Cuenta;
-import usuario.Empresa;
 
 public class ParserCsv {
 

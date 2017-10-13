@@ -12,9 +12,9 @@ import org.omg.CORBA.UserException;
 
 import mocks.EmpresasMock;
 import mocks.IndicadoresMock;
-import usuario.Cuenta;
-import usuario.Empresa;
-import usuario.Indicador;
+import model.Cuenta;
+import model.Empresa;
+import model.Indicador;
 public class ParserIndicadoresTest {
 	
 	public static List<Indicador> indicadoresMockeados;

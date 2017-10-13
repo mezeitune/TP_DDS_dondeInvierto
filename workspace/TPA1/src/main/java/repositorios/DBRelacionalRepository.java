@@ -5,8 +5,8 @@ import javax.persistence.Query;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
+import model.Empresa;
 import parserArchivos.ParserCsv;
-import usuario.Empresa;
 
 public class DBRelacionalRepository<Entity> implements WithGlobalEntityManager {//Usamos Generics para cualquier tabla
 	

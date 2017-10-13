@@ -1,8 +1,8 @@
 package parserIndicadores;
 
 
-import usuario.Cuenta;
-import usuario.Indicador;
+import model.Cuenta;
+import model.Indicador;
 
 public class Constante implements Operacion {
 	private int valor;

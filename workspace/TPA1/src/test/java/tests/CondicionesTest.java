@@ -18,10 +18,10 @@ import condiciones.Taxativa;
 import condiciones.TipoCondicion;
 import indicadoresPredefinidos.Antiguedad;
 import mocks.EmpresasMock;
+import model.Cuenta;
+import model.Empresa;
+import model.Indicador;
 import parserIndicadores.ParserFormulaIndicador;
-import usuario.Cuenta;
-import usuario.Empresa;
-import usuario.Indicador;
 
 public class CondicionesTest {
 

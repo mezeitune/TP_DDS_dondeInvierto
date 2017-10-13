@@ -4,8 +4,6 @@ package Server;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import usuario.Empresa;
-import usuario.Metodologia;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import model.Empresa;
+import model.Metodologia;
 import repositorios.MetodologiasRepository;
 
 import repositorios.UsuariosRepository;

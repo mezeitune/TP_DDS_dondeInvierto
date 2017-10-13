@@ -11,12 +11,12 @@ import org.uqbar.commons.utils.Observable;
 import excepciones.EmpresasIsEmptyException;
 import excepciones.MetodologiaNotFoundException;
 import excepciones.PeriodosIsEmptyException;
+import model.Empresa;
+import model.Metodologia;
 import repositorios.EmpresasAEvaluarRepository;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
 import repositorios.MetodologiasRepository;
-import usuario.Empresa;
-import usuario.Metodologia;
 import utilities.JPAUtility;
 @Observable
 public class MetodologiasEmpresasViewModel {

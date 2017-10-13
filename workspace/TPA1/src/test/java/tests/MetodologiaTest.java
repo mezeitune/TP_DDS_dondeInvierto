@@ -10,9 +10,9 @@ import org.junit.Test;
 
 import metodologiasPredefinidas.WarrenBuffet;
 import mocks.EmpresasMock;
+import model.Empresa;
+import model.Metodologia;
 import parserIndicadores.ParserFormulaIndicador;
-import usuario.Empresa;
-import usuario.Metodologia;
 
 public class MetodologiaTest {
 

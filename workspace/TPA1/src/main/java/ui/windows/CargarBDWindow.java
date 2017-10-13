@@ -18,9 +18,9 @@ import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.DatoRepetidoException;
 import excepciones.NombreIndicadorNotFound;
+import model.Indicador;
 import ui.vm.CargarBDViewModel;
 import ui.vm.CargarIndicadoresViewModel;
-import usuario.Indicador;
 
 @SuppressWarnings("serial")
 public class CargarBDWindow extends Dialog<CargarBDViewModel> {

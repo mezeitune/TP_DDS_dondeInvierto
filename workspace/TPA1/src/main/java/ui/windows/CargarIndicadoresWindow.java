@@ -18,9 +18,9 @@ import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.DatoRepetidoException;
 import excepciones.NombreIndicadorNotFound;
+import model.Indicador;
+import model.Metodologia;
 import ui.vm.CargarIndicadoresViewModel;
-import usuario.Indicador;
-import usuario.Metodologia;
 
 @SuppressWarnings("serial")
 public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> {

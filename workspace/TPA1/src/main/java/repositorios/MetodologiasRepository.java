@@ -10,9 +10,9 @@ import javax.persistence.Query;
 import com.google.gson.Gson;
 
 import metodologiasPredefinidas.WarrenBuffet;
+import model.Metodologia;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
-import usuario.Metodologia;
 import utilities.JPAUtility;
 
 public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> {

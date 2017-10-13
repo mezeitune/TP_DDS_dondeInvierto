@@ -15,9 +15,9 @@ import com.google.gson.reflect.TypeToken;
 
 import condiciones.Condicion;
 import excepciones.CSVInexistenteException;
-import usuario.Empresa;
-import usuario.Indicador;
-import usuario.Metodologia;
+import model.Empresa;
+import model.Indicador;
+import model.Metodologia;
 
 public class ParserJsonAObjetosJava {
 

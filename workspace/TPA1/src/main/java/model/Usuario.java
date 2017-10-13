@@ -1,4 +1,4 @@
-package usuario;
+package model;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class Usuarios {
+@Table(name="Usuarios")
+public class Usuario {
 
 	@Id @GeneratedValue
 	private Long id;
@@ -43,11 +45,11 @@ public class Usuarios {
 	@JoinColumn(name = "usuario_id",nullable = false)
 	private List<Indicador> indicadores = new LinkedList<>(); 
 	
-	public Usuarios(){
+	public Usuario(){
 		
 	}
 	
-	public Usuarios(String username,String password){
+	public Usuario(String username,String password){
 	this.username = username;
 	this.password = password;
 	}

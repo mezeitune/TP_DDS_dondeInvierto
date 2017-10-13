@@ -12,11 +12,11 @@ import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.DatoRepetidoException;
 import excepciones.NombreIndicadorNotFound;
+import model.Indicador;
 import parserIndicadores.ParserFormulaIndicador;
 import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
 import repositorios.MetodologiasRepository;
-import usuario.Indicador;
 import utilities.JPAUtility;
 @Observable
 public class CargarBDViewModel {
