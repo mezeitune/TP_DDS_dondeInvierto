@@ -12,7 +12,7 @@
     	<class>model.Empresa</class>
     	<class>model.Metodologia</class>
     	<class>model.Cuenta</class>
-    	<class>model.Usuarios</class>
+    	<class>model.Usuario</class>
     	<class>condiciones.Condicion</class>
     	<class>condiciones.TipoCondicion</class>
     	<class>condiciones.Comparativa</class>

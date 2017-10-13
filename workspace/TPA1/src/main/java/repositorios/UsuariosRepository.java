@@ -40,8 +40,8 @@ public class UsuariosRepository extends DBRelacionalRepository<Usuario> {
 	
 
 	public List<Indicador> getIndicadoresPorUsuario(String username) {
-		Query queryUsuarios = entityManager().createQuery("from Indicador where usuario_id=:us");
-		queryUsuarios.setParameter("us", obtenerUsuario(username).getId());
+		Query queryUsuarios = entityManager().createQuery("from Indicador where usuario=:us");
+		queryUsuarios.setParameter("us", username);
 		return queryUsuarios.getResultList(); 
 	}
 	
