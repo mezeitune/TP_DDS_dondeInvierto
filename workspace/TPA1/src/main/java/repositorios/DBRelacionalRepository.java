@@ -41,21 +41,7 @@ public class DBRelacionalRepository<Entity> implements WithGlobalEntityManager {
 		return listado;
 	}
 
-	public void agregarDatosALaBDDDeLosArchivos(){
-		ParserCsv parserCsv = new ParserCsv();
-		Query queryEmpresas = entityManager().createQuery("from Empresa"); 
-		List <Empresa> empresasEnLaBD = queryEmpresas.getResultList(); 
-		List <Empresa> empresasAAgregarEnLaBD= parserCsv.csvFileToEmpresas("empresas.csv");
-				
-		if(empresasAAgregarEnLaBD.containsAll(empresasEnLaBD)){
-			entityManager().getTransaction().begin();			
-
-			empresasAAgregarEnLaBD.forEach(unaEmp -> this.agregar(unaEmp));
-			
-			entityManager().getTransaction().commit();
-		
-		}
-	}
+	
 	
 	public void begin() {
 		entityManager().getTransaction().begin();	

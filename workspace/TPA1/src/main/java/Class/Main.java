@@ -34,7 +34,7 @@ public class Main extends Application{
 	public static void testeoAManoBD(){
 		//Instanciacion del repo que contiene todas las consultas a BD , el JPA que maneja el factory del entity
 		DBRelacionalRepository<EntityManager> repo=new DBRelacionalRepository<EntityManager>();
-		repo.agregarDatosALaBDDDeLosArchivos();
+		
 	}
 
 }
