@@ -46,7 +46,7 @@ public class ControllerIndicadores {
 		
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = repositorio_indicadores.getIndicadores();
+		indicadores = repositorio_usuarios.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		
 		return new ModelAndView(indicadores,"agregarIndicador.hbs");
 	}
@@ -57,7 +57,7 @@ public class ControllerIndicadores {
 		if(nombreIndicador != null)	repositorio_indicadores.eliminarIndicadorDeLaBDD(nombreIndicador);
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = repositorio_indicadores.getIndicadores();
+		indicadores = repositorio_usuarios.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		
 		return new ModelAndView(indicadores,"eliminarIndicador.hbs");
 	}
@@ -66,7 +66,7 @@ public class ControllerIndicadores {
 	public static ModelAndView evaluarIndicador(Request request,Response response) {
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = repositorio_indicadores.getIndicadores();
+		indicadores = repositorio_usuarios.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		
 		Map<String, Object> diccionario = new HashMap<String, Object>();
 		Map<String, Object> diccionarioPeriodos = repositorio_empresas.getHashMapPeriodos();
