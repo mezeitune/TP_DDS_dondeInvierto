@@ -67,7 +67,7 @@ static List<Empresa> empresas =  new LinkedList<Empresa>();
 			List<List<Empresa>> resultado = metodologia.evaluar(EmpresasAEvaluarRepository.getEmpresasAEvaluar(),EmpresasAEvaluarRepository.getPeriodosAEvaluar());
 			
 			empresasInvertibles = resultado.get(0);
-			empresasNoInvertibles =resultado.get(1);
+			empresasNoInvertibles = resultado.get(1);
 		
 		}
 		System.out.println(nombreMetodologia+empresasInvertibles.size());
