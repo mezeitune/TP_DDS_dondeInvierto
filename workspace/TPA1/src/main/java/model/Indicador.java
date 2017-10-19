@@ -1,9 +1,16 @@
 package model;
 
 
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,6 +28,7 @@ public class Indicador implements Comparable<Indicador> {
 	protected String nombre;
 	protected String formula;
 	
+
 	@Transient
 	protected Operacion raiz;
 	

@@ -19,7 +19,7 @@ public class Usuario {
 	private String password;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "usuario",nullable = false)
+	@JoinColumn(name = "usuario",nullable = true)
 	private List<Metodologia> metodologias = new LinkedList<>(); 
 	
 	
@@ -40,7 +40,7 @@ public class Usuario {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "usuario",nullable = false)
+	@JoinColumn(name = "usuario",nullable = true)
 	private List<Indicador> indicadores = new LinkedList<>(); 
 	
 	public Usuario(){

@@ -36,6 +36,7 @@ public class ControllerIndicadores {
 		
 		String nombreIndicador = request.queryParams("nombre");
 		String formulaIndicador = request.queryParams("formula");
+		
 	
 		try {
 			repositorio_indicadores.generarIndicador(nombreIndicador, formulaIndicador);
