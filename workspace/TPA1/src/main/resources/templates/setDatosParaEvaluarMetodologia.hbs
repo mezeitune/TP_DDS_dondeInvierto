@@ -39,10 +39,12 @@
      </ul>
  </header>
 <div class="conteiner-fluid">
-		
-        <div class= "row justify-content-center">
+		<h3 class="text-info text-center">Seteo de datos para Evaluar</h3>
+<div class= "row justify-content-center">
+
       <div class="col-4">
-        <h3 class="text-info text-center">Empresas invertibles</h3>
+        
+        <h3 class="text-info text-center">Empresas a evaluar</h3>
         <table class="table table-striped" style="float: left">
           <thead class="table-inverse">
             <tr>
@@ -52,7 +54,7 @@
             </tr>
           </thead>
           <tbody class="empresas_list">
-          {{#each this.empresasInvertibles}}
+          {{#each this.empresasAEvaluar}}
           <tr>
             <th scope="row">{{@index}}</th>
             <th class="text-center">{{nombre}}</th>
@@ -64,30 +66,75 @@
       </div>
 
       <div class="col-4">
-        <h3 class="text-info text-center">No conviene invertir en</h3>
+        <h3 class="text-info text-center">Periodos a evaluar</h3>
         <table class="table table-striped" style="float: right">
           <thead class="table-inverse">
             <tr>
               <th>#</th>
-              <th class="text-center">Nombre</th>
+              <th class="text-center">Periodo</th>
             </tr>
           </thead>
           <tbody class="periodos_list">
-          {{#each this.empresasNoInvertibles}}
+          {{#each this.periodosAEvaluar}}
           <tr>
             <th scope="row">{{@index}}</th>
-            <th class="text-center">{{@key}}</th>
-            <th class="text-center">{{this}}</th>
+            <th class="text-center">{{nombre}}</th>
           </tr>
           {{/each}}
           </tbody>
         </table>
       </div>
+
+
+
+   </div>
+<div class="row justify-content-center"">
+     <h1 class="text-info text-center">Seleccion</h1>
+  </div>
+  <div class="row justify-content-center"">
+  <div class="col-4"> 
+  
+   
+  	<form action="/metodologias/setDatosParaEvaluar" method="post">
+     <div class="form-group">
+     
+       <label for="indicador">Metodologia</label>
+       <select name="metodologia">
+         <option value="null" selected="selected"></option>
+        {{#each this.metodologias}}
+        <option value="{{nombre}}" {{#selected}} selected="selected"{{/selected}}> {{nombre}} </option>
+        {{/each}}
+       </select>
+		  <button class="btn btn-primary" type="submit">Setear Metodologia</button>
+		  
+		  
+       <label for="empresas">Empresas</label>
+        <select name="empresa">
+          <option value="null" selected="selected"></option>
+        {{#each this.empresas}}
+        <option value="{{@key}}" {{#selected}} selected="selected"{{/selected}}> {{@key}} </option>
+        {{/each}}
+       </select>
+  		<button class="btn btn-primary" type="submit">Setear Empresa</button>
+  		
+  		
+  		
+        <label for="periodos">Periodo</label>
+        <select name="periodo">
+          <option value="null" selected="selected"></option>
+        {{#each this.periodos}}
+          {{#each this}}
+            <option value="{{this}}" {{#selected}} selected="selected"{{/selected}}> {{this}} </option>
+          {{/each}}
+        {{/each}}
+       </select>
+         <button class="btn btn-primary" type="submit">Setear Periodo</button>
         
-        
-     </div>
       </form>
       
+      <form action="/metodologias/evaluar" method="get">
+       <button class="btn btn-primary" type="submit">Evaluar</button>
+       </form>
    </div>
     
   </div>
