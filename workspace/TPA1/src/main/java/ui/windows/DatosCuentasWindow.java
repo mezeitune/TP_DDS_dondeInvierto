@@ -15,10 +15,10 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+import model.Cuenta;
+import model.Empresa;
+import model.Indicador;
 import ui.vm.DatosCuentasViewModel;
-import usuario.Cuenta;
-import usuario.Empresa;
-import usuario.Indicador;
 
 @SuppressWarnings("serial")
 public class DatosCuentasWindow extends Dialog<DatosCuentasViewModel>{

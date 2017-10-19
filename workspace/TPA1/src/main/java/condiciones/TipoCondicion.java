@@ -14,10 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
-import usuario.Empresa;
 import org.uqbar.commons.utils.Observable;
 
 import comparadores.Comparador;
+import model.Empresa;
 
 @Observable
 public class TipoCondicion { //Si senor, clase abstracta para la persistencia en Json.

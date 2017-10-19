@@ -15,20 +15,20 @@ import excepciones.FormulaIndicadorNotFound;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.DatoRepetidoException;
 import excepciones.NombreIndicadorNotFound;
+import model.Indicador;
+import model.Metodologia;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserIndicadores.ParserFormulaIndicador;
 import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
 import repositorios.MetodologiasRepository;
-import usuario.Indicador;
-import usuario.Metodologia;
 import utilities.JPAUtility;
 @Observable
 public class CargarIndicadoresViewModel {
 	
 	private JPAUtility jpa=JPAUtility.getInstance();
 	private EntityManager entityManager = this.jpa.getEntityManager();
-	private IndicadoresRepository repo=new IndicadoresRepository(this.entityManager);
+	private IndicadoresRepository repo=new IndicadoresRepository();
 	
 	
 	private List<Indicador> indicadores = repo.getIndicadoresDefinidosPorElUsuario();
@@ -106,7 +106,7 @@ public class CargarIndicadoresViewModel {
 		ObservableUtils.firePropertyChanged(this, "indicadores");
 	}
 	public boolean esUnIndicadorYaIngresado (Indicador nuevoIndicador) {
-		IndicadoresRepository repositorioDeIndicadores = new IndicadoresRepository(entityManager);
+		IndicadoresRepository repositorioDeIndicadores = new IndicadoresRepository();
 
 		return repositorioDeIndicadores.validarIndicadorRepetidoAntesCargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
 	}

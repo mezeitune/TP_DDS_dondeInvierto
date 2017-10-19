@@ -11,9 +11,8 @@ import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-
+import model.Empresa;
 import ui.vm.EliminarEmpresaViewModel;
-import usuario.Empresa;
 
 public class EliminarEmpresaWindow extends Dialog<EliminarEmpresaViewModel>{
 	public EliminarEmpresaWindow(WindowOwner parent)  {

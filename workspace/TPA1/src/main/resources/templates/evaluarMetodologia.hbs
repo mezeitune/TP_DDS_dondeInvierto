@@ -1,96 +1,59 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  </head>
-<body>
-
-<header class="navbar navbar-expand-lg navbar-ligh" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="../dondeInvierto.html">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/US_Democratic_Party_Logo.svg/2000px-US_Democratic_Party_Logo.svg.png" width="30" height="30" class="d-inline-block align-top" alt="" >
-    </a>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-       <ul class="navbar-nav bd-navbar-nav flex-row" >
-          <li class="nav-item">
-            <a class="nav-link " href="../dondeInvierto.html">Home</a>
-          </li>
-          <li class="nav-item">
-           <a class="nav-link active" href="../empresas">Empresas</a>
-         </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/indicadores">Indicadores</a>
-          </li>
-          <li class = "nav-item">
-          <a class="nav-link" href="#">Metodologias</a>
-          </li>
-       </ul>
-     </div>
-
-     <ul class="navbar-nav justify-content-end">
-      <li class="nav-item" >
-        <a class="nav-link" data-toogle="pill"  href="#" role="tab" aria-controls="pills-profile" aria-expanded="true">Contacto</a>
-      </li>
-     </ul>
- </header>
+{{#partial "contenido"}}
 <div class="conteiner-fluid">
-<div class= "row justify-content-center">
+		
+        <div class= "row justify-content-center">
       <div class="col-4">
-       <h3 class="text-info text-center">Metodologia Seleccionada: "{{nombre}}"</h3>
-        <h1 class="text-info text-center">Empresas a evaluar</h1>
-        <table class="table table-striped">
+        <h3 class="text-info text-center">Empresas invertibles</h3>
+        <table class="table table-striped" style="float: left">
           <thead class="table-inverse">
             <tr>
               <th>#</th>
               <th class="text-center">Nombre</th>
-             <th class="text-center">Cantidad de cuentas</th>
+            
             </tr>
           </thead>
-          <tbody class="metodologias_list">
-          {{#each this}}
+          <tbody class="empresas_list">
+          {{#each this.empresasInvertibles}}
           <tr>
-            <th scope="row"></th>
-            <th class="text-center"></th>
-              <th class="text-center"></th>
+            <th scope="row">{{@index}}</th>
+            <th class="text-center">{{nombre}}</th>
+           
           </tr>
           {{/each}}
           </tbody>
         </table>
       </div>
-   </div>
-<div class="row justify-content-center"">
-     <h1 class="text-info text-center">Seleccion de Empresas</h1>
-  </div>
-  <div class="row justify-content-center"">
-  <div class="col-4">  
-  	
-  	
-     <div class="form-group">
-       <label for="empresa"></label>
-       <input type="text"  class="form-control is-invalid" id="empresa" placeholder="empresa" name="empresa">
-       <div class="invalid-feedback">Porfavor, ingresa una empresa</div>
-       
-     </div> 
-      
-    
-      <button class="btn btn-primary" type="submit">Evaluar!</button>
-      
-      
-      <form action="/metodologias" method="get">
-      <button class="btn btn-primary" type="submit">Volver</button>
+
+      <div class="col-4">
+        <h3 class="text-info text-center">No conviene invertir en</h3>
+        <table class="table table-striped" style="float: right">
+          <thead class="table-inverse">
+            <tr>
+              <th>#</th>
+              <th class="text-center">Nombre</th>
+            </tr>
+          </thead>
+          <tbody class="periodos_list">
+          {{#each this.empresasNoInvertibles}}
+          <tr>
+            <th scope="row">{{@index}}</th>
+            <th class="text-center">{{@key}}</th>
+            <th class="text-center">{{this}}</th>
+          </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+        
+        
+     </div>
       </form>
-          
       
    </div>
     
   </div>
  </div>
 
-</div>
-</body>
-</html>
+
+{{/partial}}
+{{>userspace.hbs}}

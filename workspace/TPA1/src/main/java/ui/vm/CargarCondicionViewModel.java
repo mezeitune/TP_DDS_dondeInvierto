@@ -16,11 +16,11 @@ import excepciones.NombreCondicionNotFound;
 import excepciones.PesoCondicionNotFound;
 import excepciones.TipoCondicionNotFound;
 import indicadoresPredefinidos.PatrimonioNeto;
+import model.Indicador;
 import repositorios.CondicionesRepository;
 import repositorios.DBRelacionalRepository;
 import repositorios.IndicadoresRepository;
 import repositorios.MetodologiasRepository;
-import usuario.Indicador;
 import utilities.JPAUtility;
 
 @Observable
@@ -28,10 +28,10 @@ public class CargarCondicionViewModel {
 	
 	private JPAUtility jpa=JPAUtility.getInstance();
 	private EntityManager entityManager = this.jpa.getEntityManager();
-	private IndicadoresRepository repoIndicadores=new IndicadoresRepository(this.entityManager);
+	private IndicadoresRepository repoIndicadores=new IndicadoresRepository();
 	
 
-	private CondicionesRepository repoCondiciones=new CondicionesRepository(this.entityManager);
+	private CondicionesRepository repoCondiciones=new CondicionesRepository();
 	
 	private  String nombreCondicion;
 	private  TipoCondicion tipoCondicion;
@@ -119,7 +119,7 @@ public class CargarCondicionViewModel {
 	}
 
 	private boolean esUnaCondicionRepetida(String nombre) {
-		CondicionesRepository repoDeCondiciones = new CondicionesRepository(entityManager);
+		CondicionesRepository repoDeCondiciones = new CondicionesRepository();
 		return repoDeCondiciones.validarCondicionRepetidoAntesCargar(nombre);
 		
 	}

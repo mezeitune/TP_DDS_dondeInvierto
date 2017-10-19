@@ -11,10 +11,12 @@ import org.uqbar.commons.utils.Observable;
 import excepciones.EmpresasIsEmptyException;
 import excepciones.MetodologiaNotFoundException;
 import excepciones.PeriodosIsEmptyException;
+import model.Empresa;
+import model.Metodologia;
 import repositorios.EmpresasAEvaluarRepository;
+import repositorios.EmpresasRepository;
+import repositorios.IndicadoresRepository;
 import repositorios.MetodologiasRepository;
-import usuario.Empresa;
-import usuario.Metodologia;
 import utilities.JPAUtility;
 @Observable
 public class MetodologiasEmpresasViewModel {
@@ -23,16 +25,16 @@ public class MetodologiasEmpresasViewModel {
 
 	private List<Empresa> empresasInvertibles = new LinkedList<>();
 	private List<Empresa> empresasNoInvertibles = new LinkedList<>();
-	private JPAUtility jpa=JPAUtility.getInstance();
-	private EntityManager entityManager = this.jpa.getEntityManager();
-	private MetodologiasRepository repo=new MetodologiasRepository(this.entityManager);
+	
+	private static MetodologiasRepository repositorio_metodologias=new MetodologiasRepository();
+	private static EmpresasAEvaluarRepository repositorio_empresas_evaluables=new EmpresasAEvaluarRepository();
 	
 	public MetodologiasEmpresasViewModel() {
 		
 	}
 	
 	public List<Metodologia> getMetodologias(){
-		return repo.getMetodologias();
+		return repositorio_metodologias.getMetodologias();
 	}
 	
 	
@@ -71,7 +73,7 @@ public class MetodologiasEmpresasViewModel {
 	}
 	
 	public void autocompletarListaEmpresasAEvaluar(){
-		EmpresasAEvaluarRepository.cargarTodasLasEmpresas();
+		repositorio_empresas_evaluables.cargarTodasLasEmpresas();
 		
 		ObservableUtils.firePropertyChanged(this, "empresas");	
 	}

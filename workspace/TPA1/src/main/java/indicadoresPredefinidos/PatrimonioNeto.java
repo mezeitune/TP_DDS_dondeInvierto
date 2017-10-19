@@ -2,7 +2,7 @@ package indicadoresPredefinidos;
 
 import org.uqbar.commons.utils.Observable;
 
-import usuario.Indicador;
+import model.Indicador;
 
 //indicador predefinido que extiende de indicador para que todos tengan el metodo calcular en su dominio
 @Observable

@@ -17,7 +17,7 @@ public class AgregarCondicionSeleccionadaViewModel {
 
 	private JPAUtility jpa=JPAUtility.getInstance();
 	private EntityManager entityManager = this.jpa.getEntityManager();
-	private CondicionesRepository repo=new CondicionesRepository(this.entityManager);
+	private CondicionesRepository repo=new CondicionesRepository();
 	
 	private  Condicion condicionSeleccionada;
 	

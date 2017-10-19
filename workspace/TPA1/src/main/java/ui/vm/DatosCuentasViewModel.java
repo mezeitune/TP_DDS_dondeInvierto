@@ -10,24 +10,23 @@ import javax.persistence.EntityManager;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
+import model.*;
 import repositorios.DBRelacionalRepository;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
-import usuario.*;
 import utilities.JPAUtility;
 
 @Observable
 public class DatosCuentasViewModel{
 	
-	private JPAUtility jpa=JPAUtility.getInstance();
-	private EntityManager entityManager = this.jpa.getEntityManager();
-	private IndicadoresRepository repo=new IndicadoresRepository(this.entityManager);
+	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository();
+	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
 	
 	private Empresa empresa;
 	private String periodo;	
 	private int calculo;
 	
-	private List<Indicador> indicadores = repo.getIndicadores();
+	private List<Indicador> indicadores = repositorio_indicadores.getIndicadores();
 	private String nombreIndicador;
 	private String formulaIndicador;
 	
@@ -73,7 +72,7 @@ public class DatosCuentasViewModel{
 	}
 	
 	public List<Empresa> getEmpresas(){
-		return EmpresasRepository.getEmpresas();
+		return repositorio_empresas.getEmpresas();
 	}
 	
 	public List<Cuenta> getCuentasFiltradas(){

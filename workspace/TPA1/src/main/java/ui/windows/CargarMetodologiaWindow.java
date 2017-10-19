@@ -18,8 +18,8 @@ import condiciones.Condicion;
 import excepciones.CondicionesNotFoundException;
 import excepciones.MetodologiaRepetidaException;
 import excepciones.NombreMetodologiaNotFoundException;
+import model.Metodologia;
 import ui.vm.CargarMetodologiaViewModel;
-import usuario.Metodologia;
 
 @SuppressWarnings("serial")
 public class CargarMetodologiaWindow extends Dialog <CargarMetodologiaViewModel>{

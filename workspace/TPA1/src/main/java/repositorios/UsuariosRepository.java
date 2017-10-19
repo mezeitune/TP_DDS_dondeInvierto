@@ -4,29 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.google.gson.Gson;
+import model.Indicador;
+import model.Usuario;
 
-import metodologiasPredefinidas.WarrenBuffet;
-import parserArchivos.ParserJsonAObjetosJava;
-import parserArchivos.ParserJsonString;
-import usuario.Indicador;
-import usuario.Metodologia;
-import usuario.Usuarios;
-import utilities.JPAUtility;
-
-public class UsuariosRepository extends DBRelacionalRepository<Metodologia> {
-	public UsuariosRepository(EntityManager em) {
-		super(em);
-		// TODO Auto-generated constructor stub
-	}
-
-
+public class UsuariosRepository extends DBRelacionalRepository<Usuario> {
 	
-	public List<Usuarios> getUsuarios(){
-		List<Usuarios> usuarios = new LinkedList<Usuarios> ();
+	public List<Usuario> getUsuarios(){
+		List<Usuario> usuarios = new LinkedList<Usuario> ();
 		this.cargarUsuarios(usuarios);
 		return usuarios;
 	}
@@ -38,20 +24,28 @@ public class UsuariosRepository extends DBRelacionalRepository<Metodologia> {
 													 .collect(Collectors.toList());
 	}
 
-	public List<Usuarios> getUsuariosDefinidosPorElUsuario() {
-		Query queryUsuarios = entityManager.createQuery("from Usuarios"); 
+	public List<Usuario> getUsuariosDefinidosPorElUsuario() {
+		Query queryUsuarios = entityManager().createQuery("from Usuario"); 
 		return queryUsuarios.getResultList(); 
 	}
 	
 	
-	public void cargarUsuarios(List<Usuarios> usuarios) {
+
+	public List<Indicador> getIndicadoresPorUsuario(String username) {
+		Query queryUsuarios = entityManager().createQuery("from Indicador where usuario=:us");
+		queryUsuarios.setParameter("us", username);
+		return queryUsuarios.getResultList(); 
+	}
+	
+	
+	
+	public void cargarUsuarios(List<Usuario> usuarios) {
 		this.getUsuariosDefinidosPorElUsuario().stream().forEach(UsuarioDefinidoPorUsuario -> usuarios.add(UsuarioDefinidoPorUsuario));
 	}
 	
-	public Usuarios obtUsuario(String usuario){
-		List<Usuarios> usersFiltrados=this.getUsuarios().stream().filter(us -> us.getUsername().equals(usuario))
-				 .collect(Collectors.toList());
-		return usersFiltrados.get(0);
+	public Usuario obtenerUsuario(String usuario){
+		return this.getUsuarios().stream().filter(us -> us.getUsername().equals(usuario))
+				 .collect(Collectors.toList()).get(0);
 	}
 
 
@@ -60,7 +54,7 @@ public class UsuariosRepository extends DBRelacionalRepository<Metodologia> {
 	}
 	
 	public Boolean logeoCorrecto(String usuario,String password){
-		if(this.usuarioExistente(usuario) && this.obtUsuario(usuario).getPassword().equals(password)){
+		if(this.usuarioExistente(usuario) && this.obtenerUsuario(usuario).getPassword().equals(password)){
 			return true;
 		}
 		

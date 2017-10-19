@@ -8,11 +8,11 @@
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
-    	<class>usuario.Indicador</class>
-    	<class>usuario.Empresa</class>
-    	<class>usuario.Metodologia</class>
-    	<class>usuario.Cuenta</class>
-    	<class>usuario.Usuarios</class>
+    	<class>model.Indicador</class>
+    	<class>model.Empresa</class>
+    	<class>model.Metodologia</class>
+    	<class>model.Cuenta</class>
+    	<class>model.Usuario</class>
     	<class>condiciones.Condicion</class>
     	<class>condiciones.TipoCondicion</class>
     	<class>condiciones.Comparativa</class>
@@ -35,7 +35,7 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dondeInvierto" /> 
             <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="root" /> 
+            <property name="hibernate.connection.password" value="utnutnutn" /> 
 
 
 <!-- 

@@ -2,7 +2,7 @@ package condiciones;
 
 import org.uqbar.commons.utils.Observable;
 
-import usuario.Indicador;
+import model.Indicador;
 @Observable
 public class ParametroOperacion {
 

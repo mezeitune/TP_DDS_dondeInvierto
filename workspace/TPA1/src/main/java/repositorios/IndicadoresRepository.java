@@ -17,19 +17,16 @@ import excepciones.FormulaIndicadorNotValidException;
 import excepciones.NombreIndicadorNotFound;
 import indicadoresPredefinidos.Antiguedad;
 import indicadoresPredefinidos.PatrimonioNeto;
+import model.Indicador;
+import model.Metodologia;
+import model.Usuario;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
 import parserIndicadores.ParserFormulaIndicador;
-import usuario.Indicador;
-import usuario.Metodologia;
 import utilities.JPAUtility;
 
 public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 	
-	public IndicadoresRepository(EntityManager em) {
-		super(em);
-		// TODO Auto-generated constructor stub
-	}
 	private ParserJsonAObjetosJava parser = new ParserJsonAObjetosJava("indicadores.json");
 	
 	public List<Indicador> getIndicadores(){
@@ -38,17 +35,19 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 		return indicadores;
 	}
 	
+
+	
 	public List<String> getNombreIndicadores(){
 		return this.getIndicadores().stream().map(indicador -> indicador.getNombre())
 													 .collect(Collectors.toList());
 	}
 	
 	public List<Indicador> getIndicadoresDefinidosPorElUsuario() {
-		Query queryIndicadores = entityManager.createQuery("from Indicador"); 
+		Query queryIndicadores = entityManager().createQuery("from Indicador"); 
 		return queryIndicadores.getResultList(); 
 	}
 	
-	public static List<Indicador>  getIndicadoresPredefinidos() {
+	public  List<Indicador>  getIndicadoresPredefinidos() {
 		List<Indicador> indicadoresPredefinidos = new LinkedList<Indicador>();
 		indicadoresPredefinidos.add(PatrimonioNeto.getInstance());
 		indicadoresPredefinidos.add(Antiguedad.getInstance());
@@ -70,15 +69,6 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 	}
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void generarIndicador(String nombreIndicador, String formulaIndicador) throws NombreIndicadorNotFound, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorNotFound {
 		
 		if(nombreIndicador == null) throw new NombreIndicadorNotFound();
@@ -91,30 +81,30 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 		if(!ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
 		
-		if (!entityManager.getTransaction().isActive()) {
-			entityManager.getTransaction().begin();
+		if (!entityManager().getTransaction().isActive()) {
+			entityManager().getTransaction().begin();
 		} 
 		
 		this.agregar(nuevoIndicador);
-		entityManager.getTransaction().commit();
+		entityManager().getTransaction().commit();
 
 	}
 	public boolean esUnIndicadorYaIngresado (Indicador nuevoIndicador) {
-		IndicadoresRepository repositorioDeIndicadores = new IndicadoresRepository(entityManager);
+		IndicadoresRepository repositorioDeIndicadores = new IndicadoresRepository();
 
 		return repositorioDeIndicadores.validarIndicadorRepetidoAntesCargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
 	}
 
 	public void eliminarIndicadorDeLaBDD(String nombreIndicador){
 		
-		List<Indicador> indicadorAEliminar = this.getIndicadores().stream().filter(unInd -> unInd.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
+		List<Indicador> indicadorAEliminar =this.getIndicadores().stream().filter(unInd -> unInd.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
 		
 				
-		if (!entityManager.getTransaction().isActive()) {
-			entityManager.getTransaction().begin();
+		if (!entityManager().getTransaction().isActive()) {
+			entityManager().getTransaction().begin();
 		} 
 		this.eliminar(indicadorAEliminar.get(0));
-		entityManager.getTransaction().commit();
+		entityManager().getTransaction().commit();
 		//this.setResultadoIndicador("Se ha eliminado correctamente el indicador :"+ nombreIndicador);
 
 	}

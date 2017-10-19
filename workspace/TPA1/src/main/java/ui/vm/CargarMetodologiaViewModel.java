@@ -14,11 +14,11 @@ import excepciones.CondicionesNotFoundException;
 import excepciones.MetodologiaRepetidaException;
 import excepciones.NombreMetodologiaNotFoundException;
 import metodologiasPredefinidas.WarrenBuffet;
+import model.Indicador;
+import model.Metodologia;
 import repositorios.CondicionesSeleccionadasRepository;
 import repositorios.DBRelacionalRepository;
 import repositorios.MetodologiasRepository;
-import usuario.Indicador;
-import usuario.Metodologia;
 import utilities.JPAUtility;
 
 
@@ -28,7 +28,7 @@ public class CargarMetodologiaViewModel {
 	
 	private JPAUtility jpa=JPAUtility.getInstance();
 	private EntityManager entityManager = this.jpa.getEntityManager();
-	private MetodologiasRepository repo=new MetodologiasRepository(this.entityManager);
+	private MetodologiasRepository repo=new MetodologiasRepository();
 	
 	
 	private String resultadoIndicador;

@@ -1,43 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{{#partial "contenido"}}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  </head>
-<body>
-
-<header class="navbar navbar-expand-lg navbar-ligh" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="../dondeInvierto.html">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/US_Democratic_Party_Logo.svg/2000px-US_Democratic_Party_Logo.svg.png" width="30" height="30" class="d-inline-block align-top" alt="" >
-    </a>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-       <ul class="navbar-nav bd-navbar-nav flex-row" >
-          <li class="nav-item">
-            <a class="nav-link " href="../dondeInvierto.html">Home</a>
-          </li>
-          <li class="nav-item">
-           <a class="nav-link active" href="../empresas">Empresas</a>
-         </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/indicadores">Indicadores</a>
-          </li>
-          <li class = "nav-item">
-          <a class="nav-link" href="#">Metodologias</a>
-          </li>
-       </ul>
-     </div>
-
-     <ul class="navbar-nav justify-content-end">
-      <li class="nav-item" >
-        <a class="nav-link" data-toogle="pill"  href="#" role="tab" aria-controls="pills-profile" aria-expanded="true">Contacto</a>
-      </li>
-     </ul>
- </header>
 <div class="conteiner-fluid">
 <div class= "row justify-content-center">
       <div class="col-4">
@@ -62,10 +24,9 @@
         </table>
       </div>
    </div>
-
-  <div class="row justify-content-center"">
-  <div class="col-4">  
-    <div class="form-group">
+   <div class="row justify-content-center">
+    <div class="col-4">
+     <div class="form-group">
         <div class="input-group">
              <form action="/indicadores/agregar" method="get">
             <button class="btn btn-primary" type="submit">Ingresar Indicador</button>
@@ -82,7 +43,6 @@
     </div>
   </div>
  </div>
-
 </div>
-</body>
-</html>
+{{/partial}}
+{{>userspace.hbs}}

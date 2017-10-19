@@ -4,9 +4,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import model.Empresa;
+import model.Indicador;
 import parserIndicadores.Constante;
-import usuario.Empresa;
-import usuario.Indicador;
 
 public class Antiguedad extends Indicador {
 	

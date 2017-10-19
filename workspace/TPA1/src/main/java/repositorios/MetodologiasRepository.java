@@ -10,43 +10,47 @@ import javax.persistence.Query;
 import com.google.gson.Gson;
 
 import metodologiasPredefinidas.WarrenBuffet;
+import model.Indicador;
+import model.Metodologia;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
-import usuario.Metodologia;
 import utilities.JPAUtility;
 
 public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> {
-	public MetodologiasRepository(EntityManager em) {
-		super(em);
-		// TODO Auto-generated constructor stub
-	}
 
 	private ParserJsonAObjetosJava parserMetodologias= new ParserJsonAObjetosJava("metodologias.json");
 	
 	
-	public List<Metodologia> getMetodologias(){
+	public  List<Metodologia> getMetodologias(){
 		List<Metodologia> metodologias = new LinkedList<Metodologia> ();
 		this.cargarMetodologias(metodologias);
 		return metodologias;
 	}
 	
 	public List<Metodologia> getMetodologiasDefinidasPorElUsuario(){
-		Query queryIndicadores = entityManager.createQuery("from Metodologia");
+		Query queryIndicadores = entityManager().createQuery("from Metodologia");
 		return queryIndicadores.getResultList(); 
 	}
 	
 	
-	public void cargarMetodologias(List<Metodologia> metodologias) {
+	public  void cargarMetodologias(List<Metodologia> metodologias) {
 		this.getMetodologiasDefinidasPorElUsuario().stream().forEach(metodologiaDefinidaPorUsuario -> metodologias.add(metodologiaDefinidaPorUsuario));
 		this.getMetodologiasPredefinidas().stream().forEach(metodologiaPredefinida -> metodologias.add(metodologiaPredefinida));
 	}
 
-	public List<Metodologia> getMetodologiasPredefinidas(){
+	public  List<Metodologia> getMetodologiasPredefinidas(){
 		List<Metodologia> metodologiasPredefinidas = new LinkedList<Metodologia>();
 		metodologiasPredefinidas.add(WarrenBuffet.getInstance());
 		return metodologiasPredefinidas;
 	}
 
+		public Metodologia getMetodologia(String nombreMet){
+		
+		List<Metodologia> metodologias = this.getMetodologias().stream().filter(unInd -> unInd.getNombre().equals(nombreMet)).collect(Collectors.toList());
+		return metodologias.get(0);
+		
+		
+	}
 	
 
 
