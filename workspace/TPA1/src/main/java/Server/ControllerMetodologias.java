@@ -75,6 +75,10 @@ private static EmpresasAEvaluarRepository repositorio_empresas_evaluar=new Empre
 		diccionario.put("empresasNoInvertibles", empresasNoInvertibles);
 		return new ModelAndView(diccionario,"evaluarMetodologia.hbs");
 	}
+	
+	
+	
+	
 	public static ModelAndView setDatosParaEvaluar(Request request, Response responce){
 		List<Metodologia> metodologias = new LinkedList<Metodologia>();
 		List<Empresa> empresas =  repositorio_empresas.getEmpresas();
@@ -100,10 +104,8 @@ private static EmpresasAEvaluarRepository repositorio_empresas_evaluar=new Empre
 			
 		}
 		diccionario.put("empresasAEvaluar", EmpresasAEvaluarRepository.getEmpresasAEvaluar());
-		diccionario.put("periodosAEvaluar", EmpresasAEvaluarRepository.getPeriodosAEvaluar());
 		diccionario.put("metodologias",metodologias);
 		diccionario.put("periodos", diccionarioPeriodos);
-		diccionario.put("empresas", empresas);
 		return new ModelAndView(diccionario,"setDatosParaEvaluarMetodologia.hbs");
 	}
 		
