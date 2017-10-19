@@ -35,8 +35,8 @@ public class Router {
 			Spark.get("indicadores/evaluar", ControllerIndicadores::evaluarIndicador,engine);
 			
 						
-			Spark.get("metodologias",Controller::consultarMetodologias,engine);
-			Spark.get("metodologias/evaluar",Controller::evaluarMetodologia,engine);
+			Spark.get("metodologias",ControllerMetodologias::consultarMetodologias,engine);
+			Spark.get("metodologias/evaluar",ControllerMetodologias::evaluarMetodologia,engine);
 			
 	}
 }

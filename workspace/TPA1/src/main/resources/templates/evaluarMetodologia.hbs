@@ -39,52 +39,139 @@
      </ul>
  </header>
 <div class="conteiner-fluid">
+		
 <div class= "row justify-content-center">
       <div class="col-4">
-       <h3 class="text-info text-center">Metodologia Seleccionada: "{{nombre}}"</h3>
-        <h1 class="text-info text-center">Empresas a evaluar</h1>
-        <table class="table table-striped">
+        <h3 class="text-info text-center">Empresas a evaluar</h3>
+        <table class="table table-striped" style="float: left">
           <thead class="table-inverse">
             <tr>
               <th>#</th>
               <th class="text-center">Nombre</th>
-             <th class="text-center">Cantidad de cuentas</th>
+            
             </tr>
           </thead>
-          <tbody class="metodologias_list">
-          {{#each this}}
+          <tbody class="empresas_list">
+          {{#each this.empresas}}
           <tr>
-            <th scope="row"></th>
-            <th class="text-center"></th>
-              <th class="text-center"></th>
+            <th scope="row">{{@index}}</th>
+            <th class="text-center">{{nombre}}</th>
+           
           </tr>
           {{/each}}
           </tbody>
         </table>
       </div>
+
+      <div class="col-4">
+        <h3 class="text-info text-center">Periodos a evaluar</h3>
+        <table class="table table-striped" style="float: right">
+          <thead class="table-inverse">
+            <tr>
+              <th>#</th>
+              <th class="text-center">Periodo</th>
+            </tr>
+          </thead>
+          <tbody class="periodos_list">
+          {{#each this.periodos}}
+          <tr>
+            <th scope="row">{{@index}}</th>
+            <th class="text-center">{{@key}}</th>
+            <th class="text-center">{{this}}</th>
+          </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+
+
+
    </div>
 <div class="row justify-content-center"">
-     <h1 class="text-info text-center">Seleccion de Empresas</h1>
+     <h1 class="text-info text-center">Seleccion</h1>
   </div>
   <div class="row justify-content-center"">
   <div class="col-4">  
-  	
-  	
+  	<form action="/metodologias/evaluar" method="get">
      <div class="form-group">
-       <label for="empresa"></label>
-       <input type="text"  class="form-control is-invalid" id="empresa" placeholder="empresa" name="empresa">
-       <div class="invalid-feedback">Porfavor, ingresa una empresa</div>
-       
-     </div> 
-      
-    
-      <button class="btn btn-primary" type="submit">Evaluar!</button>
-      
-      
-      <form action="/metodologias" method="get">
-      <button class="btn btn-primary" type="submit">Volver</button>
+       <label for="indicador">Metodologia</label>
+       <select name="metodologia">
+         <option value="null" selected="selected"></option>
+        {{#each this.metodologias}}
+        <option value="{{nombre}}" {{#selected}} selected="selected"{{/selected}}> {{nombre}} </option>
+        {{/each}}
+       </select>
+		  <button class="btn btn-primary" type="submit">Setear Metodologia</button>
+       <label for="periodos">Empresas</label>
+        <select name="empresa">
+          <option value="null" selected="selected"></option>
+        {{#each this.empresas}}
+        <option value="{{@key}}" {{#selected}} selected="selected"{{/selected}}> {{@key}} </option>
+        {{/each}}
+       </select>
+  		<button class="btn btn-primary" type="submit">Setear Empresa</button>
+        <label for="periodos">Periodo</label>
+        <select name="periodo">
+          <option value="null" selected="selected"></option>
+        {{#each this.periodos}}
+          {{#each this}}
+            <option value="{{this}}" {{#selected}} selected="selected"{{/selected}}> {{this}} </option>
+          {{/each}}
+        {{/each}}
+       </select>
+         <button class="btn btn-primary" type="submit">Setear Periodo</button>
+         
+         
+         
+        <button class="btn btn-primary" type="submit">Evaluar</button>
+        
+        <div class= "row justify-content-center">
+      <div class="col-4">
+        <h3 class="text-info text-center">Empresas invertibles</h3>
+        <table class="table table-striped" style="float: left">
+          <thead class="table-inverse">
+            <tr>
+              <th>#</th>
+              <th class="text-center">Nombre</th>
+            
+            </tr>
+          </thead>
+          <tbody class="empresas_list">
+          {{#each this.empresasInvertibles}}
+          <tr>
+            <th scope="row">{{@index}}</th>
+            <th class="text-center">{{nombre}}</th>
+           
+          </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-4">
+        <h3 class="text-info text-center">No conviene invertir en</h3>
+        <table class="table table-striped" style="float: right">
+          <thead class="table-inverse">
+            <tr>
+              <th>#</th>
+              <th class="text-center">Nombre</th>
+            </tr>
+          </thead>
+          <tbody class="periodos_list">
+          {{#each this.empresasNoInvertibles}}
+          <tr>
+            <th scope="row">{{@index}}</th>
+            <th class="text-center">{{@key}}</th>
+            <th class="text-center">{{this}}</th>
+          </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+        
+        
+     </div>
       </form>
-          
       
    </div>
     

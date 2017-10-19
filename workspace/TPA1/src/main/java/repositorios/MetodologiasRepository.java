@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import com.google.gson.Gson;
 
 import metodologiasPredefinidas.WarrenBuffet;
+import model.Indicador;
 import model.Metodologia;
 import parserArchivos.ParserJsonAObjetosJava;
 import parserArchivos.ParserJsonString;
@@ -43,6 +44,13 @@ public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> 
 		return metodologiasPredefinidas;
 	}
 
+		public Metodologia getMetodologia(String nombreMet){
+		
+		List<Metodologia> metodologias = this.getMetodologias().stream().filter(unInd -> unInd.getNombre().equals(nombreMet)).collect(Collectors.toList());
+		return metodologias.get(0);
+		
+		
+	}
 	
 
 

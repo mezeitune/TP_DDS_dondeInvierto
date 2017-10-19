@@ -30,38 +30,6 @@ public class Controller {
 
 	}
 
-	public static ModelAndView consultarMetodologias(Request request,Response response) {
-		
-	
-		List<Metodologia> metodologias = new LinkedList<Metodologia>();
-		metodologias= repositorio_metodologias.getMetodologias();
-		
-		
-		return new ModelAndView(metodologias,"metodologias.hbs");
-	}
-
-		
-	public static ModelAndView evaluarMetodologia(Request request, Response responce){
-		
-		Map<String, Object> parametros = new HashMap<String, Object>();
-
-		String metSeleccionadaNombre = request.queryParams("metodologia");
-		
-		List<Empresa> empresas = new LinkedList<Empresa>();
-		
-		List <Metodologia> metodologias = repositorio_metodologias.getMetodologias();
-		
-		Metodologia metodologia = metodologias.stream().filter(e -> e.getNombre().equals(metSeleccionadaNombre)).collect(Collectors.toList()).get(0);
-		//parametros.put("metSeleccionada", metodologia);
-		
-		
-		ModelAndView mv=new ModelAndView(metodologia, "evaluarMetodologia.hbs");
-		
-		return mv;
-		
-		
-	}
-	
 	
 	public static ModelAndView crearSessionDeLogin(Request request,Response response) {
 		
