@@ -15,7 +15,7 @@
             </tr>
           </thead>
           <tbody class="empresas_list">
-          {{#each this.empresasAEvaluar}}
+          {{#each this.empresas}}
           <tr>
             <th scope="row">{{@index}}</th>
             <th class="text-center">{{nombre}}</th>
@@ -34,23 +34,15 @@
   <div class="col-4"> 
   
    
-  	<form action="/metodologias/setDatosParaEvaluar" method="post">
+  	<form action="/metodologias/guardarDatosParaEvaluar" method="POST">
      <div class="form-group">
      
-       <label for="indicador">Metodologia</label>
-       <select name="metodologia">
-         <option value="null" selected="selected"></option>
-        {{#each this.metodologias}}
-        <option value="{{nombre}}" {{#selected}} selected="selected"{{/selected}}> {{nombre}} </option>
-        {{/each}}
-       </select>
-		  <button class="btn btn-primary" type="submit">Setear Metodologia</button>
-		  
+      
 		  
        <label for="empresas">Empresas</label>
         <select name="empresa">
           <option value="null" selected="selected"></option>
-        {{#each this.empresas}}
+        {{#each this.periodos}}
         <option value="{{@key}}" {{#selected}} selected="selected"{{/selected}}> {{@key}} </option>
         {{/each}}
        </select>
@@ -72,6 +64,13 @@
       </form>
       
       <form action="/metodologias/evaluar" method="get">
+       <label for="indicador">Metodologia</label>
+       <select name="metodologia">
+         <option value="null" selected="selected"></option>
+        {{#each this.metodologias}}
+        <option value="{{nombre}}" {{#selected}} selected="selected"{{/selected}}> {{nombre}} </option>
+        {{/each}}
+       </select>
        <button class="btn btn-primary" type="submit">Evaluar</button>
        </form>
    </div>
