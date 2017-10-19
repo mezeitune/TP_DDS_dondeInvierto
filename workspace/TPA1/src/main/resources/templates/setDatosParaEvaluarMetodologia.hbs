@@ -4,14 +4,14 @@
 <div class= "row justify-content-center">
 
       <div class="col-4">
-        
+
         <h3 class="text-info text-center">Empresas a evaluar</h3>
         <table class="table table-striped">
           <thead class="table-inverse">
             <tr>
               <th>#</th>
               <th class="text-center">Nombre</th>
-            
+
             </tr>
           </thead>
           <tbody class="empresas_list">
@@ -19,26 +19,26 @@
           <tr>
             <th scope="row">{{@index}}</th>
             <th class="text-center">{{nombre}}</th>
-           
+
           </tr>
           {{/each}}
           </tbody>
         </table>
       </div>
    </div>
-   
+
 <div class="row justify-content-center"">
      <h1 class="text-info text-center">Seleccion</h1>
   </div>
   <div class="row justify-content-center"">
-  <div class="col-4"> 
-  
-   
+  <div class="col-4">
+
+
   	<form action="/metodologias/guardarDatosParaEvaluar" method="POST">
      <div class="form-group">
-     
-      
-		  
+
+
+
        <label for="empresas">Empresas</label>
         <select name="empresa">
           <option value="null" selected="selected"></option>
@@ -46,10 +46,10 @@
         <option value="{{@key}}" {{#selected}} selected="selected"{{/selected}}> {{@key}} </option>
         {{/each}}
        </select>
-  		<button class="btn btn-primary" type="submit">Setear Empresa</button>
-  		
-  		
-  		
+  		<!--<button class="btn btn-primary" type="submit">Setear Empresa</button>-->
+
+
+
         <label for="periodos">Periodo</label>
         <select name="periodo">
           <option value="null" selected="selected"></option>
@@ -59,10 +59,10 @@
           {{/each}}
         {{/each}}
        </select>
-         <button class="btn btn-primary" type="submit">Setear Periodo</button>
-        
+         <button class="btn btn-primary" type="submit">Setear Empresa</button>
+
       </form>
-      
+
       <form action="/metodologias/evaluar" method="get">
        <label for="indicador">Metodologia</label>
        <select name="metodologia">
@@ -74,8 +74,8 @@
        <button class="btn btn-primary" type="submit">Evaluar</button>
        </form>
    </div>
-    
+
   </div>
- 
+
 {{/partial}}
 {{>userspace.hbs}}
