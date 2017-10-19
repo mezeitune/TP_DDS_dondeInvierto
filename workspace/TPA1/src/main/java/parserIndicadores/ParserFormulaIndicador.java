@@ -2,11 +2,8 @@ package parserIndicadores;
 
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
 
 import org.apache.commons.lang.math.NumberUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.junit.experimental.theories.Theories;
 
 import excepciones.AccountNotFoundException;
 import model.Cuenta;
@@ -15,11 +12,9 @@ import model.Indicador;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
 
-import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.List;
 
-import utilities.JPAUtility;
 
 public class ParserFormulaIndicador {
 

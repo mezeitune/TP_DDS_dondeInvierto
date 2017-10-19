@@ -107,17 +107,17 @@ public class EmpresasMock {
 	}
 	
 	public List<Empresa> getEmpresasMockeadas(){
-		if(empresas.isEmpty()) {
-			mockearListaEmpresas();
-		}
+		if(empresas.isEmpty()) mockearListaEmpresas();
+	
 		return this.empresas;
 	}
 	
 	public List<Cuenta> getCuentasMockeadas(){
+		if(empresas.isEmpty()) mockearListaEmpresas();
 		List<Cuenta> cuentas = new ArrayList<>();
-		
 		this.empresas.stream().forEach(empresa -> cuentas.addAll(empresa.getCuentas()));
-		
 		return cuentas;
 	}
+
+	
 }
