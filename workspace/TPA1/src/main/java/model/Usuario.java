@@ -39,6 +39,10 @@ public class Usuario {
 		this.indicadores = indicadores;
 	}
 
+	public void addIndicador(Indicador indicadores) {
+		this.indicadores.add(indicadores);
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "usuario",nullable = true)
 	private List<Indicador> indicadores = new LinkedList<>(); 

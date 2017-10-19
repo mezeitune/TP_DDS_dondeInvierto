@@ -89,6 +89,28 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 		entityManager().getTransaction().commit();
 
 	}
+	
+	public void generarIndicadorParaUser(String nombreIndicador, String formulaIndicador,Usuario user) throws NombreIndicadorNotFound, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorNotFound {
+		
+		if(nombreIndicador == null) throw new NombreIndicadorNotFound();
+		if(formulaIndicador == null) throw new FormulaIndicadorNotFound();
+		
+		Indicador nuevoIndicador = new Indicador(nombreIndicador,formulaIndicador);
+		
+		if(this.esUnIndicadorYaIngresado(nuevoIndicador)) throw new DatoRepetidoException();
+		
+		if(!ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
+
+		
+		if (!entityManager().getTransaction().isActive()) {
+			entityManager().getTransaction().begin();
+		} 
+		
+		this.agregar(nuevoIndicador);
+		user.addIndicador(nuevoIndicador);
+		entityManager().getTransaction().commit();
+
+	}
 	public boolean esUnIndicadorYaIngresado (Indicador nuevoIndicador) {
 		IndicadoresRepository repositorioDeIndicadores = new IndicadoresRepository();
 

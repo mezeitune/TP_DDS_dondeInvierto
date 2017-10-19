@@ -11,6 +11,7 @@ import excepciones.FormulaIndicadorNotValidException;
 import excepciones.NombreIndicadorNotFound;
 import model.Empresa;
 import model.Indicador;
+import model.Usuario;
 import repositorios.EmpresasRepository;
 import repositorios.IndicadoresRepository;
 import repositorios.UsuariosRepository;
@@ -36,10 +37,11 @@ public class ControllerIndicadores {
 		
 		String nombreIndicador = request.queryParams("nombre");
 		String formulaIndicador = request.queryParams("formula");
-		
+		String us=request.session().attribute("usuario");
 	
+		Usuario user=repositorio_usuarios.obtenerUsuario(us);
 		try {
-			repositorio_indicadores.generarIndicador(nombreIndicador, formulaIndicador);
+			repositorio_indicadores.generarIndicadorParaUser(nombreIndicador, formulaIndicador,user);
 		} catch (NombreIndicadorNotFound | DatoRepetidoException | FormulaIndicadorNotValidException | FormulaIndicadorNotFound e) {
 			//TODO [Que hacer aca]
 		}
