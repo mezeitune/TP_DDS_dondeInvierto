@@ -1,21 +1,15 @@
 package mocks;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.uqbar.commons.utils.Observable;
 
 import model.Cuenta;
 import model.Empresa;
-@Observable
 public class EmpresasMock {
 	
-	List<Empresa> empresas = new ArrayList<>();
-	
-	
-	public EmpresasMock(){
-		this.mockearListaEmpresas();
-	}
+	List<Empresa> empresas = new LinkedList<Empresa>();
 	
 	public void mockearListaEmpresas(){
 		List<Cuenta> cuentasEmpresa1 = new ArrayList<>();
@@ -113,6 +107,9 @@ public class EmpresasMock {
 	}
 	
 	public List<Empresa> getEmpresasMockeadas(){
+		if(empresas.isEmpty()) {
+			mockearListaEmpresas();
+		}
 		return this.empresas;
 	}
 	
