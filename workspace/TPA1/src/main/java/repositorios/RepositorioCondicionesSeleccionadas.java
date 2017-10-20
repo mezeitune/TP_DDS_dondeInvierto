@@ -5,7 +5,7 @@ import java.util.List;
 
 import condiciones.Condicion;
 
-public class CondicionesSeleccionadasRepository {
+public class RepositorioCondicionesSeleccionadas {
 
 	public static List<Condicion> condicionesSeleccionadas = new LinkedList<>(); 
 	

@@ -14,11 +14,11 @@ import model.Empresa;
 import parserArchivos.CsvFile;
 import parserArchivos.ParserCsv;
 
-public class EmpresasRepository extends DBRelacionalRepository<Empresa> {
+public class RepositorioEmpresas extends RepositorioDBRelational<Empresa> {
 	
 	
 	
-	public EmpresasRepository() {
+	public RepositorioEmpresas() {
 	}
 	
 	public List<Empresa> getEmpresas(){

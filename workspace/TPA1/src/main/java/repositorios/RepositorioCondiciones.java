@@ -18,7 +18,7 @@ import condiciones.Taxativa;
 import condiciones.TipoCondicion;
 import condicionesPredefinidas.MargenesCrecientes;
 
-public class CondicionesRepository extends DBRelacionalRepository<Condicion>{
+public class RepositorioCondiciones extends RepositorioDBRelational<Condicion>{
 
 
 	public List<Condicion> getCondiciones() {

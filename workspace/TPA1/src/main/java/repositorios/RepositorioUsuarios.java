@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import model.Indicador;
 import model.Usuario;
 
-public class UsuariosRepository extends DBRelacionalRepository<Usuario> {
+public class RepositorioUsuarios extends RepositorioDBRelational<Usuario> {
 	
 	public List<Usuario> getUsuarios(){
 		List<Usuario> usuarios = new LinkedList<Usuario> ();

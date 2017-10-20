@@ -6,13 +6,13 @@ import spark.Request;
 import spark.Response;
 
 
-import repositorios.UsuariosRepository;
+import repositorios.RepositorioUsuarios;
 
 
 public class ControllerLogin {
 
 
-	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository();
+	private static RepositorioUsuarios repositorio_usuarios=new RepositorioUsuarios();
 	
 	public static ModelAndView home(Request request,Response response) {
 		return new ModelAndView(null, "home/home.hbs");

@@ -16,7 +16,7 @@ import model.Indicador;
 import model.Usuario;
 import parserIndicadores.ParserFormulaIndicador;
 
-public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
+public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 	
 	public List<Indicador> getIndicadores(){
 		List<Indicador> indicadores = new LinkedList<Indicador>();
@@ -75,7 +75,7 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 	}
 	
 	public boolean esIndicadorRepetido (Indicador nuevoIndicador) {
-		IndicadoresRepository repositorioDeIndicadores = new IndicadoresRepository();
+		RepositorioIndicadores repositorioDeIndicadores = new RepositorioIndicadores();
 
 		return repositorioDeIndicadores.validarIndicadorRepetidoAntesCargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
 	}

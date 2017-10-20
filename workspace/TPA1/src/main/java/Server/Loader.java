@@ -12,19 +12,19 @@ import model.Empresa;
 import model.Indicador;
 import model.Metodologia;
 import model.Usuario;
-import repositorios.DBRelacionalRepository;
-import repositorios.EmpresasRepository;
-import repositorios.IndicadoresRepository;
-import repositorios.MetodologiasRepository;
-import repositorios.UsuariosRepository;
+import repositorios.RepositorioDBRelational;
+import repositorios.RepositorioEmpresas;
+import repositorios.RepositorioIndicadores;
+import repositorios.RepositorioMetodologias;
+import repositorios.RepositorioUsuarios;
 
 public class Loader {
 
-	private static DBRelacionalRepository<EntityManager> repositorio_global = new DBRelacionalRepository<>();
-	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
-	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository();
-	private static MetodologiasRepository repositorio_metodologias = new MetodologiasRepository();
-	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository();
+	private static RepositorioDBRelational<EntityManager> repositorio_global = new RepositorioDBRelational<>();
+	private static RepositorioEmpresas repositorio_empresas=new RepositorioEmpresas();
+	private static RepositorioIndicadores repositorio_indicadores=new RepositorioIndicadores();
+	private static RepositorioMetodologias repositorio_metodologias = new RepositorioMetodologias();
+	private static RepositorioUsuarios repositorio_usuarios=new RepositorioUsuarios();
 	
 	public static void main(String[] args) {
 		init();

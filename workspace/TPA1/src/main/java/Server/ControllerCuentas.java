@@ -8,14 +8,14 @@ import java.util.stream.Collectors;
 
 import model.Cuenta;
 import model.Empresa;
-import repositorios.EmpresasRepository;
+import repositorios.RepositorioEmpresas;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
 public class ControllerCuentas {
 
-	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
+	private static RepositorioEmpresas repositorio_empresas=new RepositorioEmpresas();
 
 	
 	public static ModelAndView consultarEmpresas(Request request, Response response) {

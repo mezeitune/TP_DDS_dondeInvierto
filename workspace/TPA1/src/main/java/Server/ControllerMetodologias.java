@@ -11,16 +11,16 @@ import java.util.List;
 import java.util.Map;
 import model.Empresa;
 import model.Metodologia;
-import repositorios.EmpresasAEvaluarRepository;
-import repositorios.EmpresasRepository;
-import repositorios.MetodologiasRepository;
+import repositorios.RepositorioEmpresasAEvaluar;
+import repositorios.RepositorioEmpresas;
+import repositorios.RepositorioMetodologias;
 
 
 public class ControllerMetodologias {
 
-private static MetodologiasRepository repositorio_metodologias=new MetodologiasRepository();
-private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
-private static EmpresasAEvaluarRepository repositorio_empresas_evaluar=new EmpresasAEvaluarRepository();
+private static RepositorioMetodologias repositorio_metodologias=new RepositorioMetodologias();
+private static RepositorioEmpresas repositorio_empresas=new RepositorioEmpresas();
+private static RepositorioEmpresasAEvaluar repositorio_empresas_evaluar=new RepositorioEmpresasAEvaluar();
 static List<Metodologia> metodologias = new LinkedList<Metodologia>();
 static List<Empresa> empresas =  new LinkedList<Empresa>();
 
@@ -57,7 +57,7 @@ static List<Empresa> empresas =  new LinkedList<Empresa>();
 			
 			Metodologia metodologia = repositorio_metodologias.getMetodologia(nombreMetodologia);
 			
-			List<List<Empresa>> resultado = metodologia.evaluar(EmpresasAEvaluarRepository.getEmpresasAEvaluar(),EmpresasAEvaluarRepository.getPeriodosAEvaluar());
+			List<List<Empresa>> resultado = metodologia.evaluar(RepositorioEmpresasAEvaluar.getEmpresasAEvaluar(),RepositorioEmpresasAEvaluar.getPeriodosAEvaluar());
 			
 			empresasInvertibles = resultado.get(0);
 			empresasNoInvertibles = resultado.get(1);
@@ -102,13 +102,13 @@ static List<Empresa> empresas =  new LinkedList<Empresa>();
 		
 		
 		if(nombreEmpresa!=null){
-			EmpresasAEvaluarRepository.agregarEmpresaAEvaluar(repositorio_empresas.getEmpresa(nombreEmpresa));
+			RepositorioEmpresasAEvaluar.agregarEmpresaAEvaluar(repositorio_empresas.getEmpresa(nombreEmpresa));
 			empresas.add(repositorio_empresas.getEmpresa(nombreEmpresa));
 			System.out.println("sdlsdkdlskdlskdlskldk"+empresas.size());
 			
 		}
 		if( periodo!=null){
-			EmpresasAEvaluarRepository.agregarPeriodoAEvaluar(periodo);	
+			RepositorioEmpresasAEvaluar.agregarPeriodoAEvaluar(periodo);	
 			
 		}
 		diccionario.put("metodologias",metodologias);

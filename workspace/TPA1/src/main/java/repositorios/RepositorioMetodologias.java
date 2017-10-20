@@ -10,9 +10,9 @@ import javax.persistence.Query;
 import metodologiasPredefinidas.WarrenBuffet;
 import model.Metodologia;
 
-public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> {
+public class RepositorioMetodologias extends RepositorioDBRelational<Metodologia> {
 
-	private static CondicionesRepository repositorio_condiciones = new CondicionesRepository();
+	private static RepositorioCondiciones repositorio_condiciones = new RepositorioCondiciones();
 	
 	public  List<Metodologia> getMetodologias(){
 		List<Metodologia> metodologias = new LinkedList<Metodologia> ();

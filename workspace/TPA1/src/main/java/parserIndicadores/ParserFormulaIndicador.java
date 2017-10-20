@@ -9,8 +9,8 @@ import excepciones.AccountNotFoundException;
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
-import repositorios.EmpresasRepository;
-import repositorios.IndicadoresRepository;
+import repositorios.RepositorioEmpresas;
+import repositorios.RepositorioIndicadores;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,8 +26,8 @@ public class ParserFormulaIndicador {
 	private static List<Cuenta> cuentasPorPeriodo;
 	
 	
-	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository();
-	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
+	private static RepositorioIndicadores repositorio_indicadores=new RepositorioIndicadores();
+	private static RepositorioEmpresas repositorio_empresas=new RepositorioEmpresas();
 	
 	public static ParserFormulaIndicador getInstance() {
 		if(parserInstance == null) return new ParserFormulaIndicador();

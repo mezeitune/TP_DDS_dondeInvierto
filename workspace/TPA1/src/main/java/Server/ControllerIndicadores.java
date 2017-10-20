@@ -12,18 +12,18 @@ import excepciones.NombreIndicadorVacioError;
 import model.Empresa;
 import model.Indicador;
 import model.Usuario;
-import repositorios.EmpresasRepository;
-import repositorios.IndicadoresRepository;
-import repositorios.UsuariosRepository;
+import repositorios.RepositorioEmpresas;
+import repositorios.RepositorioIndicadores;
+import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
 public class ControllerIndicadores {
 	
-	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository();
-	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository();
-	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
+	private static RepositorioUsuarios repositorio_usuarios=new RepositorioUsuarios();
+	private static RepositorioIndicadores repositorio_indicadores=new RepositorioIndicadores();
+	private static RepositorioEmpresas repositorio_empresas=new RepositorioEmpresas();
 	
 	public static ModelAndView consultarIndicadores(Request request,Response response) {
 		List<Indicador> indicadores = new LinkedList<Indicador>();

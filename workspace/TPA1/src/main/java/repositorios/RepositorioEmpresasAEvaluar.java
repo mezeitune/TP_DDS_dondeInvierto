@@ -10,13 +10,13 @@ import javax.persistence.Query;
 import model.Empresa;
 import utilities.JPAUtility;
 
-public class EmpresasAEvaluarRepository extends DBRelacionalRepository<Empresa> {
+public class RepositorioEmpresasAEvaluar extends RepositorioDBRelational<Empresa> {
 	
 	public static List<Empresa> empresasAEvaluar = new ArrayList<>(); 
 	public static List<String> periodosAEvaluar = new LinkedList<>(); 
-	public EmpresasRepository repositorio_empresas = new EmpresasRepository();
+	public RepositorioEmpresas repositorio_empresas = new RepositorioEmpresas();
 	
-	public EmpresasAEvaluarRepository(){
+	public RepositorioEmpresasAEvaluar(){
 		
 		Query query = entityManager().createQuery("from Empresa");
 		
@@ -28,18 +28,18 @@ public class EmpresasAEvaluarRepository extends DBRelacionalRepository<Empresa> 
 	}
 
 	public static void agregarEmpresaAEvaluar(Empresa empresaAEvaluar) {
-			EmpresasAEvaluarRepository.empresasAEvaluar.add(empresaAEvaluar);
+			RepositorioEmpresasAEvaluar.empresasAEvaluar.add(empresaAEvaluar);
 	}
 	public static void vaciarListaDeEmpresasAEvaluar() {
-		EmpresasAEvaluarRepository.empresasAEvaluar.removeAll(empresasAEvaluar);
+		RepositorioEmpresasAEvaluar.empresasAEvaluar.removeAll(empresasAEvaluar);
 	}
 
 	public static void eliminarEmpresaAEvaluar(Empresa unaEmpresa) {
-		EmpresasAEvaluarRepository.empresasAEvaluar.remove(unaEmpresa);
+		RepositorioEmpresasAEvaluar.empresasAEvaluar.remove(unaEmpresa);
 		
 	}
 	public static void setPeriodosAEvaluar(){
-		EmpresasAEvaluarRepository.periodosAEvaluar.addAll(getPeriodosAEvaluar());
+		RepositorioEmpresasAEvaluar.periodosAEvaluar.addAll(getPeriodosAEvaluar());
 	}
 	
 	public static List<String> getPeriodosAEvaluar() {
@@ -47,14 +47,14 @@ public class EmpresasAEvaluarRepository extends DBRelacionalRepository<Empresa> 
 	}
 
 	public static void agregarPeriodoAEvaluar(String periodoAEvaluar) {
-		EmpresasAEvaluarRepository.periodosAEvaluar.add(periodoAEvaluar);
+		RepositorioEmpresasAEvaluar.periodosAEvaluar.add(periodoAEvaluar);
 	}
 	public static void vaciarListaDePeriodosAEvaluar() {
-		EmpresasAEvaluarRepository.periodosAEvaluar.removeAll(periodosAEvaluar);
+		RepositorioEmpresasAEvaluar.periodosAEvaluar.removeAll(periodosAEvaluar);
 	}
 
 	public static void eliminarPeriodoaAEvaluar(String unPeriodo) {
-		EmpresasAEvaluarRepository.periodosAEvaluar.remove(unPeriodo);
+		RepositorioEmpresasAEvaluar.periodosAEvaluar.remove(unPeriodo);
 	}
 
 	

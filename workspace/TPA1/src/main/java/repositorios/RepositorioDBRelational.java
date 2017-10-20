@@ -6,7 +6,7 @@ import javax.persistence.Query;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 
-public class DBRelacionalRepository<Entity> implements WithGlobalEntityManager {//Usamos Generics para cualquier tabla
+public class RepositorioDBRelational<Entity> implements WithGlobalEntityManager {//Usamos Generics para cualquier tabla
 	
 	@SuppressWarnings("hiding")
 	public <Entity> void agregar(Entity elemento){

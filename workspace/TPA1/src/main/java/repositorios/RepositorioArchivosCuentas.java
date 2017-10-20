@@ -5,7 +5,7 @@ import java.util.List;
 
 import parserArchivos.CsvFile;
 
-public class ArchivosCuentasRepository {
+public class RepositorioArchivosCuentas {
 
 	
 	public static List<CsvFile> archivos = new LinkedList<CsvFile>();
