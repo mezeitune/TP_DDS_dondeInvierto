@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -26,7 +25,7 @@ public class Indicador implements Comparable<Indicador> {
 	protected String formula;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name = "indicador_id")
+	//@JoinColumn(name = "indicador_id")
 	protected Usuario usuario;
 	
 

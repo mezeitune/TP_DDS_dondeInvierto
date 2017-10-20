@@ -3,6 +3,8 @@ package metodologiasPredefinidas;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import org.uqbar.commons.utils.Observable;
 
 import comparadores.ComparadorMayor;
@@ -15,7 +17,9 @@ import condiciones.TipoCondicion;
 import indicadoresPredefinidos.Antiguedad;
 import model.Indicador;
 import model.Metodologia;
+
 @Observable
+@Entity
 public class WarrenBuffet extends Metodologia{
 
 	

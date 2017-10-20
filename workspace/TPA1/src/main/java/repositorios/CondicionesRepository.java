@@ -4,10 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import com.google.gson.Gson;
 
 import comparadores.Comparador;
 import comparadores.ComparadorMayor;
@@ -20,18 +17,10 @@ import condiciones.Mixta;
 import condiciones.Taxativa;
 import condiciones.TipoCondicion;
 import condicionesPredefinidas.MargenesCrecientes;
-import model.Indicador;
-import model.Metodologia;
-import parserArchivos.ParserJsonAObjetosJava;
-import parserArchivos.ParserJsonString;
-import utilities.JPAUtility;
 
 public class CondicionesRepository extends DBRelacionalRepository<Condicion>{
 
 
-	private ParserJsonAObjetosJava parserCondiciones = new ParserJsonAObjetosJava("condiciones.json");
-
-	
 	public List<Condicion> getCondiciones() {
 		List<Condicion> condiciones = new LinkedList<Condicion>();
 		this.cargarCondiciones(condiciones);
@@ -44,6 +33,7 @@ public class CondicionesRepository extends DBRelacionalRepository<Condicion>{
 		return condicionesPredefinidas;
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<Condicion> getCondicionesDefinidasPorElUsuario() {
 		Query queryIndicadores = entityManager().createQuery("from Condicion"); 
 		return queryIndicadores.getResultList(); 
@@ -62,14 +52,9 @@ public class CondicionesRepository extends DBRelacionalRepository<Condicion>{
 		return tipoCondiciones;
 	}
 	public boolean validarCondicionRepetidoAntesCargar(String nombre) {
-		List<Condicion> condicionesRepetidos = this.getCondiciones().stream().filter(line -> line.getNombre().equals(nombre)).collect(Collectors.toList());
-		
-		if (condicionesRepetidos.size() >= 1){
-			return true;
-		} else {
-			return false;
-		}
+		return this.getCondiciones().stream().filter(line -> line.getNombre().equals(nombre)).collect(Collectors.toList()).size() >=1;
 	}
+	
 	public List<Comparador> getComparadores() {
 		List<Comparador> comparadores = new LinkedList<Comparador>();
 		comparadores.add(new ComparadorMayor());

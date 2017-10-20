@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -23,6 +25,7 @@ import condiciones.Condicion;
 
 @Observable
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="Metodologias")
 public class Metodologia {
 
@@ -37,9 +40,16 @@ public class Metodologia {
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name = "metodologia_id")
 	protected Usuario usuario;
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public Metodologia(){
 		
 	}

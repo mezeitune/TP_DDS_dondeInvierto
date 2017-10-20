@@ -4,22 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.google.gson.Gson;
 
 import metodologiasPredefinidas.WarrenBuffet;
-import model.Indicador;
 import model.Metodologia;
-import parserArchivos.ParserJsonAObjetosJava;
-import parserArchivos.ParserJsonString;
-import utilities.JPAUtility;
 
 public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> {
 
-	private ParserJsonAObjetosJava parserMetodologias= new ParserJsonAObjetosJava("metodologias.json");
-	
+	private static CondicionesRepository repositorio_condiciones = new CondicionesRepository();
 	
 	public  List<Metodologia> getMetodologias(){
 		List<Metodologia> metodologias = new LinkedList<Metodologia> ();
@@ -27,6 +20,7 @@ public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> 
 		return metodologias;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Metodologia> getMetodologiasDefinidasPorElUsuario(){
 		Query queryIndicadores = entityManager().createQuery("from Metodologia");
 		return queryIndicadores.getResultList(); 
@@ -44,12 +38,8 @@ public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> 
 		return metodologiasPredefinidas;
 	}
 
-		public Metodologia getMetodologia(String nombreMet){
-		
-		List<Metodologia> metodologias = this.getMetodologias().stream().filter(unInd -> unInd.getNombre().equals(nombreMet)).collect(Collectors.toList());
-		return metodologias.get(0);
-		
-		
+	public Metodologia getMetodologia(String nombreMet){
+		return this.getMetodologias().stream().filter(unInd -> unInd.getNombre().equals(nombreMet)).collect(Collectors.toList()).get(0);
 	}
 	
 
@@ -57,6 +47,13 @@ public class MetodologiasRepository extends DBRelacionalRepository<Metodologia> 
 	public boolean esMetodologiaRepetida(String nombreMetodologia) {
 		return this.getMetodologias().stream().map(metodologia -> metodologia.getNombre()).collect(Collectors.toList()).contains(nombreMetodologia);
 	}
+
+	public void agregar(Metodologia metodologia)
+	{
+		metodologia.getCondiciones().stream().forEach(condicion -> repositorio_condiciones.agregar(condicion));
+		entityManager().persist(metodologia);
+	}
+	
 
 
 }
