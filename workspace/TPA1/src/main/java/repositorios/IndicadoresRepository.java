@@ -107,7 +107,7 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 	@SuppressWarnings("unchecked")
 	public List<Indicador> getIndicadoresPorUsuario(String username) {
 		Query queryUsuarios = entityManager().createQuery("from Indicador where usuario_username like :username");
-		queryUsuarios.setParameter("username", "'" + username + "'");
+		queryUsuarios.setParameter("username",username);
 		return queryUsuarios.getResultList();
 	}
 	
