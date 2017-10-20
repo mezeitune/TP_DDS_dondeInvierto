@@ -17,11 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.uqbar.commons.utils.Observable;
 
 import condiciones.Condicion;
 
-@Observable
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="Metodologias")

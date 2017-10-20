@@ -7,11 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import org.uqbar.commons.utils.Observable;
-
 import model.Empresa;
 
-@Observable
 public class Mixta extends TipoCondicion{
 
 	private static Mixta instance ;

@@ -5,12 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-import org.uqbar.commons.utils.Observable;
-
 import comparadores.Comparador;
 import model.Empresa;
 import model.Indicador;
-@Observable
 
 public class Comparativa extends TipoCondicion{
 	

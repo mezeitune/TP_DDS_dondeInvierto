@@ -3,14 +3,10 @@ package condiciones;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-import org.uqbar.commons.utils.Observable;
-
 import comparadores.Comparador;
 import model.Empresa;
 import model.Indicador;
 
-@Observable
 public class Taxativa extends TipoCondicion {
 	
 	private static Taxativa instance ;

@@ -1,18 +1,9 @@
 package comparadores;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 
-import org.uqbar.commons.utils.Observable;
 
-@Observable
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name="Comparadores")
 public class Comparador { //Si senor, otra clase abstracta para la persistencia en Json
 	@Id @GeneratedValue
 	private Long id;

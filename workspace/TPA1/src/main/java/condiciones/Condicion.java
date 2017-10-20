@@ -14,11 +14,9 @@ import javax.persistence.Transient;
 
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
-import org.uqbar.commons.utils.Observable;
 
 import model.Empresa;
 import model.Indicador;
-@Observable
 @Entity
 @Table(name="Condiciones")
 public class Condicion {

@@ -3,9 +3,6 @@ package model;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.uqbar.commons.utils.Observable;
-
-@Observable
 @Entity
 @Table(name="Cuentas")
 public class Cuenta extends PersistentObject{

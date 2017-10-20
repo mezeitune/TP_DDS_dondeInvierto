@@ -7,12 +7,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.uqbar.commons.utils.Observable;
 import excepciones.AccountNotFoundException;
 import parserIndicadores.Operacion;
 import parserIndicadores.ParserFormulaIndicador;
 
-@Observable
 @Entity
 @Table(name="Indicadores")
 public class Indicador extends PersistentObject implements Comparable<Indicador>{

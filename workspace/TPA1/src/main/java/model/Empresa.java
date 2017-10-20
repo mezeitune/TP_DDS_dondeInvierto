@@ -13,10 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.uqbar.commons.utils.Observable;
 
 
-@Observable
 @Entity
 @Table(name="Empresas")
 public class Empresa {
