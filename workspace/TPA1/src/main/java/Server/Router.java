@@ -20,10 +20,10 @@ public class Router {
 		    	   
 		    });
 			
-		    Spark.get("/", Controller::home,engine);
+		    Spark.get("/", ControllerLogin::home,engine);
 			
-			Spark.post("login/entry", Controller::crearSessionDeLogin,engine);
-			Spark.get("login/clear", Controller::eliminarSessionDeLogin,engine);
+			Spark.post("login/entry", ControllerLogin::crearSessionDeLogin,engine);
+			Spark.get("login/clear", ControllerLogin::eliminarSessionDeLogin,engine);
 			
 
 			Spark.get("empresas", ControllerCuentas::consultarEmpresas,engine);

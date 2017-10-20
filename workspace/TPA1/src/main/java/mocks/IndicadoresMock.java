@@ -9,10 +9,9 @@ public class IndicadoresMock {
 	private List<Indicador> indicadores = new LinkedList<Indicador>();
 	
 	public IndicadoresMock() {
-		this.setIndicadoresMockeados();
 	}
 	
-	public void setIndicadoresMockeados(){
+	public void cargarIndicadores(){
 		this.indicadores.add(new Indicador("IndicadorConSumas","1+1"));
 		this.indicadores.add(new Indicador("IndicadorConRestas","3-1"));
 		this.indicadores.add(new Indicador("IndicadorConMultiplicacion","2*1"));
@@ -24,6 +23,7 @@ public class IndicadoresMock {
 	
 	
 	public List<Indicador> getIndicadoresMockeados() {
+		if(this.indicadores.isEmpty()) cargarIndicadores();
 		return this.indicadores;
 	}
 	

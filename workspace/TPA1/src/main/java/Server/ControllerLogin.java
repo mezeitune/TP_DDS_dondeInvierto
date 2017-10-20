@@ -18,7 +18,7 @@ import repositorios.MetodologiasRepository;
 import repositorios.UsuariosRepository;
 
 
-public class Controller {
+public class ControllerLogin {
 
 
 	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository();

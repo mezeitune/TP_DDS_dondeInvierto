@@ -2,14 +2,23 @@ package Server;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import mocks.EmpresasMock;
+import mocks.IndicadoresMock;
 import model.Empresa;
+import model.Indicador;
+import model.Usuario;
+import repositorios.DBRelacionalRepository;
 import repositorios.EmpresasRepository;
+import repositorios.IndicadoresRepository;
 import repositorios.UsuariosRepository;
 
 public class Loader {
 
+	private static DBRelacionalRepository<EntityManager> repositorio_global = new DBRelacionalRepository<>();
 	private static EmpresasRepository repositorio_empresas=new EmpresasRepository();
+	private static IndicadoresRepository repositorio_indicadores=new IndicadoresRepository();
 	private static UsuariosRepository repositorio_usuarios=new UsuariosRepository();
 	
 	public static void main(String[] args) {
@@ -18,20 +27,18 @@ public class Loader {
 	
 	public static void init(){
 		List<Empresa> empresas = new EmpresasMock().getEmpresasMockeadas();
-		//List<Indicador> indicadores = new IndicadoresMock().getIndicadoresMockeados();
+		List<Indicador> indicadores_root = new IndicadoresMock().getIndicadoresMockeados();
+		Usuario root = new Usuario("root","root");
 		
-	//	Usuario root = new Usuario("root","root");
+		indicadores_root.stream().forEach(indicador -> indicador.setUsuario(root));
 		
-		//root.setIndicadores(indicadores);
+		repositorio_global.begin();
+		empresas.stream().forEach(empresa -> repositorio_empresas.agregar(empresa));
+		indicadores_root.stream().forEach(indicador -> repositorio_indicadores.agregar(indicador));
 		
-		//List<Usuario> usuarios = new LinkedList<Usuario>();
-		
-		//usuarios.add(root);
-		
-		repositorio_empresas.begin();
-		empresas.forEach(empresa -> repositorio_empresas.agregar(empresa));
 		//usuarios.forEach(usuario -> repositorio_usuarios.agregar(usuario));
-		repositorio_empresas.commit();
+		
+		repositorio_global.commit();
 	}
 	
 	

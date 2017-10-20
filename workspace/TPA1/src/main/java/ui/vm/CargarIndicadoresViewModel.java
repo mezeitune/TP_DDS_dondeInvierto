@@ -11,10 +11,10 @@ import javax.persistence.Query;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import excepciones.FormulaIndicadorNotFound;
+import excepciones.FormulaIndicadorVacioError;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.DatoRepetidoException;
-import excepciones.NombreIndicadorNotFound;
+import excepciones.NombreIndicadorVacioError;
 import model.Indicador;
 import model.Metodologia;
 import parserArchivos.ParserJsonAObjetosJava;
@@ -80,10 +80,10 @@ public class CargarIndicadoresViewModel {
 	}
 	
 	//@SuppressWarnings("unchecked")
-	public void generarIndicador() throws NombreIndicadorNotFound, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorNotFound {
+	public void generarIndicador() throws NombreIndicadorVacioError, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorVacioError {
 		
-		if(nombreIndicador == null) throw new NombreIndicadorNotFound();
-		if(formulaIndicador == null) throw new FormulaIndicadorNotFound();
+		if(nombreIndicador == null) throw new NombreIndicadorVacioError();
+		if(formulaIndicador == null) throw new FormulaIndicadorVacioError();
 		
 		Indicador nuevoIndicador = new Indicador(nombreIndicador,formulaIndicador);
 		
@@ -91,7 +91,7 @@ public class CargarIndicadoresViewModel {
 		
 		System.out.println("Formula " + formulaIndicador);
 		
-		if(!ParserFormulaIndicador.formulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
+		if(!ParserFormulaIndicador.esFormulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
 		
 		if (!entityManager.getTransaction().isActive()) {

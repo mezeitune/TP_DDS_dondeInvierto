@@ -14,10 +14,10 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import excepciones.FormulaIndicadorNotFound;
+import excepciones.FormulaIndicadorVacioError;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.DatoRepetidoException;
-import excepciones.NombreIndicadorNotFound;
+import excepciones.NombreIndicadorVacioError;
 import model.Indicador;
 import model.Metodologia;
 import ui.vm.CargarIndicadoresViewModel;
@@ -89,9 +89,9 @@ public class CargarIndicadoresWindow extends Dialog<CargarIndicadoresViewModel> 
 											this.getModelObject().generarIndicador();
 											this.getDelegate().close();
 											PreguntaNuevoIndicadorWindow();
-										} catch (NombreIndicadorNotFound e) {
+										} catch (NombreIndicadorVacioError e) {
 											this.showError("No se ha ingresado un nombre para el indicador");
-										} catch (FormulaIndicadorNotFound e) {
+										} catch (FormulaIndicadorVacioError e) {
 											this.showError("No se ha ingresado la formula del indicador");
 										} catch (DatoRepetidoException e) {
 											this.showError("El nombre ingresado ya existe");

@@ -8,10 +8,10 @@ import javax.persistence.EntityManager;
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 
-import excepciones.FormulaIndicadorNotFound;
+import excepciones.FormulaIndicadorVacioError;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.DatoRepetidoException;
-import excepciones.NombreIndicadorNotFound;
+import excepciones.NombreIndicadorVacioError;
 import model.Indicador;
 import parserIndicadores.ParserFormulaIndicador;
 import repositorios.DBRelacionalRepository;

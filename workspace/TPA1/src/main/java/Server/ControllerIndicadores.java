@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import excepciones.DatoRepetidoException;
-import excepciones.FormulaIndicadorNotFound;
+import excepciones.FormulaIndicadorVacioError;
 import excepciones.FormulaIndicadorNotValidException;
-import excepciones.NombreIndicadorNotFound;
+import excepciones.NombreIndicadorVacioError;
 import model.Empresa;
 import model.Indicador;
 import model.Usuario;
@@ -42,7 +42,7 @@ public class ControllerIndicadores {
 		Usuario user=repositorio_usuarios.obtenerUsuario(us);
 		try {
 			repositorio_indicadores.generarIndicadorParaUser(nombreIndicador, formulaIndicador,user);
-		} catch (NombreIndicadorNotFound | DatoRepetidoException | FormulaIndicadorNotValidException | FormulaIndicadorNotFound e) {
+		} catch (NombreIndicadorVacioError | DatoRepetidoException | FormulaIndicadorNotValidException | FormulaIndicadorVacioError e) {
 			//TODO [Que hacer aca]
 		}
 		

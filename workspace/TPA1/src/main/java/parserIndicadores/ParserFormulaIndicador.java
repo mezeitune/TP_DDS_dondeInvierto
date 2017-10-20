@@ -144,7 +144,7 @@ public class ParserFormulaIndicador {
 		}
 	}
  	
-	public static  boolean formulaIndicadorValida(String formula){  /*TODO: No estaria funcionando*/
+	public static  boolean esFormulaIndicadorValida(String formula){  /*TODO: No estaria funcionando*/
 		indicadores = repositorio_indicadores.getIndicadoresDefinidosPorElUsuario();
 		
 		String[] result = formula.split("[-+*/]");

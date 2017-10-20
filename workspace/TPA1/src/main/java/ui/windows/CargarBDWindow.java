@@ -14,10 +14,10 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-import excepciones.FormulaIndicadorNotFound;
+import excepciones.FormulaIndicadorVacioError;
 import excepciones.FormulaIndicadorNotValidException;
 import excepciones.DatoRepetidoException;
-import excepciones.NombreIndicadorNotFound;
+import excepciones.NombreIndicadorVacioError;
 import model.Indicador;
 import ui.vm.CargarBDViewModel;
 import ui.vm.CargarIndicadoresViewModel;

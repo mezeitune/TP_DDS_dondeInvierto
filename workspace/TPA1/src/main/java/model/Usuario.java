@@ -18,34 +18,6 @@ public class Usuario {
 	private String username;
 	private String password;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "usuario",nullable = true)
-	private List<Metodologia> metodologias = new LinkedList<>(); 
-	
-	
-	public List<Metodologia> getMetodologias() {
-		return metodologias;
-	}
-
-	public void setMetodologias(List<Metodologia> metodologias) {
-		this.metodologias = metodologias;
-	}
-
-	public List<Indicador> getIndicadores() {
-		return indicadores;
-	}
-
-	public void setIndicadores(List<Indicador> indicadores) {
-		this.indicadores = indicadores;
-	}
-
-	public void addIndicador(Indicador indicadores) {
-		this.indicadores.add(indicadores);
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "usuario",nullable = true)
-	private List<Indicador> indicadores = new LinkedList<>(); 
 	
 	public Usuario(){
 		

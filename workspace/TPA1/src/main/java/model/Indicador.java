@@ -1,16 +1,12 @@
 package model;
 
-
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,9 +21,22 @@ import parserIndicadores.ParserFormulaIndicador;
 public class Indicador implements Comparable<Indicador> {
 	@Id @GeneratedValue
 	private Long id;
+	
 	protected String nombre;
 	protected String formula;
 	
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "indicador_id")
+	protected Usuario usuario;
+	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	@Transient
 	protected Operacion raiz;
@@ -36,6 +45,12 @@ public class Indicador implements Comparable<Indicador> {
 	public Indicador(String nombre,String formula){
 		this.nombre=nombre;
 		this.formula=formula;
+	}
+	
+	public Indicador(String nombre,String formula,Usuario usuario){
+		this.nombre=nombre;
+		this.formula=formula;
+		this.usuario = usuario;
 	}
 	
 	public Indicador(){
