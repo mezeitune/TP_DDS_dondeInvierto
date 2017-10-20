@@ -14,19 +14,6 @@
     	<class>model.Cuenta</class>
     	<class>model.Usuario</class>
     	<class>condiciones.Condicion</class>
-    	<class>condiciones.TipoCondicion</class>
-    	<class>condiciones.Comparativa</class>
-    	<class>condiciones.Taxativa</class>
-    	<class>condiciones.Mixta</class>
-    	<class>comparadores.Comparador</class>
-    	<class>comparadores.ComparadorMayor</class>
-    	<class>comparadores.ComparadorMayorIgual</class>
-    	<class>comparadores.ComparadorMenor</class>
-    	<class>comparadores.ComparadorMenorIgual</class>
-    
-
-
-    	
 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
