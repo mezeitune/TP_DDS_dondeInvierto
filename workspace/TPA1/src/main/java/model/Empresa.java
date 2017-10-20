@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -22,8 +21,7 @@ import org.uqbar.commons.utils.Observable;
 @Table(name="Empresas")
 public class Empresa {
 
-	@Id @GeneratedValue
-	private Long id;
+	@Id
 	private String nombre;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

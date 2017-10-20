@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.Query;
 
 import model.Cuenta;
 import model.Empresa;
@@ -22,12 +21,8 @@ public class EmpresasRepository extends DBRelacionalRepository<Empresa> {
 	public EmpresasRepository() {
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Empresa> getEmpresas(){
-		
-		Query query = entityManager().createQuery("from Empresa", Empresa.class);
-		List<Empresa> empresas = query.getResultList();
-		return empresas;
+		return entityManager().createQuery("from Empresa", Empresa.class).getResultList();
 	}
 	
 	public static void concatenarEmpresas(CsvFile archivoCuentas,List<Empresa> empresas) {

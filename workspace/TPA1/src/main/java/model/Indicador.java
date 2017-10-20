@@ -3,8 +3,6 @@ package model;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -17,9 +15,7 @@ import parserIndicadores.ParserFormulaIndicador;
 @Observable
 @Entity
 @Table(name="Indicadores")
-public class Indicador implements Comparable<Indicador> {
-	@Id @GeneratedValue
-	private Long id;
+public class Indicador extends PersistentObject implements Comparable<Indicador>{
 	
 	protected String nombre;
 	protected String formula;
@@ -116,10 +112,6 @@ public class Indicador implements Comparable<Indicador> {
 		return raiz.calcular();
 	}
 	
-	public String toString (){
-        String mensaje="El indicador"+id+" es "+nombre+" con la formula: "+formula;
-        return mensaje;
-    }
 
 
 	

@@ -3,7 +3,6 @@ package condiciones;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.Entity;
 
 import org.uqbar.commons.utils.Observable;
 

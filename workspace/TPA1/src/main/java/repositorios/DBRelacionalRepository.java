@@ -24,6 +24,7 @@ public class DBRelacionalRepository<Entity> implements WithGlobalEntityManager {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List <Entity> traerTodosLosCamposDeUnaTabla (Class<Entity> typeParameterClass ){
 	
 		Query query = entityManager().createQuery("from "+ typeParameterClass); 

@@ -9,19 +9,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
-import excepciones.EmpresasIsEmptyException;
-import excepciones.MetodologiaNotFoundException;
-import excepciones.PeriodosIsEmptyException;
 import model.Empresa;
-import model.Indicador;
 import model.Metodologia;
 import repositorios.EmpresasAEvaluarRepository;
 import repositorios.EmpresasRepository;
 import repositorios.MetodologiasRepository;
 
-import repositorios.UsuariosRepository;
 
 public class ControllerMetodologias {
 
