@@ -53,28 +53,7 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 	}
 
 
-	public void generarIndicador(String nombreIndicador, String formulaIndicador) throws NombreIndicadorVacioError, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorVacioError {
-		
-		if(nombreIndicador == null) throw new NombreIndicadorVacioError();
-		if(formulaIndicador == null) throw new FormulaIndicadorVacioError();
-		
-		Indicador nuevoIndicador = new Indicador(nombreIndicador,formulaIndicador);
-		
-		if(this.esIndicadorRepetido(nuevoIndicador)) throw new DatoRepetidoException();
-		
-		if(!ParserFormulaIndicador.esFormulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
-
-		
-		if (!entityManager().getTransaction().isActive()) {
-			entityManager().getTransaction().begin();
-		} 
-		
-		this.agregar(nuevoIndicador);
-		entityManager().getTransaction().commit();
-
-	}
-	
-	public void generarIndicadorParaUser(String nombreIndicador, String formulaIndicador,Usuario user) throws NombreIndicadorVacioError, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorVacioError {
+	public void generarIndicador(String nombreIndicador, String formulaIndicador,Usuario user) throws NombreIndicadorVacioError, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorVacioError {
 		
 		if(nombreIndicador == null) throw new NombreIndicadorVacioError();
 		if(formulaIndicador == null) throw new FormulaIndicadorVacioError();
@@ -101,7 +80,7 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 		return repositorioDeIndicadores.validarIndicadorRepetidoAntesCargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
 	}
 
-	public void eliminarIndicadorDeLaBDD(String nombreIndicador){
+	public void eliminarIndicador(String nombreIndicador){
 		
 		List<Indicador> indicadorAEliminar =this.getIndicadores().stream().filter(unInd -> unInd.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
 		
@@ -122,6 +101,14 @@ public class IndicadoresRepository extends DBRelacionalRepository<Indicador> {
 		return indicador.get(0);
 		
 		
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public List<Indicador> getIndicadoresPorUsuario(String username) {
+		Query queryUsuarios = entityManager().createQuery("from Indicador where usuario_username like :username");
+		queryUsuarios.setParameter("username", "'" + username + "'");
+		return queryUsuarios.getResultList();
 	}
 	
 	

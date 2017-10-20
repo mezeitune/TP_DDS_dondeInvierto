@@ -1,5 +1,4 @@
 package repositorios;
-import utilities.JPAUtility;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import model.Cuenta;
@@ -23,15 +21,12 @@ public class EmpresasRepository extends DBRelacionalRepository<Empresa> {
 	
 	public EmpresasRepository() {
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	public List<Empresa> getEmpresas(){
 		
-		Query query = entityManager().createQuery("from Empresa");
-		
-		List<Empresa> empresas = new LinkedList<Empresa>();
-		//ArchivosCuentasRepository.getArchivosCuentas().forEach(file -> EmpresasRepository.concatenarEmpresas(file,empresas));
-		empresas = query.getResultList();
-		
+		Query query = entityManager().createQuery("from Empresa", Empresa.class);
+		List<Empresa> empresas = query.getResultList();
 		return empresas;
 	}
 	

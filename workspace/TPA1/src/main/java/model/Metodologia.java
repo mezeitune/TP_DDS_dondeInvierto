@@ -28,11 +28,11 @@ import condiciones.Condicion;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="Metodologias")
 public class Metodologia {
-
 	@Id @GeneratedValue
 	private Long id;
 	@Transient
 	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
+	
 	private String nombre;
 	
 	@ManyToMany(cascade=CascadeType.DETACH)  
@@ -42,6 +42,10 @@ public class Metodologia {
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	protected Usuario usuario;
 	
+	public Metodologia(){
+		
+	}
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -50,9 +54,7 @@ public class Metodologia {
 		this.usuario = usuario;
 	}
 
-	public Metodologia(){
-		
-	}
+	
 	
 	public String getNombre() {
 		return nombre;

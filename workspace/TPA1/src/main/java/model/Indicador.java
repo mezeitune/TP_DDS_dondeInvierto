@@ -40,6 +40,10 @@ public class Indicador implements Comparable<Indicador> {
 	@Transient
 	protected Operacion raiz;
 	
+
+	public Indicador(){
+		
+	}
 	
 	public Indicador(String nombre,String formula){
 		this.nombre=nombre;
@@ -52,9 +56,6 @@ public class Indicador implements Comparable<Indicador> {
 		this.usuario = usuario;
 	}
 	
-	public Indicador(){
-		
-	}
 	
 	
 	public String getFormula() {

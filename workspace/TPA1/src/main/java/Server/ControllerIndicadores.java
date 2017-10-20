@@ -27,7 +27,7 @@ public class ControllerIndicadores {
 	
 	public static ModelAndView consultarIndicadores(Request request,Response response) {
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = repositorio_usuarios.getIndicadoresPorUsuario(request.session().attribute("usuario"));
+		indicadores = repositorio_indicadores.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		
 		return new ModelAndView(indicadores,"indicadores.hbs");
 	}
@@ -37,18 +37,18 @@ public class ControllerIndicadores {
 		
 		String nombreIndicador = request.queryParams("nombre");
 		String formulaIndicador = request.queryParams("formula");
-		String us=request.session().attribute("usuario");
+		String username=request.session().attribute("usuario");
 	
-		Usuario user=repositorio_usuarios.obtenerUsuario(us);
+		Usuario user=repositorio_usuarios.obtenerUsuario(username);
 		try {
-			repositorio_indicadores.generarIndicadorParaUser(nombreIndicador, formulaIndicador,user);
+			repositorio_indicadores.generarIndicador(nombreIndicador, formulaIndicador,user);
 		} catch (NombreIndicadorVacioError | DatoRepetidoException | FormulaIndicadorNotValidException | FormulaIndicadorVacioError e) {
-			//TODO [Que hacer aca]
+			//TODO Subir las excepeciones a UI.
 		}
 		
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = repositorio_usuarios.getIndicadoresPorUsuario(request.session().attribute("usuario"));
+		indicadores = repositorio_indicadores.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		
 		return new ModelAndView(indicadores,"agregarIndicador.hbs");
 	}
@@ -56,10 +56,10 @@ public class ControllerIndicadores {
 	public static ModelAndView eliminarIndicador(Request request,Response response) {
 		String nombreIndicador = request.queryParams("nombre");
 	
-		if(nombreIndicador != null)	repositorio_indicadores.eliminarIndicadorDeLaBDD(nombreIndicador);
+		if(nombreIndicador != null)	repositorio_indicadores.eliminarIndicador(nombreIndicador);
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = repositorio_usuarios.getIndicadoresPorUsuario(request.session().attribute("usuario"));
+		indicadores = repositorio_indicadores.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		
 		return new ModelAndView(indicadores,"eliminarIndicador.hbs");
 	}
@@ -68,7 +68,7 @@ public class ControllerIndicadores {
 	public static ModelAndView evaluarIndicador(Request request,Response response) {
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		indicadores = repositorio_usuarios.getIndicadoresPorUsuario(request.session().attribute("usuario"));
+		indicadores = repositorio_indicadores.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		
 		Map<String, Object> diccionario = new HashMap<String, Object>();
 		Map<String, Object> diccionarioPeriodos = repositorio_empresas.getHashMapPeriodos();

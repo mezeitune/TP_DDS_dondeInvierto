@@ -30,7 +30,9 @@ public class Empresa {
 	@JoinColumn(name = "empresa_id",nullable = false)//el nullable es para poder eliminar deshabilitando las FK
 	private List<Cuenta> cuentas = new LinkedList<>(); 
 	
-	
+	public Empresa(){
+		
+	}
 	
 	public Empresa(String nombreEmpresa,List<Cuenta> cuentas){
 		this.nombre = nombreEmpresa;
@@ -45,9 +47,7 @@ public class Empresa {
 		return Integer.toString(this.getCuentas().size());
 	}
 	
-	public Empresa(){
-		
-	}
+	
 
 	
 	public String getNombre() {
