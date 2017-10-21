@@ -35,9 +35,9 @@ public class Router {
 			Spark.get("empresas/cuentas", ControllerCuentas::mostrarCuentas,engine);
 			
 			Spark.get("indicadores", ControllerIndicadores::consultarIndicadores,engine);
-			Spark.get("indicadores/agregar", ControllerIndicadores::agregarIndicador,engine);
-			Spark.get("indicadores/eliminar", ControllerIndicadores::eliminarIndicador,engine);
-			Spark.get("indicadores/evaluar", ControllerIndicadores::evaluarIndicador,engine);
+			Spark.post("indicadores/add", ControllerIndicadores::agregarIndicador,engine);
+			Spark.post("indicadores/delete", ControllerIndicadores::eliminarIndicador,engine);
+			Spark.get("indicadores/eval", ControllerIndicadores::evaluarIndicador,engine);
 			
 						
 			Spark.get("metodologias",ControllerMetodologias::consultarMetodologias,engine);

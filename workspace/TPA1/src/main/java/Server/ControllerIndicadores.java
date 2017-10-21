@@ -39,9 +39,13 @@ public class ControllerIndicadores {
 		String formulaIndicador = request.queryParams("formula");
 		String username=request.session().attribute("usuario");
 	
+		
 		Usuario user=repositorio_usuarios.obtenerUsuario(username);
+		
+		Indicador indicador = new Indicador(nombreIndicador,formulaIndicador,user);
+		
 		try {
-			repositorio_indicadores.generarIndicador(nombreIndicador, formulaIndicador,user);
+			repositorio_indicadores.generarIndicador(indicador/*nombreIndicador, formulaIndicador,user*/);
 		} catch (NombreIndicadorVacioError | DatoRepetidoException | FormulaIndicadorNotValidException | FormulaIndicadorVacioError e) {
 			//TODO Subir las excepeciones a UI.
 		}
