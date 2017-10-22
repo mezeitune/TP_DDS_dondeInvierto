@@ -76,6 +76,7 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		
 		this.agregar(nuevoIndicador);
 		entityManager().getTransaction().commit();
+		
 
 	}
 	
@@ -85,9 +86,9 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		return repositorioDeIndicadores.validarIndicadorRepetidoAntesCargar(nuevoIndicador.getNombre(),nuevoIndicador.getFormula());
 	}
 
-	public void eliminarIndicador(String nombreIndicador){
+	public void eliminarIndicador(String nombreIndicador, Usuario user){
 		
-		List<Indicador> indicadorAEliminar =this.getIndicadores().stream().filter(unInd -> unInd.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
+		List<Indicador> indicadorAEliminar = this.getIndicadoresPorUsuario(user.getUsername()).stream().filter(indic -> indic.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
 		
 				
 		if (!entityManager().getTransaction().isActive()) {
@@ -100,9 +101,9 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 	}
 	
 	
-	public Indicador getIndicador(String nombreIndicador){
+	public Indicador getIndicador(String nombreIndicador,String user){
 		
-		List<Indicador> indicador = this.getIndicadores().stream().filter(unInd -> unInd.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
+		List<Indicador> indicador = this.getIndicadoresPorUsuario(user).stream().filter(unInd -> unInd.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
 		return indicador.get(0);
 		
 		
@@ -111,9 +112,14 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 
 	@SuppressWarnings("unchecked")
 	public List<Indicador> getIndicadoresPorUsuario(String username) {
-		Query queryUsuarios = entityManager().createQuery("from Indicador where usuario_username like :username");
+
+		
+		Query queryUsuarios = entityManager().createQuery("from Indicador where usuario_username = :username");
 		queryUsuarios.setParameter("username",username);
-		return queryUsuarios.getResultList();
+		
+		List<Indicador> indicadores = queryUsuarios.getResultList();
+
+		return indicadores;
 	}
 	
 	

@@ -10,7 +10,7 @@ public class EntityManagerFilter {
 	RepositorioDBRelational<EntityManager> repositorio_global = new RepositorioDBRelational<>();
 
 	public void restart(Request req, Response res) {
-		repositorio_global.entityManager().clear();
+		repositorio_global.entityManager().close();
 	}
 
 	
