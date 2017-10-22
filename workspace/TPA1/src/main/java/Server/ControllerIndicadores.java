@@ -39,26 +39,30 @@ public class ControllerIndicadores {
 		String formulaIndicador = request.queryParams("formula");
 		String username=request.session().attribute("usuario");
 	
-		
+		List<Indicador> indicadores = new LinkedList<Indicador>();
 		Usuario user=repositorio_usuarios.obtenerUsuario(username);
 		
 		Indicador indicador = new Indicador(nombreIndicador,formulaIndicador,user);
 		
+		Map<String, Object> diccionario = new HashMap<String, Object>();
+		
+
 		try {
 			repositorio_indicadores.generarIndicador(indicador/*nombreIndicador, formulaIndicador,user*/);
-		} catch (NombreIndicadorVacioError | DatoRepetidoException | FormulaIndicadorNotValidException | FormulaIndicadorVacioError e) {
-			//TODO Subir las excepeciones a UI.
-		}
+		} catch (NombreIndicadorVacioError  e) {diccionario.put("error","Nombre invalido, debe ingresar uno");}
+		catch (DatoRepetidoException e) {diccionario.put("error","Nombre de indicador ya existente");
+		} catch (FormulaIndicadorNotValidException | FormulaIndicadorVacioError e) {diccionario.put("error","Formula invalida");}
+
 		
-		
-		List<Indicador> indicadores = new LinkedList<Indicador>();
+
 		indicadores = repositorio_indicadores.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		
-		return new ModelAndView(indicadores,"agregarIndicador.hbs");
+		diccionario.put("indicadores", indicadores);
+		return new ModelAndView(diccionario,"agregarIndicador.hbs");
 	}
 	
 	public static ModelAndView eliminarIndicador(Request request,Response response) {
-		String nombreIndicador = request.queryParams("nombre");
+		String nombreIndicador = request.queryParams("indicador");
 	
 		if(nombreIndicador != null)	repositorio_indicadores.eliminarIndicador(nombreIndicador);
 		

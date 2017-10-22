@@ -17,8 +17,7 @@ public class Router {
 		    AuthenticationFilter authentication = new AuthenticationFilter();
 		    EntityManagerFilter entityFilter = new EntityManagerFilter();
 		    Spark.before((req,res)->{
-		    	  authentication.isAuthorized(req, res);
-		    	   
+		    	  authentication.isAuthorized(req, res);   
 		    });
 		    
 		    Spark.after((req,res)->{

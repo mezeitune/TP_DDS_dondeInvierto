@@ -107,6 +107,7 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 	}
 	
 	public int calcular() {
+		
 		return raiz.calcular();
 	}
 	

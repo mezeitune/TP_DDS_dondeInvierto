@@ -11,7 +11,7 @@
             </tr>
           </thead>
           <tbody class="empresas_list">
-          {{#each this}}
+          {{#each this.indicadores}}
           <tr>
             <th scope="row">{{@index}}</th>
             <th class="text-center">{{nombre}}</th>
@@ -36,11 +36,15 @@
        <label for="formula">Formula</label>
        <input type="text" class="form-control is-invalid" id="formula" placeholder="Formula" name="formula">
        <!---<div class="invalid-feedback">Porfavor, ingresa un periodo</div-->
+       	{{#if this.error}}
+      		<label for="error" style="color: red">{{this.error}}</label>
+      	{{/if}}
      </div> 
      <button class="btn btn-primary" type="submit">Agregar</button>
       </form>
+
    </div>
  </div>
- </div>
+
 {{/partial}}
 {{>userspace.hbs}}
