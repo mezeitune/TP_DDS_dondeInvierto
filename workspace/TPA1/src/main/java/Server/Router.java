@@ -42,6 +42,6 @@ public class Router {
 			Spark.get("metodologias",ControllerMetodologias::consultarMetodologias,engine);
 			Spark.get("metodologias/setDatosParaEvaluar",ControllerMetodologias::setDatosParaEvaluar,engine);
 			Spark.get("metodologias/evaluar",ControllerMetodologias::evaluarMetodologia,engine);
-			Spark.post("metodologias/guardarDatosParaEvaluar",ControllerMetodologias::guardarDatosParaEvaluar, engine);
+			Spark.post("metodologias/guardarEmpresaParaEvaluar",ControllerMetodologias::guardarEmpresaParaEvaluar, engine);
 	}
 }

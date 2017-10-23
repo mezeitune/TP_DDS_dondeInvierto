@@ -21,9 +21,8 @@ public class ControllerMetodologias {
 private static RepositorioMetodologias repositorio_metodologias=new RepositorioMetodologias();
 private static RepositorioEmpresas repositorio_empresas=new RepositorioEmpresas();
 private static RepositorioEmpresasAEvaluar repositorio_empresas_evaluar=new RepositorioEmpresasAEvaluar();
-static List<Metodologia> metodologias = new LinkedList<Metodologia>();
-static List<Empresa> empresas =  new LinkedList<Empresa>();
-
+private static boolean periodoIngresado;
+private static String error;
 	public static ModelAndView home(Request request,Response response) {
 		
 		return new ModelAndView(null, "home/home.hbs");
@@ -44,14 +43,10 @@ static List<Empresa> empresas =  new LinkedList<Empresa>();
 	public static ModelAndView evaluarMetodologia(Request request, Response responce){
 		List <Empresa> empresasInvertibles = new LinkedList<>();
 		List <Empresa> empresasNoInvertibles = new LinkedList<>();
-	
 		
 		Map<String, Object> diccionario = new HashMap<String, Object>();
 		
 		String nombreMetodologia = request.queryParams("metodologia");
-		
-		
-		
 		
 		if(nombreMetodologia != null ){
 			
@@ -69,51 +64,60 @@ static List<Empresa> empresas =  new LinkedList<Empresa>();
 		return new ModelAndView(diccionario,"evaluarMetodologia.hbs");
 	}
 	
-	
-	
-	
 	public static ModelAndView setDatosParaEvaluar(Request request, Response responce){
 	
-		
-		metodologias = repositorio_metodologias.getMetodologias();
-		
-		Map<String, Object> diccionario = new HashMap<String, Object>();
 		Map<String, Object> diccionarioPeriodos = repositorio_empresas.getHashMapPeriodos();
 		
-		
-		diccionario.put("metodologias",metodologias);
-		diccionario.put("empresasAEvaluar", empresas);
-		diccionario.put("periodos", diccionarioPeriodos);
+		Map<String, Object> diccionario = new HashMap<String, Object>();
+		diccionario.put("metodologias",repositorio_metodologias.getMetodologias());
+		diccionario.put("empresasAEvaluar",RepositorioEmpresasAEvaluar.getEmpresasAEvaluar());
+		diccionario.put("empresas",repositorio_empresas.getEmpresas());
+		diccionario.put("periodosAEvaluar",RepositorioEmpresasAEvaluar.getPeriodosAEvaluar());
+		diccionario.put("periodos",diccionarioPeriodos);
 		return new ModelAndView(diccionario,"setDatosParaEvaluarMetodologia.hbs");
+		
 	}
 		
-	public static ModelAndView guardarDatosParaEvaluar(Request request, Response responce){
+	public static ModelAndView guardarEmpresaParaEvaluar(Request request, Response responce){
 		
-		String nombreMetodologia = request.queryParams("metodologia");
 		String nombreEmpresa= request.queryParams("empresa");
-		String periodo = request.queryParams("periodo");
-		
-		metodologias = repositorio_metodologias.getMetodologias();
-		
 		Map<String, Object> diccionario = new HashMap<String, Object>();
-		Map<String, Object> diccionarioPeriodos = repositorio_empresas.getHashMapPeriodos();
-		
-		
-		
-		
-		if(nombreEmpresa!=null){
+		Map<String, Object> diccionarioPeriodos = new HashMap<String, Object>();
+		if(nombreEmpresa!=null && (!(RepositorioEmpresasAEvaluar.esEmpresaRepetida(repositorio_empresas.getEmpresa(nombreEmpresa))))){
+			 diccionarioPeriodos= repositorio_empresas.getHashMapPeriodos();
+			
 			RepositorioEmpresasAEvaluar.agregarEmpresaAEvaluar(repositorio_empresas.getEmpresa(nombreEmpresa));
-			empresas.add(repositorio_empresas.getEmpresa(nombreEmpresa));
-			System.out.println("sdlsdkdlskdlskdlskldk"+empresas.size());
-			
+		}else {
+			error="Empresa Ya Ingresada";
 		}
-		if( periodo!=null){
-			RepositorioEmpresasAEvaluar.agregarPeriodoAEvaluar(periodo);	
-			
-		}
-		diccionario.put("metodologias",metodologias);
-		diccionario.put("empresasAEvaluar", empresas);
-		diccionario.put("periodos", diccionarioPeriodos);
+		
+		
+		diccionario.put("metodologias",repositorio_metodologias.getMetodologias());
+		diccionario.put("empresasAEvaluar",RepositorioEmpresasAEvaluar.getEmpresasAEvaluar());
+		diccionario.put("empresas",repositorio_empresas.getEmpresas());
+		diccionario.put("periodosAEvaluar",RepositorioEmpresasAEvaluar.getPeriodosAEvaluar());
+		diccionario.put("periodos",diccionarioPeriodos);
+		diccionario.put("error",error);
+		return new ModelAndView(diccionario,"setDatosParaEvaluarMetodologia.hbs");
+	}
+	public static ModelAndView guardarPeriodoParaEvaluar(Request request, Response responce){
+		
+	String periodo = request.queryParams("periodo");
+	Map<String, Object> diccionarioPeriodos = repositorio_empresas.getHashMapPeriodos();
+	Map<String, Object> diccionario = new HashMap<String, Object>();
+	
+	if( periodo!=null && periodoIngresado==false){
+		RepositorioEmpresasAEvaluar.agregarPeriodoAEvaluar(periodo);	
+		periodoIngresado=true;
+	}else{
+		error="Ya ha ingresado un periodo";
+	}
+	diccionario.put("metodologias",repositorio_metodologias.getMetodologias());
+	diccionario.put("empresasAEvaluar",RepositorioEmpresasAEvaluar.getEmpresasAEvaluar());
+	diccionario.put("empresas",repositorio_empresas.getEmpresas());
+	diccionario.put("periodosAEvaluar",RepositorioEmpresasAEvaluar.getPeriodosAEvaluar());
+	diccionario.put("periodos",diccionarioPeriodos);
+	diccionario.put("error",error);
 	return new ModelAndView(diccionario,"setDatosParaEvaluarMetodologia.hbs");
 	}
 }

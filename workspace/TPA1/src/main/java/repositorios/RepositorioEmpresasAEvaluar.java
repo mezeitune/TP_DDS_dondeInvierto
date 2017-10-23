@@ -20,7 +20,6 @@ public class RepositorioEmpresasAEvaluar extends RepositorioDBRelational<Empresa
 		
 		Query query = entityManager().createQuery("from Empresa");
 		
-		empresasAEvaluar = query.getResultList();
 	}
 	
 	public static List<Empresa> getEmpresasAEvaluar() {
@@ -71,7 +70,7 @@ public class RepositorioEmpresasAEvaluar extends RepositorioDBRelational<Empresa
 	}
 
 	public static boolean esEmpresaRepetida(Empresa empresa) {
-		return empresasAEvaluar.stream().anyMatch(empresaCargada -> empresaCargada.equals(empresa));
+		return empresasAEvaluar.stream().anyMatch(empresaCargada -> empresaCargada.getNombre().equals(empresa.getNombre()));
 	}
 
 	public void cargarTodasLasEmpresas() {
