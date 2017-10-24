@@ -18,20 +18,22 @@
     			  <tbody class="empresas_list">
               {{#each empresas}}
           			<tr>
-                  <form method="GET" action="empresas/cuentas" id="empresa_form">
+                  <form method="GET" action="empresas/cuentas" id="form_{{nombre}}" >
               					<th scope="row">{{@index}}</th>
               					<th class="text-center">
                           <input type="text" name="cuenta"
-                          value="{{nombre}}" readonly="readonly">
+                          value="{{nombre}}" readonly="readonly"/>
                         </th>
               					<th class="text-center">{{cantidad}}</th>
                         <th class="text-center">
                             <select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-                            name="periodo" form="empresa_form">
+                            name="periodo_select" form="form_{{nombre}}">
+                            <option disabled selected>Seleccionar Periodo</option>
                               {{#each this.periodosSinRepetidos}}
-                              <option value="{{this}}">{{this}}</option>
+                              <option name="{{this}}" value="{{this}}">{{this}}</option>
                               {{/each}}
                             </select>
+
                         </th>
                         <th class="text-center">
                           <input type="submit" value="Ver cuentas">
