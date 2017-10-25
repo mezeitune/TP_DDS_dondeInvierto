@@ -44,7 +44,7 @@ public class ControllerCuentas {
 			parametros.put("usuario", request.session().attribute("usuario"));
 			parametros.put("empresaSeleccionada", nombreEmpresa);
 			parametros.put("empresas", empresas);
-			return new ModelAndView(parametros,"empresas/alerta-periodo.hbs");
+			return new ModelAndView(parametros,"alerta-periodo.hbs");
 	
 		}
 		if(periodo.contains("all")) {
