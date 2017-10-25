@@ -1,0 +1,40 @@
+{{#partial "contenido"}}
+
+   <div class="row justify-content-center">
+     <h1 class="text-info text-center">Cuentas</h1>
+    </div>
+  <div class="row justify-content-center">
+     <h2 class="text-info text-center">Empresa: {{empresaSeleccionada}}</h2>
+   </div>
+   <div class="row justify-content-center">
+     <h2 class="text-info text-center">Periodo: {{periodoSeleccionado}}</h2>
+  </div>
+  <div class="row justify-content-center">
+  <div class="col-4">
+     <table class="table table-striped">
+      <thead class= "table-inverse">
+       <tr>
+         <th class="text-center">#</th>
+         <th class="text-center">Nombre</th>
+         <th class="text-center">Valor</th>
+         <th class="text-center">Periodo</th>
+       </tr>
+     </thead>
+      <tbody class="cuentas-list">
+           {{#each cuentas}}
+          <tr>
+            <th scope="row">{{@index}}</th>
+            <th class="text-center">{{nombre}}</th>
+            <th class="text-center">{{valor}}</th>
+            <th class="text-center">{{periodo}}</th>
+          </tr>
+          {{/each}}
+      </tbody>
+     </table>
+   </div>
+ </div>
+</div>
+
+{{/partial}}
+
+{{>userspace.hbs}}

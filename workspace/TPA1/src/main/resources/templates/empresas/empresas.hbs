@@ -21,14 +21,15 @@
                   <form method="GET" action="empresas/cuentas" id="form_{{nombre}}" >
               					<th scope="row">{{@index}}</th>
               					<th class="text-center">
-                          <input type="text" name="cuenta"
+                          <input type="text" name="empresa"
                           value="{{nombre}}" readonly="readonly"/>
                         </th>
               					<th class="text-center">{{cantidad}}</th>
                         <th class="text-center">
                             <select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-                            name="periodo_select" form="form_{{nombre}}">
+                            name="periodo" form="form_{{nombre}}">
                             <option disabled selected>Seleccionar Periodo</option>
+                            <option name="all" value="all">Todos</option>
                               {{#each this.periodosSinRepetidos}}
                               <option name="{{this}}" value="{{this}}">{{this}}</option>
                               {{/each}}

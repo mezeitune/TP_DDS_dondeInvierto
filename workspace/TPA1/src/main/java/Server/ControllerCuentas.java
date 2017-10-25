@@ -25,7 +25,7 @@ public class ControllerCuentas {
 		parametros.put("usuario", request.session().attribute("usuario"));
 		parametros.put("empresas", empresas);
 		
-		return new ModelAndView(parametros, "empresas.hbs");
+		return new ModelAndView(parametros, "empresas/empresas.hbs");
 
 	}
 	
@@ -40,13 +40,30 @@ public class ControllerCuentas {
 		empresas = repositorio_empresas.getEmpresas();
 		Empresa empresa = empresas.stream().filter(e -> e.getNombre().equals(nombreEmpresa)).collect(Collectors.toList()).get(0);
 		
-		if(periodo.isEmpty()) cuentas = empresa.getCuentas();
+		if(ControllerCuentas.validarPeriodo(request)) {
+			parametros.put("usuario", request.session().attribute("usuario"));
+			parametros.put("empresaSeleccionada", nombreEmpresa);
+			parametros.put("empresas", empresas);
+			return new ModelAndView(parametros,"empresas/alerta-periodo.hbs");
+	
+		}
+		if(periodo.contains("all")) {
+			cuentas = empresa.getCuentas();
+			periodo = "No especificado";
+		}
 		else cuentas = empresa.getCuentasPorPeriodo(periodo);
 		
+		parametros.put("usuario", request.session().attribute("usuario"));
 		parametros.put("empresaSeleccionada", nombreEmpresa);
 		parametros.put("periodoSeleccionado",periodo);
 		parametros.put("empresas",empresas);
 		parametros.put("cuentas",cuentas);
-		return new ModelAndView(parametros,"cuentas.hbs");
+		return new ModelAndView(parametros,"empresas/cuentas.hbs");
 	}
+	
+	public static boolean validarPeriodo(Request request)
+	{
+		return request.queryParams().stream().filter(query -> query == "periodo").collect(Collectors.toList()).isEmpty();
+	}
+	
 }
