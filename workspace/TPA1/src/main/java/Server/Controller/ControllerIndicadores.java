@@ -1,4 +1,4 @@
-package Server;
+package Server.Controller;
 
 import java.util.HashMap;
 import java.util.LinkedList;

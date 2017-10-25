@@ -1,4 +1,4 @@
-package Server;
+package Server.Controller;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,7 +13,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class ControllerCuentas {
+public class ControllerCuentas extends Controller{
 
 	private static RepositorioEmpresas repositorio_empresas=new RepositorioEmpresas();
 
@@ -40,7 +40,7 @@ public class ControllerCuentas {
 		empresas = repositorio_empresas.getEmpresas();
 		Empresa empresa = empresas.stream().filter(e -> e.getNombre().equals(nombreEmpresa)).collect(Collectors.toList()).get(0);
 		
-		if(ControllerCuentas.validarPeriodo(request)) {
+		if(!ControllerCuentas.contieneQueryParam("periodo",request)) {
 			parametros.put("usuario", request.session().attribute("usuario"));
 			parametros.put("empresaSeleccionada", nombreEmpresa);
 			parametros.put("empresas", empresas);
@@ -61,9 +61,6 @@ public class ControllerCuentas {
 		return new ModelAndView(parametros,"empresas/cuentas.hbs");
 	}
 	
-	public static boolean validarPeriodo(Request request)
-	{
-		return request.queryParams().stream().filter(query -> query == "periodo").collect(Collectors.toList()).isEmpty();
-	}
+	
 	
 }

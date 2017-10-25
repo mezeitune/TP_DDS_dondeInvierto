@@ -1,4 +1,4 @@
-package Server;
+package Server.Filtros;
 
 import javax.persistence.EntityManager;
 
