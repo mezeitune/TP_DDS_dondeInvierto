@@ -12,8 +12,6 @@ import model.Metodologia;
 
 public class RepositorioMetodologias extends RepositorioDBRelational<Metodologia> {
 
-	private static RepositorioCondiciones repositorio_condiciones = new RepositorioCondiciones();
-	
 	public  List<Metodologia> getMetodologias(){
 		List<Metodologia> metodologias = new LinkedList<Metodologia> ();
 		this.cargarMetodologias(metodologias);
@@ -50,7 +48,6 @@ public class RepositorioMetodologias extends RepositorioDBRelational<Metodologia
 
 	public void agregar(Metodologia metodologia)
 	{
-		metodologia.getCondiciones().stream().forEach(condicion -> repositorio_condiciones.agregar(condicion));
 		entityManager().persist(metodologia);
 	}
 	

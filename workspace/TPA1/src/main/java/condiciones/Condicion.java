@@ -8,9 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
@@ -23,16 +23,17 @@ public class Condicion {
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Transient
+	
+	@OneToOne(fetch =FetchType.EAGER, cascade = CascadeType.ALL)
 	public TipoCondicion tipo;
+	
 	public int peso;
+	
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL) 
 	@OrderColumn
 	public Indicador indicador;
+	
 	public String nombre;
-	
-	
-	
 	
 	
 	public Condicion(){
@@ -49,7 +50,7 @@ public class Condicion {
 	
 	public List<Empresa> evaluar(List<Empresa> listaAEvaluar,List<String> periodos){
 		List<Empresa> resultado = new LinkedList<Empresa>(this.tipo.evaluar(listaAEvaluar,periodos,this));
-		//this.imprimirResultado(resultado);
+		
 		return resultado;
 	}
 	
@@ -82,13 +83,6 @@ public class Condicion {
 		return this.nombre;
 	}
 	
-	public void imprimirResultado(List<Empresa> empresas){
-		int i;
-		System.out.println(this.getNombre());
-		for(i=0;i<empresas.size();i++){
-			System.out.println(empresas.get(i).getNombre());
-		}
-		System.out.println("****************");
-	}
+
 	
 }

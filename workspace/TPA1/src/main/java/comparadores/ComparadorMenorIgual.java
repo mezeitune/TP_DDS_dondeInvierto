@@ -1,6 +1,8 @@
 package comparadores;
 
+import javax.persistence.Entity;
 
+@Entity
 public class ComparadorMenorIgual extends Comparador{
 	public ComparadorMenorIgual(){
 		this.nombre = "<=";

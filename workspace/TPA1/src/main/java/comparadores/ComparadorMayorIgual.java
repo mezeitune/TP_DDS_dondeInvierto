@@ -1,6 +1,8 @@
 package comparadores;
 
+import javax.persistence.Entity;
 
+@Entity
 public class ComparadorMayorIgual extends Comparador {
 	
 	public ComparadorMayorIgual(){

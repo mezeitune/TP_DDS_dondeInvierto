@@ -47,7 +47,6 @@ public class Loader {
 		metodologias_root.stream().forEach(metodologia -> metodologia.setUsuario(root));
 		
 		repositorio_global.begin();
-		
 		usuarios.forEach(usuario -> repositorio_usuarios.agregar(usuario));
 		empresas.stream().forEach(empresa -> repositorio_empresas.agregar(empresa));
 		indicadores_root.stream().forEach(indicador -> repositorio_indicadores.agregar(indicador));

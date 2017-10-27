@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import javax.persistence.Query;
 
-import model.Indicador;
 import model.Usuario;
 
 public class RepositorioUsuarios extends RepositorioDBRelational<Usuario> {
@@ -24,6 +23,7 @@ public class RepositorioUsuarios extends RepositorioDBRelational<Usuario> {
 													 .collect(Collectors.toList());
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Usuario> getUsuariosDefinidosPorElUsuario() {
 		Query queryUsuarios = entityManager().createQuery("from Usuario"); 
 		return queryUsuarios.getResultList(); 

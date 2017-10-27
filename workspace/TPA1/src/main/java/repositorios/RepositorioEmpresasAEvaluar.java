@@ -4,64 +4,57 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import model.Empresa;
-import utilities.JPAUtility;
 
 public class RepositorioEmpresasAEvaluar extends RepositorioDBRelational<Empresa> {
 	
-	public static List<Empresa> empresasAEvaluar = new ArrayList<>(); 
-	public static List<String> periodosAEvaluar = new LinkedList<>(); 
+	public  List<Empresa> empresasAEvaluar = new ArrayList<>(); 
+	public  List<String> periodosAEvaluar = new LinkedList<>(); 
 	public RepositorioEmpresas repositorio_empresas = new RepositorioEmpresas();
 	
 	public RepositorioEmpresasAEvaluar(){
-		
-		Query query = entityManager().createQuery("from Empresa");
-		
 	}
 	
-	public static List<Empresa> getEmpresasAEvaluar() {
-		return empresasAEvaluar;
+	public  List<Empresa> getEmpresasAEvaluar() {
+		return this.empresasAEvaluar;
 	}
 
-	public static void agregarEmpresaAEvaluar(Empresa empresaAEvaluar) {
-			RepositorioEmpresasAEvaluar.empresasAEvaluar.add(empresaAEvaluar);
+	public  void repositorio_empresas_evaluar(Empresa empresaAEvaluar) {
+			this.empresasAEvaluar.add(empresaAEvaluar);
 	}
-	public static void vaciarListaDeEmpresasAEvaluar() {
-		RepositorioEmpresasAEvaluar.empresasAEvaluar.removeAll(empresasAEvaluar);
+	public  void vaciarListaDeEmpresasAEvaluar() {
+		this.empresasAEvaluar.removeAll(empresasAEvaluar);
 	}
 
-	public static void eliminarEmpresaAEvaluar(Empresa unaEmpresa) {
-		RepositorioEmpresasAEvaluar.empresasAEvaluar.remove(unaEmpresa);
+	public  void eliminarEmpresaAEvaluar(Empresa unaEmpresa) {
+		this.empresasAEvaluar.remove(unaEmpresa);
 		
 	}
-	public static void setPeriodosAEvaluar(){
-		RepositorioEmpresasAEvaluar.periodosAEvaluar.addAll(getPeriodosAEvaluar());
+	public void setPeriodosAEvaluar(){
+		this.periodosAEvaluar.addAll(this.getPeriodosAEvaluar());
 	}
 	
-	public static List<String> getPeriodosAEvaluar() {
+	public List<String> getPeriodosAEvaluar() {
 		return periodosAEvaluar;
 	}
 
-	public static void agregarPeriodoAEvaluar(String periodoAEvaluar) {
-		RepositorioEmpresasAEvaluar.periodosAEvaluar.add(periodoAEvaluar);
+	public void agregarPeriodoAEvaluar(String periodoAEvaluar) {
+		this.periodosAEvaluar.add(periodoAEvaluar);
 	}
-	public static void vaciarListaDePeriodosAEvaluar() {
-		RepositorioEmpresasAEvaluar.periodosAEvaluar.removeAll(periodosAEvaluar);
+	public  void vaciarListaDePeriodosAEvaluar() {
+		this.periodosAEvaluar.removeAll(this.periodosAEvaluar);
 	}
 
-	public static void eliminarPeriodoaAEvaluar(String unPeriodo) {
-		RepositorioEmpresasAEvaluar.periodosAEvaluar.remove(unPeriodo);
+	public  void eliminarPeriodoaAEvaluar(String unPeriodo) {
+		this.periodosAEvaluar.remove(unPeriodo);
 	}
 
 	
-	public static boolean esPeriodoRepetido(String periodo){
+	public  boolean esPeriodoRepetido(String periodo){
 		return periodosAEvaluar.stream().anyMatch(unPeriodo -> unPeriodo.equals(periodo));
 	}
 	
-	public static boolean esPeriodoInexistente(String periodo){
+	public  boolean esPeriodoInexistente(String periodo){
 		return !periodosAEvaluar.stream().anyMatch(unPeriodo -> unPeriodo.equals(periodo));
 	}
 
@@ -69,12 +62,17 @@ public class RepositorioEmpresasAEvaluar extends RepositorioDBRelational<Empresa
 		this.empresasAEvaluar = empresas;
 	}
 
-	public static boolean esEmpresaRepetida(Empresa empresa) {
+	public  boolean esEmpresaRepetida(Empresa empresa) {
 		return empresasAEvaluar.stream().anyMatch(empresaCargada -> empresaCargada.getNombre().equals(empresa.getNombre()));
 	}
 
 	public void cargarTodasLasEmpresas() {
 		this.setEmpresasAEvaluar(repositorio_empresas.getEmpresas());
+	}
+
+	public void agregarEmpresaAEvaluar(Empresa empresa) {
+		this.empresasAEvaluar.add(empresa);
+		
 	}
 	
 }

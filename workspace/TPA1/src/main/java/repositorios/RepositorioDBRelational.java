@@ -49,6 +49,8 @@ public class RepositorioDBRelational<Entity> implements WithGlobalEntityManager 
 	public void commit () {
 		entityManager().getTransaction().commit();
 	}
+
+	
 	
 	
 }
