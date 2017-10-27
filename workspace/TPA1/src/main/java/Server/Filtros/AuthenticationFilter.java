@@ -9,7 +9,7 @@ public class AuthenticationFilter {
 		boolean authenticated =
 				req.session().attribute("usuario") !=null;
 		if(!isPublic(req.pathInfo()) && !authenticated){
-			res.redirect("/login.html");
+			res.redirect("/login");
 		}
 				
 	}

@@ -5,7 +5,11 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import model.Empresa;
 import repositorios.RepositorioUsuarios;
 
 
@@ -18,6 +22,16 @@ public class ControllerLogin {
 		return new ModelAndView(null, "home/home.hbs");
 	}
 	
+	public static ModelAndView mostrarLogin(Request request, Response response) {
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		
+		parametros.put("mensaje", " ");
+	
+		
+		return new ModelAndView(parametros, "home/login.hbs");
+
+	}
+	
 	public static ModelAndView crearSessionDeLogin(Request request,Response response) {
 		
 		String username = request.queryParams("usuario");
@@ -28,14 +42,17 @@ public class ControllerLogin {
         		response.redirect("/empresas");
         	}
         }
-        response.redirect("/login.html");//Ver si login realmente deberia ser estatico , por que hay que mandar un mensaje de error
-        
-		return null;
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		
+		parametros.put("mensaje", "El usuario y la contrasena ingresados no coinciden");
+	
+		
+		return new ModelAndView(parametros, "home/login.hbs");
 	}
 	
 	public static ModelAndView eliminarSessionDeLogin(Request request,Response response) {
         request.session().removeAttribute("usuario");
-        response.redirect("/dondeInvierto.html");
+        response.redirect("/");
 		return null;
 		
 	}
