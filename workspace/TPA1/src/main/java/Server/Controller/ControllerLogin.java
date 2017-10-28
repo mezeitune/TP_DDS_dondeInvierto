@@ -51,7 +51,8 @@ public class ControllerLogin {
 	}
 	
 	public static ModelAndView eliminarSessionDeLogin(Request request,Response response) {
-        request.session().removeAttribute("usuario");
+		request.session().attribute("usuario", null);
+		request.session().removeAttribute("usuario");
         response.redirect("/");
 		return null;
 		
