@@ -25,13 +25,13 @@ public class ControllerLogin {
 	public static ModelAndView mostrarLogin(Request request, Response response) {
 		Map<String, Object> parametros = new HashMap<String, Object>();
 		
-		parametros.put("mensaje", " ");
-	
+		String nada="";
+		
+		parametros.put("mensaje",nada);
 		
 		return new ModelAndView(parametros, "home/login.hbs");
 
 	}
-	
 	public static ModelAndView crearSessionDeLogin(Request request,Response response) {
 		
 		String username = request.queryParams("usuario");
