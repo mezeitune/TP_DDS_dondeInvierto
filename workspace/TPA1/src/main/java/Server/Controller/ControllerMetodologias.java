@@ -48,17 +48,24 @@ private static String error;
 		
 		String nombreMetodologia = request.queryParams("metodologia");
 		
-		if(nombreMetodologia != null ){
+		if((request.queryMap().toMap().containsKey("metodologia"))){
 			
 			Metodologia metodologia = repositorio_metodologias.getMetodologia(nombreMetodologia);
-			
 			List<List<Empresa>> resultado = metodologia.evaluar(repositorio_empresas_evaluar.getEmpresasAEvaluar(),repositorio_empresas_evaluar.getPeriodosAEvaluar());
-			
 			empresasInvertibles = resultado.get(0);
 			empresasNoInvertibles = resultado.get(1);
 		
+		}else{
+			error="metodologia no ingresada, seleccione una";
+			diccionario.put("metodologias",repositorio_metodologias.getMetodologias());
+			diccionario.put("empresasAEvaluar",repositorio_empresas_evaluar.getEmpresasAEvaluar());
+			diccionario.put("empresas",repositorio_empresas.getEmpresas());
+			diccionario.put("periodosAEvaluar",repositorio_empresas_evaluar.getPeriodosAEvaluar());
+			diccionario.put("periodos",repositorio_empresas.getHashMapPeriodos());
+			diccionario.put("error",error);
+			return new ModelAndView(diccionario,"setDatosParaEvaluarMetodologia.hbs");
 		}
-		System.out.println(nombreMetodologia+empresasInvertibles.size());
+		
 		diccionario.put("empresasInvertibles", empresasInvertibles);
 		diccionario.put("empresasNoInvertibles", empresasNoInvertibles);
 		return new ModelAndView(diccionario,"evaluarMetodologia.hbs");
@@ -70,6 +77,7 @@ private static String error;
 		
 		Map<String, Object> diccionario = new HashMap<String, Object>();
 		diccionario.put("metodologias",repositorio_metodologias.getMetodologias());
+		
 		diccionario.put("empresasAEvaluar",repositorio_empresas_evaluar.getEmpresasAEvaluar());
 		diccionario.put("empresas",repositorio_empresas.getEmpresas());
 		diccionario.put("periodosAEvaluar",repositorio_empresas_evaluar.getPeriodosAEvaluar());
@@ -87,6 +95,7 @@ private static String error;
 			 diccionarioPeriodos= repositorio_empresas.getHashMapPeriodos();
 			
 			 repositorio_empresas_evaluar.agregarEmpresaAEvaluar(repositorio_empresas.getEmpresa(nombreEmpresa));
+			 error="";
 		}else {
 			error="Empresa Ya Ingresada";
 		}

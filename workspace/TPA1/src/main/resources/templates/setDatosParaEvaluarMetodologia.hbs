@@ -73,13 +73,15 @@
        <select name="metodologia">
          <option value="null" selected="selected"></option>
         {{#each this.metodologias}}
-        <option value="{{nombre}}" {{#selected}} selected="selected"{{/selected}}> {{nombre}} </option>
+        <option value="{{nombre}}" selected="selected"> {{nombre}} </option>
         {{/each}}
        </select>
        <button class="btn btn-primary" type="submit">Evaluar</button>
        </form>
  
- <h1 class="text-info text-center">{{error}}</h1>
+<div class="alert alert-danger" role="alert">
+{{error}}
+</div>
  </div>
  </div>
 {{/partial}}
