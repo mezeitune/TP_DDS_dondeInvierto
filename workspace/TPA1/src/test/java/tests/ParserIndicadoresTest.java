@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.omg.CORBA.UserException;
 
+import excepciones.AccountNotFoundException;
 import mocks.EmpresasMock;
 import mocks.IndicadoresMock;
 import model.Cuenta;
@@ -37,32 +38,32 @@ public class ParserIndicadoresTest {
  	}
 
 	@Test
-	public void FormulaSoloConSumasFuncionaCorrectamente() throws UserException{
+	public void FormulaSoloConSumasFuncionaCorrectamente() throws UserException, NumberFormatException, AccountNotFoundException{
 		Indicador indicadorConFormulaSuma = indicadoresMockeados.get(0);
 		indicadorConFormulaSuma.construirOperadorRaiz();
 		assertEquals(2.0,indicadorConFormulaSuma.calcular(),0);
 	}
 	
 	@Test
-	public void FormulaSoloConRestasFuncionaCorrectamente() throws UserException{
+	public void FormulaSoloConRestasFuncionaCorrectamente() throws UserException, NumberFormatException, AccountNotFoundException{
 		Indicador indicadorConFormulaResta = indicadoresMockeados.get(1);
 		indicadorConFormulaResta.construirOperadorRaiz();
 		assertEquals(2.0,indicadorConFormulaResta.calcular(),0);
 	}
 	@Test
-	public void FormulaSoloConProductosFuncionaCorrectamente() throws UserException{
+	public void FormulaSoloConProductosFuncionaCorrectamente() throws UserException, NumberFormatException, AccountNotFoundException{
 		Indicador indicadorConFormulaProducto = indicadoresMockeados.get(2);
 		indicadorConFormulaProducto.construirOperadorRaiz();
 		assertEquals(2.0,indicadorConFormulaProducto.calcular(),0);
 	}
 	@Test
-	public void FormulaSoloConDivisionesFuncionaCorrectamente() throws UserException{
+	public void FormulaSoloConDivisionesFuncionaCorrectamente() throws UserException, NumberFormatException, AccountNotFoundException{
 		Indicador indicadorConFormulaDivisiones = indicadoresMockeados.get(3);
 		indicadorConFormulaDivisiones.construirOperadorRaiz();
 		assertEquals(2.0,indicadorConFormulaDivisiones.calcular(),0);
 	}
 	@Test
-	public void FormulaDeNumerosConDistintasOperacionesFuncionaCorrectamente() {
+	public void FormulaDeNumerosConDistintasOperacionesFuncionaCorrectamente() throws NumberFormatException, AccountNotFoundException {
 		Indicador indicadorConDistintasOperaciones = indicadoresMockeados.get(5);
 		indicadorConDistintasOperaciones.construirOperadorRaiz();
 		assertEquals(-1.0,indicadorConDistintasOperaciones.calcular(),0);

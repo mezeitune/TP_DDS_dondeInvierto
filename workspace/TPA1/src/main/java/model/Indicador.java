@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import Server.Controller.ControllerIndicadores;
 import excepciones.AccountNotFoundException;
 import parserIndicadores.Operacion;
 import parserIndicadores.ParserFormulaIndicador;
@@ -93,27 +94,28 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 		try {
 			this.raiz = parser.construirArbolOperaciones(this.formula);
 		} catch (AccountNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ControllerIndicadores.setErrorMessage("Cuenta inexistente en el periodo indicado");
 		}
 	}
 	
-	//Para testear solo indicadores con formulas de numeros
-	public void construirOperadorRaiz() {
-		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
-		try {
-			this.raiz = parser.construirArbolOperaciones(this.formula);
-		} catch (AccountNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public int calcular(){
+
+		try{
+			return 	raiz.calcular();
+		}catch (NullPointerException e) {
+			ControllerIndicadores.setErrorMessage("Cuenta inexistente en el periodo indicado");
 		}
-	}
-	
-	public int calcular() {
+		return 0;
 		
-		return raiz.calcular();
 	}
 	
+	//Para testear solo indicadores con formulas de numeros////////////////////////////////////////
+	public void construirOperadorRaiz() throws NumberFormatException, AccountNotFoundException{
+		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
+		
+		this.raiz = parser.construirArbolOperaciones(this.formula);
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////
 
 
 	

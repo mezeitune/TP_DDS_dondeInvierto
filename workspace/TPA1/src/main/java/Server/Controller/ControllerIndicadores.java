@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-
+import excepciones.AccountNotFoundException;
 import excepciones.DatoRepetidoException;
 import excepciones.FormulaIndicadorVacioError;
 import excepciones.FormulaIndicadorNotValidException;
@@ -25,6 +25,13 @@ public class ControllerIndicadores {
 	private static RepositorioUsuarios repositorio_usuarios=new RepositorioUsuarios();
 	private static RepositorioIndicadores repositorio_indicadores=new RepositorioIndicadores();
 	private static RepositorioEmpresas repositorio_empresas=new RepositorioEmpresas();
+	private static String error;
+	
+	public static void setErrorMessage(String errorMessage){
+		error = errorMessage;
+	}
+	
+	
 	
 	public static ModelAndView consultarIndicadores(Request request,Response response) {
 		List<Indicador> indicadores = getIndicadoresUsuarioActual(request);
@@ -35,27 +42,39 @@ public class ControllerIndicadores {
 	
 	public static ModelAndView agregarIndicador(Request request,Response response) {
 		
+		error = null;
+		
 		String nombreIndicador = request.queryParams("nombre");
 		String formulaIndicador = request.queryParams("formula");
 		String username=request.session().attribute("usuario");
 
-		
-		Usuario user = repositorio_usuarios.obtenerUsuario(username);
-		Indicador indicador = new Indicador(nombreIndicador,formulaIndicador,user);
+		Indicador indicador;
 		Map<String, Object> diccionario = new HashMap<String, Object>();
 		
-
+		Usuario user; 
+		
+		if(!(nombreIndicador == null && formulaIndicador == null)){
+			user = repositorio_usuarios.obtenerUsuario(username);
+			indicador = new Indicador(nombreIndicador,formulaIndicador,user);
+		
 		try {
 			repositorio_indicadores.generarIndicador(indicador/*nombreIndicador, formulaIndicador,user*/);
-		} catch (NombreIndicadorVacioError  e) {diccionario.put("error","Nombre invalido, debe ingresar uno");}
-		catch (DatoRepetidoException e) {diccionario.put("error","Nombre de indicador ya existente");
-		} catch (FormulaIndicadorNotValidException | FormulaIndicadorVacioError e) {diccionario.put("error","Formula invalida");}
+		} catch (NombreIndicadorVacioError  e) {
+			setErrorMessage("Nombre de indicador ya existente");
+			}
+		catch (DatoRepetidoException e) {
+			setErrorMessage("Nombre de indicador ya existente");
+			}
+		catch (FormulaIndicadorNotValidException | FormulaIndicadorVacioError e) {
+			setErrorMessage("Formula invalida");
+			}
 
+		}
 		List<Indicador> indicadores = getIndicadoresUsuarioActual(request);
 
-		
-		
 		diccionario.put("indicadores", indicadores);
+		diccionario.put("error",error);
+
 		return new ModelAndView(diccionario,"agregarIndicador.hbs");
 	}
 	
@@ -75,6 +94,8 @@ public class ControllerIndicadores {
 
 	public static ModelAndView evaluarIndicador(Request request,Response response) {
 		
+		error = null;
+		
 		List<Indicador> indicadores = getIndicadoresUsuarioActual(request);
 		
 		Map<String, Object> diccionario = new HashMap<String, Object>();
@@ -92,15 +113,20 @@ public class ControllerIndicadores {
 			Indicador indicador = repositorio_indicadores.getIndicador(nombreIndicador, request.session().attribute("usuario"));
 			Empresa empresa = repositorio_empresas.getEmpresa(nombreEmpresa);
 		
-			indicador.construirOperadorRaiz(empresa,periodo);
-			resultado = indicador.calcular();
+			try{
+				indicador.construirOperadorRaiz(empresa,periodo);
+				resultado = indicador.calcular();
+			} catch (NumberFormatException e) {
+				setErrorMessage("Fallo calculo del indicador, Indicador en formula inexistente/eliminado");
+			}
+			
 		}
 
 		diccionario.put("indicadores", indicadores);
 		diccionario.put("periodos", diccionarioPeriodos);
 		diccionario.put("resultado", String.valueOf(resultado));
+		diccionario.put("error",error);
 		
-
 		return new ModelAndView(diccionario,"evaluarIndicador.hbs");
 	}
 

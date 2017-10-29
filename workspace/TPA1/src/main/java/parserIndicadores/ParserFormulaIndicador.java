@@ -77,11 +77,11 @@ public class ParserFormulaIndicador {
 		return this.periodo;
 	}
 	
-	public int getCalculoIndicador(String formula) throws AccountNotFoundException{
+	public int getCalculoIndicador(String formula) throws AccountNotFoundException,NumberFormatException{
 			return this.construirArbolOperaciones(formula).calcular();
 	}
 	
-	public Operacion construirArbolOperaciones(String operandos) throws AccountNotFoundException{
+	public Operacion construirArbolOperaciones(String operandos) throws AccountNotFoundException,NumberFormatException{
 		
 		if(operandos.matches(operadorSumaSplit)) return this.getOperacion(operandos.split("[+]"),new Suma());
 		if(operandos.matches(operadorRestaSplit)) return this.getOperacion(operandos.split("[-]"),new Resta());
@@ -92,7 +92,7 @@ public class ParserFormulaIndicador {
 				
 		}
 	
-	public  Operacion getOperacion(String [] formula,Operacion nuevaOperacion) throws AccountNotFoundException{
+	public  Operacion getOperacion(String [] formula,Operacion nuevaOperacion) throws AccountNotFoundException, NumberFormatException{
 		List<String> operandos = new LinkedList<>();
 		int i;
 		for(i=0;i<formula.length;i++){
@@ -111,10 +111,10 @@ public class ParserFormulaIndicador {
 	}
 	
 	
-	public Operacion getConstante(String operador) throws AccountNotFoundException{
+	public Operacion getConstante(String operador) throws AccountNotFoundException, NumberFormatException{
 		if (ParserFormulaIndicador.esIndicador(operador)) return new Constante().setIndicador(this.buscarYObtenerIndicador(operador));
 		if (ParserFormulaIndicador.esCuenta(operador)) return new Constante().setCuenta(this.buscarYObtenerCuenta(operador));
-		return  new Constante(Integer.parseInt(operador));
+		return new Constante(Integer.parseInt(operador));
 	}
 	
 	public static  boolean esIndicador(String operador){
@@ -149,61 +149,24 @@ public class ParserFormulaIndicador {
 		
 		String[] result = formula.split("[-+*/]");
 		int[] validacion = new int[result.length];
-	
-		
+			
 		for (int i = 0; i < validacion.length; i++) {
 			if(NumberUtils.isNumber(result[i]) || esIndicador(result[i]) || esCuenta(result[i])) {
-				
-				System.out.println("Resultado True" + result[i]);
 				validacion[i] = 1;
 			}
 			else {
-				
-				System.out.println("Resultado False" + result[i]);
 				validacion[i] = 0;
 			}
 		}
-		
+				
 		for(int k=0;k< validacion.length;k++){
 			if(validacion[k] == 0){
-				System.out.println("Di False");
 				return false;
 			}
 		}
 
 		
 		return true;
-		
-		
-		/*for(int j=0;j<ver.length;j++){
-			ver[j]="no";
-		}
-		
-		for (int i = 0; i < result.length; i++) {
-			
-			if( StringUtils.isNumeric(result[i])){
-				ver[i]="si";
-			}else{
-				for(Indicador s : indicadores){
-					  if(s.getNombre().equals(result[i])){
-						  ver[i]="si";
-					  }
-				}
-				
-				for(String s : nombreCuentas){
-					  if(s.equals(result[i])){
-						  ver[i]="si";
-					  }
-				}
-			}
-		}
-
-*
-*
-*
-*/		
-
-
 	}
 
 	public static void restart() {

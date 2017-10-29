@@ -86,7 +86,17 @@
        </select>
        
         <button class="btn btn-primary" type="submit">Evaluar</button>
-        <label for="periodos"> <b> Resultado = {{this.resultado}} </b> </label>
+        <div class="numeric-display-holder">
+        <div id="lcd-symbols">&nbsp;</div>
+        {{#if this.error}}
+          <label for="error" style="color: red"> <b> {{this.error}} </b></label>
+          {{else}} 
+            <label for="resultado"> <b> Resultado = {{this.resultado}} </b> </label> 
+        {{/if}}
+            
+          
+        </div>
+        
      </div>
       </form>
    </div>

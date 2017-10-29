@@ -1,6 +1,7 @@
 package parserIndicadores;
 
 
+import excepciones.AccountNotFoundException;
 import model.Cuenta;
 import model.Indicador;
 
@@ -19,7 +20,7 @@ public class Constante implements Operacion {
 		return this.valor;
 	}
 	
-	public Operacion setIndicador(Indicador indicador) {
+	public Operacion setIndicador(Indicador indicador){
 		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
 		indicador.construirOperadorRaiz(parser.getEmpresa(), parser.getPeriodo());
 		this.valor = indicador.calcular();

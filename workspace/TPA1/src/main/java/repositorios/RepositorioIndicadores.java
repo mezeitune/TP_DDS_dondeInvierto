@@ -53,7 +53,7 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 	}
 
 
-	public void generarIndicador( Indicador indicador/*String nombreIndicador, String formulaIndicador,Usuario user*/) throws NombreIndicadorVacioError, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorVacioError {
+	public void generarIndicador( Indicador indicador) throws NombreIndicadorVacioError, DatoRepetidoException, FormulaIndicadorNotValidException, FormulaIndicadorVacioError {
 		
 		String nombreIndicador = indicador.getNombre();
 		String formulaIndicador = indicador.getFormula();
