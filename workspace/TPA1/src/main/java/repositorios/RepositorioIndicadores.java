@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.Query;
 
+import Server.Controller.ControllerIndicadores;
 import excepciones.DatoRepetidoException;
 import excepciones.FormulaIndicadorVacioError;
 import excepciones.FormulaIndicadorNotValidException;
@@ -104,7 +105,13 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 	public Indicador getIndicador(String nombreIndicador,String user){
 		
 		List<Indicador> indicador = this.getIndicadoresPorUsuario(user).stream().filter(unInd -> unInd.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
-		return indicador.get(0);
+		try{
+			return indicador.get(0);
+		}catch(IndexOutOfBoundsException e){
+			ControllerIndicadores.setErrorMessage("Debe seleccionar un indicador y una empresa");
+		}
+		return null;
+
 		
 		
 	}

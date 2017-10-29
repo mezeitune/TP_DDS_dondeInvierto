@@ -53,7 +53,7 @@ public class ControllerIndicadores {
 		
 		Usuario user; 
 		
-		if(!(nombreIndicador == null && formulaIndicador == null)){
+		if(!(nombreIndicador == null && formulaIndicador == null )){
 			user = repositorio_usuarios.obtenerUsuario(username);
 			indicador = new Indicador(nombreIndicador,formulaIndicador,user);
 		
@@ -107,8 +107,7 @@ public class ControllerIndicadores {
 		String nombreEmpresa = request.queryParams("empresa");
 		String periodo = request.queryParams("periodo");
 		
-		
-		if(nombreIndicador != null && nombreEmpresa != null){
+		if(!(nombreIndicador == null || nombreEmpresa == null)){
 		
 			Indicador indicador = repositorio_indicadores.getIndicador(nombreIndicador, request.session().attribute("usuario"));
 			Empresa empresa = repositorio_empresas.getEmpresa(nombreEmpresa);
@@ -118,6 +117,8 @@ public class ControllerIndicadores {
 				resultado = indicador.calcular();
 			} catch (NumberFormatException e) {
 				setErrorMessage("Fallo calculo del indicador, Indicador en formula inexistente/eliminado");
+			} catch (NullPointerException e){
+				setErrorMessage("Debe seleccionar un indicador y una empresa");
 			}
 			
 		}

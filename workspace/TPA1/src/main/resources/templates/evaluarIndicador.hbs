@@ -1,4 +1,34 @@
 {{#partial "contenido"}}
+
+
+  <head>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="http://cdn.intercoolerjs.org/intercooler-1.2.0.js"></script>
+  <script type="text/javascript">
+
+          function removeOptions(selectbox){
+            var i;
+            for(i = selectbox.options.length - 1 ; i > 0 ; i--){
+              selectbox.remove(i);
+            }
+          }
+           function setPeriodos(empresa){
+            var combo = document.getElementById("selectPeriodos");
+            removeOptions(combo);
+            {{#each this.periodos}}
+              if("{{@key}}" == empresa){
+                {{#each this}}
+                  var option = document.createElement("option");
+                  option.text = "{{this}}";
+                  combo.add(option);
+                {{/each}}
+              }
+            {{/each}}
+          }
+
+  </script>
+  </head>
+
     <div class= "row justify-content-center">
       <div class="col-4">
         <h3 class="text-info text-center">Mis Indicadores</h3>
@@ -48,6 +78,9 @@
 
 <!--##############################################################################################################-->
   <div class="row justify-content-center"">
+
+
+
   <h3 class="text-info text-center">Seleccionar datos para evaluar</h3>
   </div>
   <div class="row justify-content-center"">
@@ -67,24 +100,18 @@
 
        <label for="empresa">Empresa</label>
 
-       <select name="empresa" required>
+       <select name="empresa" onchange="setPeriodos(this.value);" required>
           <option value="null" selected="selected"></option>
         {{#each this.periodos}}
-        <option value="{{@key}}" {{#selected}} selected="selected"{{/selected}}> {{@key}} </option>
+          <option value="{{@key}}" {{#selected}} selected="selected"{{/selected}}> {{@key}} </option>
         {{/each}}
        </select>
 
-        <label for="periodo">Periodo</label>
-        
-        <select name="periodo">
+        <label for="periodo" >Periodos</label>
+        <select name="periodo" id="selectPeriodos">
           <option value="null" selected="selected"></option>
-        {{#each this.periodos}}
-          {{#each this}}
-            <option value="{{this}}" {{#selected}} selected="selected"{{/selected}}> {{this}} </option>
-          {{/each}}
-        {{/each}}
-       </select>
-       
+        </select>
+
         <button class="btn btn-primary" type="submit">Evaluar</button>
         <div class="numeric-display-holder">
         <div id="lcd-symbols">&nbsp;</div>
@@ -101,6 +128,9 @@
       </form>
    </div>
 </div>
+
+
+
 
 {{/partial}}
 
