@@ -52,25 +52,30 @@
   </div>
   <div class="row justify-content-center"">
   <div class="col-xs-4">  
-    <form action="/indicadores/eval" method="get">
+    <form action="/indicadores/eval" method="get" id="form1">
      <div class="form-group">
+
        <label for="indicador">Indicador</label>
-       <select name="indicador">
+       
+
+       <select name="indicador" required>
          <option value="null" selected="selected"></option>
         {{#each this.indicadores}}
         <option value="{{nombre}}" {{#selected}} selected="selected"{{/selected}}> {{nombre}} </option>
         {{/each}}
        </select>
 
-       <label for="periodos">Empresa</label>
-        <select name="empresa">
+       <label for="empresa">Empresa</label>
+
+       <select name="empresa" required>
           <option value="null" selected="selected"></option>
         {{#each this.periodos}}
         <option value="{{@key}}" {{#selected}} selected="selected"{{/selected}}> {{@key}} </option>
         {{/each}}
        </select>
 
-        <label for="periodos">Periodo</label>
+        <label for="periodo">Periodo</label>
+        
         <select name="periodo">
           <option value="null" selected="selected"></option>
         {{#each this.periodos}}
@@ -79,12 +84,14 @@
           {{/each}}
         {{/each}}
        </select>
+       
         <button class="btn btn-primary" type="submit">Evaluar</button>
         <label for="periodos"> <b> Resultado = {{this.resultado}} </b> </label>
      </div>
       </form>
    </div>
 </div>
-<!--##############################################################################################################-->
+
 {{/partial}}
+
 {{>userspace.hbs}}

@@ -85,7 +85,10 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 	public void construirOperadorRaiz(Empresa empresa,String periodo){
 		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
 		parser.setEmpresa(empresa);
-		parser.setPeriodo(periodo);
+		
+		if(!(periodo == null)){
+			parser.setPeriodo(periodo);
+		}
 		
 		try {
 			this.raiz = parser.construirArbolOperaciones(this.formula);
