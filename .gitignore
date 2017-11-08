@@ -1,0 +1,9 @@
+
+*.xml
+workspace/TPA1/src/main/resources/META-INF/persistence.xml
+workspace/TPA1/src/main/resources/META-INF/persistence.xml
+workspace/TPA1/src/test/resources/META-INF/persistence.xml
+workspace/TPA1/target/classes/META-INF/persistence.xml
+workspace/TPA1/target/test-classes/META-INF/persistence.xml
+workspace/TPA1/pom.xml
+workspace/TPA1/.classpath
