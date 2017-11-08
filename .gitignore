@@ -7,3 +7,4 @@ workspace/TPA1/target/classes/META-INF/persistence.xml
 workspace/TPA1/target/test-classes/META-INF/persistence.xml
 workspace/TPA1/pom.xml
 workspace/TPA1/.classpath
+*.json
