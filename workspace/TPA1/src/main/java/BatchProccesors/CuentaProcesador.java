@@ -26,8 +26,9 @@ public class CuentaProcesador {
 														.flatMap(empresas_mapeadas -> empresas_mapeadas.stream())
 														.distinct()
 														.collect(Collectors.toList());
-		
+		repositorioEmpresas.begin();
 		repositorioEmpresas.agregarEmpresas(empresas);
+		repositorioEmpresas.commit();
 		System.out.println("Empresas y cuentas cargadas");
 		}
 	
