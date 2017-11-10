@@ -13,7 +13,7 @@ public class CuentaProcesador {
 
 	private RepositorioEmpresas repositorioEmpresas = new RepositorioEmpresas();
 	private ParserCsv parser = new ParserCsv();
-	private static File folder = new File("C:/Users/Manu/Documents/GitHub/2017-jm-group-11/workspace/TPA1/src/main/resources/Cuentas");
+	private static File folder;
 	
 	public CuentaProcesador(String directorio)
 	{
@@ -22,11 +22,13 @@ public class CuentaProcesador {
 		
 		public void cargarCuentas() {
 			List<Empresa> empresas = getArchivos(folder).stream()
-															  .map(archivo -> parser.getEmpresas(archivo.getAbsolutePath()))
-															  .flatMap(empresas_mapeadas -> empresas_mapeadas.stream())
-															  .distinct()
-															  .collect(Collectors.toList());
-		repositorioEmpresas.agregarEmpresas(empresas);	
+														.map(archivo -> parser.getEmpresas(archivo.getAbsolutePath()))
+														.flatMap(empresas_mapeadas -> empresas_mapeadas.stream())
+														.distinct()
+														.collect(Collectors.toList());
+		
+		repositorioEmpresas.agregarEmpresas(empresas);
+		System.out.println("Empresas y cuentas cargadas");
 		}
 	
 	
@@ -46,6 +48,10 @@ public class CuentaProcesador {
 	    return archivos;
 	  }
 	  
+	  public static void main(String[] args) {
+			new CuentaProcesador("C:/Users/Manu/Documents/GitHub/2017-jm-group-11/workspace/TPA1/src/main/resources/Cuentas").cargarCuentas();
+		}
+		
 	  
 	   
 
