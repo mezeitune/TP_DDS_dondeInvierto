@@ -27,7 +27,7 @@ public class RepositorioEmpresas extends RepositorioDBRelational<Empresa> {
 	
 	public static void concatenarEmpresas(CsvFile archivoCuentas,List<Empresa> empresas) {
 		ParserCsv parser = new ParserCsv();
-		parser.csvFileToEmpresas(archivoCuentas.getDirectorio()).forEach(empresa -> empresas.add(empresa));
+		parser.getEmpresas(archivoCuentas.getDirectorio()).forEach(empresa -> empresas.add(empresa));
 	}
 	
 	public List<String> getNombreCuentas() {
@@ -75,6 +75,10 @@ public class RepositorioEmpresas extends RepositorioDBRelational<Empresa> {
 	public Empresa getEmpresa(String nombreEmpresa){
 		return this.getEmpresas().stream().filter(empresa -> empresa.getNombre().equals(nombreEmpresa)).collect(Collectors.toList()).get(0);
 		
+	}
+
+	public void agregarEmpresas(List<Empresa> empresas) {
+		empresas.forEach(empresa->agregar(empresa));
 	}
 
 }

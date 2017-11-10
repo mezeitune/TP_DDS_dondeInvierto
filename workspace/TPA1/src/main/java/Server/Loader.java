@@ -53,7 +53,7 @@ public class Loader {
 		metodologias_root.stream().forEach(metodologia-> repositorio_metodologias.agregar(metodologia));
 		
 		repositorio_global.commit();
-	}
-	
+		
+	}	
 	
 }

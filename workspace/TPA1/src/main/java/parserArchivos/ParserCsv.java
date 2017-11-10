@@ -36,7 +36,7 @@ public class ParserCsv {
 		return CSVObjectList;
 	}
 	
-	public List<Empresa> csvFileToEmpresas(String archivo){
+	public List<Empresa> getEmpresas(String archivo){
 		List<CsvEmpresa> CSVObjectList = null;
 		try {
 			CSVObjectList = this.CSVFileToCSVObjectList(archivo);
