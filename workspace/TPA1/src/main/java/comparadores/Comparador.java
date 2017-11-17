@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="Comparadores")
-public class Comparador { //Si senor, otra clase abstracta para la persistencia en Json
+public class Comparador { 
 	@Id @GeneratedValue
 	private Long id;
 	

@@ -20,7 +20,6 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 	protected String formula;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	//@JoinColumn(name = "indicador_id")
 	protected Usuario usuario;
 	
 

@@ -27,7 +27,7 @@ public class CuentaProcesador {
 														.distinct()
 														.collect(Collectors.toList());
 		repositorioEmpresas.begin();
-		repositorioEmpresas.agregarEmpresas(empresas);
+		repositorioEmpresas.actualizarEmpresas(empresas);
 		repositorioEmpresas.commit();
 		System.out.println("Empresas y cuentas cargadas");
 		}

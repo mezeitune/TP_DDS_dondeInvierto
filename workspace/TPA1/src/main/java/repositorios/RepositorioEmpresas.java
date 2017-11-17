@@ -81,4 +81,8 @@ public class RepositorioEmpresas extends RepositorioDBRelational<Empresa> {
 		empresas.forEach(empresa->agregar(empresa));
 	}
 
+	public void actualizarEmpresas(List<Empresa> empresas) {
+	   
+	}
+
 }
