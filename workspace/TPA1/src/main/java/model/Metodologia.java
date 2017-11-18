@@ -7,37 +7,48 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.uqbar.commons.utils.Observable;
 
 import condiciones.Condicion;
 
-@Observable
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="Metodologias")
-public class Metodologia {
-
-	@Id @GeneratedValue
-	private Long id;
+public class Metodologia extends PersistentObject{
 	@Transient
 	private List<List<Empresa>> listasEmpresasEvaluadas = new LinkedList<List<Empresa>>();
+	
 	private String nombre;
 	
-	@ManyToMany(cascade=CascadeType.DETACH)  
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)  
     @JoinTable(name="metodologias_condiciones", joinColumns=@JoinColumn(name="metodologia_id"), inverseJoinColumns=@JoinColumn(name="condicion_id"))  
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	protected Usuario usuario;
 	
 	public Metodologia(){
 		
 	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	
 	
 	public String getNombre() {
 		return nombre;

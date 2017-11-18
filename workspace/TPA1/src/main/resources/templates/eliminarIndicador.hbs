@@ -1,53 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  </head>
-<body>
-
-<header class="navbar navbar-expand-lg navbar-ligh" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="../dondeInvierto.html">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/US_Democratic_Party_Logo.svg/2000px-US_Democratic_Party_Logo.svg.png" width="30" height="30" class="d-inline-block align-top" alt="" >
-    </a>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-       <ul class="navbar-nav bd-navbar-nav flex-row" >
-          <li class="nav-item">
-            <a class="nav-link " href="../dondeInvierto.html">Home</a>
-          </li>
-          <li class="nav-item">
-           <a class="nav-link active" href="../empresas">Empresas</a>
-         </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/indicadores">Indicadores</a>
-          </li>
-          <li class = "nav-item">
-          <a class="nav-link" href="#">Metodologias</a>
-          </li>
-       </ul>
-     </div>
-
-     <ul class="navbar-nav justify-content-end">
-      <li class="nav-item" >
-        <a class="nav-link" data-toogle="pill"  href="#" role="tab" aria-controls="pills-profile" aria-expanded="true">Contacto</a>
-      </li>
-     </ul>
- </header>
-<div class="conteiner-fluid">
+{{#partial "contenido"}}
 <div class= "row justify-content-center">
       <div class="col-4">
         <h1 class="text-info text-center">Mis Indicadores</h1>
-        <table class="table table-striped">
+        <table class="table table-striped" id="indicadores">
           <thead class="table-inverse">
             <tr>
               <th>#</th>
               <th class="text-center">Nombre</th>
               <th class="text-center">Fórmula</th>
+              <th class="text-center"></th>
             </tr>
           </thead>
           <tbody class="empresas_list">
@@ -64,21 +25,25 @@
    </div>
 
   <div class="row justify-content-center"">
-  <h2 class="text-info text-center">Eliminar Indicador</h2>
+  <h4 class="text-info text-center">Eliminar Indicador</h4>
   </div>
   <div class="row justify-content-center"">
   <div class="col-4">  
-    <form action="/indicadores/eliminar" method="get">
+    <form action="/indicadores/removal" method="post">
      <div class="form-group">
-       <label for="indicador">Nombre indicador a Eliminar</label>
-       <input type="text"  class="form-control is-invalid" id="nombre" placeholder="Nombre" name="nombre">
+       <label for="indicador">Elegir Indicador</label>
+        <select name="indicador">
+          <option value="null" selected="selected"></option>
+          {{#each this}}
+           <option value="{{nombre}}" {{#selected}} selected="selected"{{/selected}}> {{nombre}} </option>
+          {{/each}}
+        </select>
+      <button class="btn btn-primary" type="submit">Eliminar</button>
      </div> 
-     <button class="btn btn-primary" type="submit">Eliminar</button>
+
       </form>
    </div>
  </div>
 
-
-</div>
-</body>
-</html>
+ {{/partial}}
+{{>userspace.hbs}}

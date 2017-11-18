@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
-
-import org.uqbar.commons.utils.Observable;
+import javax.persistence.Transient;
 
 import comparadores.Comparador;
 import model.Empresa;
 import model.Indicador;
 
-@Observable
+@Entity
 public class Taxativa extends TipoCondicion {
 	
+	@Transient
 	private static Taxativa instance ;
 	public int valorRequerido;
 	

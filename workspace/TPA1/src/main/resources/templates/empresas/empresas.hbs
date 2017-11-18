@@ -1,0 +1,53 @@
+{{#partial "contenido"}}
+
+<div class="container-fluid">
+   <div class= "row justify-content-center">
+     	<div class="col-4">
+        <h1 class="text-info text-center">Empresas</h1>
+       	<table class="table table-striped">
+
+         		<thead class="table-inverse">
+    	     		<tr>
+    	     			<th>#</th>
+    	     			<th class="text-center">Nombre</th>
+    	     			<th class="text-center">Cantidad de Cuentas</th>
+                <th class="text-center">Periodos</th>
+                <th class="text-center">Cuentas</th>
+    	     		</tr>
+    			  </thead>
+    			  <tbody class="empresas_list">
+              {{#each empresas}}
+          			<tr>
+                  <form method="GET" action="empresas/cuentas" id="form_{{nombre}}" >
+              					<th scope="row">{{@index}}</th>
+              					<th class="text-center">
+                          <input type="text" name="empresa"
+                          value="{{nombre}}" readonly="readonly"/>
+                        </th>
+              					<th class="text-center">{{cantidad}}</th>
+                        <th class="text-center">
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0"
+                            name="periodo" form="form_{{nombre}}">
+                            <option disabled selected>Seleccionar Periodo</option>
+                            <option name="all" value="all">Todos</option>
+                              {{#each this.periodosSinRepetidos}}
+                              <option name="{{this}}" value="{{this}}">{{this}}</option>
+                              {{/each}}
+                            </select>
+
+                        </th>
+                        <th class="text-center">
+                          <input type="submit" value="Ver cuentas">
+                        </th>
+                    </form>
+          				</tr>
+                {{/each}}
+    			  </tbody>
+       	</table>
+      </div>
+   </div>
+</div>
+
+{{/partial}}
+
+{{>userspace.hbs}}

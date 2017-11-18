@@ -14,19 +14,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
-import org.uqbar.commons.utils.Observable;
-
 import comparadores.Comparador;
 import model.Empresa;
 
-@Observable
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Table(name="TipoCondiciones")
 public class TipoCondicion { //Si senor, clase abstracta para la persistencia en Json.
 
 	@Id @GeneratedValue
 	private Long id;
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST) 
+	
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL) 
 	@OrderColumn
 	public Comparador comparador;
+	
 	public String nombre;
 	
 	public List<Empresa> evaluar(List<Empresa> empresa,List<String> periodos, Condicion condicion){

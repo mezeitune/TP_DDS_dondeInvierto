@@ -15,27 +15,17 @@
     	<class>model.Usuario</class>
     	<class>condiciones.Condicion</class>
     	<class>condiciones.TipoCondicion</class>
-    	<class>condiciones.Comparativa</class>
-    	<class>condiciones.Taxativa</class>
-    	<class>condiciones.Mixta</class>
     	<class>comparadores.Comparador</class>
-    	<class>comparadores.ComparadorMayor</class>
-    	<class>comparadores.ComparadorMayorIgual</class>
-    	<class>comparadores.ComparadorMenor</class>
-    	<class>comparadores.ComparadorMenorIgual</class>
-    
-    	
-    	
+    	<class>metodologiasPredefinidas.WarrenBuffet</class>
   
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
         
          
-            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
+            <property name="hibernate.connection.driver_class" value=" com.mysql.jdbc.Driver" /> 
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dondeInvierto" /> 
             <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="fulopet100" /> 
-
+            <property name="hibernate.connection.password" value="root" />  
 
 <!-- 
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 

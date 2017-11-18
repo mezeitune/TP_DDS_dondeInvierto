@@ -5,20 +5,19 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-
-import org.uqbar.commons.utils.Observable;
+import javax.persistence.Transient;
 
 import model.Empresa;
 
-@Observable
+@Entity
 public class Mixta extends TipoCondicion{
 
+	@Transient
 	private static Mixta instance ;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	
-	@JoinColumn(name = "tipoCondicionComposite_id",nullable = false)//el nullable es para poder eliminar deshabilitando las FK
+	@OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<TipoCondicion> tiposCondiciones = new LinkedList<TipoCondicion> ();
 
 	public Mixta(List<TipoCondicion> tiposCondiciones){

@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import indicadoresPredefinidos.PatrimonioNeto;
 public class JPAUtility {
 	private static JPAUtility instance ;
  	private EntityManagerFactory emFactory;

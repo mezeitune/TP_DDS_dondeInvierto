@@ -2,9 +2,6 @@ package comparadores;
 
 import javax.persistence.Entity;
 
-import org.uqbar.commons.utils.Observable;
-
-@Observable
 @Entity
 public class ComparadorMayorIgual extends Comparador {
 	

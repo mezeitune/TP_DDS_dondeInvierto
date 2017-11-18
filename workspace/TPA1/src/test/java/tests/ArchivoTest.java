@@ -23,7 +23,7 @@ public class ArchivoTest {
 	
 	@Test
  	public void pasarArchivoExistenteYQueFuncioneCorrectamente()  {
-		parserCSV.csvFileToEmpresas("Prueba.csv");
+		parserCSV.getEmpresas("Prueba.csv");
  	    
  	}
  	@Test
@@ -39,7 +39,7 @@ public class ArchivoTest {
  	
 	@Test
  	public void recibeCorrectamente2EmpresasDeUnArchivoCSV() {
- 		List <Empresa> empresasCargadas = parserCSV.csvFileToEmpresas("Prueba.csv");
+ 		List <Empresa> empresasCargadas = parserCSV.getEmpresas("Prueba.csv");
  		assertEquals(2,empresasCargadas.size());
  		
  	}

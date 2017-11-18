@@ -1,46 +1,55 @@
 package model;
 
-
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.uqbar.commons.utils.Observable;
+import Server.Controller.ControllerIndicadores;
 import excepciones.AccountNotFoundException;
 import parserIndicadores.Operacion;
 import parserIndicadores.ParserFormulaIndicador;
 
-@Observable
 @Entity
 @Table(name="Indicadores")
-public class Indicador implements Comparable<Indicador> {
-	@Id @GeneratedValue
-	private Long id;
+public class Indicador extends PersistentObject implements Comparable<Indicador>{
+	
 	protected String nombre;
 	protected String formula;
 	
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	protected Usuario usuario;
+	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	@Transient
 	protected Operacion raiz;
 	
+
+	public Indicador(){
+		
+	}
 	
 	public Indicador(String nombre,String formula){
 		this.nombre=nombre;
 		this.formula=formula;
 	}
 	
-	public Indicador(){
-		
+	public Indicador(String nombre,String formula,Usuario usuario){
+		this.nombre=nombre;
+		this.formula=formula;
+		this.usuario = usuario;
 	}
+	
 	
 	
 	public String getFormula() {
@@ -76,35 +85,36 @@ public class Indicador implements Comparable<Indicador> {
 	public void construirOperadorRaiz(Empresa empresa,String periodo){
 		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
 		parser.setEmpresa(empresa);
-		parser.setPeriodo(periodo);
+		
+		if(!(periodo == null)){
+			parser.setPeriodo(periodo);
+		}
 		
 		try {
 			this.raiz = parser.construirArbolOperaciones(this.formula);
 		} catch (AccountNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ControllerIndicadores.setErrorMessage("Cuenta inexistente en el periodo indicado");
 		}
 	}
 	
-	//Para testear solo indicadores con formulas de numeros
-	public void construirOperadorRaiz() {
+	public int calcular(){
+
+		try{
+			return 	raiz.calcular();
+		}catch (NullPointerException e) {
+			ControllerIndicadores.setErrorMessage("Cuenta inexistente en el periodo indicado");
+		}
+		return 0;
+		
+	}
+	
+	//Para testear solo indicadores con formulas de numeros////////////////////////////////////////
+	public void construirOperadorRaiz() throws NumberFormatException, AccountNotFoundException{
 		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
-		try {
-			this.raiz = parser.construirArbolOperaciones(this.formula);
-		} catch (AccountNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		this.raiz = parser.construirArbolOperaciones(this.formula);
 	}
-	
-	public int calcular() {
-		return raiz.calcular();
-	}
-	
-	public String toString (){
-        String mensaje="El indicador"+id+" es "+nombre+" con la formula: "+formula;
-        return mensaje;
-    }
+	//////////////////////////////////////////////////////////////////////////////////////////////
 
 
 	

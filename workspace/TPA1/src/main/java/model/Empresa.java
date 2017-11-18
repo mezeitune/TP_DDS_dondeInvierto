@@ -8,29 +8,27 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.uqbar.commons.utils.Observable;
 
 
-@Observable
 @Entity
 @Table(name="Empresas")
 public class Empresa {
 
-	@Id @GeneratedValue
-	private Long id;
+	@Id
 	private String nombre;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "empresa_id",nullable = false)//el nullable es para poder eliminar deshabilitando las FK
 	private List<Cuenta> cuentas = new LinkedList<>(); 
 	
-	
+	public Empresa(){
+		
+	}
 	
 	public Empresa(String nombreEmpresa,List<Cuenta> cuentas){
 		this.nombre = nombreEmpresa;
@@ -45,9 +43,7 @@ public class Empresa {
 		return Integer.toString(this.getCuentas().size());
 	}
 	
-	public Empresa(){
-		
-	}
+	
 
 	
 	public String getNombre() {
