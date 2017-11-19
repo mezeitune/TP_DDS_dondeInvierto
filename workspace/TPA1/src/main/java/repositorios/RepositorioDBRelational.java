@@ -49,21 +49,26 @@ public class RepositorioDBRelational<Entity> implements WithGlobalEntityManager 
 	public void commit () {
 		entityManager().getTransaction().commit();
 	}
+	
+	public void rollback() {
+		entityManager().getTransaction().rollback();
+	}
 
 	public void removeAll() {
 		begin();
-		
 		 Query query = entityManager().createNativeQuery(
-		 		"DROP TABLE [dbo].[metodologias_condiciones] "+
-		 		"DROP TABLE [dbo].[Condiciones]"+
-		 		"DROP TABLE [dbo].[TipoCondiciones]"+
-		 		"DROP TABLE [dbo].[Comparadores]"+
-		 		"DROP TABLE [dbo].[Cuentas]"+
-		 		"DROP TABLE [dbo].[Empresas]"+
-		 		"DROP TABLE [dbo].[Metodologias]"+
-		 		"DROP TABLE [dbo].[Indicadores]"+
-		 		"DROP TABLE [dbo].[Usuarios]"
-		 		);
+			 		"DROP TABLE IF EXISTS "+
+			 		"metodologias_condiciones,"+
+			 		"Condiciones,"+
+			 		"TipoCondiciones,"+
+			 		"Comparadores,"+
+			 		"Cuentas,"+
+			 		"Empresas,"+
+			 		"Metodologias,"+
+			 		"Indicadores,"+
+			 		"Usuarios;"
+			 		);
+		
 			      
 		query.executeUpdate();
 		commit();
