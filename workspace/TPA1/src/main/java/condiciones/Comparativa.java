@@ -16,10 +16,11 @@ public class Comparativa extends TipoCondicion{
 	
 	@Transient
 	private static Comparativa instance ;
-
+	
 
 	public Comparativa(Comparador comparador){
 		this.comparador = comparador;
+		this.nombre = "Comparativa";
 	}
 	
 	public Comparativa(){

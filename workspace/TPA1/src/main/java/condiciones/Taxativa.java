@@ -20,6 +20,7 @@ public class Taxativa extends TipoCondicion {
 	public Taxativa(Comparador comparador,int valorRequerido){
 		this.comparador=comparador;
 		this.valorRequerido = valorRequerido;
+		this.nombre = "Taxativa";
 	}
 
 	public Taxativa(){

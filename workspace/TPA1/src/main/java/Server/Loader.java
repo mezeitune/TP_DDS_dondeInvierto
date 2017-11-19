@@ -28,6 +28,8 @@ public class Loader {
 	
 	public static void main(String[] args) {
 		init();
+		System.out.println("Schema completed");
+		System.exit(0);
 	}
 	
 	public static void init(){

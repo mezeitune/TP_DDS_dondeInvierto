@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -18,10 +19,12 @@ public class Mixta extends TipoCondicion{
 	private static Mixta instance ;
 	
 	@OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="mixta_id")
 	private List<TipoCondicion> tiposCondiciones = new LinkedList<TipoCondicion> ();
 
 	public Mixta(List<TipoCondicion> tiposCondiciones){
 			this.tiposCondiciones = tiposCondiciones;
+			this.nombre = "Mixta";
 	}
 	
 	public Mixta(){
