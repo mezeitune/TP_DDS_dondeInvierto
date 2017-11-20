@@ -83,7 +83,26 @@ public class ParserIndicadoresTest {
 		List<Cuenta> cuentas = new LinkedList<Cuenta>();
 		cuentas.add(new Cuenta("EBITDA","2016",50));
 		
-		int resultado = parser.calcularIndicador(indicadorDemandante.getFormula(), empresaSinCuentasSuficientes, "2016");
+		 parser.calcularIndicador(indicadorDemandante.getFormula(), empresaSinCuentasSuficientes, "2016");
+	}
+	
+	@Test
+	public void AccountNotFoundExceptionInformaBienLaCuentaFaltante() {
+		Indicador indicadorDemandante = indicadoresMockeados.get(7);
+		Empresa empresaSinCuentasSuficientes = new Empresa();
+		List<Cuenta> cuentas = new LinkedList<Cuenta>();
+		cuentas.add(new Cuenta("EBITDA","2016",50));
+		empresaSinCuentasSuficientes.setCuentas(cuentas);
+		
+		AccountNotFoundException exception = new AccountNotFoundException();
+		
+		try {
+		parser.calcularIndicador(indicadorDemandante.getFormula(), empresaSinCuentasSuficientes, "2016");
+		}catch(AccountNotFoundException e) {
+			exception = e;
+		}
+		assertEquals("2016",exception.getPeriodo());
+		assertEquals("Revenue",exception.getNombreCuenta());
 	}
 	
 	@After
