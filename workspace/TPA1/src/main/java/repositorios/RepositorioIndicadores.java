@@ -120,11 +120,13 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 	@SuppressWarnings("unchecked")
 	public List<Indicador> getIndicadoresPorUsuario(String username) {
 
+		Query queryIdUsuario = entityManager().createQuery("from Usuario where username= :username");
+		queryIdUsuario.setParameter("username", username);
+		Usuario usuario = (Usuario)queryIdUsuario.getSingleResult();
 		
-		Query queryUsuarios = entityManager().createQuery("from Indicador where usuario_username = :username");
-		queryUsuarios.setParameter("username",username);
-		
-		List<Indicador> indicadores = queryUsuarios.getResultList();
+		Query queryIndicadores = entityManager().createQuery("from Indicador where usuario_id = :user_id");
+		queryIndicadores.setParameter("user_id",usuario.getId());
+		List<Indicador> indicadores = queryIndicadores.getResultList();
 
 		return indicadores;
 	}

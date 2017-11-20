@@ -3,6 +3,7 @@ package model;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -20,6 +21,7 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 	protected String formula;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "usuario_id")
 	protected Usuario usuario;
 	
 
