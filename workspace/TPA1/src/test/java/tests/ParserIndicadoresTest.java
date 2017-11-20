@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 
 import parserIndicadores.ParserFormulaIndicador;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.After;
@@ -73,6 +74,16 @@ public class ParserIndicadoresTest {
 		Indicador indicadorConDistintasOperaciones = indicadoresMockeados.get(6);
 		indicadorConDistintasOperaciones.construirOperadorRaiz(empresa,periodo);
 		assertEquals(198.0,indicadorConDistintasOperaciones.calcular(),0);
+	}
+	
+	@Test(expected = AccountNotFoundException.class)
+	public void UnaEmpresaSinCuentasNecesariasFallaAlCalcularElIndicador() {
+		Indicador indicadorDemandante = indicadoresMockeados.get(7);
+		Empresa empresaSinCuentasSuficientes = new Empresa();
+		List<Cuenta> cuentas = new LinkedList<Cuenta>();
+		cuentas.add(new Cuenta("EBITDA","2016",50));
+		
+		int resultado = parser.calcularIndicador(indicadorDemandante.getFormula(), empresaSinCuentasSuficientes, "2016");
 	}
 	
 	@After

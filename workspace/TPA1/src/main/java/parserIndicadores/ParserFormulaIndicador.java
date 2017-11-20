@@ -25,7 +25,6 @@ public class ParserFormulaIndicador {
 	
 	private static List<Cuenta> cuentasPorPeriodo;
 	
-	
 	private static RepositorioIndicadores repositorio_indicadores=new RepositorioIndicadores();
 	private static RepositorioEmpresas repositorio_empresas=new RepositorioEmpresas();
 	
@@ -77,11 +76,17 @@ public class ParserFormulaIndicador {
 		return this.periodo;
 	}
 	
-	public int getCalculoIndicador(String formula) throws AccountNotFoundException,NumberFormatException{
+	public int calcularIndicador(String formula,Empresa empresa, String periodo)  {
+		this.empresa = empresa;
+		this.setPeriodo(periodo);
+		return getCalculoIndicador(formula);
+	}
+	
+	public int getCalculoIndicador(String formula) {
 			return this.construirArbolOperaciones(formula).calcular();
 	}
 	
-	public Operacion construirArbolOperaciones(String operandos) throws AccountNotFoundException,NumberFormatException{
+	public Operacion construirArbolOperaciones(String operandos) {
 		
 		if(operandos.matches(operadorSumaSplit)) return this.getOperacion(operandos.split("[+]"),new Suma());
 		if(operandos.matches(operadorRestaSplit)) return this.getOperacion(operandos.split("[-]"),new Resta());
@@ -92,7 +97,7 @@ public class ParserFormulaIndicador {
 				
 		}
 	
-	public  Operacion getOperacion(String [] formula,Operacion nuevaOperacion) throws AccountNotFoundException, NumberFormatException{
+	public  Operacion getOperacion(String [] formula,Operacion nuevaOperacion) {
 		List<String> operandos = new LinkedList<>();
 		int i;
 		for(i=0;i<formula.length;i++){
@@ -111,10 +116,17 @@ public class ParserFormulaIndicador {
 	}
 	
 	
-	public Operacion getConstante(String operador) throws AccountNotFoundException, NumberFormatException{
-		if (ParserFormulaIndicador.esIndicador(operador)) return new Constante().setIndicador(this.buscarYObtenerIndicador(operador));
-		if (ParserFormulaIndicador.esCuenta(operador)) return new Constante().setCuenta(this.buscarYObtenerCuenta(operador));
-		return new Constante(Integer.parseInt(operador));
+	public Operacion getConstante(String operador) {
+		Constante constante = new Constante();
+		
+		if(NumberUtils.isNumber(operador)) constante.setConstante(Integer.parseInt(operador));
+		
+		if (ParserFormulaIndicador.esIndicador(operador)) constante.setIndicador(this.buildIndicador(operador));
+		
+		if (ParserFormulaIndicador.esCuenta(operador)) constante.setCuenta(this.buildCuenta(operador));
+		
+		return constante;
+		
 	}
 	
 	public static  boolean esIndicador(String operador){
@@ -125,12 +137,12 @@ public class ParserFormulaIndicador {
 		return nombreCuentas.stream().anyMatch(cuenta -> cuenta.equals(operador));
 	}
 	
-	public  Indicador buscarYObtenerIndicador(String operador){
+	public  Indicador buildIndicador(String operador){
 		return indicadores.stream().filter(indicador -> indicador.getNombre().equals(operador)).collect(Collectors.toList()).get(0);
 	}
 	
-	public Cuenta buscarYObtenerCuenta(String operador) throws AccountNotFoundException{
-		if(!cuentasPorPeriodo.stream().anyMatch(cuenta -> cuenta.getNombre().equals(operador))) throw new AccountNotFoundException();
+	public Cuenta buildCuenta(String operador){
+		if(!cuentasPorPeriodo.stream().anyMatch(cuenta -> cuenta.getNombre().equals(operador))) throw new AccountNotFoundException(this.empresa,this.periodo,operador);
 		return cuentasPorPeriodo.stream().filter(cuenta -> cuenta.getNombre().equals(operador)).collect(Collectors.toList()).get(0);
 	}
 	

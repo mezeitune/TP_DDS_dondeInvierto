@@ -19,6 +19,7 @@ public class IndicadoresMock {
 		this.indicadores.add(new Indicador("IndicadorOperandoConOtroIndicador","IndicadorConSumas-2"));
 		this.indicadores.add(new Indicador("IndicadorConOperacionesDistintas","5-1+2/2-2*3+11"));
 		this.indicadores.add(new Indicador("IndicadorCombinado","EBITDA-2+IndicadorConMultiplicacion-2*1"));
+		this.indicadores.add(new Indicador("IndicadorDemandante","EBITDA+Revenue+Capital Total+Activo-Pasivo"));
 	}
 	
 	
