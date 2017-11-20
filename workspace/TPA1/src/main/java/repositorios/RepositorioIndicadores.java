@@ -132,24 +132,4 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

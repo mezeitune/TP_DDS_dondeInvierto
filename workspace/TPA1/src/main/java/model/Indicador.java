@@ -23,19 +23,9 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "usuario_id")
 	protected Usuario usuario;
-	
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	@Transient
 	protected Operacion raiz;
-	
+
 
 	public Indicador(){
 		
@@ -52,7 +42,13 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 		this.usuario = usuario;
 	}
 	
-	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 	public String getFormula() {
 		return formula;
@@ -77,13 +73,18 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 		return this.raiz;
 	}
 	
+	
+	public IndicadorPrecalculado precalcular(Empresa empresa,String periodo) {
+		int resultado;
+		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
+		try {
+		resultado = parser.calcularIndicador(this.formula,empresa,periodo);
+		}catch(AccountNotFoundException exception) {
+		resultado = -1;
+		}
+		return new IndicadorPrecalculado(empresa,periodo,resultado,this);
+	}
 
-	@Override
-	public int compareTo(Indicador unIndicador) {
-        return this.getNombre().compareTo(unIndicador.getNombre());
-    }
-	
-	
 	public void construirOperadorRaiz(Empresa empresa,String periodo){
 		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
 		parser.setEmpresa(empresa);
@@ -95,7 +96,10 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 		try {
 			this.raiz = parser.construirArbolOperaciones(this.formula);
 		} catch (AccountNotFoundException e) {
-			ControllerIndicadores.setErrorMessage("Cuenta inexistente en el periodo indicado");
+			ControllerIndicadores.setErrorMessage("La empresa " +e.getEmpresa()+
+												  " no contiene la cuenta "+e.getNombreCuenta()+
+												  " en el periodo "+e.getPeriodo()+
+												  " para el indicador " + this.nombre);
 		}
 	}
 	
@@ -117,7 +121,10 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 		this.raiz = parser.construirArbolOperaciones(this.formula);
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////////
-
+	@Override
+	public int compareTo(Indicador unIndicador) {
+        return this.getNombre().compareTo(unIndicador.getNombre());
+    }
 
 	
 }

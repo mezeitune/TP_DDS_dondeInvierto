@@ -58,6 +58,7 @@ public class RepositorioDBRelational<Entity> implements WithGlobalEntityManager 
 		begin();
 		 Query query = entityManager().createNativeQuery(
 			 		"DROP TABLE IF EXISTS "+
+			 		"indicadorprecalculado,"+
 			 		"metodologias_condiciones,"+
 			 		"Condiciones,"+
 			 		"TipoCondiciones,"+

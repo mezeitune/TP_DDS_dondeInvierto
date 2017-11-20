@@ -17,6 +17,7 @@
     	<class>condiciones.TipoCondicion</class>
     	<class>comparadores.Comparador</class>
     	<class>metodologiasPredefinidas.WarrenBuffet</class>
+    	<class>model.IndicadorPrecalculado</class>
 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
