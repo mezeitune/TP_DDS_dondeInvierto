@@ -28,8 +28,7 @@
                         <th class="text-center">
                             <select class="custom-select mb-2 mr-sm-2 mb-sm-0"
                             name="periodo" form="form_{{nombre}}">
-                            <option disabled selected>Seleccionar Periodo</option>
-                            <option name="all" value="all">Todos</option>
+                            <option name="all" value="all" selected>Todos</option>
                               {{#each this.periodosSinRepetidos}}
                               <option name="{{this}}" value="{{this}}">{{this}}</option>
                               {{/each}}
