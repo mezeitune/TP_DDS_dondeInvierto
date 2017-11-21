@@ -17,6 +17,8 @@
     	<class>condiciones.TipoCondicion</class>
     	<class>comparadores.Comparador</class>
     	<class>metodologiasPredefinidas.WarrenBuffet</class>
+    	<class>model.IndicadorPrecalculado</class>
+    	
   
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
@@ -25,7 +27,7 @@
             <property name="hibernate.connection.driver_class" value=" com.mysql.jdbc.Driver" /> 
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dondeInvierto" /> 
             <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="utnutnutn" />  
+            <property name="hibernate.connection.password" value="root" />  
 
 <!-- 
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 

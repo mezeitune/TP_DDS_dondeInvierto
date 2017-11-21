@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import Server.Controller.ControllerIndicadores;
@@ -13,7 +14,9 @@ import excepciones.FormulaIndicadorNotValidException;
 import excepciones.NombreIndicadorVacioError;
 import indicadoresPredefinidos.Antiguedad;
 import indicadoresPredefinidos.PatrimonioNeto;
+import model.Empresa;
 import model.Indicador;
+import model.IndicadorPrecalculado;
 import model.Usuario;
 import parserIndicadores.ParserFormulaIndicador;
 
@@ -71,6 +74,7 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		if(!ParserFormulaIndicador.esFormulaIndicadorValida(formulaIndicador)) throw new FormulaIndicadorNotValidException();
 
 		
+		
 		if (!entityManager().getTransaction().isActive()) {
 			entityManager().getTransaction().begin();
 		} 
@@ -88,17 +92,25 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 	}
 
 	public void eliminarIndicador(String nombreIndicador, Usuario user){
-		
 		List<Indicador> indicadorAEliminar = this.getIndicadoresPorUsuario(user.getUsername()).stream().filter(indic -> indic.getNombre().equals(nombreIndicador)).collect(Collectors.toList());
-		
-				
+
+		eliminarInstanciasIndicador(indicadorAEliminar);
+
+	}
+
+
+	private void eliminarInstanciasIndicador(List<Indicador> indicadorAEliminar) {
 		if (!entityManager().getTransaction().isActive()) {
 			entityManager().getTransaction().begin();
 		} 
-		this.eliminar(indicadorAEliminar.get(0));
-		entityManager().getTransaction().commit();
-		//this.setResultadoIndicador("Se ha eliminado correctamente el indicador :"+ nombreIndicador);
 
+		Query queryIndicador = entityManager().createQuery("delete from IndicadorPrecalculado where indicador_id = :indicador_id");
+		queryIndicador.setParameter("indicador_id", getIndicadorId(indicadorAEliminar.get(0).getNombre()));
+		queryIndicador.executeUpdate();
+		
+		this.eliminar(indicadorAEliminar.get(0));
+		
+		entityManager().getTransaction().commit();
 	}
 	
 	
@@ -129,6 +141,56 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		List<Indicador> indicadores = queryIndicadores.getResultList();
 
 		return indicadores;
+	}
+	
+	public void generarPrecalculado(Indicador indicador, Empresa empresa, String periodo){
+		
+		indicador.construirOperadorRaiz(empresa, periodo);
+		
+		IndicadorPrecalculado indicadorPrecalculado = new IndicadorPrecalculado(empresa,periodo,indicador.calcular(),indicador);
+		
+		
+		if (!entityManager().getTransaction().isActive()) {
+			entityManager().getTransaction().begin();
+		} 
+		
+		this.agregar(indicadorPrecalculado);
+		entityManager().getTransaction().commit();
+		
+		
+	}
+	
+	
+	public long getIndicadorId(String nombre){
+		Query queryIdIndicador = entityManager().createQuery("select id from Indicador where nombre= :nombre ");
+		queryIdIndicador.setParameter("nombre", nombre);
+		return (long) queryIdIndicador.getSingleResult();
+	}
+	
+	public IndicadorPrecalculado getIndicadorPrecalculado(String nombreIndicador,String nombreEmpresa,String periodo){
+		IndicadorPrecalculado indicador;
+		
+		Query queryIndicadorPrecalculado = entityManager().createQuery("from IndicadorPrecalculado where indicador_id= :indicador_id and empresa_id= :empresa_id and periodo= :periodo");
+		queryIndicadorPrecalculado.setParameter("indicador_id", getIndicadorId(nombreIndicador));
+		queryIndicadorPrecalculado.setParameter("empresa_id", new RepositorioEmpresas().getIdEmpresa(nombreEmpresa));
+		queryIndicadorPrecalculado.setParameter("periodo",periodo);
+		
+		try{
+			indicador = (IndicadorPrecalculado) queryIndicadorPrecalculado.getSingleResult();
+		}catch(NoResultException e){
+			
+			return null;
+		}
+		
+		
+		
+		return indicador;
+		
+	}
+
+	public int getResultadoPrecalculado(String nombreIndicador,String nombreEmpresa,String periodo){
+		return getIndicadorPrecalculado(nombreIndicador, nombreEmpresa, periodo).getResultado();
+		
 	}
 	
 	
