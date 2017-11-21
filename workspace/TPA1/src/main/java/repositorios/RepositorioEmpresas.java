@@ -21,6 +21,9 @@ public class RepositorioEmpresas extends RepositorioDBRelational<Empresa> {
 	public RepositorioEmpresas() {
 	}
 	
+
+	
+	
 	public List<Empresa> getEmpresas(){
 		return entityManager().createQuery("from Empresa", Empresa.class).getResultList();
 	}

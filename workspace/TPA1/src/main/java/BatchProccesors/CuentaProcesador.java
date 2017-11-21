@@ -27,7 +27,7 @@ public class CuentaProcesador {
 														.distinct()
 														.collect(Collectors.toList());
 		repositorioEmpresas.begin();
-		repositorioEmpresas.actualizarEmpresas(empresas);
+		repositorioEmpresas.agregarEmpresas(empresas);
 		repositorioEmpresas.commit();
 		System.out.println("Empresas y cuentas cargadas");
 		}
@@ -50,7 +50,7 @@ public class CuentaProcesador {
 	  }
 	  
 	  public static void main(String[] args) {
-			new CuentaProcesador("C:/Users/Manu/Documents/GitHub/2017-jm-group-11/workspace/TPA1/src/main/resources/Cuentas").cargarCuentas();
+			new CuentaProcesador("/home/mezeitune/workspace/2017-jm-group-11/workspace/TPA1/src/main/resources/Cuentas").cargarCuentas();
 		}
 		
 	  
