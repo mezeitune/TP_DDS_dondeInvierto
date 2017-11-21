@@ -4,7 +4,7 @@ import com.opencsv.bean.CsvBind;
 
 
 @SuppressWarnings("deprecation")
-public class CsvEmpresa {
+public class CsvObjectEmpresa {
 
 	
 		@CsvBind
@@ -17,7 +17,7 @@ public class CsvEmpresa {
 		private int valor;
 		
 		
-		public CsvEmpresa init(String empresa, String cuenta, String periodo, int valor){
+		public CsvObjectEmpresa init(String empresa, String cuenta, String periodo, int valor){
 			this.empresa=empresa;
 			this.cuenta=cuenta;
 			this.periodo=periodo;

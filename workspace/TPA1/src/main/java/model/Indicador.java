@@ -80,12 +80,8 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 	public IndicadorPrecalculado precalcular(Empresa empresa,String periodo) throws AccountNotFoundException {
 		int resultado;
 		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
-		try {
 		resultado = parser.calcularIndicador(this.formula,empresa,periodo);
-		}catch(AccountNotFoundException exception) {
-			return new IndicadorPrecalculado(empresa,periodo,0,this,false);
-		}
-		return new IndicadorPrecalculado(empresa,periodo,resultado,this,true);
+		return new IndicadorPrecalculado(empresa,periodo,resultado,this);
 	}
 
 	public void construirOperadorRaiz(Empresa empresa,String periodo){

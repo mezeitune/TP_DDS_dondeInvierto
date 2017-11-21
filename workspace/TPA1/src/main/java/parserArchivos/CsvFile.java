@@ -1,8 +1,5 @@
 package parserArchivos;
 
-import org.uqbar.commons.utils.Observable;
-
-
 public class CsvFile {
 
 	public String nombre;

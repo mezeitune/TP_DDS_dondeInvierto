@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import indicadoresPredefinidos.Antiguedad;
-import indicadoresPredefinidos.PatrimonioNeto;
 import metodologiasPredefinidas.WarrenBuffet;
 import mocks.EmpresasMock;
 import mocks.IndicadoresMock;
@@ -30,7 +28,6 @@ public class Loader {
 	
 	public static void main(String[] args) {
 		init();
-		System.out.println("Schema completed");
 		System.exit(0);
 	}
 	
@@ -38,13 +35,13 @@ public class Loader {
 		List<Empresa> empresas = new EmpresasMock().getEmpresasMockeadas();
 		
 		List<Indicador> indicadores_root = new IndicadoresMock().getIndicadoresMockeados();
-		//List<Indicador> indicadores_root = repositorio_indicadores.getIndicadores();
 		List<Metodologia> metodologias_root = new LinkedList<Metodologia>();
 		metodologias_root.add(WarrenBuffet.getInstance());
 		
 		List<Usuario> usuarios = new LinkedList<Usuario>();
 		
 		Usuario root = new Usuario("root","root");
+		
 		usuarios.add(root);
 		
 		indicadores_root.stream().forEach(indicador -> indicador.setUsuario(root));
@@ -57,7 +54,7 @@ public class Loader {
 		metodologias_root.stream().forEach(metodologia-> repositorio_metodologias.agregar(metodologia));
 		
 		repositorio_global.commit();
-		
+		System.out.println("Schema completed");
 	}	
 	
 }

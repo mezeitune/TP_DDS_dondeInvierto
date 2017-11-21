@@ -3,23 +3,23 @@ package mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import parserArchivos.CsvEmpresa;
+import parserArchivos.CsvObjectEmpresa;
 
 public class ListaLineasCsvFileMock {
 
 	
-	public List<CsvEmpresa> mockearListaLineas(){
-		List <CsvEmpresa> listaLineas = new ArrayList<CsvEmpresa> ();
+	public List<CsvObjectEmpresa> mockearListaLineas(){
+		List <CsvObjectEmpresa> listaLineas = new ArrayList<CsvObjectEmpresa> ();
 		
-		CsvEmpresa linea1 = new CsvEmpresa().init("Facebook","Cuenta 1","2016",14870);
-		CsvEmpresa linea2 = new CsvEmpresa().init("Facebook","Cuenta 2","2015",8162);
-		CsvEmpresa linea3 = new CsvEmpresa().init("Facebook","Cuenta 3","2016",11617);
-		CsvEmpresa linea4 = new CsvEmpresa().init("Facebook","Cuenta 4","2016",27638);
-		CsvEmpresa linea5 = new CsvEmpresa().init("Facebook","Cuenta 5","2014",7000);
-		CsvEmpresa linea6 = new CsvEmpresa().init("Apple","Cuenta 1","2016",52276);
-		CsvEmpresa linea7 = new CsvEmpresa().init("Apple","Cuenta 2","2015",65824);
-		CsvEmpresa linea8 = new CsvEmpresa().init("Apple","Cuenta 3","2015",30512);
-		CsvEmpresa linea9 = new CsvEmpresa().init("Apple","Cuenta 4","2015",15420);
+		CsvObjectEmpresa linea1 = new CsvObjectEmpresa().init("Facebook","Cuenta 1","2016",14870);
+		CsvObjectEmpresa linea2 = new CsvObjectEmpresa().init("Facebook","Cuenta 2","2015",8162);
+		CsvObjectEmpresa linea3 = new CsvObjectEmpresa().init("Facebook","Cuenta 3","2016",11617);
+		CsvObjectEmpresa linea4 = new CsvObjectEmpresa().init("Facebook","Cuenta 4","2016",27638);
+		CsvObjectEmpresa linea5 = new CsvObjectEmpresa().init("Facebook","Cuenta 5","2014",7000);
+		CsvObjectEmpresa linea6 = new CsvObjectEmpresa().init("Apple","Cuenta 1","2016",52276);
+		CsvObjectEmpresa linea7 = new CsvObjectEmpresa().init("Apple","Cuenta 2","2015",65824);
+		CsvObjectEmpresa linea8 = new CsvObjectEmpresa().init("Apple","Cuenta 3","2015",30512);
+		CsvObjectEmpresa linea9 = new CsvObjectEmpresa().init("Apple","Cuenta 4","2015",15420);
 		
 		listaLineas.add(linea1);
 		listaLineas.add(linea2);

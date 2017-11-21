@@ -13,10 +13,7 @@ public class Cleanear {
 	}
 	
 	public static void init(){
-	
 		repositorio_global.removeAll();
-		
 		System.out.println("Schema droped");
-		
 	}
 }

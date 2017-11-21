@@ -25,18 +25,12 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 	
 	public List<Indicador> getIndicadores(){
 		List<Indicador> indicadores = new LinkedList<Indicador>();
-		this.cargarIndicadores(indicadores);
+		indicadores.addAll(getIndicadoresCustoms());
+		indicadores.addAll(getIndicadoresPredefinidos());
 		return indicadores;
 	}
-	
-
-	public List<String> getNombreIndicadores(){
-		return this.getIndicadores().stream().map(indicador -> indicador.getNombre())
-													 .collect(Collectors.toList());
-	}
-	
 	@SuppressWarnings("unchecked")
-	public List<Indicador> getIndicadoresDefinidosPorElUsuario() {
+	public List<Indicador> getIndicadoresCustoms() {
 		Query queryIndicadores = entityManager().createQuery("from Indicador"); 
 		return queryIndicadores.getResultList(); 
 	}
@@ -48,10 +42,12 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		return indicadoresPredefinidos;
 	}
 	
-	public void cargarIndicadores(List<Indicador> indicadores) {
-		this.getIndicadoresPredefinidos().stream().forEach(indicadorPredefinido -> indicadores.add(indicadorPredefinido));
-		this.getIndicadoresDefinidosPorElUsuario().stream().forEach(indicadorDefinidoPorUsuario -> indicadores.add(indicadorDefinidoPorUsuario));
+
+	public List<String> getNombreIndicadores(){
+		return this.getIndicadores().stream().map(indicador -> indicador.getNombre())
+											 .collect(Collectors.toList());
 	}
+	
 	public boolean validarIndicadorRepetidoAntesCargar(String nombre , String formula) {
 		List<Indicador> indicadoresRepetidos = this.getIndicadores().stream().filter(line -> line.getNombre().equals(nombre)).collect(Collectors.toList());
 		return indicadoresRepetidos.size() >= 1;
@@ -143,12 +139,12 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		return indicadores;
 	}
 	
+	//TODO: Sacar begin y commit
 	public void generarPrecalculado(Indicador indicador, Empresa empresa, String periodo){
 		
 		indicador.construirOperadorRaiz(empresa, periodo);
 		
-		IndicadorPrecalculado indicadorPrecalculado = new IndicadorPrecalculado(empresa,periodo,indicador.calcular(),indicador,true);
-		
+		IndicadorPrecalculado indicadorPrecalculado = new IndicadorPrecalculado(empresa,periodo,indicador.calcular(),indicador);
 		
 		if (!entityManager().getTransaction().isActive()) {
 			entityManager().getTransaction().begin();
@@ -156,8 +152,6 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		
 		this.agregar(indicadorPrecalculado);
 		entityManager().getTransaction().commit();
-		
-		
 	}
 	
 	

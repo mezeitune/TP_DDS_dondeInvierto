@@ -6,10 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name="Indicadores_Precalculados")
 public class IndicadorPrecalculado extends PersistentObject {
 
 	@ManyToOne
@@ -21,15 +22,12 @@ public class IndicadorPrecalculado extends PersistentObject {
 	private String periodo;
 	private int resultado;
 	
-	@Transient
-	boolean flagResultado;
 
-	public IndicadorPrecalculado(Empresa empresa, String periodo, int resultado,Indicador indicador, boolean flag) {
+	public IndicadorPrecalculado(Empresa empresa, String periodo, int resultado,Indicador indicador) {
 		this.empresa = empresa;
 		this.periodo = periodo;
 		this.resultado = resultado;
 		this.indicador = indicador;
-		this.flagResultado = flag;
 	}
 
 	public IndicadorPrecalculado(){
@@ -49,11 +47,5 @@ public class IndicadorPrecalculado extends PersistentObject {
 	public Empresa getEmpresa() {
 		return empresa;
 	}
-	public boolean getFlag() {
-		return flagResultado;
-	}
-
-	
-	
 
 }

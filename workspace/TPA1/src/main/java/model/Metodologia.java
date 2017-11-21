@@ -30,7 +30,7 @@ public class Metodologia extends PersistentObject{
 	private String nombre;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)  
-    @JoinTable(name="metodologias_condiciones", joinColumns=@JoinColumn(name="metodologia_id"), inverseJoinColumns=@JoinColumn(name="condicion_id"))  
+    @JoinTable(name="Metodologias_Condiciones", joinColumns=@JoinColumn(name="metodologia_id"), inverseJoinColumns=@JoinColumn(name="condicion_id"))  
 	private List<Condicion> condiciones = new LinkedList<Condicion>();
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
