@@ -58,7 +58,7 @@ public class ControllerIndicadores {
 			indicador = new Indicador(nombreIndicador,formulaIndicador,user);
 		
 		try {
-			repositorio_indicadores.generarIndicador(indicador/*nombreIndicador, formulaIndicador,user*/);
+			repositorio_indicadores.generarIndicador(indicador);
 		} catch (NombreIndicadorVacioError  e) {
 			setErrorMessage("Nombre de indicador ya existente");
 			}
@@ -108,21 +108,30 @@ public class ControllerIndicadores {
 		String periodo = request.queryParams("periodo");
 		
 		if(!(nombreIndicador == null || nombreEmpresa == null)){
+			if(repositorio_indicadores.getIndicadorPrecalculado(nombreIndicador,nombreEmpresa,periodo) == null){
 		
-			Indicador indicador = repositorio_indicadores.getIndicador(nombreIndicador, request.session().attribute("usuario"));
-			Empresa empresa = repositorio_empresas.getEmpresa(nombreEmpresa);
 		
-			try{
-				indicador.construirOperadorRaiz(empresa,periodo);
-				resultado = indicador.calcular();
-			} catch (NumberFormatException e) {
-				setErrorMessage("Fallo calculo del indicador, Indicador en formula inexistente/eliminado");
-			} catch (NullPointerException e){
-				setErrorMessage("Debe seleccionar un indicador y una empresa");
-			}
+				Indicador indicador = repositorio_indicadores.getIndicador(nombreIndicador, request.session().attribute("usuario"));
+				Empresa empresa = repositorio_empresas.getEmpresa(nombreEmpresa);
+		
 			
-		}
-
+			
+				try{
+					indicador.construirOperadorRaiz(empresa,periodo);
+					resultado = indicador.calcular();
+				
+					repositorio_indicadores.generarPrecalculado(indicador,empresa,periodo);
+				
+				
+				} catch (NumberFormatException e) {
+					setErrorMessage("Fallo calculo del indicador, Indicador en formula inexistente/eliminado");
+				} catch (NullPointerException e){
+					setErrorMessage("Debe seleccionar un indicador y una empresa");
+				}
+			
+			} else resultado = repositorio_indicadores.getResultadoPrecalculado(nombreIndicador, nombreEmpresa, periodo);
+		} 
+		
 		diccionario.put("indicadores", indicadores);
 		diccionario.put("periodos", diccionarioPeriodos);
 		diccionario.put("resultado", String.valueOf(resultado));
@@ -138,6 +147,8 @@ public class ControllerIndicadores {
 		indicadores = repositorio_indicadores.getIndicadoresPorUsuario(request.session().attribute("usuario"));
 		return indicadores;
 	}
+	
+	
 	
 	
 	

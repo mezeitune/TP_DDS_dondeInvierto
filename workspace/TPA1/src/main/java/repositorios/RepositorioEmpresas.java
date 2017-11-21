@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.Query;
 
 import model.Cuenta;
 import model.Empresa;
@@ -72,6 +73,13 @@ public class RepositorioEmpresas extends RepositorioDBRelational<Empresa> {
 			diccionarioPeriodos.put(empresas.get(i).getNombre(), periodos.get(i));
 		}
 		return diccionarioPeriodos;
+		
+	}
+	
+	public long getIdEmpresa(String nombre){
+		Query queryIdEmpresa = entityManager().createQuery("select id from Empresa where nombre= :nombre ");
+		queryIdEmpresa.setParameter("nombre", nombre);
+		return (long) queryIdEmpresa.getSingleResult();
 		
 	}
 	
