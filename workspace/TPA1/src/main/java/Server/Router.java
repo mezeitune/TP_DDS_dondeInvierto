@@ -34,7 +34,8 @@ public class Router {
 		    
 		    Spark.get("login", ControllerLogin::mostrarLogin,engine);
 			Spark.post("login/entry", ControllerLogin::crearSessionDeLogin,engine);
-			Spark.post("login/clear", ControllerLogin::eliminarSessionDeLogin,engine);
+			Spark.post("logout", ControllerLogin::eliminarSessionDeLogin,engine);
+			
 			
 
 			Spark.get("empresas", ControllerCuentas::consultarEmpresas,engine);
