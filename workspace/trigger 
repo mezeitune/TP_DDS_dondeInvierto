@@ -1,0 +1,21 @@
+Ponerlo en la bd despues de correr el proyecto , asi ya estan las tablas creadas
+
+delimiter //
+
+
+drop trigger if exists aborting_trigger ;
+create trigger aborting_trigger before insert on Cuentas
+for each row
+begin
+  set @found := false;
+  select true into @found from Cuentas where nombre=new.nombre and valor=new.valor and periodo=new.periodo and  empresa_id=new.empresa_id;
+ -- o   if((select count(*) from Cuentas where nombre=new.nombre and valor=new.valor and periodo=new.periodo and  empresa_id=new.empresa_id)>1) then
+
+  if @found then
+      signal sqlstate '45000' set message_text = 'duplicate insert';
+  end if;
+end   //
+
+
+
+delimiter ;
