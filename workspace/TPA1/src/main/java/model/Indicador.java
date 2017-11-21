@@ -3,6 +3,8 @@ package model;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,6 +17,7 @@ import parserIndicadores.ParserFormulaIndicador;
 
 @Entity
 @Table(name="Indicadores")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Indicador extends PersistentObject implements Comparable<Indicador>{
 	
 	protected String nombre;
@@ -74,15 +77,15 @@ public class Indicador extends PersistentObject implements Comparable<Indicador>
 	}
 	
 	
-	public IndicadorPrecalculado precalcular(Empresa empresa,String periodo) {
+	public IndicadorPrecalculado precalcular(Empresa empresa,String periodo) throws AccountNotFoundException {
 		int resultado;
 		ParserFormulaIndicador parser = ParserFormulaIndicador.getInstance();
 		try {
 		resultado = parser.calcularIndicador(this.formula,empresa,periodo);
 		}catch(AccountNotFoundException exception) {
-		resultado = -1;
+			return new IndicadorPrecalculado(empresa,periodo,0,this,false);
 		}
-		return new IndicadorPrecalculado(empresa,periodo,resultado,this);
+		return new IndicadorPrecalculado(empresa,periodo,resultado,this,true);
 	}
 
 	public void construirOperadorRaiz(Empresa empresa,String periodo){

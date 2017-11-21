@@ -107,29 +107,29 @@ public class ControllerIndicadores {
 		String nombreEmpresa = request.queryParams("empresa");
 		String periodo = request.queryParams("periodo");
 		
-		if(!(nombreIndicador == null || nombreEmpresa == null)){
-			if(repositorio_indicadores.getIndicadorPrecalculado(nombreIndicador,nombreEmpresa,periodo) == null){
 		
 		
-				Indicador indicador = repositorio_indicadores.getIndicador(nombreIndicador, request.session().attribute("usuario"));
-				Empresa empresa = repositorio_empresas.getEmpresa(nombreEmpresa);
-		
+		if(!(nombreIndicador == null || nombreEmpresa == null || periodo == null)){
+			if(!(nombreIndicador.equals("null") || nombreEmpresa.equals("null") || periodo.equals("null"))){
+				if(repositorio_indicadores.getIndicadorPrecalculado(nombreIndicador,nombreEmpresa,periodo) == null){
+				
+					Indicador indicador = repositorio_indicadores.getIndicador(nombreIndicador, request.session().attribute("usuario"));
+					Empresa empresa = repositorio_empresas.getEmpresa(nombreEmpresa);
 			
 			
-				try{
-					indicador.construirOperadorRaiz(empresa,periodo);
-					resultado = indicador.calcular();
+					try{
+						indicador.construirOperadorRaiz(empresa,periodo);
+						resultado = indicador.calcular();
 				
-					repositorio_indicadores.generarPrecalculado(indicador,empresa,periodo);
+						repositorio_indicadores.generarPrecalculado(indicador,empresa,periodo);
 				
 				
-				} catch (NumberFormatException e) {
-					setErrorMessage("Fallo calculo del indicador, Indicador en formula inexistente/eliminado");
-				} catch (NullPointerException e){
-					setErrorMessage("Debe seleccionar un indicador y una empresa");
-				}
+					} catch (NumberFormatException e) {
+						setErrorMessage("Fallo calculo del indicador, Indicador en formula inexistente/eliminado");
+					}
 			
-			} else resultado = repositorio_indicadores.getResultadoPrecalculado(nombreIndicador, nombreEmpresa, periodo);
+				} else resultado = repositorio_indicadores.getResultadoPrecalculado(nombreIndicador, nombreEmpresa, periodo);
+			} else setErrorMessage("Debe seleccionar un indicador,empresa y periodo");
 		} 
 		
 		diccionario.put("indicadores", indicadores);
@@ -140,7 +140,7 @@ public class ControllerIndicadores {
 		return new ModelAndView(diccionario,"evaluarIndicador.hbs");
 	}
 
-
+		
 	private static List<Indicador> getIndicadoresUsuarioActual(Request request) {
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();

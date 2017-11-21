@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
 import Server.Controller.ControllerIndicadores;
@@ -107,7 +108,6 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		Query queryIndicador = entityManager().createQuery("delete from IndicadorPrecalculado where indicador_id = :indicador_id");
 		queryIndicador.setParameter("indicador_id", getIndicadorId(indicadorAEliminar.get(0).getNombre()));
 		queryIndicador.executeUpdate();
-		
 		this.eliminar(indicadorAEliminar.get(0));
 		
 		entityManager().getTransaction().commit();
@@ -147,7 +147,7 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		
 		indicador.construirOperadorRaiz(empresa, periodo);
 		
-		IndicadorPrecalculado indicadorPrecalculado = new IndicadorPrecalculado(empresa,periodo,indicador.calcular(),indicador);
+		IndicadorPrecalculado indicadorPrecalculado = new IndicadorPrecalculado(empresa,periodo,indicador.calcular(),indicador,true);
 		
 		
 		if (!entityManager().getTransaction().isActive()) {
@@ -162,9 +162,13 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 	
 	
 	public long getIndicadorId(String nombre){
-		Query queryIdIndicador = entityManager().createQuery("select id from Indicador where nombre= :nombre ");
+		Query queryIdIndicador = entityManager().createQuery("select id from Indicador where nombre= :nombre and usuario_id != null");
 		queryIdIndicador.setParameter("nombre", nombre);
-		return (long) queryIdIndicador.getSingleResult();
+		try{
+			return (long) queryIdIndicador.getSingleResult();
+		}catch (NoResultException e) {
+		}
+		return 0;
 	}
 	
 	public IndicadorPrecalculado getIndicadorPrecalculado(String nombreIndicador,String nombreEmpresa,String periodo){
@@ -174,16 +178,14 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		queryIndicadorPrecalculado.setParameter("indicador_id", getIndicadorId(nombreIndicador));
 		queryIndicadorPrecalculado.setParameter("empresa_id", new RepositorioEmpresas().getIdEmpresa(nombreEmpresa));
 		queryIndicadorPrecalculado.setParameter("periodo",periodo);
-		
+
 		try{
 			indicador = (IndicadorPrecalculado) queryIndicadorPrecalculado.getSingleResult();
-		}catch(NoResultException e){
+		}catch(NoResultException  | NonUniqueResultException e){
 			
 			return null;
 		}
-		
-		
-		
+
 		return indicador;
 		
 	}
@@ -193,5 +195,26 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 		
 	}
 	
+	public boolean validarExistenciaIndicadorPrecalculado(String nombreIndicador,String nombreEmpresa,String periodo){
+		
+		Query queryIndicadorPrecalculado = entityManager().createQuery("from IndicadorPrecalculado where indicador_id= :indicador_id and empresa_id= :empresa_id and periodo= :periodo");
+		queryIndicadorPrecalculado.setParameter("indicador_id", getIndicadorId(nombreIndicador));
+		if(getIndicadorId(nombreIndicador) == 0) return true;
+		queryIndicadorPrecalculado.setParameter("empresa_id", new RepositorioEmpresas().getIdEmpresa(nombreEmpresa));
+		queryIndicadorPrecalculado.setParameter("periodo",periodo);
+		
+		return queryIndicadorPrecalculado.getResultList().size() > 0;
+			
+	}
+	
+	public void updateResultadoIndicador(IndicadorPrecalculado indicador){
+		Query updateIndicadorPrecalculado = entityManager().createQuery("update IndicadorPrecalculado set resultado= :r where indicador_id= :indicador_id and empresa_id= :empresa_id and periodo= :periodo");
+		updateIndicadorPrecalculado.setParameter("indicador_id", getIndicadorId(indicador.getIndicador().getNombre()));
+		updateIndicadorPrecalculado.setParameter("empresa_id", new RepositorioEmpresas().getIdEmpresa(indicador.getEmpresa().getNombre()));
+		updateIndicadorPrecalculado.setParameter("periodo",indicador.getPeriodo());
+		updateIndicadorPrecalculado.setParameter("r",indicador.getResultado());
+		updateIndicadorPrecalculado.executeUpdate();
+		
+	}
 	
 }

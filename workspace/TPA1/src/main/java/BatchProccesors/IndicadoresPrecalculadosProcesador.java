@@ -39,7 +39,19 @@ public class IndicadoresPrecalculadosProcesador {
 		List<IndicadorPrecalculado> indicadoresPrecalculados = new LinkedList<IndicadorPrecalculado>();
 		
 		empresa.getPeriodosSinRepetidos().stream().forEach(periodo->indicadoresPrecalculados.add(indicador.precalcular(empresa,periodo)));
-		
-		indicadoresPrecalculados.stream().forEach(indicadorPrecalculado -> repositorio_indicadores.agregar(indicadorPrecalculado));
+
+	
+		for (int i = 0; i < indicadoresPrecalculados.size(); i++) {
+			IndicadorPrecalculado indicadorPrecalculado = indicadoresPrecalculados.get(i);
+			String nomIndic = indicadorPrecalculado.getIndicador().getNombre();
+			String periodo = indicadorPrecalculado.getPeriodo();
+			
+			if(indicadorPrecalculado.getFlag()){
+				if(!repositorio_indicadores.validarExistenciaIndicadorPrecalculado(nomIndic, empresa.getNombre(), periodo)){
+					repositorio_indicadores.agregar(indicadorPrecalculado);
+				}else repositorio_indicadores.updateResultadoIndicador(indicadorPrecalculado);
+			}
+			
+		}
 	}
 }

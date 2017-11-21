@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import indicadoresPredefinidos.Antiguedad;
+import indicadoresPredefinidos.PatrimonioNeto;
 import metodologiasPredefinidas.WarrenBuffet;
 import mocks.EmpresasMock;
 import mocks.IndicadoresMock;
@@ -36,7 +38,7 @@ public class Loader {
 		List<Empresa> empresas = new EmpresasMock().getEmpresasMockeadas();
 		
 		List<Indicador> indicadores_root = new IndicadoresMock().getIndicadoresMockeados();
-		
+		//List<Indicador> indicadores_root = repositorio_indicadores.getIndicadores();
 		List<Metodologia> metodologias_root = new LinkedList<Metodologia>();
 		metodologias_root.add(WarrenBuffet.getInstance());
 		
