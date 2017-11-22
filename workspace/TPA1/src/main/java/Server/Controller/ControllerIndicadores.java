@@ -144,7 +144,6 @@ public class ControllerIndicadores {
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
 		indicadores = repositorio_indicadores.getIndicadoresPorUsuario(request.session().attribute("usuario"));
-		indicadores.addAll(repositorio_indicadores.getIndicadoresPredefinidos());
 		return indicadores;
 	}
 	
