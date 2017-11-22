@@ -156,7 +156,7 @@ public class RepositorioIndicadores extends RepositorioDBRelational<Indicador> {
 	
 	
 	public long getIndicadorId(String nombre){
-		Query queryIdIndicador = entityManager().createQuery("select id from Indicador where nombre= :nombre and usuario_id != null");
+		Query queryIdIndicador = entityManager().createQuery("select id from Indicador where nombre= :nombre");
 		queryIdIndicador.setParameter("nombre", nombre);
 		try{
 			return (long) queryIdIndicador.getSingleResult();

@@ -36,7 +36,7 @@ public class ControllerLogin {
 		
 		String username = request.queryParams("usuario");
 		String password = request.queryParams("contrasena");
-        if (username != null && repositorio_usuarios.usuarioExistente(username)) {
+        if (username != null && repositorio_usuarios.usuarioExistente(username) && !username.equals("gen")) {
         	if(repositorio_usuarios.logeoCorrecto(username, password)){
         		request.session().attribute("usuario", username);
         		response.redirect("/empresas");

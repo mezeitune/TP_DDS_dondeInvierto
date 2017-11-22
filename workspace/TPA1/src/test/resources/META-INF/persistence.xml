@@ -18,6 +18,8 @@
     	<class>comparadores.Comparador</class>
     	<class>metodologiasPredefinidas.WarrenBuffet</class>
     	<class>model.IndicadorPrecalculado</class>
+    	<class>indicadoresPredefinidos.PatrimonioNeto</class>
+    	<class>indicadoresPredefinidos.Antiguedad</class>
 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        

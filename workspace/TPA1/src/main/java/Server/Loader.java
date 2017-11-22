@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import indicadoresPredefinidos.PatrimonioNeto;
 import metodologiasPredefinidas.WarrenBuffet;
 import mocks.EmpresasMock;
 import mocks.IndicadoresMock;
@@ -41,12 +42,11 @@ public class Loader {
 		List<Usuario> usuarios = new LinkedList<Usuario>();
 		
 		Usuario root = new Usuario("root","root");
-		
 		usuarios.add(root);
 		
 		indicadores_root.stream().forEach(indicador -> indicador.setUsuario(root));
 		metodologias_root.stream().forEach(metodologia -> metodologia.setUsuario(root));
-		
+		indicadores_root.add(PatrimonioNeto.getInstance());
 		repositorio_global.begin();
 		usuarios.forEach(usuario -> repositorio_usuarios.agregar(usuario));
 		empresas.stream().forEach(empresa -> repositorio_empresas.agregar(empresa));

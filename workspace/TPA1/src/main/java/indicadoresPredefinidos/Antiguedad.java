@@ -4,14 +4,21 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+
 import model.Empresa;
 import model.Indicador;
 import parserIndicadores.Constante;
-
+import repositorios.RepositorioUsuarios;
+@Entity
 public class Antiguedad extends Indicador {
 	
+	
 	private static Antiguedad instance ;
+	@Transient
 	public Empresa empresa;
+	@Transient
 	int anioActual; /*TODO: Hardcodeado para testear*/
 
 	public void setAnioActual(int anoActual) {
@@ -21,6 +28,7 @@ public class Antiguedad extends Indicador {
 	public Antiguedad(){
 		this.nombre = "Antiguedad";
 		this.formula = "Edad de la Empresa";
+		this.usuario = RepositorioUsuarios.getGen();
 	}
 	
 	public void setEmpresa(Empresa empresa){

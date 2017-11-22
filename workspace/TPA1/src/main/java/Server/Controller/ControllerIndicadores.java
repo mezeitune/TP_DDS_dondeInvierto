@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import excepciones.AccountNotFoundException;
 import excepciones.DatoRepetidoException;
 import excepciones.FormulaIndicadorVacioError;
 import excepciones.FormulaIndicadorNotValidException;
@@ -54,7 +53,7 @@ public class ControllerIndicadores {
 		Usuario user; 
 		
 		if(!(nombreIndicador == null && formulaIndicador == null )){
-			user = repositorio_usuarios.obtenerUsuario(username);
+			user = repositorio_usuarios.getUsuario(username);
 			indicador = new Indicador(nombreIndicador,formulaIndicador,user);
 		
 		try {
@@ -81,7 +80,7 @@ public class ControllerIndicadores {
 	public static ModelAndView eliminarIndicador(Request request,Response response) {
 		String nombreIndicador = request.queryParams("indicador");
 		
-		Usuario user = repositorio_usuarios.obtenerUsuario(request.session().attribute("usuario"));
+		Usuario user = repositorio_usuarios.getUsuario(request.session().attribute("usuario"));
 		List<Indicador> indicadores = getIndicadoresUsuarioActual(request);
 	
 		if(nombreIndicador != null)	repositorio_indicadores.eliminarIndicador(nombreIndicador,user);
@@ -145,6 +144,7 @@ public class ControllerIndicadores {
 		
 		List<Indicador> indicadores = new LinkedList<Indicador>();
 		indicadores = repositorio_indicadores.getIndicadoresPorUsuario(request.session().attribute("usuario"));
+		indicadores.addAll(repositorio_indicadores.getIndicadoresPredefinidos());
 		return indicadores;
 	}
 	

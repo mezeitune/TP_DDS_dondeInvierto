@@ -16,6 +16,7 @@ import condiciones.TipoCondicion;
 import indicadoresPredefinidos.Antiguedad;
 import model.Indicador;
 import model.Metodologia;
+import repositorios.RepositorioUsuarios;
 
 @Entity
 public class WarrenBuffet extends Metodologia{
@@ -41,18 +42,19 @@ public class WarrenBuffet extends Metodologia{
 	public List<Condicion> inicializarCondiciones(){
 		List<Condicion> condicionesPredefinidas = new LinkedList<Condicion>();
 		
+		
 		int pesoRoe = 10;
-		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total");
+		Indicador roe = new Indicador("ROE","Ingreso Neto-Dividendos/Capital Total", RepositorioUsuarios.getGen());
 		Condicion maximizarROE = new Condicion("maximizarRoe",new Comparativa(new ComparadorMayor()),roe,pesoRoe);
 		condicionesPredefinidas.add(maximizarROE);		
 		
 		int pesoNivelDeuda=5;
-		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo");
+		Indicador nivelDeuda = new Indicador ("Nivel de deuda","Activo/Pasivo",RepositorioUsuarios.getGen());
 		Condicion minimizarDeuda = new Condicion("minimizarDeuda",new Comparativa(new ComparadorMenor()),nivelDeuda,pesoNivelDeuda);
 		condicionesPredefinidas.add(minimizarDeuda);
 		
 		int pesoMargenesCrecientes=20;
-		Indicador margen = new Indicador ("Margen","Activo/Capital Total");
+		Indicador margen = new Indicador ("Margen","Activo/Capital Total", RepositorioUsuarios.getGen());
 		Condicion margenesCrecientes = new Condicion("margenesCrecientes",new Comparativa(new ComparadorMayor()),margen,pesoMargenesCrecientes);
 		condicionesPredefinidas.add(margenesCrecientes);
 		
@@ -61,7 +63,7 @@ public class WarrenBuffet extends Metodologia{
 		List<TipoCondicion> tiposCondiciones = new LinkedList<TipoCondicion>();
 		tiposCondiciones.add(new Comparativa(new ComparadorMayor()));
 		tiposCondiciones.add(new Taxativa(new ComparadorMenor(),anosRequeridos));
-		Condicion longevidad = new Condicion("longevidad",new Mixta(tiposCondiciones),new Antiguedad(),pesoLongevidad);
+		Condicion longevidad = new Condicion("longevidad",new Mixta(tiposCondiciones),Antiguedad.getInstance(),pesoLongevidad);
 		condicionesPredefinidas.add(longevidad);
 		
 		return condicionesPredefinidas;
