@@ -1,4 +1,4 @@
-package Server;
+package procesosBatch;
 
 import javax.persistence.EntityManager;
 import repositorios.RepositorioDBRelational;

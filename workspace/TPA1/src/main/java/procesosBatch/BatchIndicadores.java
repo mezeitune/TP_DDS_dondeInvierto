@@ -1,8 +1,10 @@
-package BatchProccesors;
+package procesosBatch;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import Logger.LogPrecalculoIndicadores;
 import excepciones.AccountNotFoundException;
 import model.Empresa;
 import model.Indicador;
@@ -10,19 +12,26 @@ import model.IndicadorPrecalculado;
 import repositorios.RepositorioEmpresas;
 import repositorios.RepositorioIndicadores;
 
-public class IndicadoresPrecalculadosProcesador {
+public class BatchIndicadores {
 
 	private static List<Empresa> empresas;
 	private static List<Indicador> indicadores;
 	private static RepositorioEmpresas repositorio_empresas = new RepositorioEmpresas();
 	private static RepositorioIndicadores repositorio_indicadores = new RepositorioIndicadores();
+	private static LogPrecalculoIndicadores log;
 	
 	public static void main(String[] args) {
-		new IndicadoresPrecalculadosProcesador().init();
+		new BatchIndicadores().init();
 		System.exit(0);
 	}
 	
 	private void init() {
+		try {
+			log = new LogPrecalculoIndicadores();
+		} catch (SecurityException | IOException e) {
+			System.out.println("Error al crear el Log");
+			System.exit(0);
+		}
 		indicadores = repositorio_indicadores.getIndicadores();
 		empresas = repositorio_empresas.getEmpresas();
 		
@@ -44,7 +53,6 @@ public class IndicadoresPrecalculadosProcesador {
 		indicadoresPrecalculados.stream().forEach(indicadorPrecalculado -> persistir(indicadorPrecalculado,empresa));
 	}
 	
-	//TODO: Hacer Log para esos indicadores que no pudieron calcularse en una empresa y periodo.
 	private void precalcularEn(List<IndicadorPrecalculado> indicadoresPrecalculados,Empresa empresa, String periodo,Indicador indicador){
 		IndicadorPrecalculado indicadorPrecalculado = new IndicadorPrecalculado();
 		
@@ -52,9 +60,10 @@ public class IndicadoresPrecalculadosProcesador {
 			indicadorPrecalculado = indicador.precalcular(empresa, periodo);
 			indicadoresPrecalculados.add(indicadorPrecalculado);
 		}catch (AccountNotFoundException exception) {
-			System.out.println("El indicador "+indicador.getNombre()+" no pudo ser calculado en la empresa "
-								+exception.getEmpresa().getNombre()+" para el periodo "+exception.getPeriodo()
-								+" porque no tiene la cuenta "+exception.getNombreCuenta());
+			log.loguearPrecalculoInvalido(indicador.getNombre(), 
+										  exception.getEmpresa().getNombre(), 
+										  exception.getPeriodo(), 
+										  exception.getNombreCuenta());
 		}
 	}
 	

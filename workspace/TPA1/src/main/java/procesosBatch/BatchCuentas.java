@@ -1,4 +1,4 @@
-package BatchProccesors;
+package procesosBatch;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -9,13 +9,13 @@ import model.Empresa;
 import parserArchivos.ParserCsv;
 import repositorios.RepositorioEmpresas;
 
-public class CuentaProcesador {
+public class BatchCuentas {
 
 	private RepositorioEmpresas repositorioEmpresas = new RepositorioEmpresas();
 	private ParserCsv parser = new ParserCsv();
 	private static File folder;
 	
-	public CuentaProcesador(String directorio)
+	public BatchCuentas(String directorio)
 	{
 		folder= new File(directorio);
 	}
@@ -50,7 +50,7 @@ public class CuentaProcesador {
 	  }
 	  
 	  public static void main(String[] args) {
-			new CuentaProcesador("/home/mezeitune/workspace/2017-jm-group-11/workspace/TPA1/src/main/resources/Cuentas").cargarCuentas();
+			new BatchCuentas("/home/mezeitune/workspace/2017-jm-group-11/workspace/TPA1/src/main/resources/Cuentas").cargarCuentas();
 		}
 		
 	  
