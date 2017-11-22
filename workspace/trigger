@@ -1,21 +1,34 @@
 Ponerlo en la bd despues de correr el proyecto , asi ya estan las tablas creadas
 
+
+CREATE TABLE IF NOT EXISTS auditoria_cuentas_repetidas (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  id_Cuenta bigint(20),
+  PRIMARY KEY (id)
+) ENGINE=InnoDB
+
 delimiter //
-CREATE TRIGGER upd_check BEFORE insert ON cuentas
+CREATE TRIGGER check_cuentas_repetidas AFTER insert ON Cuentas
        FOR EACH ROW
        BEGIN
-		SET @valor=NEW.valor, @nombre=NEW.nombre,@periodo=NEW.periodo,@empresaid=NEW.empresa_id;
-           IF ( (NEW.periodo = (select periodo from cuentas where periodo=new.periodo LIMIT 1))  AND (NEW.nombre = (select nombre from cuentas where nombre=new.nombre LIMIT 1))) THEN
-		CALL procupdate(@valor,@nombre,@periodo,@empresaid);      
-  	END IF;
+		insert into auditoria_cuentas_repetidas values (NULL,NEW.id);
        END;//
 delimiter ;
 
 delimiter //
-CREATE PROCEDURE procupdate (IN valorin INT(11), IN nombrein varchar(255), IN periodoin varchar(255),IN empresa_id bigint(20))
-   BEGIN
-    delete from cuentas where nombre=nombrein and periodo=periodoin;
-    insert into cuentas values (NULL,nombrein,periodoin,valor,empresa_id);
+CREATE TRIGGER eliminar_cuenta_repetida_asociada AFTER insert ON auditoria_cuentas_repetidas
+       FOR EACH ROW
+       BEGIN
+		SET @nombre:="unacuenta", @periodo:="2010", @empresa_id:="1";
+		
+		select MIN(id) INTO @id_cuenta from Cuentas where nombre=@nombre and periodo=@periodo and empresa_id=@empresa_id;
 
-   END//
+		select nombre, periodo, empresa_id into @nombre, @periodo, @empresa_id from Cuentas where id=@id_cuenta;
+		
+		IF((select count(*) from Cuentas where nombre=@nombre and periodo=@periodo and empresa_id=@empresa_id)>1) THEN
+
+		delete from Cuentas where id=@id_cuenta;
+
+		END IF;
+       END;//
 delimiter ;
