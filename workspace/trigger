@@ -1,0 +1,21 @@
+Ponerlo en la bd despues de correr el proyecto , asi ya estan las tablas creadas
+
+delimiter //
+CREATE TRIGGER upd_check BEFORE insert ON cuentas
+       FOR EACH ROW
+       BEGIN
+		SET @valor=NEW.valor, @nombre=NEW.nombre,@periodo=NEW.periodo,@empresaid=NEW.empresa_id;
+           IF ( (NEW.periodo = (select periodo from cuentas where periodo=new.periodo LIMIT 1))  AND (NEW.nombre = (select nombre from cuentas where nombre=new.nombre LIMIT 1))) THEN
+		CALL procupdate(@valor,@nombre,@periodo,@empresaid);      
+  	END IF;
+       END;//
+delimiter ;
+
+delimiter //
+CREATE PROCEDURE procupdate (IN valorin INT(11), IN nombrein varchar(255), IN periodoin varchar(255),IN empresa_id bigint(20))
+   BEGIN
+    delete from cuentas where nombre=nombrein and periodo=periodoin;
+    insert into cuentas values (NULL,nombrein,periodoin,valor,empresa_id);
+
+   END//
+delimiter ;
